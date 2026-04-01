@@ -1,0 +1,7 @@
+# askel-pages
+
+Published pages for Askel Ventures. Each folder is a site deployed to `<folder-name>.askelventures.com` via Cloudflare Pages.
+
+| Folder | URL |
+|--------|-----|
+| steve-test | https://steve-test.askelventures.com |
