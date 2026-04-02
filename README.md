@@ -5,3 +5,4 @@ Published pages for Askel Ventures. Each folder is a site deployed to `<folder-n
 | Folder | URL |
 |--------|-----|
 | steve-test | https://steve-test.askelventures.com |
+| pitch | https://pitch.askelventures.com |
