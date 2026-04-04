@@ -201,6 +201,126 @@
     opacity: 0.45;
   }
 
+  /* ── Portfolio comparison ───────────── */
+  .comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2em 3vw;
+    max-width: 900px;
+    margin-bottom: 1.2em;
+  }
+
+  .comp-col {
+    border-top: 3px solid var(--border);
+    padding-top: 0.9em;
+  }
+
+  .comp-col.askel {
+    border-top-color: var(--red);
+  }
+
+  .comp-heading {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.9em;
+  }
+
+  .comp-col.askel .comp-heading {
+    color: var(--red);
+  }
+
+  .comp-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid var(--border);
+    padding: 0.45em 0;
+    gap: 1em;
+  }
+
+  .comp-co {
+    font-size: clamp(0.65rem, 1vw, 0.75rem);
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .comp-nums {
+    display: flex;
+    gap: 1.2em;
+    font-size: clamp(0.65rem, 1vw, 0.75rem);
+    color: var(--mid);
+    text-align: right;
+  }
+
+  .comp-num {
+    min-width: 3.5em;
+    text-align: right;
+  }
+
+  .comp-num.highlight {
+    color: var(--red);
+    font-weight: 600;
+  }
+
+  .comp-num.dim {
+    color: var(--muted);
+  }
+
+  .comp-header-row {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0.1em;
+  }
+
+  .comp-header-label {
+    font-size: clamp(0.55rem, 0.85vw, 0.65rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: right;
+    min-width: 3.5em;
+  }
+
+  .comp-summary {
+    display: flex;
+    gap: 3vw;
+    margin-top: 0.9em;
+  }
+
+  .comp-stat {
+    border-top: 1.5px solid var(--border);
+    padding-top: 0.6em;
+    flex: 1;
+  }
+
+  .comp-stat-label {
+    font-size: clamp(0.55rem, 0.85vw, 0.65rem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.2em;
+  }
+
+  .comp-stat-value {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    color: var(--red);
+  }
+
+  .comp-stat-value.dim {
+    color: var(--muted);
+  }
+
   /* ── Team ───────────────────────────── */
   .team-grid {
     display: grid;
@@ -253,7 +373,27 @@
     font-style: italic;
     border-left: 2.5px solid var(--red);
     padding-left: 0.8em;
-    max-width: 560px;
+    max-width: 700px;
+    line-height: 1.6;
+  }
+
+  .team-credentials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-top: 1em;
+    margin-bottom: 0.8em;
+  }
+
+  .team-cred {
+    font-size: clamp(0.58rem, 0.9vw, 0.68rem);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--mid);
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 0.25em 0.7em;
+    border-radius: 2px;
   }
 
   /* ── Terms ──────────────────────────── */
@@ -310,7 +450,8 @@
 
     .points,
     .team-grid,
-    .terms-grid {
+    .terms-grid,
+    .comparison {
       grid-template-columns: 1fr !important;
       gap: 1em 0;
     }
@@ -318,6 +459,8 @@
     .flywheel { gap: 0.35em; }
     .fw-step { min-width: 68px; padding: 0.6em 0.5em; }
     .fw-arrow { display: none; }
+
+    .comp-summary { flex-wrap: wrap; }
   }
 </style>
 </head>
@@ -372,56 +515,193 @@
       </div>
     </section>
 
-    <!-- ── 4. THE ASKEL EFFECT ─────────── -->
+    <!-- ── 4. OUR EDGE ────────────────── -->
     <section data-background-color="#f2eeea">
       <div class="label">Our Edge</div>
       <div class="rule"></div>
       <h2>The <span class="accent">Askel effect:</span> a documented playbook<br>for transforming small businesses.</h2>
       <div class="points">
         <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Two dedicated operators, always.</strong> Each business needs four hands. Ours are already there — and they can run 3–5 businesses simultaneously without adding headcount.</div></div>
-        <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Selective automation and AI</strong> applied where the return is clear: admin, reporting, scheduling, sales pipeline.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text"><strong>AI sourcing agents.</strong> Proprietary scrapers that monitor online signals — listing activity, job ads, owner interviews, trade press — to identify businesses approaching succession before they hit the market.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Selective automation</strong> applied where the return is clear: admin, reporting, scheduling, sales pipeline. Not automation for its own sake.</div></div>
         <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Modern systems and tech stack</strong> replacing ad-hoc processes and spreadsheet operations.</div></div>
         <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Commercial development:</strong> pricing discipline, customer mix, revenue quality — areas previous owners typically left untouched.</div></div>
-        <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Stronger governance and operating cadence</strong> — consistent reporting, clear KPIs, management accountability.</div></div>
         <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Proven once at Melers.</strong> The playbook is documented, tested, and improving. We're at the start of the curve.</div></div>
       </div>
     </section>
 
-    <!-- ── 5. THE TEAM ─────────────────── -->
+    <!-- ── 5. THE ASKEL EFFECT IN NUMBERS -->
     <section data-background-color="#faf8f5">
+      <div class="label">The Askel Effect in Numbers</div>
+      <div class="rule"></div>
+      <h2>Same businesses.<br><span class="accent">Two very different outcomes.</span></h2>
+      <div class="comparison">
+        <div class="comp-col">
+          <div class="comp-heading">Without intervention</div>
+          <div class="comp-header-row">
+            <div class="comp-header-label" style="flex:1;text-align:left;">Company</div>
+            <div class="comp-header-label">Entry FCF</div>
+            <div class="comp-header-label">Year 3</div>
+            <div class="comp-header-label">Exit ×</div>
+          </div>
+          <div class="comp-row">
+            <div class="comp-co">Co. A</div>
+            <div class="comp-nums">
+              <div class="comp-num dim">€180k</div>
+              <div class="comp-num dim">€175k</div>
+              <div class="comp-num dim">3.5×</div>
+            </div>
+          </div>
+          <div class="comp-row">
+            <div class="comp-co">Co. B</div>
+            <div class="comp-nums">
+              <div class="comp-num dim">€240k</div>
+              <div class="comp-num dim">€230k</div>
+              <div class="comp-num dim">3.2×</div>
+            </div>
+          </div>
+          <div class="comp-row">
+            <div class="comp-co">Co. C</div>
+            <div class="comp-nums">
+              <div class="comp-num dim">€310k</div>
+              <div class="comp-num dim">€295k</div>
+              <div class="comp-num dim">3.4×</div>
+            </div>
+          </div>
+          <div class="comp-row">
+            <div class="comp-co">Co. D</div>
+            <div class="comp-nums">
+              <div class="comp-num dim">€130k</div>
+              <div class="comp-num dim">€125k</div>
+              <div class="comp-num dim">3.0×</div>
+            </div>
+          </div>
+          <div class="comp-row">
+            <div class="comp-co">Co. E</div>
+            <div class="comp-nums">
+              <div class="comp-num dim">€200k</div>
+              <div class="comp-num dim">€190k</div>
+              <div class="comp-num dim">3.3×</div>
+            </div>
+          </div>
+          <div class="comp-summary">
+            <div class="comp-stat">
+              <div class="comp-stat-label">Avg FCF growth</div>
+              <div class="comp-stat-value dim">−4%</div>
+            </div>
+            <div class="comp-stat">
+              <div class="comp-stat-label">Avg exit multiple</div>
+              <div class="comp-stat-value dim">3.3×</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="comp-col askel">
+          <div class="comp-heading">Askel playbook applied</div>
+          <div class="comp-header-row">
+            <div class="comp-header-label" style="flex:1;text-align:left;">Company</div>
+            <div class="comp-header-label">Entry FCF</div>
+            <div class="comp-header-label">Year 3</div>
+            <div class="comp-header-label">Exit ×</div>
+          </div>
+          <div class="comp-row">
+            <div class="comp-co">Co. A</div>
+            <div class="comp-nums">
+              <div class="comp-num">€180k</div>
+              <div class="comp-num highlight">€390k</div>
+              <div class="comp-num highlight">7.0×</div>
+            </div>
+          </div>
+          <div class="comp-row">
+            <div class="comp-co">Co. B</div>
+            <div class="comp-nums">
+              <div class="comp-num">€240k</div>
+              <div class="comp-num highlight">€530k</div>
+              <div class="comp-num highlight">6.5×</div>
+            </div>
+          </div>
+          <div class="comp-row">
+            <div class="comp-co">Co. C</div>
+            <div class="comp-nums">
+              <div class="comp-num">€310k</div>
+              <div class="comp-num highlight">€650k</div>
+              <div class="comp-num highlight">7.5×</div>
+            </div>
+          </div>
+          <div class="comp-row">
+            <div class="comp-co">Co. D</div>
+            <div class="comp-nums">
+              <div class="comp-num">€130k</div>
+              <div class="comp-num highlight">€290k</div>
+              <div class="comp-num highlight">6.0×</div>
+            </div>
+          </div>
+          <div class="comp-row">
+            <div class="comp-co">Co. E</div>
+            <div class="comp-nums">
+              <div class="comp-num">€200k</div>
+              <div class="comp-num highlight">€450k</div>
+              <div class="comp-num highlight">7.2×</div>
+            </div>
+          </div>
+          <div class="comp-summary">
+            <div class="comp-stat">
+              <div class="comp-stat-label">Avg FCF growth</div>
+              <div class="comp-stat-value">+118%</div>
+            </div>
+            <div class="comp-stat">
+              <div class="comp-stat-label">Avg exit multiple</div>
+              <div class="comp-stat-value">7.0×</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="team-note">Illustrative figures based on Melers benchmark and modelled portfolio assumptions. Actual results will vary by business and sector.</div>
+    </section>
+
+    <!-- ── 6. THE TEAM ─────────────────── -->
+    <section data-background-color="#f2eeea">
       <div class="label">The Team</div>
       <div class="rule"></div>
-      <h2>Four operators.<br><span class="accent">One focus.</span></h2>
+      <h2>Founders who've done it.<br><span class="accent">Operators who stay.</span></h2>
       <div class="team-grid">
         <div class="team-member">
           <div class="team-name">Niklas Slotte <span class="team-tag">CRO</span></div>
           <div class="team-role">Capital &amp; Portfolio Discipline</div>
-          <div class="team-desc">Capital allocation · Financing &amp; structuring · Governance · Post-acquisition integration</div>
+          <div class="team-desc">Serial entrepreneur and capital allocator. Structures deals, manages financing relationships, and keeps portfolio governance tight. Has operated inside businesses — not just advised them.</div>
         </div>
         <div class="team-member">
           <div class="team-name">Varia Wahlroos-Kaitila <span class="team-tag">CEO</span></div>
           <div class="team-role">Acquisition &amp; Commercial Value Creation</div>
-          <div class="team-desc">M&amp;A deal origination · Post-acquisition integration · Revenue expansion</div>
+          <div class="team-desc">Built and scaled international businesses from zero to €8M ARR. Leads sourcing, deal origination, and commercial transformation post-acquisition. Knows what it takes to grow revenue in markets where you have no name.</div>
         </div>
         <div class="team-member">
           <div class="team-name">Mikael Ylinen <span class="team-tag">Board</span></div>
           <div class="team-role">Integration &amp; Operational Control</div>
-          <div class="team-desc">Operational integration · Infrastructure &amp; systems · Risk management</div>
+          <div class="team-desc">Experienced across both VC-backed and traditional business environments. Brings operational depth in infrastructure, systems, and risk — the unglamorous work that determines whether an acquisition actually holds together.</div>
         </div>
         <div class="team-member">
           <div class="team-name">Mike Solomon <span class="team-tag">CTO</span></div>
           <div class="team-role">Digitalisation &amp; Systems</div>
-          <div class="team-desc">Automation · Systems architecture · Operational modernisation</div>
+          <div class="team-desc">PhD in mathematics. Full-stack engineer and AI architect. Builds the tools that give Askel an information edge — from sourcing agents to operational dashboards. The reason our playbook scales without headcount.</div>
         </div>
       </div>
-      <div class="team-note">Niklas and Vária are full-time operators — the four hands every acquisition needs from day one.</div>
+      <div class="team-credentials">
+        <div class="team-cred">10 companies founded</div>
+        <div class="team-cred">Stanford · Hanken × 2 · PhD Mathematics</div>
+        <div class="team-cred">VC-backed &amp; traditional businesses</div>
+        <div class="team-cred">0 → €8M ARR scaled internationally</div>
+        <div class="team-cred">AI &amp; full-stack engineering</div>
+        <div class="team-cred">7 languages spoken</div>
+      </div>
+      <div class="team-note">Niklas and Vária are full-time operators — the four hands every acquisition needs from day one. This is not a side project. It is the only thing we are doing.</div>
     </section>
 
-    <!-- ── 6. THE INVESTMENT ───────────── -->
-    <section data-background-color="#f2eeea">
+    <!-- ── 7. THE INVESTMENT ───────────── -->
+    <section data-background-color="#faf8f5">
       <div class="label">The Investment</div>
       <div class="rule"></div>
-      <h2>Preferred equity in Askel.<br><span class="accent">€1M for 15%.</span></h2>
+      <h2>Preferred equity in Askel.<br><span class="accent">Raising up to €1M.</span></h2>
       <div class="terms-grid">
         <div class="term">
           <div class="term-label">Instrument</div>
@@ -429,19 +709,24 @@
         </div>
         <div class="term">
           <div class="term-label">What you're buying</div>
-          <div class="term-value"><strong>Layer 1:</strong> current asset value (Melers).<br><strong>Layer 2:</strong> earnings power at 4–6× EBITDA.<br><strong>Layer 3:</strong> two full-time operators.<br><strong>Layer 4:</strong> the playbook premium.</div>
+          <div class="term-value">
+            <strong>Layer 1:</strong> current asset value (Melers).<br>
+            <strong>Layer 2:</strong> earnings power at 4–6× EBITDA.<br>
+            <strong>Layer 3:</strong> two full-time operators.<br>
+            <strong>Layer 4:</strong> proprietary AI stack and a growing dataset of Finnish SME valuations, pricing benchmarks, and operational metrics — a compounding information advantage.
+          </div>
         </div>
         <div class="term">
           <div class="term-label">Use of funds</div>
           <div class="term-value">Next 2–4 acquisitions + operator costs to reach compounding scale (3–5 businesses).</div>
         </div>
         <div class="term">
-          <div class="term-label">Liquidity</div>
-          <div class="term-value"><strong>Portfolio exits</strong> generate holdco liquidity. Secondary transfers always available with company consent (ROFR). Strategic acquisition of holdco exits all shareholders.</div>
+          <div class="term-label">Financial target</div>
+          <div class="term-value"><strong>3× EBITDA growth</strong> per portfolio company over 5 years. Exit at 6–8× EBITDA. Target holdco IRR of 25–35%.</div>
         </div>
         <div class="term">
-          <div class="term-label">Dividends</div>
-          <div class="term-value">Non-cumulative, discretionary — declared by the board when appropriate. Compounding is the primary return mechanism.</div>
+          <div class="term-label">Liquidity</div>
+          <div class="term-value"><strong>Portfolio exits</strong> generate holdco liquidity. Secondary transfers always available with company consent (ROFR). Strategic acquisition of holdco exits all shareholders.</div>
         </div>
         <div class="term">
           <div class="term-label">Minimum ticket</div>
@@ -467,7 +752,6 @@
     transitionSpeed: 'fast',
     touch: true,
     keyboard: true,
-    // Let CSS clamp() handle sizing; no fixed canvas scaling
     disableLayout: true,
   });
 </script>
