@@ -11,11 +11,11 @@ export const content = {
       langToggle: "FI",
     },
     hero: {
-      prefix: "A good home for",
-      words: ["service businesses", "family companies", "Finnish SMEs", "essential businesses"],
+      prefix: "Boring businesses",
+      words: ["are our thing", "are underrated", "are worth more than you think", "deserve better owners"],
       suffix: "",
       subtitle:
-        "We acquire profitable Finnish businesses and run them for the long term — with respect for what the founder built.",
+        "For founders ready to pass the torch. For investors who know boring beats shiny.",
       cta1: "Get In Touch",
       cta2: "Learn More",
       ctaSeller: "Selling your business?",
@@ -189,7 +189,7 @@ export const content = {
     },
     footer: {
       company: "Askel Ventures",
-      tagline: "A good home for good businesses.",
+      tagline: "Boring businesses are our thing.",
       columns: [
         {
           title: "Company",
@@ -231,11 +231,11 @@ export const content = {
       langToggle: "EN",
     },
     hero: {
-      prefix: "Hyvä koti",
-      words: ["palveluyrityksille", "perheyrityksille", "suomalaisille pk-yrityksille", "välttämättömille yrityksille"],
+      prefix: "Tylsät yritykset",
+      words: ["ovat meidän juttumme", "ovat aliarvostettuja", "ansaitsevat paremman omistajan", "ovat enemmän kuin miltä näyttävät"],
       suffix: "",
       subtitle:
-        "Ostamme kannattavia suomalaisia yrityksiä ja operoimme niitä pitkäjänteisesti — kunnioittaen sitä, mitä perustaja on rakentanut.",
+        "Yrittäjille, jotka ovat valmiita luovuttamaan. Sijoittajille, jotka tietävät tylsän voittavan kiiltävän.",
       cta1: "Ota yhteyttä",
       cta2: "Lue lisää",
       ctaSeller: "Myytkö yritystäsi?",
