@@ -460,6 +460,34 @@
   .team-credentials {
     display: flex;
     flex-wrap: wrap;
+    gap: 0.5em 1em;
+    margin-bottom: 1.3em;
+  }
+
+  .team-cred {
+    font-size: clamp(0.58rem, 0.9vw, 0.68rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--bg-alt);
+    padding: 0.3em 0.75em;
+    border-radius: 2px;
+  }
+
+  .team-photo {
+    width: 100%;
+    max-height: 22vh;
+    object-fit: cover;
+    object-position: center 20%;
+    border-radius: 3px;
+    margin-bottom: 1.3em;
+    display: block;
+  }
+
+  .team-credentials {
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.5em;
     margin-top: 1em;
     margin-bottom: 0.8em;
@@ -676,37 +704,37 @@
       <div class="label">The Team</div>
       <div class="rule"></div>
       <h2>Founders who've done it.<br><span class="accent">Operators who stay.</span></h2>
+      <img src="askel-team.webp" alt="Askel team" class="team-photo">
       <div class="team-grid">
-        <div class="team-member">
-          <div class="team-name">Niklas Slotte <span class="team-tag">CRO</span></div>
-          <div class="team-role">Capital &amp; Portfolio Discipline</div>
-          <div class="team-desc">Serial entrepreneur and capital allocator. Structures deals, manages financing relationships, and keeps portfolio governance tight. Has operated inside businesses — not just advised them.</div>
-        </div>
         <div class="team-member">
           <div class="team-name">Varia Wahlroos-Kaitila <span class="team-tag">CEO</span></div>
           <div class="team-role">Acquisition &amp; Commercial Value Creation</div>
-          <div class="team-desc">Built and scaled international businesses from zero to €8M ARR. Leads sourcing, deal origination, and commercial transformation post-acquisition. Knows what it takes to grow revenue in markets where you have no name.</div>
+          <div class="team-desc">Founded 5 companies across agency, SaaS, and venture-backed startups. Built a marketing business from 0 to €2M ARR, sold a company, and led negotiations with banks and institutional partners for the first acquisition.</div>
+        </div>
+        <div class="team-member">
+          <div class="team-name">Niklas Slotte <span class="team-tag">CRO</span></div>
+          <div class="team-role">Deal Execution &amp; Revenue Scaling</div>
+          <div class="team-desc">Serial entrepreneur with experience building and leading multiple businesses, including scaling an international company to €8M ARR. Brings sharp commercial judgment, team leadership, and hands-on ownership during roll-up execution.</div>
         </div>
         <div class="team-member">
           <div class="team-name">Mikael Ylinen <span class="team-tag">Board</span></div>
-          <div class="team-role">Integration &amp; Operational Control</div>
-          <div class="team-desc">Experienced across both VC-backed and traditional business environments. Brings operational depth in infrastructure, systems, and risk — the unglamorous work that determines whether an acquisition actually holds together.</div>
+          <div class="team-role">Operational Depth &amp; Industrial Understanding</div>
+          <div class="team-desc">Entrepreneur and long-term board operator with broad end-to-end business understanding. Brings practical experience in production environments, hardware, and the operational realities that determine whether acquisitions hold together.</div>
         </div>
         <div class="team-member">
           <div class="team-name">Mike Solomon <span class="team-tag">CTO</span></div>
-          <div class="team-role">Digitalisation &amp; Systems</div>
-          <div class="team-desc">PhD in mathematics. Full-stack engineer and AI architect. Builds the tools that give Askel an information edge — from sourcing agents to operational dashboards. The reason our playbook scales without headcount.</div>
+          <div class="team-role">AI Systems &amp; Software Leverage</div>
+          <div class="team-desc">PhD in Mathematics, Stanford graduate, and full-stack AI systems builder. Develops the internal software and AI agents that increase sourcing capacity, accelerate diligence, and create operating leverage across the portfolio.</div>
         </div>
       </div>
       <div class="team-credentials">
-        <div class="team-cred">10 companies founded</div>
-        <div class="team-cred">Stanford · Hanken × 2 · PhD Mathematics</div>
-        <div class="team-cred">VC-backed &amp; traditional businesses</div>
-        <div class="team-cred">0 → €8M ARR scaled internationally</div>
-        <div class="team-cred">AI &amp; full-stack engineering</div>
-        <div class="team-cred">7 languages spoken</div>
+        <div class="team-cred">5 companies founded</div>
+        <div class="team-cred">€8M ARR scaled internationally</div>
+        <div class="team-cred">Stanford · Hanken ×2 · PhD Mathematics</div>
+        <div class="team-cred">AI &amp; full-stack systems</div>
+        <div class="team-cred">VC-backed + traditional business experience</div>
+        <div class="team-cred">Full-time owner-operators</div>
       </div>
-      <div class="team-note">Niklas and Vária are full-time operators — the four hands every acquisition needs from day one. This is not a side project. It is the only thing we are doing.</div>
     </section>
 
     <!-- ── 7. THE INVESTMENT ───────────── -->
