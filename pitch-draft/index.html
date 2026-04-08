@@ -574,8 +574,8 @@
 
   .team-layout {
     display: flex;
-    gap: 4vw;
-    align-items: flex-start;
+    gap: 2.5vw;
+    align-items: stretch;
     width: 100%;
   }
 
@@ -585,17 +585,16 @@
   }
 
   .team-photo-wrap {
-    flex: 0 0 36%;
-    max-width: 36%;
-    align-self: flex-start;
-    margin-top: 3em;
+    flex: 0 0 48%;
+    max-width: 48%;
+    min-height: 300px;
   }
 
   .team-photo {
     width: 100%;
-    height: auto;
-    object-fit: contain;
-    object-position: center top;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
     border-radius: 3px;
     display: block;
   }
@@ -687,8 +686,8 @@
     .comp-summary { flex-wrap: wrap; }
 
     .team-layout { flex-direction: column; }
-    .team-photo-wrap { flex: none; max-width: 100%; width: 100%; align-self: auto; }
-    .team-photo { height: auto; min-height: unset; max-height: 30vh; object-fit: cover; }
+    .team-photo-wrap { flex: none; max-width: 100%; width: 100%; min-height: unset; }
+    .team-photo { height: 28vh; }
   }
 </style>
 </head>
