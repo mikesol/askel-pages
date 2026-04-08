@@ -575,7 +575,7 @@
   .team-layout {
     display: flex;
     gap: 2.5vw;
-    align-items: flex-start;
+    align-items: stretch;
     width: 100%;
   }
 
@@ -591,7 +591,9 @@
 
   .team-photo {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
     border-radius: 3px;
     display: block;
   }
