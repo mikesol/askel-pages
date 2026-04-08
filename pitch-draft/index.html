@@ -42,13 +42,14 @@
 
   .reveal .slides section {
     text-align: left;
-    min-height: 100vh;
-    height: auto !important;
+    height: 100vh !important;
+    min-height: unset;
     padding: 5.5vh 7vw;
     box-sizing: border-box;
     display: flex !important;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    overflow-y: auto;
   }
 
   /* ── Headings ───────────────────────── */
