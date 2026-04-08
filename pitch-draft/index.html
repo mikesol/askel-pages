@@ -186,6 +186,18 @@
     display: block;
   }
 
+  /* ── Model slide: flywheel outside v-scroll container ── */
+  .slide-model {
+    overflow: hidden !important;
+  }
+
+  .model-body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   /* ── Flywheel ───────────────────────── */
   .flywheel-outer {
     width: 100%;
@@ -711,9 +723,9 @@
       gap: 1em 0;
     }
 
-    .flywheel-outer { overflow-x: visible; }
-    .flywheel { flex-wrap: wrap; min-width: unset; gap: 0.4em; }
-    .fw-step { box-sizing: border-box; flex: 0 0 calc(50% - 0.2em); min-width: unset; padding: 0.6em 0.5em; }
+    .flywheel-outer { overflow-x: scroll; -webkit-overflow-scrolling: touch; }
+    .flywheel { flex-wrap: nowrap; min-width: max-content; gap: 0.35em; }
+    .fw-step { flex: 0 0 auto; box-sizing: content-box; min-width: 80px; padding: 0.6em 0.5em; }
     .fw-arrow { display: none; }
 
     .comp-summary { flex-wrap: wrap; }
@@ -754,7 +766,7 @@
     </section>
 
     <!-- ── 3. THE MODEL ────────────────── -->
-    <section data-background-color="#faf8f5">
+    <section class="slide-model" data-background-color="#faf8f5">
       <div class="label">The Model</div>
       <div class="rule"></div>
       <h2>We buy, operate, grow, and <span class="accent">selectively exit</span> —<br>then reinvest the proceeds.</h2>
@@ -771,12 +783,14 @@
         <div class="fw-step"><div class="fw-label">Redeploy</div><div class="fw-desc">Fund next acquisition<br>or return capital</div></div>
       </div>
       </div>
+      <div class="model-body">
       <div class="points">
         <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Agentic AI sourcing.</strong> Our proprietary software system (a.k.a. Steve 🦔) monitors online signals — listing activity, job ads, owner interviews, trade press — to identify businesses approaching succession before they hit the market.</div></div>
         <div class="point"><div class="point-dot"></div><div class="point-text"><strong>What we mean by boring businesses.</strong> Cash-generative SMEs in essential, non-glamorous services — laundromats, cleaning, waste collection, B2B trades. Resilient demand, low disruption risk, 400K–1.5M EUR revenue, 3–4× EBITDA entry. Unglamorous by design.</div></div>
         <div class="point"><div class="point-dot"></div><div class="point-text"><strong>We sell when the Askel effect is fully realized</strong> — not because investors need liquidity, but because the next euro of value creation happens elsewhere. Portfolio exits fund future acquisitions and create natural investor liquidity.</div></div>
         <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Inspired by the Barbell strategy.</strong> Buying boring but profitable businesses, digitalizing them, and building a tech layer on top — stable cash flows on one end, asymmetric upside on the other.</div></div>
       </div>
+      </div><!-- /model-body -->
     </section>
 
     <!-- ── 4. OUR EDGE ────────────────── -->
