@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Askel Ventures – Investor Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<style>
+  :root {
+    --bg:      #f2eeea;
+    --bg-alt:  #ece8e3;
+    --white:   #faf8f5;
+    --red:     #c0392b;
+    --dark:    #1a1108;
+    --mid:     #4a3f35;
+    --muted:   #8a7d72;
+    --border:  #d5cec6;
+  }
+
+  .reveal-viewport { background: var(--bg); }
+
+  .reveal {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    color: var(--dark);
+  }
+
+  /* ── Slide base ─────────────────────── */
+  .reveal,
+  .reveal .slides,
+  .reveal .slides section {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    left: 0 !important;
+    top: 0 !important;
+    transform: none !important;
+  }
+
+  .reveal .slides section {
+    text-align: left;
+    min-height: 100vh;
+    height: auto !important;
+    padding: 5.5vh 7vw;
+    box-sizing: border-box;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* ── Headings ───────────────────────── */
+  .reveal h1, .reveal h2 {
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    text-transform: none;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--dark);
+    margin: 0 0 0.55em 0;
+    text-shadow: none;
+    word-break: normal;
+  }
+
+  .reveal h1 { font-size: clamp(2.6rem, 6.5vw, 5.2rem); }
+  .reveal h2 { font-size: clamp(1.8rem, 4vw, 3.4rem); }
+
+  .reveal .accent { color: var(--red); }
+
+  /* ── Section label ──────────────────── */
+  .label {
+    font-family: 'Open Sans', sans-serif;
+    font-size: clamp(0.6rem, 1.1vw, 0.72rem);
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1em;
+  }
+
+  /* ── Red rule ───────────────────────── */
+  .rule {
+    width: 44px;
+    height: 3px;
+    background: var(--red);
+    margin-bottom: 1.3em;
+    flex-shrink: 0;
+  }
+
+  /* ── Cover ──────────────────────────── */
+  .slide-cover {
+    background: var(--white) !important;
+    justify-content: space-between !important;
+    padding-top: 8vh !important;
+    padding-bottom: 7vh !important;
+  }
+
+  .wordmark {
+    font-size: clamp(0.6rem, 1.1vw, 0.72rem);
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .cover-body { flex: 1; display: flex; align-items: center; }
+
+  .cover-tagline {
+    font-size: clamp(0.62rem, 1.1vw, 0.8rem);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-top: 1.5px solid var(--border);
+    padding-top: 1.3em;
+    max-width: 660px;
+  }
+
+  /* ── Bullet points ──────────────────── */
+  .points {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.3em 4vw;
+    max-width: 900px;
+  }
+
+  .points.single {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+  }
+
+  .point {
+    display: flex;
+    gap: 0.75em;
+    align-items: flex-start;
+  }
+
+  .point-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--red);
+    margin-top: 0.42em;
+    flex-shrink: 0;
+  }
+
+  .point-text {
+    font-size: clamp(0.75rem, 1.2vw, 0.88rem);
+    line-height: 1.65;
+    color: var(--mid);
+  }
+
+  .point-text strong {
+    color: var(--dark);
+    font-weight: 600;
+    display: block;
+  }
+
+  /* ── Flywheel ───────────────────────── */
+  .flywheel {
+    display: flex;
+    align-items: stretch;
+    margin-bottom: 1.8em;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 0;
+  }
+
+  .fw-step {
+    text-align: center;
+    padding: 0.9em 1em;
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    min-width: 96px;
+    flex: 1;
+  }
+
+  .fw-label {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(0.65rem, 1.1vw, 0.8rem);
+    color: var(--red);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.3em;
+  }
+
+  .fw-desc {
+    font-size: clamp(0.58rem, 0.9vw, 0.7rem);
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .fw-arrow {
+    font-size: 1em;
+    color: var(--red);
+    padding: 0 0.25em;
+    align-self: center;
+    flex-shrink: 0;
+    opacity: 0.45;
+  }
+
+  /* ── Team ───────────────────────────── */
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2em 4vw;
+    max-width: 860px;
+    margin-bottom: 1.3em;
+  }
+
+  .team-member {
+    border-top: 1.5px solid var(--border);
+    padding-top: 0.9em;
+  }
+
+  .team-name {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(0.95rem, 1.7vw, 1.25rem);
+    color: var(--dark);
+    margin-bottom: 0.2em;
+  }
+
+  .team-tag {
+    font-size: clamp(0.55rem, 0.9vw, 0.68rem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-left: 0.4em;
+    vertical-align: middle;
+  }
+
+  .team-role {
+    font-size: clamp(0.58rem, 0.95vw, 0.7rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.45em;
+  }
+
+  .team-desc {
+    font-size: clamp(0.68rem, 1.05vw, 0.8rem);
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .team-note {
+    font-size: clamp(0.68rem, 1.05vw, 0.8rem);
+    color: var(--muted);
+    font-style: italic;
+    border-left: 2.5px solid var(--red);
+    padding-left: 0.8em;
+    max-width: 560px;
+  }
+
+  /* ── Terms ──────────────────────────── */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.3em 4vw;
+    max-width: 860px;
+  }
+
+  .term {
+    border-top: 1.5px solid var(--border);
+    padding-top: 0.85em;
+  }
+
+  .term-label {
+    font-size: clamp(0.58rem, 0.95vw, 0.7rem);
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4em;
+  }
+
+  .term-value {
+    font-size: clamp(0.72rem, 1.15vw, 0.85rem);
+    color: var(--mid);
+    line-height: 1.6;
+  }
+
+  .term-value strong {
+    color: var(--dark);
+    font-weight: 600;
+  }
+
+  /* ── Reveal overrides ───────────────── */
+  .reveal .progress { color: var(--red); height: 3px; }
+  .reveal .controls { color: var(--red); }
+  .reveal .slide-number {
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.7rem;
+    bottom: 14px;
+    right: 14px;
+  }
+
+  /* ── Mobile ─────────────────────────── */
+  @media (max-width: 600px) {
+    .reveal .slides section { padding: 5vh 6vw; }
+
+    .reveal h1 { font-size: 2.4rem; }
+    .reveal h2 { font-size: 1.7rem; }
+
+    .points,
+    .team-grid,
+    .terms-grid {
+      grid-template-columns: 1fr !important;
+      gap: 1em 0;
+    }
+
+    .flywheel { gap: 0.35em; }
+    .fw-step { min-width: 68px; padding: 0.6em 0.5em; }
+    .fw-arrow { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ── 1. COVER ────────────────────── -->
+    <section class="slide-cover" data-background-color="#faf8f5">
+      <div class="wordmark">Askel Ventures</div>
+      <div class="cover-body">
+        <h1>Acquiring <span class="accent">boring businesses.</span><br>Building compounding value.</h1>
+      </div>
+      <div class="cover-tagline">
+        Operator-led family PE &nbsp;·&nbsp; Finnish small business acquisitions &nbsp;·&nbsp; Micro-cap focus
+      </div>
+    </section>
+
+    <!-- ── 2. THE OPPORTUNITY ──────────── -->
+    <section data-background-color="#f2eeea">
+      <div class="label">The Opportunity</div>
+      <div class="rule"></div>
+      <h2>A wave of <span class="accent">succession transitions</span><br>no one is equipped to handle.</h2>
+      <div class="points">
+        <div class="point"><div class="point-dot"></div><div class="point-text"><strong>The silver tsunami is here.</strong> Across the Nordics, essential small businesses are profitable and resilient — but founder-led and approaching succession transition.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Structural gap in the market.</strong> These businesses are too small for traditional private equity and too operationally demanding for passive investors.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Modern tools, untapped.</strong> Many lack data visibility, scalable processes, and modern systems. AI and software now create practical efficiency gains in admin, sales, reporting, and operations.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Attractive entry multiples.</strong> Stable, cash-generative businesses available at 3–4× EBITDA — a pricing dynamic unavailable at scale in any other asset class.</div></div>
+      </div>
+    </section>
+
+    <!-- ── 3. THE MODEL ────────────────── -->
+    <section data-background-color="#faf8f5">
+      <div class="label">The Model</div>
+      <div class="rule"></div>
+      <h2>We buy, operate, grow, and <span class="accent">selectively exit</span> —<br>then reinvest the proceeds.</h2>
+      <div class="flywheel">
+        <div class="fw-step"><div class="fw-label">Acquire</div><div class="fw-desc">3–4× EBITDA entry<br>debt + equity</div></div>
+        <div class="fw-arrow">→</div>
+        <div class="fw-step"><div class="fw-label">Apply Playbook</div><div class="fw-desc">Systems, AI,<br>commercial dev</div></div>
+        <div class="fw-arrow">→</div>
+        <div class="fw-step"><div class="fw-label">Grow</div><div class="fw-desc">Target 3× EBITDA<br>over 5 years</div></div>
+        <div class="fw-arrow">→</div>
+        <div class="fw-step"><div class="fw-label">Sell at Premium</div><div class="fw-desc">6–8× EBITDA<br>to passive buyers</div></div>
+        <div class="fw-arrow">→</div>
+        <div class="fw-step"><div class="fw-label">Redeploy</div><div class="fw-desc">Fund next acquisition<br>or return capital</div></div>
+      </div>
+      <div class="points single">
+        <div class="point"><div class="point-dot"></div><div class="point-text"><strong>We sell when the Askel effect is fully realized</strong> — not because investors need liquidity, but because the next euro of value creation happens elsewhere. Portfolio exits fund future acquisitions and create natural investor liquidity.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Barbell strategy:</strong> boring but profitable businesses with a systematic tech and operations layer on top.</div></div>
+      </div>
+    </section>
+
+    <!-- ── 4. THE ASKEL EFFECT ─────────── -->
+    <section data-background-color="#f2eeea">
+      <div class="label">Our Edge</div>
+      <div class="rule"></div>
+      <h2>The <span class="accent">Askel effect:</span> a documented playbook<br>for transforming small businesses.</h2>
+      <div class="points">
+        <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Two dedicated operators, always.</strong> Each business needs four hands. Ours are already there — and they can run 3–5 businesses simultaneously without adding headcount.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Selective automation and AI</strong> applied where the return is clear: admin, reporting, scheduling, sales pipeline.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Modern systems and tech stack</strong> replacing ad-hoc processes and spreadsheet operations.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Commercial development:</strong> pricing discipline, customer mix, revenue quality — areas previous owners typically left untouched.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Stronger governance and operating cadence</strong> — consistent reporting, clear KPIs, management accountability.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Proven once at Melers.</strong> The playbook is documented, tested, and improving. We're at the start of the curve.</div></div>
+      </div>
+    </section>
+
+    <!-- ── 5. THE TEAM ─────────────────── -->
+    <section data-background-color="#faf8f5">
+      <div class="label">The Team</div>
+      <div class="rule"></div>
+      <h2>Four operators.<br><span class="accent">One focus.</span></h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="team-name">Niklas Slotte <span class="team-tag">CRO</span></div>
+          <div class="team-role">Capital &amp; Portfolio Discipline</div>
+          <div class="team-desc">Capital allocation · Financing &amp; structuring · Governance · Post-acquisition integration</div>
+        </div>
+        <div class="team-member">
+          <div class="team-name">Varia Wahlroos-Kaitila <span class="team-tag">CEO</span></div>
+          <div class="team-role">Acquisition &amp; Commercial Value Creation</div>
+          <div class="team-desc">M&amp;A deal origination · Post-acquisition integration · Revenue expansion</div>
+        </div>
+        <div class="team-member">
+          <div class="team-name">Mikael Ylinen <span class="team-tag">Board</span></div>
+          <div class="team-role">Integration &amp; Operational Control</div>
+          <div class="team-desc">Operational integration · Infrastructure &amp; systems · Risk management</div>
+        </div>
+        <div class="team-member">
+          <div class="team-name">Mike Solomon <span class="team-tag">CTO</span></div>
+          <div class="team-role">Digitalisation &amp; Systems</div>
+          <div class="team-desc">Automation · Systems architecture · Operational modernisation</div>
+        </div>
+      </div>
+      <div class="team-note">Niklas and Vária are full-time operators — the four hands every acquisition needs from day one.</div>
+    </section>
+
+    <!-- ── 6. THE INVESTMENT ───────────── -->
+    <section data-background-color="#f2eeea">
+      <div class="label">The Investment</div>
+      <div class="rule"></div>
+      <h2>Preferred equity in Askel.<br><span class="accent">€1M for 15%.</span></h2>
+      <div class="terms-grid">
+        <div class="term">
+          <div class="term-label">Instrument</div>
+          <div class="term-value"><strong>Preferred equity</strong> in the Askel holdco via private placement.</div>
+        </div>
+        <div class="term">
+          <div class="term-label">What you're buying</div>
+          <div class="term-value"><strong>Layer 1:</strong> current asset value (Melers).<br><strong>Layer 2:</strong> earnings power at 4–6× EBITDA.<br><strong>Layer 3:</strong> two full-time operators.<br><strong>Layer 4:</strong> the playbook premium.</div>
+        </div>
+        <div class="term">
+          <div class="term-label">Use of funds</div>
+          <div class="term-value">Next 2–4 acquisitions + operator costs to reach compounding scale (3–5 businesses).</div>
+        </div>
+        <div class="term">
+          <div class="term-label">Liquidity</div>
+          <div class="term-value"><strong>Portfolio exits</strong> generate holdco liquidity. Secondary transfers always available with company consent (ROFR). Strategic acquisition of holdco exits all shareholders.</div>
+        </div>
+        <div class="term">
+          <div class="term-label">Dividends</div>
+          <div class="term-value">Non-cumulative, discretionary — declared by the board when appropriate. Compounding is the primary return mechanism.</div>
+        </div>
+        <div class="term">
+          <div class="term-label">Minimum ticket</div>
+          <div class="term-value"><strong>€150,000.</strong> Closing on a rolling basis.</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    center: false,
+    controls: true,
+    controlsTutorial: false,
+    controlsLayout: 'bottom-right',
+    progress: true,
+    slideNumber: 'c/t',
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    touch: true,
+    keyboard: true,
+    // Let CSS clamp() handle sizing; no fixed canvas scaling
+    disableLayout: true,
+  });
+</script>
+
+</body>
+</html>

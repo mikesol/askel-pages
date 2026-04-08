@@ -7,3 +7,4 @@ Published pages for Askel Ventures. Each folder is a site deployed to `<folder-n
 | steve-test | https://steve-test.askelventures.com |
 | pitch | https://pitch.askelventures.com |
 | preview | https://preview.askelventures.com |
+| anika | https://anika.askelventures.com |
