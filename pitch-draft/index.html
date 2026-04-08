@@ -325,6 +325,82 @@
     color: var(--muted);
   }
 
+  /* ── Stage table ───────────────────── */
+  .stage-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.8em;
+  }
+
+  .stage-table th {
+    font-size: clamp(0.55rem, 0.85vw, 0.65rem);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 0 1em 0.6em 0;
+    border-bottom: 1.5px solid var(--border);
+  }
+
+  .stage-table td {
+    padding: 0.7em 1em 0.7em 0;
+    border-bottom: 1px solid var(--border);
+    font-size: clamp(0.7rem, 1.1vw, 0.82rem);
+    color: var(--mid);
+    vertical-align: top;
+  }
+
+  .stage-table tr.highlight-row td {
+    color: var(--dark);
+    font-weight: 600;
+  }
+
+  .stage-table tr.highlight-row .stage-name {
+    color: var(--red);
+  }
+
+  .stage-name {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(0.8rem, 1.3vw, 1rem);
+    color: var(--dark);
+    white-space: nowrap;
+  }
+
+  .stage-ebitda, .stage-multiple {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+    color: var(--dark);
+    white-space: nowrap;
+  }
+
+  .stage-callout {
+    display: flex;
+    gap: 4vw;
+    margin-top: 0.4em;
+  }
+
+  .stage-callout-stat {
+    border-top: 1.5px solid var(--border);
+    padding-top: 0.6em;
+    flex: 1;
+  }
+
+  .stage-callout-label {
+    font-size: clamp(0.55rem, 0.85vw, 0.65rem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.2em;
+  }
+
+  .stage-callout-value {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    color: var(--red);
+  }
+
   /* ── Team ───────────────────────────── */
   .team-grid {
     display: grid;
@@ -541,129 +617,58 @@
     <section data-background-color="#faf8f5">
       <div class="label">The Askel Effect in Numbers</div>
       <div class="rule"></div>
-      <h2>Same businesses.<br><span class="accent">Two very different outcomes.</span></h2>
-      <div class="comparison">
-        <div class="comp-col">
-          <div class="comp-heading">Without intervention</div>
-          <div class="comp-header-row">
-            <div class="comp-header-label" style="flex:1;text-align:left;">Company</div>
-            <div class="comp-header-label">Entry FCF</div>
-            <div class="comp-header-label">Year 3</div>
-            <div class="comp-header-label">Exit ×</div>
-          </div>
-          <div class="comp-row">
-            <div class="comp-co">Co. A</div>
-            <div class="comp-nums">
-              <div class="comp-num dim">€180k</div>
-              <div class="comp-num dim">€175k</div>
-              <div class="comp-num dim">3.5×</div>
-            </div>
-          </div>
-          <div class="comp-row">
-            <div class="comp-co">Co. B</div>
-            <div class="comp-nums">
-              <div class="comp-num dim">€240k</div>
-              <div class="comp-num dim">€230k</div>
-              <div class="comp-num dim">3.2×</div>
-            </div>
-          </div>
-          <div class="comp-row">
-            <div class="comp-co">Co. C</div>
-            <div class="comp-nums">
-              <div class="comp-num dim">€310k</div>
-              <div class="comp-num dim">€295k</div>
-              <div class="comp-num dim">3.4×</div>
-            </div>
-          </div>
-          <div class="comp-row">
-            <div class="comp-co">Co. D</div>
-            <div class="comp-nums">
-              <div class="comp-num dim">€130k</div>
-              <div class="comp-num dim">€125k</div>
-              <div class="comp-num dim">3.0×</div>
-            </div>
-          </div>
-          <div class="comp-row">
-            <div class="comp-co">Co. E</div>
-            <div class="comp-nums">
-              <div class="comp-num dim">€200k</div>
-              <div class="comp-num dim">€190k</div>
-              <div class="comp-num dim">3.3×</div>
-            </div>
-          </div>
-          <div class="comp-summary">
-            <div class="comp-stat">
-              <div class="comp-stat-label">Avg FCF growth</div>
-              <div class="comp-stat-value dim">−4%</div>
-            </div>
-            <div class="comp-stat">
-              <div class="comp-stat-label">Avg exit multiple</div>
-              <div class="comp-stat-value dim">3.3×</div>
-            </div>
-          </div>
+      <h2>How boring becomes <span class="accent">extraordinary.</span></h2>
+      <table class="stage-table">
+        <thead>
+          <tr>
+            <th>Stage</th>
+            <th>Business profile</th>
+            <th>Illustrative EBITDA</th>
+            <th>Exit multiple</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="stage-name">Owner-led</span></td>
+            <td>Founder-dependent, limited systems</td>
+            <td><span class="stage-ebitda">€250k</span></td>
+            <td><span class="stage-multiple">3–4×</span></td>
+          </tr>
+          <tr>
+            <td><span class="stage-name">Operator-led</span></td>
+            <td>Better execution, clearer accountability</td>
+            <td><span class="stage-ebitda">€350k</span></td>
+            <td><span class="stage-multiple">4–5×</span></td>
+          </tr>
+          <tr>
+            <td><span class="stage-name">Management-led</span></td>
+            <td>Repeatable processes, stronger governance</td>
+            <td><span class="stage-ebitda">€600k</span></td>
+            <td><span class="stage-multiple">5–6×</span></td>
+          </tr>
+          <tr class="highlight-row">
+            <td><span class="stage-name">Professionally-led</span></td>
+            <td>Scalable, less key-person risk, broader buyer appeal</td>
+            <td><span class="stage-ebitda">€1.5m</span></td>
+            <td><span class="stage-multiple">6–8×</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="stage-callout">
+        <div class="stage-callout-stat">
+          <div class="stage-callout-label">EBITDA growth</div>
+          <div class="stage-callout-value">€250k → €1.5m</div>
         </div>
-
-        <div class="comp-col askel">
-          <div class="comp-heading">Askel playbook applied</div>
-          <div class="comp-header-row">
-            <div class="comp-header-label" style="flex:1;text-align:left;">Company</div>
-            <div class="comp-header-label">Entry FCF</div>
-            <div class="comp-header-label">Year 3</div>
-            <div class="comp-header-label">Exit ×</div>
-          </div>
-          <div class="comp-row">
-            <div class="comp-co">Co. A</div>
-            <div class="comp-nums">
-              <div class="comp-num">€180k</div>
-              <div class="comp-num highlight">€390k</div>
-              <div class="comp-num highlight">7.0×</div>
-            </div>
-          </div>
-          <div class="comp-row">
-            <div class="comp-co">Co. B</div>
-            <div class="comp-nums">
-              <div class="comp-num">€240k</div>
-              <div class="comp-num highlight">€530k</div>
-              <div class="comp-num highlight">6.5×</div>
-            </div>
-          </div>
-          <div class="comp-row">
-            <div class="comp-co">Co. C</div>
-            <div class="comp-nums">
-              <div class="comp-num">€310k</div>
-              <div class="comp-num highlight">€650k</div>
-              <div class="comp-num highlight">7.5×</div>
-            </div>
-          </div>
-          <div class="comp-row">
-            <div class="comp-co">Co. D</div>
-            <div class="comp-nums">
-              <div class="comp-num">€130k</div>
-              <div class="comp-num highlight">€290k</div>
-              <div class="comp-num highlight">6.0×</div>
-            </div>
-          </div>
-          <div class="comp-row">
-            <div class="comp-co">Co. E</div>
-            <div class="comp-nums">
-              <div class="comp-num">€200k</div>
-              <div class="comp-num highlight">€450k</div>
-              <div class="comp-num highlight">7.2×</div>
-            </div>
-          </div>
-          <div class="comp-summary">
-            <div class="comp-stat">
-              <div class="comp-stat-label">Avg FCF growth</div>
-              <div class="comp-stat-value">+118%</div>
-            </div>
-            <div class="comp-stat">
-              <div class="comp-stat-label">Avg exit multiple</div>
-              <div class="comp-stat-value">7.0×</div>
-            </div>
-          </div>
+        <div class="stage-callout-stat">
+          <div class="stage-callout-label">Multiple expansion</div>
+          <div class="stage-callout-value">3–4× → 6–8×</div>
+        </div>
+        <div class="stage-callout-stat">
+          <div class="stage-callout-label">The mechanism</div>
+          <div class="stage-callout-value" style="font-size:clamp(0.7rem,1.2vw,0.9rem);font-family:'Open Sans',sans-serif;font-weight:600;padding-top:0.2em;">De-risk the operation. Grow the business. The market reprices both.</div>
         </div>
       </div>
-      <div class="team-note">Illustrative figures based on Melers benchmark and modelled portfolio assumptions. Actual results will vary by business and sector.</div>
+      <div class="team-note">Illustrative figures. Actual results will vary by business and sector.</div>
     </section>
 
     <!-- ── 6. THE TEAM ─────────────────── -->
