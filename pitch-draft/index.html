@@ -572,16 +572,32 @@
     border-radius: 2px;
   }
 
+  .team-layout {
+    display: flex;
+    gap: 4vw;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .team-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .team-photo-wrap {
+    flex: 0 0 36%;
+    max-width: 36%;
+    align-self: stretch;
+  }
+
   .team-photo {
     width: 100%;
-    height: auto;
-    max-height: 38vh;
-    object-fit: contain;
+    height: 100%;
+    min-height: 200px;
+    object-fit: cover;
     object-position: center center;
     border-radius: 3px;
-    margin-bottom: 1.3em;
     display: block;
-    background: var(--bg);
   }
 
   .team-credentials {
@@ -669,6 +685,10 @@
     .fw-arrow { display: none; }
 
     .comp-summary { flex-wrap: wrap; }
+
+    .team-layout { flex-direction: column; }
+    .team-photo-wrap { flex: none; max-width: 100%; width: 100%; align-self: auto; }
+    .team-photo { height: auto; min-height: unset; max-height: 30vh; object-fit: cover; }
   }
 </style>
 </head>
@@ -848,10 +868,11 @@
 
     <!-- ── 7. THE TEAM ─────────────────── -->
     <section data-background-color="#faf8f5">
+      <div class="team-layout">
+      <div class="team-content">
       <div class="label">The Team</div>
       <div class="rule"></div>
       <h2>Founders with deep tech and<br><span class="accent">business building experience.</span></h2>
-      <img src="askel-team.webp" alt="Askel team" class="team-photo">
       <div class="team-grid">
         <div class="team-member">
           <div class="team-name">Varia Wahlroos-Kaitila <span class="team-tag">CEO</span></div>
@@ -882,6 +903,11 @@
         <div class="team-cred">VC-backed + traditional business experience</div>
         <div class="team-cred">Full-time owner-operators</div>
       </div>
+      </div><!-- /team-content -->
+      <div class="team-photo-wrap">
+        <img src="askel-team.webp" alt="Askel team" class="team-photo">
+      </div>
+      </div><!-- /team-layout -->
     </section>
 
     <!-- ── 7. THE INVESTMENT ───────────── -->
