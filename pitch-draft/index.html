@@ -809,37 +809,22 @@
         <button class="stage-btn" data-stage="3">Professionally-led</button>
       </div>
 
-      <div class="chart-stage-desc" id="chart-desc">Founder-dependent, limited systems</div>
+      <div class="chart-stage-desc" id="lc-desc">Founder-dependent, limited systems</div>
 
-      <div class="chart-area">
-        <div class="chart-bar-group">
-          <div class="chart-bar-value-label" id="chart-ebitda-val">€250k</div>
-          <div class="chart-bar-wrap">
-            <div class="chart-bar" id="chart-ebitda-bar" style="height:16.7%"></div>
-          </div>
-          <div class="chart-bar-title">EBITDA</div>
-        </div>
-        <div class="chart-bar-group">
-          <div class="chart-bar-value-label accent" id="chart-exit-val">€875k</div>
-          <div class="chart-bar-wrap">
-            <div class="chart-bar red" id="chart-exit-bar" style="height:8.3%"></div>
-          </div>
-          <div class="chart-bar-title">Exit Value</div>
-        </div>
-      </div>
+      <svg id="lc-svg" viewBox="0 0 640 230" preserveAspectRatio="xMidYMid meet" style="width:100%;max-height:34vh;display:block;overflow:visible;"></svg>
 
-      <div class="stage-callout">
+      <div class="stage-callout" style="margin-top:0.6em">
         <div class="stage-callout-stat">
           <div class="stage-callout-label">EBITDA</div>
-          <div class="stage-callout-value" id="callout-ebitda">€250k</div>
+          <div class="stage-callout-value" id="lc-ebitda">€250k</div>
         </div>
         <div class="stage-callout-stat">
           <div class="stage-callout-label">Exit multiple</div>
-          <div class="stage-callout-value" id="callout-multiple">3–4×</div>
+          <div class="stage-callout-value" id="lc-multiple">3–4×</div>
         </div>
         <div class="stage-callout-stat">
           <div class="stage-callout-label">Exit value</div>
-          <div class="stage-callout-value" id="callout-exit">€875k</div>
+          <div class="stage-callout-value" id="lc-exit">€875k</div>
         </div>
       </div>
     </section>
@@ -942,36 +927,129 @@
 </script>
 
 <script>
-  const stageData = [
-    { name: 'Owner-led',           desc: 'Founder-dependent, limited systems',                    ebitda: 250000,   multiple: '3–4×',  exit: 875000   },
-    { name: 'Operator-led',        desc: 'Better execution, clearer accountability',               ebitda: 350000,   multiple: '4–5×',  exit: 1575000  },
-    { name: 'Management-led',      desc: 'Repeatable processes, stronger governance',              ebitda: 600000,   multiple: '5–6×',  exit: 3300000  },
-    { name: 'Professionally-led',  desc: 'Scalable, less key-person risk, broader buyer appeal',  ebitda: 1500000,  multiple: '6–8×',  exit: 10500000 },
-  ];
-  const MAX_EBITDA = 1500000;
-  const MAX_EXIT   = 10500000;
+(function () {
+  // Time-series data (year 0–5, S-curve shape)
+  const ebitdaK = [250, 285, 390, 600, 950, 1500];
+  const exitK   = [875, 1100, 1820, 3300, 6175, 10500];
 
-  function fmt(n) {
-    if (n >= 1000000) return '€' + (n / 1000000).toFixed(1).replace('.0','') + 'm';
-    return '€' + (n / 1000).toFixed(0) + 'k';
+  // Stage definitions: yearIdx maps to data index above
+  const stages = [
+    { yearIdx: 0, desc: 'Founder-dependent, limited systems',                   ebitda: 250,  multiple: '3–4×', exit: 875   },
+    { yearIdx: 1, desc: 'Better execution, clearer accountability',              ebitda: 285,  multiple: '4–5×', exit: 1100  },
+    { yearIdx: 3, desc: 'Repeatable processes, stronger governance',             ebitda: 600,  multiple: '5–6×', exit: 3300  },
+    { yearIdx: 5, desc: 'Scalable, less key-person risk, broader buyer appeal',  ebitda: 1500, multiple: '6–8×', exit: 10500 },
+  ];
+
+  // SVG layout constants
+  const X1 = 62, X2 = 610, Y1 = 18, Y2 = 195;
+  const W = X2 - X1, H = Y2 - Y1;
+
+  function toX(yi)      { return X1 + (yi / 5) * W; }
+  function toEY(k)      { return Y2 - (k / 1500)  * H; }
+  function toXY(k)      { return Y2 - (k / 10500) * H; }
+
+  // Catmull-Rom → smooth cubic bezier path
+  function smoothPath(pts) {
+    let d = `M ${pts[0].x},${pts[0].y}`;
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p0 = pts[Math.max(0, i - 1)];
+      const p1 = pts[i];
+      const p2 = pts[i + 1];
+      const p3 = pts[Math.min(pts.length - 1, i + 2)];
+      const cp1x = (p1.x + (p2.x - p0.x) / 6).toFixed(1);
+      const cp1y = (p1.y + (p2.y - p0.y) / 6).toFixed(1);
+      const cp2x = (p2.x - (p3.x - p1.x) / 6).toFixed(1);
+      const cp2y = (p2.y - (p3.y - p1.y) / 6).toFixed(1);
+      d += ` C ${cp1x},${cp1y} ${cp2x},${cp2y} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`;
+    }
+    return d;
   }
 
-  function updateChart(idx) {
-    const d = stageData[idx];
-    document.getElementById('chart-desc').textContent     = d.desc;
-    document.getElementById('chart-ebitda-val').textContent = fmt(d.ebitda);
-    document.getElementById('chart-exit-val').textContent   = fmt(d.exit);
-    document.getElementById('callout-ebitda').textContent   = fmt(d.ebitda);
-    document.getElementById('callout-multiple').textContent = d.multiple;
-    document.getElementById('callout-exit').textContent     = fmt(d.exit);
-    document.getElementById('chart-ebitda-bar').style.height = (d.ebitda / MAX_EBITDA * 100) + '%';
-    document.getElementById('chart-exit-bar').style.height   = (d.exit   / MAX_EXIT   * 100) + '%';
+  function el(tag, attrs, text) {
+    const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+
+  function fmt(k) {
+    return k >= 1000 ? '€' + (k / 1000).toFixed(1).replace('.0', '') + 'm' : '€' + k + 'k';
+  }
+
+  function buildChart() {
+    const svg = document.getElementById('lc-svg');
+    if (!svg) return;
+
+    // Grid lines
+    [0.25, 0.5, 0.75, 1].forEach(t => {
+      svg.appendChild(el('line', { x1: X1, y1: Y2 - t * H, x2: X2, y2: Y2 - t * H, stroke: '#d5cec6', 'stroke-width': '0.5' }));
+    });
+
+    // X-axis
+    svg.appendChild(el('line', { x1: X1, y1: Y2, x2: X2, y2: Y2, stroke: '#d5cec6', 'stroke-width': '1' }));
+
+    // Year labels
+    for (let y = 0; y <= 5; y++) {
+      svg.appendChild(el('text', { x: toX(y), y: Y2 + 13, 'text-anchor': 'middle', fill: '#8a7d72', 'font-size': '9', 'font-family': 'Open Sans,sans-serif' }, `Yr ${y}`));
+    }
+
+    // Left Y labels (EBITDA — dark)
+    [{ k: 0, l: '€0' }, { k: 750, l: '€750k' }, { k: 1500, l: '€1.5m' }].forEach(({ k, l }) => {
+      svg.appendChild(el('text', { x: X1 - 5, y: toEY(k) + 3, 'text-anchor': 'end', fill: '#4a3f35', 'font-size': '8', 'font-family': 'Open Sans,sans-serif' }, l));
+    });
+
+    // Right Y labels (Exit value — red)
+    [{ k: 0, l: '€0' }, { k: 5250, l: '€5.3m' }, { k: 10500, l: '€10.5m' }].forEach(({ k, l }) => {
+      svg.appendChild(el('text', { x: X2 + 5, y: toXY(k) + 3, 'text-anchor': 'start', fill: '#c0392b', 'font-size': '8', 'font-family': 'Open Sans,sans-serif' }, l));
+    });
+
+    // Legend
+    svg.appendChild(el('line',   { x1: X1,      y1: Y1 - 6, x2: X1 + 18,  y2: Y1 - 6, stroke: '#4a3f35', 'stroke-width': '2.5' }));
+    svg.appendChild(el('text',   { x: X1 + 22,  y: Y1 - 3,  fill: '#4a3f35', 'font-size': '8', 'font-weight': '600', 'font-family': 'Open Sans,sans-serif' }, 'EBITDA'));
+    svg.appendChild(el('line',   { x1: X1 + 70, y1: Y1 - 6, x2: X1 + 88,  y2: Y1 - 6, stroke: '#c0392b', 'stroke-width': '2.5' }));
+    svg.appendChild(el('text',   { x: X1 + 92,  y: Y1 - 3,  fill: '#c0392b', 'font-size': '8', 'font-weight': '600', 'font-family': 'Open Sans,sans-serif' }, 'Exit Value'));
+
+    // EBITDA line (dark)
+    const ePts = ebitdaK.map((k, i) => ({ x: toX(i), y: toEY(k) }));
+    svg.appendChild(el('path', { d: smoothPath(ePts), fill: 'none', stroke: '#4a3f35', 'stroke-width': '2.5', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }));
+
+    // Exit value line (red)
+    const xPts = exitK.map((k, i) => ({ x: toX(i), y: toXY(k) }));
+    svg.appendChild(el('path', { d: smoothPath(xPts), fill: 'none', stroke: '#c0392b', 'stroke-width': '2.5', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }));
+
+    // Stage markers
+    stages.forEach((s, si) => {
+      const x  = toX(s.yearIdx);
+      const ey = toEY(s.ebitda);
+      const xy = toXY(s.exit);
+      const g  = el('g', { id: `lc-m${si}`, opacity: si === 0 ? '1' : '0', style: 'transition:opacity 0.35s' });
+      g.appendChild(el('line',   { x1: x, y1: Y1, x2: x, y2: Y2, stroke: '#8a7d72', 'stroke-width': '1', 'stroke-dasharray': '4,3' }));
+      g.appendChild(el('circle', { cx: x, cy: ey, r: '5', fill: '#4a3f35', stroke: '#faf8f5', 'stroke-width': '2' }));
+      g.appendChild(el('circle', { cx: x, cy: xy, r: '5', fill: '#c0392b', stroke: '#faf8f5', 'stroke-width': '2' }));
+      svg.appendChild(g);
+    });
+  }
+
+  function updateLineChart(idx) {
+    const s = stages[idx];
+    document.getElementById('lc-desc').textContent     = s.desc;
+    document.getElementById('lc-ebitda').textContent   = fmt(s.ebitda);
+    document.getElementById('lc-multiple').textContent = s.multiple;
+    document.getElementById('lc-exit').textContent     = fmt(s.exit);
+    stages.forEach((_, si) => document.getElementById(`lc-m${si}`).setAttribute('opacity', si === idx ? '1' : '0'));
     document.querySelectorAll('.stage-btn').forEach((btn, i) => btn.classList.toggle('active', i === idx));
   }
 
   document.querySelectorAll('.stage-btn').forEach(btn => {
-    btn.addEventListener('click', () => updateChart(+btn.dataset.stage));
+    btn.addEventListener('click', () => updateLineChart(+btn.dataset.stage));
   });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', buildChart);
+  } else {
+    buildChart();
+  }
+})();
 </script>
 
 </body>
