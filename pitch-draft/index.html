@@ -802,7 +802,7 @@
       <div class="rule"></div>
       <h2>How boring becomes <span class="accent">extraordinary.</span></h2>
 
-      <svg viewBox="0 0 680 260" preserveAspectRatio="xMidYMid meet" style="width:100%;max-height:65vh;display:block;overflow:visible;">
+      <svg id="slide6-chart" viewBox="0 0 680 260" preserveAspectRatio="xMidYMid meet" style="width:100%;max-height:65vh;display:block;overflow:visible;">
 
         <!-- Zone shading: Askel operating zone -->
         <rect x="195" y="35" width="285" height="175" fill="#c0392b" opacity="0.04" rx="2"/>
@@ -1119,6 +1119,17 @@
   });
 
   } // end if(false)
+})();
+
+// Narrow the chart viewBox on mobile so it scales taller
+(function () {
+  var chart = document.getElementById('slide6-chart');
+  function adjust() {
+    if (!chart) return;
+    chart.setAttribute('viewBox', window.innerWidth < 768 ? '70 0 550 260' : '0 0 680 260');
+  }
+  adjust();
+  window.addEventListener('resize', adjust);
 })();
 </script>
 
