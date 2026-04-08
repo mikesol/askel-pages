@@ -711,7 +711,9 @@
       gap: 1em 0;
     }
 
-    .fw-step { padding: 0.6em 0.5em; }
+    .flywheel-outer { overflow-x: visible; }
+    .flywheel { flex-wrap: wrap; min-width: unset; }
+    .fw-step { flex: 0 0 calc(50% - 0.2em); min-width: unset; padding: 0.6em 0.5em; }
     .fw-arrow { display: none; }
 
     .comp-summary { flex-wrap: wrap; }
@@ -1142,30 +1144,6 @@
 })();
 </script>
 
-<script>
-// Flywheel touch scroll — bypasses Reveal.js touch interception on mobile
-(function () {
-  var outer = document.querySelector('.flywheel-outer');
-  if (!outer) return;
-  var startX, startScrollLeft, isDragging = false;
-
-  outer.addEventListener('touchstart', function (e) {
-    startX = e.touches[0].clientX;
-    startScrollLeft = outer.scrollLeft;
-    isDragging = true;
-  }, { passive: true });
-
-  outer.addEventListener('touchmove', function (e) {
-    if (!isDragging) return;
-    var dx = startX - e.touches[0].clientX;
-    outer.scrollLeft = startScrollLeft + dx;
-    // Only stop propagation if meaningfully horizontal
-    if (Math.abs(dx) > 5) e.stopPropagation();
-  }, { passive: true });
-
-  outer.addEventListener('touchend', function () { isDragging = false; }, { passive: true });
-})();
-</script>
 
 </body>
 </html>
