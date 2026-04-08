@@ -187,13 +187,19 @@
   }
 
   /* ── Flywheel ───────────────────────── */
+  .flywheel-outer {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    margin-bottom: 1.8em;
+  }
+
   .flywheel {
     display: flex;
     align-items: stretch;
-    margin-bottom: 1.8em;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
     gap: 0;
+    min-width: max-content;
   }
 
   .fw-step {
@@ -705,8 +711,9 @@
       gap: 1em 0;
     }
 
-    .flywheel { gap: 0.35em; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .fw-step { flex: 0 0 auto; min-width: 80px; padding: 0.6em 0.5em; }
+    .flywheel-outer { margin-left: -6vw; margin-right: -6vw; padding-left: 6vw; padding-right: 6vw; }
+    .flywheel { gap: 0.35em; }
+    .fw-step { min-width: 80px; padding: 0.6em 0.5em; }
     .fw-arrow { display: none; }
 
     .comp-summary { flex-wrap: wrap; }
@@ -751,6 +758,7 @@
       <div class="label">The Model</div>
       <div class="rule"></div>
       <h2>We buy, operate, grow, and <span class="accent">selectively exit</span> —<br>then reinvest the proceeds.</h2>
+      <div class="flywheel-outer">
       <div class="flywheel">
         <div class="fw-step"><div class="fw-label">Source &amp; Acquire</div><div class="fw-desc">3–4× EBITDA entry<br>debt + equity</div></div>
         <div class="fw-arrow">→</div>
@@ -761,6 +769,7 @@
         <div class="fw-step"><div class="fw-label">Sell at Premium</div><div class="fw-desc">6–8× EBITDA<br>to passive buyers</div></div>
         <div class="fw-arrow">→</div>
         <div class="fw-step"><div class="fw-label">Redeploy</div><div class="fw-desc">Fund next acquisition<br>or return capital</div></div>
+      </div>
       </div>
       <div class="points">
         <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Agentic AI sourcing.</strong> Our proprietary software system (a.k.a. Steve 🦔) monitors online signals — listing activity, job ads, owner interviews, trade press — to identify businesses approaching succession before they hit the market.</div></div>
