@@ -574,12 +574,14 @@
 
   .team-photo {
     width: 100%;
-    height: 26vh;
-    object-fit: cover;
-    object-position: center 20%;
+    height: auto;
+    max-height: 38vh;
+    object-fit: contain;
+    object-position: center center;
     border-radius: 3px;
     margin-bottom: 1.3em;
     display: block;
+    background: var(--bg);
   }
 
   .team-credentials {
