@@ -325,6 +325,101 @@
     color: var(--muted);
   }
 
+  /* ── Interactive chart ─────────────── */
+  .stage-selector {
+    display: flex;
+    gap: 0.5em;
+    margin-bottom: 1.6em;
+    flex-wrap: wrap;
+  }
+
+  .stage-btn {
+    font-family: 'Open Sans', sans-serif;
+    font-size: clamp(0.58rem, 0.9vw, 0.7rem);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: transparent;
+    border: 1.5px solid var(--border);
+    padding: 0.45em 1em;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .stage-btn:hover {
+    border-color: var(--red);
+    color: var(--red);
+  }
+
+  .stage-btn.active {
+    background: var(--red);
+    border-color: var(--red);
+    color: #fff;
+  }
+
+  .chart-area {
+    display: flex;
+    align-items: flex-end;
+    gap: 6vw;
+    height: 26vh;
+    margin-bottom: 1em;
+  }
+
+  .chart-bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+    flex: 1;
+    max-width: 200px;
+    height: 100%;
+    justify-content: flex-end;
+  }
+
+  .chart-bar-value-label {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    color: var(--dark);
+    transition: opacity 0.3s;
+  }
+
+  .chart-bar-value-label.accent { color: var(--red); }
+
+  .chart-bar-wrap {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    height: 18vh;
+  }
+
+  .chart-bar {
+    width: 100%;
+    background: var(--border);
+    border-radius: 2px 2px 0 0;
+    transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .chart-bar.red { background: var(--red); }
+
+  .chart-bar-title {
+    font-size: clamp(0.58rem, 0.9vw, 0.68rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .chart-stage-desc {
+    font-size: clamp(0.68rem, 1.05vw, 0.8rem);
+    color: var(--muted);
+    margin-bottom: 1.2em;
+    min-height: 1.4em;
+    transition: opacity 0.3s;
+  }
+
   /* ── Stage table ───────────────────── */
   .stage-table {
     width: 100%;
@@ -701,7 +796,55 @@
       <div class="team-note">Illustrative figures. Actual results will vary by business and sector.</div>
     </section>
 
-    <!-- ── 6. THE TEAM ─────────────────── -->
+    <!-- ── 6. INTERACTIVE CHART ─────────── -->
+    <section data-background-color="#faf8f5">
+      <div class="label">The Askel Effect in Numbers</div>
+      <div class="rule"></div>
+      <h2>How boring becomes <span class="accent">extraordinary.</span></h2>
+
+      <div class="stage-selector">
+        <button class="stage-btn active" data-stage="0">Owner-led</button>
+        <button class="stage-btn" data-stage="1">Operator-led</button>
+        <button class="stage-btn" data-stage="2">Management-led</button>
+        <button class="stage-btn" data-stage="3">Professionally-led</button>
+      </div>
+
+      <div class="chart-stage-desc" id="chart-desc">Founder-dependent, limited systems</div>
+
+      <div class="chart-area">
+        <div class="chart-bar-group">
+          <div class="chart-bar-value-label" id="chart-ebitda-val">€250k</div>
+          <div class="chart-bar-wrap">
+            <div class="chart-bar" id="chart-ebitda-bar" style="height:16.7%"></div>
+          </div>
+          <div class="chart-bar-title">EBITDA</div>
+        </div>
+        <div class="chart-bar-group">
+          <div class="chart-bar-value-label accent" id="chart-exit-val">€875k</div>
+          <div class="chart-bar-wrap">
+            <div class="chart-bar red" id="chart-exit-bar" style="height:8.3%"></div>
+          </div>
+          <div class="chart-bar-title">Exit Value</div>
+        </div>
+      </div>
+
+      <div class="stage-callout">
+        <div class="stage-callout-stat">
+          <div class="stage-callout-label">EBITDA</div>
+          <div class="stage-callout-value" id="callout-ebitda">€250k</div>
+        </div>
+        <div class="stage-callout-stat">
+          <div class="stage-callout-label">Exit multiple</div>
+          <div class="stage-callout-value" id="callout-multiple">3–4×</div>
+        </div>
+        <div class="stage-callout-stat">
+          <div class="stage-callout-label">Exit value</div>
+          <div class="stage-callout-value" id="callout-exit">€875k</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 7. THE TEAM ─────────────────── -->
     <section data-background-color="#faf8f5">
       <div class="label">The Team</div>
       <div class="rule"></div>
@@ -795,6 +938,39 @@
     touch: true,
     keyboard: true,
     disableLayout: true,
+  });
+</script>
+
+<script>
+  const stageData = [
+    { name: 'Owner-led',           desc: 'Founder-dependent, limited systems',                    ebitda: 250000,   multiple: '3–4×',  exit: 875000   },
+    { name: 'Operator-led',        desc: 'Better execution, clearer accountability',               ebitda: 350000,   multiple: '4–5×',  exit: 1575000  },
+    { name: 'Management-led',      desc: 'Repeatable processes, stronger governance',              ebitda: 600000,   multiple: '5–6×',  exit: 3300000  },
+    { name: 'Professionally-led',  desc: 'Scalable, less key-person risk, broader buyer appeal',  ebitda: 1500000,  multiple: '6–8×',  exit: 10500000 },
+  ];
+  const MAX_EBITDA = 1500000;
+  const MAX_EXIT   = 10500000;
+
+  function fmt(n) {
+    if (n >= 1000000) return '€' + (n / 1000000).toFixed(1).replace('.0','') + 'm';
+    return '€' + (n / 1000).toFixed(0) + 'k';
+  }
+
+  function updateChart(idx) {
+    const d = stageData[idx];
+    document.getElementById('chart-desc').textContent     = d.desc;
+    document.getElementById('chart-ebitda-val').textContent = fmt(d.ebitda);
+    document.getElementById('chart-exit-val').textContent   = fmt(d.exit);
+    document.getElementById('callout-ebitda').textContent   = fmt(d.ebitda);
+    document.getElementById('callout-multiple').textContent = d.multiple;
+    document.getElementById('callout-exit').textContent     = fmt(d.exit);
+    document.getElementById('chart-ebitda-bar').style.height = (d.ebitda / MAX_EBITDA * 100) + '%';
+    document.getElementById('chart-exit-bar').style.height   = (d.exit   / MAX_EXIT   * 100) + '%';
+    document.querySelectorAll('.stage-btn').forEach((btn, i) => btn.classList.toggle('active', i === idx));
+  }
+
+  document.querySelectorAll('.stage-btn').forEach(btn => {
+    btn.addEventListener('click', () => updateChart(+btn.dataset.stage));
   });
 </script>
 
