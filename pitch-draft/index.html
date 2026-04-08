@@ -43,13 +43,15 @@
   .reveal .slides section {
     text-align: left;
     height: 100vh !important;
+    height: 100dvh !important;
     min-height: unset;
     padding: 5.5vh 7vw;
     box-sizing: border-box;
     display: flex !important;
     flex-direction: column;
     justify-content: flex-start;
-    overflow-y: auto;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
   }
 
   /* ── Headings ───────────────────────── */
@@ -754,7 +756,7 @@
     slideNumber: 'c/t',
     transition: 'fade',
     transitionSpeed: 'fast',
-    touch: true,
+    touch: false,
     keyboard: true,
     disableLayout: true,
   });
