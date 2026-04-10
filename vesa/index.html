@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- v2 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -190,11 +189,11 @@
   /* ── Model slide: flywheel outside v-scroll container ── */
   .slide-model {
     overflow: hidden !important;
-    justify-content: center !important;
   }
 
   .model-body {
-    flex: 0 0 auto;
+    flex: 1;
+    min-height: 0;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -582,9 +581,9 @@
   }
 
   .team-desc {
-    font-size: clamp(0.75rem, 1.2vw, 0.88rem);
-    color: var(--mid);
-    line-height: 1.65;
+    font-size: clamp(0.68rem, 1.05vw, 0.8rem);
+    color: var(--muted);
+    line-height: 1.55;
   }
 
   .team-note {
@@ -686,9 +685,9 @@
   }
 
   .term-value {
-    font-size: clamp(0.75rem, 1.2vw, 0.88rem);
+    font-size: clamp(0.72rem, 1.15vw, 0.85rem);
     color: var(--mid);
-    line-height: 1.65;
+    line-height: 1.6;
   }
 
   .term-value strong {
