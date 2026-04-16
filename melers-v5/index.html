@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Melers — Pesulapalvelut kotiovelle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:       #1A2E1C;   /* dark forest green — dominant */
+      --green-deep:  #111E12;   /* even darker for footer */
+      --green-mid:   #264228;   /* slightly lighter green */
+      --lime:        #AADC30;   /* bright chartreuse/lime — accent */
+      --lime-dark:   #8DBE20;
+      --lime-tint:   #F0F9D8;   /* lime at ~12% */
+      --off-white:   #F4F5EF;   /* warm off-white background */
+      --white:       #FFFFFF;
+      --text:        #0E1C0F;
+      --muted:       #4A5C4B;
+      --rule:        rgba(14,28,15,0.1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--off-white);
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: var(--lime);
+      text-align: center;
+      padding: 0.6rem 6vw;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--green);
+      letter-spacing: 0.02em;
+    }
+    .topbar a {
+      color: var(--green);
+      font-weight: 700;
+      text-decoration: underline;
+      margin-left: 0.4rem;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6vw;
+      height: 72px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    /* Asterisk mark */
+    .logo-asterisk {
+      width: 28px; height: 28px;
+      color: var(--lime);
+      flex-shrink: 0;
+    }
+
+    .logo-wordmark { display: flex; flex-direction: column; line-height: 1.1; }
+
+    .logo-name {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .logo-sub {
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .nav-phone {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.1rem;
+    }
+
+    .nav-phone-label {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.05em;
+    }
+
+    .nav-phone-number {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--lime);
+      text-decoration: none;
+    }
+    .nav-phone-number:hover { color: white; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--off-white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 86vh;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6vw 5vw 6vw 8vw;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-eyebrow .dot {
+      width: 6px; height: 6px;
+      background: var(--lime);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .hero-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(3rem, 5.5vw, 5.5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      color: var(--green);
+      margin-bottom: 1.75rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-heading em {
+      font-style: italic;
+      color: var(--green-mid);
+    }
+
+    .hero-body {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 400px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .btn-lime {
+      background: var(--lime);
+      color: var(--green);
+      border: none;
+      padding: 1rem 2.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-lime:hover { background: var(--lime-dark); transform: translateY(-1px); }
+
+    .btn-green {
+      background: var(--green);
+      color: white;
+      border: none;
+      padding: 1rem 2.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+    .btn-green:hover { background: var(--green-mid); }
+
+    .hero-call-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .hero-call-row a {
+      font-weight: 700;
+      color: var(--green);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .hero-call-row a:hover { color: var(--lime-dark); }
+
+    .hero-image {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-image img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* ── STATEMENT ── */
+    .statement {
+      background: var(--green);
+      padding: 5.5rem 8vw;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 6vw;
+      align-items: center;
+    }
+
+    .statement-mark {
+      display: flex;
+      justify-content: center;
+    }
+
+    .statement-asterisk {
+      width: clamp(80px, 14vw, 160px);
+      height: clamp(80px, 14vw, 160px);
+      color: var(--lime);
+      opacity: 0.18;
+    }
+
+    .statement-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 1rem;
+    }
+
+    .statement-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--white);
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+    }
+
+    .statement-heading strong {
+      font-style: normal;
+      font-weight: 600;
+      color: var(--lime);
+    }
+
+    .statement-body {
+      font-size: 0.97rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.6);
+      max-width: 520px;
+    }
+
+    /* ── SERVICES ── */
+    .services {
+      background: var(--white);
+      padding: 6rem 8vw;
+    }
+
+    .section-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 400;
+      color: var(--green);
+      margin-bottom: 3.5rem;
+      max-width: 520px;
+      line-height: 1.2;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: var(--off-white);
+      padding: 2.5rem 2rem;
+      border-top: 3px solid var(--green);
+      transition: transform 0.2s;
+    }
+    .service-card:hover { transform: translateY(-4px); }
+    .service-card:nth-child(2) { border-top-color: var(--lime); background: var(--lime-tint); }
+
+    .service-icon {
+      width: 36px; height: 36px;
+      color: var(--green);
+      margin-bottom: 1.25rem;
+    }
+    .service-card:nth-child(2) .service-icon { color: var(--lime-dark); }
+
+    .service-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--green);
+      margin-bottom: 0.75rem;
+    }
+
+    .service-body {
+      font-size: 0.93rem;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how {
+      background: var(--off-white);
+      padding: 6rem 8vw;
+      border-top: 1px solid var(--rule);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .step {
+      border-top: 2px solid var(--green);
+      padding-top: 1.75rem;
+    }
+
+    .step-number {
+      font-family: 'Fraunces', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--lime);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .step-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--green);
+      margin-bottom: 0.6rem;
+    }
+
+    .step-body {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    /* ── IN THE WILD ── */
+    .in-the-wild {
+      background: var(--green);
+      padding: 6rem 8vw;
+    }
+
+    .in-the-wild .section-eyebrow { color: rgba(255,255,255,0.4); }
+    .in-the-wild .section-heading { color: var(--white); }
+
+    .itw-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .itw-card {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+
+    .itw-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .itw-card:hover img { transform: scale(1.03); }
+
+    .itw-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.25rem 1.5rem;
+      background: linear-gradient(transparent, rgba(14,28,15,0.75));
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    /* Lime underline on hover */
+    .itw-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--lime);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .itw-card:hover::after { transform: scaleX(1); }
+
+    /* ── PROMISE ── */
+    .promise {
+      background: var(--lime);
+      padding: 6rem 8vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6vw;
+      align-items: center;
+    }
+
+    .promise-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 400;
+      color: var(--green);
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+    .promise-heading em { font-style: italic; }
+
+    .promise-body {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--green-mid);
+      margin-bottom: 2rem;
+    }
+
+    .promise-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .promise-stat {
+      border-left: 3px solid var(--green);
+      padding-left: 1.25rem;
+    }
+
+    .promise-stat-number {
+      font-family: 'Fraunces', serif;
+      font-size: 2.8rem;
+      font-weight: 400;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 0.2rem;
+    }
+
+    .promise-stat-label {
+      font-size: 0.88rem;
+      color: var(--green-mid);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--green-deep);
+      padding: 3rem 8vw;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .footer-logo .logo-name  { color: var(--white); }
+    .footer-logo .logo-sub   { color: rgba(255,255,255,0.3); }
+    .footer-logo .logo-asterisk { color: var(--lime); }
+
+    .footer-contact { text-align: right; }
+
+    .footer-phone {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--lime);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .footer-phone:hover { color: white; }
+
+    .footer-url {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero        { grid-template-columns: 1fr; }
+      .hero-image  { height: 55vw; }
+      .statement   { grid-template-columns: 1fr; }
+      .statement-mark { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .steps       { grid-template-columns: 1fr; }
+      .itw-grid    { grid-template-columns: 1fr; }
+      .promise     { grid-template-columns: 1fr; }
+      footer       { grid-template-columns: 1fr; }
+      .footer-contact { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    Tarvitsetko apua tilaamisessa?
+    <a href="tel:+358101234567">Soita: 010&nbsp;123&nbsp;4567</a>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a class="logo" href="#">
+      <!-- Asterisk mark -->
+      <svg class="logo-asterisk" viewBox="0 0 28 28" fill="none">
+        <line x1="14" y1="2" x2="14" y2="26" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+        <line x1="2" y1="14" x2="26" y2="14" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+        <line x1="4.9" y1="4.9" x2="23.1" y2="23.1" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+        <line x1="23.1" y1="4.9" x2="4.9" y2="23.1" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+      </svg>
+      <div class="logo-wordmark">
+        <span class="logo-name">Melers</span>
+        <span class="logo-sub">Pesulapalvelut</span>
+      </div>
+    </a>
+    <div class="nav-phone">
+      <span class="nav-phone-label">Soita meille</span>
+      <a class="nav-phone-number" href="tel:+358101234567">010&nbsp;123&nbsp;4567</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow"><span class="dot"></span>Kuivapesu &amp; vesipesu</p>
+      <h1 class="hero-heading">Kotiovelle.<br><em>Puhtaana.</em></h1>
+      <p class="hero-body">Haemme vaatteesi, pesemme huolella ja toimitamme takaisin ovellesi. Yksinkertaisesti.</p>
+      <div class="hero-cta">
+        <a href="#" class="btn-lime">Tilaa nouto</a>
+        <div class="hero-call-row">
+          tai soita &nbsp;
+          <a href="tel:+358101234567">010&nbsp;123&nbsp;4567</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="images/hero-bag.png" alt="Melers toimituspussi ovella" />
+    </div>
+  </section>
+
+  <!-- STATEMENT -->
+  <div class="statement">
+    <div class="statement-mark">
+      <svg class="statement-asterisk" viewBox="0 0 160 160" fill="none">
+        <line x1="80" y1="8" x2="80" y2="152" stroke="currentColor" stroke-width="12" stroke-linecap="round"/>
+        <line x1="8" y1="80" x2="152" y2="80" stroke="currentColor" stroke-width="12" stroke-linecap="round"/>
+        <line x1="26" y1="26" x2="134" y2="134" stroke="currentColor" stroke-width="12" stroke-linecap="round"/>
+        <line x1="134" y1="26" x2="26" y2="134" stroke="currentColor" stroke-width="12" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div>
+      <p class="statement-label">Mit&auml; me teemme</p>
+      <h2 class="statement-heading">
+        Huolehdimme vaatteistasi<br>
+        <strong>kuin omistamme.</strong>
+      </h2>
+      <p class="statement-body">Jokainen kappale tarkistetaan, pesty oikealla tavalla ja palautetaan siististi taitettuna. Ei oikoteit&auml;.</p>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services">
+    <p class="section-eyebrow">Palvelumme</p>
+    <h2 class="section-heading">Kaikki tekstiilihuolto yhdell&auml; tilauksella.</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 36 36" fill="none">
+          <path d="M18 6v6M6 18h6M24 18h6M18 24v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="18" cy="18" r="5" stroke="currentColor" stroke-width="1.8" fill="none"/>
+        </svg>
+        <h3 class="service-title">Kuivapesu</h3>
+        <p class="service-body">Pukujen, takkien ja herkkien tekstiilien ammattitaitoinen puhdistus. Turvallinen menettelm&auml; herkimm&auml;llekin kankaalle.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 36 36" fill="none">
+          <path d="M18 8c0 0-8 6-8 14a8 8 0 0 0 16 0c0-8-8-14-8-14z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <h3 class="service-title">Vesipesu</h3>
+        <p class="service-body">Arjen vaatteille ja liinavaatteille. Ekologinen pesu oikealla l&auml;mp&ouml;tilalla &mdash; puhdas tulos joka kerta.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 36 36" fill="none">
+          <rect x="4" y="14" width="20" height="14" rx="1.5" stroke="currentColor" stroke-width="1.8" fill="none"/>
+          <path d="M24 20h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-4" stroke="currentColor" stroke-width="1.8" fill="none"/>
+          <circle cx="9" cy="31" r="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <circle cx="19" cy="31" r="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path d="M8 14V9a6 6 0 0 1 12 0v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        </svg>
+        <h3 class="service-title">Kotiinkuljetus</h3>
+        <p class="service-body">Noudamme ja toimitamme suoraan kotiovellesi. Ei jonottamista, ei kantamista &mdash; tilaa ja odota.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how">
+    <p class="section-eyebrow">N&auml;in se k&auml;y</p>
+    <h2 class="section-heading">Kolme askelta puhtaisiin vaatteisiin.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3 class="step-title">Tilaa nouto</h3>
+        <p class="step-body">Soita meille tai tilaa verkosta. Sovimme noudon sinulle sopivaan aikaan.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3 class="step-title">Me huolehdimme</h3>
+        <p class="step-body">Haemme vaatteesi, pesemme ammattitaidolla ja tarkistamme jokaisen kappaleen huolella.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3 class="step-title">Toimitamme ovelle</h3>
+        <p class="step-body">Puhtaat, siististi taitetut vaatteet palautuvat suoraan kotiovellesi sovittuna aikana.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- IN THE WILD -->
+  <section class="in-the-wild">
+    <p class="section-eyebrow">Melers arjessa</p>
+    <h2 class="section-heading">Tuttu n&auml;ky kadulla ja kotiovella.</h2>
+    <div class="itw-grid">
+      <div class="itw-card">
+        <img src="images/van.png" alt="Melers toimitusauto" />
+        <span class="itw-caption">Kotiinkuljetus</span>
+      </div>
+      <div class="itw-card">
+        <img src="images/storefront.png" alt="Melers toimipiste" />
+        <span class="itw-caption">Toimipiste</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMISE -->
+  <section class="promise">
+    <div>
+      <h2 class="promise-heading">Vaatteesi, <em>huoliteltuina.</em></h2>
+      <p class="promise-body">Melers on rakennettu yhdelle lupaukselle: vaatteesi palautuvat aina siist&auml;in&auml;, huoliteltuina ja ajoissa.</p>
+      <a href="#" class="btn-green">Tilaa ensimm&auml;inen nouto</a>
+    </div>
+    <div class="promise-stats">
+      <div class="promise-stat">
+        <div class="promise-stat-number">24 h</div>
+        <div class="promise-stat-label">Nouto tilauksesta</div>
+      </div>
+      <div class="promise-stat">
+        <div class="promise-stat-number">10+</div>
+        <div class="promise-stat-label">Vuotta kokemusta</div>
+      </div>
+      <div class="promise-stat">
+        <div class="promise-stat-number">100%</div>
+        <div class="promise-stat-label">Tyytyv&auml;isyystakuu</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a class="logo footer-logo" href="#">
+      <svg class="logo-asterisk" viewBox="0 0 28 28" fill="none">
+        <line x1="14" y1="2" x2="14" y2="26" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+        <line x1="2" y1="14" x2="26" y2="14" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+        <line x1="4.9" y1="4.9" x2="23.1" y2="23.1" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+        <line x1="23.1" y1="4.9" x2="4.9" y2="23.1" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+      </svg>
+      <div class="logo-wordmark">
+        <span class="logo-name">Melers</span>
+        <span class="logo-sub">Pesulapalvelut</span>
+      </div>
+    </a>
+    <div class="footer-contact">
+      <a class="footer-phone" href="tel:+358101234567">010&nbsp;123&nbsp;4567</a>
+      <span class="footer-url">melers.fi</span>
+    </div>
+  </footer>
+
+</body>
+</html>
