@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IC Memo — Auran Pesupojat Oy</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Georgia', serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #1a1a1a;
+      background: #f7f6f3;
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 32px 80px;
+    }
+
+    /* Header */
+    .header {
+      border-bottom: 3px solid #1a1a1a;
+      padding-bottom: 24px;
+      margin-bottom: 36px;
+    }
+    .header-meta {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 30px;
+      font-weight: normal;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+    .header-sub {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 13px;
+      color: #555;
+    }
+
+    /* Verdict banner */
+    .verdict {
+      background: #1a1a1a;
+      color: #fff;
+      padding: 20px 28px;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .verdict-label {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #aaa;
+      white-space: nowrap;
+    }
+    .verdict-text {
+      font-size: 16px;
+      font-weight: normal;
+    }
+    .verdict-tag {
+      margin-left: auto;
+      background: #e8c84a;
+      color: #1a1a1a;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      white-space: nowrap;
+    }
+
+    /* Snapshot grid */
+    .snapshot {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: #ccc;
+      border: 1px solid #ccc;
+      margin-bottom: 48px;
+    }
+    .snap-cell {
+      background: #fff;
+      padding: 18px 20px;
+    }
+    .snap-label {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 6px;
+    }
+    .snap-value {
+      font-size: 22px;
+      font-weight: normal;
+      letter-spacing: -0.5px;
+    }
+    .snap-note {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 48px;
+    }
+    h2 {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #888;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+    }
+    h3 {
+      font-size: 16px;
+      font-weight: normal;
+      margin-bottom: 10px;
+      margin-top: 24px;
+    }
+    h3:first-child { margin-top: 0; }
+    p { margin-bottom: 12px; }
+    p:last-child { margin-bottom: 0; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+    thead tr {
+      border-bottom: 2px solid #1a1a1a;
+    }
+    th {
+      text-align: left;
+      padding: 8px 12px 8px 0;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #888;
+      white-space: nowrap;
+    }
+    th:not(:first-child) { text-align: right; }
+    td {
+      padding: 9px 12px 9px 0;
+      border-bottom: 1px solid #eee;
+      vertical-align: top;
+    }
+    td:not(:first-child) { text-align: right; }
+    tr.total td {
+      font-weight: 700;
+      border-top: 2px solid #1a1a1a;
+      border-bottom: none;
+    }
+    tr.highlight td {
+      background: #f0f7ff;
+    }
+    tr.section-header td {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #aaa;
+      padding-top: 16px;
+      border-bottom: none;
+    }
+
+    /* Valuation box */
+    .val-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 16px;
+    }
+    .val-box {
+      border: 1px solid #ddd;
+      padding: 20px;
+      background: #fff;
+    }
+    .val-box-title {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 14px;
+    }
+    .val-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 13px;
+    }
+    .val-row:last-child { border-bottom: none; }
+    .val-row.strong { font-weight: 700; }
+    .val-row .num { font-variant-numeric: tabular-nums; }
+
+    /* Risk table */
+    .risk-table { width: 100%; border-collapse: collapse; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13px; }
+    .risk-table th { text-align: left; padding: 8px 12px 8px 0; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #888; border-bottom: 2px solid #1a1a1a; }
+    .risk-table td { padding: 10px 12px 10px 0; border-bottom: 1px solid #eee; vertical-align: top; }
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 2px;
+    }
+    .badge-high { background: #fde8e8; color: #c0392b; }
+    .badge-med  { background: #fef3cd; color: #856404; }
+    .badge-low  { background: #e8f5e9; color: #2e7d32; }
+
+    /* DD checklist */
+    .dd-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .dd-col-title {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      color: #555;
+    }
+    .dd-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 13px;
+    }
+    .dd-item .icon { font-size: 14px; line-height: 1.5; flex-shrink: 0; }
+
+    /* Open questions */
+    .oq-list {
+      list-style: none;
+      padding: 0;
+    }
+    .oq-list li {
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 13px;
+      align-items: flex-start;
+    }
+    .oq-list li:last-child { border-bottom: none; }
+    .oq-num {
+      font-size: 10px;
+      font-weight: 700;
+      color: #aaa;
+      padding-top: 2px;
+      min-width: 20px;
+    }
+    .oq-text strong { display: block; margin-bottom: 2px; color: #1a1a1a; }
+    .oq-text span { color: #666; font-size: 12px; }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid #ddd;
+      padding-top: 20px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px;
+      color: #aaa;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Responsive */
+    @media (max-width: 620px) {
+      .snapshot { grid-template-columns: repeat(2, 1fr); }
+      .val-grid { grid-template-columns: 1fr; }
+      .dd-grid { grid-template-columns: 1fr; }
+      .verdict { flex-wrap: wrap; }
+      .verdict-tag { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-meta">Askel Ventures — Investment Committee Memo &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; April 2026</div>
+    <h1>Auran Pesupojat Oy</h1>
+    <div class="header-sub">Cleaning &amp; laundry services &nbsp;·&nbsp; Turku, Finland &nbsp;·&nbsp; Y-tunnus 0934595-3 &nbsp;·&nbsp; Est. 2015</div>
+  </div>
+
+  <!-- Verdict -->
+  <div class="verdict">
+    <div class="verdict-label">Recommendation</div>
+    <div class="verdict-text">Proceed to offer — target 190–195K, van excluded, 70/30 payment split</div>
+    <div class="verdict-tag">Conditional Go</div>
+  </div>
+
+  <!-- Snapshot -->
+  <div class="snapshot">
+    <div class="snap-cell">
+      <div class="snap-label">Revenue (FY2026)</div>
+      <div class="snap-value">190K</div>
+      <div class="snap-note">EUR, flat YoY</div>
+    </div>
+    <div class="snap-cell">
+      <div class="snap-label">EBITDA (mgmt basis)</div>
+      <div class="snap-value">49K</div>
+      <div class="snap-note">Year 1 post-transition, excl. MF</div>
+    </div>
+    <div class="snap-cell">
+      <div class="snap-label">Target price</div>
+      <div class="snap-value">190K</div>
+      <div class="snap-note">Van excluded, 3.9x EBITDA</div>
+    </div>
+    <div class="snap-cell">
+      <div class="snap-label">Equity required</div>
+      <div class="snap-value">38K</div>
+      <div class="snap-note">20% of deal, 9.5K/partner</div>
+    </div>
+  </div>
+
+  <!-- Business Overview -->
+  <section>
+    <h2>Business Overview</h2>
+    <p>Auran Pesupojat Oy is a single-operator cleaning and laundry service based in Turku, operating from a 270 m² workshop at Iso-Heikkiläntie 4 since 2015. The business offers textile cleaning, laundry services, and — a growing niche — boat cover cleaning and restoration. Revenue is approximately 80% consumer (B2C) and 20% commercial (B2B).</p>
+    <p>The company is owned and run entirely by Asko Haahtela, who has built a loyal customer base organically without any active marketing. The business has never needed to advertise; customers from as far as Inari travel to Turku specifically for the boat cover service, indicating genuine market scarcity in this segment.</p>
+    <p>Financials are clean: no debt, consistent profitability over four years, and cash on the balance sheet. The business is being sold via broker Suomen Yrityskaupat Oy. Asko is willing to transition over up to 12 months at 4,000€/month, training incoming staff.</p>
+
+    <h3>Revenue mix</h3>
+    <table>
+      <thead><tr><th>Segment</th><th>Est. share</th><th>Est. revenue</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>B2C — general cleaning &amp; laundry</td><td style="text-align:right">~70%</td><td style="text-align:right">~134K</td><td>Recurring, walk-in and contracted</td></tr>
+        <tr><td>B2C/B2B — boat covers</td><td style="text-align:right">&gt;10%</td><td style="text-align:right">~20K+</td><td>Growing niche; limited competition nationally</td></tr>
+        <tr><td>B2B — commercial clients</td><td style="text-align:right">~20%</td><td style="text-align:right">~38K</td><td>Contract status unknown — key DD item</td></tr>
+        <tr class="total"><td>Total</td><td></td><td style="text-align:right">~192K</td><td></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Premises</h3>
+    <p>Lease with Kiinteistöyhtymä Lahtonen, running since December 2015. Rent: 2,000€/month (24,000€/year) including heating. Electricity and water billed at consumption. The lease is rolling with a 6-month mutual notice period. CPI-indexed annually. The lease was originally signed under <em>Acotim Oy Lieto / Auran Pesupojat</em> — this name discrepancy requires clarification, though it is not expected to be an issue in a share deal structure.</p>
+  </section>
+
+  <!-- Financials -->
+  <section>
+    <h2>Financial History</h2>
+    <p style="font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12px; color: #888; margin-bottom: 16px;">All figures EUR thousands. Fiscal year Feb 1 – Jan 31. Sheet labels lag calendar year by one month.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Line item</th>
+          <th>FY2023</th>
+          <th>FY2024</th>
+          <th>FY2025</th>
+          <th>FY2026</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Revenue</td><td>165</td><td>180</td><td>192</td><td>190</td></tr>
+        <tr><td>Materials &amp; services</td><td>−9</td><td>−8</td><td>−7</td><td>−8</td></tr>
+        <tr><td>Personnel costs</td><td>−89</td><td>−91</td><td>−91</td><td>−97</td></tr>
+        <tr><td>Other opex</td><td>−44</td><td>−49</td><td>−46</td><td>−49</td></tr>
+        <tr class="total"><td>EBITDA</td><td>23</td><td>32</td><td><strong>48</strong></td><td>37</td></tr>
+        <tr><td>EBITDA margin</td><td>14%</td><td>18%</td><td>25%</td><td>19%</td></tr>
+        <tr><td>Depreciation</td><td>−7</td><td>−10</td><td>−8</td><td>−6</td></tr>
+        <tr><td>EBIT</td><td>16</td><td>22</td><td>41</td><td>31</td></tr>
+        <tr><td>Net profit</td><td>13</td><td>18</td><td>33</td><td>24</td></tr>
+      </tbody>
+    </table>
+
+    <p>Revenue grew at ~5% CAGR from FY2023 to FY2025 before plateauing in FY2026. FY2025 was the peak earnings year (48K EBITDA, 25% margin). FY2026 margin compression was driven by a 6.6K increase in personnel costs with flat revenue — a one-year anomaly rather than a structural shift. The business has no debt and carried 26K cash at year-end FY2026.</p>
+  </section>
+
+  <!-- Forecast -->
+  <section>
+    <h2>Forecast — Askel Management Basis</h2>
+    <p style="font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12px; color: #888; margin-bottom: 16px;">Opco (Auran Pesupojat) P&amp;L under Askel ownership. Management fee is a cash-routing mechanism to holdco (TripleH/Askel Ventures) and nets to zero in consolidation. EBITDA excl. MF represents the true operational earnings.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Line item</th>
+          <th>2026E</th>
+          <th>2027E</th>
+          <th>2028E</th>
+          <th>2029E</th>
+          <th>2030E</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="section-header"><td colspan="6">Opco</td></tr>
+        <tr><td>Revenue (incl. Melers +10K)</td><td>200</td><td>210</td><td>221</td><td>232</td><td>243</td></tr>
+        <tr><td>Materials &amp; services</td><td>−8</td><td>−8</td><td>−8</td><td>−9</td><td>−9</td></tr>
+        <tr><td>Personnel (transition → stable)</td><td>−94</td><td>−83</td><td>−87</td><td>−91</td><td>−96</td></tr>
+        <tr><td>Other opex</td><td>−49</td><td>−51</td><td>−53</td><td>−56</td><td>−59</td></tr>
+        <tr class="highlight total"><td>EBITDA excl. MF</td><td><strong>49</strong></td><td><strong>68</strong></td><td><strong>73</strong></td><td><strong>76</strong></td><td><strong>79</strong></td></tr>
+        <tr><td>EBITDA margin excl. MF</td><td>25%</td><td>33%</td><td>33%</td><td>33%</td><td>33%</td></tr>
+        <tr><td>Management fee to holdco</td><td>−50</td><td>−50</td><td>−50</td><td>−75</td><td>−75</td></tr>
+        <tr><td>EBITDA incl. MF (opco retained)</td><td>−1</td><td>18</td><td>23</td><td>1</td><td>4</td></tr>
+        <tr><td>Opco cash EoY</td><td>24</td><td>37</td><td>53</td><td>53</td><td>57</td></tr>
+        <tr class="section-header"><td colspan="6">Holdco (TripleH / Askel Ventures)</td></tr>
+        <tr><td>MF revenue</td><td>50</td><td>50</td><td>50</td><td>75</td><td>75</td></tr>
+        <tr><td>Holdco costs</td><td>−10</td><td>−10</td><td>−10</td><td>−10</td><td>−10</td></tr>
+        <tr><td>Financing costs</td><td>−10</td><td>−10</td><td>−8</td><td>−6</td><td>−5</td></tr>
+        <tr><td>Tax</td><td>−6</td><td>−5</td><td>−6</td><td>−11</td><td>−11</td></tr>
+        <tr class="highlight total"><td>Holdco net income</td><td><strong>24</strong></td><td><strong>25</strong></td><td><strong>26</strong></td><td><strong>48</strong></td><td><strong>49</strong></td></tr>
+        <tr><td>Holdco cash EoY</td><td>81</td><td>24</td><td>25</td><td>47</td><td>71</td></tr>
+        <tr><td>Bank loan balance</td><td>152</td><td>127</td><td>101</td><td>76</td><td>51</td></tr>
+      </tbody>
+    </table>
+    <p style="font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12px; color: #888;">Assumptions: 5% annual revenue growth from 2027; personnel stabilises at 83K post-Asko (2027+); Melers synergy +10K confirmed from day 1; MF 50K years 1–3, 75K years 4–5, 100K year 6+.</p>
+  </section>
+
+  <!-- Valuation -->
+  <section>
+    <h2>Valuation</h2>
+    <div class="val-grid">
+      <div class="val-box">
+        <div class="val-box-title">EV / EBITDA — Askel basis</div>
+        <div class="val-row"><span>Target price (van excl.)</span><span class="num">190K</span></div>
+        <div class="val-row"><span>2026E EBITDA excl. MF</span><span class="num">49K</span></div>
+        <div class="val-row strong"><span>Multiple (year 1)</span><span class="num">3.9x</span></div>
+        <div class="val-row"><span>2027E EBITDA (stabilised)</span><span class="num">68K</span></div>
+        <div class="val-row strong"><span>Multiple (stabilised)</span><span class="num">2.8x</span></div>
+      </div>
+      <div class="val-box">
+        <div class="val-box-title">Broker ask vs. Askel target</div>
+        <div class="val-row"><span>Broker formal ask</span><span class="num">210K</span></div>
+        <div class="val-row"><span>Seller implied price</span><span class="num">~200K</span></div>
+        <div class="val-row"><span>Van removal (agreed)</span><span class="num">−20K</span></div>
+        <div class="val-row strong"><span>Askel target</span><span class="num">190–195K</span></div>
+        <div class="val-row"><span>Walk-away price</span><span class="num">200K</span></div>
+      </div>
+    </div>
+    <div class="val-grid">
+      <div class="val-box">
+        <div class="val-box-title">Financing structure</div>
+        <div class="val-row"><span>Bank loan (80%)</span><span class="num">152K</span></div>
+        <div class="val-row"><span>Finnvera guarantee (70%)</span><span class="num">106K</span></div>
+        <div class="val-row"><span>Equity (20%)</span><span class="num">38K</span></div>
+        <div class="val-row"><span>Equity per partner (4)</span><span class="num">9.5K</span></div>
+        <div class="val-row strong"><span>Personal guarantee / partner</span><span class="num">~15K</span></div>
+      </div>
+      <div class="val-box">
+        <div class="val-box-title">Payment terms</div>
+        <div class="val-row"><span>At closing (70%)</span><span class="num">133K</span></div>
+        <div class="val-row"><span>On Asko exit (30%)</span><span class="num">57K</span></div>
+        <div class="val-row"><span>Max Asko transition</span><span class="num">12 months</span></div>
+        <div class="val-row"><span>Loan term</span><span class="num">6 years</span></div>
+        <div class="val-row strong"><span>Loan fully repaid</span><span class="num">2032</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Growth upside -->
+  <section>
+    <h2>Growth Upside</h2>
+    <p>The base case uses conservative 5% annual revenue growth. Two specific opportunities could materially exceed this:</p>
+    <h3>Boat cover cleaning</h3>
+    <p>Currently &gt;10% of revenue (~20K+) with zero marketing. Customers travel from across Finland because the service is genuinely scarce. Askel's digital marketing capability could convert this into a national brand — think direct online booking, SEO, social proof. Even capturing demand from three or four major coastal cities at current pricing would double this segment. This is the most interesting organic growth lever in the business.</p>
+    <h3>Melers synergy</h3>
+    <p>Askel's Melers industrial washing facility already generates 10K in confirmed synergy by internalising carpet and textile cleaning currently outsourced to third parties. This is in the base case. Additional cross-selling between Melers and Pesupojat clients is possible and not yet modelled.</p>
+  </section>
+
+  <!-- Risks -->
+  <section>
+    <h2>Risk Assessment</h2>
+    <table class="risk-table">
+      <thead>
+        <tr><th>Risk</th><th>Severity</th><th>Mitigation</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Key-person — Asko Haahtela</strong><br><span style="color:#666;font-size:12px">The entire business runs on one person. Operations, B2B relationships, institutional knowledge.</span></td>
+          <td><span class="badge badge-high">High</span></td>
+          <td style="font-size:13px">12-month transition, Asko trains incoming staff. 30% of price withheld until exit. Mitigated but not eliminated.</td>
+        </tr>
+        <tr>
+          <td><strong>B2B client retention (~38K revenue)</strong><br><span style="color:#666;font-size:12px">20% of revenue is commercial. If accounts are personal relationships with Asko, they could walk post-acquisition.</span></td>
+          <td><span class="badge badge-high">High</span></td>
+          <td style="font-size:13px">Need client list and contract status in DD. Consider contractual guarantee from Asko on B2B revenue for transition period.</td>
+        </tr>
+        <tr>
+          <td><strong>Staff transition speed</strong><br><span style="color:#666;font-size:12px">Model assumes 6-month Asko overlap. If hiring takes 10–12 months, year-1 personnel costs rise ~27K, compressing EBITDA.</span></td>
+          <td><span class="badge badge-med">Medium</span></td>
+          <td style="font-size:13px">25K opco cash buffer absorbs this. Start recruitment process before close to minimise lag.</td>
+        </tr>
+        <tr>
+          <td><strong>Lease continuity</strong><br><span style="color:#666;font-size:12px">Rolling 6-month notice. Landlord could terminate. Name discrepancy (Acotim Oy) on current lease document.</span></td>
+          <td><span class="badge badge-med">Medium</span></td>
+          <td style="font-size:13px">Request landlord estoppel letter or written lease confirmation as closing condition. Clarify Acotim name. 10+ year relationship is positive signal.</td>
+        </tr>
+        <tr>
+          <td><strong>Revenue plateau</strong><br><span style="color:#666;font-size:12px">FY2026 revenue dipped slightly vs. FY2025. Growth was Asko-constrained, not market-constrained — but needs validation.</span></td>
+          <td><span class="badge badge-low">Low</span></td>
+          <td style="font-size:13px">Melers synergy (+10K) and boat cover digitisation provide near-term organic upside. Model conservatively assumes 5%/year.</td>
+        </tr>
+        <tr>
+          <td><strong>Equipment replacement capex</strong><br><span style="color:#666;font-size:12px">Machinery book value at 16K (Jan 2026) and declining. Replacement cycle unknown.</span></td>
+          <td><span class="badge badge-low">Low</span></td>
+          <td style="font-size:13px">Physical asset inspection required in DD. Budget 10–20K contingency for near-term equipment capex not in base case.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- DD status -->
+  <section>
+    <h2>Due Diligence Status</h2>
+    <div class="dd-grid">
+      <div>
+        <div class="dd-col-title">Completed</div>
+        <div class="dd-item"><span class="icon">✓</span><span>4 years of audited financial statements (FY2023–FY2026) reviewed</span></div>
+        <div class="dd-item"><span class="icon">✓</span><span>Interim P&amp;L through Aug 2025 reviewed</span></div>
+        <div class="dd-item"><span class="icon">✓</span><span>Lease agreement reviewed — key terms confirmed</span></div>
+        <div class="dd-item"><span class="icon">✓</span><span>Broker materials reviewed and benchmarked</span></div>
+        <div class="dd-item"><span class="icon">✓</span><span>Van exclusion confirmed with broker/seller</span></div>
+        <div class="dd-item"><span class="icon">✓</span><span>Transition terms confirmed (4K/month, 12-month max)</span></div>
+        <div class="dd-item"><span class="icon">✓</span><span>Melers synergy (10K) confirmed as real, already visible</span></div>
+        <div class="dd-item"><span class="icon">✓</span><span>Financial model built and stress-tested</span></div>
+      </div>
+      <div>
+        <div class="dd-col-title">Pending</div>
+        <div class="dd-item"><span class="icon">○</span><span>B2B client list and contract status</span></div>
+        <div class="dd-item"><span class="icon">○</span><span>Physical site visit (equipment condition, layout)</span></div>
+        <div class="dd-item"><span class="icon">○</span><span>Landlord estoppel / lease name (Acotim) clarification</span></div>
+        <div class="dd-item"><span class="icon">○</span><span>Tax DD — open disputes, VAT compliance, TyEL status</span></div>
+        <div class="dd-item"><span class="icon">○</span><span>Equipment inventory and replacement capex estimate</span></div>
+        <div class="dd-item"><span class="icon">○</span><span>Customer concentration — any single client &gt;10%?</span></div>
+        <div class="dd-item"><span class="icon">○</span><span>Boat cover revenue detail and seasonality profile</span></div>
+        <div class="dd-item"><span class="icon">○</span><span>Confirmation of Asko's motivation for selling</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Open questions -->
+  <section>
+    <h2>Open Questions for IC</h2>
+    <ul class="oq-list">
+      <li>
+        <span class="oq-num">01</span>
+        <span class="oq-text"><strong>B2B revenue — contracted or handshake?</strong><span>38K of commercial revenue is the single biggest retention risk. If it's personal relationships with Asko, the effective purchase price should be adjusted down or a revenue guarantee should be built into the SPA.</span></span>
+      </li>
+      <li>
+        <span class="oq-num">02</span>
+        <span class="oq-text"><strong>Do we have a candidate for Worker 1?</strong><span>Hiring speed is the main variable in year-1 economics. Starting recruitment before close would materially de-risk the transition. Does Askel have any network leads in Turku?</span></span>
+      </li>
+      <li>
+        <span class="oq-num">03</span>
+        <span class="oq-text"><strong>Boat cover market size — how big is the opportunity?</strong><span>This could be a genuine differentiator for the business and worth sizing properly. Anecdotally, demand exists from Inari to Helsinki. Is it worth commissioning a quick market scan before IC?</span></span>
+      </li>
+      <li>
+        <span class="oq-num">04</span>
+        <span class="oq-text"><strong>MF escalation to 100K in 2031 — does it need revisiting?</strong><span>At 5% revenue growth, opco EBITDA excl. MF reaches ~83K by 2031 while MF steps to 100K, leaving the opco cash-negative on an annual basis. This is fine given accumulated cash buffers (57K), but the model should be reviewed in 2028–2029 before the 100K step kicks in.</span></span>
+      </li>
+      <li>
+        <span class="oq-num">05</span>
+        <span class="oq-text"><strong>Price — 190K or 195K?</strong><span>Seller implied expectation is 200K. Van exclusion brings this to ~180K by their logic, or to 190K by ours. Opening at 185K and settling at 190–195K is realistic. Does IC authorise up to 195K?</span></span>
+      </li>
+      <li>
+        <span class="oq-num">06</span>
+        <span class="oq-text"><strong>Momentum financing vs. bank + Finnvera?</strong><span>Broker offers to arrange financing through Momentum. Askel's model uses bank + Finnvera (152K loan, 70% Finnvera guarantee). Which route does IC prefer, and has the bank been sounded out?</span></span>
+      </li>
+      <li>
+        <span class="oq-num">07</span>
+        <span class="oq-text"><strong>TripleH → Askel Ventures rename</strong><span>The holdco is currently named TripleH Ventures Oy. This should be officially renamed to Askel Ventures Oy before or shortly after the acquisition. Is this in motion?</span></span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Summary -->
+  <section>
+    <h2>Summary</h2>
+    <p>Auran Pesupojat is a well-run, debt-free, cash-generating micro-business with ten years of operational history in Turku. It fits Askel's acquisition thesis — profitable, overlooked, and with a motivated seller willing to support a clean transition. The financials are transparent and the deal structure is straightforward.</p>
+    <p>At 190–195K (3.9x year-1 EBITDA), the entry price is fair. The return profile is strong: 24K net income to equity in year 1 on a 38K equity investment (63% cash-on-cash), loan fully repaid by 2032, and an optionality upside in the boat cover segment that is currently untapped.</p>
+    <p>The main risk is key-person concentration, partially mitigated by the structured 12-month transition and deferred payment. The remaining pre-close DD items (B2B client list, site visit, lease confirmation) are standard and should not be blockers. Recommendation: authorise offer at 190K, ceiling 195K, subject to satisfactory completion of pending DD.</p>
+  </section>
+
+  <div class="footer">
+    <span>Askel Ventures — Internal &amp; Confidential</span>
+    <span>Prepared April 2026 &nbsp;·&nbsp; Steve / Niklas</span>
+  </div>
+
+</div>
+</body>
+</html>
