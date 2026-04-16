@@ -9,3 +9,4 @@ Published pages for Askel Ventures. Each folder is a site deployed to `<folder-n
 | preview | https://preview.askelventures.com |
 | anika | https://anika.askelventures.com |
 | vesa | https://vesa.askelventures.com |
+| appoy | https://appoy.askelventures.com |
