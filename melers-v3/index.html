@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Melers — Pesulapalvelut kotiovelle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #1C2B4A;
+      --gold:    #B8943F;
+      --gold-lt: #F5EDD6;   /* gold at ~15% — warm section tint */
+      --cream:   #F7F2EA;
+      --white:   #FFFFFF;
+      --text:    #2A2A2A;
+      --muted:   #6B6355;
+      --rule:    rgba(28,43,74,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: var(--navy);
+      text-align: center;
+      padding: 0.55rem 6vw;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.04em;
+    }
+    .topbar a {
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 700;
+      margin-left: 0.4rem;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6vw;
+      height: 76px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-mark { width: 30px; height: 22px; }
+
+    .logo-wordmark { display: flex; flex-direction: column; line-height: 1.1; }
+
+    .logo-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: 0.01em;
+    }
+
+    .logo-sub {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .nav-phone {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.1rem;
+    }
+
+    .nav-phone-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    .nav-phone-number {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-phone-number:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 82vh;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6vw 5vw 6vw 8vw;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      font-weight: 500;
+      line-height: 1.1;
+      color: var(--navy);
+      margin-bottom: 1.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-heading em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-body {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 400px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .btn-primary {
+      background: var(--navy);
+      color: white;
+      border: none;
+      padding: 1rem 2.5rem;
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold); }
+
+    .hero-or {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .hero-call {
+      font-size: 1rem;
+      color: var(--navy);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .hero-call:hover { color: var(--gold); }
+    .hero-call span {
+      font-weight: 300;
+      color: var(--muted);
+      margin-right: 0.35rem;
+    }
+
+    .hero-image {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* ── TRUST BAR ── */
+    .trustbar {
+      background: var(--gold-lt);
+      border-top: 1px solid rgba(184,148,63,0.2);
+      border-bottom: 1px solid rgba(184,148,63,0.2);
+      padding: 1.25rem 8vw;
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 0.88rem;
+      color: var(--navy);
+      font-weight: 400;
+    }
+    .trust-icon {
+      width: 20px; height: 20px;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ── SERVICES ── */
+    .services {
+      background: var(--cream);
+      padding: 6rem 8vw;
+    }
+
+    .section-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 3.5rem;
+      max-width: 520px;
+      line-height: 1.25;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .service-card {
+      background: var(--white);
+      padding: 2.5rem 2rem;
+      border-top: 3px solid var(--gold);
+    }
+
+    .service-icon {
+      width: 36px; height: 36px;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+    }
+
+    .service-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+
+    .service-body {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how {
+      background: var(--navy);
+      padding: 6rem 8vw;
+    }
+
+    .how .section-eyebrow { color: var(--gold); }
+    .how .section-heading { color: var(--white); margin-bottom: 3rem; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .step {
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 1.75rem;
+    }
+
+    .step-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 400;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 1rem;
+      opacity: 0.7;
+    }
+
+    .step-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+
+    .step-body {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ── IN THE WILD ── */
+    .in-the-wild {
+      background: var(--cream);
+      padding: 6rem 8vw;
+    }
+
+    .itw-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .itw-card {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+
+    .itw-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .itw-card:hover img { transform: scale(1.03); }
+
+    .itw-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.25rem 1.5rem;
+      background: linear-gradient(transparent, rgba(28,43,74,0.7));
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── PROMISE ── */
+    .promise {
+      background: var(--white);
+      padding: 6rem 8vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6vw;
+      align-items: center;
+      border-top: 1px solid var(--rule);
+    }
+
+    .promise-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 500;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+
+    .promise-heading em { font-style: italic; color: var(--gold); }
+
+    .promise-body {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .promise-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+
+    .promise-divider {
+      width: 1px;
+      background: var(--rule);
+      align-self: stretch;
+    }
+
+    .promise-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .promise-stat {
+      border-left: 3px solid var(--gold);
+      padding-left: 1.25rem;
+    }
+
+    .promise-stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 500;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .promise-stat-label {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      padding: 3rem 8vw;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .footer-logo .logo-name { color: white; }
+    .footer-logo .logo-sub  { color: var(--gold); }
+
+    .footer-contact {
+      text-align: right;
+    }
+
+    .footer-phone {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .footer-phone:hover { color: var(--gold); }
+
+    .footer-url {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero           { grid-template-columns: 1fr; }
+      .hero-image     { height: 55vw; }
+      .services-grid  { grid-template-columns: 1fr; }
+      .steps          { grid-template-columns: 1fr; }
+      .itw-grid       { grid-template-columns: 1fr; }
+      .promise        { grid-template-columns: 1fr; }
+      .promise-divider{ display: none; }
+      .trustbar       { gap: 1.5rem; flex-wrap: wrap; justify-content: flex-start; }
+      footer          { grid-template-columns: 1fr; }
+      .footer-contact { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    Tarvitsetko apua tilaamisessa?
+    <a href="tel:+358101234567">010&nbsp;123&nbsp;4567</a>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a class="logo" href="#">
+      <svg class="logo-mark" viewBox="0 0 30 22" fill="none">
+        <path d="M2 18 C2 18, 5.5 4, 9 10 C11 14, 13 7, 15 7 C17 7, 19 14, 21 10 C24.5 4, 28 18, 28 18"
+              stroke="#1C2B4A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M2 18 C2 18, 5.5 4, 9 10 C11 14, 13 7, 15 7 C17 7, 19 14, 21 10 C24.5 4, 28 18, 28 18"
+              stroke="#B8943F" stroke-width="2.5" stroke-linecap="round" fill="none"
+              stroke-dasharray="5 55" stroke-dashoffset="0"/>
+      </svg>
+      <div class="logo-wordmark">
+        <span class="logo-name">Melers</span>
+        <span class="logo-sub">Pesulapalvelut</span>
+      </div>
+    </a>
+    <div class="nav-phone">
+      <span class="nav-phone-label">Soita meille</span>
+      <a class="nav-phone-number" href="tel:+358101234567">010&nbsp;123&nbsp;4567</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Kuivapesu &amp; vesipesu</p>
+      <h1 class="hero-heading">
+        Kotiovelle.<br><em>Puhtaana.</em>
+      </h1>
+      <p class="hero-body">
+        Haemme vaatteesi, pesemme huolella ja toimitamme takaisin ovellesi. Yksinkertaisesti.
+      </p>
+      <div class="hero-cta">
+        <a href="#" class="btn-primary">Tilaa nouto</a>
+        <span class="hero-or">tai soita suoraan</span>
+        <a href="tel:+358101234567" class="hero-call">
+          <span>Puhelin</span>010&nbsp;123&nbsp;4567
+        </a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="images/hero-bag.png" alt="Melers toimituspussi ovella" />
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trustbar">
+    <span class="trust-item">
+      <svg class="trust-icon" viewBox="0 0 20 20" fill="none">
+        <path d="M10 2l2.4 4.8 5.3.8-3.8 3.7.9 5.2L10 14l-4.8 2.5.9-5.2-3.8-3.7 5.3-.8z"
+              stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+      </svg>
+      Luotettava palvelu
+    </span>
+    <span class="trust-item">
+      <svg class="trust-icon" viewBox="0 0 20 20" fill="none">
+        <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.4" fill="none"/>
+        <path d="M10 6v4l2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+      </svg>
+      Nouto 24–48 tunnissa
+    </span>
+    <span class="trust-item">
+      <svg class="trust-icon" viewBox="0 0 20 20" fill="none">
+        <path d="M10 2C6.7 2 4 4.7 4 8c0 4.4 6 10 6 10s6-5.6 6-10c0-3.3-2.7-6-6-6z"
+              stroke="currentColor" stroke-width="1.4" fill="none"/>
+        <circle cx="10" cy="8" r="2" stroke="currentColor" stroke-width="1.4" fill="none"/>
+      </svg>
+      Kotiinkuljetus koko alueella
+    </span>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services">
+    <p class="section-eyebrow">Palvelumme</p>
+    <h2 class="section-heading">Kaikki tekstiilihuolto yhdell&auml; tilauksella.</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 36 36" fill="none">
+          <path d="M18 6v6M6 18h6M24 18h6M18 24v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="18" cy="18" r="5" stroke="currentColor" stroke-width="1.8" fill="none"/>
+        </svg>
+        <h3 class="service-title">Kuivapesu</h3>
+        <p class="service-body">Pukujen, takkien ja herkkien tekstiilien ammattitaitoinen puhdistus. Turvallinen menettelm&auml; herkimm&auml;llekin kankaalle.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 36 36" fill="none">
+          <path d="M18 8c0 0-8 6-8 14a8 8 0 0 0 16 0c0-8-8-14-8-14z"
+                stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <h3 class="service-title">Vesipesu</h3>
+        <p class="service-body">Arjen vaatteille ja liinavaatteille. Ekologinen pesu oikealla l&auml;mp&ouml;tilalla &mdash; puhdas tulos joka kerta.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 36 36" fill="none">
+          <rect x="4" y="14" width="20" height="14" rx="1.5" stroke="currentColor" stroke-width="1.8" fill="none"/>
+          <path d="M24 20h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-4" stroke="currentColor" stroke-width="1.8" fill="none"/>
+          <circle cx="9" cy="31" r="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <circle cx="19" cy="31" r="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path d="M8 14V9a6 6 0 0 1 12 0v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        </svg>
+        <h3 class="service-title">Kotiinkuljetus</h3>
+        <p class="service-body">Noudamme ja toimitamme suoraan kotiovellesi. Ei jonottamista, ei kantamista &mdash; tilaa ja odota.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how">
+    <p class="section-eyebrow">N&auml;in se k&auml;y</p>
+    <h2 class="section-heading">Kolme askelta puhtaisiin vaatteisiin.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3 class="step-title">Tilaa nouto</h3>
+        <p class="step-body">Soita meille tai tilaa verkosta. Sovimme noudon sinulle sopivaan aikaan.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3 class="step-title">Me huolehdimme</h3>
+        <p class="step-body">Haemme vaatteesi, pesemme ammattitaidolla ja tarkistamme jokaisen kappaleen huolella.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3 class="step-title">Toimitamme ovelle</h3>
+        <p class="step-body">Puhtaat, siististi taitetut vaatteet palautuvat suoraan kotiovellesi sovittuna aikana.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- IN THE WILD -->
+  <section class="in-the-wild">
+    <p class="section-eyebrow">Melers arjessa</p>
+    <h2 class="section-heading">Tuttu n&auml;ky kadulla ja kotiovella.</h2>
+    <div class="itw-grid">
+      <div class="itw-card">
+        <img src="images/melers-van-coral.png" alt="Melers toimitusauto" />
+        <span class="itw-caption">Kotiinkuljetus</span>
+      </div>
+      <div class="itw-card">
+        <img src="images/melers-storefront-coral.png" alt="Melers toimipiste" />
+        <span class="itw-caption">Toimipiste</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMISE -->
+  <section class="promise">
+    <div>
+      <h2 class="promise-heading">
+        Vaatteesi, <em>huoliteltuina.</em>
+      </h2>
+      <p class="promise-body">
+        Melers on rakennettu yhdelle lupaukselle: vaatteesi palautuvat aina siist&auml;in&auml;, huoliteltuina ja ajoissa. Niin kuin aina ennenkin &mdash; nyt vain helpommin.
+      </p>
+      <div class="promise-cta">
+        <a href="#" class="btn-primary">Tilaa ensimm&auml;inen nouto</a>
+        <a href="tel:+358101234567" class="hero-call" style="margin-top:0.25rem">
+          <span>tai soita</span>010&nbsp;123&nbsp;4567
+        </a>
+      </div>
+    </div>
+    <div class="promise-divider"></div>
+    <div class="promise-right">
+      <div class="promise-stat">
+        <div class="promise-stat-number">24 h</div>
+        <div class="promise-stat-label">Nouto tilauksesta</div>
+      </div>
+      <div class="promise-stat">
+        <div class="promise-stat-number">10+</div>
+        <div class="promise-stat-label">Vuotta kokemusta</div>
+      </div>
+      <div class="promise-stat">
+        <div class="promise-stat-number">100%</div>
+        <div class="promise-stat-label">Tyytyv&auml;isyystakuu</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a class="logo footer-logo" href="#">
+      <svg class="logo-mark" viewBox="0 0 30 22" fill="none">
+        <path d="M2 18 C2 18, 5.5 4, 9 10 C11 14, 13 7, 15 7 C17 7, 19 14, 21 10 C24.5 4, 28 18, 28 18"
+              stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <path d="M2 18 C2 18, 5.5 4, 9 10 C11 14, 13 7, 15 7 C17 7, 19 14, 21 10 C24.5 4, 28 18, 28 18"
+              stroke="#B8943F" stroke-width="2.5" stroke-linecap="round" fill="none"
+              stroke-dasharray="5 55" stroke-dashoffset="0"/>
+      </svg>
+      <div class="logo-wordmark">
+        <span class="logo-name">Melers</span>
+        <span class="logo-sub">Pesulapalvelut</span>
+      </div>
+    </a>
+    <div class="footer-contact">
+      <a class="footer-phone" href="tel:+358101234567">010&nbsp;123&nbsp;4567</a>
+      <span class="footer-url">melers.fi</span>
+    </div>
+  </footer>
+
+</body>
+</html>
