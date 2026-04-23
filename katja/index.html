@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- v2 -->
 <html lang="en">
 <head>
   <meta name="robots" content="noindex, nofollow">
@@ -190,11 +191,11 @@
   /* ── Model slide: flywheel outside v-scroll container ── */
   .slide-model {
     overflow: hidden !important;
+    justify-content: center !important;
   }
 
   .model-body {
-    flex: 1;
-    min-height: 0;
+    flex: 0 0 auto;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -582,9 +583,9 @@
   }
 
   .team-desc {
-    font-size: clamp(0.68rem, 1.05vw, 0.8rem);
-    color: var(--muted);
-    line-height: 1.55;
+    font-size: clamp(0.75rem, 1.2vw, 0.88rem);
+    color: var(--mid);
+    line-height: 1.65;
   }
 
   .team-note {
@@ -686,9 +687,9 @@
   }
 
   .term-value {
-    font-size: clamp(0.72rem, 1.15vw, 0.85rem);
+    font-size: clamp(0.75rem, 1.2vw, 0.88rem);
     color: var(--mid);
-    line-height: 1.6;
+    line-height: 1.65;
   }
 
   .term-value strong {
@@ -848,15 +849,15 @@
         <text x="212" y="27" fill="#8a7d72" font-size="8" font-family="Open Sans,sans-serif">Market (no intervention)</text>
 
         <!-- Dotted baseline (market / no intervention) -->
-        <path d="M 105,188 C 105,188 155.8,178.8 195,174 C 234.2,169.2 292.5,165.2 340,159 C 387.5,152.8 434.2,143 480,137 C 525.8,131 615,123 615,123"
+        <path d="M 105,188 C 105,188 155.8,178.8 195,174 C 234.2,169.2 292.5,165.2 340,159 C 387.5,153 440,152 480,152 C 530,152 575,152 615,152"
               fill="none" stroke="#8a7d72" stroke-width="1.5" stroke-dasharray="5,4"/>
 
         <!-- Askel path — solid (Askel operating zone) -->
-        <path d="M 105,181 C 105,181 155.8,160.5 195,152 C 234.2,143.5 292.5,142.2 340,130 C 387.5,117.8 434.2,92.5 480,79"
+        <path d="M 105,187 C 120,187 165,167 195,167 C 295,167 385,93 480,93"
               fill="none" stroke="#c0392b" stroke-width="2.5" stroke-linecap="round"/>
 
         <!-- Askel path — dashed + faded (next buyer's territory) -->
-        <path d="M 480,79 C 530,65 585,52 620,48"
+        <path d="M 480,93 C 530,91 575,90 620,89"
               fill="none" stroke="#c0392b" stroke-width="2" stroke-dasharray="5,4" opacity="0.4"/>
 
         <!-- "Apply playbook" bracket -->
@@ -866,16 +867,16 @@
         <text x="337" y="40" text-anchor="middle" fill="#c0392b" font-size="8" font-family="Open Sans,sans-serif" font-weight="700" letter-spacing="0.8">APPLY PLAYBOOK</text>
 
         <!-- "Buy here" marker -->
-        <circle cx="195" cy="152" r="5" fill="#faf8f5" stroke="#c0392b" stroke-width="2"/>
-        <text x="204" y="142" fill="#c0392b" font-size="8.5" font-family="Open Sans,sans-serif" font-weight="700">Buy here</text>
+        <circle cx="195" cy="167" r="5" fill="#faf8f5" stroke="#c0392b" stroke-width="2"/>
+        <text x="154" y="157" fill="#c0392b" font-size="8.5" font-family="Open Sans,sans-serif" font-weight="700">Buy here</text>
 
         <!-- "Sell here" marker -->
-        <circle cx="480" cy="79" r="5" fill="#faf8f5" stroke="#c0392b" stroke-width="2"/>
-        <text x="489" y="92" fill="#c0392b" font-size="8.5" font-family="Open Sans,sans-serif" font-weight="700">Sell here</text>
+        <circle cx="480" cy="93" r="5" fill="#faf8f5" stroke="#c0392b" stroke-width="2"/>
+        <text x="489" y="106" fill="#c0392b" font-size="8.5" font-family="Open Sans,sans-serif" font-weight="700">Sell here</text>
 
         <!-- "Next buyer's territory" label -->
-        <text x="549" y="158" text-anchor="middle" fill="#8a7d72" font-size="7.5" font-family="Open Sans,sans-serif" font-style="italic">Next buyer's</text>
-        <text x="549" y="169" text-anchor="middle" fill="#8a7d72" font-size="7.5" font-family="Open Sans,sans-serif" font-style="italic">territory</text>
+        <text x="549" y="178" text-anchor="middle" fill="#8a7d72" font-size="7.5" font-family="Open Sans,sans-serif" font-style="italic">Next buyer's</text>
+        <text x="549" y="189" text-anchor="middle" fill="#8a7d72" font-size="7.5" font-family="Open Sans,sans-serif" font-style="italic">territory</text>
 
         <!-- Stage tick marks on X-axis -->
         <line x1="195" y1="207" x2="195" y2="214" stroke="#c5bfb8" stroke-width="1"/>
