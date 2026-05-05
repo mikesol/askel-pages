@@ -709,6 +709,88 @@
     right: 14px;
   }
 
+  /* ── Opportunity stat strip ────────── */
+  .opp-stats {
+    display: flex;
+    gap: 3vw;
+    margin: 0.8em 0 1.4em 0;
+    flex-wrap: wrap;
+  }
+
+  .opp-stat {
+    border-top: 2px solid var(--red);
+    padding-top: 0.55em;
+    flex: 1;
+    min-width: 130px;
+  }
+
+  .opp-stat-num {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    color: var(--dark);
+    line-height: 1;
+    margin-bottom: 0.2em;
+  }
+
+  .opp-stat-num.accent { color: var(--red); }
+
+  .opp-stat-lbl {
+    font-size: clamp(0.58rem, 0.95vw, 0.7rem);
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* ── Case study ─────────────────────── */
+  .case-stats {
+    display: flex;
+    gap: 3vw;
+    margin-bottom: 1.4em;
+    flex-wrap: wrap;
+  }
+
+  .case-stat {
+    border-top: 1.5px solid var(--border);
+    padding-top: 0.55em;
+    flex: 1;
+    min-width: 90px;
+  }
+
+  .case-stat-val {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(1.1rem, 2.2vw, 1.7rem);
+    color: var(--dark);
+    line-height: 1;
+    margin-bottom: 0.15em;
+  }
+
+  .case-stat-val.accent { color: var(--red); }
+
+  .case-stat-lbl {
+    font-size: clamp(0.55rem, 0.88vw, 0.68rem);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .case-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2em 4vw;
+    max-width: 960px;
+  }
+
+  .case-col-head {
+    font-size: clamp(0.6rem, 0.95vw, 0.72rem);
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.8em;
+    border-bottom: 1.5px solid var(--border);
+    padding-bottom: 0.4em;
+  }
+
   /* ── Mobile ─────────────────────────── */
   @media (max-width: 600px) {
     .reveal .slides section { padding: 5vh 6vw; }
@@ -734,6 +816,9 @@
     .team-layout { flex-direction: column; }
     .team-photo-wrap { flex: none; max-width: 100%; width: 100%; min-height: unset; }
     .team-photo { height: 28vh; }
+
+    .case-cols { grid-template-columns: 1fr; }
+    .opp-stats, .case-stats { gap: 1em; }
   }
 </style>
 </head>
@@ -758,6 +843,20 @@
       <div class="label">The Opportunity</div>
       <div class="rule"></div>
       <h2>A wave of <span class="accent">succession transitions</span><br>no one is equipped to handle.</h2>
+      <div class="opp-stats">
+        <div class="opp-stat">
+          <div class="opp-stat-num">73,000+</div>
+          <div class="opp-stat-lbl">Finnish entrepreneurs aged 54+</div>
+        </div>
+        <div class="opp-stat">
+          <div class="opp-stat-num">34,000</div>
+          <div class="opp-stat-lbl">intend to sell to an outside buyer within the decade</div>
+        </div>
+        <div class="opp-stat">
+          <div class="opp-stat-num accent">20,000+</div>
+          <div class="opp-stat-lbl">viable businesses at closure risk — no suitable buyer exists</div>
+        </div>
+      </div>
       <div class="points">
         <div class="point"><div class="point-dot"></div><div class="point-text"><strong>The silver tsunami is here.</strong> Across the Nordics, essential small businesses are profitable and resilient — but founder-led and approaching succession transition.</div></div>
         <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Structural gap in the market.</strong> These businesses are too small for traditional private equity and too operationally demanding for passive investors.</div></div>
@@ -806,6 +905,61 @@
         <div class="point"><div class="point-dot"></div><div class="point-text"><strong>The AI Layer</strong> We deploy the latest AI technologies — from agents to computer vision — not for the sake of it, but to solve specific, real-world operational problems. This is where asymmetric upside gets built.</div></div>
         <div class="point"><div class="point-dot"></div><div class="point-text"><strong>The Growth Engine</strong> Replacing ad-hoc processes and spreadsheet operations with a modern, proven tech stack. A repeatable Growth Engine — documented and improving with every acquisition.</div></div>
         <div class="point"><div class="point-dot"></div><div class="point-text"><strong>From owner-led to professionally-led</strong> We recruit dedicated operators for each business — often replacing the outgoing founder — and build around them: stronger governance, clearer operating cadence, and the systems to scale without founder dependency.</div></div>
+      </div>
+    </section>
+
+    <!-- ── 5. CASE STUDY: MELERS OY ─────── -->
+    <section data-background-color="#faf8f5">
+      <div class="label">Case Study</div>
+      <div class="rule"></div>
+      <h2>Melers Oy — <span class="accent">the playbook in action.</span></h2>
+
+      <div class="case-stats">
+        <div class="case-stat">
+          <div class="case-stat-val">1957</div>
+          <div class="case-stat-lbl">Founded</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-val">€400K</div>
+          <div class="case-stat-lbl">Purchase price</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-val">€100K</div>
+          <div class="case-stat-lbl">EBITDA at entry</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-val accent">4×</div>
+          <div class="case-stat-lbl">EBITDA target</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-val accent">10×</div>
+          <div class="case-stat-lbl">AI platform upside</div>
+        </div>
+      </div>
+
+      <div class="case-cols">
+        <div>
+          <div class="case-col-head">What we found</div>
+          <div class="points single">
+            <div class="point"><div class="point-dot"></div><div class="point-text">Operational since 1957 — deep sector credibility, Oy incorporated 2001. Strong fundamentals, zero modern infrastructure.</div></div>
+            <div class="point"><div class="point-dot"></div><div class="point-text">Fully founder-dependent. No documented processes, no digital systems, no scalable operations.</div></div>
+            <div class="point"><div class="point-dot"></div><div class="point-text">Solid cash flow at €100K EBITDA. Acquired at 4× — a clean entry with clear upside.</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="case-col-head">What we built</div>
+          <div class="points single">
+            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Knowledge transfer.</strong> Full video training via Connectteam — founder dependency eliminated. Two new operators hired to run day-to-day.</div></div>
+            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Brand &amp; marketing.</strong> Full brand refresh, modern marketing and sales systems — deployed in 3 months.</div></div>
+            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>AI agentic ERP.</strong> Active partnership with Business Finland to co-develop a purpose-built AI agentic ERP for the industry. Unlocks 10× if the platform scales sector-wide.</div></div>
+            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>SaaS layer.</strong> Introducing AI agentic SaaS software across operations — building the tech layer on top of a stable cash business.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:1.2em;display:flex;align-items:center;gap:0.7em;">
+        <span style="font-size:clamp(0.55rem,0.85vw,0.65rem);font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);">Partner</span>
+        <span class="team-cred" style="color:#003580;border-color:#aabfe0;background:#f0f4ff;letter-spacing:0.06em;">Business Finland</span>
       </div>
     </section>
 
@@ -913,6 +1067,21 @@
         </div>
       </div>
       <div class="team-note" style="margin-top:0.6em">Illustrative figures. Actual multiples vary by business, sector, and execution.</div>
+    </section>
+
+    <!-- ── 7. REVENUE PROJECTIONS ────────── -->
+    <section data-background-color="#faf8f5">
+      <div class="label">Revenue Projections</div>
+      <div class="rule"></div>
+      <h2>See the <span class="accent">compounding effect</span><br>in real numbers.</h2>
+      <div class="points single" style="margin-bottom:2.2em;max-width:640px;">
+        <div class="point"><div class="point-dot"></div><div class="point-text">Each acquisition adds cash flow. Each exit funds the next. The model compounds — and the math is transparent.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text">Run your own scenarios: adjust acquisition timelines, EBITDA growth rates, exit multiples, and equity allocation to see portfolio IRR and distributions over time.</div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:0.6em;">
+        <a href="https://effect.askelventures.com" target="_blank" class="cta-btn">Try the compounding effect calculator →</a>
+        <span style="font-size:clamp(0.58rem,0.9vw,0.68rem);color:var(--muted);letter-spacing:0.02em;">Revenue projections for Askel Ventures</span>
+      </div>
     </section>
 
     <!-- ── 7. THE TEAM ─────────────────── -->
