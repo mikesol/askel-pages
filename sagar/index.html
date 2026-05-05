@@ -834,8 +834,8 @@
   }
 
   .cs-website-card {
-    flex: 1;
-    min-height: 0;
+    flex: 0 0 clamp(90px, 16vh, 150px);
+    position: relative;
     border-radius: 4px;
     overflow: hidden;
     border: 1.5px solid var(--border);
@@ -847,6 +847,20 @@
     object-fit: cover;
     object-position: top;
     display: block;
+  }
+
+  .cs-brand-tag {
+    position: absolute;
+    top: 0.45em;
+    left: 0.45em;
+    font-size: clamp(0.5rem, 0.75vw, 0.6rem);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(0,0,0,0.55);
+    padding: 0.25em 0.6em;
+    border-radius: 2px;
   }
 
   /* ── Mobile ─────────────────────────── */
@@ -1006,22 +1020,23 @@
         <!-- RIGHT: before → brand update → after (linear) -->
         <div class="cs-right">
 
-          <!-- Before -->
-          <div class="cs-website-card" style="flex:0 0 auto;height:clamp(70px,13vh,120px);position:relative;">
+          <!-- Old brand -->
+          <div class="cs-website-card">
             <img src="melers-old-brand.png" alt="Melers old brand">
-            <span style="position:absolute;top:0.4em;left:0.5em;font-size:clamp(0.5rem,0.78vw,0.62rem);font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,0.45);padding:0.2em 0.55em;border-radius:2px;">Before</span>
+            <span class="cs-brand-tag">Old brand</span>
           </div>
 
           <!-- Divider -->
-          <div style="display:flex;align-items:center;gap:0.6em;flex-shrink:0;padding:0.1em 0;">
+          <div style="display:flex;align-items:center;gap:0.6em;flex-shrink:0;">
             <div style="height:1px;background:var(--border);flex:1;"></div>
             <span style="font-size:clamp(0.52rem,0.82vw,0.64rem);font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);white-space:nowrap;">Brand update</span>
             <div style="height:1px;background:var(--red);flex:1;"></div>
           </div>
 
-          <!-- New website -->
+          <!-- New brand -->
           <div class="cs-website-card">
-            <img src="melers-website.png" alt="Melers new website">
+            <img src="melers-website.png" alt="Melers new brand">
+            <span class="cs-brand-tag" style="background:var(--red);">New brand</span>
           </div>
 
         </div>
