@@ -11,4 +11,3 @@ Published pages for Askel Ventures. Each folder is a site deployed to `<folder-n
 | vesa | https://vesa.askelventures.com |
 | appoy | https://appoy.askelventures.com |
 | effect | https://effect.askelventures.com |
-| loi | https://loi.askelventures.com |
