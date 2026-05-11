@@ -664,6 +664,37 @@
     border-radius: 2px;
   }
 
+  /* ── Opportunity stat strip ────────── */
+  .opp-stats {
+    display: flex;
+    gap: 3vw;
+    margin: 0.8em 0 1.4em 0;
+    flex-wrap: wrap;
+  }
+
+  .opp-stat {
+    border-top: 2px solid var(--red);
+    padding-top: 0.55em;
+    flex: 1;
+    min-width: 130px;
+  }
+
+  .opp-stat-num {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    color: var(--dark);
+    line-height: 1;
+    margin-bottom: 0.2em;
+  }
+
+  .opp-stat-num.accent { color: var(--red); }
+
+  .opp-stat-lbl {
+    font-size: clamp(0.58rem, 0.95vw, 0.7rem);
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
   /* ── Terms ──────────────────────────── */
   .terms-grid {
     display: grid;
@@ -759,6 +790,20 @@
       <div class="label">The Opportunity</div>
       <div class="rule"></div>
       <h2>A wave of <span class="accent">succession transitions</span><br>no one is equipped to handle.</h2>
+      <div class="opp-stats">
+        <div class="opp-stat">
+          <div class="opp-stat-num">73,000+</div>
+          <div class="opp-stat-lbl">Finnish entrepreneurs aged 54+</div>
+        </div>
+        <div class="opp-stat">
+          <div class="opp-stat-num">34,000</div>
+          <div class="opp-stat-lbl">intend to sell to an outside buyer within the decade</div>
+        </div>
+        <div class="opp-stat">
+          <div class="opp-stat-num accent">20,000+</div>
+          <div class="opp-stat-lbl">viable businesses at closure risk — no suitable buyer exists</div>
+        </div>
+      </div>
       <div class="points">
         <div class="point"><div class="point-dot"></div><div class="point-text"><strong>The silver tsunami is here.</strong> Across the Nordics, essential small businesses are profitable and resilient — but founder-led and approaching succession transition.</div></div>
         <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Structural gap in the market.</strong> These businesses are too small for traditional private equity and too operationally demanding for passive investors.</div></div>
@@ -956,11 +1001,15 @@
     <section data-background-color="#faf8f5">
       <div class="label">The Investment</div>
       <div class="rule"></div>
-      <h2>Preferred equity in Askel.<br><span class="accent">Raising up to €1M.</span></h2>
+      <h2>Ordinary shares in Askel Ventures.<br><span class="accent">Raising up to €1M.</span></h2>
       <div class="terms-grid">
         <div class="term">
           <div class="term-label">Instrument</div>
-          <div class="term-value"><strong>Preferred equity</strong> in the Askel holdco via private placement.</div>
+          <div class="term-value"><strong>Ordinary shares</strong> in Askel Ventures via private placement.</div>
+        </div>
+        <div class="term">
+          <div class="term-label">Alignment</div>
+          <div class="term-value">Investors hold the same share class as the founders — no preference stack, no separate share class. We win when you win.</div>
         </div>
         <div class="term">
           <div class="term-label">What you're buying</div>
