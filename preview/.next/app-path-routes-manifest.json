@@ -1,0 +1,10 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/case-study/page": "/case-study",
+  "/favicon.ico/route": "/favicon.ico",
+  "/investors/page": "/investors",
+  "/operators/page": "/operators",
+  "/page": "/",
+  "/sellers/page": "/sellers"
+}
