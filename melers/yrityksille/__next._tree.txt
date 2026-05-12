@@ -1,4 +1,4 @@
-:HL["/_next/static/chunks/0mkjx4ilu_mn_.css","style"]
+:HL["/_next/static/chunks/158u.cj3jmlk~.css","style"]
 :HL["https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700&family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&display=swap","style"]
 :HL["/photo-van-big.png","image"]
 :HL["/logos/barona.svg","image"]
@@ -7,4 +7,4 @@
 :HL["/logos/yliopiston-apteekki.png","image"]
 :HL["/photo-hotel.png","image"]
 :HL["/photo-palvelujohtaja.jpg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"yrityksille","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"8j07VPVp1XJ0eWUT8pB7Q"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"yrityksille","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"FkAVBNUPt2Jg69t-CfX0a"}
