@@ -90,6 +90,105 @@
   </div>
 </header>
 
+<!-- DRIVE INDEXING -->
+<h2>Drive Indexing — The Core Problem</h2>
+
+<div class="callout callout-warn">
+  <strong>The Drive is almost entirely unindexed.</strong> Of all the documents referenced across skills, CLAUDE.md, and the playbook, only <em>one</em> — Varia's financial analysis sheet — is referenced by a permanent Drive file ID anywhere in the repo. Everything else is either undocumented, referenced by a vague description, or linked by a name that could resolve to multiple versions. That's exactly how the .docx mistake happened: searching by name returned the stale version.
+</div>
+
+<p>Google Drive file IDs are permanent. A document can be renamed, moved to a different folder, or shared with new people — the ID stays the same. Skills that reference documents by ID can never accidentally grab the wrong version. Skills that don't, can.</p>
+
+<h3>Full inventory of known documents</h3>
+
+<table>
+  <thead><tr><th>Document</th><th>Permanent ID</th><th>Indexed in skills?</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Playbook v2 EN</strong> <span class="badge badge-green">Canonical</span></td>
+      <td><code>1pjyuvlImFjGNSGA8LBkJjd6kVzVMcstv905Tdbkga6o</code></td>
+      <td><span class="badge badge-red">No</span></td>
+      <td>The source of truth for the migration. Not referenced anywhere in the repo yet.</td>
+    </tr>
+    <tr>
+      <td>Playbook v1 EN</td>
+      <td><code>1cZfNoRGWtNByNuhQhTxJRFX7ceWZFStCYl4DDJuFSu0</code></td>
+      <td><span class="badge badge-red">No</span></td>
+      <td>Needed only for Sales System EPICs and Melers lessons. Should be marked legacy once migration is done.</td>
+    </tr>
+    <tr>
+      <td>Playbook .docx</td>
+      <td><code>1XRapOoCtbo9qQjKAmnMYhoXEoIIBKnyF</code></td>
+      <td><span class="badge badge-red">No</span></td>
+      <td>Stale. The one we almost migrated from. Should be explicitly marked as superseded in the registry.</td>
+    </tr>
+    <tr>
+      <td><strong>Financial Analysis Sheet</strong> (Varia)</td>
+      <td><code>1llwFP6A7K8D7KaMK9hUOZrz_Bh69od0q</code></td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td>Referenced by ID in <code>sourcing-tradecraft/SKILL.md</code> and CLAUDE.md. The one document that's properly indexed.</td>
+    </tr>
+    <tr>
+      <td>Broker List (Välittäjät)</td>
+      <td><code>1Hq_LLE7aZ20JLXADAAxjBeECczZxJNwr</code></td>
+      <td><span class="badge badge-red">No</span></td>
+      <td>Referenced by URL in sourcing-tradecraft but the URL contains the sheet ID — barely counts. Should be explicit.</td>
+    </tr>
+    <tr>
+      <td>LOI — Investor + Advisor Role</td>
+      <td><code>1eShC2EbviEnjc49v3j0CRHSrBGciU_nT5yc1hRhmRwQ</code></td>
+      <td><span class="badge badge-red">No</span></td>
+      <td>Separate from the acquisition LOI. Relevant to fundraising/investor work.</td>
+    </tr>
+    <tr>
+      <td>Staff Interview Form (DD)</td>
+      <td><code>1FAIpQLSeRBaUzRB0THKq4lyDHCjD3-Mz15m4O57Sz71eWkKji0k15wQ</code></td>
+      <td><span class="badge badge-red">No</span></td>
+      <td>Google Form used in DD2 — interview staff. Referenced by URL in the playbook but not in any skill.</td>
+    </tr>
+    <tr>
+      <td>Melers Hinnasto (price list)</td>
+      <td><code>1uIxDkNYRHnoXT6-LLGSxH4gnWp8WBCnXwOgpaGQRY4E</code></td>
+      <td><span class="badge badge-red">No</span></td>
+      <td>Operational doc for Melers. Should live in <code>knowledge/portfolio/melers/</code> reference.</td>
+    </tr>
+    <tr>
+      <td>Melers Markkinointi sheet</td>
+      <td><code>1EWnNdbOZN1nrcBfjqaWatBE39wRlswSJ9WPYvzt2RmA</code></td>
+      <td><span class="badge badge-red">No</span></td>
+      <td>New customer acquisition tracking for Melers. Operational.</td>
+    </tr>
+    <tr>
+      <td>MARKKINOINTI folder</td>
+      <td><code>1F3pfLceGvfEmjiJaj-Hk1eqtrvxTIV_r</code></td>
+      <td><span class="badge badge-red">No</span></td>
+      <td>Contains brand kit, logos, fonts, flyers, videos, icons. Relevant to portfolio/melers/brand.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>External references (non-Drive)</h3>
+<table>
+  <thead><tr><th>Resource</th><th>URL / ID</th><th>Indexed?</th><th>Used by</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Trello TEMPLATE card</strong></td><td><code>trello.com/c/ZWY6fNrB</code></td><td><span class="badge badge-green">Yes</span> (CLAUDE.md)</td><td>All prospect card creation</td></tr>
+    <tr><td><strong>Trello Case Scouting board</strong></td><td><code>trello.com/b/01KUlg8H</code></td><td><span class="badge badge-green">Yes</span> (CLAUDE.md)</td><td>Sourcing, prospecting</td></tr>
+    <tr><td>Exec Summary Canva template</td><td><code>canva.com/design/DAGpYhfKLSs/...</code></td><td><span class="badge badge-red">No</span></td><td>IC prep, bank submissions</td></tr>
+    <tr><td>DD Template Trello board</td><td><code>trello.com/b/p9gyEgEZ</code></td><td><span class="badge badge-red">No</span></td><td>DD process</td></tr>
+    <tr><td>Trello DayToDay Ops board</td><td><code>trello.com/b/lMuMegjL</code></td><td><span class="badge badge-red">No</span></td><td>Ops, general reference</td></tr>
+  </tbody>
+</table>
+
+<h3>The fix: a Drive registry</h3>
+
+<p>Before Phase 1 starts, create <code>knowledge/drive-registry.md</code> — a single file mapping every external document to its permanent ID, type, purpose, and canonical status. Each skill then cites documents by ID from this registry, never by name or search.</p>
+
+<p>The pattern is already established for 1Password secrets (<code>op://askel-server/...</code>). Drive documents should follow the same discipline: <strong>a permanent pointer, not a name-based search</strong>. The playbook skills in particular need this — if <code>playbook-dd</code> says "fetch the staff interview form from Drive" without an ID, a future search for "staff interview" could return the wrong thing.</p>
+
+<p>This registry also solves a subtler problem: when Varia creates a new operational document for Melers, it should be added to the registry so Steve can find it in future sessions without trawling the whole Drive.</p>
+
+<hr class="divider" style="margin: 1.5rem 0">
+
 <!-- SOURCE DOC -->
 <h2>Canonical Source</h2>
 
@@ -357,6 +456,17 @@ cc-disco/<br>
 
 <!-- PHASES -->
 <h2>Migration Phases</h2>
+
+<div class="phase" style="border-color:#7c3aed; margin-bottom:1.5rem; padding:0 0 0 1.2rem;">
+  <h3 style="color:var(--text); margin-top:0;">Phase 0 — Drive registry <span class="effort">· 1 session · prerequisite</span></h3>
+  <p style="margin-bottom:0.5rem">Create <code>knowledge/drive-registry.md</code> cataloguing every external document with its permanent ID before any skill migration starts. Without this, skills will be written with the same indexing gap that caused the .docx mistake.</p>
+  <ul>
+    <li>One entry per document: name, ID, type (Doc/Sheet/Form/Folder), purpose, canonical status, last-verified date</li>
+    <li>Mark stale/superseded versions explicitly (<em>playbook .docx → superseded by v2 EN</em>)</li>
+    <li>Add to CLAUDE.md knowledge base index so it's always in context</li>
+    <li>Going forward: any new Drive document gets an entry before being referenced in a skill</li>
+  </ul>
+</div>
 
 <div class="phase p1">
   <h3>Phase 1 — Fix thesis fragmentation <span class="effort">· 1 session · start now</span></h3>
