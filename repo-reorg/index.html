@@ -22,13 +22,12 @@
   body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; font-size: 15px; line-height: 1.65; padding: 0 1rem 4rem; }
   .container { max-width: 860px; margin: 0 auto; }
   header { padding: 3rem 0 2rem; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
-  header h1 { font-size: 1.6rem; font-weight: 700; color: var(--text); }
+  header h1 { font-size: 1.6rem; font-weight: 700; }
   header p { color: var(--muted); margin-top: 0.4rem; font-size: 0.92rem; }
   header .meta { margin-top: 1rem; display: flex; gap: 1.5rem; flex-wrap: wrap; }
   header .meta span { font-size: 0.82rem; color: var(--muted); }
   header .meta strong { color: var(--text); }
-
-  h2 { font-size: 1.15rem; font-weight: 600; color: var(--text); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h2 { font-size: 1.15rem; font-weight: 600; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
   h3 { font-size: 0.97rem; font-weight: 600; color: var(--accent); margin: 1.5rem 0 0.6rem; }
   p { color: var(--muted); margin-bottom: 0.75rem; }
   p strong { color: var(--text); }
@@ -37,34 +36,31 @@
   ul, ol { color: var(--muted); padding-left: 1.4rem; margin-bottom: 0.75rem; }
   li { margin-bottom: 0.3rem; }
   li strong { color: var(--text); }
-  code { font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 0.82rem; background: var(--tag-bg); padding: 0.15em 0.4em; border-radius: 3px; color: #a5b4d4; }
-
-  .badge { display: inline-block; font-size: 0.75rem; padding: 0.2em 0.6em; border-radius: 4px; font-weight: 600; vertical-align: middle; margin-left: 0.5rem; }
-  .badge-green { background: #14532d; color: var(--green); }
+  code { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; background: var(--tag-bg); padding: 0.15em 0.4em; border-radius: 3px; color: #a5b4d4; }
+  .badge { display: inline-block; font-size: 0.75rem; padding: 0.2em 0.6em; border-radius: 4px; font-weight: 600; vertical-align: middle; margin-left: 0.4rem; }
+  .badge-green  { background: #14532d; color: var(--green); }
   .badge-yellow { background: #422006; color: var(--yellow); }
-  .badge-red { background: #450a0a; color: var(--red); }
+  .badge-red    { background: #450a0a; color: var(--red); }
   .badge-orange { background: #431407; color: var(--orange); }
-  .badge-muted { background: #1e2435; color: var(--muted); }
-
-  table { width: 100%; border-collapse: collapse; margin-bottom: 1.2rem; font-size: 0.88rem; }
+  .badge-muted  { background: #1e2435; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 1.2rem; font-size: 0.87rem; }
   th { background: var(--surface); color: var(--muted); font-weight: 600; text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); }
   td { padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--border); color: var(--muted); vertical-align: top; }
   td strong { color: var(--text); }
   tr:last-child td { border-bottom: none; }
-
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem 1.4rem; margin-bottom: 1rem; }
-  .card h4 { font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
-  .card p { font-size: 0.87rem; margin-bottom: 0; }
-  .card.warn { border-color: #854d0e; }
-  .card.ok { border-color: #14532d; }
-
+  .callout { border-radius: 6px; padding: 0.9rem 1.1rem; margin-bottom: 1rem; font-size: 0.88rem; color: var(--muted); }
+  .callout strong { color: var(--text); }
+  .callout-blue  { background: #1a1e2e; border: 1px solid var(--accent); }
+  .callout-green { background: #052e16; border: 1px solid #166534; }
+  .callout-warn  { background: #1c0f00; border: 1px solid #854d0e; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
   .tree { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem 1.4rem; overflow-x: auto; color: #a5b4d4; line-height: 1.7; }
   .tree .comment { color: var(--muted); font-style: italic; }
-  .tree .new { color: var(--green); }
+  .tree .new     { color: var(--green); }
   .tree .changed { color: var(--yellow); }
   .tree .removed { color: var(--red); text-decoration: line-through; }
-  .tree .stub { color: var(--orange); }
-
+  .tree .stub    { color: var(--orange); }
   .phase { border-left: 3px solid var(--border); padding: 0 0 0 1.2rem; margin-bottom: 1.5rem; }
   .phase.p1 { border-color: var(--green); }
   .phase.p2 { border-color: var(--accent); }
@@ -72,21 +68,13 @@
   .phase.p4 { border-color: var(--orange); }
   .phase h3 { color: var(--text); margin-top: 0; }
   .phase .effort { font-size: 0.78rem; color: var(--muted); font-weight: 400; }
-
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
-
   .divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
-  .callout { background: #1a1e2e; border: 1px solid var(--accent); border-radius: 6px; padding: 0.9rem 1.1rem; margin-bottom: 1rem; font-size: 0.88rem; color: var(--muted); }
-  .callout strong { color: var(--text); }
-  .callout.green { border-color: #166534; background: #052e16; }
-  .callout.warn { border-color: #854d0e; background: #1c0f00; }
-
   .resolved-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-bottom: 1rem; }
   @media (max-width: 600px) { .resolved-grid { grid-template-columns: 1fr; } }
   .resolved-item { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.8rem 1rem; font-size: 0.86rem; }
   .resolved-item .q { color: var(--muted); margin-bottom: 0.3rem; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; }
   .resolved-item .a { color: var(--text); }
+  .new-tag { font-size: 0.7rem; font-weight: 700; background: #14532d; color: var(--green); padding: 0.1em 0.4em; border-radius: 3px; vertical-align: middle; margin-left: 0.3rem; }
 </style>
 </head>
 <body>
@@ -97,13 +85,110 @@
   <p>Analysis: migrating the Askel playbook from Google Docs to skills. Repo-level structural implications.</p>
   <div class="meta">
     <span><strong>Updated:</strong> 2026-05-12</span>
-    <span><strong>Author:</strong> Steve 🦔</span>
-    <span><strong>Status:</strong> <span class="badge badge-green">Decisions locked — ready to execute</span></span>
+    <span><strong>Source:</strong> Playbook v2 EN (canonical)</span>
+    <span><strong>Status:</strong> <span class="badge badge-green">Ready to execute</span></span>
   </div>
 </header>
 
-<!-- DECISIONS LOCKED -->
-<h2>Decisions Locked</h2>
+<!-- SOURCE DOC -->
+<h2>Canonical Source</h2>
+
+<div class="callout callout-blue">
+  <strong>Use v2 EN, not the .docx.</strong> There are three versions of the playbook in Drive. The <em>.docx</em> shared by invite is the oldest. <em>v1 EN</em> is richer. <em>v2 EN</em> ("The Playbook — Flipping Boring Businesses (v2 EN)") is the most complete and the one to migrate from. It resolves every content gap identified earlier, adds a Valuation Risk Scoring Tool, and generalises the Knowledge Transfer section away from Melers-specific content.
+</div>
+
+<table>
+  <thead><tr><th>Version</th><th>Format</th><th>Use for</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Playbook v2 EN</strong> <span class="badge badge-green">Canonical</span></td><td>Native Google Doc</td><td>Migration source. Everything comes from here.</td></tr>
+    <tr><td>Playbook v1 EN</td><td>Native Google Doc</td><td>Only needed for "Skills for Mike" section and detailed Sales System EPICs (both absent from v2).</td></tr>
+    <tr><td>.docx (email invite)</td><td>Word upload</td><td>Ignore — older draft.</td></tr>
+  </tbody>
+</table>
+
+<!-- WHAT V2 CHANGED -->
+<h2>What v2 Resolved</h2>
+
+<p>Every content gap identified in the previous analysis is now closed. Also new material that wasn't in the plan at all.</p>
+
+<table>
+  <thead><tr><th>Item</th><th>Before</th><th>After (v2)</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Dataroom requirements</strong></td>
+      <td><span class="badge badge-red">Missing</span></td>
+      <td><span class="badge badge-green">Done</span> Full checklist: Financial (3yr statements, current P&L, monthly cash flow), Legal (articles, shareholder register, contracts), Operational (staff list, customer register, asset inventory)</td>
+    </tr>
+    <tr>
+      <td><strong>Assets Inventory Template</strong></td>
+      <td><span class="badge badge-red">Missing</span></td>
+      <td><span class="badge badge-green">Done</span> Complete table in Appendix C — vehicles, equipment, IT, customer register, brand/domain, contracts, permits</td>
+    </tr>
+    <tr>
+      <td><strong>Cost Structure Template</strong></td>
+      <td><span class="badge badge-red">Missing</span></td>
+      <td><span class="badge badge-green">Done</span> 3-year P&L table in Appendix B — Revenue, COGS (labour/materials/fuel), Gross Profit, overheads, EBITDA, margins</td>
+    </tr>
+    <tr>
+      <td><strong>CPT Sheet / Psychological Matrix</strong></td>
+      <td><span class="badge badge-red">External ref</span></td>
+      <td><span class="badge badge-green">Resolved</span> The matrix <em>is</em> Chapter 5 — it was always there. "CPT Sheet" was just a name for it. Appendix D points back to Ch. 5. No separate doc needed.</td>
+    </tr>
+    <tr>
+      <td><strong>30-60-90 Day Plan</strong></td>
+      <td><span class="badge badge-red">External PDF ref</span></td>
+      <td><span class="badge badge-green">Done</span> Full 3-phase template in Appendix F: Stabilise (D1-30), Systematise (D31-60), Grow (D61-90) — each with objectives and success metrics</td>
+    </tr>
+    <tr>
+      <td><strong>Thesis</strong></td>
+      <td><span class="badge badge-yellow">Heading only in .docx</span></td>
+      <td><span class="badge badge-green">Done</span> Full criteria table in Ch. 2: Revenue €400K–1.5M, Profit €100K+, Ask ≤€1M, Age 10yr+, 5+ employees. Also Immediate Disqualifiers checklist.</td>
+    </tr>
+    <tr>
+      <td><strong>Knowledge Transfer</strong></td>
+      <td><span class="badge badge-orange">Melers-specific</span></td>
+      <td><span class="badge badge-green">Generalized</span> Ch. 9 is now a generic charter template with placeholders — not Melers content. Lessons Learned section preserved as bullet points.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>New content not in the original plan</h3>
+
+<table>
+  <thead><tr><th>Item</th><th>Where</th><th>Implication</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Valuation Risk Scoring Tool</strong> <span class="new-tag">NEW</span></td>
+      <td>Appendix G</td>
+      <td>34-item scored checklist across 5 categories (Financial Performance, Market Position, Operational Strength, Intangible Factors, Risk Factors). Maps score → yield rate → Business Value = Cash Flow ÷ Yield Rate. Goes into <code>playbook-screening</code> as its own subsection, or a standalone <code>playbook-valuation</code> skill. Strong enough to warrant prominence.</td>
+    </tr>
+    <tr>
+      <td><strong>Investment Philosophies</strong> <span class="new-tag">NEW</span></td>
+      <td>Ch. 1</td>
+      <td>5 clean principles ("Boring is beautiful", "We build under market prices", etc.). Goes in <code>playbook</code> router preamble.</td>
+    </tr>
+    <tr>
+      <td><strong>Geography: Sweden + Estonia</strong> <span class="new-tag">NEW</span></td>
+      <td>Ch. 2 thesis table</td>
+      <td>The thesis now says Finland + Sweden + Estonia. This directly affects <code>playbook-thesis</code> and the cron-swedish-sweep skill. The existing repo thesis file says "Finland only" — needs updating.</td>
+    </tr>
+    <tr>
+      <td><strong>DD1 / DD2 / DD3 structure</strong> <span class="new-tag">Clarified</span></td>
+      <td>Ch. 7</td>
+      <td>DD1 = financial/market data from screening. DD2 = full operational & legal due diligence before signing. DD3 = bank/Finnvera alignment + covenant review. Clean. Maps neatly to <code>playbook-dd</code> with three subsections.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Content only in v1 EN (not in v2)</h3>
+<p>Two sections exist in v1 EN that v2 dropped. Both should still be migrated — from v1 EN, not v2.</p>
+<ul>
+  <li><strong>"Skills for Mike" / Melers lessons</strong> — "I wish I had known" table + killer skills stack. This is Varia's proto-knowledge. Goes to <code>knowledge/portfolio/melers/learnings/</code>, not a playbook skill.</li>
+  <li><strong>Sales System EPICs</strong> — detailed B2B/B2C breakdown with named owners (Varia=CMO, Niklas=CFO, Mike=CTO). Goes into <code>playbook-sales-system</code>.</li>
+</ul>
+
+<!-- DECISIONS -->
+<h2>Decisions (All Locked)</h2>
 
 <div class="resolved-grid">
   <div class="resolved-item">
@@ -116,242 +201,95 @@
   </div>
   <div class="resolved-item">
     <div class="q">Knowledge transfer section</div>
-    <div class="a">Not skillifiable yet. Stub skill only. Varia writes anecdotes + proto-skills in <code>knowledge/portfolio/melers/learnings/</code>.</div>
+    <div class="a">Stub skill only (v2 template is generalized, good enough for stub). Varia's Melers anecdotes → <code>knowledge/portfolio/melers/learnings/</code>.</div>
   </div>
   <div class="resolved-item">
-    <div class="q">"For Mike" / killer skills</div>
-    <div class="a">Non-blocking. Ignored for now. Stub can be added later when content exists.</div>
+    <div class="q">"For Mike" section</div>
+    <div class="a">Non-blocking. Ignored for playbook migration. Melers lessons go to portfolio learnings instead.</div>
   </div>
 </div>
 
-<!-- BLOCKERS -->
-<h2>Blockers</h2>
+<!-- REMAINING BLOCKERS -->
+<h2>Remaining Blockers</h2>
 
-<div class="callout green">
-  <strong>No hard blockers.</strong> Phase 1 and Phase 2 can start immediately. The content gaps below don't block creating skills — we create those sections with explicit <code>TODO</code> markers and they become living documents.
+<div class="callout callout-green">
+  <strong>No blockers.</strong> v2 resolved every content gap. All phases can start and complete without waiting on anyone.
 </div>
 
-<p>Content gaps that will need Askel input at some point — not now, but before the playbook can be considered "complete":</p>
+<p>One minor question worth confirming before Phase 2 starts — not a blocker, just a decision:</p>
+<ul>
+  <li><strong>Valuation Risk Scoring Tool placement:</strong> standalone <code>playbook-valuation</code> skill, or subsection of <code>playbook-screening</code>? It's substantial enough (34 items + formula) to stand alone, but it's also a screening-stage tool. Call it either way — I have a slight preference for standalone so it can be referenced from IC and DD too.</li>
+</ul>
 
-<table>
-  <thead>
-    <tr><th>Gap</th><th>Where</th><th>Who</th><th>Urgency</th></tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Dataroom requirements list</strong></td>
-      <td><code>playbook-dd</code></td>
-      <td>Niklas / Varia</td>
-      <td><span class="badge badge-yellow">Before first DD</span></td>
-    </tr>
-    <tr>
-      <td><strong>Sales success criteria placeholders</strong> (<code>[X]</code> B2B customers, <code>[Y]</code> B2C customers)</td>
-      <td><code>playbook-sales-system</code></td>
-      <td>Askel (collectively)</td>
-      <td><span class="badge badge-muted">Post-acquisition</span></td>
-    </tr>
-    <tr>
-      <td><strong>CPT sheet / psychological matrix</strong> (referenced in screening - resources)</td>
-      <td><code>playbook-screening</code></td>
-      <td>Varia</td>
-      <td><span class="badge badge-muted">Before next screening</span></td>
-    </tr>
-    <tr>
-      <td><strong>Assets inventory template</strong> (arvolista)</td>
-      <td><code>playbook-screening</code></td>
-      <td>Varia</td>
-      <td><span class="badge badge-muted">Before next screening</span></td>
-    </tr>
-    <tr>
-      <td><strong>Melers cost structure template</strong> (referenced in screening - financials)</td>
-      <td><code>playbook-screening</code></td>
-      <td>Varia</td>
-      <td><span class="badge badge-muted">Before next screening</span></td>
-    </tr>
-    <tr>
-      <td><strong>30-60-90 day plan PDF</strong> (BusBuy-9.3)</td>
-      <td><code>playbook-dd</code></td>
-      <td>Varia</td>
-      <td><span class="badge badge-muted">Before next DD</span></td>
-    </tr>
-    <tr>
-      <td><strong>Varia's Melers learnings</strong></td>
-      <td><code>knowledge/portfolio/melers/learnings/</code></td>
-      <td>Varia</td>
-      <td><span class="badge badge-muted">Ongoing</span></td>
-    </tr>
-  </tbody>
-</table>
+<!-- SKILL TAXONOMY (UPDATED) -->
+<h2>Updated Skill Taxonomy</h2>
 
-<p>One thing worth noting: the <strong>LOI template</strong> already exists in the repo at <code>knowledge/legal/loi-investor-capital-template.md</code> — but it's the investor capital LOI, not the acquisition LOI referenced in the playbook (<em>Aiesopimus Liiketoiminnan_kauppa</em>). Those are different documents. If the acquisition LOI exists somewhere, it should be committed to <code>knowledge/legal/</code>.</p>
-
-<!-- PLAYBOOK CONTENT AUDIT -->
-<h2>Playbook → Skill Mapping</h2>
-<p>What's in the Google Doc and what each section maps to. Quality rating is a measure of how much editorial work is needed to turn the current content into a proper skill.</p>
-
-<table>
-  <thead>
-    <tr><th>Section</th><th>Quality</th><th>Skill</th><th>Notes</th></tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Philosophies</strong></td>
-      <td><span class="badge badge-yellow">Sparse</span></td>
-      <td><code>playbook</code> (preamble)</td>
-      <td>A few bullet points. Good for the router preamble.</td>
-    </tr>
-    <tr>
-      <td><strong>Sourcing</strong></td>
-      <td><span class="badge badge-green">Solid</span></td>
-      <td><code>playbook-sourcing</code></td>
-      <td>Absorbs current <code>sourcing-tradecraft</code> which is already comprehensive. Clean merge.</td>
-    </tr>
-    <tr>
-      <td><strong>Prospecting — thesis check</strong></td>
-      <td><span class="badge badge-green">Solid</span></td>
-      <td><code>playbook-thesis</code> + <code>playbook-prospecting</code></td>
-      <td>Thesis content is already in <code>sourcing-tradecraft/references/thesis.md</code> — richer than the doc. Migrate that file.</td>
-    </tr>
-    <tr>
-      <td><strong>Screening — Financials</strong></td>
-      <td><span class="badge badge-yellow">Checklist</span></td>
-      <td><code>playbook-screening</code></td>
-      <td>Good checklist. Template references → mark as TODO.</td>
-    </tr>
-    <tr>
-      <td><strong>Screening — Market Research</strong></td>
-      <td><span class="badge badge-yellow">Checklist</span></td>
-      <td><code>playbook-screening</code></td>
-      <td>Includes asiakastieto.fi for competitor lookup. "450 kpl" customer count is Melers-specific — remove.</td>
-    </tr>
-    <tr>
-      <td><strong>Screening — Resources (People & Assets)</strong></td>
-      <td><span class="badge badge-yellow">Sparse</span></td>
-      <td><code>playbook-screening</code></td>
-      <td>CPT sheet and assets inventory referenced but missing. Flagged as content gaps above.</td>
-    </tr>
-    <tr>
-      <td><strong>Screening — Deal Terms</strong></td>
-      <td><span class="badge badge-green">Solid</span></td>
-      <td><code>playbook-screening</code></td>
-      <td>Earn-out, seller financing, business vs. share sale, data transfer. Ready to port as-is.</td>
-    </tr>
-    <tr>
-      <td><strong>Psychological Factors</strong> <em>(table)</em></td>
-      <td><span class="badge badge-green">Excellent</span></td>
-      <td><code>playbook-screening</code></td>
-      <td>Best content in the doc. Four-row table: Identity fusion, Control preservation, Sunk-cost emotion, Mortality salience — driver, behavior, fear, what to say. Goes in verbatim.</td>
-    </tr>
-    <tr>
-      <td><strong>IC Process</strong></td>
-      <td><span class="badge badge-green">Solid</span></td>
-      <td><code>playbook-ic</code></td>
-      <td>Pre-read → champion presents → Q&A → deal structure → 3/4 vote → LOI. Canva exec summary linked. Ready to port.</td>
-    </tr>
-    <tr>
-      <td><strong>Thesis</strong></td>
-      <td><span class="badge badge-green">Exists in repo</span></td>
-      <td><code>playbook-thesis</code></td>
-      <td>Doc section is just a heading — real content is in <code>sourcing-tradecraft/references/thesis.md</code>, which is more complete. Migrate that file directly.</td>
-    </tr>
-    <tr>
-      <td><strong>DD2</strong></td>
-      <td><span class="badge badge-yellow">Mixed</span></td>
-      <td><code>playbook-dd</code></td>
-      <td>Solid checklist + a structured DD project charter table (objective, EPICs, risks, SMART goal). Melers-specific values need generalizing.</td>
-    </tr>
-    <tr>
-      <td><strong>Dataroom Requirements</strong></td>
-      <td><span class="badge badge-red">Missing content</span></td>
-      <td><code>playbook-dd</code></td>
-      <td>Heading only — "sent to Bank and Finnvera". Actual list lives elsewhere. Content gap (see above).</td>
-    </tr>
-    <tr>
-      <td><strong>Knowledge Transfer</strong></td>
-      <td><span class="badge badge-orange">Not ready</span></td>
-      <td><code>playbook-knowledge-transfer</code> (stub)</td>
-      <td>Intentionally not skillified yet. Stub points to Varia's learnings. Revisit after ~10 acquisitions.</td>
-    </tr>
-    <tr>
-      <td><strong>Sales System</strong></td>
-      <td><span class="badge badge-yellow">Sparse</span></td>
-      <td><code>playbook-sales-system</code></td>
-      <td>Tool list (Wix, Elisa, Wannado, Upwork, Finderi.fi) + success criteria with <code>[X]</code>/<code>[Y]</code> placeholders. Port with TODOs.</td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- SKILL TAXONOMY -->
-<h2>Skill Taxonomy</h2>
-
-<div class="callout">
-  <strong>Routing model:</strong> The top-level <code>playbook</code> skill is a dispatcher. It reads context (deal stage, task type) and surfaces only the relevant sub-skill. Cron jobs load <code>playbook-thesis</code> directly; interactive sessions route through <code>playbook</code>. Progressive disclosure — don't load the whole playbook, load what's relevant.
+<div class="callout callout-blue">
+  <strong>Routing model:</strong> <code>playbook</code> is the dispatcher — reads context, surfaces the relevant sub-skill. Cron jobs load <code>playbook-thesis</code> directly. Interactive acquisition work routes through <code>playbook</code>. Progressive disclosure — never load the whole playbook when one chapter is enough.
 </div>
 
 <table>
-  <thead>
-    <tr><th>Skill</th><th>Role</th><th>Source</th><th>Status</th></tr>
-  </thead>
+  <thead><tr><th>Skill</th><th>Source (v2 chapter)</th><th>Key content</th><th>Status</th></tr></thead>
   <tbody>
     <tr>
       <td><code>playbook</code></td>
-      <td>Top-level router. Reads context, dispatches to sub-skill. Canonical pointer to where the playbook lives and how it's edited.</td>
-      <td>New</td>
+      <td>Ch. 1</td>
+      <td>Router. Investment philosophies preamble. Canonical pointer to website and how skills are edited.</td>
       <td><span class="badge badge-yellow">To create</span></td>
     </tr>
     <tr>
       <td><code>playbook-thesis</code></td>
-      <td>Canonical pass/fail criteria. Single source of truth for all crons and sweeps.</td>
-      <td>Migrate from <code>sourcing-tradecraft/references/thesis.md</code></td>
+      <td>Ch. 2</td>
+      <td>Full criteria table + Immediate Disqualifiers. Geography updated to Finland + Sweden + Estonia. Replaces <code>sourcing-tradecraft/references/thesis.md</code>.</td>
       <td><span class="badge badge-yellow">To create</span></td>
     </tr>
     <tr>
       <td><code>playbook-sourcing</code></td>
-      <td>Where to look, how to score, weak signals, finder.fi workflow, Trello card standards.</td>
-      <td>Absorbs <code>sourcing-tradecraft</code></td>
-      <td><span class="badge badge-yellow">To create</span></td>
-    </tr>
-    <tr>
-      <td><code>playbook-prospecting</code></td>
-      <td>First-pass triage. Kill questions. When a Trello card is warranted.</td>
-      <td>Google Doc prospecting section</td>
+      <td>Ch. 3</td>
+      <td>Broker platforms, weak-signal sourcing (owner age 55+, declining revenue, stale web, etc.). Absorbs <code>sourcing-tradecraft</code>.</td>
       <td><span class="badge badge-yellow">To create</span></td>
     </tr>
     <tr>
       <td><code>playbook-screening</code></td>
-      <td>Financials, market research, team/assets, deal terms. Psychological factors table (the best content in the doc). Pre-IC kill questions.</td>
-      <td>Google Doc screening + psych table</td>
+      <td>Ch. 4 + 5</td>
+      <td>4-lens screening checklist (thesis fit, financials, market research, resources + deal terms). Psychological Driver Matrix (all 5 drivers). Cost Structure + Assets Inventory templates.</td>
+      <td><span class="badge badge-yellow">To create</span></td>
+    </tr>
+    <tr>
+      <td><code>playbook-valuation</code> <span class="new-tag">NEW</span></td>
+      <td>Appendix G</td>
+      <td>34-item Valuation Risk Scoring Tool. Score → yield rate (20–30%) → Business Value formula. Standalone so IC and DD can reference it too.</td>
       <td><span class="badge badge-yellow">To create</span></td>
     </tr>
     <tr>
       <td><code>playbook-ic</code></td>
-      <td>IC meeting format, exec summary template, 3/4 voting rule, LOI signing.</td>
-      <td>Google Doc IC section</td>
+      <td>Ch. 6</td>
+      <td>Pre-IC kill questions, IC process (champion → pre-read → vote 3/4), post-IC (LOI signing). Canva exec summary template.</td>
       <td><span class="badge badge-yellow">To create</span></td>
     </tr>
     <tr>
       <td><code>playbook-dd</code></td>
-      <td>DD1 + DD2 checklists, DD project charter template, dataroom requirements (partial — see gaps).</td>
-      <td>Google Doc DD2 + dataroom</td>
+      <td>Ch. 7 + 8</td>
+      <td>DD1/DD2/DD3 structure. DD2 charter template (objective, EPICs, risks, SMART goal). Full dataroom checklist (Financial, Legal, Operational). 30-60-90 Day Plan (Appendix F).</td>
       <td><span class="badge badge-yellow">To create</span></td>
     </tr>
     <tr>
       <td><code>playbook-knowledge-transfer</code></td>
-      <td>Stub. Points to <code>knowledge/portfolio/melers/learnings/</code>. No generalizable playbook yet.</td>
-      <td>Stub only</td>
+      <td>Ch. 9</td>
+      <td>Stub. v2's generalized charter template is a good base for the stub — better than empty. Points to <code>knowledge/portfolio/melers/learnings/</code> for real-world lessons. Revisit after ~10 acquisitions.</td>
       <td><span class="badge badge-orange">Stub (intentional)</span></td>
     </tr>
     <tr>
       <td><code>playbook-sales-system</code></td>
-      <td>Post-acquisition commercial systems. Tool stack, B2B/B2C processes, success criteria.</td>
-      <td>Google Doc sales system section</td>
+      <td>Ch. 10 (v2) + Sales EPICs (v1 EN)</td>
+      <td>Askel tech stack (mandatory). Detailed B2B/B2C EPICs with named owners (from v1 EN). Tool stack.</td>
       <td><span class="badge badge-yellow">To create</span></td>
     </tr>
     <tr>
       <td><code>sourcing-tradecraft</code></td>
-      <td>Current sourcing skill — being replaced.</td>
       <td>—</td>
-      <td><span class="badge badge-red">Deprecate → absorbed</span></td>
+      <td>Replaced by <code>playbook-sourcing</code>.</td>
+      <td><span class="badge badge-red">Deprecate</span></td>
     </tr>
   </tbody>
 </table>
@@ -359,27 +297,21 @@
 <!-- REPO STRUCTURE -->
 <h2>Repo Reorganization</h2>
 
-<p>The repo currently serves one master: Steve's working memory. After migration it becomes Askel's shared knowledge base too. Three-axis structure:</p>
-<ul>
-  <li><strong>Process knowledge</strong> → <code>.claude/skills/playbook-*/</code> — how to do things (published as website)</li>
-  <li><strong>Market knowledge</strong> → <code>knowledge/</code> — what we know about the market</li>
-  <li><strong>Portfolio knowledge</strong> → <code>knowledge/portfolio/</code> — what we know about companies we own</li>
-</ul>
+<p>Three-axis structure after migration: <strong>process</strong> (playbook skills, published as website) · <strong>market</strong> (sourcing sessions, competition intel) · <strong>portfolio</strong> (per-company operational knowledge).</p>
 
 <div class="two-col">
   <div>
-    <h3>Current Structure</h3>
+    <h3>Current</h3>
     <div class="tree">
 cc-disco/<br>
 ├── .claude/skills/<br>
-│   ├── sourcing-tradecraft/<br>
-│   │   └── references/thesis.md<br>
-│   ├── cron-*/ <span class="comment">← hardcoded thesis</span><br>
+│   ├── sourcing-tradecraft/ <span class="comment">← thesis buried here</span><br>
+│   ├── cron-*/ <span class="comment">← hardcoded thesis × 3</span><br>
 │   └── [10 other skills]<br>
 ├── knowledge/<br>
 │   ├── competition/<br>
-│   ├── sourcing/<br>
-│   ├── melers/ <span class="comment">← brand assets</span><br>
+│   ├── sourcing/ <span class="comment">← sessions + portfolio.yaml</span><br>
+│   ├── melers/ <span class="comment">← brand assets (misplaced)</span><br>
 │   ├── legal/<br>
 │   ├── outreach/<br>
 │   └── fundraising/<br>
@@ -390,21 +322,21 @@ cc-disco/<br>
     </div>
   </div>
   <div>
-    <h3>After Migration</h3>
+    <h3>After</h3>
     <div class="tree">
 cc-disco/<br>
 ├── .claude/skills/<br>
-│   ├── <span class="new">playbook/</span><br>
-│   ├── <span class="new">playbook-thesis/</span><br>
+│   ├── <span class="new">playbook/</span> <span class="comment">← router + philosophies</span><br>
+│   ├── <span class="new">playbook-thesis/</span> <span class="comment">← FI+SE+EE</span><br>
 │   ├── <span class="new">playbook-sourcing/</span><br>
 │   ├── <span class="removed">sourcing-tradecraft/</span><br>
-│   ├── <span class="new">playbook-prospecting/</span><br>
 │   ├── <span class="new">playbook-screening/</span><br>
+│   ├── <span class="new">playbook-valuation/</span> <span class="comment">← new</span><br>
 │   ├── <span class="new">playbook-ic/</span><br>
 │   ├── <span class="new">playbook-dd/</span><br>
 │   ├── <span class="stub">playbook-knowledge-transfer/</span> <span class="comment">stub</span><br>
 │   ├── <span class="new">playbook-sales-system/</span><br>
-│   └── [crons updated → ref thesis]<br>
+│   └── [crons ref playbook-thesis]<br>
 ├── knowledge/<br>
 │   ├── <span class="new">portfolio/</span><br>
 │   │   └── <span class="new">melers/</span><br>
@@ -423,44 +355,44 @@ cc-disco/<br>
   </div>
 </div>
 
-<!-- MIGRATION PHASES -->
+<!-- PHASES -->
 <h2>Migration Phases</h2>
 
 <div class="phase p1">
-  <h3>Phase 1 — Fix thesis fragmentation <span class="effort">1 session · no blockers · start now</span></h3>
+  <h3>Phase 1 — Fix thesis fragmentation <span class="effort">· 1 session · start now</span></h3>
   <ul>
-    <li>Create <code>playbook-thesis</code> from <code>sourcing-tradecraft/references/thesis.md</code></li>
-    <li>Update all cron skills to reference <code>playbook-thesis</code> instead of inline criteria</li>
+    <li>Create <code>playbook-thesis</code> from v2 Ch. 2 — full criteria table + Immediate Disqualifiers + <strong>Finland + Sweden + Estonia geography</strong> (current repo thesis says Finland only)</li>
+    <li>Update <code>cron-yritysporssi-scrape</code>, <code>cron-weekly-sourcing</code>, <code>cron-swedish-sweep</code> to reference <code>playbook-thesis</code></li>
     <li>Update <code>sourcing-tradecraft</code> to reference <code>playbook-thesis</code></li>
   </ul>
 </div>
 
 <div class="phase p2">
-  <h3>Phase 2 — Port playbook stages <span class="effort">3–4 sessions · no blockers</span></h3>
+  <h3>Phase 2 — Port playbook stages <span class="effort">· 3–4 sessions</span></h3>
   <ul>
-    <li>Create each <code>playbook-*</code> skill from the doc + editorial cleanup (generalize Melers-specific values, flag template TODOs, preserve Finnish where appropriate)</li>
-    <li>Psychological factors table goes in verbatim — it's the best content in the doc</li>
-    <li>Create <code>playbook</code> router skill</li>
-    <li>Create stubs for <code>playbook-knowledge-transfer</code> and <code>playbook-sales-system</code></li>
-    <li>Deprecate <code>sourcing-tradecraft</code> (keep one sprint as redirect, then delete)</li>
+    <li>Create all <code>playbook-*</code> skills from v2 EN as primary source, supplementing with v1 EN for Sales System EPICs and Melers lessons</li>
+    <li><code>playbook-valuation</code> from Appendix G — the 34-item scoring tool + formula</li>
+    <li><code>playbook</code> router with Ch. 1 philosophies as preamble</li>
+    <li><code>playbook-knowledge-transfer</code> stub using v2's generalized charter template as the base (it's clean enough to not be embarrassingly empty)</li>
+    <li>Deprecate <code>sourcing-tradecraft</code> after one sprint as redirect</li>
   </ul>
 </div>
 
 <div class="phase p3">
-  <h3>Phase 3 — Repo reorganization <span class="effort">1 session · no blockers</span></h3>
+  <h3>Phase 3 — Repo restructure <span class="effort">· 1 session</span></h3>
   <ul>
     <li><code>git mv knowledge/melers/ knowledge/portfolio/melers/brand/</code></li>
-    <li>Create <code>knowledge/portfolio/melers/learnings/</code> with a placeholder README for Varia</li>
-    <li>Update CLAUDE.md index, housekeeping skill, any internal references</li>
+    <li>Create <code>knowledge/portfolio/melers/learnings/</code> with Melers lessons from v1 EN (Varia's "I wish I had known" table + killer skills stack)</li>
+    <li>Update CLAUDE.md, housekeeping skill, all internal references</li>
   </ul>
 </div>
 
 <div class="phase p4">
-  <h3>Phase 4 — Web publish <span class="effort">1 session · no blockers</span></h3>
+  <h3>Phase 4 — Web publish <span class="effort">· 1 session</span></h3>
   <ul>
     <li>Generate <code>playbook.askelventures.com</code> from skill markdown files</li>
-    <li>v1: static HTML, auto-regenerated whenever skills change</li>
-    <li>Add header to the Google Doc pointing to the website</li>
+    <li>Add "Confidential — Askel Ventures" header (v2 is marked confidential)</li>
+    <li>Add superseded header to the Google Docs versions pointing to the live site</li>
     <li>Tear down this analysis site (<code>repo-reorg.askelventures.com</code>)</li>
   </ul>
 </div>
