@@ -7,4 +7,4 @@
 :HL["/logos/yliopiston-apteekki.png","image"]
 :HL["/photo-hotel.png","image"]
 :HL["/photo-palvelujohtaja.jpg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"yrityksille","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"FkAVBNUPt2Jg69t-CfX0a"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"yrityksille","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"rEWJ8DSWHJnPTOlGzNboR"}
