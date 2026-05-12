@@ -3,4 +3,4 @@
 :HL["/photo-baskets.png","image"]
 :HL["/photo-van-big.png","image"]
 :HL["/photo-palvelujohtaja.jpg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"yhteys","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"IWW3xLYtffURnsu_PPeww"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"yhteys","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"m5GWnVB2TDyj-cu1QgCN4"}
