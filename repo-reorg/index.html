@@ -168,16 +168,46 @@
 </table>
 
 <h3>External references (non-Drive)</h3>
+
 <table>
-  <thead><tr><th>Resource</th><th>Link</th><th>Used by skill(s)</th></tr></thead>
+  <thead><tr><th>Resource</th><th>Link</th><th>Currently linked inline?</th><th>Used by</th></tr></thead>
   <tbody>
-    <tr><td><strong>Trello TEMPLATE card</strong></td><td><a href="https://trello.com/c/ZWY6fNrB">open ↗</a></td><td>All prospect card creation (already in CLAUDE.md)</td></tr>
-    <tr><td><strong>Trello Case Scouting board</strong></td><td><a href="https://trello.com/b/01KUlg8H/case-scouting">open ↗</a></td><td>Sourcing, prospecting (already in CLAUDE.md)</td></tr>
-    <tr><td>Exec Summary Canva template</td><td><a href="https://www.canva.com/design/DAGpYhfKLSs/kD_LoR1zZKiStdoD_73XHA/edit">open ↗</a></td><td><code>playbook-ic</code></td></tr>
-    <tr><td>DD Template Trello board</td><td><a href="https://trello.com/b/p9gyEgEZ/dd-template-avoiding-idiocy">open ↗</a></td><td><code>playbook-dd</code></td></tr>
-    <tr><td>Trello DayToDay Ops board</td><td><a href="https://trello.com/b/lMuMegjL/askel-ventures-day-to-day-ops">open ↗</a></td><td>General ops reference</td></tr>
+    <tr>
+      <td><strong>Trello TEMPLATE card</strong> (📋 PROSPEKTI)</td>
+      <td><a href="https://trello.com/c/ZWY6fNrB">open ↗</a></td>
+      <td><span class="badge badge-yellow">Partial</span> In <code>sourcing-tradecraft</code> + CLAUDE.md, but <em>not</em> repeated in cron skills that create cards</td>
+      <td>All prospect card creation</td>
+    </tr>
+    <tr>
+      <td><strong>Trello Case Scouting board</strong></td>
+      <td><a href="https://trello.com/b/01KUlg8H/case-scouting">open ↗</a></td>
+      <td><span class="badge badge-yellow">Partial</span> In CLAUDE.md, but absent from <code>cron-yritysporssi-scrape</code>, <code>cron-weekly-sourcing</code>, <code>cron-yrityskaupat-newsletter</code>, <code>cron-walk-of-shame</code></td>
+      <td>All sourcing crons</td>
+    </tr>
+    <tr>
+      <td>Exec Summary Canva template</td>
+      <td><a href="https://www.canva.com/design/DAGpYhfKLSs/kD_LoR1zZKiStdoD_73XHA/edit">open ↗</a></td>
+      <td><span class="badge badge-red">No</span> Not in any skill yet</td>
+      <td><code>playbook-ic</code></td>
+    </tr>
+    <tr>
+      <td>DD Template Trello board</td>
+      <td><a href="https://trello.com/b/p9gyEgEZ/dd-template-avoiding-idiocy">open ↗</a></td>
+      <td><span class="badge badge-red">No</span> Not in any skill yet</td>
+      <td><code>playbook-dd</code></td>
+    </tr>
+    <tr>
+      <td>Trello DayToDay Ops board</td>
+      <td><a href="https://trello.com/b/lMuMegjL/askel-ventures-day-to-day-ops">open ↗</a></td>
+      <td><span class="badge badge-red">No</span></td>
+      <td>General ops reference</td>
+    </tr>
   </tbody>
 </table>
+
+<div class="callout callout-warn" style="margin-top:0.8rem">
+  <strong>Trello gap:</strong> The template card URL exists in <code>sourcing-tradecraft</code> and CLAUDE.md, but none of the cron skills that actually create cards repeat it. They inherit it implicitly by referencing <code>sourcing-tradecraft</code> — one level of indirection the inline-link rule disallows. Once <code>sourcing-tradecraft</code> is absorbed into <code>playbook-sourcing</code>, that chain shifts anyway. Every cron skill that says "create a card" needs both the <a href="https://trello.com/b/01KUlg8H/case-scouting">Case Scouting board ↗</a> and <a href="https://trello.com/c/ZWY6fNrB">template card ↗</a> linked inline.
+</div>
 
 <hr class="divider" style="margin: 1.5rem 0">
 
