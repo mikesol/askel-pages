@@ -4,5 +4,5 @@
 :HL["/logos/barona.svg","image"]
 :HL["/logos/esperi-care.svg","image"]
 :HL["/logos/viking-line.png","image"]
-:HL["/logos/yliopiston-apteekki.svg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"yrityksille","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"G3p8uVktEks_o2EwDp1ra"}
+:HL["/logos/yliopiston-apteekki.png","image"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"yrityksille","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"nlIn7kR-DvHNTsjyz9ZIP"}
