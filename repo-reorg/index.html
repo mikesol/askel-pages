@@ -202,10 +202,10 @@ GOG_ACCOUNT=simo.siilanen@askelventures.com \
       <td>Already linked by ID in <code>sourcing-tradecraft</code> and CLAUDE.md — the one document currently done right.</td>
     </tr>
     <tr>
-      <td>Broker List (Välittäjät)</td>
-      <td><a href="https://docs.google.com/spreadsheets/d/1Hq_LLE7aZ20JLXADAAxjBeECczZxJNwr/edit" class="url">https://docs.google.com/spreadsheets/d/1Hq_LLE7aZ20JLXADAAxjBeECczZxJNwr/edit</a></td>
+      <td>Broker List (Välittäjät) <span class="badge badge-red">Unresolved</span></td>
+      <td><em style="color:var(--red)">File ID not found in Drive (404). Do not link in skills until the correct file is located. Ask a partner.</em></td>
       <td><code>playbook-sourcing</code></td>
-      <td>List of Finnish business brokers.</td>
+      <td>List of Finnish business brokers. File ID <code>1Hq_LLE7aZ20JLXADAAxjBeECczZxJNwr</code> returns 404 — either wrong ID or file lives in a shared drive simo.siilanen cannot access.</td>
     </tr>
     <tr>
       <td>LOI — Investor + Advisor Role</td>
@@ -591,7 +591,7 @@ cc-disco/<br>
   <p style="color:var(--muted);font-size:0.87rem;margin-bottom:0.6rem">Files to create (source doc in parentheses):</p>
   <ul>
     <li><strong>CREATE</strong> <code>.claude/skills/playbook/SKILL.md</code> — router + <a href="https://docs.google.com/document/d/1pjyuvlImFjGNSGA8LBkJjd6kVzVMcstv905Tdbkga6o/edit">v2 EN ↗</a> Ch. 1 philosophies preamble. Lists all sub-skills with one-line trigger condition each (use the trigger conditions from the taxonomy table above).</li>
-    <li><strong>CREATE</strong> <code>.claude/skills/playbook-sourcing/SKILL.md</code> — <a href="https://docs.google.com/document/d/1pjyuvlImFjGNSGA8LBkJjd6kVzVMcstv905Tdbkga6o/edit">v2 EN ↗</a> Ch. 3 + full content of <code>sourcing-tradecraft/SKILL.md</code>. Includes <a href="https://docs.google.com/spreadsheets/d/1Hq_LLE7aZ20JLXADAAxjBeECczZxJNwr/edit">Broker List ↗</a> inline. Trello card creation steps: link both <a href="https://trello.com/b/01KUlg8H/case-scouting">Case Scouting board ↗</a> and <a href="https://trello.com/c/ZWY6fNrB">template card ↗</a> inline.</li>
+    <li><strong>CREATE</strong> <code>.claude/skills/playbook-sourcing/SKILL.md</code> — <a href="https://docs.google.com/document/d/1pjyuvlImFjGNSGA8LBkJjd6kVzVMcstv905Tdbkga6o/edit">v2 EN ↗</a> Ch. 3 + full content of <code>sourcing-tradecraft/SKILL.md</code>. <strong>Do not link the Broker List</strong> — file ID is unresolved (404); leave a placeholder comment in the skill and ask a partner for the correct link. Trello card creation steps: link both <a href="https://trello.com/b/01KUlg8H/case-scouting">Case Scouting board ↗</a> and <a href="https://trello.com/c/ZWY6fNrB">template card ↗</a> inline.</li>
     <li><strong>CREATE</strong> <code>.claude/skills/playbook-screening/SKILL.md</code> — <a href="https://docs.google.com/document/d/1pjyuvlImFjGNSGA8LBkJjd6kVzVMcstv905Tdbkga6o/edit">v2 EN ↗</a> Ch. 4 + 5. Includes the full Psychological Driver Matrix table verbatim. Link <a href="https://docs.google.com/spreadsheets/d/1llwFP6A7K8D7KaMK9hUOZrz_Bh69od0q/edit">Financial Analysis Sheet ↗</a> inline.</li>
     <li><strong>CREATE</strong> <code>.claude/skills/playbook-valuation/SKILL.md</code> — <a href="https://docs.google.com/document/d/1pjyuvlImFjGNSGA8LBkJjd6kVzVMcstv905Tdbkga6o/edit">v2 EN ↗</a> Appendix G. 34-item scoring tool + yield rate table + Business Value formula.</li>
     <li><strong>CREATE</strong> <code>.claude/skills/playbook-ic/SKILL.md</code> — <a href="https://docs.google.com/document/d/1pjyuvlImFjGNSGA8LBkJjd6kVzVMcstv905Tdbkga6o/edit">v2 EN ↗</a> Ch. 6. Include <a href="https://www.canva.com/design/DAGpYhfKLSs/kD_LoR1zZKiStdoD_73XHA/edit">https://www.canva.com/design/DAGpYhfKLSs/kD_LoR1zZKiStdoD_73XHA/edit</a> inline (exec summary Canva template).</li>
@@ -615,9 +615,9 @@ cc-disco/<br>
 <div class="phase p3">
   <h3>Phase 3 — Repo restructure <span class="effort">· 1 session</span></h3>
   <ul>
-    <li><code>mkdir -p /home/askel/cc-disco/knowledge/portfolio</code> — create parent directory first (git mv will fail without it)</li>
+    <li><code>mkdir -p /home/askel/cc-disco/knowledge/portfolio/melers</code> — create full intermediate path first (git mv will fail without it)</li>
     <li><code>git mv /home/askel/cc-disco/knowledge/melers /home/askel/cc-disco/knowledge/portfolio/melers/brand</code></li>
-    <li><strong>CREATE</strong> <code>/home/askel/cc-disco/knowledge/portfolio/melers/learnings/README.md</code> — seed with Melers lessons from <a href="https://docs.google.com/document/d/1cZfNoRGWtNByNuhQhTxJRFX7ceWZFStCYl4DDJuFSu0/edit">v1 EN ↗</a> "Skills for Mike" / "I wish I had known" table + killer skills stack. Written by Varia; Steve provides the skeleton.</li>
+    <li><strong>CREATE</strong> <code>/home/askel/cc-disco/knowledge/portfolio/melers/learnings/README.md</code> — Steve extracts the "I wish I had known" table + killer skills stack verbatim from <a href="https://docs.google.com/document/d/1cZfNoRGWtNByNuhQhTxJRFX7ceWZFStCYl4DDJuFSu0/edit">v1 EN ↗</a> "Skills for Mike" section and writes it into the file. Varia then supplements with fresh anecdotes not captured in the doc. Steve does not leave a blank scaffold — the doc content goes in.</li>
     <li><strong>CREATE</strong> <code>/home/askel/cc-disco/knowledge/portfolio/melers/learnings/operational-sheets.md</code> — index of live Melers operational docs: <a href="https://docs.google.com/document/d/1uIxDkNYRHnoXT6-LLGSxH4gnWp8WBCnXwOgpaGQRY4E/edit">Hinnasto — https://docs.google.com/document/d/1uIxDkNYRHnoXT6-LLGSxH4gnWp8WBCnXwOgpaGQRY4E/edit ↗</a>, <a href="https://docs.google.com/spreadsheets/d/1EWnNdbOZN1nrcBfjqaWatBE39wRlswSJ9WPYvzt2RmA/edit">Markkinointi — https://docs.google.com/spreadsheets/d/1EWnNdbOZN1nrcBfjqaWatBE39wRlswSJ9WPYvzt2RmA/edit ↗</a></li>
     <li><strong>MODIFY</strong> <code>CLAUDE.md</code> knowledge base index: replace <code>knowledge/melers/</code> with <code>knowledge/portfolio/melers/</code></li>
     <li><strong>MODIFY</strong> <code>.claude/skills/housekeeping/SKILL.md</code> — reflect new portfolio structure</li>
@@ -648,7 +648,7 @@ cc-disco/<br>
 
   <h3 style="color:var(--muted);margin-top:1rem">Cleanup steps</h3>
   <ul>
-    <li>Delete <code>.claude/skills/sourcing-tradecraft/</code> — two weeks have passed since Phase 2 redirect</li>
+    <li>Delete <code>.claude/skills/sourcing-tradecraft/</code> — <strong>only if ≥14 days have elapsed since Phase 2 shipped</strong>. Run <code>git log --oneline .claude/skills/sourcing-tradecraft/SKILL.md</code> and check the timestamp of the deprecation redirect commit before deleting.</li>
     <li>Add "⚠️ Superseded — live version at playbook.askelventures.com" to the top of <a href="https://docs.google.com/document/d/1pjyuvlImFjGNSGA8LBkJjd6kVzVMcstv905Tdbkga6o/edit">v2 EN ↗</a> and <a href="https://docs.google.com/document/d/1cZfNoRGWtNByNuhQhTxJRFX7ceWZFStCYl4DDJuFSu0/edit">v1 EN ↗</a></li>
     <li>Tear down this analysis site: use the <code>askel-pages</code> skill unpublish steps for <code>repo-reorg.askelventures.com</code></li>
   </ul>
