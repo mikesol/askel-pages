@@ -605,7 +605,14 @@ cc-disco/<br>
     <li><strong>MODIFY</strong> <code>CLAUDE.md</code> — three sections need updating:
       <ol style="margin-top:0.4rem;margin-left:1rem">
         <li><strong>Knowledge base index</strong>: replace <code>sourcing-tradecraft</code> entry with <code>playbook-sourcing</code>; add all new <code>playbook-*</code> skills.</li>
-        <li><strong><code>#prospecting protocol</code> section</strong>: update hypothesis descriptions to reference <code>playbook-thesis</code> by name; ensure cron names match actual cron.json entries.</li>
+        <li><strong><code>#prospecting protocol</code> section</strong>: replace the opening paragraph and all three hypothesis bullets with the following verbatim text:
+          <pre style="font-size:0.8rem;background:var(--code-bg);padding:0.8rem;border-radius:6px;margin-top:0.6rem;white-space:pre-wrap">Systematic, cron-powered sourcing based on defined hypotheses. Thesis criteria (revenue, EBITDA, age, geography, disqualifiers) live in `playbook-thesis` — crons score against it rather than hardcoding criteria inline. Targets that pass get a Trello card cloned from the template.
+
+**Active hypotheses:**
+- **H1: Finnish broker listings** — yritysporssi.fi / yrityskaupat.net weekly scrape across thesis sectors (cleaning, maintenance, laundry, waste, funeral, transport, tires, LVI). Scoring via `playbook-thesis`. Cron: `cron-yritysporssi-scrape` (Tue), `cron-weekly-sourcing` (Mon).
+- **H2: Swedish + Estonian broker listings** — bolagsplatsen.se weekly sweep. Estonia is in the thesis but has no dedicated source — flag Estonian opportunities ad-hoc via `cron-swedish-sweep`. Scoring via `playbook-thesis`. Cron: `cron-swedish-sweep` (Tue).
+- **H3: Finder.fi weak signals** — on-demand + sweep-integrated scan for non-listed Finnish targets with exit-readiness signals (owner 55+, declining revenue, stale web presence). Scoring via `playbook-thesis`. Embedded in `cron-weekly-sourcing`.</pre>
+        </li>
         <li><strong><code>## Your jobs</code> section</strong>: mention that sourcing and deal evaluation now follow the <code>playbook</code> skill hierarchy.</li>
       </ol>
     </li>
