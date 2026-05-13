@@ -191,15 +191,11 @@
   /* ── Model slide: flywheel outside v-scroll container ── */
   .slide-model {
     overflow: hidden !important;
-    justify-content: center !important;
-  }
-
-  .model-inner {
-    display: contents;
   }
 
   .model-body {
-    flex: 0 0 auto;
+    flex: 1;
+    min-height: 0;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -760,11 +756,9 @@
       gap: 1em 0;
     }
 
-    .slide-model { overflow: hidden !important; padding: 0 !important; }
-    .model-inner { height: 100%; overflow-y: scroll; -webkit-overflow-scrolling: touch; touch-action: pan-y; padding: 5vh 6vw; box-sizing: border-box; }
-    .flywheel-outer { overflow: visible; margin-bottom: 1.2em; }
-    .flywheel { flex-wrap: wrap; min-width: unset; gap: 0.5em; }
-    .fw-step { flex: 1 1 40%; min-width: 120px; padding: 0.7em 0.8em; }
+    .flywheel-outer { overflow-x: scroll; -webkit-overflow-scrolling: touch; }
+    .flywheel { flex-wrap: nowrap; min-width: max-content; gap: 0.35em; }
+    .fw-step { flex: 0 0 auto; box-sizing: content-box; min-width: 80px; padding: 0.6em 0.5em; }
     .fw-arrow { display: none; }
 
     .comp-summary { flex-wrap: wrap; }
@@ -850,7 +844,6 @@
 
     <!-- ── 3. THE MODEL ────────────────── -->
     <section class="slide-model" data-background-color="#faf8f5">
-      <div class="model-inner">
       <div class="label">The Model</div>
       <div class="rule"></div>
       <h2>We buy, operate, grow, and <span class="accent">selectively exit</span> —<br>then reinvest the proceeds.</h2>
@@ -875,7 +868,6 @@
         <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Inspired by the Barbell strategy.</strong> Buying boring but profitable businesses, digitalizing them, and building a tech layer on top — stable cash flows on one end, asymmetric upside on the other.</div></div>
       </div>
       </div><!-- /model-body -->
-      </div><!-- /model-inner -->
     </section>
 
     <!-- ── 4. OUR EDGE ────────────────── -->
