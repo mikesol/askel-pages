@@ -756,9 +756,10 @@
       gap: 1em 0;
     }
 
-    .flywheel-outer { overflow-x: scroll; -webkit-overflow-scrolling: touch; }
-    .flywheel { flex-wrap: nowrap; min-width: max-content; gap: 0.35em; }
-    .fw-step { flex: 0 0 auto; box-sizing: content-box; min-width: 80px; padding: 0.6em 0.5em; }
+    .slide-model { overflow-y: scroll !important; overflow-x: hidden !important; justify-content: flex-start !important; }
+    .flywheel-outer { overflow: visible; margin-bottom: 1.2em; }
+    .flywheel { flex-wrap: wrap; min-width: unset; gap: 0.5em; }
+    .fw-step { flex: 1 1 40%; min-width: 120px; padding: 0.7em 0.8em; }
     .fw-arrow { display: none; }
 
     .comp-summary { flex-wrap: wrap; }
