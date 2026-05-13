@@ -191,11 +191,11 @@
   /* ── Model slide: flywheel outside v-scroll container ── */
   .slide-model {
     overflow: hidden !important;
-    justify-content: center !important;
   }
 
   .model-body {
-    flex: 0 0 auto;
+    flex: 1;
+    min-height: 0;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -756,7 +756,6 @@
       gap: 1em 0;
     }
 
-    .slide-model { overflow-y: auto !important; justify-content: flex-start !important; }
     .flywheel-outer { overflow-x: scroll; -webkit-overflow-scrolling: touch; }
     .flywheel { flex-wrap: nowrap; min-width: max-content; gap: 0.35em; }
     .fw-step { flex: 0 0 auto; box-sizing: content-box; min-width: 80px; padding: 0.6em 0.5em; }
