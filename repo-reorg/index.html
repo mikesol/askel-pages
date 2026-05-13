@@ -629,22 +629,41 @@ cc-disco/<br>
   <h3>Phase 4 — Web publish <span class="effort">· 1–2 sessions</span></h3>
 
   <h3 style="color:var(--muted);margin-top:1rem">Publishing spec</h3>
-  <p style="font-size:0.87rem">The playbook site is a single <code>index.html</code> — same dark-mode CSS as this site. Generate it by exporting each skill's <code>SKILL.md</code> content (everything after the frontmatter) and injecting it into named <code>&lt;section&gt;</code> elements with anchor IDs. Skill order for nav:</p>
-  <ol style="font-size:0.87rem;margin-bottom:0.8rem">
-    <li><code>playbook</code> (preamble + routing index)</li>
-    <li><code>playbook-thesis</code></li>
-    <li><code>playbook-sourcing</code></li>
-    <li><code>playbook-screening</code></li>
-    <li><code>playbook-valuation</code></li>
-    <li><code>playbook-ic</code></li>
-    <li><code>playbook-dd</code></li>
-    <li><code>playbook-knowledge-transfer</code></li>
-    <li><code>playbook-sales-system</code></li>
-  </ol>
-  <p style="font-size:0.87rem">Add a sticky left nav with anchor links per skill. Deploy via the <code>askel-pages</code> skill: <code>npx wrangler pages deploy &lt;dir&gt; --project-name playbook --branch main</code>, then add a DNS CNAME for <code>playbook.askelventures.com</code> via the CF API (see <code>askel-pages</code> skill for exact DNS call pattern).</p>
+  <p style="font-size:0.87rem">The playbook site is built with <strong><a href="https://squidfunk.github.io/mkdocs-material/">MkDocs + Material theme</a></strong> — free, open-source, Mintlify-tier design. Dark mode, sticky nav, search, and admonition callouts are all built in. Output is a static <code>site/</code> folder deployed as-is.</p>
+
+  <p style="font-size:0.87rem"><strong>Setup (one-time):</strong></p>
+  <pre style="font-size:0.82rem;background:var(--code-bg);padding:0.8rem;border-radius:6px;overflow-x:auto">pip install mkdocs-material
+# mkdocs.yml lives at repo root (or /home/askel/playbook-site/ — TBD)</pre>
+
+  <p style="font-size:0.87rem"><strong>mkdocs.yml skeleton:</strong></p>
+  <pre style="font-size:0.82rem;background:var(--code-bg);padding:0.8rem;border-radius:6px;overflow-x:auto">site_name: Askel Ventures Playbook
+theme:
+  name: material
+  palette:
+    scheme: slate          # dark mode
+    primary: custom
+  features:
+    - navigation.sections
+    - navigation.sticky
+    - search.highlight
+extra_css: [overrides.css] # "Askel Ventures — Confidential" banner + brand tweaks
+nav:
+  - Overview: playbook.md
+  - Thesis: playbook-thesis.md
+  - Sourcing: playbook-sourcing.md
+  - Screening: playbook-screening.md
+  - Valuation: playbook-valuation.md
+  - IC: playbook-ic.md
+  - Due Diligence: playbook-dd.md
+  - Knowledge Transfer: playbook-knowledge-transfer.md
+  - Sales System: playbook-sales-system.md</pre>
+
+  <p style="font-size:0.87rem"><strong>Build step:</strong> for each skill in nav order, copy <code>SKILL.md</code> (everything after frontmatter) to the docs source folder. Run <code>mkdocs build</code> → <code>site/</code> folder. The skill order above maps directly to the <code>nav</code> list.</p>
+
+  <p style="font-size:0.87rem"><strong>Deploy:</strong> via the <code>askel-pages</code> skill: <code>npx wrangler pages deploy site/ --project-name playbook --branch main</code>, then add a DNS CNAME for <code>playbook.askelventures.com</code> via the CF API (see <code>askel-pages</code> skill for exact DNS call pattern).</p>
 
   <h3 style="color:var(--muted);margin-top:1rem">Confidentiality</h3>
-  <p style="font-size:0.87rem">CF Zero Trust auth gating is not available (CF API token lacks Zero Trust permissions — confirmed during this planning session). Mechanism: <strong>add a prominent "Askel Ventures — Confidential" banner</strong> in the site header, and rely on URL obscurity for now. The URL is not linked from anywhere public. If stronger access control is needed later, a Cloudflare Worker with Basic Auth can be added as a wrapper — but that's out of scope for Phase 4.</p>
+  <p style="font-size:0.87rem">CF Zero Trust auth gating is not available (CF API token lacks Zero Trust permissions — confirmed during this planning session). Mechanism: <strong>add a prominent "Askel Ventures — Confidential" banner</strong> via MkDocs Material's <code>announce</code> block (set in <code>overrides/main.html</code>), and rely on URL obscurity for now. The URL is not linked from anywhere public. If stronger access control is needed later, a Cloudflare Worker with Basic Auth can be added as a wrapper — but that's out of scope for Phase 4.</p>
 
   <h3 style="color:var(--muted);margin-top:1rem">Cleanup steps</h3>
   <ul>
