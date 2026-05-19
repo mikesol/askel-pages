@@ -1,0 +1,89 @@
+{
+  "campaign": {
+    "active": true,
+    "badge": "Kampanja",
+    "headline": "Ensimmäinen nouto ilmaiseksi",
+    "body": "Uusille asiakkaille: ensimmäinen noutokerta veloituksetta. Voimassa 31.5.2026 asti.",
+    "cta": "Hyödynnä tarjous",
+    "ctaHref": "/yhteys"
+  },
+  "consumer": {
+    "heading": "Kuluttajahinnat",
+    "subheading": "Yksinkertainen hinnoittelu. Ei piilomaksuja.",
+    "currency": "€",
+    "unit": "/ kg",
+    "tiers": [
+      {
+        "name": "Peruspecsu",
+        "price": "4.90",
+        "unit": "/ kg",
+        "description": "Arjen tekstiilit — paidat, pyyhkeet, lakanat. Huolellinen pesu ja viimeistely.",
+        "includes": [
+          "Nouto ja toimitus kotiovelle",
+          "Standardipesu 40°C tai 60°C",
+          "Kuivaus ja taitto",
+          "Palautus 4–8 päivässä"
+        ],
+        "highlight": false
+      },
+      {
+        "name": "Huoltopesu",
+        "price": "7.90",
+        "unit": "/ kg",
+        "description": "Herkkiä kankaita, villaa tai erikoisvaatteita varten. Käsinpesu tai varovainen konepesu.",
+        "includes": [
+          "Nouto ja toimitus kotiovelle",
+          "Erikoispesu materiaalin mukaan",
+          "Viimeistely ja suojapussi",
+          "Palautus 4–8 päivässä"
+        ],
+        "highlight": true
+      },
+      {
+        "name": "Pikapalvelu",
+        "price": "12.90",
+        "unit": "/ kg",
+        "description": "Kiireelliset pyykit takaisin jo seuraavana päivänä. Saatavilla ma–pe.",
+        "includes": [
+          "Nouto aamulla → toimitus iltapäivällä",
+          "Kaikki pesuohjelmat",
+          "Kuivaus ja taitto",
+          "Seuraavan arkipäivän toimitus"
+        ],
+        "highlight": false
+      }
+    ],
+    "note": "Hinnat sisältävät ALV 25,5 %. Minimitilaus 3 kg. Nouto ja toimitus sisältyvät hintaan Turun kaupunkialueella."
+  },
+  "business": {
+    "heading": "Yrityshinnat",
+    "subheading": "Volyymipohjainen hinnoittelu. Räätälöidyt sopimukset.",
+    "note": "Yrityshinnat määräytyvät volyymin, tekstiilityypin ja toimialan mukaan. Pyydä tarjous — vastaamme 24 tunnissa.",
+    "tiers": [
+      {
+        "name": "Startti",
+        "volume": "alle 50 kg/vko",
+        "price": "3.90",
+        "unit": "/ kg",
+        "description": "Pienille yrityksille ja toimistoille.",
+        "highlight": false
+      },
+      {
+        "name": "Kasvu",
+        "volume": "50–200 kg/vko",
+        "price": "2.90",
+        "unit": "/ kg",
+        "description": "Hotelleille, ravintoloille ja kuntosaleille.",
+        "highlight": true
+      },
+      {
+        "name": "Volyymi",
+        "volume": "yli 200 kg/vko",
+        "price": "Sopimuksen mukaan",
+        "unit": "",
+        "description": "Hoivakodeille ja suurille toimijoille. Yksilöllinen sopimus.",
+        "highlight": false
+      }
+    ]
+  }
+}
