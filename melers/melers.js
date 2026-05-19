@@ -224,15 +224,17 @@
     });
   }
 
-  // Intercept all "Tilaa kuljetus" link clicks across all pages
-  document.querySelectorAll('a').forEach(function (a) {
-    if (/tilaa kuljetus/i.test(a.textContent) || /varaa kuljetus/i.test(a.textContent)) {
-      a.addEventListener('click', function (e) {
-        e.preventDefault();
-        openBookingModal();
-      });
+  // Intercept all "Tilaa kuljetus" link clicks across all pages.
+  // Uses capture phase so we fire before Next.js's router handler,
+  // which otherwise intercepts the click via pushState before preventDefault can stop it.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a');
+    if (a && (/tilaa kuljetus/i.test(a.textContent) || /varaa kuljetus/i.test(a.textContent))) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      openBookingModal();
     }
-  });
+  }, true);
 
   // Auto-open on /yhteys (primary landing page for "Tilaa kuljetus" CTAs)
   if (location.pathname === '/yhteys' || location.pathname === '/yhteys/') {
