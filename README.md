@@ -16,3 +16,4 @@ Published pages for Askel Ventures. Each folder is a site deployed to `<folder-n
 | epicenter | https://epicenter.askelventures.com |
 | mike-intro | https://mike-intro.askelventures.com |
 | christa | https://christa.askelventures.com |
+| askel-os | https://askel-os.askelventures.com |

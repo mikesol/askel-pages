@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Askel OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080808;
+      --surface: #111111;
+      --elevated: #1a1a1a;
+      --border: rgba(255,255,255,0.07);
+      --border-hover: rgba(255,255,255,0.14);
+      --text: #ededed;
+      --muted: #666666;
+      --subtle: #3a3a3a;
+      --red: #c0392b;
+      --red-light: #e04c3e;
+      --blue: #5dade2;
+      --green: #2ecc71;
+      --yellow: #f39c12;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 20px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-right: 44px;
+      flex-shrink: 0;
+    }
+    .nav-logo span { color: var(--red-light); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+    }
+
+    .nav-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 13px;
+      border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+      letter-spacing: 0.01em;
+    }
+    .nav-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+    .nav-link.home { color: var(--text); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-left: auto;
+    }
+
+    .nav-date {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .nav-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* ── MAIN ── */
+    main {
+      padding: 76px 32px 48px;
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+
+    /* ── GREETING ── */
+    .greeting {
+      margin-bottom: 36px;
+      padding-top: 20px;
+    }
+
+    .greeting-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 56px;
+      letter-spacing: -0.01em;
+      line-height: 1;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #ededed 40%, rgba(237,237,237,0.35));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .greeting-sub {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .greeting-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 3px 10px;
+      border-radius: 4px;
+      background: rgba(192,57,43,0.12);
+      color: var(--red-light);
+      border: 1px solid rgba(192,57,43,0.2);
+    }
+
+    /* ── PILLAR GRID ── */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    /* ── PILLAR CARD ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--border-hover); }
+
+    .card-top {
+      padding: 22px 24px 18px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pillar-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 30px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 1.05;
+    }
+    .pillar-name.accent { color: var(--red-light); }
+
+    .card-kpi {
+      text-align: right;
+    }
+    .kpi-number {
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 1;
+      color: var(--text);
+    }
+    .kpi-number.blue { color: var(--blue); }
+    .kpi-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-top: 4px;
+    }
+
+    .card-body {
+      padding: 18px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .card-footer {
+      padding: 14px 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── SECTION LABEL ── */
+    .sec-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    /* ── PIPELINE ── */
+    .pipeline {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .pipeline-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pipeline-stage {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      width: 64px;
+      flex-shrink: 0;
+    }
+    .pipeline-bar {
+      flex: 1;
+      height: 3px;
+      background: var(--elevated);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .pipeline-fill {
+      height: 100%;
+      background: var(--red);
+      border-radius: 2px;
+    }
+    .pipeline-n {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      min-width: 14px;
+      text-align: right;
+    }
+
+    /* ── INVESTOR STATS ── */
+    .stat-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .stat-label { font-size: 12px; color: var(--muted); }
+    .stat-value { font-size: 13px; font-weight: 600; color: var(--text); }
+    .stat-value.blue { color: var(--blue); }
+
+    /* ── PORTFOLIO STATUS ── */
+    .status-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .status-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 12px;
+      background: var(--elevated);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .status-name { font-size: 13px; font-weight: 500; }
+    .badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    .badge.green { background: rgba(46,204,113,0.12); color: #2ecc71; }
+    .badge.yellow { background: rgba(243,156,18,0.12); color: #f39c12; }
+    .badge.red { background: rgba(192,57,43,0.13); color: var(--red-light); }
+
+    /* ── ACTIVITY LIST ── */
+    .activity {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .act-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .act-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--subtle);
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+    .act-dot.red { background: var(--red-light); }
+    .act-dot.green { background: var(--green); }
+    .act-dot.yellow { background: var(--yellow); }
+    .act-dot.blue { background: var(--blue); }
+    .act-text { font-size: 13px; color: var(--text); line-height: 1.4; }
+    .act-time { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+    /* ── ADD BUTTON ── */
+    .add-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      background: none;
+      border: 1px dashed rgba(255,255,255,0.13);
+      padding: 7px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+      font-family: inherit;
+    }
+    .add-btn:hover {
+      color: var(--text);
+      border-color: rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.03);
+    }
+
+    /* ── PULSE FEED ── */
+    .pulse-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 24px;
+    }
+    .pulse-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .pulse-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .pulse-meta { font-size: 12px; color: var(--subtle); }
+
+    .pulse-feed {
+      display: flex;
+      flex-direction: column;
+    }
+    .pulse-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .pulse-item:first-child { padding-top: 0; }
+    .pulse-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .pulse-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+      width: 74px;
+      text-align: center;
+    }
+    .pulse-tag.deals { background: rgba(192,57,43,0.14); color: #e04c3e; }
+    .pulse-tag.funding { background: rgba(93,173,226,0.12); color: #5dade2; }
+    .pulse-tag.ops { background: rgba(46,204,113,0.1); color: #58d68d; }
+
+    .pulse-text { flex: 1; font-size: 13px; color: var(--text); }
+    .pulse-time { font-size: 11px; color: var(--muted); flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav>
+    <div class="nav-logo">Askel<span>OS</span></div>
+    <div class="nav-links">
+      <a href="#" class="nav-link home">Home</a>
+      <a href="#" class="nav-link">Find Deals</a>
+      <a href="#" class="nav-link">Fund Deals</a>
+      <a href="#" class="nav-link">Manage Operators</a>
+    </div>
+    <div class="nav-right">
+      <span class="nav-date">Fri, 22 May 2026</span>
+      <div class="nav-avatar">V</div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- GREETING -->
+    <div class="greeting">
+      <div class="greeting-text">Good morning, Varia.</div>
+      <div class="greeting-sub">
+        Week 21 · 2026
+        <span class="greeting-badge">3 tasks need attention</span>
+      </div>
+    </div>
+
+    <!-- THREE PILLAR CARDS -->
+    <div class="pillars">
+
+      <!-- FIND DEALS -->
+      <div class="card">
+        <div class="card-top">
+          <div class="pillar-name accent">Find<br>Deals</div>
+          <div class="card-kpi">
+            <div class="kpi-number">9</div>
+            <div class="kpi-label">Active targets</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="sec-label">Pipeline</div>
+            <div class="pipeline">
+              <div class="pipeline-row">
+                <div class="pipeline-stage">Leads</div>
+                <div class="pipeline-bar"><div class="pipeline-fill" style="width:100%"></div></div>
+                <div class="pipeline-n">9</div>
+              </div>
+              <div class="pipeline-row">
+                <div class="pipeline-stage">Screened</div>
+                <div class="pipeline-bar"><div class="pipeline-fill" style="width:44%"></div></div>
+                <div class="pipeline-n">4</div>
+              </div>
+              <div class="pipeline-row">
+                <div class="pipeline-stage">IC Ready</div>
+                <div class="pipeline-bar"><div class="pipeline-fill" style="width:11%"></div></div>
+                <div class="pipeline-n">1</div>
+              </div>
+              <div class="pipeline-row">
+                <div class="pipeline-stage">In DD</div>
+                <div class="pipeline-bar"><div class="pipeline-fill" style="width:11%"></div></div>
+                <div class="pipeline-n">1</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="sec-label">Recent</div>
+            <div class="activity">
+              <div class="act-item">
+                <div class="act-dot red"></div>
+                <div>
+                  <div class="act-text">LVI Saarinen — IC scheduled</div>
+                  <div class="act-time">Yesterday</div>
+                </div>
+              </div>
+              <div class="act-item">
+                <div class="act-dot"></div>
+                <div>
+                  <div class="act-text">Pesulapalvelu Luvia — screened</div>
+                  <div class="act-time">2 days ago</div>
+                </div>
+              </div>
+              <div class="act-item">
+                <div class="act-dot"></div>
+                <div>
+                  <div class="act-text">VVS Sörmland SE — added to pipeline</div>
+                  <div class="act-time">3 days ago</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="add-btn">+ Add Target</button>
+        </div>
+      </div>
+
+      <!-- FUND DEALS -->
+      <div class="card">
+        <div class="card-top">
+          <div class="pillar-name">Fund<br>Deals</div>
+          <div class="card-kpi">
+            <div class="kpi-number blue">€340K</div>
+            <div class="kpi-label">Soft circle</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="sec-label">Investor Pipeline</div>
+            <div class="stat-grid">
+              <div class="stat-row">
+                <div class="stat-label">Active investors</div>
+                <div class="stat-value">3</div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-label">Warm pipeline</div>
+                <div class="stat-value">12</div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-label">Total committed</div>
+                <div class="stat-value blue">€0</div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-label">LOIs signed</div>
+                <div class="stat-value">1</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="sec-label">Recent</div>
+            <div class="activity">
+              <div class="act-item">
+                <div class="act-dot green"></div>
+                <div>
+                  <div class="act-text">Auran Pesupojat — LOI signed</div>
+                  <div class="act-time">1 week ago</div>
+                </div>
+              </div>
+              <div class="act-item">
+                <div class="act-dot"></div>
+                <div>
+                  <div class="act-text">14 LP outreach emails sent</div>
+                  <div class="act-time">3 days ago</div>
+                </div>
+              </div>
+              <div class="act-item">
+                <div class="act-dot yellow"></div>
+                <div>
+                  <div class="act-text">Nordea — bank call scheduled</div>
+                  <div class="act-time">Tomorrow</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="add-btn">+ Log Update</button>
+        </div>
+      </div>
+
+      <!-- MANAGE OPERATORS -->
+      <div class="card">
+        <div class="card-top">
+          <div class="pillar-name accent">Manage<br>Operators</div>
+          <div class="card-kpi">
+            <div class="kpi-number">2</div>
+            <div class="kpi-label">Portfolio cos.</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="sec-label">Portfolio</div>
+            <div class="status-list">
+              <div class="status-item">
+                <div class="status-name">Melers Oy</div>
+                <div class="badge green">Healthy</div>
+              </div>
+              <div class="status-item">
+                <div class="status-name">Auran Pesupojat</div>
+                <div class="badge yellow">Pre-Acq</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="sec-label">Recent</div>
+            <div class="activity">
+              <div class="act-item">
+                <div class="act-dot green"></div>
+                <div>
+                  <div class="act-text">Melers — Asko training contract signed</div>
+                  <div class="act-time">2 days ago</div>
+                </div>
+              </div>
+              <div class="act-item">
+                <div class="act-dot"></div>
+                <div>
+                  <div class="act-text">Operator candidate Janne K. — shortlisted</div>
+                  <div class="act-time">4 days ago</div>
+                </div>
+              </div>
+              <div class="act-item">
+                <div class="act-dot"></div>
+                <div>
+                  <div class="act-text">Melers Q1 revenue: €87K</div>
+                  <div class="act-time">1 week ago</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="add-btn">+ Add Company</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ACTIVITY PULSE -->
+    <div class="pulse-card">
+      <div class="pulse-header">
+        <div class="pulse-title">Activity Pulse</div>
+        <div class="pulse-meta">All pillars · last 7 days</div>
+      </div>
+      <div class="pulse-feed">
+        <div class="pulse-item">
+          <div class="pulse-tag ops">Ops</div>
+          <div class="pulse-text">Melers — Asko training contract signed, start date 1.8.2026</div>
+          <div class="pulse-time">2d ago</div>
+        </div>
+        <div class="pulse-item">
+          <div class="pulse-tag deals">Deals</div>
+          <div class="pulse-text">LVI Saarinen — IC meeting scheduled for next week</div>
+          <div class="pulse-time">2d ago</div>
+        </div>
+        <div class="pulse-item">
+          <div class="pulse-tag deals">Deals</div>
+          <div class="pulse-text">Pesulapalvelu Luvia — passed thesis screening, added to pipeline</div>
+          <div class="pulse-time">3d ago</div>
+        </div>
+        <div class="pulse-item">
+          <div class="pulse-tag funding">Funding</div>
+          <div class="pulse-text">LP outreach batch — 14 emails sent via Simo identity</div>
+          <div class="pulse-time">3d ago</div>
+        </div>
+        <div class="pulse-item">
+          <div class="pulse-tag ops">Ops</div>
+          <div class="pulse-text">Operator candidate Janne K. — shortlisted, entering interview stage</div>
+          <div class="pulse-time">4d ago</div>
+        </div>
+        <div class="pulse-item">
+          <div class="pulse-tag deals">Deals</div>
+          <div class="pulse-text">VVS Sörmland SE — identified in Swedish sweep, added to watchlist</div>
+          <div class="pulse-time">5d ago</div>
+        </div>
+        <div class="pulse-item">
+          <div class="pulse-tag funding">Funding</div>
+          <div class="pulse-text">Auran Pesupojat — LOI signed, due diligence commencing</div>
+          <div class="pulse-time">1w ago</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>
