@@ -175,9 +175,12 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, transform 0.15s;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
     }
-    .card:hover { border-color: var(--border-hover); }
+    .card:hover { border-color: var(--border-hover); transform: translateY(-1px); }
 
     .card-top {
       padding: 22px 24px 18px;
@@ -455,7 +458,7 @@
     <div class="pillars">
 
       <!-- FIND DEALS -->
-      <div class="card">
+      <a href="find-deals.html" class="card">
         <div class="card-top">
           <div class="pillar-name accent">Find<br>Deals</div>
           <div class="card-kpi">
@@ -519,10 +522,10 @@
         <div class="card-footer">
           <button class="add-btn">+ Add Target</button>
         </div>
-      </div>
+      </a>
 
       <!-- FUND DEALS -->
-      <div class="card">
+      <a href="fund-deals.html" class="card">
         <div class="card-top">
           <div class="pillar-name">Fund<br>Deals</div>
           <div class="card-kpi">
@@ -582,10 +585,10 @@
         <div class="card-footer">
           <button class="add-btn">+ Log Update</button>
         </div>
-      </div>
+      </a>
 
       <!-- MANAGE OPERATORS -->
-      <div class="card">
+      <a href="manage-operators.html" class="card">
         <div class="card-top">
           <div class="pillar-name accent">Manage<br>Operators</div>
           <div class="card-kpi">
@@ -637,7 +640,7 @@
         <div class="card-footer">
           <button class="add-btn">+ Add Company</button>
         </div>
-      </div>
+      </a>
 
     </div>
 

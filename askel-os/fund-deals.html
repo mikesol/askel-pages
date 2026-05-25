@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fund Deals — Askel OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080808;
+      --surface: #111111;
+      --elevated: #1a1a1a;
+      --border: rgba(255,255,255,0.07);
+      --border-hover: rgba(255,255,255,0.14);
+      --text: #ededed;
+      --muted: #666666;
+      --subtle: #3a3a3a;
+      --red: #c0392b;
+      --red-light: #e04c3e;
+      --blue: #5dade2;
+      --green: #2ecc71;
+      --yellow: #f39c12;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 20px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-right: 44px;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--red-light); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+    }
+
+    .nav-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 13px;
+      border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+      letter-spacing: 0.01em;
+    }
+    .nav-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+    .nav-link.active { color: var(--text); background: rgba(255,255,255,0.05); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-left: auto;
+    }
+    .nav-date { font-size: 12px; color: var(--muted); }
+    .nav-avatar {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 600; color: white;
+      cursor: pointer; flex-shrink: 0;
+    }
+
+    /* ── MAIN ── */
+    main {
+      padding: 76px 32px 48px;
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding-top: 24px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .page-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 52px;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      line-height: 1;
+      background: linear-gradient(135deg, #ededed 40%, rgba(237,237,237,0.35));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-kpis {
+      display: flex;
+      gap: 24px;
+      align-items: flex-end;
+      padding-bottom: 4px;
+    }
+    .page-kpi { text-align: right; }
+    .page-kpi-val { font-size: 22px; font-weight: 600; color: var(--text); line-height: 1; }
+    .page-kpi-val.blue { color: var(--blue); }
+    .page-kpi-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 3px; }
+
+    /* ── SUB NAV ── */
+    .sub-nav {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0;
+    }
+
+    .sub-tab {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      padding: 8px 16px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.15s, border-color 0.15s;
+      user-select: none;
+    }
+    .sub-tab:hover { color: var(--text); }
+    .sub-tab.active { color: var(--text); border-bottom-color: var(--red-light); }
+
+    /* ── TAB VIEWS ── */
+    .tab-view { display: none; }
+    .tab-view.active { display: block; }
+
+    /* ── COMPANY DEBT CARDS ── */
+    .debt-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .debt-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .debt-card:hover { border-color: var(--border-hover); }
+
+    .debt-card-header {
+      padding: 20px 24px 18px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .debt-company {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .debt-company-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+    .debt-lender {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    .debt-status {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+    .debt-status.active { background: rgba(46,204,113,0.1); color: #2ecc71; }
+    .debt-status.pending { background: rgba(243,156,18,0.12); color: #f39c12; }
+
+    /* ── DEBT METRICS GRID ── */
+    .debt-metrics {
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .metric-cell {
+      padding: 0 20px 0 0;
+      border-right: 1px solid var(--border);
+      margin-right: 20px;
+    }
+    .metric-cell:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+
+    .metric-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .metric-value {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1;
+    }
+    .metric-value.blue { color: var(--blue); }
+    .metric-value.green { color: var(--green); }
+    .metric-value.yellow { color: var(--yellow); }
+    .metric-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    /* ── COVENANTS + ASSETS ROW ── */
+    .debt-card-bottom {
+      padding: 18px 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .sec-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    /* Covenant rows */
+    .covenant-list { display: flex; flex-direction: column; gap: 10px; }
+    .covenant-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: var(--elevated);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .covenant-name { flex: 1; font-size: 13px; color: var(--text); }
+    .covenant-threshold { font-size: 12px; color: var(--muted); min-width: 70px; text-align: right; }
+    .covenant-current { font-size: 13px; font-weight: 600; min-width: 52px; text-align: right; }
+    .covenant-current.pass { color: var(--green); }
+    .covenant-current.warn { color: var(--yellow); }
+    .covenant-current.breach { color: var(--red-light); }
+    .covenant-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+      min-width: 48px;
+      text-align: center;
+    }
+    .covenant-badge.pass { background: rgba(46,204,113,0.1); color: var(--green); }
+    .covenant-badge.warn { background: rgba(243,156,18,0.12); color: var(--yellow); }
+    .covenant-badge.breach { background: rgba(192,57,43,0.13); color: var(--red-light); }
+
+    /* Asset rows */
+    .asset-list { display: flex; flex-direction: column; gap: 10px; }
+    .asset-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: var(--elevated);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .asset-info { display: flex; flex-direction: column; gap: 2px; }
+    .asset-name { font-size: 13px; color: var(--text); }
+    .asset-type { font-size: 11px; color: var(--muted); }
+    .asset-right { display: flex; align-items: center; gap: 10px; }
+    .asset-value { font-size: 13px; font-weight: 600; color: var(--text); }
+    .asset-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .asset-tag.pledged { background: rgba(93,173,226,0.12); color: var(--blue); }
+    .asset-tag.free { background: rgba(255,255,255,0.05); color: var(--muted); }
+
+    /* Pre-acq placeholder */
+    .pre-acq-body {
+      padding: 32px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .pre-acq-icon {
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      background: rgba(243,156,18,0.1);
+      border: 1px solid rgba(243,156,18,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .pre-acq-text { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .pre-acq-text strong { color: var(--text); }
+
+    /* ── DEAL PIPELINE TAB ── */
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .pipeline-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 24px;
+    }
+
+    .pipeline-card-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+
+    .stat-grid { display: flex; flex-direction: column; gap: 8px; }
+    .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--border); }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-label { font-size: 13px; color: var(--muted); }
+    .stat-value { font-size: 13px; font-weight: 600; color: var(--text); }
+    .stat-value.blue { color: var(--blue); }
+    .stat-value.green { color: var(--green); }
+
+    .investor-list { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+    .investor-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 14px;
+      background: var(--elevated);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .investor-name { font-size: 13px; font-weight: 500; color: var(--text); }
+    .investor-right { display: flex; align-items: center; gap: 10px; }
+    .investor-amount { font-size: 13px; font-weight: 600; color: var(--blue); }
+    .investor-badge {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.07em;
+      text-transform: uppercase; padding: 2px 7px; border-radius: 4px;
+    }
+    .investor-badge.warm { background: rgba(243,156,18,0.12); color: var(--yellow); }
+    .investor-badge.active { background: rgba(46,204,113,0.1); color: var(--green); }
+    .investor-badge.cold { background: rgba(255,255,255,0.05); color: var(--muted); }
+
+    /* ── OVERVIEW TAB ── */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .overview-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+    .overview-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 8px; }
+    .overview-value { font-size: 28px; font-weight: 600; line-height: 1; color: var(--text); }
+    .overview-value.blue { color: var(--blue); }
+    .overview-value.green { color: var(--green); }
+    .overview-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Askel<span>OS</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="find-deals.html" class="nav-link">Find Deals</a>
+      <a href="fund-deals.html" class="nav-link active">Fund Deals</a>
+      <a href="manage-operators.html" class="nav-link">Manage Operators</a>
+    </div>
+    <div class="nav-right">
+      <span class="nav-date">Fri, 22 May 2026</span>
+      <div class="nav-avatar">V</div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div class="page-title">Fund Deals</div>
+      <div class="page-kpis">
+        <div class="page-kpi">
+          <div class="page-kpi-val">€600K</div>
+          <div class="page-kpi-label">Total debt outstanding</div>
+        </div>
+        <div class="page-kpi">
+          <div class="page-kpi-val blue">€340K</div>
+          <div class="page-kpi-label">Investor soft circle</div>
+        </div>
+        <div class="page-kpi">
+          <div class="page-kpi-val">2</div>
+          <div class="page-kpi-label">Active covenants</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUB NAV -->
+    <div class="sub-nav">
+      <div class="sub-tab active" onclick="switchTab('overview')">Overview</div>
+      <div class="sub-tab" onclick="switchTab('portfolio-debt')">Portfolio Debt</div>
+      <div class="sub-tab" onclick="switchTab('deal-pipeline')">Deal Pipeline</div>
+    </div>
+
+    <!-- OVERVIEW TAB -->
+    <div class="tab-view active" id="tab-overview">
+      <div class="overview-grid">
+        <div class="overview-card">
+          <div class="overview-label">Total Debt</div>
+          <div class="overview-value">€600K</div>
+          <div class="overview-sub">Across 1 active company</div>
+        </div>
+        <div class="overview-card">
+          <div class="overview-label">Avg. Korkoprosentti</div>
+          <div class="overview-value">4.25%</div>
+          <div class="overview-sub">Nordea, variable</div>
+        </div>
+        <div class="overview-card">
+          <div class="overview-label">Covenant Status</div>
+          <div class="overview-value green">All Pass</div>
+          <div class="overview-sub">2 of 2 covenants healthy</div>
+        </div>
+        <div class="overview-card">
+          <div class="overview-label">Investor Pipeline</div>
+          <div class="overview-value blue">€340K</div>
+          <div class="overview-sub">12 warm, 3 active</div>
+        </div>
+      </div>
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px;">
+        <div class="sec-label" style="margin-bottom: 14px;">Quick status</div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--border);">
+            <span style="font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; background: rgba(46,204,113,0.1); color: #2ecc71; width: 80px; text-align: center;">Pass</span>
+            <span style="flex: 1; font-size: 13px; color: var(--text);">Melers — all covenants within thresholds</span>
+            <span style="font-size: 11px; color: var(--muted);">Next report: Dec 2026</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--border);">
+            <span style="font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; background: rgba(243,156,18,0.12); color: #f39c12; width: 80px; text-align: center;">Pending</span>
+            <span style="flex: 1; font-size: 13px; color: var(--text);">Auran Pesupojat — financing structure not yet confirmed</span>
+            <span style="font-size: 11px; color: var(--muted);">DD ongoing</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px; padding: 11px 0;">
+            <span style="font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; background: rgba(93,173,226,0.12); color: #5dade2; width: 80px; text-align: center;">Active</span>
+            <span style="flex: 1; font-size: 13px; color: var(--text);">LP fundraising round — €340K soft circle, target €500K</span>
+            <span style="font-size: 11px; color: var(--muted);">3 active investors</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PORTFOLIO DEBT TAB -->
+    <div class="tab-view" id="tab-portfolio-debt">
+      <div class="debt-grid">
+
+        <!-- MELERS OY -->
+        <div class="debt-card">
+          <div class="debt-card-header">
+            <div class="debt-company">
+              <div class="debt-company-name">Melers Oy</div>
+              <div class="debt-lender">Nordea Bank · Acquisition loan · Taken 2024</div>
+            </div>
+            <div class="debt-status active">Active</div>
+          </div>
+
+          <div class="debt-metrics">
+            <div class="metric-cell">
+              <div class="metric-label">Loan Amount</div>
+              <div class="metric-value">€280K</div>
+              <div class="metric-sub">Original principal</div>
+            </div>
+            <div class="metric-cell">
+              <div class="metric-label">Remaining</div>
+              <div class="metric-value blue">€224K</div>
+              <div class="metric-sub">~3 years paid</div>
+            </div>
+            <div class="metric-cell">
+              <div class="metric-label">Korkoprosentti</div>
+              <div class="metric-value">4.25%</div>
+              <div class="metric-sub">Variable, Euribor +2.5</div>
+            </div>
+            <div class="metric-cell">
+              <div class="metric-label">Term</div>
+              <div class="metric-value">7 yr</div>
+              <div class="metric-sub">4 yr remaining</div>
+            </div>
+            <div class="metric-cell">
+              <div class="metric-label">Annual Revenue</div>
+              <div class="metric-value green">€348K</div>
+              <div class="metric-sub">DSCR 2.1×</div>
+            </div>
+          </div>
+
+          <div class="debt-card-bottom">
+            <div>
+              <div class="sec-label">Covenants</div>
+              <div class="covenant-list">
+                <div class="covenant-row">
+                  <div class="covenant-name">EBITDA margin</div>
+                  <div class="covenant-threshold">Min ≥ 15%</div>
+                  <div class="covenant-current pass">23%</div>
+                  <div class="covenant-badge pass">Pass</div>
+                </div>
+                <div class="covenant-row">
+                  <div class="covenant-name">Equity ratio</div>
+                  <div class="covenant-threshold">Min ≥ 20%</div>
+                  <div class="covenant-current pass">27%</div>
+                  <div class="covenant-badge pass">Pass</div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="sec-label">Assets & Collateral</div>
+              <div class="asset-list">
+                <div class="asset-row">
+                  <div class="asset-info">
+                    <div class="asset-name">Business assets (yrityskiinnitys)</div>
+                    <div class="asset-type">Inventory, receivables, equipment</div>
+                  </div>
+                  <div class="asset-right">
+                    <div class="asset-value">€200K</div>
+                    <div class="asset-tag pledged">Pledged</div>
+                  </div>
+                </div>
+                <div class="asset-row">
+                  <div class="asset-info">
+                    <div class="asset-name">Pesulalaitteet (washing equipment)</div>
+                    <div class="asset-type">Industrial machines, 2019–2022</div>
+                  </div>
+                  <div class="asset-right">
+                    <div class="asset-value">€85K</div>
+                    <div class="asset-tag free">Free</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AURAN PESUPOJAT -->
+        <div class="debt-card">
+          <div class="debt-card-header">
+            <div class="debt-company">
+              <div class="debt-company-name">Auran Pesupojat Oy</div>
+              <div class="debt-lender">Financing structure TBD · LOI signed May 2026</div>
+            </div>
+            <div class="debt-status pending">Pre-Acq</div>
+          </div>
+          <div class="pre-acq-body">
+            <div class="pre-acq-icon">⏳</div>
+            <div class="pre-acq-text">
+              <strong>Due diligence in progress.</strong> Financing structure not yet confirmed. Bank negotiations and asset assessment pending DD2 completion. Return here once deal terms are finalised to set up debt tracking.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DEAL PIPELINE TAB -->
+    <div class="tab-view" id="tab-deal-pipeline">
+      <div class="pipeline-grid">
+        <div class="pipeline-card">
+          <div class="pipeline-card-title">Investor Pipeline</div>
+          <div class="stat-grid" style="margin-bottom: 16px;">
+            <div class="stat-row">
+              <div class="stat-label">Soft circle</div>
+              <div class="stat-value blue">€340K</div>
+            </div>
+            <div class="stat-row">
+              <div class="stat-label">Target raise</div>
+              <div class="stat-value">€500K</div>
+            </div>
+            <div class="stat-row">
+              <div class="stat-label">Total committed</div>
+              <div class="stat-value green">€0</div>
+            </div>
+            <div class="stat-row">
+              <div class="stat-label">Contacts in pipeline</div>
+              <div class="stat-value">436</div>
+            </div>
+          </div>
+          <div class="sec-label">Active Investors</div>
+          <div class="investor-list">
+            <div class="investor-item">
+              <div class="investor-name">Investor A</div>
+              <div class="investor-right">
+                <div class="investor-amount">€100K</div>
+                <div class="investor-badge active">Active</div>
+              </div>
+            </div>
+            <div class="investor-item">
+              <div class="investor-name">Investor B</div>
+              <div class="investor-right">
+                <div class="investor-amount">€150K</div>
+                <div class="investor-badge warm">Warm</div>
+              </div>
+            </div>
+            <div class="investor-item">
+              <div class="investor-name">Investor C</div>
+              <div class="investor-right">
+                <div class="investor-amount">€90K</div>
+                <div class="investor-badge warm">Warm</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pipeline-card">
+          <div class="pipeline-card-title">Bank Relationships</div>
+          <div class="stat-grid" style="margin-bottom: 16px;">
+            <div class="stat-row">
+              <div class="stat-label">Primary lender</div>
+              <div class="stat-value">Nordea</div>
+            </div>
+            <div class="stat-row">
+              <div class="stat-label">Available facility</div>
+              <div class="stat-value blue">TBD</div>
+            </div>
+            <div class="stat-row">
+              <div class="stat-label">Next bank call</div>
+              <div class="stat-value">Tomorrow</div>
+            </div>
+          </div>
+          <div class="sec-label">Upcoming</div>
+          <div class="investor-list">
+            <div class="investor-item">
+              <div class="investor-name">Nordea — facility review</div>
+              <div class="investor-right">
+                <div class="investor-badge warm">Scheduled</div>
+              </div>
+            </div>
+            <div class="investor-item">
+              <div class="investor-name">Finnvera — guarantee inquiry</div>
+              <div class="investor-right">
+                <div class="investor-badge cold">Pending</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    function switchTab(name) {
+      document.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-view').forEach(v => v.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('tab-' + name).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
