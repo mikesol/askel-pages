@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Melers Pesulapalvelut — Kotiovelle. Puhtaana.</title>
+  <meta name="description" content="Melers Pesulapalvelut tarjoaa laadukkaat pesu- ja tekstiilihuoltopalvelut kotiin ja yrityksille. Turussa vuodesta 1967." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            merriweather: ['Merriweather', 'Georgia', 'serif'],
+            sora: ['Sora', 'system-ui', 'sans-serif'],
+            inter: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            navy: '#14375A',
+            coral: '#FF8F7A',
+            'coral-hover': '#ff7a63',
+            'light-gray': '#F1F2F4',
+            'warm-beige': '#E9E4DF',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@300;400;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-white text-navy antialiased">
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
+    <div class="max-w-6xl mx-auto px-6 md:px-8 h-16 flex items-center justify-between">
+      <a href="https://melers.fi" target="_blank" rel="noopener">
+        <img src="https://melers.askelventures.com/logo-nav.webp" alt="Melers Pesulapalvelut" class="h-9 w-auto" />
+      </a>
+      <div class="flex items-center gap-5">
+        <a href="tel:+35822331718" class="hidden sm:block font-sora font-semibold text-sm text-navy hover:text-coral transition-colors">
+          +358 22 331718
+        </a>
+        <a href="https://melers.fi" target="_blank" rel="noopener"
+           class="bg-coral text-white font-sora font-bold text-sm px-5 py-2.5 rounded-full hover:bg-coral-hover transition-colors">
+          Siirry sivustolle →
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="etusivu" class="flex min-h-screen pt-16 bg-white overflow-hidden">
+    <!-- Copy panel -->
+    <div class="flex flex-col justify-center w-full md:w-[44%] shrink-0 px-8 md:px-16 py-20">
+      <p class="font-sora text-xs font-bold tracking-widest text-coral uppercase mb-5">
+        Luotettavaa laatua jo vuodesta 1967
+      </p>
+      <h1 class="font-merriweather font-normal text-navy text-5xl md:text-[3.75rem] leading-[1.15] mb-6">
+        Kotiovelle.<br />Puhtaana.
+      </h1>
+      <p class="font-inter text-navy/65 text-base leading-relaxed mb-10 max-w-sm">
+        Melers Pesulapalvelut tarjoaa laadukkaat pesu- ja
+        tekstiilihuoltopalvelut kotiin ja yrityksille.
+        Tervetuloa myymälään tai tilaa kuljetus.
+      </p>
+      <div class="flex flex-wrap items-center gap-5">
+        <a href="https://melers.fi" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2 bg-coral text-white font-sora font-bold px-7 py-3.5 rounded-full hover:bg-coral-hover transition-colors text-base">
+          Tilaa kuljetus →
+        </a>
+        <a href="#palvelut"
+           class="inline-flex items-center gap-2 text-navy font-sora font-bold text-base hover:text-coral transition-colors">
+          <span class="w-9 h-9 rounded-full border border-navy/20 flex items-center justify-center text-sm shrink-0">▶</span>
+          Näin se toimii
+        </a>
+      </div>
+    </div>
+    <!-- Hero image -->
+    <div class="hidden md:block flex-1 relative">
+      <img src="https://melers.askelventures.com/hero-new.webp"
+           alt="Melers Pesulapalvelut — puhtaita tekstiilejä"
+           class="absolute inset-0 w-full h-full object-cover" />
+      <div class="absolute inset-0" style="background: linear-gradient(to right, #ffffff 0%, #ffffff 5%, transparent 40%)"></div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="bg-white border-t border-light-gray">
+    <div class="max-w-6xl mx-auto px-6 md:px-8 py-10 md:py-12 grid grid-cols-2 md:grid-cols-4 gap-y-8 md:gap-y-0">
+
+      <div class="flex items-start gap-3 md:gap-4 pr-4 md:pr-6">
+        <div class="w-10 h-10 rounded-full bg-light-gray flex items-center justify-center shrink-0 mt-0.5 text-navy">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <h3 class="font-sora font-bold text-navy text-sm mb-1.5">Vuodesta 1967</h3>
+          <p class="font-inter text-navy/55 text-xs leading-relaxed">Lähes 60 vuotta pesulakokemusta Turussa.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-3 md:gap-4 px-4 md:px-6 border-l border-warm-beige">
+        <div class="w-10 h-10 rounded-full bg-light-gray flex items-center justify-center shrink-0 mt-0.5 text-navy">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <h3 class="font-sora font-bold text-navy text-sm mb-1.5">Paikallinen palveluntarjoaja</h3>
+          <p class="font-inter text-navy/55 text-xs leading-relaxed">Turku, Raisio, Naantali ja lähikunnat.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-3 md:gap-4 pl-0 md:px-6 md:border-l border-warm-beige">
+        <div class="w-10 h-10 rounded-full bg-light-gray flex items-center justify-center shrink-0 mt-0.5 text-navy">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l.98-.98a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.92 17z"/></svg>
+        </div>
+        <div>
+          <h3 class="font-sora font-bold text-navy text-sm mb-1.5">Aina tavoitettavissa</h3>
+          <p class="font-inter text-navy/55 text-xs leading-relaxed">Soita meille:<br /><a href="tel:+35822331718" class="font-bold text-coral hover:underline">+358 22 331718</a></p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-3 md:gap-4 px-4 md:px-6 border-l border-warm-beige">
+        <div class="w-10 h-10 rounded-full bg-light-gray flex items-center justify-center shrink-0 mt-0.5 text-navy">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="m16 8 5 2v5h-5V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div>
+          <h3 class="font-sora font-bold text-navy text-sm mb-1.5">Joustava palvelu</h3>
+          <p class="font-inter text-navy/55 text-xs leading-relaxed">Myymälä Turussa tai nouto kotioveltasi.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="palvelut" class="bg-light-gray py-20">
+    <div class="max-w-6xl mx-auto px-6">
+
+      <div class="grid md:grid-cols-2 gap-8 items-center mb-12">
+        <div>
+          <p class="font-sora text-xs font-bold tracking-widest text-coral uppercase mb-3">Palvelumme</p>
+          <h2 class="font-merriweather font-normal text-navy text-4xl">
+            Kaikki tekstiilihuolto<br />yhdestä paikasta
+          </h2>
+        </div>
+        <div class="rounded-3xl overflow-hidden aspect-[4/3]">
+          <img src="https://melers.askelventures.com/photo-towels.webp"
+               alt="Puhtaita tekstiilejä"
+               class="w-full h-full object-cover object-[center_40%]" />
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-4 gap-5">
+
+        <!-- Pyykinpesu -->
+        <div class="rounded-2xl bg-white text-navy p-7 flex flex-col gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#FFE6E2] flex items-center justify-center p-2">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF8F7A" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12a4 4 0 0 1 8 0"/><path d="M12 8v1"/></svg>
+          </div>
+          <h3 class="font-sora font-semibold text-lg text-navy">Pyykinpesu</h3>
+          <p class="font-inter text-sm leading-relaxed text-navy/65">
+            Arjen tekstiileille hellävaraista ja tehokasta pesua. Paidat, lakanat, pyyhkeet, peitot ja matot — kaikki puhtaana kotiovellesi.
+          </p>
+          <a href="https://melers.fi/palvelut" target="_blank" rel="noopener"
+             class="text-sm font-sora font-bold mt-auto text-coral">Lue lisää →</a>
+        </div>
+
+        <!-- Kemiallinen pesu -->
+        <div class="rounded-2xl bg-white text-navy p-7 flex flex-col gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#FFE6E2] flex items-center justify-center p-2">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF8F7A" stroke-width="2"><path d="M9 3h6l1 9H8L9 3z"/><path d="M6.5 12S5 13.5 5 16a7 7 0 0 0 14 0c0-2.5-1.5-4-1.5-4"/></svg>
+          </div>
+          <h3 class="font-sora font-semibold text-lg text-navy">Kemiallinen pesu</h3>
+          <p class="font-inter text-sm leading-relaxed text-navy/65">
+            Puvut, juhlavaatteet, takit ja silkki — herkät vaatteet käsitelty oikein, muoto ja väri säilyvät.
+          </p>
+          <a href="https://melers.fi/palvelut" target="_blank" rel="noopener"
+             class="text-sm font-sora font-bold mt-auto text-coral">Lue lisää →</a>
+        </div>
+
+        <!-- Yrityspalvelut (highlight) -->
+        <div class="rounded-2xl bg-navy text-white p-7 flex flex-col gap-4">
+          <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center p-2">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+          </div>
+          <h3 class="font-sora font-semibold text-lg text-white">Yrityspalvelut</h3>
+          <p class="font-inter text-sm leading-relaxed text-white/75">
+            Luotettavat pesulapalvelut yrityksille ja yhteisöille. Hoivakodit, hotellit ja ravintolat — sujuvasti hoidettu.
+          </p>
+          <a href="https://melers.fi/yrityksille" target="_blank" rel="noopener"
+             class="text-sm font-sora font-bold mt-auto text-coral">Lue lisää →</a>
+        </div>
+
+        <!-- Booking card -->
+        <div class="rounded-2xl bg-coral text-white p-7 flex flex-col justify-between">
+          <div>
+            <h3 class="font-sora font-semibold text-xl mb-3">Varaa pesulapalvelu</h3>
+            <p class="font-inter text-sm text-white/80 leading-relaxed mb-6">
+              Valitse sinulle sopiva aika — me hoidamme loput.
+            </p>
+          </div>
+          <div>
+            <a href="https://melers.fi" target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 bg-white text-coral font-sora font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#FFE6E2] transition-colors">
+              Varaa aika →
+            </a>
+            <p class="mt-3 text-xs text-white/60 font-inter">⏱ Varaus vie vain 2 minuuttia</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Quality promise -->
+      <div class="mt-8 flex items-center justify-center gap-3">
+        <span class="text-coral text-lg">✦</span>
+        <p class="font-inter text-navy/60 text-sm">
+          <span class="font-sora font-bold text-navy">Tahratakuu:</span>
+          Jos vaikea tahra ei lähde, pesemme uudelleen — veloituksetta.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="bg-warm-beige py-20">
+    <div class="max-w-6xl mx-auto px-6">
+
+      <div class="text-center mb-14">
+        <p class="font-sora text-xs font-bold tracking-widest text-coral uppercase mb-3">Asiakkaiden sanoin</p>
+        <h2 class="font-merriweather font-normal text-navy text-4xl">Mitä asiakkaamme sanovat</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <div class="bg-white rounded-2xl p-8 flex flex-col gap-6">
+          <div class="flex gap-1">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF8F7A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF8F7A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF8F7A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF8F7A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF8F7A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="font-inter text-navy/75 text-sm leading-relaxed flex-1">
+            "Vein juhlamekkoni kemialliseen pesuun ennen sisareni häitä. Mekossa oli pieni tahranäkymä kainalon kohdalla josta olin huolissani. Tuli takaisin täysin puhtaana ja viimeistelty huolellisesti. Ei muuhun pesulaan enää."
+          </p>
+          <div class="flex items-center gap-3 pt-2 border-t border-warm-beige">
+            <div class="w-9 h-9 rounded-full bg-[#DDE7F0] flex items-center justify-center font-sora font-bold text-navy text-sm shrink-0">R</div>
+            <div>
+              <p class="font-sora font-bold text-navy text-sm">Reetta S.</p>
+              <p class="font-inter text-navy/50 text-xs">Turku</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 flex flex-col gap-6">
+          <div class="flex gap-1">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF8F7A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF8F7A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF8F7A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF8F7A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF8F7A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="font-inter text-navy/75 text-sm leading-relaxed flex-1">
+            "Matot olivat jo sen verran likaiset etten itse uskaltanut pestä niitä. Soitin Melersille, he neuvoivat miten toimia ja nouto sovittiin samalle viikolle. Matot tulivat takaisin kuin uusina. Hinta oli myös kohtuullinen."
+          </p>
+          <div class="flex items-center gap-3 pt-2 border-t border-warm-beige">
+            <div class="w-9 h-9 rounded-full bg-[#DDE7F0] flex items-center justify-center font-sora font-bold text-navy text-sm shrink-0">P</div>
+            <div>
+              <p class="font-sora font-bold text-navy text-sm">Pekka V.</p>
+              <p class="font-inter text-navy/50 text-xs">Turku</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 flex flex-col gap-6">
+          <div class="flex gap-1">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF8F7A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF8F7A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF8F7A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF8F7A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF8F7A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="font-inter text-navy/75 text-sm leading-relaxed flex-1">
+            "Tilasin noutopalvelun äidilleni joka asuu Raisiossa. Lakanat ja pyyhkeet haetaan kerran kuukaudessa ja tuodaan puhtaina takaisin. Äiti sanoo ettei jaksa enää pestä itse, ja tämä on ollut todella helppo ratkaisu. Henkilökunta on ystävällistä ja aina täsmällisiä."
+          </p>
+          <div class="flex items-center gap-3 pt-2 border-t border-warm-beige">
+            <div class="w-9 h-9 rounded-full bg-[#DDE7F0] flex items-center justify-center font-sora font-bold text-navy text-sm shrink-0">T</div>
+            <div>
+              <p class="font-sora font-bold text-navy text-sm">Tuula H.</p>
+              <p class="font-inter text-navy/50 text-xs">Raisio</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION + PROMO -->
+  <section class="bg-warm-beige py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-8 items-stretch">
+
+        <!-- Google Maps -->
+        <div class="rounded-3xl overflow-hidden min-h-[380px]">
+          <iframe
+            src="https://maps.google.com/maps?q=Kaskenkatu+12,+20700+Turku,+Finland&z=16&output=embed"
+            width="100%"
+            height="100%"
+            style="border:0; min-height:380px"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Melers Pesulapalvelut — Kaskenkatu 12, Turku">
+          </iframe>
+        </div>
+
+        <!-- Promo card -->
+        <div class="bg-navy rounded-3xl p-10 flex flex-col justify-between">
+          <div>
+            <p class="font-sora text-xs font-bold tracking-widest text-coral uppercase mb-4">Tarjous uusille asiakkaille</p>
+            <h2 class="font-merriweather font-normal text-white text-3xl md:text-4xl mb-5">
+              Ensimmäinen nouto ilmaiseksi
+            </h2>
+            <p class="font-inter text-white/70 text-base leading-relaxed">
+              Uusille asiakkaille: ensimmäinen noutokerta veloituksetta. Kokeile kotiinkuljetuspalvelua ilman riskiä.
+            </p>
+          </div>
+          <div class="mt-8">
+            <a href="https://melers.fi" target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 bg-coral text-white font-sora font-bold px-7 py-3.5 rounded-full hover:bg-coral-hover transition-colors text-sm">
+              Tilaa ilmainen nouto →
+            </a>
+            <div class="mt-6 pt-6 border-t border-white/10">
+              <p class="font-sora font-semibold text-white text-sm mb-1">Kaskenkatu 12, Turku</p>
+              <p class="font-inter text-white/50 text-xs">Ma–pe 10–17 · La 10–14</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-navy text-white">
+    <div class="max-w-6xl mx-auto px-6 py-12">
+      <div class="grid md:grid-cols-3 gap-10 mb-10">
+
+        <div>
+          <div class="mb-4">
+            <img src="https://melers.askelventures.com/logo-footer-transparent.webp"
+                 alt="Melers Pesulapalvelut"
+                 class="w-[110px] h-auto" />
+          </div>
+          <p class="font-inter text-white/60 text-base leading-relaxed">
+            Kotiovelle. Puhtaana.<br />Turussa vuodesta 1967.
+          </p>
+        </div>
+
+        <div>
+          <p class="font-sora font-bold text-white/50 text-base uppercase tracking-widest mb-4">Sivut</p>
+          <ul class="flex flex-col gap-2.5">
+            <li><a href="https://melers.fi" target="_blank" rel="noopener" class="font-inter text-white/60 text-base hover:text-white transition-colors">Etusivu</a></li>
+            <li><a href="https://melers.fi/palvelut" target="_blank" rel="noopener" class="font-inter text-white/60 text-base hover:text-white transition-colors">Palvelut</a></li>
+            <li><a href="https://melers.fi/hinnasto" target="_blank" rel="noopener" class="font-inter text-white/60 text-base hover:text-white transition-colors">Hinnasto</a></li>
+            <li><a href="https://melers.fi/yrityksille" target="_blank" rel="noopener" class="font-inter text-white/60 text-base hover:text-white transition-colors">Yrityksille</a></li>
+            <li><a href="https://melers.fi/meista" target="_blank" rel="noopener" class="font-inter text-white/60 text-base hover:text-white transition-colors">Meistä</a></li>
+            <li><a href="https://melers.fi/yhteys" target="_blank" rel="noopener" class="font-inter text-white/60 text-base hover:text-white transition-colors">Ota Yhteyttä</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="font-sora font-bold text-white/50 text-base uppercase tracking-widest mb-4">Yhteystiedot</p>
+          <div class="flex flex-col gap-2.5 font-inter text-white/60 text-base">
+            <p>Kaskenkatu 12, 20700 Turku</p>
+            <p>Ma–pe 10–17 · La 10–14</p>
+            <p class="text-white/40 text-base">Yritysasiakkaat: ma–pe 6–17</p>
+            <a href="tel:+35822331718" class="text-coral hover:text-[#FFE6E2] transition-colors">+358 22 331718</a>
+            <a href="https://melers.fi/yhteys" target="_blank" rel="noopener" class="text-coral hover:text-[#FFE6E2] transition-colors">Ota yhteyttä →</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-3">
+        <p class="font-inter text-white/30 text-base">© 2026 Melers Pesulapalvelut Oy. Kaikki oikeudet pidätetään.</p>
+        <p class="font-inter text-white/20 text-base italic">Kotiovelle. Puhtaana.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
