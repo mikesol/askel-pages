@@ -18,4 +18,5 @@ Published pages for Askel Ventures. Each folder is a site deployed to `<folder-n
 | christa | https://christa.askelventures.com |
 | askel-os | https://askel-os.askelventures.com |
 | bijay | https://bijay.askelventures.com |
+| jussi | https://jussi.askelventures.com |
 | pesulaturku | https://pesulaturku.askelventures.com |
