@@ -1,6 +1,27 @@
 ---
 import Layout from '../layouts/Layout.astro'
 
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "DryCleaningOrLaundry",
+  "name": "Melers Pesulapalvelut",
+  "description": "Laadukkaat pesu- ja tekstiilihuoltopalvelut kotiin ja yrityksille Turussa. Luotettava kumppani vuodesta 1967.",
+  "url": "https://melers.fi",
+  "telephone": "+358223317 18",
+  "image": "https://melers.fi/hero-new.webp",
+  "logo": "https://melers.fi/logo.svg",
+  "foundingDate": "1967",
+  "areaServed": ["Turku", "Raisio", "Naantali"],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Turku",
+    "addressCountry": "FI"
+  },
+  "openingHoursSpecification": [],
+  "sameAs": [],
+  "priceRange": "€€"
+}
+
 const trustItems = [
   {
     icon: '/icons/Artboard_11.svg',
@@ -51,6 +72,7 @@ const year = new Date().getFullYear()
 
 <Layout title="Melers Pesulapalvelut — Kotiovelle. Puhtaana.">
   <link rel="preload" as="image" href="/hero-new.webp" slot="head" />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(localBusinessSchema)} />
 
   <!-- Hero -->
   <section id="etusivu" class="flex min-h-screen pt-16 bg-white overflow-hidden">

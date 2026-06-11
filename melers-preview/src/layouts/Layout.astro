@@ -7,12 +7,16 @@ import ChatWidget from '../components/ChatWidget'
 interface Props {
   title: string
   description?: string
+  ogImage?: string
 }
 
 const {
   title,
-  description = 'Laadukkaat pesu- ja tekstiilihuoltopalvelut kotiin ja yrityksille Turussa. Melers Pesulapalvelut — luotettava kumppani vuodesta 1967.'
+  description = 'Laadukkaat pesu- ja tekstiilihuoltopalvelut kotiin ja yrityksille Turussa. Melers Pesulapalvelut — luotettava kumppani vuodesta 1967.',
+  ogImage = '/hero-new.webp'
 } = Astro.props
+
+const canonicalURL = new URL(Astro.url.pathname, 'https://melers.fi')
 ---
 <!doctype html>
 <html lang="fi">
@@ -21,6 +25,14 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`https://melers.fi${ogImage}`} />
+    <meta property="og:locale" content="fi_FI" />
+    <meta property="og:site_name" content="Melers Pesulapalvelut" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
