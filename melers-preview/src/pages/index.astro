@@ -50,6 +50,7 @@ const year = new Date().getFullYear()
 ---
 
 <Layout title="Melers Pesulapalvelut — Kotiovelle. Puhtaana.">
+  <link rel="preload" as="image" href="/hero-new.webp" slot="head" />
 
   <!-- Hero -->
   <section id="etusivu" class="flex min-h-screen pt-16 bg-white overflow-hidden">
@@ -73,7 +74,7 @@ const year = new Date().getFullYear()
       </div>
     </div>
     <div class="hidden md:block flex-1 relative">
-      <img src="/hero-new.webp" alt="Melers Pesulapalvelut — puhtaita tekstiilejä" class="absolute inset-0 w-full h-full object-cover" />
+      <img src="/hero-new.webp" alt="Melers Pesulapalvelut — puhtaita tekstiilejä" class="absolute inset-0 w-full h-full object-cover" fetchpriority="high" />
       <div class="absolute inset-0" style="background: linear-gradient(to right, #ffffff 0%, #ffffff 5%, transparent 40%)" />
     </div>
   </section>
