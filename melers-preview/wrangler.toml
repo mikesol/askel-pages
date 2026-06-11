@@ -1,0 +1,7 @@
+name = "melers"
+compatibility_date = "2024-09-23"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "melers-bookings"
+database_id = "884b3214-7755-483f-9acb-de419154ed49"

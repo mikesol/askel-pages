@@ -20,3 +20,4 @@ Published pages for Askel Ventures. Each folder is a site deployed to `<folder-n
 | bijay | https://bijay.askelventures.com |
 | jussi | https://jussi.askelventures.com |
 | pesulaturku | https://pesulaturku.askelventures.com |
+| melers-preview | https://melers-preview.askelventures.com |
