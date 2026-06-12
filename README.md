@@ -22,3 +22,4 @@ Published pages for Askel Ventures. Each folder is a site deployed to `<folder-n
 | pesulaturku | https://pesulaturku.askelventures.com |
 | melers-preview | https://melers-preview.askelventures.com |
 | serena | https://serena.askelventures.com |
+| samantha | https://samantha.askelventures.com |
