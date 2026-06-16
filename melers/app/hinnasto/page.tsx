@@ -229,7 +229,7 @@ export default function Hinnasto() {
               <PriceCard title="Arjen vaatteet & työvaatteet">
                 <UnitHeader label="Per kg" />
                 {[
-                  { name: "Vaatekilopesu — vesipestävä käyttövaate", price: "8,30 €/kg", note: "min. 4 kg · sisältää: pesu, silitys ja viikkaus" },
+                  { name: "Vaatekilopesu — vesipestävä käyttövaate", price: "8,30 €/kg", note: "min. 4 kg · sisältää: pesu, kuivaus ja viikkaus" },
                 ].map((item) => <PriceRow key={item.name} name={item.name} price={item.price} note={item.note} />)}
 
                 <UnitHeader label="Per kappale" />

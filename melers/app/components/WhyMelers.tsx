@@ -45,6 +45,7 @@ export default function WhyMelers() {
               <div className="mt-6 pt-6 border-t border-white/10">
                 <p className="font-sora font-semibold text-white text-sm mb-1">Kaskenkatu 12, Turku</p>
                 <p className="font-inter text-white/50 text-xs">Ma–pe 10–17 · La 10–14</p>
+                <p className="font-inter text-[#FFE6E2] text-xs font-semibold">Kesä: la suljettu 1.6.–31.8. · Heinäkuu suljettu.</p>
               </div>
             </div>
           </div>

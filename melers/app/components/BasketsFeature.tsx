@@ -35,6 +35,7 @@ export default function BasketsFeature() {
             <div className="flex flex-col gap-1.5 font-inter text-sm text-[#14375A]/60">
               <p>Kaskenkatu 12, Turku</p>
               <p>Ma–pe 10–17 · La 10–14</p>
+              <p className="text-xs text-[#FF8F7A] font-semibold mt-1">Kesä: la suljettu 1.6.–31.8. · Heinäkuu suljettu.</p>
               <p className="text-xs text-[#14375A]/40 mt-1">Valmis 4–8 päivässä</p>
             </div>
           </div>

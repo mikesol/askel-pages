@@ -45,6 +45,7 @@ export default function Footer() {
             <div className="flex flex-col gap-2.5 font-inter text-white/60 text-sm">
               <p>Kaskenkatu 12, 20700 Turku</p>
               <p>Ma–pe 10–17 · La 10–14</p>
+              <p className="text-[#FFE6E2] text-xs font-semibold">Kesä: lauantait suljettu 1.6.–31.8. · Heinäkuu suljettu kokonaan.</p>
               <p className="text-white/40 text-xs">Yritysasiakkaat: ma–pe 6–17</p>
               <a href="tel:+35822331718" className="text-[#FF8F7A] hover:text-[#FFE6E2] transition-colors">
                 +358 22 331718

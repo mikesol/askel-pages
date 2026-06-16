@@ -151,7 +151,7 @@ export default function Palvelut() {
                 <ul className="flex flex-col gap-4">
                   {[
                     "Liinavaatteet: pesu, mankeli ja viikkaus",
-                    "Käyttövaatteet: pesu, silitys ja viikkaus",
+                    "Käyttövaatteet: pesu, kuivaus ja viikkaus",
                     "Tahratakuu — jos tahra ei lähde, pesemme uudelleen veloituksetta",
                     "Nouto ja toimitus kotiovelle alk. 10,99 € / suunta",
                     "Voit myös tuoda myymälään — Kaskenkatu 12, Turku",
