@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BookingButton from "./BookingButton";
 
 export default function WhyMelers() {
   return (
@@ -36,12 +37,9 @@ export default function WhyMelers() {
             </div>
 
             <div className="mt-8">
-              <Link
-                href="/yhteys"
-                className="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-7 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors text-sm"
-              >
+              <BookingButton className="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-7 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors text-sm">
                 Tilaa ilmainen nouto →
-              </Link>
+              </BookingButton>
               <div className="mt-6 pt-6 border-t border-white/10">
                 <p className="font-sora font-semibold text-white text-sm mb-1">Kaskenkatu 12, Turku</p>
                 <p className="font-inter text-white/50 text-xs">Ma–pe 10–17 · La 10–14</p>

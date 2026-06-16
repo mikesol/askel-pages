@@ -10,14 +10,14 @@ export default function Footer() {
             <div className="mb-4">
               <Image src="/logo-footer-transparent.webp" alt="Melers Pesulapalvelut" width={110} height={110} className="w-[110px] h-auto" />
             </div>
-            <p className="font-inter text-white/60 text-sm leading-relaxed">
+            <p className="font-inter text-white/60 text-base leading-relaxed">
               Kotiovelle. Puhtaana.<br />Turussa vuodesta 1967.
             </p>
           </div>
 
           {/* Links */}
           <div>
-            <p className="font-sora font-bold text-white/50 text-xs uppercase tracking-widest mb-4">Sivut</p>
+            <p className="font-sora font-bold text-white/50 text-base uppercase tracking-widest mb-4">Sivut</p>
             <ul className="flex flex-col gap-2.5">
               {[
                 { label: "Etusivu", href: "/" },
@@ -30,7 +30,7 @@ export default function Footer() {
                 <li key={l.label}>
                   <a
                     href={l.href}
-                    className="font-inter text-white/60 text-sm hover:text-white transition-colors"
+                    className="font-inter text-white/60 text-base hover:text-white transition-colors"
                   >
                     {l.label}
                   </a>
@@ -41,8 +41,8 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <p className="font-sora font-bold text-white/50 text-xs uppercase tracking-widest mb-4">Yhteystiedot</p>
-            <div className="flex flex-col gap-2.5 font-inter text-white/60 text-sm">
+            <p className="font-sora font-bold text-white/50 text-base uppercase tracking-widest mb-4">Yhteystiedot</p>
+            <div className="flex flex-col gap-2.5 font-inter text-white/60 text-base">
               <p>Kaskenkatu 12, 20700 Turku</p>
               <p>Ma–pe 10–17 · La 10–14</p>
               <p className="text-[#FFE6E2] text-xs font-semibold">Kesä: lauantait suljettu 1.6.–31.8. · Heinäkuu suljettu kokonaan.</p>
@@ -58,10 +58,10 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-3">
-          <p className="font-inter text-white/30 text-xs">
+          <p className="font-inter text-white/30 text-base">
             © {new Date().getFullYear()} Melers Pesulapalvelut Oy. Kaikki oikeudet pidätetään.
           </p>
-          <p className="font-inter text-white/20 text-xs italic">
+          <p className="font-inter text-white/20 text-base italic">
             Kotiovelle. Puhtaana.
           </p>
         </div>

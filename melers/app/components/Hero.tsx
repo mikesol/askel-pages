@@ -9,14 +9,14 @@ export default function Hero() {
       {/* Left: copy panel */}
       <div className="flex flex-col justify-center w-full md:w-[44%] shrink-0 px-8 md:px-16 py-20">
         <p className="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-5">
-          Luotettavaa laatua jo vuodesta 1957
+          Luotettavaa laatua jo vuodesta 1967
         </p>
         <h1 className="font-merriweather font-normal text-[#14375A] text-5xl md:text-[3.75rem] leading-[1.15] mb-6">
           Kotiovelle.<br />Puhtaana.
         </h1>
         <p className="font-inter text-[#14375A]/65 text-base leading-relaxed mb-10 max-w-sm">
           Melers Pesulapalvelut tarjoaa laadukkaat pesu- ja
-          tekstiilihuoltopalvelut kotiin ja yrityksille.
+          tekstiilihuoltopalvelut kotiin ja yrityksille. Tervetuloa myymälään tai tilaa kuljetus.
         </p>
         <div className="flex flex-wrap items-center gap-5">
           <button

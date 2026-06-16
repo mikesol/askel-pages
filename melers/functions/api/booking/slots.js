@@ -1,53 +1,53 @@
-// ~/askel-pages/melers/functions/api/booking/slots.js
+import { getCalendarEvents, eventsForDate, blockCapacity } from './gcal.js';
 
-const FI_DAYS = { 2: 'Tiistai', 5: 'Perjantai' };
+const FI_DAYS   = { 0:'Sunnuntai', 1:'Maanantai', 2:'Tiistai', 3:'Keskiviikko', 4:'Torstai', 5:'Perjantai', 6:'Lauantai' };
+const FI_PERIOD = { morning: 'aamupäivä', afternoon: 'iltapäivä' };
 
-function getNextSlotDates(n = 8) {
-  const slots = [];
-  const d = new Date();
-  // Use Helsinki time offset (UTC+2 or UTC+3) — approximate with UTC+2
-  d.setTime(d.getTime() + 2 * 60 * 60 * 1000);
-  d.setDate(d.getDate() + 1); // start from tomorrow
-  while (slots.length < n) {
+function helsinkiToday() {
+  return new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Helsinki' }); // "YYYY-MM-DD"
+}
+
+// Next N Tue/Fri dates from tomorrow (Helsinki).
+function deliveryDates(n = 60) {
+  const today = helsinkiToday();
+  const dates = [];
+  const d = new Date(today + 'T12:00:00Z');
+  d.setUTCDate(d.getUTCDate() + 1);
+  while (dates.length < n) {
     const day = d.getUTCDay();
-    if (day === 2 || day === 5) {
-      const yyyy = d.getUTCFullYear();
-      const mm = String(d.getUTCMonth() + 1).padStart(2, '0');
-      const dd = String(d.getUTCDate()).padStart(2, '0');
-      slots.push({ date: `${yyyy}-${mm}-${dd}`, fi: FI_DAYS[day] });
-    }
-    d.setDate(d.getDate() + 1);
+    if (day === 2 || day === 5) dates.push({ date: d.toISOString().slice(0, 10), day });
+    d.setUTCDate(d.getUTCDate() + 1);
   }
-  return slots;
+  return dates;
 }
 
 export async function onRequestGet(context) {
   const { env } = context;
 
-  const slotDates = getNextSlotDates(8);
-  const dateList = slotDates.map(s => `'${s.date}'`).join(',');
+  const candidates = deliveryDates(8); // ~4 weeks / 1 month of Tue+Fri
+  const first = candidates[0].date;
+  const last  = candidates[candidates.length - 1].date;
 
-  const rows = await env.DB.prepare(
-    `SELECT slot_date, COUNT(*) as count FROM bookings WHERE slot_date IN (${dateList}) GROUP BY slot_date`
-  ).all();
-
-  const countMap = {};
-  for (const row of rows.results) {
-    countMap[row.slot_date] = row.count;
+  let rawEvents = [];
+  try {
+    rawEvents = await getCalendarEvents(env, `${first}T00:00:00Z`, `${last}T21:00:00Z`);
+  } catch (err) {
+    console.error('gcal fetch failed:', err.message);
   }
 
-  const slots = slotDates.map(s => ({
-    date: s.date,
-    fi: s.fi,
-    count: countMap[s.date] || 0,
-  }));
+  const slots = [];
+  for (const { date, day } of candidates) {
+    const dayEvents = eventsForDate(rawEvents, date);
+    for (const period of ['morning', 'afternoon']) {
+      if (blockCapacity(period, dayEvents) > 0) {
+        slots.push({ date, period, fi: FI_DAYS[day], fiPeriod: FI_PERIOD[period] });
+      }
+    }
+  }
 
   return new Response(JSON.stringify({ slots }), {
     status: 200,
-    headers: {
-      'Content-Type': 'application/json',
-      'Cache-Control': 'no-store',
-    },
+    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
   });
 }
 

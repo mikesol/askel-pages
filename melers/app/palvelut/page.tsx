@@ -2,6 +2,7 @@ import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import Link from "next/link";
 import Image from "next/image";
+import BookingButton from "../components/BookingButton";
 
 export const metadata = {
   title: "Palvelut — Melers Pesulapalvelut",
@@ -105,7 +106,7 @@ export default function Palvelut() {
                 Paidat, lakanat, pyyhkeet, peitot, matot — kaikki samalla tilauksella. Noudamme, pesemme ammattimaisesti ja toimitamme takaisin puhtaana. Hinnoittelu kilon mukaan, minimitilaus 4 kg.
               </p>
 
-              <div className="flex gap-6 mb-8 p-4 rounded-2xl bg-[#F1F2F4]">
+              <div className="flex flex-wrap gap-6 mb-8 p-4 rounded-2xl bg-[#F1F2F4]">
                 <div className="text-center">
                   <p className="font-sora font-bold text-xs uppercase tracking-widest mb-1 text-[#14375A]/40">Toimitusaika</p>
                   <p className="font-sora font-bold text-sm text-[#14375A]">4–8 päivässä</p>
@@ -122,18 +123,17 @@ export default function Palvelut() {
                 </div>
               </div>
 
-              <Link
-                href="/yhteys"
-                className="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-7 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors text-sm"
-              >
-                Tilaa nouto →
-              </Link>
-              <Link
-                href="/hinnasto#vesipesu"
-                className="inline-flex items-center gap-2 ml-4 text-[#14375A]/60 font-sora font-bold text-sm hover:text-[#14375A] transition-colors"
-              >
-                Katso hinnat →
-              </Link>
+              <div className="flex flex-wrap gap-3 items-center">
+                <BookingButton className="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-7 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors text-sm">
+                  Tilaa nouto →
+                </BookingButton>
+                <Link
+                  href="/hinnasto#vesipesu"
+                  className="inline-flex items-center gap-2 text-[#14375A]/60 font-sora font-bold text-sm hover:text-[#14375A] transition-colors"
+                >
+                  Katso hinnat →
+                </Link>
+              </div>
             </div>
 
             <div className="rounded-3xl overflow-hidden bg-[#F1F2F4]">
@@ -179,7 +179,7 @@ export default function Palvelut() {
                 Puvut, juhlavaatteet, takit ja silkki — herkät tekstiilit puhdistetaan kemiallisesti ilman vettä. Muoto ja väri säilyvät, materiaalin rakenne pysyy ehjänä. Hinnoittelu kappaleittain.
               </p>
 
-              <div className="flex gap-6 mb-8 p-4 rounded-2xl bg-white">
+              <div className="flex flex-wrap gap-6 mb-8 p-4 rounded-2xl bg-white">
                 <div className="text-center">
                   <p className="font-sora font-bold text-xs uppercase tracking-widest mb-1 text-[#14375A]/40">Toimitusaika</p>
                   <p className="font-sora font-bold text-sm text-[#14375A]">4–8 päivässä</p>
@@ -254,7 +254,7 @@ export default function Palvelut() {
                 ))}
               </div>
 
-              <div className="flex gap-6 mb-8 p-4 rounded-2xl bg-white/60">
+              <div className="flex flex-wrap gap-6 mb-8 p-4 rounded-2xl bg-white/60">
                 <div className="text-center">
                   <p className="font-sora font-bold text-xs uppercase tracking-widest mb-1 text-[#14375A]/40">Toimitusaika</p>
                   <p className="font-sora font-bold text-sm text-[#14375A]">Sovitun mukaan</p>

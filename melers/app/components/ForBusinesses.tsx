@@ -300,8 +300,8 @@ export default function ForBusinesses() {
                     </p>
                   </div>
                 </div>
-                <a href="tel:+123456789" className="font-sora font-bold text-[#14375A] text-2xl hover:text-[#FF8F7A] transition-colors">
-                  +123456789
+                <a href="tel:0222321300" className="font-sora font-bold text-[#14375A] text-2xl hover:text-[#FF8F7A] transition-colors">
+                  02 2321300
                 </a>
                 <a
                   href="#yhteys"
@@ -317,7 +317,7 @@ export default function ForBusinesses() {
                   <p className="font-inter text-[#14375A]/60 text-sm">Valitse sinulle sopiva aika.</p>
                 </div>
                 <iframe
-                  src="https://calendar.app.google/d9QWgxLT7vrYU8ar6"
+                  src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ14fXOqowBDfPHNey_5OQgSrmRjQjYI84HGqepJbs9BCIpRU9rp9u7PZ50LSc3TnnHgUshxJJQD?gv=true"
                   style={{width: "100%", height: "420px", border: "none"}}
                   title="Varaa tapaaminen"
                 />
@@ -421,7 +421,7 @@ export default function ForBusinesses() {
                 <p className="font-inter text-[#14375A]/60 text-sm">Valitse sinulle sopiva aika suoraan kalenterista.</p>
               </div>
               <iframe
-                src="https://calendar.app.google/d9QWgxLT7vrYU8ar6"
+                src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ14fXOqowBDfPHNey_5OQgSrmRjQjYI84HGqepJbs9BCIpRU9rp9u7PZ50LSc3TnnHgUshxJJQD?gv=true"
                 style={{width: "100%", height: "500px", border: "none"}}
                 title="Varaa tapaaminen"
               />

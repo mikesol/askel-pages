@@ -1,4 +1,5 @@
 import Image from "next/image";
+import BookingButton from "./BookingButton";
 
 const services = [
   {
@@ -96,12 +97,9 @@ export default function Services() {
               </p>
             </div>
             <div>
-              <a
-                href="#yhteys"
-                className="inline-flex items-center gap-2 bg-white text-[#FF8F7A] font-sora font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#FFE6E2] transition-colors"
-              >
+              <BookingButton className="inline-flex items-center gap-2 bg-white text-[#FF8F7A] font-sora font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#FFE6E2] transition-colors">
                 Varaa aika →
-              </a>
+              </BookingButton>
               <p className="mt-3 text-xs text-white/60 font-inter">
                 ⏱ Varaus vie vain 2 minuuttia
               </p>

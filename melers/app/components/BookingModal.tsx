@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 
 interface Slot {
   date: string;
+  period: string;
   fi: string;
+  fiPeriod: string;
 }
 
 interface BookingModalProps {
@@ -13,16 +15,19 @@ interface BookingModalProps {
 
 function formatDate(dateStr: string) {
   const d = new Date(dateStr + "T12:00:00Z");
-  return `${d.getUTCDate()}.${d.getUTCMonth() + 1}.${d.getUTCFullYear()}`;
+  return `${d.getUTCDate()}.${d.getUTCMonth() + 1}.`;
 }
 
 type Step = "slots" | "form" | "success" | "error";
+
+const PAGE_SIZE = 8; // 4 cols × 2 rows desktop, 2 cols × 4 rows mobile
 
 export default function BookingModal({ open, onClose }: BookingModalProps) {
   const [slots, setSlots] = useState<Slot[]>([]);
   const [slotsLoaded, setSlotsLoaded] = useState(false);
   const [slotsLoading, setSlotsLoading] = useState(false);
   const [slotsError, setSlotsError] = useState(false);
+  const [page, setPage] = useState(0);
   const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
   const [step, setStep] = useState<Step>("slots");
 
@@ -64,6 +69,7 @@ export default function BookingModal({ open, onClose }: BookingModalProps) {
   function reset() {
     setSelectedSlot(null);
     setStep("slots");
+    setPage(0);
     setNimi(""); setOsoite(""); setPuhelin(""); setEmail(""); setLisatiedot("");
     setFormError("");
     setSubmitting(false);
@@ -87,6 +93,7 @@ export default function BookingModal({ open, onClose }: BookingModalProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           slot_date: selectedSlot!.date,
+          slot_period: selectedSlot!.period,
           nimi, osoite, puhelin, email, lisatiedot,
         }),
       });
@@ -101,6 +108,10 @@ export default function BookingModal({ open, onClose }: BookingModalProps) {
       setSubmitting(false);
     }
   }
+
+  const totalPages = Math.ceil(slots.length / PAGE_SIZE);
+  const pageSlots = slots.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
+  const periodTime = selectedSlot?.period === "morning" ? "klo 7–12" : "klo 12–16";
 
   if (!open) return null;
 
@@ -127,10 +138,10 @@ export default function BookingModal({ open, onClose }: BookingModalProps) {
             Varaa nouto
           </h2>
           <p className="font-inter text-[#14375A]/65 text-[15px] mb-7">
-            Nouto tiistaisin tai perjantaisin klo 9–15. Valitse sinulle sopiva päivä.
+            Valitse sinulle sopiva päivä ja aika.
           </p>
 
-          {/* Slot selection */}
+          {/* Slot grid */}
           {slotsError ? (
             <p className="font-inter text-red-500 text-sm">
               Ei saatavilla. Soita: +358 22 331718
@@ -138,21 +149,48 @@ export default function BookingModal({ open, onClose }: BookingModalProps) {
           ) : slotsLoading ? (
             <p className="font-inter text-[#999] text-sm">Ladataan...</p>
           ) : (
-            <div className="flex flex-wrap gap-2.5 mb-7">
-              {slots.map((slot) => (
-                <button
-                  key={slot.date}
-                  onClick={() => { setSelectedSlot(slot); setStep("form"); }}
-                  className={`border-2 rounded-2xl px-5 py-3.5 font-sora text-left min-w-[130px] transition-colors ${
-                    selectedSlot?.date === slot.date
-                      ? "border-[#FF8F7A] bg-[#FFF5F3]"
-                      : "border-[#E9E4DF] bg-white hover:border-[#FF8F7A]"
-                  }`}
-                >
-                  <div className="font-bold text-[#14375A] text-sm">{slot.fi}</div>
-                  <div className="text-[#14375A]/70 text-[13px] mt-0.5">{formatDate(slot.date)}</div>
-                </button>
-              ))}
+            <div className="mb-7">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-4">
+                {pageSlots.map((slot) => {
+                  const key = `${slot.date}-${slot.period}`;
+                  const isSelected = selectedSlot?.date === slot.date && selectedSlot?.period === slot.period;
+                  return (
+                    <button
+                      key={key}
+                      onClick={() => { setSelectedSlot(slot); setStep("form"); }}
+                      className={`border-2 rounded-2xl px-4 py-3 font-sora text-left transition-colors ${
+                        isSelected
+                          ? "border-[#FF8F7A] bg-[#FFF5F3]"
+                          : "border-[#E9E4DF] bg-white hover:border-[#FF8F7A]"
+                      }`}
+                    >
+                      <div className="font-bold text-[#14375A] text-sm leading-snug">{slot.fi} {formatDate(slot.date)}</div>
+                      <div className="text-[#14375A]/60 text-[12px] mt-0.5">{slot.fiPeriod}</div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="flex items-center justify-between">
+                  <button
+                    onClick={() => setPage((p) => Math.max(0, p - 1))}
+                    disabled={page === 0}
+                    className="flex items-center gap-1.5 font-sora font-bold text-sm text-[#14375A] disabled:opacity-30 hover:text-[#FF8F7A] transition-colors disabled:hover:text-[#14375A]"
+                  >
+                    ← Edellinen
+                  </button>
+                  <span className="font-inter text-[#14375A]/40 text-xs">{page + 1} / {totalPages}</span>
+                  <button
+                    onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
+                    disabled={page === totalPages - 1}
+                    className="flex items-center gap-1.5 font-sora font-bold text-sm text-[#14375A] disabled:opacity-30 hover:text-[#FF8F7A] transition-colors disabled:hover:text-[#14375A]"
+                  >
+                    Seuraava →
+                  </button>
+                </div>
+              )}
             </div>
           )}
 
@@ -160,7 +198,7 @@ export default function BookingModal({ open, onClose }: BookingModalProps) {
           {step === "form" && selectedSlot && (
             <div className="bg-[#F1F2F4] rounded-2xl p-7 max-w-[520px]">
               <h3 className="font-sora font-bold text-[#14375A] text-[15px] mb-4">
-                Varaa {selectedSlot.fi} {formatDate(selectedSlot.date)}
+                Varaa {selectedSlot.fi} {formatDate(selectedSlot.date)} — {selectedSlot.fiPeriod}
               </h3>
               <div className="flex flex-col gap-3">
                 <input
@@ -172,7 +210,7 @@ export default function BookingModal({ open, onClose }: BookingModalProps) {
                 />
                 <input
                   type="text"
-                  placeholder="Noutoosoite *"
+                  placeholder="Nouto-osoite *"
                   value={osoite}
                   onChange={(e) => setOsoite(e.target.value)}
                   className="bg-white border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] outline-none focus:border-[#FF8F7A] transition-colors"
@@ -217,7 +255,7 @@ export default function BookingModal({ open, onClose }: BookingModalProps) {
             <div className="bg-[#14375A] text-white rounded-2xl p-8 text-center max-w-[520px]">
               <p className="font-sora font-bold text-xl mb-2">Varaus vahvistettu!</p>
               <p className="font-inter text-sm opacity-80 mb-5">
-                Nouto {selectedSlot.fi.toLowerCase()}na {formatDate(selectedSlot.date)} klo 9–15.<br />
+                Nouto {selectedSlot.fi.toLowerCase()}na {formatDate(selectedSlot.date)} {selectedSlot.fiPeriod} {periodTime}.<br />
                 Vahvistus lähetetty sähköpostiisi.
               </p>
               <button

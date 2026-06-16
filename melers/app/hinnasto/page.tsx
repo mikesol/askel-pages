@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import HinnastoNav from "../components/HinnastoNav";
 import pricing from "../../content/pricing.json";
 import Link from "next/link";
+import BookingButton from "../components/BookingButton";
 
 export const metadata = {
   title: "Hinnasto — Melers Pesulapalvelut",
@@ -161,12 +162,9 @@ export default function Hinnasto() {
                 <div className="shrink-0 text-center">
                   <div className="font-merriweather font-normal text-white text-6xl leading-none mb-1">0 €</div>
                   <p className="font-inter text-white/60 text-xs mb-6">ensimmäinen nouto</p>
-                  <Link
-                    href="/yhteys"
-                    className="inline-block font-sora font-bold text-sm bg-white text-[#FF8F7A] px-7 py-3 rounded-full hover:bg-[#FFE6E2] transition-colors"
-                  >
+                  <BookingButton className="inline-block font-sora font-bold text-sm bg-white text-[#FF8F7A] px-7 py-3 rounded-full hover:bg-[#FFE6E2] transition-colors">
                     Hyödynnä tarjous →
-                  </Link>
+                  </BookingButton>
                 </div>
               </div>
             </div>

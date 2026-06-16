@@ -123,8 +123,8 @@ export default function Yhteys() {
                   <p className="font-inter text-[#14375A]/65 text-sm leading-relaxed mb-3">
                     Soita suoraan tai varaa tapaaminen alla olevasta kalenterista.
                   </p>
-                  <a href="tel:+123456789" className="font-sora font-bold text-[#14375A] text-xl hover:text-[#FF8F7A] transition-colors">
-                    +123456789
+                  <a href="tel:0222321300" className="font-sora font-bold text-[#14375A] text-xl hover:text-[#FF8F7A] transition-colors">
+                    02 2321300
                   </a>
                 </div>
               </div>
@@ -136,8 +136,8 @@ export default function Yhteys() {
                   <p className="font-inter text-[#14375A]/60 text-sm">Valitse sinulle sopiva aika suoraan kalenterista.</p>
                 </div>
                 <iframe
-                  src="https://calendar.app.google/d9QWgxLT7vrYU8ar6"
-                  style={{width: "100%", height: "460px", border: "none"}}
+                  src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ14fXOqowBDfPHNey_5OQgSrmRjQjYI84HGqepJbs9BCIpRU9rp9u7PZ50LSc3TnnHgUshxJJQD?gv=true"
+                  style={{width: "100%", height: "600px", border: "none"}}
                   title="Varaa tapaaminen"
                 />
               </div>
