@@ -218,36 +218,66 @@
     .team-desc { font-size: 13px; color: #aaa; line-height: 1.5; }
 
     /* ── Agenda slide ────────────────────────────── */
-    .agenda-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+    .agenda-wrap {
+      display: flex;
+      flex-direction: column;
       flex: 1;
+      gap: 10px;
+    }
+    .agenda-half-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #333;
+      padding: 2px 0 4px;
+    }
+    .agenda-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
     .agenda-act {
-      border-radius: 6px;
-      padding: 22px 24px;
+      border-radius: 8px;
+      padding: 20px 22px;
       border: 1px solid var(--border);
-    }
-    .agenda-act-title {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
     .agenda-act-time {
-      font-size: 12px;
+      font-size: 13px;
+      font-weight: 600;
       color: var(--muted);
-      margin-bottom: 14px;
+      letter-spacing: 0.04em;
+    }
+    .agenda-act-title {
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
     }
     .agenda-bullets {
-      font-size: 13px;
-      color: #aaa;
+      font-size: 14px;
+      color: #666;
       line-height: 1.7;
       list-style: none;
+      margin-top: 2px;
     }
     .agenda-bullets li::before { content: '· '; }
+    .agenda-divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 2px 0;
+    }
+    .agenda-divider-line { flex: 1; height: 1px; background: var(--border); }
+    .agenda-divider-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #383838;
+      white-space: nowrap;
+    }
 
     /* ── Title slide ─────────────────────────────── */
     .title-slide {
@@ -529,78 +559,64 @@
   <div class="slide" data-section="0">
     <span class="section-badge intro">Session Overview</span>
     <div class="slide-title">Today's agenda</div>
-    <div class="timetable">
+    <div class="agenda-wrap">
 
-      <div class="tt-row tt-break">
-        <div class="tt-time">11:00</div>
-        <div class="tt-content">
-          <div class="tt-label" style="color:#666;">Welcome &amp; introductions</div>
-          <div class="tt-topics">Set context, introductions, confirm agenda</div>
+      <div class="agenda-half-label">Morning · 11:00–13:00</div>
+
+      <div class="agenda-row">
+        <div class="agenda-act" style="background:rgba(212,168,83,0.08); border-color:rgba(212,168,83,0.25);">
+          <div class="agenda-act-time">11:15 – 12:15</div>
+          <div class="agenda-act-title" style="color:var(--act1);">Act I · Case Learnings</div>
+          <ul class="agenda-bullets">
+            <li>Melers Oy — rationale, financials, valuation</li>
+            <li>Post-acquisition development &amp; lessons learned</li>
+            <li>Auran Pesupojat — the add-on thesis</li>
+          </ul>
         </div>
-        <div class="tt-dur">15 min</div>
+        <div class="agenda-act" style="background:rgba(91,143,232,0.08); border-color:rgba(91,143,232,0.25);">
+          <div class="agenda-act-time">12:15 – 13:00</div>
+          <div class="agenda-act-title" style="color:var(--act2);">Act II · Askel as a Platform</div>
+          <ul class="agenda-bullets">
+            <li>Founding team &amp; roles</li>
+            <li>Steve — AI sourcing engine</li>
+            <li>DD &amp; IC process · Holdings &amp; cap table</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="tt-row" style="--act-color: var(--act1);">
-        <div class="tt-time">11:15</div>
-        <div class="tt-content">
-          <div class="tt-label" style="color:var(--act1);">Act I · Case learnings &amp; acquisition pattern</div>
-          <div class="tt-topics">Melers Oy — rationale, financials, valuation logic, post-acquisition development, lessons learned · Auran Pesupojat — plug-in thesis, transition plan, upside</div>
-        </div>
-        <div class="tt-dur">60 min</div>
+      <div class="agenda-divider">
+        <div class="agenda-divider-line"></div>
+        <div class="agenda-divider-label">🍽 Lunch · 13:00 – 14:00</div>
+        <div class="agenda-divider-line"></div>
       </div>
 
-      <div class="tt-row" style="--act-color: var(--act2);">
-        <div class="tt-time">12:15</div>
-        <div class="tt-content">
-          <div class="tt-label" style="color:var(--act2);">Act II · Askel as a platform</div>
-          <div class="tt-topics">Founding team · Steve &amp; the sourcing engine · DD &amp; IC process · Holdings structure &amp; cap table</div>
+      <div class="agenda-half-label">Afternoon · 14:00–16:00</div>
+
+      <div class="agenda-row">
+        <div class="agenda-act" style="background:rgba(76,175,125,0.08); border-color:rgba(76,175,125,0.25);">
+          <div class="agenda-act-time">14:00 – 14:50</div>
+          <div class="agenda-act-title" style="color:var(--act3);">Act III · Capital Model</div>
+          <ul class="agenda-bullets">
+            <li>Seven-year plan &amp; acquisition pace</li>
+            <li>Financing model · Target returns</li>
+            <li>Key assumptions</li>
+          </ul>
         </div>
-        <div class="tt-dur">45 min</div>
+        <div class="agenda-act" style="background:rgba(155,120,224,0.08); border-color:rgba(155,120,224,0.25);">
+          <div class="agenda-act-time">15:05 – 16:00</div>
+          <div class="agenda-act-title" style="color:var(--act4);">Act IV · Sweden &amp; VP Role</div>
+          <ul class="agenda-bullets">
+            <li>Swedish market opportunity</li>
+            <li>Role, time commitment &amp; IC involvement</li>
+            <li>Economics, governance &amp; next steps</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="tt-row tt-break">
-        <div class="tt-time">13:00</div>
-        <div class="tt-content">
-          <div class="tt-label" style="color:#666;">🍽 Lunch</div>
-          <div class="tt-topics">Break</div>
-        </div>
-        <div class="tt-dur">60 min</div>
-      </div>
-
-      <div class="tt-row" style="--act-color: var(--act3);">
-        <div class="tt-time">14:00</div>
-        <div class="tt-content">
-          <div class="tt-label" style="color:var(--act3);">Act III · Capital model &amp; compounding logic</div>
-          <div class="tt-topics">Seven-year plan · Financing model · Target returns · Key assumptions</div>
-        </div>
-        <div class="tt-dur">50 min</div>
-      </div>
-
-      <div class="tt-row tt-break">
-        <div class="tt-time">14:50</div>
-        <div class="tt-content">
-          <div class="tt-label" style="color:#666;">☕ Coffee break</div>
-          <div class="tt-topics">Break</div>
-        </div>
-        <div class="tt-dur">15 min</div>
-      </div>
-
-      <div class="tt-row" style="--act-color: var(--act4);">
-        <div class="tt-time">15:05</div>
-        <div class="tt-content">
-          <div class="tt-label" style="color:var(--act4);">Act IV · Sweden entry &amp; Venture Partner role</div>
-          <div class="tt-topics">Swedish opportunity · Deal champion responsibilities · Time commitment &amp; IC involvement · Economics, governance &amp; carve-outs · Next steps</div>
-        </div>
-        <div class="tt-dur">55 min</div>
-      </div>
-
-      <div class="tt-row tt-break tt-terrace">
-        <div class="tt-time">16:00</div>
-        <div class="tt-content">
-          <div class="tt-label" style="color:#666;">🌿 Terrace &amp; informal close</div>
-          <div class="tt-topics">Open conversation, Q&amp;A, next steps</div>
-        </div>
-        <div class="tt-dur">—</div>
+      <div class="agenda-divider">
+        <div class="agenda-divider-line"></div>
+        <div class="agenda-divider-label">🌿 Terrace &amp; informal close · 16:00</div>
+        <div class="agenda-divider-line"></div>
       </div>
 
     </div>
