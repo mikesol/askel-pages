@@ -23,3 +23,4 @@ Published pages for Askel Ventures. Each folder is a site deployed to `<folder-n
 | melers-preview | https://melers-preview.askelventures.com |
 | serena | https://serena.askelventures.com |
 | samantha | https://samantha.askelventures.com |
+| helsinkimeetupday | https://helsinkimeetupday.askelventures.com |
