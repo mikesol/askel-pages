@@ -466,6 +466,39 @@
       border-top: 1px solid var(--border);
     }
 
+    /* ── Show-live links ─────────────────────────── */
+    .show-live {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .show-live a {
+      font-size: 12px;
+      font-weight: 600;
+      color: #555;
+      text-decoration: none;
+      padding: 5px 11px;
+      border: 1px solid #222;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .show-live a:hover { color: #ccc; border-color: #444; }
+    .show-live-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #333;
+      align-self: center;
+      white-space: nowrap;
+    }
+
     /* ── Timetable ───────────────────────────────── */
     .timetable {
       display: flex;
@@ -749,7 +782,9 @@
             <li>Booking system rebuilt on <strong>modern stack</strong> (Cloudflare Workers + D1 + Google Calendar + Resend)</li>
             <li><strong>Full brand refresh</strong> — Melers.fi, brand kit, vehicle branding, print materials</li>
             <li><strong>New operator recruited</strong> — owner-led → professionally-led management</li>
-            <li>Marketing infrastructure: SMS campaigns, virtual assistant for sales meetings, Wix CRM</li>
+            <li><strong>ConnectTeam installed</strong> — staff scheduling, task tracking, hourly work logging, team communication</li>
+            <li><strong>Video SOPs created</strong> — every founder routine documented on camera before handover</li>
+            <li>Marketing: SMS campaigns, virtual assistant for sales meeting booking, Wix CRM</li>
           </ul>
         </div>
       </div>
@@ -765,8 +800,10 @@
         </div>
       </div>
     </div>
-    <ul class="points">
-    </ul>
+    <div class="show-live">
+      <span class="show-live-label">Show live</span>
+      <a href="https://trello.com/b/01KUlg8H/case-scouting" target="_blank">↗ Trello Case Wall</a>
+    </div>
   </div>
 
   <!-- ═══════════════════════════════════════════════
@@ -964,6 +1001,11 @@
           </ul>
         </div>
       </div>
+    </div>
+    <div class="show-live">
+      <span class="show-live-label">Show live</span>
+      <a href="https://trello.com/b/01KUlg8H/case-scouting" target="_blank">↗ Trello Case Wall</a>
+      <a href="https://playbook.askelventures.com/playbook-dd" target="_blank">↗ DD Checklist</a>
     </div>
   </div>
 
