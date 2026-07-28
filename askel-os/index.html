@@ -304,6 +304,14 @@
       width: 20px; height: 20px; border-radius: 50%; background: var(--red);
       display: flex; align-items: center; justify-content: center; font-size: 9.5px; font-weight: 700; color: white;
     }
+    .record-hint {
+      display: inline-flex; align-items: center; gap: 5px; font-size: 10.5px;
+      color: var(--subtle); margin-top: 2px; cursor: default; user-select: none;
+    }
+    .record-hint .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red-light); opacity: 0.6; }
+    .kanban-card .record-hint { margin-bottom: 7px; }
+    .modal .record-hint { font-size: 12px; margin: -8px 0 16px; }
+
     .add-card-btn, .add-col-btn {
       width: 100%; text-align: left; background: none; border: 1px dashed rgba(255,255,255,0.13);
       color: var(--muted); font-size: 12px; padding: 8px 10px; border-radius: 8px; cursor: pointer;
@@ -643,6 +651,7 @@
           return `
             <div class="kanban-card" onclick="openCard('${c.id}')">
               <div class="kanban-card-title">${escapeHtml(c.title)}</div>
+              <div class="record-hint"><span class="dot"></span> 🎥 Record instructions</div>
               <div class="kanban-card-tags">
                 <span class="kc-tag ${engineTagClass(c.engine)}">${c.engine}</span>
                 <span class="kc-tag goal">${escapeHtml(c.goal || 'No goal')}</span>
@@ -741,6 +750,8 @@
           <div class="modal-field">
             <input type="text" value="${escapeAttr(c.title)}" onchange="updateCard('${c.id}','title',this.value)" style="font-size:16px; font-weight:600; margin-top:0;">
           </div>
+
+          <div class="record-hint">🎥 Record instructions <span class="tag-example" style="margin-left:2px;">Mockup — no recording yet</span></div>
 
           <div class="modal-row">
             <div class="modal-field">
