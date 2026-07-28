@@ -363,6 +363,18 @@
     .owner-option .owner-avatar { margin-left: 0; }
     .owner-check { margin-left: auto; color: var(--green); font-weight: 700; }
 
+    /* ── IC CHAT PANEL ── */
+    .chat-window { display: flex; flex-direction: column; gap: 10px; max-height: 360px; overflow-y: auto; padding-right: 2px; }
+    .chat-msg { max-width: 82%; display: flex; flex-direction: column; }
+    .chat-msg.steve { align-self: flex-start; }
+    .chat-msg.partner { align-self: flex-end; align-items: flex-end; }
+    .chat-msg-from { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
+    .chat-msg-text {
+      font-size: 12.5px; line-height: 1.5; padding: 9px 12px; border-radius: 10px;
+      background: var(--elevated); border: 1px solid var(--border); display: inline-block; text-align: left;
+    }
+    .chat-msg.steve .chat-msg-text { background: rgba(192,57,43,0.10); border-color: rgba(192,57,43,0.22); }
+
     /* ── KANBAN ── */
     .kanban-section { margin-top: 28px; }
     .kanban-board { display: flex; gap: 14px; align-items: flex-start; overflow-x: auto; padding-bottom: 4px; }
@@ -2703,6 +2715,21 @@
       `;
     }
 
+    function renderICChat(lead) {
+      const bubbles = lead.chat.map(m => `
+        <div class="chat-msg ${m.from}">
+          <div class="chat-msg-from">${m.from === 'steve' ? '🦔 Steve' : 'Partner'}</div>
+          <div class="chat-msg-text">${escapeHtml(m.text)}</div>
+        </div>
+      `).join('');
+      return `
+        <div class="card static card-pad" style="margin-top:16px;">
+          <div class="sec-label">💬 Chat with Steve <span class="tag-example">Demo transcript — not a live conversation</span></div>
+          <div class="chat-window">${bubbles}</div>
+        </div>
+      `;
+    }
+
     function renderICTask(leadId) {
       const s = DATA.findStages.find(x => x.key === 'ic');
       const lead = s.leads.find(x => x.id === leadId);
@@ -2732,7 +2759,7 @@
 
         ${renderICKillQuestions(lead)}
 
-        <!-- IC_CHAT_PLACEHOLDER -->
+        ${renderICChat(lead)}
 
         <!-- IC_ACTIONS_PLACEHOLDER -->
 
