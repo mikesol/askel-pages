@@ -431,12 +431,843 @@
           key: "sourcing", name: "Sourcing", count: 44,
           purpose: "Find acquisition targets using broker listings, weak signals, and direct outreach.",
           owner: "Steve / sourcing crons",
-          sample: [
-            "Isännöintitoimisto — Helsinki/Espoo",
-            "Sähköasennusyritys — Turku",
-            "LVIS-urakointiyritys — Varsinais-Suomi",
-            "Kankaanpään Kukka ja Hautaustoimisto Anttila Oy",
-            "IV-yritys Itä-Suomi — 558K osakekauppa"
+          prospects: [
+            {
+              "id": "p1",
+              "name": "Isännöintitoimisto — Helsinki/Espoo (yritysporssi)",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Helsinki + Espoo (pääkaupunkiseutu)",
+              "ytunnus": "Ei tiedossa (broker-gated, anonymisoitu ilmoitus)",
+              "tag": "Strong fit",
+              "source": "Yrityspörssi",
+              "sourceUrl": "https://www.yritysporssi.fi/myytavat/yritykset/kiinteistoala/isannointi-ja-kiinteistohuolto/",
+              "trello": "https://trello.com/c/rxTPo2U9",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "fail" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p2",
+              "name": "Sähköasennusyritys — Turku (firmakauppa FK70094)",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Turku, Varsinais-Suomi",
+              "ytunnus": "Ei tiedossa (broker-gated, anonymisoitu ilmoitus)",
+              "tag": "Strong fit",
+              "source": "Firmakauppa.fi",
+              "sourceUrl": "https://www.firmakauppa.fi/fi/myytavat-yritykset/sahkoasennus-huolto-suunnittelu/varsinais-suomi/myydaan-vakiintunut-sahkoasennusyritys-turussa/70094/",
+              "trello": "https://trello.com/c/EZqW0CX2",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p3",
+              "name": "LVIS-urakointiyritys — Varsinais-Suomi (yrityskaupat #127109)",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Varsinais-Suomi",
+              "ytunnus": "Ei tiedossa (broker-gated, anonymisoitu ilmoitus)",
+              "tag": "Strong fit",
+              "source": "Firmakauppa.fi",
+              "sourceUrl": "https://www.yrityskaupat.net/fi/myytava-yritys/lvi-asennus-huolto-suunnittelu/varsinais-suomi/erikoistunut-hyvatuottoinen-lvis-urakointiyritys-myynnissa-varsinais-suomessa/127109/",
+              "trello": "https://trello.com/c/f6Gsflt3",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "unknown" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p4",
+              "name": "Jauhemaalausyritys Etelä-Suomi #126335",
+              "price": "585 000€",
+              "result": "tuntematon",
+              "location": "Etelä-Suomi (tarkka sijainti anon.)",
+              "ytunnus": "Ei tiedossa — tarvitaan välittäjältä",
+              "tag": "Strong fit",
+              "source": "Yrityskaupat.net",
+              "sourceUrl": "https://trello.com/c/iNLOezSk",
+              "trello": "https://trello.com/c/iNLOezSk",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p5",
+              "name": "Kankaanpään Kukka ja Hautaustoimisto Anttila Oy",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Kankaanpää, Satakunta, Länsi-Suomi",
+              "ytunnus": "0133438-7",
+              "tag": "Strong fit",
+              "source": "Yrityspörssi",
+              "sourceUrl": "https://www.asiakastieto.fi/yritykset/fi/kankaanpaan-kukka-ja-hautaustoimisto-anttila-oy/01334387/rekisteritiedot",
+              "trello": "https://trello.com/c/OEqTGSmp",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "pass" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p6",
+              "name": "Höyrymyynnin erikoisosaaja Turku — 320K (yrityskaupat #125367)",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Turun talousalue",
+              "ytunnus": "Ei tiedossa — broker contact required",
+              "tag": "Strong fit",
+              "source": "Yrityskaupat.net",
+              "sourceUrl": "https://www.yrityskaupat.net/fi/myytava-yritys/kiinteistoalan-palvelut/turun-talousalue/pitkaan-toiminut-kannattava-hoyrymyynnin-ja-palveluiden-erikoisosaaja/125367/",
+              "trello": "https://trello.com/c/ahlSRgsu",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "unknown" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p7",
+              "name": "IV-yritys Itä-Suomi — 558K osakekauppa (yrityskaupat #116880)",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Itä-Suomi",
+              "ytunnus": "Ei tiedossa — broker contact required",
+              "tag": "Strong fit",
+              "source": "Yrityskaupat.net",
+              "sourceUrl": "https://www.yrityskaupat.net/fi/myytava-yritys/lvi-asennus-huolto-suunnittelu/ita-suomi/pitkaan-toiminut-kannattava-ilmastointiasennusyritys-myynnissa/116880/",
+              "trello": "https://trello.com/c/MIntSfxW",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "unknown" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p8",
+              "name": "Menestyvä Autokorjaamo / Huoltamo — 295K sis. kiinteistö (yrityskaupat #123803)",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Suomi (tarkka sijainti ei tiedossa)",
+              "ytunnus": "Ei tiedossa — broker contact required",
+              "tag": "Strong fit",
+              "source": "Yrityskaupat.net",
+              "sourceUrl": "https://www.yrityskaupat.net/fi/myytava-yritys/ajoneuvojen-huoltokorjaamot/suomi/myytavana-menestyva-autokorjaamo/123803/",
+              "trello": "https://trello.com/c/43b2dgu3",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "unknown" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p9",
+              "name": "Kuljetusliike + Raskaan Kaluston Huolto — 60v (yrityskaupat #118997)",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Suomi (tarkka sijainti ei tiedossa)",
+              "ytunnus": "Ei tiedossa — broker contact required",
+              "tag": "Strong fit",
+              "source": "Yrityskaupat.net",
+              "sourceUrl": "https://www.yrityskaupat.net/en/myytava-yritys/heavy-vehicle-fleet-repair-and-ma",
+              "trello": "https://trello.com/c/zKCc1T7g",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p10",
+              "name": "Maalaus- ja Muutostyöt JL Oy",
+              "price": "tarjous",
+              "result": "66 000€",
+              "location": "Turku (Kupittaankatu 122), Naantali",
+              "ytunnus": "0290725-5",
+              "tag": "Cold outreach",
+              "source": "Weak signal (finder.fi-style)",
+              "sourceUrl": "https://www.asiakastieto.fi/yritykset/fi/maalaus-ja-muutostyot-jl-oy/02907255/taloustiedot",
+              "trello": "https://trello.com/c/77HyG8KF",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "fail" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "pass" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p11",
+              "name": "(unnamed lead)",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "unknown",
+              "ytunnus": "unknown",
+              "tag": "Strong fit",
+              "source": "Yrityspörssi",
+              "sourceUrl": "https://www.yritysporssi.fi/etela-suomi-finland/myytavat/yritykset/rakentaminen/sahkoasennus-ja-huolto/myydaan-telealan-yritys-etela-suomessa-115889",
+              "trello": "https://trello.com/c/mVwFvvsK",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "unknown" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p12",
+              "name": "Väletablerat städbolag Stockholm",
+              "price": "tarjous",
+              "result": "~900 kSEK",
+              "location": "Stockholm",
+              "ytunnus": "unknown",
+              "tag": "Strong fit",
+              "source": "Bolagsplatsen",
+              "sourceUrl": "https://www.bolagsplatsen.se/foretag-till-salu/valetablerat-stadbolag-i-stockholm-med-stabila-avtalskunder-och-hog-potential-89693",
+              "trello": "https://trello.com/c/HPgOF55k",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p13",
+              "name": "VVS-företag Sörmland",
+              "price": "4 MSEK",
+              "result": "930 kSEK",
+              "location": "Södermanland (Sörmland)",
+              "ytunnus": "unknown",
+              "tag": "Strong fit",
+              "source": "Bolagsplatsen",
+              "sourceUrl": "https://www.bolagsplatsen.se/foretag-till-salu/valrenommerat-vvs-foretag-med-lang-historia-och-stabil-lonsamhet-i-sormland-89581",
+              "trello": "https://trello.com/c/ovdy97nC",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "unknown" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p14",
+              "name": "Städföretag Jönköping",
+              "price": "tarjous",
+              "result": "~1 MSEK",
+              "location": "Jönköping, Västra Sverige",
+              "ytunnus": "unknown",
+              "tag": "Strong fit",
+              "source": "Bolagsplatsen",
+              "sourceUrl": "https://www.bolagsplatsen.se/foretag-till-salu/lonsamt-stadforetag-med-stark-kundbas-89611",
+              "trello": "https://trello.com/c/mNbr23kO",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p15",
+              "name": "Fastighetsservice Gävle",
+              "price": "tarjous",
+              "result": "vinst",
+              "location": "Gävle, Gävleborg (Norrland)",
+              "ytunnus": "unknown",
+              "tag": "Strong fit",
+              "source": "Bolagsplatsen",
+              "sourceUrl": "https://www.bolagsplatsen.se/foretag-till-salu/valetablerat-och-lonsamt-fastighetsserviceforetag-i-gavle-till-salu-88568",
+              "trello": "https://trello.com/c/PnoDVTxf",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p16",
+              "name": "hitsaus-ja-konepajatoiminnot-keski-suomessa-115973",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "unknown",
+              "ytunnus": "unknown",
+              "tag": "Strong fit",
+              "source": "Yrityspörssi",
+              "sourceUrl": "https://www.yritysporssi.fi/keski-suomi-finland/myytavat/yritykset/teollisuus/konepaja/hitsaus-ja-konepajatoiminnot-keski-suomessa-115973",
+              "trello": "https://trello.com/c/NoIjK3v9",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "unknown" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p17",
+              "name": "vakiintunut-maanrakennusyritys-116026",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "unknown",
+              "ytunnus": "unknown",
+              "tag": "Strong fit",
+              "source": "Yrityspörssi",
+              "sourceUrl": "https://www.yritysporssi.fi/koko-suomi-finland/myytavat/yritykset/rakentaminen/maanrakennus/vakiintunut-maanrakennusyritys-116026",
+              "trello": "https://trello.com/c/0A1hF8KJ",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "unknown" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p18",
+              "name": "myydaan-monipuolinen-ja-kokenut-tienhoitolaitteiden-valmista",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "unknown",
+              "ytunnus": "unknown",
+              "tag": "Strong fit",
+              "source": "Yrityspörssi",
+              "sourceUrl": "https://www.yritysporssi.fi/palkane-pirkanmaa-lansi-suomi-finland/myytavat/yritykset/teollisuus/koneiden-laitteiden-ja-komponenttien-valmistus/myydaan-monipuolinen-ja-kokenut-tienhoitolaitteiden-valmistaja-yritys-114406",
+              "trello": "https://trello.com/c/Hq2KKOU5",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "unknown" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p19",
+              "name": "Tvätteri Mälardalen – 80+ år i branschen",
+              "price": "tarjous",
+              "result": "vinst",
+              "location": "Stockholm / Mälardalen",
+              "ytunnus": "unknown",
+              "tag": "Strong fit",
+              "source": "Bolagsplatsen",
+              "sourceUrl": "https://www.bolagsplatsen.se/foretag-till-salu/valetablerat-och-miljoledande-tvatteri-i-malardalen-%E2%80%93-over-80-ar-i-branschen-89782",
+              "trello": "https://trello.com/c/Vdo53V7B",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "pass" }
+              ]
+            },
+            {
+              "id": "p20",
+              "name": "Städföretag Mellansverige",
+              "price": "tarjous",
+              "result": "~1 MSEK",
+              "location": "Mellansverige (anonym, större stad)",
+              "ytunnus": "unknown",
+              "tag": "Strong fit",
+              "source": "Bolagsplatsen",
+              "sourceUrl": "https://www.bolagsplatsen.se/foretag-till-salu/lonsamt-och-valetablerat-stadforetag-i-mellansverige-%E2%80%93-stark-kundbas-och-hog-lonsamhet-89437",
+              "trello": "https://trello.com/c/Wf3S06qH",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p21",
+              "name": "Ympäristörakentaminen (liiketoiminta), Uusimaa",
+              "price": "tarjous",
+              "result": "EBITDA ~90k/v",
+              "location": "Uusimaa (pääkaupunkiseutu + keski- ja itäuusimaa)",
+              "ytunnus": "unknown",
+              "tag": "Strong fit",
+              "source": "Yrityskaupat.net",
+              "sourceUrl": "https://www.yrityskaupat.net/fi/myytava-yritys/maarakennus-ja-suunnittelu/uusimaa/uudellamaalla-tasaisessa-kasvussa-oleva-kannattava-ja-hyvamaineinen-ymparistorakentamiseen-erikoistunut-yrityksen-liiketoiminta/125313/",
+              "trello": "https://trello.com/c/WAZADevU",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "unknown" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p22",
+              "name": "Kukkakauppa ja Hautaustoimisto Nyberg Oy",
+              "price": "ei myynnissä",
+              "result": "~125 000€",
+              "location": "Lappeenranta (Etelä-Karjala) — palvelee myös Imatra, Joutseno",
+              "ytunnus": "0312706-6",
+              "tag": "Cold outreach",
+              "source": "Weak signal (finder.fi-style)",
+              "sourceUrl": "https://trello.com/c/M6sNuGkt",
+              "trello": "https://trello.com/c/M6sNuGkt",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "pass" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "pass" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p23",
+              "name": "Menestynyt kuljetusliike, Satakunta #118222",
+              "price": "450 000€",
+              "result": "ei julkinen",
+              "location": "Satakunta (Pori-alue)",
+              "ytunnus": "ei tiedossa (anonyymi listaus — selvitä välittäjältä)",
+              "tag": "Strong fit",
+              "source": "Yrityskaupat.net",
+              "sourceUrl": "https://www.yrityskaupat.net/fi/myytava-yritys/kuljetusliikkeet-taksit/satakunta/menestynyt-kuljetusliike-jolla-pitka-historia-ja-hyva-tuloksentekokyky/118222/",
+              "trello": "https://trello.com/c/oqqJEvFl",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "unknown" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "pass" }
+              ]
+            },
+            {
+              "id": "p24",
+              "name": "Soukkio Oy (tienhoitolaitteet) — Pälkäne, Pirkanmaa — €600K-€800K",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Pälkäne, Pirkanmaa, Länsi-Suomi",
+              "ytunnus": "Ei tiedossa (Soukkio Oy, www.soukkio.fi)",
+              "tag": "Strong fit",
+              "source": "Yrityspörssi",
+              "sourceUrl": "https://www.yritysporssi.fi/palkkane-pirkanmaa-lansi-suomi-finland/myytavat/yritykset/teollisuus/konepajateollisuus/myydaan-monipuolinen-ja-kokenut-tienhoitolaitteiden-valmistaja-yritys-114406",
+              "trello": "https://trello.com/c/xuPEvHEt",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p25",
+              "name": "Vaasan Kodinkonehuolto Oy — Vaasa, Pohjanmaa — €300K-€400K",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Vaasa, Pohjanmaa, Länsi-Suomi",
+              "ytunnus": "Ei tiedossa (Vaasan Kodinkonehuolto Oy, vaasankodinkonehuolto.fi)",
+              "tag": "Strong fit",
+              "source": "Yrityspörssi",
+              "sourceUrl": "https://www.yritysporssi.fi/vaasa-pohjanmaa-lansi-suomi-finland/myytavat/yritykset/kodinkone-ja-kalustemyymala/myynnissa-vaasan-kodinkonehuolto-oy-110048",
+              "trello": "https://trello.com/c/voAbZK1U",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p26",
+              "name": "Autohuoltoliiketoiminta Keski-Suomi #126182",
+              "price": "690 000€",
+              "result": "ei tiedossa (LV >1,5M)",
+              "location": "Keski-Suomi",
+              "ytunnus": "Ei tiedossa (anonyymi, yrityskaupat #126182)",
+              "tag": "Strong fit",
+              "source": "Yrityskaupat.net",
+              "sourceUrl": "https://trello.com/c/JpCSY2mz",
+              "trello": "https://trello.com/c/JpCSY2mz",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "unknown" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p27",
+              "name": "Alajärven Rengashuolto Oy — Rengasliike + autokorjaamo, ~1,2-1,4 M€",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Alajärvi, Etelä-Pohjanmaa",
+              "ytunnus": "1966870-5",
+              "tag": "Strong fit",
+              "source": "Yrityspörssi",
+              "sourceUrl": "https://www.yritysporssi.fi/myytavat/yritykset/liikenne-ja-ajoneuvot/rengasliike/",
+              "trello": "https://trello.com/c/aor6hfv6",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "unknown" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "pass" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p28",
+              "name": "Kannattava autokorjaamo Espoo #108177 — 1–1,5 M€",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Espoo, Uusimaa",
+              "ytunnus": "Ei tiedossa — broker contact required",
+              "tag": "Strong fit",
+              "source": "Yrityspörssi",
+              "sourceUrl": "https://www.yritysporssi.fi/espoo-uusimaa-etela-suomi-finland/myytavat/yritykset/liikenne-ja-ajoneuvot/autokorjaamo-ja-huolto/myydaan-kannattava-autokorjaamo-108177",
+              "trello": "https://trello.com/c/SPwRtKlG",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "unknown" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p29",
+              "name": "Vakavarainen kuljetusliike Itä-Suomi #113952 — 800K–1M€",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Itä-Suomi",
+              "ytunnus": "Ei tiedossa — broker contact required",
+              "tag": "Strong fit",
+              "source": "Yrityspörssi",
+              "sourceUrl": "https://www.yritysporssi.fi/ita-suomi-finland/myytavat/yritykset/liikenne-ja-ajoneuvot/kuljetusliike/vakavarainen-kuljetusliike-113952",
+              "trello": "https://trello.com/c/iwygNFLI",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "unknown" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p30",
+              "name": "Arvostettu kuljetusliike Etelä-Suomi #124736",
+              "price": "400 000€",
+              "result": "ei julkinen",
+              "location": "Etelä-Suomi (anonymisoitu)",
+              "ytunnus": "Ei tiedossa — broker contact required",
+              "tag": "Strong fit",
+              "source": "Yrityskaupat.net",
+              "sourceUrl": "https://www.yrityskaupat.net/fi/myytava-yritys/kuljetusliikkeet-taksit/etela-suomi/arvostettu-ja-pitkaan-toiminut-kuljetusalan-yritys-erinomainen-mahdollisuus/124736/",
+              "trello": "https://trello.com/c/PFEWqmMj",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p31",
+              "name": "Palkittu merkkihuoltokorjaamo Etelä-Suomi #120917",
+              "price": "550 000€",
+              "result": "ei julkinen (kannattava 10v+)",
+              "location": "Etelä-Suomi (anonymisoitu)",
+              "ytunnus": "Ei tiedossa — broker contact required",
+              "tag": "Strong fit",
+              "source": "Yrityskaupat.net",
+              "sourceUrl": "https://www.yrityskaupat.net/fi/myytava-yritys/ajoneuvojen-huoltokorjaamot/suomi/etela-suomessa-sijaitseva-palkitun-merkkihuoltokorjaamon-liiketoiminta/120917/",
+              "trello": "https://trello.com/c/RacMR5KT",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p32",
+              "name": "Rengasliike Raahe #113774 — 40+ vuotta, 800K+€ lv",
+              "price": "tarjous",
+              "result": "ei julkinen",
+              "location": "Raahe, Pohjois-Pohjanmaa",
+              "ytunnus": "Ei tiedossa — broker contact required",
+              "tag": "Strong fit",
+              "source": "Yrityspörssi",
+              "sourceUrl": "https://www.yritysporssi.fi/raahe-pohjois-pohjanmaa-pohjois-suomi-finland/myytavat/yritykset/liikenne-ja-ajoneuvot/rengasliike/rengasalan-kauppaa-ja-osaamista-yli-40-vuotta-113774",
+              "trello": "https://trello.com/c/0VKIIwHg",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p33",
+              "name": "Kiinteistöhuolto Laukaa #114119 — perustettu 1990, 35v",
+              "price": "tarjous",
+              "result": "ei tiedossa",
+              "location": "Laukaa, Keski-Suomi",
+              "ytunnus": "Ei tiedossa — broker contact required",
+              "tag": "Strong fit",
+              "source": "Yrityspörssi",
+              "sourceUrl": "https://www.yritysporssi.fi/laukaa-keski-suomi-keski-suomi-finland/myytavat/yritykset/kiinteistoala/isannointi-ja-kiinteistohuolto/myydaan-kiinteistohuollon-liiketoiminta-tai-koko-osakekanta-laukaassa-114119",
+              "trello": "https://trello.com/c/72j4Bcvv",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p34",
+              "name": "Pesulax Tampere — 43v, 854K lv (kasvava)",
+              "price": "ei myynnissä",
+              "result": "77K (9,1%)",
+              "location": "Tampere, Pirkanmaa",
+              "ytunnus": "0696974-4",
+              "tag": "Cold outreach",
+              "source": "Weak signal (finder.fi-style)",
+              "sourceUrl": "https://www.finder.fi/Pesula/Pesulax/Tampere/yhteystiedot/179025",
+              "trello": "https://trello.com/c/1a0lOF5x",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "pass" },
+                { "label": "Follow-on acquisition?", "state": "pass" }
+              ]
+            },
+            {
+              "id": "p35",
+              "name": "Ipa-Pesu Oy — Pesulapalvelu, Lahti",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Lahti, Päijät-Häme",
+              "ytunnus": "0880969-9",
+              "tag": "Cold outreach",
+              "source": "Weak signal (finder.fi-style)",
+              "sourceUrl": "https://www.finder.fi/Pesula/Ipa-Pesu+Oy/Lahti/yhteystiedot/140471",
+              "trello": "https://trello.com/c/FSKRapvx",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "pass" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p36",
+              "name": "Keiteleen Jätehuolto / Esko Laukkanen — Keitele, Pohjois-Savo",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Keitele, Pohjois-Savo",
+              "ytunnus": "1190617-4",
+              "tag": "Strong fit",
+              "source": "Yrityspörssi",
+              "sourceUrl": "https://www.yritysporssi.fi/keitele-pohjois-savo-ita-suomi-finland/myytavat/yritykset/liikenne-ja-ajoneuvot/kuljetusliike/keiteleen-jatehuolto-pitkalla-historialla-113356",
+              "trello": "https://trello.com/c/H8pSs9ZI",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "pass" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p37",
+              "name": "LVI E Saarinen Oy — Pornainen (Uusimaa) [#114267]",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Pornainen, Uusimaa",
+              "ytunnus": "Ei tiedossa (broker-gated)",
+              "tag": "Strong fit",
+              "source": "Yrityspörssi",
+              "sourceUrl": "https://www.yritysporssi.fi/pornainen-uusimaa-etela-suomi-finland/myytavat/yritykset/rakentaminen/lvi-asennus-ja-huolto/vakiintunut-lvi-alan-yritys-myynnissa-114267",
+              "trello": "https://trello.com/c/cymIJA2e",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p38",
+              "name": "Pesulapalvelu Luvia (Satakunta) [#114124]",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Luvia, Satakunta",
+              "ytunnus": "Ei tiedossa (broker-gated)",
+              "tag": "Strong fit",
+              "source": "Yrityspörssi",
+              "sourceUrl": "https://www.yritysporssi.fi/luvia-satakunta-lansi-suomi-finland/myytavat/yritykset/palvelut/pesula/myydaan-toimivan-pesulapalvelun-liiketoiminta-myos-koneiden-osto-114124",
+              "trello": "https://trello.com/c/pDwxH4Vo",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p39",
+              "name": "Korjaamo + Rengasliike — Merikarvia (Satakunta) [#115858]",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Merikarvia, Satakunta",
+              "ytunnus": "Ei tiedossa (broker-gated)",
+              "tag": "Strong fit",
+              "source": "Yrityspörssi",
+              "sourceUrl": "https://www.yritysporssi.fi/satakunta-lansi-suomi-finland/myytavat/yritykset/liikenne-ja-ajoneuvot/autokorjaamo-ja-huolto/pitkaan-toiminut-korjaamo-ja-rengasliike-kiinteistoineen-115858",
+              "trello": "https://trello.com/c/mf9cwYy0",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p40",
+              "name": "Hautauspalvelu Kalla — Rovaniemi (Lappi)",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Rovaniemi, Lappi",
+              "ytunnus": "2298647-2",
+              "tag": "Cold outreach",
+              "source": "Weak signal (finder.fi-style)",
+              "sourceUrl": "https://trello.com/c/HtYsDvXo",
+              "trello": "https://trello.com/c/HtYsDvXo",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "pass" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p41",
+              "name": "PTP Luttinen Oy — Muhos (Oulu) ⚠️ yli liikevaihtokaaton",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Muhos, Pohjois-Pohjanmaa (Oulu-seutu)",
+              "ytunnus": "0954294-9",
+              "tag": "Cold outreach",
+              "source": "Weak signal (finder.fi-style)",
+              "sourceUrl": "https://luttinen.fi",
+              "trello": "https://trello.com/c/wB2miDB1",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "pass" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p42",
+              "name": "Hautaustoimisto Satakunta #113716 — 400-500K lv, 260K hinta",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Satakunta (Eura-alue), Länsi-Suomi",
+              "ytunnus": "unknown",
+              "tag": "Strong fit",
+              "source": "Yrityspörssi",
+              "sourceUrl": "https://www.yritysporssi.fi/satakunta-lansi-suomi-finland/myytavat/yritykset/palvelut/hautaustoimisto/satakunnassa-sijaitseva-pitkaan-toiminut-ja-kannattava-hautaustoimisto-113716",
+              "trello": "https://trello.com/c/F4WpBXb4",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p43",
+              "name": "Kannattava autokorjaamo Helsingissä — #116056",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Helsinki, Uusimaa",
+              "ytunnus": "Ei tiedossa (anonymisoitu — selvitettävä ensikontaktissa)",
+              "tag": "Strong fit",
+              "source": "Yrityspörssi",
+              "sourceUrl": "https://trello.com/c/xJbUCZWz",
+              "trello": "https://trello.com/c/xJbUCZWz",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "pass" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            },
+            {
+              "id": "p44",
+              "name": "Hautaustoimisto Tallinn, Estonia #119808 — €200-500K lv, €150K hinta",
+              "price": "unknown",
+              "result": "unknown",
+              "location": "Tallinna, Viro",
+              "ytunnus": "Ei tiedossa — OÜ (todennäköisesti), Viron kaupparekisteri",
+              "tag": "Strong fit",
+              "source": "Yrityskaupat.net",
+              "sourceUrl": "https://www.yrityskaupat.net/fi/myytava-yritys/hautaustoimisto/viro/tayden-palvelun-hautaustoimisto/119808/",
+              "trello": "https://trello.com/c/EWF3TrqR",
+              "checklist": [
+                { "label": "Yritys min. 5 vuotta vanha", "state": "unknown" },
+                { "label": "Yritys tekee voittoa min. 100 000€ vuodessa", "state": "unknown" },
+                { "label": "Yrityksellä min. 5 työntekijää", "state": "unknown" },
+                { "label": "Y-tunnus vahvistettu", "state": "unknown" },
+                { "label": "Follow-on acquisition?", "state": "unknown" }
+              ]
+            }
           ]
         },
         {
