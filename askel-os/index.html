@@ -333,6 +333,36 @@
     }
     .pill-btn:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.28); }
 
+    /* ── OWNER PICKER (shared: Sourcing, Screening, IC) ── */
+    .prospect-row-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .owner-picker { position: relative; display: flex; align-items: center; gap: 4px; }
+    .owner-avatars { display: flex; }
+    .owner-avatar {
+      width: 22px; height: 22px; border-radius: 50%; background: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9.5px; font-weight: 700; color: white; margin-left: -6px;
+      border: 1.5px solid var(--surface); flex-shrink: 0;
+    }
+    .owner-avatars .owner-avatar:first-child { margin-left: 0; }
+    .owner-add-btn {
+      width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,0.06);
+      border: 1px dashed rgba(255,255,255,0.28); color: var(--muted); font-size: 13px; line-height: 1;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .owner-add-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.5); }
+    .owner-menu {
+      position: absolute; top: 26px; right: 0; z-index: 20; min-width: 140px;
+      background: var(--surface); border: 1px solid var(--border-hover); border-radius: 10px;
+      padding: 6px; box-shadow: 0 12px 28px rgba(0,0,0,0.45);
+    }
+    .owner-option {
+      display: flex; align-items: center; gap: 8px; font-size: 12.5px; padding: 6px 8px;
+      border-radius: 6px; cursor: pointer;
+    }
+    .owner-option:hover { background: rgba(255,255,255,0.06); }
+    .owner-option .owner-avatar { margin-left: 0; }
+    .owner-check { margin-left: auto; color: var(--green); font-weight: 700; }
+
     /* ── KANBAN ── */
     .kanban-section { margin-top: 28px; }
     .kanban-board { display: flex; gap: 14px; align-items: flex-start; overflow-x: auto; padding-bottom: 4px; }
@@ -1521,6 +1551,68 @@
     };
 
     const ROADMAP_GOALS = DATA.okrs.map(o => o.label);
+
+    // ── OWNER PICKER (shared component — Sourcing, Screening, IC) ──
+    const PARTNERS = ['Varia', 'Niklas', 'Mike', 'Micke'];
+    const PARTNER_INITIALS = { Varia: 'V', Niklas: 'N', Mike: 'M', Micke: 'Mi' };
+    let openOwnerPicker = null; // e.g. 'sourcing:p3' — pickerKey of the currently open dropdown, or null
+
+    function seedDefaultOwners() {
+      const sourcing = DATA.findStages.find(s => s.key === 'sourcing');
+      const screening = DATA.findStages.find(s => s.key === 'screening');
+      sourcing.prospects.forEach(p => { if (!p.owners) p.owners = ['Varia', 'Niklas']; });
+      screening.leads.forEach(l => { if (!l.owners) l.owners = ['Varia', 'Niklas']; });
+    }
+    seedDefaultOwners();
+
+    function findOwnerItem(stageKey, itemId) {
+      const s = DATA.findStages.find(x => x.key === stageKey);
+      if (!s) return null;
+      if (stageKey === 'sourcing') return s.prospects.find(x => x.id === itemId);
+      if (stageKey === 'screening') return s.leads.find(x => x.id === itemId);
+      if (stageKey === 'ic') return s.leads.find(x => x.id === itemId);
+      return null;
+    }
+
+    function renderOwnerPicker(stageKey, itemId) {
+      const item = findOwnerItem(stageKey, itemId);
+      if (!item) return '';
+      const owners = item.owners || [];
+      const pickerKey = stageKey + ':' + itemId;
+      const isOpen = openOwnerPicker === pickerKey;
+
+      const avatars = owners.map(o => `<span class="owner-avatar" title="${escapeAttr(o)}">${escapeHtml(PARTNER_INITIALS[o] || o[0])}</span>`).join('');
+
+      const menuOptions = PARTNERS.map(p => `
+        <div class="owner-option" onclick="event.stopPropagation(); toggleOwner('${stageKey}','${itemId}','${p}')">
+          <span class="owner-avatar">${PARTNER_INITIALS[p]}</span>
+          <span>${p}</span>
+          ${owners.includes(p) ? '<span class="owner-check">✓</span>' : ''}
+        </div>
+      `).join('');
+
+      return `
+        <div class="owner-picker" onclick="event.stopPropagation();">
+          <div class="owner-avatars">${avatars}</div>
+          <button class="owner-add-btn" onclick="event.stopPropagation(); toggleOwnerPickerOpen('${pickerKey}')">+</button>
+          ${isOpen ? `<div class="owner-menu">${menuOptions}</div>` : ''}
+        </div>
+      `;
+    }
+
+    function toggleOwnerPickerOpen(pickerKey) {
+      openOwnerPicker = openOwnerPicker === pickerKey ? null : pickerKey;
+      render();
+    }
+
+    function toggleOwner(stageKey, itemId, partner) {
+      const item = findOwnerItem(stageKey, itemId);
+      if (!item) return;
+      if (!item.owners) item.owners = [];
+      const idx = item.owners.indexOf(partner);
+      if (idx === -1) item.owners.push(partner); else item.owners.splice(idx, 1);
+      render();
+    }
 
     // ── KANBAN STATE (in-memory only, resets on reload) ──
     let kanbanIdSeq = 1;
