@@ -325,6 +325,13 @@
     }
     .lens-section { margin-bottom: 16px; }
     .lens-section:last-child { margin-bottom: 0; }
+    .pill-btn {
+      display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;
+      padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06); color: var(--text); font-size: 12px; font-weight: 500;
+      cursor: pointer; white-space: nowrap; transition: background 0.15s, border-color 0.15s;
+    }
+    .pill-btn:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.28); }
 
     /* ── KANBAN ── */
     .kanban-section { margin-top: 28px; }
@@ -2427,8 +2434,13 @@
         ${crumbs([{ label: 'Company', path: '/' }, { label: 'Find', path: '/find' }, { label: s.name, path: '/find/screening' }, { label: lead.name }])}
 
         <div class="card static card-pad" style="max-width:640px; margin-bottom:16px;">
-          <div class="card-title">${escapeHtml(lead.name)}</div>
-          <div class="card-owner">${escapeHtml(lead.location)}</div>
+          <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px;">
+            <div>
+              <div class="card-title">${escapeHtml(lead.name)}</div>
+              <div class="card-owner">${escapeHtml(lead.location)}</div>
+            </div>
+            <button class="pill-btn" onclick="alert('Coming soon — will create/open a Drive folder for ${escapeAttr(lead.name)} containing its financial analysis and development plan.')">📁 Drive Folder</button>
+          </div>
 
           <div class="field-row"><div class="field-label">Revenue</div><div class="field-value">${escapeHtml(lead.revenue)}</div></div>
           <div class="field-row"><div class="field-label">Profit</div><div class="field-value">${escapeHtml(lead.profit)}</div></div>
@@ -2452,7 +2464,6 @@
         <div class="card static card-pad" style="margin-top:16px;">
           <button class="add-card-btn" style="margin-top:0;" onclick="openExecSummaryModal('${lead.id}')">📄 Executive Summary</button>
           <button class="add-card-btn" onclick="openDevPlanModal('${lead.id}')">📋 Development Plan</button>
-          <button class="add-card-btn" onclick="alert('Coming soon — will create/open a Drive folder for ${escapeAttr(lead.name)} containing its financial analysis and development plan.')">📁 Prospect Drive Folder</button>
           <button class="add-card-btn" ${allDone ? '' : 'disabled'} onclick="moveToIC('${lead.id}')">${allDone ? '✓ Move to IC' : 'Move to IC — complete all checklists first'}</button>
         </div>
       `;
