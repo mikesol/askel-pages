@@ -2116,11 +2116,63 @@
       `;
     }
 
+    // ── SCREENING WORKFLOW (real data view) ──
+    function leadCompletion(lead) {
+      let done = 0, total = 0;
+      lead.sections.forEach(sec => sec.items.forEach(item => { total++; if (item.done) done++; }));
+      return { done, total };
+    }
+
+    function screeningTotals(s) {
+      let done = 0, total = 0;
+      s.leads.forEach(lead => {
+        const c = leadCompletion(lead);
+        done += c.done; total += c.total;
+      });
+      return { done, total };
+    }
+
+    function renderScreeningWorkflow(s) {
+      const totals = screeningTotals(s);
+
+      const leadRows = s.leads.map(lead => {
+        const c = leadCompletion(lead);
+        return `
+          <a href="#/find/screening/task/${lead.id}" class="prospect-row" onclick="navigate('/find/screening/task/${lead.id}'); return false;">
+            <div>
+              <div class="prospect-row-name">${escapeHtml(lead.name)}</div>
+              <div class="prospect-row-meta">${escapeHtml(lead.location)}${lead.revenue !== 'unknown' ? ' · ' + escapeHtml(lead.revenue) : ''}</div>
+            </div>
+            <span class="completion-badge">${c.done}/${c.total} checked</span>
+          </a>
+        `;
+      }).join('');
+
+      return `
+        ${crumbs([{ label: 'Company', path: '/' }, { label: 'Find', path: '/find' }, { label: s.name }])}
+        <div class="greeting">
+          <div class="greeting-text" style="font-size:36px;">${s.name}</div>
+          <div class="greeting-sub">${s.purpose}</div>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi-number">${s.leads.length}</div>
+          <div class="kpi-label">In Screening<span class="kpi-sub">${totals.done} of ${totals.total} checklist items complete across all leads</span></div>
+        </div>
+
+        <div class="card static card-pad">
+          <div class="sec-label">Leads (${s.leads.length})</div>
+          <div class="prospect-list">${leadRows}</div>
+        </div>
+      `;
+    }
+
     // ── SCREEN 3: Workflow page ──
     function renderWorkflow(key) {
       const s = DATA.findStages.find(x => x.key === key);
       if (!s) return renderFind();
       if (key === 'sourcing') return renderSourcingWorkflow(s);
+      if (key === 'screening') return renderScreeningWorkflow(s);
 
       let tasksHtml = '';
       if (s.task) {
