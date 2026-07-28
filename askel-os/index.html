@@ -1401,7 +1401,7 @@
       } else if (parts[0] === 'find' && parts.length === 2) {
         app.innerHTML = renderWorkflow(parts[1]);
       } else if (parts[0] === 'find' && parts.length === 4 && parts[2] === 'task') {
-        app.innerHTML = renderTask(parts[1], parts[3]);
+        app.innerHTML = parts[1] === 'sourcing' ? renderProspectTask(parts[3]) : renderTask(parts[1], parts[3]);
       } else if (parts[0] === 'fund' || parts[0] === 'grow') {
         app.innerHTML = renderPlaceholderEngine(parts[0]);
       } else {
@@ -1971,6 +1971,45 @@
               </div>
             </div>
           </div>
+        </div>
+      `;
+    }
+
+    // ── SCREEN 4b: Prospect detail (Sourcing) ──
+    const TRI_STATE_ICON = { pass: '✓', fail: '✗', unknown: '?' };
+
+    function renderProspectTask(prospectId) {
+      const s = DATA.findStages.find(x => x.key === 'sourcing');
+      const p = s.prospects.find(x => x.id === prospectId);
+      if (!p) return renderSourcingWorkflow(s);
+
+      const checklistHtml = p.checklist.map(item => `
+        <div class="checklist-item">
+          <span class="tri-state ${item.state}">${TRI_STATE_ICON[item.state]}</span>
+          <span>${escapeHtml(item.label)}</span>
+        </div>
+      `).join('');
+
+      return `
+        ${crumbs([{ label: 'Company', path: '/' }, { label: 'Find', path: '/find' }, { label: s.name, path: '/find/sourcing' }, { label: p.name }])}
+
+        <div class="card static card-pad" style="max-width:640px;">
+          <div class="card-title">${escapeHtml(p.name)}</div>
+          <div class="card-owner">Source: ${escapeHtml(p.source)} &nbsp;<span class="fit-tag ${p.tag === 'Strong fit' ? 'strong' : 'cold'}">${p.tag}</span></div>
+
+          <div class="field-row"><div class="field-label">Price</div><div class="field-value">${escapeHtml(p.price)}</div></div>
+          <div class="field-row"><div class="field-label">Result / profit</div><div class="field-value">${escapeHtml(p.result)}</div></div>
+          <div class="field-row"><div class="field-label">Location</div><div class="field-value">${escapeHtml(p.location)}</div></div>
+
+          <div class="sec-label" style="margin-top:18px;">Gate checklist</div>
+          ${checklistHtml}
+
+          <div style="margin-top:14px; display:flex; gap:16px;">
+            <a class="link-out" href="${escapeAttr(p.sourceUrl)}" target="_blank" rel="noopener">Open source listing →</a>
+            <a class="link-out" href="${escapeAttr(p.trello)}" target="_blank" rel="noopener">Open Trello card →</a>
+          </div>
+
+          <button class="add-card-btn" style="margin-top:16px;" onclick="alert('Coming soon — will create a Kanban task from this prospect.')">+ Create Task</button>
         </div>
       `;
     }
