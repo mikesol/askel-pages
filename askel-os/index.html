@@ -1704,6 +1704,7 @@
           : parts[1] === 'screening' ? renderScreeningTask(parts[3])
           : parts[1] === 'ic' ? renderICTask(parts[3])
           : renderTask(parts[1], parts[3]);
+        if (parts[1] === 'ic' && icCalendarVisible) renderCalendar();
       } else if (parts[0] === 'fund' || parts[0] === 'grow') {
         app.innerHTML = renderPlaceholderEngine(parts[0]);
       } else {
@@ -2761,10 +2762,25 @@
 
         ${renderICChat(lead)}
 
-        <!-- IC_ACTIONS_PLACEHOLDER -->
+        <div class="card static card-pad" style="margin-top:16px;">
+          <button class="add-card-btn" style="margin-top:0;" onclick="window.open('https://appoy.askelventures.com', '_blank')">📊 Create IC Presentation</button>
+          <button class="add-card-btn" onclick="toggleICCalendar()">🗓️ ${icCalendarVisible ? 'Hide' : 'Show'} partners' calendar</button>
+          <button class="add-card-btn" onclick="alert('Coming soon — would create a real Google Calendar event with the partners.')">+ Create meeting</button>
+        </div>
+
+        <div class="calendar-section" id="ic-calendar-wrap" style="display:${icCalendarVisible ? 'block' : 'none'};">
+          <div class="sec-label" style="margin-bottom:12px;">🗓️ Partners' Calendar <span class="tag-example">Mock calendar — not your real Google Calendar</span></div>
+          <div id="calendar-root"></div>
+        </div>
 
         <!-- IC_VOTE_PLACEHOLDER -->
       `;
+    }
+
+    let icCalendarVisible = false;
+    function toggleICCalendar() {
+      icCalendarVisible = !icCalendarVisible;
+      render();
     }
 
     // ── SCREEN 4b: Prospect detail (Sourcing) ──
