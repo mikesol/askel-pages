@@ -456,6 +456,76 @@
   <main id="app"></main>
 
   <script>
+    // ── SCREENING VIEW — real checklist items from the Case Scouting "Screening" list Trello cards (verified 2026-07-28) ──
+    const SCREENING_CHECKLIST_TEMPLATE = [
+      {
+        key: 'financial', name: 'Financial',
+        items: [
+          'Pyydä tilinpäätös kolmelta viime vuodelta',
+          'Pyydä tulos ja tase laajalla näkymällä',
+          'Kopioi ja täytä talousanalyysi (talousanalyysi-pohja)',
+          'Kulurakenne selkeä, top 3 suurinta kuluerää tiedossa',
+          'Top 10 isoimmat asiakkaat tiedossa (B2B/B2C)',
+          'Onko yrityksessä recurring revenue?',
+          'Kuukausittainen kassavirta tiedossa',
+          'Kausivaihtelut tiedossa',
+          'Tuloksentekokyky OK → jatketaan'
+        ]
+      },
+      {
+        key: 'market', name: 'Market & SWOT',
+        items: [
+          'Top 3 kilpailijaa tiedossa (asiakastieto.fi)',
+          '3 kansainvälistä kilpailijaa tiedossa',
+          'Asiakasrekisterin koko tiedossa',
+          'Tiedossa kuka on asiakas ja paljonko heitä on palveltavana alueella',
+          'Miten alalla hyödynnetään tekoälyä?',
+          'SWOT tehty',
+          'Kehitysideat tiedossa'
+        ]
+      },
+      {
+        key: 'resources', name: 'Team & Resources',
+        items: [
+          'Palaveri paikanpäälle sovittu',
+          'Arvioidaan tiimi + myyjän rooli/tehtävät',
+          'Haastatellaan yrittäjä',
+          'Haastatellaan henkilökunta',
+          'Rekrytointitarve ja roolin KPI selvä'
+        ]
+      },
+      {
+        key: 'dealTerms', name: 'Deal Terms',
+        items: [
+          'Liiketoimintakauppa vai osakekauppa — päätetty',
+          'Kauanko myyjä jää yritykseen töihin',
+          'Suostuuko konsultoimaan työvelvoitteen loputtua',
+          'Asiakasrekisteri ja markkinointilistat siirtyvät kaupan mukana',
+          'Tiedon siirrosta sovittu',
+          'Preliminary deal structure neuvoteltu',
+          'Tarjous lähetetty myyjälle'
+        ]
+      },
+      {
+        key: 'killQuestions', name: 'Kill Questions',
+        items: [
+          'How could we exit in 3–5 years?',
+          'Capital gain on exit min. 100 000€ per owner',
+          'Can we implement tech solutions that make operations faster?',
+          'Can we run this business with max 5 hours weekly?',
+          'Champion + aisapari valittu'
+        ]
+      }
+    ];
+
+    function mkScreeningSections() {
+      return SCREENING_CHECKLIST_TEMPLATE.map(sec => ({
+        key: sec.key,
+        name: sec.name,
+        items: sec.items.map(label => ({ label, done: false }))
+      }));
+    }
+
     // ── DATA (real Askel pipeline data as of 2026-07-28, pulled from Case Scouting Trello board) ──
     const DATA = {
       vision: "Acquire and grow the best small businesses in the Nordics using technology and operational excellence.",
@@ -1322,14 +1392,81 @@
           key: "screening", name: "Screening", count: 7,
           purpose: "First-pass thesis fit, financials, market, and resource check before IC.",
           owner: "Partners",
-          sample: [
-            "Jätehuolto Härmälä Oy",
-            "Sähköurakointiliike Pohjois-Suomi",
-            "Nokian Mirla-palvelut Oy",
-            "Orimattilan Putkityö Oy",
-            "Menestyvä rengasliike Satakunnassa",
-            "Rengasliike Pohjois-Karjala",
-            "LK-Huolto Oy"
+          leads: [
+            {
+              id: 's1', name: 'Jätehuolto Härmälä Oy',
+              location: 'Kankaanpää', ytunnus: '0716721-7',
+              ceo: 'Ari Juhani Härmälä', contact: 'sari.harmala@dnainternet.net · 040 074 5766',
+              revenue: '866 000 €', profit: '≈75 000 €', teamSize: 'unknown',
+              founded: 'unknown (previously Jätehuolto Leo Härmälä Oy — likely family business)',
+              whyInteresting: 'Overpaid-owner check candidate — low reported profit relative to revenue; investigate henkilöstökulut and owner compensation.',
+              trello: 'https://trello.com/c/h579qGpe', extraLink: null,
+              sections: mkScreeningSections()
+            },
+            {
+              id: 's2', name: 'Sähköurakointiliike Pohjois-Suomi',
+              location: 'Pohjois-Suomi', ytunnus: 'unknown',
+              ceo: 'unknown (anonymized broker listing)', contact: 'Harri Vakkuri (broker contact, Yrityspörssi)',
+              revenue: '1 000 001–2 000 000 €', profit: 'unknown', teamSize: '6–9',
+              founded: 'unknown ("pitkään toiminut" — long-running, no exact year stated)',
+              whyInteresting: 'Trades-sector thesis fit, Northern Finland, long-running with a strong order book; services include electrical design plus maintenance and fault repair.',
+              trello: 'https://trello.com/c/0AJqa2fw',
+              extraLink: { label: 'Open source listing →', url: 'https://www.yritysporssi.fi/pohjois-suomi-finland/myytavat/yritykset/rakentaminen/sahkoasennus-ja-huolto/menestyva-ja-pitkaan-toiminut-sahkourakointiliike-116104' },
+              sections: mkScreeningSections()
+            },
+            {
+              id: 's3', name: 'Nokian Mirla-palvelut Oy',
+              location: 'Tottijärvi, Nokia (Pirkanmaa)', ytunnus: '0580253-9',
+              ceo: 'Petri Tapio Mäkinen', contact: 'petri.makinen@mirla.fi · +358 400 778 243',
+              revenue: '753 000 € (2024)', profit: '164 000 € (2024, 21.8% margin)', teamSize: '10',
+              founded: '1985 (40 yrs)',
+              whyInteresting: 'Strong and improving margin (21.8% in 2024), steady 5-year revenue growth, blue-chip industrial customers. CEO changed in 2014 — possible generational transition already underway.',
+              trello: 'https://trello.com/c/n3kkcTUv',
+              extraLink: { label: 'Open company site →', url: 'https://www.mirla.fi' },
+              sections: mkScreeningSections()
+            },
+            {
+              id: 's4', name: 'Orimattilan Putkityö Oy',
+              location: 'Orimattila', ytunnus: '0129834-7',
+              ceo: 'Hannu Olavi Tuominen', contact: 'hannu.tuominen@orimattilanputkityo.fi · +358 40 5138073',
+              revenue: '789 000 €', profit: '53 000 €', teamSize: 'unknown',
+              founded: '1958 (68 yrs); incorporated as Oy in 1992',
+              whyInteresting: 'Overpaid-owner check candidate — low reported profit relative to revenue; investigate henkilöstökulut and owner compensation.',
+              trello: 'https://trello.com/c/2pQ1aCmL', extraLink: null,
+              sections: mkScreeningSections()
+            },
+            {
+              id: 's5', name: 'Menestyvä rengasliike Satakunnassa',
+              location: 'Satakunta, Länsi-Suomi', ytunnus: 'unknown (anonymized broker listing)',
+              ceo: 'unknown', contact: 'via broker (Yrityspörssi listing)',
+              revenue: '600 000–700 000 €/vuosi', profit: 'unknown (stated only as "profitable, unspecified")', teamSize: 'unknown',
+              founded: 'operating since the 1990s',
+              whyInteresting: '900+ private tire-storage customers plus 1 dealership (~1,050 tire sets in storage) — stable recurring cash flow. Already thesis-scored 6/10 by whoever entered this card. Owner retiring, handover support offered.',
+              trello: 'https://trello.com/c/HyONSPIh',
+              extraLink: { label: 'Open source listing →', url: 'https://www.yritysporssi.fi/satakunta-lansi-suomi-finland/myytavat/yritykset/liikenne-ja-ajoneuvot/rengasliike/myydaan-menestyva-rengasliike-satakunnassa-113844' },
+              sections: mkScreeningSections()
+            },
+            {
+              id: 's6', name: 'Rengasliike Pohjois-Karjala (anon)',
+              location: 'Joensuu, Pohjois-Karjala', ytunnus: '0168055-4',
+              ceo: 'Kai Markus Repo & Pentti Olavi Repo (joint vastuuhenkilöt)', contact: 'pore@pohjolanrengas.fi · 013 123 511',
+              revenue: '860 000 € (2025)', profit: '4 000 € (2025, 0.6% margin) — negative in 3 of the last 5 years', teamSize: '2 (down from 4 in 2021)',
+              founded: 'unknown exact year (Y-tunnus prefix suggests ~1980s)',
+              whyInteresting: 'Revenue sits in thesis range with a strong tire-hotel base (~1,000 customers) and a 2025 turnaround — +15.4% growth, first positive result in years. But margin is razor-thin and headcount is very small (owner-operator risk).',
+              trello: 'https://trello.com/c/UzxMJaAW',
+              extraLink: { label: 'Open source listing →', url: 'https://yritysporssi.businessjoensuu.fi/index.cfm?action=showDetails&itemID=5231' },
+              sections: mkScreeningSections()
+            },
+            {
+              id: 's7', name: 'LK-Huolto Oy',
+              location: 'Viinijärvi, Liperi (Pohjois-Karjala)', ytunnus: '0415437-3',
+              ceo: 'Jukka Paavali Ikonen', contact: 'huolto@lkhuolto.com · 0400 375 260',
+              revenue: '583 000 € (2023)', profit: '126 000 € (2023, 21.6% margin)', teamSize: '≈7',
+              founded: '≈1981 (≈45 yrs)',
+              whyInteresting: "Best find of the sweep — score 6/6. 45-year-old company, owner an estimated 71–76, no website or digital presence, no formal succession plan despite the owner's son also working there. Healthy 21.6% margin. Flagged outreach-ready.",
+              trello: 'https://trello.com/c/VN2vlsRf', extraLink: null,
+              sections: mkScreeningSections()
+            }
           ]
         },
         {
