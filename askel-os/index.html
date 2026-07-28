@@ -1556,7 +1556,9 @@
       } else if (parts[0] === 'find' && parts.length === 2) {
         app.innerHTML = renderWorkflow(parts[1]);
       } else if (parts[0] === 'find' && parts.length === 4 && parts[2] === 'task') {
-        app.innerHTML = parts[1] === 'sourcing' ? renderProspectTask(parts[3]) : renderTask(parts[1], parts[3]);
+        app.innerHTML = parts[1] === 'sourcing' ? renderProspectTask(parts[3])
+          : parts[1] === 'screening' ? renderScreeningTask(parts[3])
+          : renderTask(parts[1], parts[3]);
       } else if (parts[0] === 'fund' || parts[0] === 'grow') {
         app.innerHTML = renderPlaceholderEngine(parts[0]);
       } else {
@@ -2234,6 +2236,76 @@
           </div>
         </div>
       `;
+    }
+
+    // ── SCREENING TASK DETAIL ──
+    const SCREENING_SECTION_ICON = { financial: '💰', market: '📊', resources: '👥', dealTerms: '🤝', killQuestions: '☠️' };
+
+    function renderScreeningTask(leadId) {
+      const s = DATA.findStages.find(x => x.key === 'screening');
+      const lead = s.leads.find(x => x.id === leadId);
+      if (!lead) return renderScreeningWorkflow(s);
+
+      const allDone = lead.sections.every(sec => sec.items.every(item => item.done));
+
+      const sectionsHtml = lead.sections.map(sec => {
+        const itemsHtml = sec.items.map((item, i) => `
+          <div class="checklist-item ${item.done ? 'done' : ''}">
+            <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleScreeningItem('${lead.id}','${sec.key}',${i})">
+            <span>${escapeHtml(item.label)}</span>
+          </div>
+        `).join('');
+        return `
+          <div class="card static card-pad lens-section">
+            <div class="sec-label">${SCREENING_SECTION_ICON[sec.key] || ''} ${escapeHtml(sec.name)}</div>
+            ${itemsHtml}
+          </div>
+        `;
+      }).join('');
+
+      const extraLinkHtml = lead.extraLink
+        ? `<a class="link-out" href="${escapeAttr(lead.extraLink.url)}" target="_blank" rel="noopener">${escapeHtml(lead.extraLink.label)}</a>`
+        : '';
+
+      return `
+        ${crumbs([{ label: 'Company', path: '/' }, { label: 'Find', path: '/find' }, { label: s.name, path: '/find/screening' }, { label: lead.name }])}
+
+        <div class="card static card-pad" style="max-width:640px; margin-bottom:16px;">
+          <div class="card-title">${escapeHtml(lead.name)}</div>
+          <div class="card-owner">${escapeHtml(lead.location)}</div>
+
+          <div class="field-row"><div class="field-label">Revenue</div><div class="field-value">${escapeHtml(lead.revenue)}</div></div>
+          <div class="field-row"><div class="field-label">Profit</div><div class="field-value">${escapeHtml(lead.profit)}</div></div>
+          <div class="field-row"><div class="field-label">Team size</div><div class="field-value">${escapeHtml(lead.teamSize)}</div></div>
+          <div class="field-row"><div class="field-label">Founded</div><div class="field-value">${escapeHtml(lead.founded)}</div></div>
+          <div class="field-row"><div class="field-label">Y-tunnus</div><div class="field-value">${escapeHtml(lead.ytunnus)}</div></div>
+          <div class="field-row"><div class="field-label">CEO / Owner</div><div class="field-value">${escapeHtml(lead.ceo)}</div></div>
+          <div class="field-row"><div class="field-label">Contact</div><div class="field-value">${escapeHtml(lead.contact)}</div></div>
+
+          <div class="sec-label" style="margin-top:14px;">Why interesting</div>
+          <div class="card-desc">${escapeHtml(lead.whyInteresting)}</div>
+
+          <div style="margin-top:14px; display:flex; gap:16px;">
+            <a class="link-out" href="${escapeAttr(lead.trello)}" target="_blank" rel="noopener">Open Trello card →</a>
+            ${extraLinkHtml}
+          </div>
+        </div>
+
+        ${sectionsHtml}
+
+        <div class="card static card-pad" style="margin-top:16px;">
+          <!-- SCREENING_ACTIONS_PLACEHOLDER -->
+        </div>
+      `;
+    }
+
+    function toggleScreeningItem(leadId, sectionKey, itemIndex) {
+      const s = DATA.findStages.find(x => x.key === 'screening');
+      const lead = s.leads.find(x => x.id === leadId);
+      if (!lead) return;
+      const section = lead.sections.find(sec => sec.key === sectionKey);
+      section.items[itemIndex].done = !section.items[itemIndex].done;
+      document.getElementById('app').innerHTML = renderScreeningTask(leadId);
     }
 
     // ── SCREEN 4b: Prospect detail (Sourcing) ──
