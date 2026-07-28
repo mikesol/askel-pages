@@ -2411,7 +2411,10 @@
               <div class="prospect-row-name">${escapeHtml(lead.name)}</div>
               <div class="prospect-row-meta">${escapeHtml(lead.location)}${lead.revenue !== 'unknown' ? ' · ' + escapeHtml(lead.revenue) : ''}</div>
             </div>
-            <span class="completion-badge">${c.done}/${c.total} checked</span>
+            <div class="prospect-row-right">
+              ${renderOwnerPicker('screening', lead.id)}
+              <span class="completion-badge">${c.done}/${c.total} checked</span>
+            </div>
           </a>
         `;
       }).join('');
@@ -2557,7 +2560,10 @@
               <div class="card-title">${escapeHtml(lead.name)}</div>
               <div class="card-owner">${escapeHtml(lead.location)}</div>
             </div>
-            <button class="pill-btn" onclick="alert('Coming soon — will create/open a Drive folder for ${escapeAttr(lead.name)} containing its financial analysis and development plan.')">📁 Drive Folder</button>
+            <div style="display:flex; align-items:center; gap:10px;">
+              ${renderOwnerPicker('screening', lead.id)}
+              <button class="pill-btn" onclick="alert('Coming soon — will create/open a Drive folder for ${escapeAttr(lead.name)} containing its financial analysis and development plan.')">📁 Drive Folder</button>
+            </div>
           </div>
 
           <div class="field-row"><div class="field-label">Revenue</div><div class="field-value">${escapeHtml(lead.revenue)}</div></div>
