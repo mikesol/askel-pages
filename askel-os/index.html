@@ -468,53 +468,55 @@
 
   <script>
     // ── SCREENING VIEW — real checklist items from the Case Scouting "Screening" list Trello cards (verified 2026-07-28) ──
+    const SCREENING_FINANCIAL_ANALYSIS_URL = 'https://docs.google.com/spreadsheets/d/1llwFP6A7K8D7KaMK9hUOZrz_Bh69od0q/edit';
+
     const SCREENING_CHECKLIST_TEMPLATE = [
       {
         key: 'financial', name: 'Financial',
         items: [
-          'Pyydä tilinpäätös kolmelta viime vuodelta',
-          'Pyydä tulos ja tase laajalla näkymällä',
-          'Kopioi ja täytä talousanalyysi (talousanalyysi-pohja)',
-          'Kulurakenne selkeä, top 3 suurinta kuluerää tiedossa',
-          'Top 10 isoimmat asiakkaat tiedossa (B2B/B2C)',
-          'Onko yrityksessä recurring revenue?',
-          'Kuukausittainen kassavirta tiedossa',
-          'Kausivaihtelut tiedossa',
-          'Tuloksentekokyky OK → jatketaan'
+          'Request financial statements for the last 3 years',
+          'Request income statement and balance sheet in full view',
+          { label: 'Copy and complete the financial analysis', url: SCREENING_FINANCIAL_ANALYSIS_URL },
+          'Cost structure clear, top 3 largest cost items known',
+          'Top 10 largest customers known (B2B/B2C)',
+          'Does the company have recurring revenue?',
+          'Monthly cash flow known',
+          'Seasonal variation known',
+          'Profitability OK → proceed'
         ]
       },
       {
         key: 'market', name: 'Market & SWOT',
         items: [
-          'Top 3 kilpailijaa tiedossa (asiakastieto.fi)',
-          '3 kansainvälistä kilpailijaa tiedossa',
-          'Asiakasrekisterin koko tiedossa',
-          'Tiedossa kuka on asiakas ja paljonko heitä on palveltavana alueella',
-          'Miten alalla hyödynnetään tekoälyä?',
-          'SWOT tehty',
-          'Kehitysideat tiedossa'
+          'Top 3 local competitors known (asiakastieto.fi)',
+          '3 international competitors known',
+          'Customer register size known',
+          'Known who the customers are and how many are in the service area',
+          'How is AI used in the industry?',
+          'SWOT completed',
+          'Development ideas known'
         ]
       },
       {
         key: 'resources', name: 'Team & Resources',
         items: [
-          'Palaveri paikanpäälle sovittu',
-          'Arvioidaan tiimi + myyjän rooli/tehtävät',
-          'Haastatellaan yrittäjä',
-          'Haastatellaan henkilökunta',
-          'Rekrytointitarve ja roolin KPI selvä'
+          'In-person meeting scheduled',
+          'Team and seller’s role/tasks assessed',
+          'Interview the owner',
+          'Interview the staff',
+          'Recruitment need and role KPIs clear'
         ]
       },
       {
         key: 'dealTerms', name: 'Deal Terms',
         items: [
-          'Liiketoimintakauppa vai osakekauppa — päätetty',
-          'Kauanko myyjä jää yritykseen töihin',
-          'Suostuuko konsultoimaan työvelvoitteen loputtua',
-          'Asiakasrekisteri ja markkinointilistat siirtyvät kaupan mukana',
-          'Tiedon siirrosta sovittu',
-          'Preliminary deal structure neuvoteltu',
-          'Tarjous lähetetty myyjälle'
+          'Asset deal vs. share deal — decided',
+          'How long the seller stays on',
+          'Willing to consult after employment ends',
+          'Customer register and marketing lists transfer with the sale',
+          'Knowledge transfer agreed',
+          'Preliminary deal structure negotiated',
+          'Offer sent to seller'
         ]
       },
       {
@@ -524,7 +526,7 @@
           'Capital gain on exit min. 100 000€ per owner',
           'Can we implement tech solutions that make operations faster?',
           'Can we run this business with max 5 hours weekly?',
-          'Champion + aisapari valittu'
+          'Champion + second person assigned'
         ]
       }
     ];
@@ -533,7 +535,9 @@
       return SCREENING_CHECKLIST_TEMPLATE.map(sec => ({
         key: sec.key,
         name: sec.name,
-        items: sec.items.map(label => ({ label, done: false }))
+        items: sec.items.map(it => typeof it === 'string'
+          ? { label: it, url: null, done: false }
+          : { label: it.label, url: it.url, done: false })
       }));
     }
 
@@ -1871,6 +1875,87 @@
       URL.revokeObjectURL(url);
     }
 
+    // ── DEVELOPMENT PLAN (static blank template — matches the real "Kehitysprojekti" template doc) ──
+    function devPlanText(lead) {
+      return [
+        `DEVELOPMENT PLAN — ${lead.name}`,
+        '',
+        `${lead.name} serves WHOM, developed HOW, to achieve WHAT desired outcome`,
+        '_'.repeat(60),
+        '',
+        'Date / Place: ______________________',
+        'Signatures: ______________________   ______________________',
+        '',
+        '1. PROJECT OBJECTIVES',
+        '   Theme:',
+        '   Project phases:',
+        '   Project scope: ___ person-days / ___ hours',
+        '   Created during the project:',
+        '',
+        '2. STAKEHOLDERS',
+        '',
+        '3. CONSTRAINTS',
+        '',
+        '4. P.E.S.T. RISKS',
+        '',
+        '5. COMPLETION CRITERIA AND KPIs',
+        '   S.M.A.R.T. goal:',
+        '',
+        '6. ROLE 1',
+        '',
+        '7. ROLE 2',
+        '',
+        '8. ROLE 3',
+        '',
+        '9. OTHER / BUDGET',
+        '   Budget:'
+      ].join('\n');
+    }
+
+    function openDevPlanModal(leadId) {
+      const s = DATA.findStages.find(x => x.key === 'screening');
+      const lead = s.leads.find(x => x.id === leadId);
+      if (!lead) return;
+      let overlay = document.getElementById('modal-overlay');
+      if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'modal-overlay';
+        overlay.className = 'modal-overlay';
+        overlay.onclick = (e) => { if (e.target === overlay) closeDevPlanModal(); };
+        document.body.appendChild(overlay);
+      }
+      overlay.innerHTML = `
+        <div class="modal">
+          <button class="modal-close" onclick="closeDevPlanModal()">×</button>
+          <div class="modal-section-title" style="margin-top:0;">📋 Development Plan — ${escapeHtml(lead.name)}</div>
+          <div class="tag-example" style="margin-bottom:14px; display:inline-block;">Blank template — matches the real Kehitysprojekti template doc</div>
+          <pre style="white-space:pre-wrap; font-size:12.5px; line-height:1.6; color:var(--text); font-family:inherit; margin:0;">${escapeHtml(devPlanText(lead))}</pre>
+          <button class="add-card-btn" style="margin-top:16px;" onclick="downloadDevPlan('${lead.id}')">Download</button>
+        </div>
+      `;
+      overlay.style.display = 'flex';
+    }
+
+    function closeDevPlanModal() {
+      const overlay = document.getElementById('modal-overlay');
+      if (overlay) overlay.style.display = 'none';
+    }
+
+    function downloadDevPlan(leadId) {
+      const s = DATA.findStages.find(x => x.key === 'screening');
+      const lead = s.leads.find(x => x.id === leadId);
+      if (!lead) return;
+      const blob = new Blob([devPlanText(lead)], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = lead.name.replace(/[^a-z0-9]+/gi, '-').toLowerCase() + '-development-plan.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
     function renderCardModal(c) {
       const colOptions = kanban.columns.map(col => `<option value="${escapeAttr(col)}" ${col === c.column ? 'selected' : ''}>${escapeHtml(col)}</option>`).join('');
       const goalOptions = ROADMAP_GOALS.map(g => `<option value="${escapeAttr(g)}" ${g === c.goal ? 'selected' : ''}>${escapeHtml(g)}</option>`).join('');
@@ -2321,7 +2406,9 @@
         const itemsHtml = sec.items.map((item, i) => `
           <div class="checklist-item ${item.done ? 'done' : ''}">
             <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleScreeningItem('${lead.id}','${sec.key}',${i})">
-            <span>${escapeHtml(item.label)}</span>
+            <span>${item.url
+              ? `<a class="link-out" href="${escapeAttr(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.label)} →</a>`
+              : escapeHtml(item.label)}</span>
           </div>
         `).join('');
         return `
@@ -2364,6 +2451,8 @@
 
         <div class="card static card-pad" style="margin-top:16px;">
           <button class="add-card-btn" style="margin-top:0;" onclick="openExecSummaryModal('${lead.id}')">📄 Executive Summary</button>
+          <button class="add-card-btn" onclick="openDevPlanModal('${lead.id}')">📋 Development Plan</button>
+          <button class="add-card-btn" onclick="alert('Coming soon — will create/open a Drive folder for ${escapeAttr(lead.name)} containing its financial analysis and development plan.')">📁 Prospect Drive Folder</button>
           <button class="add-card-btn" ${allDone ? '' : 'disabled'} onclick="moveToIC('${lead.id}')">${allDone ? '✓ Move to IC' : 'Move to IC — complete all checklists first'}</button>
         </div>
       `;
