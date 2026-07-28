@@ -2327,7 +2327,10 @@
             <div class="prospect-row-name">${escapeHtml(p.name)}</div>
             <div class="prospect-row-meta">${escapeHtml(p.source)}${p.price !== 'unknown' ? ' · ' + escapeHtml(p.price) : ''}</div>
           </div>
-          <span class="fit-tag ${p.tag === 'Strong fit' ? 'strong' : 'cold'}">${p.tag}</span>
+          <div class="prospect-row-right">
+            ${renderOwnerPicker('sourcing', p.id)}
+            <span class="fit-tag ${p.tag === 'Strong fit' ? 'strong' : 'cold'}">${p.tag}</span>
+          </div>
         </a>
       `).join('');
 
@@ -2624,8 +2627,13 @@
         ${crumbs([{ label: 'Company', path: '/' }, { label: 'Find', path: '/find' }, { label: s.name, path: '/find/sourcing' }, { label: p.name }])}
 
         <div class="card static card-pad" style="max-width:640px;">
-          <div class="card-title">${escapeHtml(p.name)}</div>
-          <div class="card-owner">Source: ${escapeHtml(p.source)} &nbsp;<span class="fit-tag ${p.tag === 'Strong fit' ? 'strong' : 'cold'}">${p.tag}</span></div>
+          <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px;">
+            <div>
+              <div class="card-title">${escapeHtml(p.name)}</div>
+              <div class="card-owner">Source: ${escapeHtml(p.source)} &nbsp;<span class="fit-tag ${p.tag === 'Strong fit' ? 'strong' : 'cold'}">${p.tag}</span></div>
+            </div>
+            ${renderOwnerPicker('sourcing', p.id)}
+          </div>
 
           <div class="field-row"><div class="field-label">Price</div><div class="field-value">${escapeHtml(p.price)}</div></div>
           <div class="field-row"><div class="field-label">Result / profit</div><div class="field-value">${escapeHtml(p.result)}</div></div>
