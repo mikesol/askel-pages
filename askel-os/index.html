@@ -1802,6 +1802,75 @@
       render();
     }
 
+    // ── EXECUTIVE SUMMARY (static template for now — Varia: no editing functionality yet) ──
+    function execSummaryText(lead) {
+      return [
+        'EXECUTIVE SUMMARY',
+        '',
+        `Name of company: ${lead.name}`,
+        `Location of company: ${lead.location}`,
+        `Contact info: ${lead.contact}`,
+        `Summary of company: ${lead.whyInteresting}`,
+        `Team size: ${lead.teamSize}`,
+        `Revenue: ${lead.revenue}`,
+        `Profit: ${lead.profit}`,
+        `Loan details: unknown`,
+        `Development plan: unknown`
+      ].join('\n');
+    }
+
+    function openExecSummaryModal(leadId) {
+      const s = DATA.findStages.find(x => x.key === 'screening');
+      const lead = s.leads.find(x => x.id === leadId);
+      if (!lead) return;
+      let overlay = document.getElementById('modal-overlay');
+      if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'modal-overlay';
+        overlay.className = 'modal-overlay';
+        overlay.onclick = (e) => { if (e.target === overlay) closeExecSummaryModal(); };
+        document.body.appendChild(overlay);
+      }
+      overlay.innerHTML = `
+        <div class="modal">
+          <button class="modal-close" onclick="closeExecSummaryModal()">×</button>
+          <div class="modal-section-title" style="margin-top:0;">📄 Executive Summary — for the bank</div>
+          <div class="tag-example" style="margin-bottom:14px; display:inline-block;">Static template — not yet editable</div>
+          <div class="field-row"><div class="field-label">Name of company</div><div class="field-value">${escapeHtml(lead.name)}</div></div>
+          <div class="field-row"><div class="field-label">Location of company</div><div class="field-value">${escapeHtml(lead.location)}</div></div>
+          <div class="field-row"><div class="field-label">Contact info</div><div class="field-value">${escapeHtml(lead.contact)}</div></div>
+          <div class="field-row"><div class="field-label">Summary of company</div><div class="field-value" style="text-align:left; max-width:360px;">${escapeHtml(lead.whyInteresting)}</div></div>
+          <div class="field-row"><div class="field-label">Team size</div><div class="field-value">${escapeHtml(lead.teamSize)}</div></div>
+          <div class="field-row"><div class="field-label">Revenue</div><div class="field-value">${escapeHtml(lead.revenue)}</div></div>
+          <div class="field-row"><div class="field-label">Profit</div><div class="field-value">${escapeHtml(lead.profit)}</div></div>
+          <div class="field-row"><div class="field-label">Loan details</div><div class="field-value">unknown</div></div>
+          <div class="field-row"><div class="field-label">Development plan</div><div class="field-value">unknown</div></div>
+          <button class="add-card-btn" style="margin-top:16px;" onclick="downloadExecSummary('${lead.id}')">Download</button>
+        </div>
+      `;
+      overlay.style.display = 'flex';
+    }
+
+    function closeExecSummaryModal() {
+      const overlay = document.getElementById('modal-overlay');
+      if (overlay) overlay.style.display = 'none';
+    }
+
+    function downloadExecSummary(leadId) {
+      const s = DATA.findStages.find(x => x.key === 'screening');
+      const lead = s.leads.find(x => x.id === leadId);
+      if (!lead) return;
+      const blob = new Blob([execSummaryText(lead)], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = lead.name.replace(/[^a-z0-9]+/gi, '-').toLowerCase() + '-executive-summary.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
     function renderCardModal(c) {
       const colOptions = kanban.columns.map(col => `<option value="${escapeAttr(col)}" ${col === c.column ? 'selected' : ''}>${escapeHtml(col)}</option>`).join('');
       const goalOptions = ROADMAP_GOALS.map(g => `<option value="${escapeAttr(g)}" ${g === c.goal ? 'selected' : ''}>${escapeHtml(g)}</option>`).join('');
@@ -2294,7 +2363,8 @@
         ${sectionsHtml}
 
         <div class="card static card-pad" style="margin-top:16px;">
-          <!-- SCREENING_ACTIONS_PLACEHOLDER -->
+          <button class="add-card-btn" style="margin-top:0;" onclick="openExecSummaryModal('${lead.id}')">📄 Executive Summary</button>
+          <!-- MOVE_TO_IC_PLACEHOLDER -->
         </div>
       `;
     }
