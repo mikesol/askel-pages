@@ -270,6 +270,47 @@
 
     .stack { display: flex; flex-direction: column; gap: 16px; }
 
+    /* ── SOURCING VIEW ── */
+    .kpi-row { display: flex; align-items: baseline; gap: 14px; margin-bottom: 20px; }
+    .kpi-number {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 44px;
+      color: var(--red-light); line-height: 1;
+    }
+    .kpi-label { font-size: 13px; color: var(--muted); }
+    .kpi-sub { display: block; font-size: 11.5px; margin-top: 2px; }
+
+    .thesis-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .thesis-chip {
+      font-size: 12px; padding: 6px 12px; border-radius: 16px;
+      background: rgba(192,57,43,0.1); border: 1px solid rgba(192,57,43,0.25); color: var(--text);
+    }
+
+    .prospect-list { display: flex; flex-direction: column; gap: 8px; max-height: 640px; overflow-y: auto; }
+    .prospect-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 11px 14px; background: var(--elevated); border-radius: 8px; border: 1px solid var(--border);
+      text-decoration: none; color: inherit; cursor: pointer;
+    }
+    .prospect-row:hover { border-color: var(--border-hover); }
+    .prospect-row-name { font-weight: 500; font-size: 13px; }
+    .prospect-row-meta { color: var(--muted); font-size: 11.5px; margin-top: 2px; }
+    .fit-tag {
+      font-size: 9.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 4px; white-space: nowrap; flex-shrink: 0;
+    }
+    .fit-tag.strong { background: rgba(46,204,113,0.14); color: var(--green); }
+    .fit-tag.cold { background: rgba(93,173,226,0.14); color: var(--blue); }
+
+    .tri-state { display: inline-block; width: 16px; text-align: center; font-weight: 700; }
+    .tri-state.pass { color: var(--green); }
+    .tri-state.fail { color: var(--red-light); }
+    .tri-state.unknown { color: var(--subtle); }
+
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+    .skill-card { background: var(--elevated); border: 1px solid var(--border); border-radius: 9px; padding: 12px 14px; }
+    .skill-card-name { font-size: 12.5px; font-weight: 600; margin-bottom: 4px; }
+    .skill-card-desc { font-size: 11.5px; color: var(--muted); line-height: 1.4; }
+
     /* ── KANBAN ── */
     .kanban-section { margin-top: 28px; }
     .kanban-board { display: flex; gap: 14px; align-items: flex-start; overflow-x: auto; padding-bottom: 4px; }
@@ -1798,10 +1839,79 @@
       `;
     }
 
+    // ── SOURCING WORKFLOW (real data view) ──
+    const SKILLS_SEED = [
+      { name: 'playbook-sourcing', desc: 'Broker platforms, weak-signal detection, finder.fi workflow, Trello card standards.' },
+      { name: 'playbook-thesis', desc: 'The investment criteria used to score every lead.' },
+      { name: 'cron-weekly-sourcing', desc: 'Yrityskaupat.net weekly scrape across thesis sectors (Mon).' },
+      { name: 'cron-swedish-sweep', desc: 'Bolagsplatsen.se sweep, Finnish + Swedish listings (Tue).' },
+      { name: 'finder-fi', desc: 'Finnish company and financial lookups via Finder.fi.' }
+    ];
+    const skillsState = { skills: SKILLS_SEED.slice() };
+
+    const THESIS_CHIPS = [
+      '💰 €400K–1.5M revenue', '📈 €100K+ profit', '🏷️ max €1M price',
+      '📅 10+ yrs old', '👥 5+ staff', '🌍 FI · SE · EE', '🏢 Oy'
+    ];
+
+    function renderSourcingWorkflow(s) {
+      const strongCount = s.prospects.filter(p => p.tag === 'Strong fit').length;
+      const coldCount = s.prospects.length - strongCount;
+
+      const thesisHtml = THESIS_CHIPS.map(c => `<span class="thesis-chip">${c}</span>`).join('');
+
+      const prospectRows = s.prospects.map(p => `
+        <a href="#/find/sourcing/task/${p.id}" class="prospect-row" onclick="navigate('/find/sourcing/task/${p.id}'); return false;">
+          <div>
+            <div class="prospect-row-name">${escapeHtml(p.name)}</div>
+            <div class="prospect-row-meta">${escapeHtml(p.source)}${p.price !== 'unknown' ? ' · ' + escapeHtml(p.price) : ''}</div>
+          </div>
+          <span class="fit-tag ${p.tag === 'Strong fit' ? 'strong' : 'cold'}">${p.tag}</span>
+        </a>
+      `).join('');
+
+      const skillCards = skillsState.skills.map(sk => `
+        <div class="skill-card">
+          <div class="skill-card-name">${escapeHtml(sk.name)}</div>
+          <div class="skill-card-desc">${escapeHtml(sk.desc)}</div>
+        </div>
+      `).join('');
+
+      return `
+        ${crumbs([{ label: 'Company', path: '/' }, { label: 'Find', path: '/find' }, { label: s.name }])}
+        <div class="greeting">
+          <div class="greeting-text" style="font-size:36px;">${s.name}</div>
+          <div class="greeting-sub">${s.purpose}</div>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi-number">${s.prospects.length}</div>
+          <div class="kpi-label">Prospects<span class="kpi-sub">${strongCount} strong fit · ${coldCount} cold outreach</span></div>
+        </div>
+
+        <div class="card static card-pad" style="margin-bottom:16px;">
+          <div class="sec-label">Thesis fit</div>
+          <div class="thesis-chips">${thesisHtml}</div>
+        </div>
+
+        <div class="card static card-pad" style="margin-bottom:16px;">
+          <div class="sec-label">Prospects (${s.prospects.length})</div>
+          <div class="prospect-list">${prospectRows}</div>
+        </div>
+
+        <div class="card static card-pad" id="skills-section">
+          <div class="sec-label">🦔 Steve's Skills</div>
+          <div class="skills-grid">${skillCards}</div>
+          <button class="add-card-btn" style="margin-top:12px;" onclick="openTeachSkillModal()">+ Teach Steve a Skill</button>
+        </div>
+      `;
+    }
+
     // ── SCREEN 3: Workflow page ──
     function renderWorkflow(key) {
       const s = DATA.findStages.find(x => x.key === key);
       if (!s) return renderFind();
+      if (key === 'sourcing') return renderSourcingWorkflow(s);
 
       let tasksHtml = '';
       if (s.task) {
