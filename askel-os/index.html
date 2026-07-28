@@ -1771,7 +1771,7 @@
     }
 
     // ── TEACH STEVE A SKILL (mockup only — no real skill is created) ──
-    function openTeachSkillModal() {
+    function openTeachSkillModal(context) {
       let overlay = document.getElementById('modal-overlay');
       if (!overlay) {
         overlay = document.createElement('div');
@@ -1793,7 +1793,7 @@
             <div class="modal-field-label">Description</div>
             <textarea id="new-skill-desc" placeholder="What should this skill do?"></textarea>
           </div>
-          <button class="add-card-btn" onclick="addSkill()">Add</button>
+          <button class="add-card-btn" onclick="addSkill('${context}')">Add</button>
         </div>
       `;
       overlay.style.display = 'flex';
@@ -1804,11 +1804,12 @@
       if (overlay) overlay.style.display = 'none';
     }
 
-    function addSkill() {
+    function addSkill(context) {
       const nameInput = document.getElementById('new-skill-name');
       const descInput = document.getElementById('new-skill-desc');
       if (!nameInput.value.trim()) return;
-      skillsState.skills.push({ name: nameInput.value.trim(), desc: descInput.value.trim() || 'No description given.' });
+      const targetState = context === 'screening' ? screeningSkillsState : skillsState;
+      targetState.skills.push({ name: nameInput.value.trim(), desc: descInput.value.trim() || 'No description given.' });
       closeTeachSkillModal();
       render();
     }
@@ -2274,12 +2275,21 @@
         <div class="card static card-pad" id="skills-section">
           <div class="sec-label">🦔 Steve's Sourcing Skills</div>
           <div class="skills-grid">${skillCards}</div>
-          <button class="add-card-btn" style="margin-top:12px;" onclick="openTeachSkillModal()">+ Teach Steve a Skill</button>
+          <button class="add-card-btn" style="margin-top:12px;" onclick="openTeachSkillModal('sourcing')">+ Teach Steve a Skill</button>
         </div>
       `;
     }
 
     // ── SCREENING WORKFLOW (real data view) ──
+    const SCREENING_SKILLS_SEED = [
+      { name: 'playbook-screening', desc: 'The four screening lenses (financial, market, resources, deal terms) and the Psychological Driver Matrix for seller negotiation.' },
+      { name: 'playbook-valuation', desc: '34-item Valuation Risk Scoring Tool — yield rate and Business Value, run before finalizing any offer.' },
+      { name: 'playbook-thesis', desc: 'The investment criteria used to score every lead.' },
+      { name: 'trello-cli', desc: 'Reads the real Screening-list cards and checklists that back this page.' },
+      { name: 'google-workspace', desc: 'Gmail, Calendar, Drive, Sheets, and Docs — pulled the real financial analysis and development plan templates.' }
+    ];
+    const screeningSkillsState = { skills: SCREENING_SKILLS_SEED.slice() };
+
     function leadCompletion(lead) {
       let done = 0, total = 0;
       lead.sections.forEach(sec => sec.items.forEach(item => { total++; if (item.done) done++; }));
@@ -2311,6 +2321,13 @@
         `;
       }).join('');
 
+      const skillCards = screeningSkillsState.skills.map(sk => `
+        <div class="skill-card">
+          <div class="skill-card-name">${escapeHtml(sk.name)}</div>
+          <div class="skill-card-desc">${escapeHtml(sk.desc)}</div>
+        </div>
+      `).join('');
+
       return `
         ${crumbs([{ label: 'Company', path: '/' }, { label: 'Find', path: '/find' }, { label: s.name }])}
         <div class="greeting">
@@ -2323,9 +2340,15 @@
           <div class="kpi-label">In Screening<span class="kpi-sub">${totals.done} of ${totals.total} checklist items complete across all leads</span></div>
         </div>
 
-        <div class="card static card-pad">
+        <div class="card static card-pad" style="margin-bottom:16px;">
           <div class="sec-label">Leads (${s.leads.length})</div>
           <div class="prospect-list">${leadRows}</div>
+        </div>
+
+        <div class="card static card-pad" id="skills-section">
+          <div class="sec-label">🦔 Steve's Screening Skills</div>
+          <div class="skills-grid">${skillCards}</div>
+          <button class="add-card-btn" style="margin-top:12px;" onclick="openTeachSkillModal('screening')">+ Teach Steve a Skill</button>
         </div>
       `;
     }
