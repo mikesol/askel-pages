@@ -2364,7 +2364,7 @@
 
         <div class="card static card-pad" style="margin-top:16px;">
           <button class="add-card-btn" style="margin-top:0;" onclick="openExecSummaryModal('${lead.id}')">📄 Executive Summary</button>
-          <!-- MOVE_TO_IC_PLACEHOLDER -->
+          <button class="add-card-btn" ${allDone ? '' : 'disabled'} onclick="moveToIC('${lead.id}')">${allDone ? '✓ Move to IC' : 'Move to IC — complete all checklists first'}</button>
         </div>
       `;
     }
@@ -2376,6 +2376,18 @@
       const section = lead.sections.find(sec => sec.key === sectionKey);
       section.items[itemIndex].done = !section.items[itemIndex].done;
       document.getElementById('app').innerHTML = renderScreeningTask(leadId);
+    }
+
+    function moveToIC(leadId) {
+      const screening = DATA.findStages.find(x => x.key === 'screening');
+      const ic = DATA.findStages.find(x => x.key === 'ic');
+      const idx = screening.leads.findIndex(l => l.id === leadId);
+      if (idx === -1) return;
+      const [lead] = screening.leads.splice(idx, 1);
+      screening.count = screening.leads.length;
+      ic.sample.push(lead.name);
+      ic.count = ic.sample.length;
+      navigate('/find/screening');
     }
 
     // ── SCREEN 4b: Prospect detail (Sourcing) ──
