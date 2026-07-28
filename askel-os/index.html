@@ -1522,10 +1522,39 @@
           ]
         },
         {
-          key: "ic", name: "Investment Committee", count: 0,
+          key: "ic", name: "Investment Committee", count: 1,
           purpose: "Partner vote on whether to proceed to LOI and due diligence.",
           owner: "Partners",
-          sample: []
+          sample: [], // kept for moveToIC() (Screening page) compat — the IC page itself renders .leads, not .sample
+          leads: [
+            {
+              id: 'auran-pesupojat', name: 'Auran Pesupojat Oy',
+              location: 'Turku', sector: 'Mattokauppa / pesulapalvelut',
+              price: '190,000 €', result: '80,000 € (21.4% margin)',
+              champion: 'Niklas Slotte',
+              owners: ['Varia', 'Niklas'],
+              trello: 'https://trello.com/c/LM6wKok2',
+              loiUrl: 'https://docs.google.com/document/d/1qVqAkXArcOe5149gHhsEAMsWupeUSaGm/edit?usp=sharing&ouid=114904312368943683812&rtpof=true&sd=true',
+              killQuestions: [
+                { label: 'How could we exit in 3–5 years?', done: false },
+                { label: 'Capital gain on exit min. 100 000€ per owner', done: false },
+                { label: 'Can we implement tech solutions that make operations faster?', done: false },
+                { label: 'Can we run this business with max 5 hours weekly?', done: false }
+              ],
+              chat: [
+                { from: 'partner', text: "Steve, where are we on Auran Pesupojat before the IC vote?" },
+                { from: 'steve', text: "190,000 € asking price, 80,000 € result — 21.4% margin. Turku, mattokauppa / pesulapalvelut. Niklas is Champion on this one." },
+                { from: 'partner', text: "And the kill questions — are they cleared?" },
+                { from: 'steve', text: "Not formally ticked yet — all 4 are still open on the Trello card. We proceeded on judgment, not a checked box. Want me to walk through them before the vote, or are partners comfortable voting on what we already know?" },
+                { from: 'partner', text: "We're comfortable. What's the financing status?" },
+                { from: 'steve', text: "Momentum Helsinki engagement (V4, 2026-07-08) is signed — personal guarantee caps landed around 23,000–31,000 € per partner. LOI draft is in Drive, linked below, not yet signed." },
+                { from: 'partner', text: "Good. Let's get the vote in." },
+                { from: 'steve', text: "🦔 Standing by — chip away at the vote widget below when you're ready." }
+              ],
+              votes: [],
+              celebrated: false
+            }
+          ]
         },
         {
           key: "dd", name: "Due Diligence", count: 1,
@@ -2610,8 +2639,17 @@
       const [lead] = screening.leads.splice(idx, 1);
       screening.count = screening.leads.length;
       ic.sample.push(lead.name);
-      ic.count = ic.sample.length;
+      ic.count = ic.sample.length + ic.leads.length; // .leads holds the fixed demo lead; .sample holds anything moved over from Screening
       navigate('/find/screening');
+    }
+
+    // ── IC TASK DETAIL ──
+    function toggleICKillQuestion(leadId, index) {
+      const s = DATA.findStages.find(x => x.key === 'ic');
+      const lead = s.leads.find(x => x.id === leadId);
+      if (!lead) return;
+      lead.killQuestions[index].done = !lead.killQuestions[index].done;
+      render();
     }
 
     // ── SCREEN 4b: Prospect detail (Sourcing) ──
