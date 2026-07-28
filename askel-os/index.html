@@ -1690,6 +1690,7 @@
       } else if (parts[0] === 'find' && parts.length === 4 && parts[2] === 'task') {
         app.innerHTML = parts[1] === 'sourcing' ? renderProspectTask(parts[3])
           : parts[1] === 'screening' ? renderScreeningTask(parts[3])
+          : parts[1] === 'ic' ? renderICTask(parts[3])
           : renderTask(parts[1], parts[3]);
       } else if (parts[0] === 'fund' || parts[0] === 'grow') {
         app.innerHTML = renderPlaceholderEngine(parts[0]);
@@ -2480,12 +2481,47 @@
       `;
     }
 
+    // ── IC WORKFLOW (real data view — single worked demo lead) ──
+    function renderICWorkflow(s) {
+      const rows = s.leads.map(lead => `
+        <a href="#/find/ic/task/${lead.id}" class="prospect-row" onclick="navigate('/find/ic/task/${lead.id}'); return false;">
+          <div>
+            <div class="prospect-row-name">${escapeHtml(lead.name)}</div>
+            <div class="prospect-row-meta">${escapeHtml(lead.location)} · ${escapeHtml(lead.price)} price / ${escapeHtml(lead.result)} result</div>
+          </div>
+          <div class="prospect-row-right">
+            ${renderOwnerPicker('ic', lead.id)}
+            <span class="completion-badge">Awaiting IC vote</span>
+          </div>
+        </a>
+      `).join('');
+
+      return `
+        ${crumbs([{ label: 'Company', path: '/' }, { label: 'Find', path: '/find' }, { label: s.name }])}
+        <div class="greeting">
+          <div class="greeting-text" style="font-size:36px;">${s.name}</div>
+          <div class="greeting-sub">${s.purpose}</div>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi-number">${s.leads.length}</div>
+          <div class="kpi-label">In IC<span class="kpi-sub">${s.purpose}</span></div>
+        </div>
+
+        <div class="card static card-pad">
+          <div class="sec-label">Leads (${s.leads.length})</div>
+          <div class="prospect-list">${rows}</div>
+        </div>
+      `;
+    }
+
     // ── SCREEN 3: Workflow page ──
     function renderWorkflow(key) {
       const s = DATA.findStages.find(x => x.key === key);
       if (!s) return renderFind();
       if (key === 'sourcing') return renderSourcingWorkflow(s);
       if (key === 'screening') return renderScreeningWorkflow(s);
+      if (key === 'ic') return renderICWorkflow(s);
 
       let tasksHtml = '';
       if (s.task) {
@@ -2650,6 +2686,58 @@
       if (!lead) return;
       lead.killQuestions[index].done = !lead.killQuestions[index].done;
       render();
+    }
+
+    function renderICKillQuestions(lead) {
+      const itemsHtml = lead.killQuestions.map((item, i) => `
+        <div class="checklist-item ${item.done ? 'done' : ''}">
+          <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleICKillQuestion('${lead.id}',${i})">
+          <span>${escapeHtml(item.label)}</span>
+        </div>
+      `).join('');
+      return `
+        <div class="card static card-pad lens-section">
+          <div class="sec-label">☠️ Kill Questions</div>
+          ${itemsHtml}
+        </div>
+      `;
+    }
+
+    function renderICTask(leadId) {
+      const s = DATA.findStages.find(x => x.key === 'ic');
+      const lead = s.leads.find(x => x.id === leadId);
+      if (!lead) return renderICWorkflow(s);
+
+      return `
+        ${crumbs([{ label: 'Company', path: '/' }, { label: 'Find', path: '/find' }, { label: s.name, path: '/find/ic' }, { label: lead.name }])}
+
+        <div class="card static card-pad" style="max-width:640px; margin-bottom:16px;">
+          <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px;">
+            <div>
+              <div class="card-title">${escapeHtml(lead.name)}</div>
+              <div class="card-owner">${escapeHtml(lead.location)} · ${escapeHtml(lead.sector)}</div>
+            </div>
+            ${renderOwnerPicker('ic', lead.id)}
+          </div>
+
+          <div class="field-row"><div class="field-label">Price</div><div class="field-value">${escapeHtml(lead.price)}</div></div>
+          <div class="field-row"><div class="field-label">Result</div><div class="field-value">${escapeHtml(lead.result)}</div></div>
+          <div class="field-row"><div class="field-label">Champion</div><div class="field-value">${escapeHtml(lead.champion)}</div></div>
+
+          <div style="margin-top:14px; display:flex; gap:16px;">
+            <a class="link-out" href="${escapeAttr(lead.trello)}" target="_blank" rel="noopener">Open Trello card →</a>
+            <a class="link-out" href="${escapeAttr(lead.loiUrl)}" target="_blank" rel="noopener">Open LOI draft →</a>
+          </div>
+        </div>
+
+        ${renderICKillQuestions(lead)}
+
+        <!-- IC_CHAT_PLACEHOLDER -->
+
+        <!-- IC_ACTIONS_PLACEHOLDER -->
+
+        <!-- IC_VOTE_PLACEHOLDER -->
+      `;
     }
 
     // ── SCREEN 4b: Prospect detail (Sourcing) ──
