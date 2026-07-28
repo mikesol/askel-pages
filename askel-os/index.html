@@ -284,6 +284,12 @@
       font-size: 12px; padding: 6px 12px; border-radius: 16px;
       background: rgba(192,57,43,0.1); border: 1px solid rgba(192,57,43,0.25); color: var(--text);
     }
+    .industries-details { margin-top: 14px; }
+    .industries-details summary {
+      cursor: pointer; font-size: 11.5px; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
+    }
+    .industries-details summary:hover { color: var(--text); }
 
     .prospect-list { display: flex; flex-direction: column; gap: 8px; max-height: 640px; overflow-y: auto; }
     .prospect-row {
@@ -437,6 +443,7 @@
         <div class="logo-dropdown-item">Strategy <span class="logo-dropdown-tag">Soon</span></div>
         <div class="logo-dropdown-item">Legal <span class="logo-dropdown-tag">Soon</span></div>
         <div class="logo-dropdown-item">Projects <span class="logo-dropdown-tag">Soon</span></div>
+        <div class="logo-dropdown-item">Settings</div>
       </div>
     </div>
     <div class="nav-links" id="nav-links"></div>
@@ -1897,11 +1904,18 @@
       '📅 10+ yrs old', '👥 5+ staff', '🌍 FI · SE · EE', '🏢 Oy'
     ];
 
+    const THESIS_INDUSTRIES = [
+      'Cleaning & laundry services', 'Property maintenance', 'Waste & recycling collection',
+      'Funeral services', 'Transport & logistics', 'Tyre services',
+      'Auto repair', 'Security', 'Painting'
+    ];
+
     function renderSourcingWorkflow(s) {
       const strongCount = s.prospects.filter(p => p.tag === 'Strong fit').length;
       const coldCount = s.prospects.length - strongCount;
 
       const thesisHtml = THESIS_CHIPS.map(c => `<span class="thesis-chip">${c}</span>`).join('');
+      const industriesHtml = THESIS_INDUSTRIES.map(c => `<span class="thesis-chip">${c}</span>`).join('');
 
       const prospectRows = s.prospects.map(p => `
         <a href="#/find/sourcing/task/${p.id}" class="prospect-row" onclick="navigate('/find/sourcing/task/${p.id}'); return false;">
@@ -1935,6 +1949,10 @@
         <div class="card static card-pad" style="margin-bottom:16px;">
           <div class="sec-label">Thesis fit</div>
           <div class="thesis-chips">${thesisHtml}</div>
+          <details class="industries-details">
+            <summary>Industries we target (${THESIS_INDUSTRIES.length})</summary>
+            <div class="thesis-chips" style="margin-top:10px;">${industriesHtml}</div>
+          </details>
         </div>
 
         <div class="card static card-pad" style="margin-bottom:16px;">
@@ -1943,7 +1961,7 @@
         </div>
 
         <div class="card static card-pad" id="skills-section">
-          <div class="sec-label">🦔 Steve's Skills</div>
+          <div class="sec-label">🦔 Steve's Sourcing Skills</div>
           <div class="skills-grid">${skillCards}</div>
           <button class="add-card-btn" style="margin-top:12px;" onclick="openTeachSkillModal()">+ Teach Steve a Skill</button>
         </div>
