@@ -412,14 +412,14 @@
     const DATA = {
       vision: "Acquire and grow the best small businesses in the Nordics using technology and operational excellence.",
       okrs: [
-        { label: "Acquire 5 companies", pct: 20, note: "1 acquired (Melers Oy) · 1 in Due Diligence (Auran Pesupojat Oy)" },
-        { label: "Raise €8M", pct: 0, note: "Not yet tracked anywhere in the repo — placeholder target" },
-        { label: "Grow EBITDA by 35%", pct: 0, note: "Not yet tracked anywhere in the repo — placeholder target" }
+        { label: "🏢 Acquire 5 companies", pct: 20, note: "1 acquired (Melers Oy) · 1 in Due Diligence (Auran Pesupojat Oy)" },
+        { label: "💰 Raise €8M", pct: 0, note: "Not yet tracked anywhere in the repo — placeholder target" },
+        { label: "📈 Grow EBITDA by 35%", pct: 0, note: "Not yet tracked anywhere in the repo — placeholder target" }
       ],
       focus: [
-        "Auran Pesupojat Oy — Due Diligence / financing close (Momentum Helsinki engagement)",
-        "7 targets sitting in Screening awaiting first-pass review",
-        "44 leads in the Prospecting pipeline"
+        "💸 Auran Pesupojat Oy — Due Diligence / financing close (Momentum Helsinki engagement)",
+        "🔎 7 targets sitting in Screening awaiting first-pass review",
+        "📥 44 leads in the Prospecting pipeline"
       ],
       engines: {
         find:  { name: "Find",  active: 52, accent: true,  built: true,  purpose: "Acquire great businesses — sourcing, screening, IC, due diligence, LOI, close." },
@@ -575,6 +575,7 @@
         <div class="focus-item"><div class="focus-dot"></div><div>${f}</div></div>
       `).join('');
 
+      const engineEmoji = { find: '🔍', fund: '💰', grow: '🌱' };
       const engineCards = ['find', 'fund', 'grow'].map(key => {
         const e = DATA.engines[key];
         const kpi = e.built
@@ -583,7 +584,7 @@
         return `
           <a href="#/${key}" class="card engine-card" onclick="navigate('/${key}'); return false;">
             <div class="engine-top">
-              <div class="engine-name${e.accent ? ' accent' : ''}">${e.name}</div>
+              <div class="engine-name${e.accent ? ' accent' : ''}">${engineEmoji[key]} ${e.name}</div>
               ${kpi}
             </div>
             <div class="engine-purpose">${e.purpose}</div>
@@ -594,31 +595,31 @@
 
       return `
         <div class="greeting">
-          <div class="greeting-text">Company Compass</div>
+          <div class="greeting-text">🧭 Company Compass</div>
           <div class="greeting-sub">${DATA.vision}</div>
         </div>
 
         <div class="section-row">
           <div class="card static card-pad">
-            <div class="sec-label">2026 Roadmap <span class="tag-example">Example — not committed targets</span></div>
+            <div class="sec-label">🗺️ 2026 Roadmap <span class="tag-example">Example — not committed targets</span></div>
             <div class="roadmap-list">${okrRows}</div>
           </div>
           <div class="card static card-pad">
-            <div class="sec-label">Today's Focus</div>
+            <div class="sec-label">🎯 Today's Focus</div>
             <div class="focus-list">${focusRows}</div>
           </div>
         </div>
 
-        <div class="sec-label" style="margin: 22px 0 4px;">Strategic Engines</div>
+        <div class="sec-label" style="margin: 22px 0 4px;">🧩 Strategic Engines</div>
         <div class="engines">${engineCards}</div>
 
         <div class="kanban-section">
-          <div class="sec-label" style="margin-bottom:12px;">Task Board <span class="tag-example">Prototype — resets on reload</span></div>
+          <div class="sec-label" style="margin-bottom:12px;">📋 Task Board <span class="tag-example">Prototype — resets on reload</span></div>
           <div id="kanban-root"></div>
         </div>
 
         <div class="calendar-section">
-          <div class="sec-label" style="margin-bottom:12px;">This Week <span class="tag-example">Mock calendar — not your real Google Calendar</span></div>
+          <div class="sec-label" style="margin-bottom:12px;">🗓️ This Week <span class="tag-example">Mock calendar — not your real Google Calendar</span></div>
           <div id="calendar-root"></div>
         </div>
       `;
