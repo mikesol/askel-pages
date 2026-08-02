@@ -405,10 +405,16 @@
 
     /* ── DD EPIC TASK EDITOR ── */
     .dd-epic-section { margin-bottom: 14px; }
-    .dd-epic-cover {
-      display: block; width: calc(100% + 44px); margin: -20px -22px 14px -22px;
-      height: 160px; object-fit: cover; object-position: center 48%;
+    .dd-epic-banner {
+      display: flex; align-items: center; justify-content: center;
+      width: calc(100% + 44px); margin: -20px -22px 14px -22px;
+      height: 90px; font-size: 40px;
     }
+    .dd-epic-banner.accent-red { background: rgba(192,57,43,0.14); }
+    .dd-epic-banner.accent-red-light { background: rgba(224,76,62,0.14); }
+    .dd-epic-banner.accent-green { background: rgba(46,204,113,0.14); }
+    .dd-epic-banner.accent-blue { background: rgba(93,173,226,0.14); }
+    .dd-epic-banner.accent-yellow { background: rgba(243,156,18,0.14); }
     .dd-task-row { display: flex; align-items: flex-start; gap: 8px; }
     .dd-task-row input[type="checkbox"] { margin-top: 5px; flex-shrink: 0; }
     .dd-task-row textarea {
@@ -1690,13 +1696,13 @@
     // ── DD EPIC CHARTER TEMPLATE (real, from Chapter 5 of The Playbook — Flipping Boring Businesses) ──
     function ddEpicTemplate() {
       const epics = [
-        { name: "Deal Structure — asset deal versus share purchase, seller financing, and other deal terms", owner: "Niklas", cover: "img/dd-epic-deal-structure.webp", tasks: [
+        { name: "Deal Structure — asset deal versus share purchase, seller financing, and other deal terms", owner: "Niklas", emoji: "🤝", accent: "red", tasks: [
           ['Write a one-page business plan for the company, including exit options for investors — gives everyone a shared view of the endgame before we commit.', false],
           ['Confirm who the investors on this deal actually are — needed before ownership shares or financing structure can be finalized.', false],
           ["Agree and document each investor's ownership share — avoids disputes once the deal closes.", false],
           ['Decide whether to buy the company directly under Askel Ventures or under another existing portfolio company — a corporate structuring call that affects tax, liability, and reporting.', false]
         ]},
-        { name: "Financing — securing the acquisition loan and working capital", owner: "Varia", cover: "img/dd-epic-financing.webp", tasks: [
+        { name: "Financing — securing the acquisition loan and working capital", owner: "Varia", emoji: "💰", accent: "green", tasks: [
           ['Build a 12-month cash flow forecast for the company — needed to size the acquisition loan accurately.', false],
           ['Calculate the total loan amount needed to close the deal — the anchor number for every financing conversation that follows.', false],
           ['Contact the bank and send a pre-data-room package (company presentation, cash flow forecast, executive summary) — gets financing conversations moving early.', false],
@@ -1704,12 +1710,12 @@
           ["Apply for a Finnvera entrepreneur loan if the deal needs it — can improve financing terms or fill a funding gap.", false],
           ['Set up a working capital credit line and pre-prepare KYC paperwork — avoids a cash crunch right after closing.', false]
         ]},
-        { name: "Company Incorporation — legal & structural setup for the buying entity", owner: "Niklas", cover: "img/dd-epic-incorporation.webp", tasks: [
+        { name: "Company Incorporation — legal & structural setup for the buying entity", owner: "Niklas", emoji: "📜", accent: "blue", tasks: [
           ["Draft a Shareholders' Agreement (SHA) for the portfolio company if there's an external investor — sets the rules for how owners work together.", false],
           ["Confirm which accountant will handle the company's books going forward — needed before ownership changes hands.", false],
           ['Check whether a Special Purpose Vehicle (SPV) is needed for this deal — some deals need one for tax, liability, or investor reasons, some don’t.', false]
         ]},
-        { name: "DD Site Visit — verifying the business in person", owner: "Niklas", cover: "img/dd-epic-ddvisit.webp", tasks: [
+        { name: "DD Site Visit — verifying the business in person", owner: "Niklas", emoji: "🔍", accent: "yellow", tasks: [
           ["Pull and review the company's bank statements — confirms real cash flow and surfaces any red flags before we commit.", false],
           ['Interview staff on-site and review their employment contracts — tells you who actually runs the business day-to-day and what you’re inheriting.', false],
           ["Walk the site and audit all equipment in use — confirms what's actually there versus what's on paper.", false],
@@ -1720,7 +1726,7 @@
           ["Document everything the current owner actually does day-to-day, and start mapping those processes for video training — you can't hand off a role you haven't written down.", false],
           ['List all hard assets (machinery, equipment, vehicles) with an estimated market/liquidation value — worst case, this tells us what the company is worth if it had to be sold off in pieces.', false]
         ]},
-        { name: "Purchase Agreement — contract terms with the seller", owner: "Tomi", cover: "img/dd-epic-purchase.webp", tasks: [
+        { name: "Purchase Agreement — contract terms with the seller", owner: "Tomi", emoji: "✍️", accent: "red-light", tasks: [
           ['Confirm a non-compete clause is in the purchase agreement — stops the seller from opening a competing business next door.', false],
           ['Check the tax implications of the property rent arrangement — avoids an unpleasant surprise from the tax office later.', false],
           ["Confirm the property lease agreement for the company's premises — where the business actually operates from.", false],
@@ -1730,7 +1736,7 @@
           ["Add a non-disparagement clause so the seller can't badmouth the new owners — protects the business's reputation during the handover period.", false]
         ]}
       ];
-      return epics.map(e => ({ name: e.name, owner: e.owner, cover: e.cover, tasks: e.tasks.map(([text, done]) => ({ text, done, owners: [] })) }));
+      return epics.map(e => ({ name: e.name, owner: e.owner, emoji: e.emoji, accent: e.accent, tasks: e.tasks.map(([text, done]) => ({ text, done, owners: [] })) }));
     }
     DATA.findStages.find(s => s.key === 'dd').epics = ddEpicTemplate();
 
@@ -1936,9 +1942,9 @@
         const ddCards = kanban.cards.filter(c => c.ddDeal === lead.id);
         const allDone = ddCards.length > 0 && ddCards.every(c => c.column === 'Done');
         if (allDone) return "💸 Auran Pesupojat Oy — Due Diligence complete, awaiting Fund decision";
-        return "💸 Auran Pesupojat Oy — Due Diligence in progress on the project wall";
+        return "💸 Auran Pesupojat Oy — Due Diligence in progress on the Task Board";
       }
-      return "💸 Auran Pesupojat Oy — in Due Diligence, tasks not yet on the project wall";
+      return "💸 Auran Pesupojat Oy — in Due Diligence, tasks not yet on the Task Board";
     }
 
     // ── SCREEN 1: Company Compass ──
@@ -2785,7 +2791,7 @@
       { from: 'partner', text: "Steve, what's actually in a DD pass before we start one?" },
       { from: 'steve', text: "5 EPICs straight from the Playbook charter — Deal structure, Financing, Company incorporation, DD process, Purchase agreement. 34 real tasks total, and anyone on the team can pick up any task via the + on each row." },
       { from: 'partner', text: "And once we've actually got a deal in here?" },
-      { from: 'steve', text: "Assign it — automatically once an IC vote hits 3/4, or manually from the box up top if you don't want to replay a vote. Edit whatever's actually relevant to this deal, then push the EPICs to the project wall." },
+      { from: 'steve', text: "Assign it — automatically once an IC vote hits 3/4, or manually from the box up top if you don't want to replay a vote. Edit whatever's actually relevant to this deal, then push the EPICs to the Task Board." },
       { from: 'partner', text: "What happens when it's done?" },
       { from: 'steve', text: "🦔 I'll ping you the moment all 5 EPIC cards land in Done, asking if we're still moving forward to Fund financing. No more losing track of DD in Trello." }
     ];
@@ -2806,12 +2812,12 @@
     }
 
     function renderDDPushCTA(s, lead) {
-      if (!lead) return `<button class="dd-push-btn" disabled title="Assign a company first">📤 Push DD tasks to project wall</button>`;
+      if (!lead) return `<button class="dd-push-btn" disabled title="Assign a company first">📋 Push DD tasks to Task Board</button>`;
       if (lead.pushedToWall) {
         const count = kanban.cards.filter(c => c.ddDeal === lead.id).length;
-        return `<div class="empty-note">✓ Pushed — ${count} task${count === 1 ? '' : 's'} on the <a href="#/" onclick="navigate('/'); return false;">project wall</a></div>`;
+        return `<div class="empty-note">✓ Pushed — ${count} task${count === 1 ? '' : 's'} on the <a href="#/" onclick="navigate('/'); return false;">Task Board</a></div>`;
       }
-      return `<button class="dd-push-btn" onclick="pushDDTasksToWall()">📤 Push DD tasks to project wall</button>`;
+      return `<button class="dd-push-btn" onclick="pushDDTasksToWall()">📋 Push DD tasks to Task Board</button>`;
     }
 
     function pushDDTasksToWall() {
@@ -2912,7 +2918,7 @@
         }).join('');
         return `
           <div class="card static card-pad dd-epic-section">
-            ${epic.cover ? `<img class="dd-epic-cover" src="${escapeAttr(epic.cover)}" alt="" loading="lazy">` : ''}
+            ${epic.emoji ? `<div class="dd-epic-banner accent-${epic.accent}">${epic.emoji}</div>` : ''}
             <div class="sec-label">${escapeHtml(epic.name)}</div>
             ${taskRows}
             <div class="inline-add-row">
