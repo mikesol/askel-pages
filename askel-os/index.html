@@ -405,18 +405,20 @@
 
     /* ── DD EPIC TASK EDITOR ── */
     .dd-epic-section { margin-bottom: 14px; }
-    .dd-task-row { display: flex; align-items: center; gap: 8px; }
-    .dd-task-row input[type="text"] {
+    .dd-task-row { display: flex; align-items: flex-start; gap: 8px; }
+    .dd-task-row input[type="checkbox"] { margin-top: 5px; flex-shrink: 0; }
+    .dd-task-row textarea {
       flex: 1; background: transparent; border: 1px solid transparent; color: var(--text);
-      font-size: 12.5px; font-family: inherit; padding: 4px 6px; border-radius: 6px;
+      font-size: 12.5px; font-family: inherit; line-height: 1.45; padding: 4px 6px; border-radius: 6px;
+      resize: none; overflow: hidden;
     }
-    .dd-task-row input[type="text"]:hover, .dd-task-row input[type="text"]:focus {
+    .dd-task-row textarea:hover, .dd-task-row textarea:focus {
       border-color: rgba(255,255,255,0.16); background: rgba(255,255,255,0.03); outline: none;
     }
-    .dd-task-row.done input[type="text"] { text-decoration: line-through; color: var(--muted); }
+    .dd-task-row.done textarea { text-decoration: line-through; color: var(--muted); }
     .dd-task-delete {
       background: none; border: none; color: var(--muted); font-size: 15px; cursor: pointer;
-      line-height: 1; padding: 2px 4px; flex-shrink: 0;
+      line-height: 1; padding: 2px 4px; flex-shrink: 0; margin-top: 5px;
     }
     .dd-task-delete:hover { color: var(--red-light); }
     .dd-assign-row {
@@ -446,7 +448,7 @@
     .dd-push-btn:hover { filter: brightness(1.12); }
     .dd-push-btn:active { transform: scale(0.99); }
     .dd-push-btn:disabled { background: rgba(255,255,255,0.06); color: var(--muted); cursor: not-allowed; }
-    .dd-task-owner-picker { flex-shrink: 0; }
+    .dd-task-owner-picker { flex-shrink: 0; margin-top: 3px; }
 
     /* ── KANBAN ── */
     .kanban-section { margin-top: 28px; }
@@ -1684,49 +1686,44 @@
     // ── DD EPIC CHARTER TEMPLATE (real, from Chapter 5 of The Playbook — Flipping Boring Businesses) ──
     function ddEpicTemplate() {
       const epics = [
-        { name: "Deal structure", owner: "Niklas", tasks: [
-          ['Portfolio company Business Plan (incl. exit options for investors, one-pager)', false],
-          ['Who are the Investor(s)', false],
-          ['Investor ownership shares', false],
-          ['*Holding company/SPV/Ltd "technical implementation" plan', false]
+        { name: "Deal Structure — asset deal versus share purchase, seller financing, and other deal terms", owner: "Niklas", tasks: [
+          ['Write a one-page business plan for the company, including exit options for investors — gives everyone a shared view of the endgame before we commit.', false],
+          ['Confirm who the investors on this deal actually are — needed before ownership shares or financing structure can be finalized.', false],
+          ["Agree and document each investor's ownership share — avoids disputes once the deal closes.", false],
+          ['Decide whether to buy the company directly under Askel Ventures or under another existing portfolio company — a corporate structuring call that affects tax, liability, and reporting.', false]
         ]},
-        { name: "Financing", owner: "Varia", tasks: [
-          ['Cash flow forecast', false],
-          ['Loan amount needed', false],
-          ['Bank contact & "pre-data room" package sent to bank', true],
-          ['Momentum & financing house — pre-data-room package sent for competitive bidding', true],
-          ['Finnvera entrepreneur loan application if needed', false],
-          ['Credit line for working capital, pre-preparation of KYC application forms etc.', false]
+        { name: "Financing — securing the acquisition loan and working capital", owner: "Varia", tasks: [
+          ['Build a 12-month cash flow forecast for the company — needed to size the acquisition loan accurately.', false],
+          ['Calculate the total loan amount needed to close the deal — the anchor number for every financing conversation that follows.', false],
+          ['Contact the bank and send a pre-data-room package (company presentation, cash flow forecast, executive summary) — gets financing conversations moving early.', true],
+          ['Send the same pre-data-room package to other financing houses (e.g. Momentum) for competitive bidding — keeps the bank honest on rate and terms.', true],
+          ["Apply for a Finnvera entrepreneur loan if the deal needs it — can improve financing terms or fill a funding gap.", false],
+          ['Set up a working capital credit line and pre-prepare KYC paperwork — avoids a cash crunch right after closing.', false]
         ]},
-        { name: "Company incorporation", owner: "Niklas", tasks: [
-          ['Portfolio company SHA (if external investor)', false],
-          ['HH SHA', false],
-          ['HH bank accounts', false],
-          ['Accountant', false],
-          ['HH holding PRH registration', false],
-          ['Niklas Holding registration', false],
-          ['Mike holding registration', false]
+        { name: "Company Incorporation — legal & structural setup for the buying entity", owner: "Niklas", tasks: [
+          ["Draft a Shareholders' Agreement (SHA) for the portfolio company if there's an external investor — sets the rules for how owners work together.", false],
+          ["Confirm which accountant will handle the company's books going forward — needed before ownership changes hands.", false],
+          ['Check whether a Special Purpose Vehicle (SPV) is needed for this deal — some deals need one for tax, liability, or investor reasons, some don’t.', false]
         ]},
-        { name: "DD process", owner: "Niklas", tasks: [
-          ['Company bank accounts audit', true],
-          ['Staff audit on-site (interviews, employment contracts)', true],
-          ['Equipment audit', true],
-          ['Tax audit', true],
-          ['Obligations: legal + other conflicts, chemical regulators, emission/wastewater restrictions', true],
-          ['Customers (contracts & invoicing audit)', true],
-          ['Other contracts & commitments, incl. verbal ones (partnerships etc.)', true],
-          ["List previous owner roles for upcoming video documentation — create process maps (understand the operator's role)", false],
-          ['Spot partner meeting, Nella & Minna', false],
-          ['Equipment/asset listing with € values, for the seller', true]
+        { name: "DD Site Visit — verifying the business in person", owner: "Niklas", tasks: [
+          ["Pull and review the company's bank statements — confirms real cash flow and surfaces any red flags before we commit.", true],
+          ['Interview staff on-site and review their employment contracts — tells you who actually runs the business day-to-day and what you’re inheriting.', true],
+          ["Walk the site and audit all equipment in use — confirms what's actually there versus what's on paper.", true],
+          ['Request a tax debt certificate and check for any ongoing legal disputes or complaints — a clean result here is a hard requirement, not optional.', true],
+          ["Check for legal conflicts and, if relevant, chemical/emission/wastewater regulatory compliance — surfaces liabilities that don't show up in the financials.", true],
+          ["Audit customer contracts and invoicing — confirms revenue is real, recurring, and not about to walk out the door.", true],
+          ['List every other contract or commitment the company has, including verbal ones (partnerships etc.) — verbal deals are easy to miss and expensive to inherit blind.', true],
+          ["Document everything the current owner actually does day-to-day, and start mapping those processes for video training — you can't hand off a role you haven't written down.", false],
+          ['List all hard assets (machinery, equipment, vehicles) with an estimated market/liquidation value — worst case, this tells us what the company is worth if it had to be sold off in pieces.', true]
         ]},
-        { name: "Purchase agreement", owner: "Tomi", tasks: [
-          ['Non-compete clause confirmed', false],
-          ['Tax implications of rent', false],
-          ['Lease agreement', false],
-          ['Leasing agreement', false],
-          ['Spot trade name agreement', false],
-          ['IPR listing (domains, etc.)', false],
-          ['Non-disparagement clause — seller must not speak badly of the new owners', false]
+        { name: "Purchase Agreement — contract terms with the seller", owner: "Tomi", tasks: [
+          ['Confirm a non-compete clause is in the purchase agreement — stops the seller from opening a competing business next door.', false],
+          ['Check the tax implications of the property rent arrangement — avoids an unpleasant surprise from the tax office later.', false],
+          ["Confirm the property lease agreement for the company's premises — where the business actually operates from.", false],
+          ['Confirm any equipment or vehicle leasing agreements — separate from the property lease, but just as important to inherit correctly.', false],
+          ["Confirm whether we can keep using the company's existing trade name — affects branding continuity after the deal closes.", false],
+          ["List all domains, trademarks, and other IP the company owns — nothing gets left behind at closing.", false],
+          ["Add a non-disparagement clause so the seller can't badmouth the new owners — protects the business's reputation during the handover period.", false]
         ]}
       ];
       return epics.map(e => ({ name: e.name, owner: e.owner, tasks: e.tasks.map(([text, done]) => ({ text, done, owners: [] })) }));
@@ -2898,14 +2895,17 @@
 
     function renderDDEpics(s) {
       return s.epics.map((epic, epicIdx) => {
-        const taskRows = epic.tasks.map((task, taskIdx) => `
+        const taskRows = epic.tasks.map((task, taskIdx) => {
+          const rows = Math.max(2, Math.ceil(task.text.length / 95));
+          return `
           <div class="dd-task-row checklist-item ${task.done ? 'done' : ''}">
             <input type="checkbox" ${task.done ? 'checked' : ''} onchange="toggleDDTask(${epicIdx},${taskIdx})">
-            <input type="text" value="${escapeAttr(task.text)}" onchange="editDDTask(${epicIdx},${taskIdx},this.value)">
+            <textarea rows="${rows}" onchange="editDDTask(${epicIdx},${taskIdx},this.value)">${escapeHtml(task.text)}</textarea>
             ${renderDDTaskOwnerPicker(epicIdx, taskIdx)}
             <button class="dd-task-delete" onclick="deleteDDTask(${epicIdx},${taskIdx})" title="Delete task">×</button>
           </div>
-        `).join('');
+        `;
+        }).join('');
         return `
           <div class="card static card-pad dd-epic-section">
             <div class="sec-label">${escapeHtml(epic.name)}</div>
