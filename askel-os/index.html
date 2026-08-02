@@ -423,6 +423,30 @@
       display: flex; align-items: center; justify-content: space-between; gap: 10px;
       padding: 10px 12px; background: rgba(255,255,255,0.03); border-radius: 8px; margin-bottom: 8px;
     }
+    .dd-hero-section {
+      border-left: 4px solid var(--red); background: rgba(192,57,43,0.08);
+    }
+    .dd-hero-label { font-size: 15px; font-weight: 700; letter-spacing: 0.02em; color: var(--red-light); margin-bottom: 8px; }
+    .dd-hero-section textarea {
+      width: 100%; background: transparent; border: 1px solid transparent; color: var(--text);
+      font-family: inherit; font-size: 16px; line-height: 1.5; padding: 6px; border-radius: 8px; resize: vertical;
+    }
+    .dd-hero-section textarea:hover, .dd-hero-section textarea:focus { border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.03); outline: none; }
+    .dd-risk-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+    .dd-risk-row input[type="text"] {
+      flex: 1; background: transparent; border: 1px solid transparent; color: var(--text);
+      font-size: 13px; font-family: inherit; padding: 4px 6px; border-radius: 6px;
+    }
+    .dd-risk-row input[type="text"]:hover, .dd-risk-row input[type="text"]:focus { border-color: rgba(255,255,255,0.16); background: rgba(255,255,255,0.03); outline: none; }
+    .dd-push-btn {
+      font-family: inherit; font-size: 15px; font-weight: 700; padding: 14px 22px; border-radius: 10px;
+      background: var(--red); color: white; border: none; cursor: pointer; width: 100%;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .dd-push-btn:hover { background: var(--red-light); }
+    .dd-push-btn:active { transform: scale(0.99); }
+    .dd-push-btn:disabled { background: rgba(255,255,255,0.06); color: var(--muted); cursor: not-allowed; }
+    .dd-task-owner-picker { flex-shrink: 0; }
 
     /* ── KANBAN ── */
     .kanban-section { margin-top: 28px; }
@@ -1625,13 +1649,6 @@
           objective: "As prospective new owners of the business, we want to ensure the financing of the acquisition and verify the condition of the business and the motivation of the staff before the final transaction, so that the business acquisition is safe to execute.",
           risks: ["Geographic distance", "Minna's technical skills", "DD is new territory for the team"],
           smartGoal: "The team builds a Data Room in Drive for stakeholders (bank, Finnvera) so that the Preliminary/Purchase Agreement signing date can be reached, and assesses whether this business can be acquired as the first portfolio target.",
-          checklist: [
-            { label: "Interview all key staff", url: "https://docs.google.com/forms/d/e/1FAIpQLSeRBaUzRB0THKq4lyDHCjD3-Mz15m4O57Sz71eWkKji0k15wQ/viewform" },
-            { label: "Complete the BusBuy 30-60-90-Day Plan", url: null },
-            { label: "Knowledge transfer plan agreed with seller (Company Owner Role Training template, or connecteam.com)", url: null },
-            { label: "Bank: clauses must align 100% with the purchase agreement, or risk breaking a covenant (could raise the interest rate ~2%)", url: null },
-            { label: "Confirm share retirement option if the company holds its own shares (lets you extract balance sheet assets to previous owners at sale)", url: null }
-          ],
           trelloBoard: "https://trello.com/b/4mDFCBXp/auran-pesupojat-dd",
           driveFolder: "https://drive.google.com/drive/folders/1rlAGeJtPe22fBaecHXe7_SkSgcxlhzh9",
           projectPlanDoc: "https://docs.google.com/document/d/1fBZFq4jVplHDCGMWB_hCwoQSaNvgBdSF_SLMWwCltqA/edit",
@@ -1666,51 +1683,51 @@
     function ddEpicTemplate() {
       const epics = [
         { name: "Deal structure", owner: "Niklas", tasks: [
-          ['Portfolio company Business Plan (incl. exit options for investors, one-pager) (Niklas)', false],
-          ['Who are the Investor(s) (Niklas & Varia)', false],
-          ['Investor ownership shares (Niklas & Varia)', false],
-          ['*Holding company/SPV/Ltd "technical implementation" plan (Mike, Niklas, Varia)', false]
+          ['Portfolio company Business Plan (incl. exit options for investors, one-pager)', false],
+          ['Who are the Investor(s)', false],
+          ['Investor ownership shares', false],
+          ['*Holding company/SPV/Ltd "technical implementation" plan', false]
         ]},
         { name: "Financing", owner: "Varia", tasks: [
-          ['Cash flow forecast (Niklas)', false],
-          ['Loan amount needed (Niklas, Varia)', false],
-          ['Bank contact & "pre-data room" package sent to bank (Varia)', true],
-          ['Momentum & financing house — pre-data-room package sent for competitive bidding (Varia, Niklas)', true],
-          ['Finnvera entrepreneur loan application if needed (Varia, Niklas, Mike)', false],
+          ['Cash flow forecast', false],
+          ['Loan amount needed', false],
+          ['Bank contact & "pre-data room" package sent to bank', true],
+          ['Momentum & financing house — pre-data-room package sent for competitive bidding', true],
+          ['Finnvera entrepreneur loan application if needed', false],
           ['Credit line for working capital, pre-preparation of KYC application forms etc.', false]
         ]},
         { name: "Company incorporation", owner: "Niklas", tasks: [
-          ['Portfolio company SHA (if external investor) (Niklas)', false],
-          ['HH SHA (Mike)', false],
-          ['HH bank accounts (Varia, Niklas)', false],
-          ['Accountant (Niklas)', false],
+          ['Portfolio company SHA (if external investor)', false],
+          ['HH SHA', false],
+          ['HH bank accounts', false],
+          ['Accountant', false],
           ['HH holding PRH registration', false],
-          ['Niklas Holding registration (Niklas)', false],
-          ['Mike holding registration (Mike)', false]
+          ['Niklas Holding registration', false],
+          ['Mike holding registration', false]
         ]},
         { name: "DD process", owner: "Niklas", tasks: [
-          ['Company bank accounts audit (Niklas)', true],
-          ['Staff audit on-site (interviews, employment contracts) (Varia)', true],
-          ['Equipment audit (Niklas, Varia)', true],
-          ['Tax audit (Niklas)', true],
-          ['Obligations: legal + other conflicts, chemical regulators, emission/wastewater restrictions (Niklas, Varia)', true],
-          ['Customers (contracts & invoicing audit) (Varia, Niklas)', true],
-          ['Other contracts & commitments, incl. verbal ones (partnerships etc.) (Varia)', true],
-          ["List previous owner roles for upcoming video documentation — create process maps (understand the operator's role) (Varia)", false],
-          ['Spot partner meeting, Nella & Minna (Varia, Niklas)', false],
+          ['Company bank accounts audit', true],
+          ['Staff audit on-site (interviews, employment contracts)', true],
+          ['Equipment audit', true],
+          ['Tax audit', true],
+          ['Obligations: legal + other conflicts, chemical regulators, emission/wastewater restrictions', true],
+          ['Customers (contracts & invoicing audit)', true],
+          ['Other contracts & commitments, incl. verbal ones (partnerships etc.)', true],
+          ["List previous owner roles for upcoming video documentation — create process maps (understand the operator's role)", false],
+          ['Spot partner meeting, Nella & Minna', false],
           ['Equipment/asset listing with € values, for the seller', true]
         ]},
         { name: "Purchase agreement", owner: "Tomi", tasks: [
-          ['Non-compete clause confirmed (Tomi)', false],
-          ['Tax implications of rent (Tomi)', false],
-          ['Lease agreement (Niklas, Tomi)', false],
-          ['Leasing agreement (Tomi)', false],
-          ['Spot trade name agreement (Tomi)', false],
+          ['Non-compete clause confirmed', false],
+          ['Tax implications of rent', false],
+          ['Lease agreement', false],
+          ['Leasing agreement', false],
+          ['Spot trade name agreement', false],
           ['IPR listing (domains, etc.)', false],
           ['Non-disparagement clause — seller must not speak badly of the new owners', false]
         ]}
       ];
-      return epics.map(e => ({ name: e.name, owner: e.owner, tasks: e.tasks.map(([text, done]) => ({ text, done })) }));
+      return epics.map(e => ({ name: e.name, owner: e.owner, tasks: e.tasks.map(([text, done]) => ({ text, done, owners: [] })) }));
     }
     DATA.findStages.find(s => s.key === 'dd').epics = ddEpicTemplate();
 
@@ -1736,6 +1753,42 @@
       lead.ddOutcome = null;
       dd.leads.push(lead);
       dd.count = dd.leads.length;
+      render();
+    }
+
+    // ── DD TASK OWNER PICKER (per-task, not per-lead — nested epic/task index, doesn't fit findOwnerItem's flat lookup) ──
+    function renderDDTaskOwnerPicker(epicIdx, taskIdx) {
+      const s = DATA.findStages.find(x => x.key === 'dd');
+      const task = s.epics[epicIdx].tasks[taskIdx];
+      const owners = task.owners || [];
+      const pickerKey = 'ddtask:' + epicIdx + '-' + taskIdx;
+      const isOpen = openOwnerPicker === pickerKey;
+
+      const avatars = owners.map(o => `<span class="owner-avatar" title="${escapeAttr(o)}">${escapeHtml(PARTNER_INITIALS[o] || o[0])}</span>`).join('');
+
+      const menuOptions = PARTNERS.map(p => `
+        <div class="owner-option" onclick="event.stopPropagation(); toggleDDTaskOwner(${epicIdx},${taskIdx},'${p}')">
+          <span class="owner-avatar">${PARTNER_INITIALS[p]}</span>
+          <span>${p}</span>
+          ${owners.includes(p) ? '<span class="owner-check">✓</span>' : ''}
+        </div>
+      `).join('');
+
+      return `
+        <div class="owner-picker dd-task-owner-picker" onclick="event.stopPropagation();">
+          <div class="owner-avatars">${avatars}</div>
+          <button class="owner-add-btn" onclick="event.stopPropagation(); toggleOwnerPickerOpen('${pickerKey}')">+</button>
+          ${isOpen ? `<div class="owner-menu">${menuOptions}</div>` : ''}
+        </div>
+      `;
+    }
+
+    function toggleDDTaskOwner(epicIdx, taskIdx, partner) {
+      const s = DATA.findStages.find(x => x.key === 'dd');
+      const task = s.epics[epicIdx].tasks[taskIdx];
+      if (!task.owners) task.owners = [];
+      const idx = task.owners.indexOf(partner);
+      if (idx === -1) task.owners.push(partner); else task.owners.splice(idx, 1);
       render();
     }
 
@@ -2707,8 +2760,48 @@
       const input = document.getElementById('dd-add-task-' + epicIdx);
       if (!input.value.trim()) return;
       const s = DATA.findStages.find(x => x.key === 'dd');
-      s.epics[epicIdx].tasks.push({ text: input.value.trim(), done: false });
+      s.epics[epicIdx].tasks.push({ text: input.value.trim(), done: false, owners: [] });
       render();
+    }
+
+    function updateDDField(field, value) {
+      const s = DATA.findStages.find(x => x.key === 'dd');
+      s[field] = value;
+    }
+
+    function editDDRisk(i, value) {
+      const s = DATA.findStages.find(x => x.key === 'dd');
+      s.risks[i] = value;
+    }
+
+    const DD_CHAT = [
+      { from: 'partner', text: "Steve, what's actually in a DD pass before we start one?" },
+      { from: 'steve', text: "5 EPICs straight from the Playbook charter — Deal structure, Financing, Company incorporation, DD process, Purchase agreement. 34 real tasks total, and anyone on the team can pick up any task via the + on each row." },
+      { from: 'partner', text: "And once we've actually got a deal in here?" },
+      { from: 'steve', text: "Assign it — automatically once an IC vote hits 3/4, or manually from the box up top if you don't want to replay a vote. Edit whatever's actually relevant to this deal, then push the EPICs to the project wall." },
+      { from: 'partner', text: "What happens when it's done?" },
+      { from: 'steve', text: "🦔 I'll ping you the moment all 5 EPIC cards land in Done, asking if we're still moving forward to Fund financing. No more losing track of DD in Trello." }
+    ];
+
+    function renderDDChat() {
+      const bubbles = DD_CHAT.map(m => `
+        <div class="chat-msg ${m.from}">
+          <div class="chat-msg-from">${m.from === 'steve' ? '🦔 Steve' : 'Partner'}</div>
+          <div class="chat-msg-text">${escapeHtml(m.text)}</div>
+        </div>
+      `).join('');
+      return `
+        <div class="card static card-pad dd-epic-section">
+          <div class="sec-label">💬 Chat with Steve <span class="tag-example">Demo transcript — not a live conversation</span></div>
+          <div class="chat-window">${bubbles}</div>
+        </div>
+      `;
+    }
+
+    function renderDDPushCTA(s, lead) {
+      if (!lead) return `<button class="dd-push-btn" disabled title="Assign a company first">📤 Push DD tasks to project wall</button>`;
+      if (lead.pushedToWall) return `<div class="empty-note">✓ Pushed — 5 tasks on the <a href="#/" onclick="navigate('/'); return false;">project wall</a></div>`;
+      return `<button class="dd-push-btn" onclick="pushDDTasksToWall()">📤 Push DD tasks to project wall</button>`;
     }
 
     function pushDDTasksToWall() {
@@ -2799,12 +2892,13 @@
           <div class="dd-task-row checklist-item ${task.done ? 'done' : ''}">
             <input type="checkbox" ${task.done ? 'checked' : ''} onchange="toggleDDTask(${epicIdx},${taskIdx})">
             <input type="text" value="${escapeAttr(task.text)}" onchange="editDDTask(${epicIdx},${taskIdx},this.value)">
+            ${renderDDTaskOwnerPicker(epicIdx, taskIdx)}
             <button class="dd-task-delete" onclick="deleteDDTask(${epicIdx},${taskIdx})" title="Delete task">×</button>
           </div>
         `).join('');
         return `
           <div class="card static card-pad dd-epic-section">
-            <div class="sec-label">${escapeHtml(epic.name)} <span class="card-owner">— ${escapeHtml(epic.owner)}</span></div>
+            <div class="sec-label">${escapeHtml(epic.name)}</div>
             ${taskRows}
             <div class="inline-add-row">
               <input type="text" id="dd-add-task-${epicIdx}" placeholder="Add task...">
@@ -2831,23 +2925,18 @@
           <div class="field-row"><div class="field-label">Result</div><div class="field-value">${escapeHtml(lead.result)}</div></div>
           <div class="field-row"><div class="field-label">Champion</div><div class="field-value">${escapeHtml(lead.champion)}</div></div>
           <div style="margin-top:14px; display:flex; gap:16px; flex-wrap:wrap;">
-            <a class="link-out" href="${escapeAttr(s.trelloBoard)}" target="_blank" rel="noopener">Open Trello DD board →</a>
             <a class="link-out" href="${escapeAttr(s.driveFolder)}" target="_blank" rel="noopener">Open DD Drive folder →</a>
             <a class="link-out" href="${escapeAttr(s.projectPlanDoc)}" target="_blank" rel="noopener">Open project plan doc →</a>
           </div>
         </div>
       ` : '';
 
-      const riskRows = s.risks.map(r => `<div class="checklist-item"><span>⚠️ ${escapeHtml(r)}</span></div>`).join('');
-      const checklistRows = s.checklist.map(c => `
-        <div class="checklist-item"><span>${c.url ? `<a class="link-out" href="${escapeAttr(c.url)}" target="_blank" rel="noopener">${escapeHtml(c.label)} →</a>` : escapeHtml(c.label)}</span></div>
+      const riskRows = s.risks.map((r, i) => `
+        <div class="dd-risk-row">
+          <span>⚠️</span>
+          <input type="text" value="${escapeAttr(r)}" onchange="editDDRisk(${i},this.value)">
+        </div>
       `).join('');
-
-      const pushHtml = !lead
-        ? `<button class="add-card-btn" disabled title="Assign a company first">📤 Push DD tasks to project wall</button>`
-        : lead.pushedToWall
-          ? `<div class="empty-note">✓ Pushed — 5 tasks on the <a href="#/" onclick="navigate('/'); return false;">project wall</a></div>`
-          : `<button class="add-card-btn" onclick="pushDDTasksToWall()">📤 Push DD tasks to project wall</button>`;
 
       return `
         ${crumbs([{ label: 'Company', path: '/' }, { label: 'Find', path: '/find' }, { label: s.name }])}
@@ -2856,12 +2945,16 @@
           <div class="greeting-sub">${s.purpose}</div>
         </div>
 
+        <div class="card static card-pad" style="margin-bottom:16px;">
+          ${renderDDPushCTA(s, lead)}
+        </div>
+
         ${headerHtml}
         ${renderDDAssignBox(s)}
 
-        <div class="card static card-pad">
-          <div class="sec-label">Objective</div>
-          <div class="card-desc">${escapeHtml(s.objective)}</div>
+        <div class="card static card-pad dd-epic-section dd-hero-section">
+          <div class="dd-hero-label">🎯 Objective</div>
+          <textarea rows="3" onchange="updateDDField('objective', this.value)">${escapeHtml(s.objective)}</textarea>
         </div>
 
         ${renderDDEpics(s)}
@@ -2871,18 +2964,15 @@
           ${riskRows}
         </div>
 
-        <div class="card static card-pad dd-epic-section">
-          <div class="sec-label">SMART Goal</div>
-          <div class="card-desc">${escapeHtml(s.smartGoal)}</div>
+        <div class="card static card-pad dd-epic-section dd-hero-section">
+          <div class="dd-hero-label">🚀 SMART Goal</div>
+          <textarea rows="3" onchange="updateDDField('smartGoal', this.value)">${escapeHtml(s.smartGoal)}</textarea>
         </div>
 
-        <div class="card static card-pad dd-epic-section">
-          <div class="sec-label">DD Checklist</div>
-          ${checklistRows}
-        </div>
+        ${renderDDChat()}
 
         <div class="card static card-pad" style="margin-top:16px;">
-          ${pushHtml}
+          ${renderDDPushCTA(s, lead)}
         </div>
       `;
     }
@@ -3015,10 +3105,7 @@
           <div class="sec-label" style="margin-top:14px;">Why interesting</div>
           <div class="card-desc">${escapeHtml(lead.whyInteresting)}</div>
 
-          <div style="margin-top:14px; display:flex; gap:16px;">
-            <a class="link-out" href="${escapeAttr(lead.trello)}" target="_blank" rel="noopener">Open Trello card →</a>
-            ${extraLinkHtml}
-          </div>
+          ${extraLinkHtml ? `<div style="margin-top:14px; display:flex; gap:16px;">${extraLinkHtml}</div>` : ''}
         </div>
 
         ${sectionsHtml}
@@ -3113,7 +3200,6 @@
           <div class="field-row"><div class="field-label">Champion</div><div class="field-value">${escapeHtml(lead.champion)}</div></div>
 
           <div style="margin-top:14px; display:flex; gap:16px;">
-            <a class="link-out" href="${escapeAttr(lead.trello)}" target="_blank" rel="noopener">Open Trello card →</a>
             <a class="link-out" href="${escapeAttr(lead.loiUrl)}" target="_blank" rel="noopener">Open LOI draft →</a>
           </div>
         </div>
@@ -3233,7 +3319,6 @@
 
           <div style="margin-top:14px; display:flex; gap:16px;">
             <a class="link-out" href="${escapeAttr(p.sourceUrl)}" target="_blank" rel="noopener">Open source listing →</a>
-            <a class="link-out" href="${escapeAttr(p.trello)}" target="_blank" rel="noopener">Open Trello card →</a>
           </div>
 
           <button class="add-card-btn" style="margin-top:16px;" onclick="alert('Coming soon — will create a Kanban task from this prospect.')">+ Create Task</button>
@@ -3263,10 +3348,6 @@
 
           <div class="sec-label" style="margin-top:18px;">Related documents</div>
           ${docsHtml}
-
-          <div style="margin-top:14px;">
-            <a class="link-out" href="${t.trello}" target="_blank" rel="noopener">Open Trello card →</a>
-          </div>
         </div>
       `;
     }
