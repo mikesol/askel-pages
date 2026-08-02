@@ -403,6 +403,27 @@
       100% { transform: translateY(220px) rotate(300deg); opacity: 0; }
     }
 
+    /* ── DD EPIC TASK EDITOR ── */
+    .dd-epic-section { margin-bottom: 14px; }
+    .dd-task-row { display: flex; align-items: center; gap: 8px; }
+    .dd-task-row input[type="text"] {
+      flex: 1; background: transparent; border: 1px solid transparent; color: var(--text);
+      font-size: 12.5px; font-family: inherit; padding: 4px 6px; border-radius: 6px;
+    }
+    .dd-task-row input[type="text"]:hover, .dd-task-row input[type="text"]:focus {
+      border-color: rgba(255,255,255,0.16); background: rgba(255,255,255,0.03); outline: none;
+    }
+    .dd-task-row.done input[type="text"] { text-decoration: line-through; color: var(--muted); }
+    .dd-task-delete {
+      background: none; border: none; color: var(--muted); font-size: 15px; cursor: pointer;
+      line-height: 1; padding: 2px 4px; flex-shrink: 0;
+    }
+    .dd-task-delete:hover { color: var(--red-light); }
+    .dd-assign-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 10px 12px; background: rgba(255,255,255,0.03); border-radius: 8px; margin-bottom: 8px;
+    }
+
     /* ── KANBAN ── */
     .kanban-section { margin-top: 28px; }
     .kanban-board { display: flex; gap: 14px; align-items: flex-start; overflow-x: auto; padding-bottom: 4px; }
@@ -1597,17 +1618,24 @@
           ]
         },
         {
-          key: "dd", name: "Due Diligence", count: 1,
+          key: "dd", name: "Due Diligence", count: 0,
           purpose: "Deep-dive financial, legal, and operational verification before closing.",
           owner: "Niklas Slotte",
-          sample: [],
-          task: {
-            id: "auran-pesupojat", name: "Auran Pesupojat Oy",
-            owner: "Niklas Slotte", price: "190,000 €", result: "80,000 € (21.4% margin)",
-            location: "Turku", sector: "Mattokauppa / pesulapalvelut",
-            docs: ["Momentum Helsinki financing engagement (V4, 2026-07-08)", "Case Scouting board — Due Diligence list"],
-            trello: "https://trello.com/c/LM6wKok2"
-          }
+          leads: [],
+          objective: "As prospective new owners of the business, we want to ensure the financing of the acquisition and verify the condition of the business and the motivation of the staff before the final transaction, so that the business acquisition is safe to execute.",
+          risks: ["Geographic distance", "Minna's technical skills", "DD is new territory for the team"],
+          smartGoal: "The team builds a Data Room in Drive for stakeholders (bank, Finnvera) so that the Preliminary/Purchase Agreement signing date can be reached, and assesses whether this business can be acquired as the first portfolio target.",
+          checklist: [
+            { label: "Interview all key staff", url: "https://docs.google.com/forms/d/e/1FAIpQLSeRBaUzRB0THKq4lyDHCjD3-Mz15m4O57Sz71eWkKji0k15wQ/viewform" },
+            { label: "Complete the BusBuy 30-60-90-Day Plan", url: null },
+            { label: "Knowledge transfer plan agreed with seller (Company Owner Role Training template, or connecteam.com)", url: null },
+            { label: "Bank: clauses must align 100% with the purchase agreement, or risk breaking a covenant (could raise the interest rate ~2%)", url: null },
+            { label: "Confirm share retirement option if the company holds its own shares (lets you extract balance sheet assets to previous owners at sale)", url: null }
+          ],
+          trelloBoard: "https://trello.com/b/4mDFCBXp/auran-pesupojat-dd",
+          driveFolder: "https://drive.google.com/drive/folders/1rlAGeJtPe22fBaecHXe7_SkSgcxlhzh9",
+          projectPlanDoc: "https://docs.google.com/document/d/1fBZFq4jVplHDCGMWB_hCwoQSaNvgBdSF_SLMWwCltqA/edit",
+          epics: [] // populated by ddEpicTemplate() once it's defined, further down the script
         },
         {
           key: "onboarding", name: "Knowledge Transfer", count: 0,
@@ -1634,12 +1662,90 @@
     }
     seedDefaultOwners();
 
+    // ── DD EPIC CHARTER TEMPLATE (real, from Chapter 5 of The Playbook — Flipping Boring Businesses) ──
+    function ddEpicTemplate() {
+      const epics = [
+        { name: "Deal structure", owner: "Niklas", tasks: [
+          ['Portfolio company Business Plan (incl. exit options for investors, one-pager) (Niklas)', false],
+          ['Who are the Investor(s) (Niklas & Varia)', false],
+          ['Investor ownership shares (Niklas & Varia)', false],
+          ['*Holding company/SPV/Ltd "technical implementation" plan (Mike, Niklas, Varia)', false]
+        ]},
+        { name: "Financing", owner: "Varia", tasks: [
+          ['Cash flow forecast (Niklas)', false],
+          ['Loan amount needed (Niklas, Varia)', false],
+          ['Bank contact & "pre-data room" package sent to bank (Varia)', true],
+          ['Momentum & financing house — pre-data-room package sent for competitive bidding (Varia, Niklas)', true],
+          ['Finnvera entrepreneur loan application if needed (Varia, Niklas, Mike)', false],
+          ['Credit line for working capital, pre-preparation of KYC application forms etc.', false]
+        ]},
+        { name: "Company incorporation", owner: "Niklas", tasks: [
+          ['Portfolio company SHA (if external investor) (Niklas)', false],
+          ['HH SHA (Mike)', false],
+          ['HH bank accounts (Varia, Niklas)', false],
+          ['Accountant (Niklas)', false],
+          ['HH holding PRH registration', false],
+          ['Niklas Holding registration (Niklas)', false],
+          ['Mike holding registration (Mike)', false]
+        ]},
+        { name: "DD process", owner: "Niklas", tasks: [
+          ['Company bank accounts audit (Niklas)', true],
+          ['Staff audit on-site (interviews, employment contracts) (Varia)', true],
+          ['Equipment audit (Niklas, Varia)', true],
+          ['Tax audit (Niklas)', true],
+          ['Obligations: legal + other conflicts, chemical regulators, emission/wastewater restrictions (Niklas, Varia)', true],
+          ['Customers (contracts & invoicing audit) (Varia, Niklas)', true],
+          ['Other contracts & commitments, incl. verbal ones (partnerships etc.) (Varia)', true],
+          ["List previous owner roles for upcoming video documentation — create process maps (understand the operator's role) (Varia)", false],
+          ['Spot partner meeting, Nella & Minna (Varia, Niklas)', false],
+          ['Equipment/asset listing with € values, for the seller', true]
+        ]},
+        { name: "Purchase agreement", owner: "Tomi", tasks: [
+          ['Non-compete clause confirmed (Tomi)', false],
+          ['Tax implications of rent (Tomi)', false],
+          ['Lease agreement (Niklas, Tomi)', false],
+          ['Leasing agreement (Tomi)', false],
+          ['Spot trade name agreement (Tomi)', false],
+          ['IPR listing (domains, etc.)', false],
+          ['Non-disparagement clause — seller must not speak badly of the new owners', false]
+        ]}
+      ];
+      return epics.map(e => ({ name: e.name, owner: e.owner, tasks: e.tasks.map(([text, done]) => ({ text, done })) }));
+    }
+    DATA.findStages.find(s => s.key === 'dd').epics = ddEpicTemplate();
+
+    // ── DD ASSIGNMENT (IC/Screening lead → DD, automatic or manual) ──
+    function ddAssignCandidates() {
+      const ic = DATA.findStages.find(s => s.key === 'ic');
+      const screening = DATA.findStages.find(s => s.key === 'screening');
+      return [
+        ...ic.leads.filter(l => !l.inDD).map(l => ({ stage: 'ic', lead: l })),
+        ...screening.leads.filter(l => !l.inDD).map(l => ({ stage: 'screening', lead: l }))
+      ];
+    }
+
+    function assignLeadToDD(stageKey, leadId) {
+      const dd = DATA.findStages.find(s => s.key === 'dd');
+      const src = DATA.findStages.find(s => s.key === stageKey);
+      if (!src) return;
+      const lead = src.leads.find(l => l.id === leadId);
+      if (!lead || lead.inDD) return;
+      lead.inDD = true;
+      lead.pushedToWall = false;
+      lead.ddPromptShown = false;
+      lead.ddOutcome = null;
+      dd.leads.push(lead);
+      dd.count = dd.leads.length;
+      render();
+    }
+
     function findOwnerItem(stageKey, itemId) {
       const s = DATA.findStages.find(x => x.key === stageKey);
       if (!s) return null;
       if (stageKey === 'sourcing') return s.prospects.find(x => x.id === itemId);
       if (stageKey === 'screening') return s.leads.find(x => x.id === itemId);
       if (stageKey === 'ic') return s.leads.find(x => x.id === itemId);
+      if (stageKey === 'dd') return s.leads.find(x => x.id === itemId);
       return null;
     }
 
