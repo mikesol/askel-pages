@@ -648,7 +648,7 @@
         { label: "📈 Grow EBITDA by 35%", pct: 0, note: "Not yet tracked anywhere in the repo — placeholder target" }
       ],
       focus: [
-        "💸 Auran Pesupojat Oy — Due Diligence / financing close (Momentum Helsinki engagement)",
+        null, // computed at render time by ddFocusLine()
         "🔎 7 targets sitting in Screening awaiting first-pass review",
         "📥 44 leads in the Prospecting pipeline"
       ],
@@ -1870,6 +1870,21 @@
       }).join('') + `</div>`;
     }
 
+    function ddFocusLine() {
+      const dd = DATA.findStages.find(s => s.key === 'dd');
+      const lead = dd.leads[0];
+      if (!lead) return "💸 Auran Pesupojat Oy — Due Diligence / financing close (Momentum Helsinki engagement)";
+      if (lead.ddOutcome === 'proceeding') return "💸 Auran Pesupojat Oy — Due Diligence complete, proceeding to Fund financing";
+      if (lead.ddOutcome === 'paused') return "💸 Auran Pesupojat Oy — Due Diligence complete, on hold";
+      if (lead.pushedToWall) {
+        const ddCards = kanban.cards.filter(c => c.ddDeal === lead.id);
+        const allDone = ddCards.length > 0 && ddCards.every(c => c.column === 'Done');
+        if (allDone) return "💸 Auran Pesupojat Oy — Due Diligence complete, awaiting Fund decision";
+        return "💸 Auran Pesupojat Oy — Due Diligence in progress on the project wall";
+      }
+      return "💸 Auran Pesupojat Oy — in Due Diligence, tasks not yet on the project wall";
+    }
+
     // ── SCREEN 1: Company Compass ──
     function renderCompany() {
       const okrRows = DATA.okrs.map(o => `
@@ -1880,7 +1895,7 @@
         </div>
       `).join('');
 
-      const focusRows = DATA.focus.map(f => `
+      const focusRows = DATA.focus.map(f => f === null ? ddFocusLine() : f).map(f => `
         <div class="focus-item"><div class="focus-dot"></div><div>${f}</div></div>
       `).join('');
 
@@ -2324,6 +2339,13 @@
       if (!c) return;
       c[field] = field === 'estimate' ? (value === '' ? null : parseFloat(value)) : value;
       renderCalendar();
+      if (field === 'column' && c.ddDeal) {
+        const ddCards = kanban.cards.filter(card => card.ddDeal === c.ddDeal);
+        const allDone = ddCards.length > 0 && ddCards.every(card => card.column === 'Done');
+        const dd = DATA.findStages.find(s => s.key === 'dd');
+        const lead = dd.leads.find(l => l.id === c.ddDeal);
+        if (allDone && lead && !lead.ddPromptShown) openDDFundPrompt(c.ddDeal);
+      }
     }
 
     function toggleChecklist(id, i) {
@@ -2662,6 +2684,209 @@
       `;
     }
 
+    // ── DD WORKFLOW (charter EPICs, always visible — editable before/after assignment) ──
+    function toggleDDTask(epicIdx, taskIdx) {
+      const s = DATA.findStages.find(x => x.key === 'dd');
+      s.epics[epicIdx].tasks[taskIdx].done = !s.epics[epicIdx].tasks[taskIdx].done;
+      render();
+    }
+
+    function editDDTask(epicIdx, taskIdx, value) {
+      const s = DATA.findStages.find(x => x.key === 'dd');
+      if (!value.trim()) return;
+      s.epics[epicIdx].tasks[taskIdx].text = value.trim();
+    }
+
+    function deleteDDTask(epicIdx, taskIdx) {
+      const s = DATA.findStages.find(x => x.key === 'dd');
+      s.epics[epicIdx].tasks.splice(taskIdx, 1);
+      render();
+    }
+
+    function addDDTask(epicIdx) {
+      const input = document.getElementById('dd-add-task-' + epicIdx);
+      if (!input.value.trim()) return;
+      const s = DATA.findStages.find(x => x.key === 'dd');
+      s.epics[epicIdx].tasks.push({ text: input.value.trim(), done: false });
+      render();
+    }
+
+    function pushDDTasksToWall() {
+      const s = DATA.findStages.find(x => x.key === 'dd');
+      const lead = s.leads[0];
+      if (!lead || lead.pushedToWall) return;
+      s.epics.forEach(epic => {
+        kanban.cards.push({
+          id: nextKanbanId(), title: epic.name, column: "To Do",
+          deadline: "", estimate: null, owner: epic.owner,
+          engine: "find", goal: ROADMAP_GOALS[0],
+          desc: `DD EPIC for ${lead.name} — pushed from the Find engine's Due Diligence page.`,
+          checklist: epic.tasks.map(t => ({ text: t.text, done: t.done })),
+          comments: [], attachments: [],
+          ddDeal: lead.id
+        });
+      });
+      lead.pushedToWall = true;
+      render();
+    }
+
+    function openDDFundPrompt(leadId) {
+      const dd = DATA.findStages.find(s => s.key === 'dd');
+      const lead = dd.leads.find(l => l.id === leadId);
+      if (!lead) return;
+      let overlay = document.getElementById('modal-overlay');
+      if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'modal-overlay';
+        overlay.className = 'modal-overlay';
+        document.body.appendChild(overlay);
+      }
+      overlay.innerHTML = `
+        <div class="modal">
+          <button class="modal-close" onclick="closeDDFundPrompt()">×</button>
+          <div class="modal-section-title" style="margin-top:0;">${escapeHtml(lead.name)} has finished DD 🎉</div>
+          <div class="card-desc" style="margin-bottom:14px;">Still moving forward to Fund financing?</div>
+          <button class="add-card-btn" style="margin-top:0;" onclick="answerDDFundPrompt('${leadId}','proceeding')">Yes, proceeding</button>
+          <button class="add-card-btn" onclick="answerDDFundPrompt('${leadId}','paused')">No, on hold</button>
+        </div>
+      `;
+      overlay.style.display = 'flex';
+    }
+
+    function closeDDFundPrompt() {
+      const overlay = document.getElementById('modal-overlay');
+      if (overlay) overlay.style.display = 'none';
+    }
+
+    function answerDDFundPrompt(leadId, outcome) {
+      const dd = DATA.findStages.find(s => s.key === 'dd');
+      const lead = dd.leads.find(l => l.id === leadId);
+      if (!lead) return;
+      lead.ddPromptShown = true;
+      lead.ddOutcome = outcome;
+      closeDDFundPrompt();
+      render();
+    }
+
+    function renderDDAssignBox(s) {
+      const candidates = ddAssignCandidates();
+      if (s.leads.length > 0) return '';
+      if (candidates.length === 0) {
+        return `
+          <div class="card static card-pad">
+            <div class="sec-label">Assign a company</div>
+            <div class="empty-note">No leads currently sitting in IC or Screening to assign. One appears automatically once an IC vote reaches 3/4.</div>
+          </div>
+        `;
+      }
+      const rows = candidates.map(({ stage, lead }) => `
+        <div class="dd-assign-row">
+          <div><strong>${escapeHtml(lead.name)}</strong> — <span class="card-owner">${stage === 'ic' ? 'Investment Committee' : 'Screening'}</span></div>
+          <button class="pill-btn" onclick="assignLeadToDD('${stage}','${lead.id}')">Assign to DD</button>
+        </div>
+      `).join('');
+      return `
+        <div class="card static card-pad">
+          <div class="sec-label">Assign a company</div>
+          ${rows}
+        </div>
+      `;
+    }
+
+    function renderDDEpics(s) {
+      return s.epics.map((epic, epicIdx) => {
+        const taskRows = epic.tasks.map((task, taskIdx) => `
+          <div class="dd-task-row checklist-item ${task.done ? 'done' : ''}">
+            <input type="checkbox" ${task.done ? 'checked' : ''} onchange="toggleDDTask(${epicIdx},${taskIdx})">
+            <input type="text" value="${escapeAttr(task.text)}" onchange="editDDTask(${epicIdx},${taskIdx},this.value)">
+            <button class="dd-task-delete" onclick="deleteDDTask(${epicIdx},${taskIdx})" title="Delete task">×</button>
+          </div>
+        `).join('');
+        return `
+          <div class="card static card-pad dd-epic-section">
+            <div class="sec-label">${escapeHtml(epic.name)} <span class="card-owner">— ${escapeHtml(epic.owner)}</span></div>
+            ${taskRows}
+            <div class="inline-add-row">
+              <input type="text" id="dd-add-task-${epicIdx}" placeholder="Add task...">
+              <button onclick="addDDTask(${epicIdx})">Add</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderDDWorkflow(s) {
+      const lead = s.leads[0]; // at most one real case this pass
+
+      const headerHtml = lead ? `
+        <div class="card static card-pad" style="max-width:640px; margin-bottom:16px;">
+          <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px;">
+            <div>
+              <div class="card-title">${escapeHtml(lead.name)}</div>
+              <div class="card-owner">${escapeHtml(lead.location)} · ${escapeHtml(lead.sector)}</div>
+            </div>
+            ${renderOwnerPicker('dd', lead.id)}
+          </div>
+          <div class="field-row"><div class="field-label">Price</div><div class="field-value">${escapeHtml(lead.price)}</div></div>
+          <div class="field-row"><div class="field-label">Result</div><div class="field-value">${escapeHtml(lead.result)}</div></div>
+          <div class="field-row"><div class="field-label">Champion</div><div class="field-value">${escapeHtml(lead.champion)}</div></div>
+          <div style="margin-top:14px; display:flex; gap:16px; flex-wrap:wrap;">
+            <a class="link-out" href="${escapeAttr(s.trelloBoard)}" target="_blank" rel="noopener">Open Trello DD board →</a>
+            <a class="link-out" href="${escapeAttr(s.driveFolder)}" target="_blank" rel="noopener">Open DD Drive folder →</a>
+            <a class="link-out" href="${escapeAttr(s.projectPlanDoc)}" target="_blank" rel="noopener">Open project plan doc →</a>
+          </div>
+        </div>
+      ` : '';
+
+      const riskRows = s.risks.map(r => `<div class="checklist-item"><span>⚠️ ${escapeHtml(r)}</span></div>`).join('');
+      const checklistRows = s.checklist.map(c => `
+        <div class="checklist-item"><span>${c.url ? `<a class="link-out" href="${escapeAttr(c.url)}" target="_blank" rel="noopener">${escapeHtml(c.label)} →</a>` : escapeHtml(c.label)}</span></div>
+      `).join('');
+
+      const pushHtml = !lead
+        ? `<button class="add-card-btn" disabled title="Assign a company first">📤 Push DD tasks to project wall</button>`
+        : lead.pushedToWall
+          ? `<div class="empty-note">✓ Pushed — 5 tasks on the <a href="#/" onclick="navigate('/'); return false;">project wall</a></div>`
+          : `<button class="add-card-btn" onclick="pushDDTasksToWall()">📤 Push DD tasks to project wall</button>`;
+
+      return `
+        ${crumbs([{ label: 'Company', path: '/' }, { label: 'Find', path: '/find' }, { label: s.name }])}
+        <div class="greeting">
+          <div class="greeting-text" style="font-size:36px;">${s.name}</div>
+          <div class="greeting-sub">${s.purpose}</div>
+        </div>
+
+        ${headerHtml}
+        ${renderDDAssignBox(s)}
+
+        <div class="card static card-pad">
+          <div class="sec-label">Objective</div>
+          <div class="card-desc">${escapeHtml(s.objective)}</div>
+        </div>
+
+        ${renderDDEpics(s)}
+
+        <div class="card static card-pad dd-epic-section">
+          <div class="sec-label">Risks</div>
+          ${riskRows}
+        </div>
+
+        <div class="card static card-pad dd-epic-section">
+          <div class="sec-label">SMART Goal</div>
+          <div class="card-desc">${escapeHtml(s.smartGoal)}</div>
+        </div>
+
+        <div class="card static card-pad dd-epic-section">
+          <div class="sec-label">DD Checklist</div>
+          ${checklistRows}
+        </div>
+
+        <div class="card static card-pad" style="margin-top:16px;">
+          ${pushHtml}
+        </div>
+      `;
+    }
+
     // ── SCREEN 3: Workflow page ──
     function renderWorkflow(key) {
       const s = DATA.findStages.find(x => x.key === key);
@@ -2669,6 +2894,7 @@
       if (key === 'sourcing') return renderSourcingWorkflow(s);
       if (key === 'screening') return renderScreeningWorkflow(s);
       if (key === 'ic') return renderICWorkflow(s);
+      if (key === 'dd') return renderDDWorkflow(s);
 
       let tasksHtml = '';
       if (s.task) {
