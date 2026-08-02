@@ -2820,7 +2820,7 @@
             id: nextKanbanId(), title: task.text, column: "To Do",
             deadline: "", estimate: null, owner: (task.owners && task.owners.length) ? task.owners.join(', ') : '',
             engine: "find", goal: ROADMAP_GOALS[0],
-            desc: `DD task for ${lead.name}, EPIC "${epic.name}" — pushed from the Find engine's Due Diligence page.`,
+            desc: `Objective: ${s.objective}\n\nSMART Goal: ${s.smartGoal}\n\nTask: ${task.text}`,
             checklist: [], comments: [], attachments: [],
             ddDeal: lead.id, ddDealName: lead.name, ddEpic: epic.name
           });
