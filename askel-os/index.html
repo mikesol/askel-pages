@@ -477,6 +477,8 @@
     .kc-tag.engine-fund { background: rgba(93,173,226,0.14); color: var(--blue); }
     .kc-tag.engine-grow { background: rgba(46,204,113,0.12); color: var(--green); }
     .kc-tag.goal { background: rgba(255,255,255,0.06); color: var(--muted); }
+    .kc-tag.dd-deal { background: rgba(46,204,113,0.12); color: var(--green); }
+    .kc-tag.dd-epic { background: rgba(93,173,226,0.14); color: var(--blue); }
     .kanban-card-meta { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: var(--muted); }
     .kanban-card-owner {
       width: 20px; height: 20px; border-radius: 50%; background: var(--red);
@@ -2007,7 +2009,7 @@
       return engine === 'find' ? 'engine-find' : engine === 'fund' ? 'engine-fund' : 'engine-grow';
     }
     function initials(name) {
-      return (name || '?').split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+      return (name || '?').split(/[\s,]+/).filter(Boolean).map(w => w[0]).join('').slice(0, 2).toUpperCase();
     }
     function fmtDeadline(iso) {
       if (!iso) return null;
@@ -2033,6 +2035,8 @@
               <div class="kanban-card-tags">
                 <span class="kc-tag ${engineTagClass(c.engine)}">${c.engine}</span>
                 <span class="kc-tag goal">${escapeHtml(c.goal || 'No goal')}</span>
+                ${c.ddDealName ? `<span class="kc-tag dd-deal">${escapeHtml(c.ddDealName)}</span>` : ''}
+                ${c.ddEpic ? `<span class="kc-tag dd-epic">${escapeHtml(c.ddEpic)}</span>` : ''}
               </div>
               <div class="kanban-card-meta">
                 <span>${dl ? dl + (c.estimate ? ' · ' + c.estimate + 'h' : '') : 'No deadline'}</span>
@@ -2322,6 +2326,8 @@
           <div class="modal-field">
             <input type="text" value="${escapeAttr(c.title)}" onchange="updateCard('${c.id}','title',this.value)" style="font-size:16px; font-weight:600; margin-top:0;">
           </div>
+
+          ${c.ddDealName ? `<div class="card-owner" style="margin-bottom:8px;">DD task — ${escapeHtml(c.ddDealName)} · ${escapeHtml(c.ddEpic)}</div>` : ''}
 
           <div class="record-hint">🎥 Record instructions <span class="tag-example" style="margin-left:2px;">Mockup — no recording yet</span></div>
 
@@ -2800,7 +2806,10 @@
 
     function renderDDPushCTA(s, lead) {
       if (!lead) return `<button class="dd-push-btn" disabled title="Assign a company first">📤 Push DD tasks to project wall</button>`;
-      if (lead.pushedToWall) return `<div class="empty-note">✓ Pushed — 5 tasks on the <a href="#/" onclick="navigate('/'); return false;">project wall</a></div>`;
+      if (lead.pushedToWall) {
+        const count = kanban.cards.filter(c => c.ddDeal === lead.id).length;
+        return `<div class="empty-note">✓ Pushed — ${count} task${count === 1 ? '' : 's'} on the <a href="#/" onclick="navigate('/'); return false;">project wall</a></div>`;
+      }
       return `<button class="dd-push-btn" onclick="pushDDTasksToWall()">📤 Push DD tasks to project wall</button>`;
     }
 
@@ -2809,14 +2818,15 @@
       const lead = s.leads[0];
       if (!lead || lead.pushedToWall) return;
       s.epics.forEach(epic => {
-        kanban.cards.push({
-          id: nextKanbanId(), title: epic.name, column: "To Do",
-          deadline: "", estimate: null, owner: epic.owner,
-          engine: "find", goal: ROADMAP_GOALS[0],
-          desc: `DD EPIC for ${lead.name} — pushed from the Find engine's Due Diligence page.`,
-          checklist: epic.tasks.map(t => ({ text: t.text, done: t.done })),
-          comments: [], attachments: [],
-          ddDeal: lead.id
+        epic.tasks.forEach(task => {
+          kanban.cards.push({
+            id: nextKanbanId(), title: task.text, column: "To Do",
+            deadline: "", estimate: null, owner: (task.owners && task.owners.length) ? task.owners.join(', ') : '',
+            engine: "find", goal: ROADMAP_GOALS[0],
+            desc: `DD task for ${lead.name}, EPIC "${epic.name}" — pushed from the Find engine's Due Diligence page.`,
+            checklist: [], comments: [], attachments: [],
+            ddDeal: lead.id, ddDealName: lead.name, ddEpic: epic.name
+          });
         });
       });
       lead.pushedToWall = true;
