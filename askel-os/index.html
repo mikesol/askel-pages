@@ -600,6 +600,34 @@
     @media (max-width: 760px) {
       .section-row, .workflow-grid, .engines, .modal-row { grid-template-columns: 1fr; }
     }
+
+    /* ── Fund engine ── */
+    .fund-banner { background: rgba(243,156,18,0.12); border: 1px solid rgba(243,156,18,0.35); color: var(--yellow);
+      font-size: 12px; padding: 8px 14px; border-radius: 8px; margin-bottom: 24px; }
+    .fund-stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .fund-stat-tile { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; }
+    .fund-stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+    .fund-stat-value { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 26px; }
+    .fund-stat-sub { font-size: 12px; color: var(--subtle); margin-top: 4px; }
+    .fund-guarantee-row { display: flex; gap: 6px; margin-top: 10px; }
+    .fund-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--red); display: flex; align-items: center; justify-content: center; font-size: 10.5px; font-weight: 700; color: white; }
+    .fund-portfolio-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+    .fund-pf-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px; transition: border-color .15s; }
+    .fund-pf-card:hover { border-color: var(--border-hover); }
+    .fund-pf-name { font-weight: 600; font-size: 14.5px; display: flex; align-items: center; gap: 8px; }
+    .fund-pf-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .fund-pf-dot.green { background: var(--green); box-shadow: 0 0 6px rgba(46,204,113,0.6); }
+    .fund-pf-dot.red { background: var(--red-light); box-shadow: 0 0 6px rgba(224,76,62,0.6); }
+    .fund-pf-field { display: flex; justify-content: space-between; font-size: 12px; }
+    .fund-pf-field .l { color: var(--muted); }
+    .fund-pf-field .v { color: var(--text); font-weight: 500; }
+    .fund-pf-grant { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 20px; background: rgba(93,173,226,0.14); color: var(--blue); width: fit-content; }
+    .fund-pf-status { font-size: 10.5px; color: var(--yellow); background: rgba(243,156,18,0.12); padding: 2px 8px; border-radius: 20px; width: fit-content; }
+    .fund-pf-card.locked { align-items: center; justify-content: center; text-align: center; opacity: 0.55; min-height: 168px; border-style: dashed; }
+    .fund-pf-card.locked .lock { font-size: 20px; margin-bottom: 6px; }
+    .fund-pf-card.locked .name { font-size: 12.5px; color: var(--subtle); }
+    .fund-pf-card.locked .tag { font-size: 10px; color: var(--subtle); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+    @media (max-width: 900px) { .fund-portfolio-row { grid-template-columns: repeat(2, 1fr); } .fund-stat-row { grid-template-columns: repeat(2, 1fr); } }
   </style>
 </head>
 <body>
@@ -718,6 +746,19 @@
         find:  { name: "Find",  active: 52, accent: true,  built: true,  purpose: "Acquire great businesses — sourcing, screening, IC, due diligence, LOI, close." },
         fund:  { name: "Fund",  active: null, accent: false, built: false, purpose: "Secure capital — investor CRM, fundraising, bank & seller financing." },
         grow:  { name: "Grow",  active: null, accent: false, built: false, purpose: "Increase enterprise value — integration, ops, sales, SOPs, KPI reporting." }
+      },
+      fund: {
+        askel: {
+          loans: { value: "€199.7K", note: "Auran Pesupojat acquisition loan (Momentum / OP)" },
+          guarantees: { value: "€23.7–31.2K", note: "per partner, capped", partners: ["V","N","M","M"] },
+          investors: { value: "3 active", note: "Investor CRM — pipeline & LOIs" },
+          exitScenarios: { value: null, note: "No portfolio company has reached exit yet" }
+        },
+        portfolio: [
+          { name: "Melers Oy", status: "ok", revenue: "€612K /yr", profit: "€94K", loan: "€0", sellerFinancing: "€0", grants: "No active grants" },
+          { name: "Auran Pesupojat Oy", status: "risk", revenue: "TBD (DD)", profit: "TBD (DD)", loan: "€199.7K", sellerFinancing: "€0", statusNote: "Financing in progress" }
+        ],
+        lockedSlots: 8
       },
       findStages: [
         {
@@ -1918,7 +1959,9 @@
           : parts[1] === 'ic' ? renderICTask(parts[3])
           : renderTask(parts[1], parts[3]);
         if (parts[1] === 'ic' && icCalendarVisible) renderCalendar();
-      } else if (parts[0] === 'fund' || parts[0] === 'grow') {
+      } else if (parts[0] === 'fund') {
+        app.innerHTML = renderFund();
+      } else if (parts[0] === 'grow') {
         app.innerHTML = renderPlaceholderEngine(parts[0]);
       } else {
         app.innerHTML = renderCompany();
@@ -3399,7 +3442,66 @@
       `;
     }
 
-    // ── Fund / Grow placeholder ──
+    // ── Fund ──
+    function renderFund() {
+      const f = DATA.fund;
+      const a = f.askel;
+      const pfCards = f.portfolio.map(p => `
+        <div class="fund-pf-card">
+          <div class="fund-pf-name"><span class="fund-pf-dot ${p.status === 'ok' ? 'green' : 'red'}"></span>${escapeHtml(p.name)}</div>
+          <div class="fund-pf-field"><span class="l">Revenue</span><span class="v">${escapeHtml(p.revenue)}</span></div>
+          <div class="fund-pf-field"><span class="l">Profit</span><span class="v">${escapeHtml(p.profit)}</span></div>
+          <div class="fund-pf-field"><span class="l">Bank loan</span><span class="v">${escapeHtml(p.loan)}</span></div>
+          <div class="fund-pf-field"><span class="l">Seller financing</span><span class="v">${escapeHtml(p.sellerFinancing)}</span></div>
+          ${p.statusNote ? `<span class="fund-pf-status">${escapeHtml(p.statusNote)}</span>` : `<span class="fund-pf-grant">${escapeHtml(p.grants)}</span>`}
+        </div>
+      `).join('');
+      const lockedCards = Array.from({ length: f.lockedSlots }, (_, i) => `
+        <div class="fund-pf-card locked"><div class="lock">🔒</div><div class="name">Company ${f.portfolio.length + i + 1}</div><div class="tag">Coming</div></div>
+      `).join('');
+      const guaranteeAvatars = a.guarantees.partners.map(p => `<div class="fund-avatar">${p}</div>`).join('');
+      return `
+        ${crumbs([{ label: 'Company', path: '/' }, { label: 'Fund' }])}
+        <div class="greeting">
+          <div class="greeting-text">💰 Fund</div>
+          <div class="greeting-sub">Financial health across Askel Ventures and its portfolio companies</div>
+        </div>
+        <div class="fund-banner">Early sketch — layout under active review with Varia, numbers not yet wired to a real data source.</div>
+
+        <div class="sec-label">Askel Ventures — top level</div>
+        <div class="fund-stat-row">
+          <div class="fund-stat-tile">
+            <div class="fund-stat-label">Loans outstanding</div>
+            <div class="fund-stat-value">${escapeHtml(a.loans.value)}</div>
+            <div class="fund-stat-sub">${escapeHtml(a.loans.note)}</div>
+          </div>
+          <div class="fund-stat-tile">
+            <div class="fund-stat-label">Personal guarantees</div>
+            <div class="fund-stat-value">${escapeHtml(a.guarantees.value)}</div>
+            <div class="fund-stat-sub">${escapeHtml(a.guarantees.note)}</div>
+            <div class="fund-guarantee-row">${guaranteeAvatars}</div>
+          </div>
+          <div class="fund-stat-tile">
+            <div class="fund-stat-label">Investors</div>
+            <div class="fund-stat-value">${escapeHtml(a.investors.value)}</div>
+            <div class="fund-stat-sub">${escapeHtml(a.investors.note)}</div>
+          </div>
+          <div class="fund-stat-tile">
+            <div class="fund-stat-label">Exit scenarios</div>
+            <div class="fund-stat-value" style="color:var(--subtle);">${a.exitScenarios.value || '—'}</div>
+            <div class="fund-stat-sub">${escapeHtml(a.exitScenarios.note)}</div>
+          </div>
+        </div>
+
+        <div class="sec-label">Portfolio companies — bottom level</div>
+        <div class="fund-portfolio-row">
+          ${pfCards}
+          ${lockedCards}
+        </div>
+      `;
+    }
+
+    // ── Grow placeholder ──
     function renderPlaceholderEngine(key) {
       const e = DATA.engines[key];
       return `
