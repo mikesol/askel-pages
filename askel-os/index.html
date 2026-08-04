@@ -2078,6 +2078,8 @@
           : parts[1] === 'ic' ? renderICTask(parts[3])
           : renderTask(parts[1], parts[3]);
         if (parts[1] === 'ic' && icCalendarVisible) renderCalendar();
+      } else if (parts[0] === 'fund' && parts.length === 3 && parts[1] === 'company') {
+        app.innerHTML = renderFundCompany(parts[2]);
       } else if (parts[0] === 'fund') {
         app.innerHTML = renderFund();
       } else if (parts[0] === 'grow') {
@@ -3636,6 +3638,67 @@
           ${pfCards}
           ${lockedCards}
         </div>
+      `;
+    }
+
+    function editFundLiquidityRow(companyId, idx, value) {
+      const p = DATA.fund.portfolio.find(x => x.id === companyId);
+      if (!p || !p.liquiditySnapshot) return;
+      p.liquiditySnapshot.rows[idx].value = value;
+    }
+
+    function renderFundCompany(id) {
+      const p = DATA.fund.portfolio.find(x => x.id === id);
+      if (!p) return renderFund();
+
+      const liquidityHtml = p.liquiditySnapshot ? `
+        <div class="card static card-pad" style="margin-top:16px;">
+          <div class="sec-label">📊 Monthly Liquidity Snapshot <span class="tag-example">${escapeHtml(p.liquiditySnapshot.month)} — illustrative demo month, in-session editable</span></div>
+          ${p.liquiditySnapshot.rows.map((r, idx) => `
+            <div class="fund-liquidity-row">
+              <span class="l">${escapeHtml(r.label)}</span>
+              <input type="text" value="${escapeAttr(r.value)}" onchange="editFundLiquidityRow('${p.id}',${idx},this.value)">
+            </div>
+          `).join('')}
+        </div>
+      ` : `
+        <div class="card static card-pad" style="margin-top:16px;">
+          <div class="sec-label">📊 Monthly Liquidity Snapshot</div>
+          <div class="empty-note">Not available yet — deal hasn't closed.</div>
+        </div>
+      `;
+
+      return `
+        ${crumbs([{ label: 'Company', path: '/' }, { label: 'Fund', path: '/fund' }, { label: p.name }])}
+        <div class="greeting">
+          <div class="greeting-text" style="font-size:36px;">${escapeHtml(p.name)}</div>
+          <div class="greeting-sub">Portfolio company financial detail</div>
+        </div>
+
+        <div class="card static card-pad" style="max-width:640px;">
+          <div class="fund-pf-name" style="font-size:15px; margin-bottom:10px;"><span class="fund-pf-dot ${p.status === 'ok' ? 'green' : 'red'}"></span>${escapeHtml(p.name)}</div>
+          <div class="field-row"><div class="field-label">Revenue</div><div class="field-value">${escapeHtml(p.revenue)}</div></div>
+          <div class="field-row"><div class="field-label">Profit</div><div class="field-value">${escapeHtml(p.profit)}</div></div>
+          <div class="field-row"><div class="field-label">Bank loan</div><div class="field-value">${escapeHtml(p.loan)}</div></div>
+          <div class="field-row"><div class="field-label">Seller financing</div><div class="field-value">${escapeHtml(p.sellerFinancing)}</div></div>
+          <div class="field-row"><div class="field-label">Management fee</div><div class="field-value">${escapeHtml(p.managementFee)}</div></div>
+        </div>
+
+        <div class="card static card-pad" style="max-width:640px; margin-top:16px;">
+          <div class="sec-label">Basic terms</div>
+          <div class="fund-terms-row"><span class="l">Loan repayment term</span><span class="v">${escapeHtml(p.loanTerms.term)}</span></div>
+          <div class="fund-terms-row"><span class="l">Monthly loan repayment</span><span class="v">${escapeHtml(p.loanTerms.monthlyRepayment)}</span></div>
+          <div class="fund-terms-row"><span class="l">Seller financing amount</span><span class="v">${escapeHtml(p.loanTerms.sellerFinancingAmount)}</span></div>
+          <div class="fund-terms-row"><span class="l">Seller financing schedule</span><span class="v">${escapeHtml(p.loanTerms.sellerFinancingSchedule)}</span></div>
+        </div>
+
+        <div class="card static card-pad" style="max-width:640px; margin-top:16px;">
+          <button class="add-card-btn" style="margin-top:0;" onclick="alert('Coming soon — will let you upload the real purchase agreement here once document storage is wired up.')">📎 Upload purchase agreement</button>
+        </div>
+
+        ${renderICChat(p)}
+
+        ${liquidityHtml}
       `;
     }
 
