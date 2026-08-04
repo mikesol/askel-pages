@@ -24,4 +24,3 @@ Published pages for Askel Ventures. Each folder is a site deployed to `<folder-n
 | serena | https://serena.askelventures.com |
 | samantha | https://samantha.askelventures.com |
 | helsinkimeetupday | https://helsinkimeetupday.askelventures.com |
-| fund-mockup | https://fund-mockup.askelventures.com |
