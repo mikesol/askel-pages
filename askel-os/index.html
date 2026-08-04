@@ -605,14 +605,14 @@
     .fund-banner { background: rgba(243,156,18,0.12); border: 1px solid rgba(243,156,18,0.35); color: var(--yellow);
       font-size: 12px; padding: 8px 14px; border-radius: 8px; margin-bottom: 24px; }
     .fund-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .fund-stat-tile { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; }
+    .fund-stat-tile { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; text-decoration: none; color: inherit; }
     .fund-stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
     .fund-stat-value { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 26px; }
     .fund-stat-sub { font-size: 12px; color: var(--subtle); margin-top: 4px; }
     .fund-guarantee-row { display: flex; gap: 6px; margin-top: 10px; }
     .fund-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--red); display: flex; align-items: center; justify-content: center; font-size: 10.5px; font-weight: 700; color: white; }
     .fund-portfolio-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
-    .fund-pf-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px; transition: border-color .15s; }
+    .fund-pf-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px; transition: border-color .15s; text-decoration: none; color: inherit; }
     .fund-pf-card:hover { border-color: var(--border-hover); }
     .fund-pf-name { font-weight: 600; font-size: 14.5px; display: flex; align-items: center; gap: 8px; }
     .fund-pf-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
@@ -787,7 +787,7 @@
         askel: {
           loans: { value: "€199.7K", note: "Auran Pesupojat acquisition loan (Momentum / OP)" },
           guarantees: { value: "€23.7–31.2K", note: "per partner, capped", partners: ["V","N","M","M"] },
-          investors: { value: "30 active", note: "391 in Prospect · 14 closed — Investor CRM" },
+          investors: { value: "27 active", note: "391 in Prospect · 14 closed — Investor CRM" },
           exitScenarios: { value: null, note: "No portfolio company has reached exit yet" },
           ebitda: { value: null, note: "Not yet tracked anywhere in the repo — placeholder target" }
         },
@@ -3613,7 +3613,7 @@
             <div class="fund-stat-sub">${escapeHtml(a.guarantees.note)}</div>
             <div class="fund-guarantee-row">${guaranteeAvatars}</div>
           </div>
-          <a href="#/fund/investors" class="fund-stat-tile" style="display:block; text-decoration:none;" onclick="navigate('/fund/investors'); return false;">
+          <a href="#/fund/investors" class="fund-stat-tile" onclick="navigate('/fund/investors'); return false;">
             <div class="fund-stat-label">Investors</div>
             <div class="fund-stat-value">${escapeHtml(a.investors.value)}</div>
             <div class="fund-stat-sub">${escapeHtml(a.investors.note)}</div>
@@ -3625,8 +3625,8 @@
           </div>
           <div class="fund-stat-tile">
             <div class="fund-stat-label">Management fees collected</div>
-            <div class="fund-stat-value">€${mgmtFeeTotal.toLocaleString()}/mo</div>
-            <div class="fund-stat-sub">= Askel revenue, across ${f.portfolio.length} portfolio companies</div>
+            <div class="fund-stat-value">€${mgmtFeeTotal.toLocaleString('en-US')}/mo</div>
+            <div class="fund-stat-sub">= Askel revenue — Melers Oy only for now</div>
           </div>
           <div class="fund-stat-tile">
             <div class="fund-stat-label">EBITDA</div>
@@ -3677,30 +3677,32 @@
           <div class="greeting-sub">Portfolio company financial detail</div>
         </div>
 
-        <div class="card static card-pad" style="max-width:640px;">
-          <div class="fund-pf-name" style="font-size:15px; margin-bottom:10px;"><span class="fund-pf-dot ${p.status === 'ok' ? 'green' : 'red'}"></span>${escapeHtml(p.name)}</div>
-          <div class="field-row"><div class="field-label">Revenue</div><div class="field-value">${escapeHtml(p.revenue)}</div></div>
-          <div class="field-row"><div class="field-label">Profit</div><div class="field-value">${escapeHtml(p.profit)}</div></div>
-          <div class="field-row"><div class="field-label">Bank loan</div><div class="field-value">${escapeHtml(p.loan)}</div></div>
-          <div class="field-row"><div class="field-label">Seller financing</div><div class="field-value">${escapeHtml(p.sellerFinancing)}</div></div>
-          <div class="field-row"><div class="field-label">Management fee</div><div class="field-value">${escapeHtml(p.managementFee)}</div></div>
+        <div style="max-width:640px;">
+          <div class="card static card-pad">
+            <div class="fund-pf-name" style="font-size:15px; margin-bottom:10px;"><span class="fund-pf-dot ${p.status === 'ok' ? 'green' : 'red'}"></span>${escapeHtml(p.name)}</div>
+            <div class="field-row"><div class="field-label">Revenue</div><div class="field-value">${escapeHtml(p.revenue)}</div></div>
+            <div class="field-row"><div class="field-label">Profit</div><div class="field-value">${escapeHtml(p.profit)}</div></div>
+            <div class="field-row"><div class="field-label">Bank loan</div><div class="field-value">${escapeHtml(p.loan)}</div></div>
+            <div class="field-row"><div class="field-label">Seller financing</div><div class="field-value">${escapeHtml(p.sellerFinancing)}</div></div>
+            <div class="field-row"><div class="field-label">Management fee</div><div class="field-value">${escapeHtml(p.managementFee)}</div></div>
+          </div>
+
+          <div class="card static card-pad" style="margin-top:16px;">
+            <div class="sec-label">Basic terms</div>
+            <div class="fund-terms-row"><span class="l">Loan repayment term</span><span class="v">${escapeHtml(p.loanTerms.term)}</span></div>
+            <div class="fund-terms-row"><span class="l">Monthly loan repayment</span><span class="v">${escapeHtml(p.loanTerms.monthlyRepayment)}</span></div>
+            <div class="fund-terms-row"><span class="l">Seller financing amount</span><span class="v">${escapeHtml(p.loanTerms.sellerFinancingAmount)}</span></div>
+            <div class="fund-terms-row"><span class="l">Seller financing schedule</span><span class="v">${escapeHtml(p.loanTerms.sellerFinancingSchedule)}</span></div>
+          </div>
+
+          <div class="card static card-pad" style="margin-top:16px;">
+            <button class="add-card-btn" style="margin-top:0;" onclick="alert('Coming soon — will let you upload the real purchase agreement here once document storage is wired up.')">📎 Upload purchase agreement</button>
+          </div>
+
+          ${renderICChat(p)}
+
+          ${liquidityHtml}
         </div>
-
-        <div class="card static card-pad" style="max-width:640px; margin-top:16px;">
-          <div class="sec-label">Basic terms</div>
-          <div class="fund-terms-row"><span class="l">Loan repayment term</span><span class="v">${escapeHtml(p.loanTerms.term)}</span></div>
-          <div class="fund-terms-row"><span class="l">Monthly loan repayment</span><span class="v">${escapeHtml(p.loanTerms.monthlyRepayment)}</span></div>
-          <div class="fund-terms-row"><span class="l">Seller financing amount</span><span class="v">${escapeHtml(p.loanTerms.sellerFinancingAmount)}</span></div>
-          <div class="fund-terms-row"><span class="l">Seller financing schedule</span><span class="v">${escapeHtml(p.loanTerms.sellerFinancingSchedule)}</span></div>
-        </div>
-
-        <div class="card static card-pad" style="max-width:640px; margin-top:16px;">
-          <button class="add-card-btn" style="margin-top:0;" onclick="alert('Coming soon — will let you upload the real purchase agreement here once document storage is wired up.')">📎 Upload purchase agreement</button>
-        </div>
-
-        ${renderICChat(p)}
-
-        ${liquidityHtml}
       `;
     }
 
