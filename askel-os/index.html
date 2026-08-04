@@ -604,7 +604,7 @@
     /* ── Fund engine ── */
     .fund-banner { background: rgba(243,156,18,0.12); border: 1px solid rgba(243,156,18,0.35); color: var(--yellow);
       font-size: 12px; padding: 8px 14px; border-radius: 8px; margin-bottom: 24px; }
-    .fund-stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .fund-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
     .fund-stat-tile { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; }
     .fund-stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
     .fund-stat-value { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 26px; }
@@ -628,6 +628,42 @@
     .fund-pf-card.locked .name { font-size: 12.5px; color: var(--subtle); }
     .fund-pf-card.locked .tag { font-size: 10px; color: var(--subtle); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
     @media (max-width: 900px) { .fund-portfolio-row { grid-template-columns: repeat(2, 1fr); } .fund-stat-row { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ── Fund: portfolio company drill-down ── */
+    .fund-terms-row { display: flex; justify-content: space-between; font-size: 13px; padding: 8px 0; border-bottom: 1px solid var(--border); gap: 12px; }
+    .fund-terms-row:last-child { border-bottom: none; }
+    .fund-terms-row .l { color: var(--muted); flex-shrink: 0; }
+    .fund-terms-row .v { color: var(--text); font-weight: 500; text-align: right; }
+    .fund-liquidity-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 0; }
+    .fund-liquidity-row .l { font-size: 12.5px; color: var(--muted); }
+    .fund-liquidity-row input[type="text"] {
+      flex: 0 0 140px; text-align: right; background: transparent; border: 1px solid transparent;
+      color: var(--text); font-size: 12.5px; font-family: inherit; padding: 4px 6px; border-radius: 6px;
+    }
+    .fund-liquidity-row input[type="text"]:hover, .fund-liquidity-row input[type="text"]:focus {
+      border-color: rgba(255,255,255,0.16); background: rgba(255,255,255,0.03); outline: none;
+    }
+
+    /* ── Fund: Investor CRM Kanban ── */
+    .inv-prospect-tile {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+      padding: 14px 18px; margin-bottom: 18px; display: flex; align-items: baseline; gap: 10px;
+    }
+    .inv-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; align-items: start; }
+    .inv-column-header { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--subtle); margin-bottom: 10px; }
+    .inv-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin-bottom: 10px; }
+    .inv-card-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+    .inv-card-contact { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
+    .inv-field-row { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-top: 4px; }
+    .inv-field-row .l { font-size: 10.5px; color: var(--muted); }
+    .inv-field-row input[type="text"] {
+      flex: 0 0 90px; text-align: right; background: transparent; border: 1px solid transparent;
+      color: var(--text); font-size: 11.5px; font-family: inherit; padding: 3px 5px; border-radius: 5px;
+    }
+    .inv-field-row input[type="text"]:hover, .inv-field-row input[type="text"]:focus {
+      border-color: rgba(255,255,255,0.16); background: rgba(255,255,255,0.03); outline: none;
+    }
+    @media (max-width: 900px) { .inv-board { grid-template-columns: repeat(2, 1fr); } }
   </style>
 </head>
 <body>
@@ -751,14 +787,86 @@
         askel: {
           loans: { value: "€199.7K", note: "Auran Pesupojat acquisition loan (Momentum / OP)" },
           guarantees: { value: "€23.7–31.2K", note: "per partner, capped", partners: ["V","N","M","M"] },
-          investors: { value: "3 active", note: "Investor CRM — pipeline & LOIs" },
-          exitScenarios: { value: null, note: "No portfolio company has reached exit yet" }
+          investors: { value: "30 active", note: "391 in Prospect · 14 closed — Investor CRM" },
+          exitScenarios: { value: null, note: "No portfolio company has reached exit yet" },
+          ebitda: { value: null, note: "Not yet tracked anywhere in the repo — placeholder target" }
         },
         portfolio: [
-          { name: "Melers Oy", status: "ok", revenue: "€612K /yr", profit: "€94K", loan: "€0", sellerFinancing: "€0", grants: "No active grants" },
-          { name: "Auran Pesupojat Oy", status: "risk", revenue: "TBD (DD)", profit: "TBD (DD)", loan: "€199.7K", sellerFinancing: "€0", statusNote: "Financing in progress" }
+          {
+            id: "melers", name: "Melers Oy", status: "ok",
+            revenue: "€612K /yr", profit: "€94K", loan: "€0", sellerFinancing: "€0",
+            grants: "No active grants", managementFee: "€12,000/mo",
+            loanTerms: { term: "—", monthlyRepayment: "—", sellerFinancingAmount: "€0", sellerFinancingSchedule: "—" },
+            liquiditySnapshot: {
+              month: "July 2026",
+              rows: [
+                { label: "Revenue", value: "€51,000" },
+                { label: "Costs", value: "€33,600" },
+                { label: "Salaries", value: "€18,900" },
+                { label: "Capex", value: "€1,200" },
+                { label: "Debt repayment — bank", value: "€0" },
+                { label: "Debt repayment — seller", value: "€0" },
+                { label: "Open invoices (unpaid)", value: "€6,400" },
+                { label: "Bank account balance", value: "€24,150" }
+              ]
+            },
+            chat: [
+              { from: 'partner', text: "How's the management fee income looking this quarter?" },
+              { from: 'steve', text: "🦔 Steady — €12,000/mo flat per the signed agreement, invoiced the first business day of each month. No seller financing or bank debt on this one, so it's clean margin for Askel." }
+            ]
+          },
+          {
+            id: "auran-pesupojat", name: "Auran Pesupojat Oy", status: "risk",
+            revenue: "TBD (DD)", profit: "TBD (DD)", loan: "€199.7K", sellerFinancing: "€0",
+            statusNote: "Financing in progress", managementFee: "€0",
+            loanTerms: { term: "5–7yr, 0–12mo amortization-free", monthlyRepayment: "TBD — pending signature", sellerFinancingAmount: "€0", sellerFinancingSchedule: "—" },
+            liquiditySnapshot: null,
+            chat: [
+              { from: 'partner', text: "Where are we on the Momentum financing?" },
+              { from: 'steve', text: "🦔 Terms are set — €199.7K loan, 5–7yr, 0–12mo amortization-free — but Askel's side hasn't signed yet, all 4 partners are queued on Visma Sign. No management fee until the deal closes." }
+            ]
+          }
         ],
         lockedSlots: 8
+      },
+      investorCrm: {
+        prospectCount: 391,
+        columns: [
+          {
+            key: "intro", name: "1️⃣ Intro meeting",
+            cards: [
+              ["Sanna Reunanen", ""], ["Epicenter Stockholm", "community lead intro"], ["Anders Ribbing", ""],
+              ["Mattias Sjöberg", ""], ["Antti Tormanen", ""], ["Robban Olkinuora", ""], ["Teemu Kiiski", ""],
+              ["Rene", "Silvain friend"], ["Joel Roos", ""], ["Maria Grimaldi", ""],
+              ["Tomas Bennich", "Sweden Growth Alliance"], ["Fredrik Warneryd", "Sprits"],
+              ["Sami Merali", "Fuel Ventures"], ["Ganesh Sabat", "MedArtha Capital"],
+              ["Anika Syndicate", "intro"], ["Puneet Mahajan", "TBC"], ["Rosie", "London VC Partner network"],
+              ["GPFO", "London Family office network"]
+            ]
+          },
+          {
+            key: "materials", name: "2️⃣ Materials Meeting",
+            cards: [
+              ["Jussi Kallasvuo", ""], ["Serena Koivurinta", "family office"], ["Jonas Bertilson", ""],
+              ["Bijay Baniya", ""], ["Christa Coulter", "NOP"], ["Antti Mäkelä", "Reaktor"],
+              ["Anders Brotherus", ""], ["Matias Roune", ""]
+            ]
+          },
+          {
+            key: "negotiation", name: "3️⃣ Negotiation 🎉",
+            cards: [ ["Vesa", "Sparkimind VC"] ]
+          },
+          {
+            key: "done", name: "DONE (Lost/Won)",
+            cards: [
+              ["Elias Smouni", ""], ["Mika Marjalaakso", ""], ["Anika Henry", "London investor"],
+              ["Philipp Eberle", "Herax Partners"], ["Katja Koski", ""], ["Melody Violton", "Single Family Office"],
+              ["Ivan Lazarevic", ""], ["Damon Hernandez", "Epicenter Fiban angel"],
+              ["Tapio Nissilä", "Lean Sales Method"], ["Bettina Briz", ""], ["Michael Oxton", "moxton@gmail.com"],
+              ["Andy Farquson", ""], ["Tuure Lönnrot", ""], ["Sam Thurman", "Eurazeo"]
+            ]
+          }
+        ]
       },
       findStages: [
         {
@@ -1797,6 +1905,17 @@
       return epics.map(e => ({ name: e.name, owner: e.owner, emoji: e.emoji, accent: e.accent, tasks: e.tasks.map(([text, done]) => ({ text, done, owners: [] })) }));
     }
     DATA.findStages.find(s => s.key === 'dd').epics = ddEpicTemplate();
+
+    // ── INVESTOR CRM: expand [name, contact] tuples into stable-id card objects ──
+    function seedInvestorCards() {
+      let seq = 0;
+      DATA.investorCrm.columns.forEach(col => {
+        col.cards = col.cards.map(([name, contact]) => ({
+          id: 'inv' + (seq++), name, contact, ticketSize: '', equityAsk: ''
+        }));
+      });
+    }
+    seedInvestorCards();
 
     // ── DD ASSIGNMENT (IC/Screening lead → DD, automatic or manual) ──
     function ddAssignCandidates() {
