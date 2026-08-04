@@ -2080,6 +2080,8 @@
         if (parts[1] === 'ic' && icCalendarVisible) renderCalendar();
       } else if (parts[0] === 'fund' && parts.length === 3 && parts[1] === 'company') {
         app.innerHTML = renderFundCompany(parts[2]);
+      } else if (parts[0] === 'fund' && parts[1] === 'investors') {
+        app.innerHTML = renderInvestorCRM();
       } else if (parts[0] === 'fund') {
         app.innerHTML = renderFund();
       } else if (parts[0] === 'grow') {
@@ -3699,6 +3701,47 @@
         ${renderICChat(p)}
 
         ${liquidityHtml}
+      `;
+    }
+
+    function editInvestorField(cardId, field, value) {
+      for (const col of DATA.investorCrm.columns) {
+        const c = col.cards.find(x => x.id === cardId);
+        if (c) { c[field] = value; return; }
+      }
+    }
+
+    function renderInvestorCRM() {
+      const inv = DATA.investorCrm;
+      const columnsHtml = inv.columns.map(col => `
+        <div>
+          <div class="inv-column-header">${escapeHtml(col.name)} · ${col.cards.length}</div>
+          ${col.cards.map(c => `
+            <div class="inv-card">
+              <div class="inv-card-name">${escapeHtml(c.name)}</div>
+              ${c.contact ? `<div class="inv-card-contact">${escapeHtml(c.contact)}</div>` : ''}
+              <div class="inv-field-row"><span class="l">Ticket size</span><input type="text" placeholder="—" value="${escapeAttr(c.ticketSize)}" onchange="editInvestorField('${c.id}','ticketSize',this.value)"></div>
+              <div class="inv-field-row"><span class="l">Equity ask %</span><input type="text" placeholder="—" value="${escapeAttr(c.equityAsk)}" onchange="editInvestorField('${c.id}','equityAsk',this.value)"></div>
+            </div>
+          `).join('')}
+        </div>
+      `).join('');
+
+      return `
+        ${crumbs([{ label: 'Company', path: '/' }, { label: 'Fund', path: '/fund' }, { label: 'Investor CRM' }])}
+        <div class="greeting">
+          <div class="greeting-text" style="font-size:36px;">Investor CRM</div>
+          <div class="greeting-sub">Real pipeline, mirrored from the Investor CRM Trello board</div>
+        </div>
+
+        <div class="inv-prospect-tile">
+          <div class="fund-stat-value">${inv.prospectCount}</div>
+          <div class="fund-stat-sub">in Prospect — mass outreach, not shown as individual cards</div>
+        </div>
+
+        <div class="inv-board">
+          ${columnsHtml}
+        </div>
       `;
     }
 
