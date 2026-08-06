@@ -23,28 +23,15 @@
 
     /* ── Nav ── */
     .nav {
-      background: var(--navy);
-      display: flex;
-      align-items: center;
-      padding: 0 24px;
-      height: 60px;
-      gap: 32px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      background: var(--navy); display: flex; align-items: center;
+      padding: 0 24px; height: 60px; gap: 32px; position: sticky; top: 0; z-index: 100;
     }
     .nav-logo { height: 30px; flex-shrink: 0; }
     .nav-divider { width: 1px; height: 28px; background: rgba(255,255,255,0.2); }
     .nav-tab {
-      color: rgba(255,255,255,0.55);
-      font-family: 'Sora', sans-serif;
-      font-weight: 600;
-      font-size: 14px;
-      cursor: pointer;
-      padding: 4px 0;
-      border-bottom: 2px solid transparent;
-      transition: color 0.15s, border-color 0.15s;
-      user-select: none;
+      color: rgba(255,255,255,0.55); font-family: 'Sora', sans-serif; font-weight: 600; font-size: 14px;
+      cursor: pointer; padding: 4px 0; border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s; user-select: none;
     }
     .nav-tab.active { color: var(--white); border-bottom-color: var(--coral); }
     .nav-tab:hover { color: var(--white); }
@@ -55,377 +42,182 @@
 
     /* ── Modal overlay ── */
     .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(20,55,90,0.55);
-      z-index: 200;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
+      position: fixed; inset: 0; background: rgba(20,55,90,0.55);
+      z-index: 200; display: flex; align-items: center; justify-content: center; padding: 24px;
     }
     .modal-box {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 32px;
-      max-width: 560px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
+      background: var(--white); border-radius: 12px; padding: 32px;
+      max-width: 560px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative;
     }
+    .modal-box.wide { max-width: 700px; }
     .modal-close {
-      position: absolute;
-      top: 16px;
-      right: 20px;
-      font-size: 22px;
-      cursor: pointer;
-      color: #888;
-      line-height: 1;
-      background: none;
-      border: none;
+      position: absolute; top: 16px; right: 20px; font-size: 22px;
+      cursor: pointer; color: #888; line-height: 1; background: none; border: none;
     }
     .modal-close:hover { color: var(--navy); }
 
     /* ── Kanban toolbar ── */
     .kanban-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding: 16px 24px 0;
+      display: flex; align-items: center; justify-content: flex-end; padding: 16px 24px 0;
     }
-    .btn-import {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--navy);
-      color: var(--white);
-      font-family: 'Sora', sans-serif;
-      font-weight: 600;
-      font-size: 13px;
-      padding: 9px 18px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      transition: background 0.15s;
+    .btn-primary {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--navy); color: var(--white); font-family: 'Sora', sans-serif;
+      font-weight: 600; font-size: 13px; padding: 9px 18px; border-radius: 8px;
+      border: none; cursor: pointer; transition: background 0.15s;
     }
-    .btn-import:hover { background: #1a4a78; }
+    .btn-primary:hover { background: #1a4a78; }
     #file-input { display: none; }
+    #customer-file-input { display: none; }
 
     /* ── Kanban ── */
     .kanban-board {
-      display: flex;
-      gap: 16px;
-      padding: 16px 24px 24px;
-      min-height: calc(100vh - 120px);
-      overflow-x: auto;
-      align-items: flex-start;
+      display: flex; gap: 16px; padding: 16px 24px 24px;
+      min-height: calc(100vh - 120px); overflow-x: auto; align-items: flex-start;
     }
     .kanban-col {
-      flex: 0 0 260px;
-      background: rgba(20,55,90,0.06);
-      border-radius: 10px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      flex: 0 0 260px; background: rgba(20,55,90,0.06);
+      border-radius: 10px; overflow: hidden; display: flex; flex-direction: column;
     }
     .kanban-col-header { background: var(--navy); padding: 12px 16px; }
-    .kanban-col-title {
-      font-family: 'Sora', sans-serif;
-      font-weight: 600;
-      font-size: 13px;
-      color: var(--white);
-      margin-bottom: 4px;
-    }
-    .kanban-col-revenue {
-      font-size: 11px;
-      color: rgba(255,255,255,0.6);
-      font-family: 'Inter', sans-serif;
-    }
-    .kanban-cards {
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      flex: 1;
-    }
+    .kanban-col-title { font-family: 'Sora', sans-serif; font-weight: 600; font-size: 13px; color: var(--white); margin-bottom: 4px; }
+    .kanban-col-revenue { font-size: 11px; color: rgba(255,255,255,0.6); font-family: 'Inter', sans-serif; }
+    .kanban-cards { padding: 12px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
 
-    /* ── Lead card (surface) ── */
-    .lead-card {
-      background: var(--card-surface);
-      border-radius: 8px;
-      padding: 14px;
-      cursor: pointer;
-      transition: box-shadow 0.15s, transform 0.1s;
-    }
-    .lead-card:hover {
-      box-shadow: 0 4px 12px rgba(20,55,90,0.15);
-      transform: translateY(-1px);
-    }
-    .lead-card-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 4px;
-    }
-    .lead-card-company {
-      font-family: 'Sora', sans-serif;
-      font-weight: 700;
-      font-size: 13px;
-      color: var(--navy);
-    }
-    .lead-card-tag {
-      flex-shrink: 0;
-      font-size: 10px;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 20px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      white-space: nowrap;
-    }
+    /* ── Lead card ── */
+    .lead-card { background: var(--card-surface); border-radius: 8px; padding: 14px; cursor: pointer; transition: box-shadow 0.15s, transform 0.1s; }
+    .lead-card:hover { box-shadow: 0 4px 12px rgba(20,55,90,0.15); transform: translateY(-1px); }
+    .lead-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+    .lead-card-company { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 13px; color: var(--navy); }
+    .lead-card-tag { flex-shrink: 0; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
     .lead-card-tag.uusi { background: var(--coral); color: var(--white); }
     .lead-card-tag.vanha { background: rgba(20,55,90,0.15); color: var(--navy); }
     .lead-card-contact { font-size: 12px; color: #555; margin-bottom: 8px; }
-    .lead-card-deadline {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 500;
-      padding: 2px 8px;
-      border-radius: 20px;
-    }
+    .lead-card-deadline { display: inline-block; font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 20px; }
     .lead-card-deadline.on-time { background: rgba(20,55,90,0.1); color: var(--navy); }
     .lead-card-deadline.overdue { background: var(--coral); color: var(--white); }
 
     /* ── Add card button ── */
     .add-card-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      width: calc(100% - 24px);
-      margin: 0 12px 12px;
-      padding: 8px;
-      background: transparent;
-      border: 1.5px dashed rgba(20,55,90,0.25);
-      border-radius: 8px;
-      color: rgba(20,55,90,0.45);
-      font-family: 'Sora', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: border-color 0.15s, color 0.15s, background 0.15s;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      width: calc(100% - 24px); margin: 0 12px 12px; padding: 8px;
+      background: transparent; border: 1.5px dashed rgba(20,55,90,0.25); border-radius: 8px;
+      color: rgba(20,55,90,0.45); font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 600;
+      cursor: pointer; transition: border-color 0.15s, color 0.15s, background 0.15s;
     }
-    .add-card-btn:hover {
-      border-color: var(--navy);
-      color: var(--navy);
-      background: rgba(20,55,90,0.04);
-    }
+    .add-card-btn:hover { border-color: var(--navy); color: var(--navy); background: rgba(20,55,90,0.04); }
 
-    /* ── Forms (add card + edit card) ── */
+    /* ── Forms ── */
     .form-section-title {
-      font-family: 'Sora', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: rgba(20,55,90,0.4);
-      margin: 20px 0 10px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid var(--bg-light);
+      font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em; color: rgba(20,55,90,0.4);
+      margin: 20px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--bg-light);
     }
     .form-section-title:first-of-type { margin-top: 0; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .form-group { margin-bottom: 12px; }
-    .form-label {
-      display: block;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: #888;
-      margin-bottom: 5px;
-    }
+    .form-label { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #888; margin-bottom: 5px; }
     .form-input, .form-select, .form-textarea {
-      width: 100%;
-      padding: 9px 12px;
-      border: 1.5px solid #ddd;
-      border-radius: 8px;
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      color: var(--navy);
-      background: var(--white);
-      transition: border-color 0.15s;
+      width: 100%; padding: 9px 12px; border: 1.5px solid #ddd; border-radius: 8px;
+      font-family: 'Inter', sans-serif; font-size: 13px; color: var(--navy);
+      background: var(--white); transition: border-color 0.15s;
     }
-    .form-input:focus, .form-select:focus, .form-textarea:focus {
-      outline: none;
-      border-color: var(--coral);
-    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--coral); }
     .form-textarea { resize: vertical; min-height: 70px; line-height: 1.5; }
-    .form-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-    }
-    .form-submit {
-      flex: 1;
-      padding: 11px;
-      background: var(--navy);
-      color: var(--white);
-      font-family: 'Sora', sans-serif;
-      font-weight: 700;
-      font-size: 14px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.15s;
-    }
+    .form-actions { display: flex; gap: 10px; margin-top: 20px; }
+    .form-submit { flex: 1; padding: 11px; background: var(--navy); color: var(--white); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 14px; border: none; border-radius: 8px; cursor: pointer; transition: background 0.15s; }
     .form-submit:hover { background: #1a4a78; }
-    .form-cancel {
-      padding: 11px 20px;
-      background: transparent;
-      color: #888;
-      font-family: 'Sora', sans-serif;
-      font-weight: 600;
-      font-size: 14px;
-      border: 1.5px solid #ddd;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: border-color 0.15s, color 0.15s;
-    }
+    .form-cancel { padding: 11px 20px; background: transparent; color: #888; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 14px; border: 1.5px solid #ddd; border-radius: 8px; cursor: pointer; transition: border-color 0.15s, color 0.15s; }
     .form-cancel:hover { border-color: var(--navy); color: var(--navy); }
 
     /* ── Card modal header ── */
-    .card-modal-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 4px;
-    }
+    .card-modal-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
     .card-modal-company-input {
-      font-family: 'Sora', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      border: none;
-      border-bottom: 2px solid transparent;
-      padding: 2px 0;
-      color: var(--navy);
-      background: transparent;
-      width: 100%;
-      transition: border-color 0.15s;
+      font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 700; border: none;
+      border-bottom: 2px solid transparent; padding: 2px 0; color: var(--navy);
+      background: transparent; width: 100%; transition: border-color 0.15s;
     }
-    .card-modal-company-input:focus {
-      outline: none;
-      border-bottom-color: var(--coral);
-    }
-
-    /* ── Stage select in card modal ── */
+    .card-modal-company-input:focus { outline: none; border-bottom-color: var(--coral); }
     .stage-select-wrap { margin-top: 16px; }
-    .stage-select-label {
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: #888;
-      margin-bottom: 5px;
-      display: block;
-    }
+    .stage-select-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #888; margin-bottom: 5px; display: block; }
     .modal-stage-select {
-      width: 100%;
-      padding: 9px 36px 9px 12px;
-      border: 1.5px solid #ddd;
-      border-radius: 8px;
-      font-family: 'Sora', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--navy);
-      background: var(--bg-light);
-      cursor: pointer;
-      appearance: none;
+      width: 100%; padding: 9px 36px 9px 12px; border: 1.5px solid #ddd; border-radius: 8px;
+      font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 600; color: var(--navy);
+      background: var(--bg-light); cursor: pointer; appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2314375A' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 12px center;
+      background-repeat: no-repeat; background-position: right 12px center;
     }
     .modal-stage-select:focus { outline: 2px solid var(--coral); }
 
-    /* ── Customers view ── */
-    .customers-page { padding: 24px; max-width: 900px; margin: 0 auto; }
-    .customers-search-wrap { margin-bottom: 24px; }
+    /* ── Asiakkaat view ── */
+    .customers-page { padding: 24px; }
+
+    .customers-toolbar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px; gap: 16px; flex-wrap: wrap;
+    }
+    .customers-filters {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap; flex: 1;
+    }
     .customers-search {
-      width: 100%;
-      padding: 12px 18px;
-      border: 1.5px solid #ddd;
-      border-radius: 10px;
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      color: var(--navy);
-      background: var(--white);
-      transition: border-color 0.15s;
+      padding: 9px 14px; border: 1.5px solid #ddd; border-radius: 8px;
+      font-family: 'Inter', sans-serif; font-size: 13px; color: var(--navy);
+      background: var(--white); transition: border-color 0.15s; min-width: 220px;
     }
     .customers-search:focus { outline: none; border-color: var(--coral); }
     .customers-search::placeholder { color: #aaa; }
-    .customers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-    .customer-card {
-      background: var(--white);
-      border-radius: 10px;
-      padding: 18px;
-      cursor: pointer;
-      transition: box-shadow 0.15s, transform 0.1s;
-      border-top: 3px solid var(--navy);
+    .filter-select {
+      padding: 9px 12px; border: 1.5px solid #ddd; border-radius: 8px;
+      font-family: 'Inter', sans-serif; font-size: 13px; color: var(--navy);
+      background: var(--white); cursor: pointer;
     }
-    .customer-card:hover { box-shadow: 0 6px 18px rgba(20,55,90,0.12); transform: translateY(-2px); }
-    .customer-card-company { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 14px; color: var(--navy); margin-bottom: 6px; }
-    .customer-card-contact { font-size: 13px; color: #555; margin-bottom: 4px; }
-    .customer-card-pricing {
-      margin-top: 10px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--coral-hover);
-      background: rgba(255,143,122,0.1);
-      display: inline-block;
-      padding: 3px 10px;
-      border-radius: 20px;
+    .filter-select:focus { outline: none; border-color: var(--coral); }
+    .filter-date { padding: 9px 12px; border: 1.5px solid #ddd; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 13px; color: var(--navy); background: var(--white); }
+    .filter-date:focus { outline: none; border-color: var(--coral); }
+
+    /* ── Customer table ── */
+    .customers-table-wrap {
+      background: var(--white); border-radius: 10px; overflow: hidden;
+      box-shadow: 0 2px 8px rgba(20,55,90,0.06);
     }
-    .customers-empty { grid-column: 1/-1; text-align: center; color: #aaa; font-size: 14px; padding: 40px 0; }
+    .customers-table { width: 100%; border-collapse: collapse; }
+    .customers-table thead tr { background: var(--navy); }
+    .customers-table thead th {
+      padding: 12px 16px; text-align: left; font-family: 'Sora', sans-serif;
+      font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.8);
+      text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
+    }
+    .customers-table tbody tr {
+      border-bottom: 1px solid var(--bg-light); cursor: pointer;
+      transition: background 0.12s;
+    }
+    .customers-table tbody tr:last-child { border-bottom: none; }
+    .customers-table tbody tr:hover { background: rgba(20,55,90,0.04); }
+    .customers-table td { padding: 12px 16px; font-size: 13px; color: var(--navy); vertical-align: middle; }
+    .customers-table td.company-cell { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 14px; }
+    .customers-table td.company-cell:hover { text-decoration: underline; }
+    .customers-table td.muted { color: #888; }
+    .customers-empty-row td { padding: 40px; text-align: center; color: #aaa; font-size: 14px; }
+    .pricing-badge {
+      font-size: 11px; font-weight: 600; color: var(--coral-hover);
+      background: rgba(255,143,122,0.1); padding: 2px 8px; border-radius: 20px; white-space: nowrap;
+    }
 
     /* ── Customer detail modal ── */
-    .customer-modal-header { border-bottom: 2px solid var(--navy); padding-bottom: 16px; margin-bottom: 20px; }
-    .customer-modal-company { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 20px; color: var(--navy); }
-    .customer-modal-pricing-badge {
-      display: inline-block;
-      margin-top: 8px;
-      background: var(--navy);
-      color: var(--white);
-      font-family: 'Sora', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      padding: 5px 14px;
-      border-radius: 20px;
+    .detail-company-input {
+      font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 700;
+      border: none; border-bottom: 2px solid transparent; padding: 2px 0;
+      color: var(--navy); background: transparent; width: 100%; transition: border-color 0.15s;
+      margin-bottom: 20px;
     }
-    .customer-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
-    .customer-info-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #888; margin-bottom: 4px; }
-    .customer-info-value { font-size: 14px; color: var(--navy); }
-    .customer-notes-box { background: var(--bg-light); border-radius: 8px; padding: 14px; font-size: 13px; color: #555; line-height: 1.6; }
+    .detail-company-input:focus { outline: none; border-bottom-color: var(--coral); }
 
     /* ── Toast ── */
     .toast {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--navy);
-      color: var(--white);
-      font-family: 'Sora', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      padding: 12px 24px;
-      border-radius: 8px;
-      z-index: 300;
-      opacity: 0;
-      transition: opacity 0.3s;
-      pointer-events: none;
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: var(--navy); color: var(--white); font-family: 'Sora', sans-serif;
+      font-size: 13px; font-weight: 600; padding: 12px 24px; border-radius: 8px;
+      z-index: 300; opacity: 0; transition: opacity 0.3s; pointer-events: none;
     }
     .toast.show { opacity: 1; }
   </style>
@@ -443,12 +235,14 @@
 <div id="view-customers" class="view"></div>
 <div id="card-modal" class="modal-overlay" style="display:none"></div>
 <div id="add-card-modal" class="modal-overlay" style="display:none"></div>
-<div id="customer-modal" class="modal-overlay" style="display:none"></div>
+<div id="customer-detail-modal" class="modal-overlay" style="display:none"></div>
 <div class="toast" id="toast"></div>
 <input type="file" id="file-input" accept=".csv,.xlsx,.xls">
+<input type="file" id="customer-file-input" accept=".csv,.xlsx,.xls">
 
 <script>
 const TODAY = '2026-08-06';
+const INDUSTRIES = ['Kaikki toimialat','Ravintola-ala','Majoituspalvelut','Kiinteistöpalvelut','Koulutus','Terveys & hyvinvointi','Siivouspalvelut','Toimistopalvelut','Julkinen sektori','Muu'];
 
 const STAGES = [
   { id: 'prospektit',      label: 'Prospektit' },
@@ -460,40 +254,36 @@ const STAGES = [
 
 const DATA = {
   leads: [
-    // Prospektit
-    { id:1,  stage:'prospektit',     tag:'UUSI asiakas', company:'Hotelli Kauniala Oy',               ytunnus:'1234567-8', contact:'Juhani Virtanen',   title:'Toimitusjohtaja',       phone:'+358 40 123 4567', email:'juhani.virtanen@kauniala.fi',        deal:18000, contactDate:'',           nextContact:'2026-08-05', memo:'Löydetty verkosta, ei kontaktoitu vielä. Hotelli noin 50 huonetta, paljon liinavaatteita.' },
-    { id:2,  stage:'prospektit',     tag:'UUSI asiakas', company:'Tampereen Urheilukeskus Oy',        ytunnus:'2345678-9', contact:'Minna Korhonen',    title:'Hankintapäällikkö',     phone:'+358 44 234 5678', email:'minna.korhonen@urheilukeskus.fi',    deal:24000, contactDate:'',           nextContact:'2026-08-15', memo:'Potentiaalinen asiakas urheilutekstiileille. Suositeltu verkoston kautta.' },
-    { id:3,  stage:'prospektit',     tag:'UUSI asiakas', company:'Rakennus Leinonen Oy',              ytunnus:'3456789-0', contact:'Pekka Leinonen',    title:'Toimitusjohtaja',       phone:'+358 50 345 6789', email:'pekka@rakennusleinonen.fi',          deal:9600,  contactDate:'',           nextContact:'2026-08-12', memo:'Rakennusyhtiö ~30 työntekijää. Tarvitsevat työvaatteiden pesua.' },
-    { id:4,  stage:'prospektit',     tag:'VANHA asiakas',company:'Lähipalvelut Mäkinen Oy',           ytunnus:'4567890-1', contact:'Hanna Mäkinen',     title:'Toimitusjohtaja',       phone:'+358 41 456 7890', email:'hanna@lahipalvelutmakinen.fi',       deal:6000,  contactDate:'',           nextContact:'2026-08-03', memo:'Pieni siivousyritys, kiinnostunut yritysasiakkuudesta. Soitettava kiireesti.' },
-    // Liidit
-    { id:5,  stage:'liidit',         tag:'UUSI asiakas', company:'Ravintola Kultainen Porsas Oy',     ytunnus:'5678901-2', contact:'Timo Rantanen',     title:'Ravintolapäällikkö',    phone:'+358 40 567 8901', email:'timo.rantanen@kultainenporsas.fi',   deal:12000, contactDate:'2026-08-02', nextContact:'2026-08-14', memo:'Soitettu 2.8., kiinnostunut. Haluaa tarjouksen liinavaatteille ja uniformuille.' },
-    { id:6,  stage:'liidit',         tag:'UUSI asiakas', company:'Toimisto Aaltonen Oy',              ytunnus:'6789012-3', contact:'Kirsi Aaltonen',    title:'Toimistopäällikkö',     phone:'+358 44 678 9012', email:'kirsi.aaltonen@aaltonen.fi',         deal:7200,  contactDate:'2026-07-30', nextContact:'2026-08-20', memo:'Sähköpostilla yhteys otettu, vastaavat ensi viikolla.' },
-    { id:7,  stage:'liidit',         tag:'UUSI asiakas', company:'Pelastuslaitos Pirkanmaa',          ytunnus:'7890123-4', contact:'Ari Heikkinen',     title:'Hankintapäällikkö',     phone:'+358 50 789 0123', email:'ari.heikkinen@pelastuslaitos.fi',     deal:36000, contactDate:'2026-07-28', nextContact:'2026-08-22', memo:'Julkinen sektori, vaatii tarjouspyyntömenettelyn. Suuri potentiaali.' },
-    { id:8,  stage:'liidit',         tag:'VANHA asiakas',company:'Koulutuspalvelut Ylöjärvi',         ytunnus:'8901234-5', contact:'Seija Lähteenmäki', title:'Palvelupäällikkö',      phone:'+358 41 890 1234', email:'seija.lahteenmaki@kouluylojärvi.fi', deal:8400,  contactDate:'2026-08-01', nextContact:'2026-08-18', memo:'Koulu haluaa pesua lounasliinoille. Kontaktoitu messuilla elokuussa.' },
-    // Intro palaveri
-    { id:9,  stage:'intro',          tag:'UUSI asiakas', company:'Siivouspalvelu Puhtola Oy',         ytunnus:'9012345-6', contact:'Risto Puhtola',     title:'Toimitusjohtaja',       phone:'+358 40 901 2345', email:'risto@puhtola.fi',                   deal:15600, contactDate:'2026-08-05', nextContact:'2026-08-09', memo:'Tapaaminen pidetty 5.8. Erittäin kiinnostunut. Odottaa tarjousta ensi viikolla.' },
-    { id:10, stage:'intro',          tag:'VANHA asiakas',company:'Majoituspalvelut Näsijärvi Oy',     ytunnus:'0123456-7', contact:'Leena Järvinen',    title:'Kiinteistöpäällikkö',   phone:'+358 44 012 3456', email:'leena.jarvinen@nasijärvi.fi',        deal:21600, contactDate:'2026-08-07', nextContact:'2026-08-13', memo:'Intro palaveri 7.8. Tyytyväinen palvelukuvaukseen, pyysivät referenssejä.' },
-    { id:11, stage:'intro',          tag:'UUSI asiakas', company:'Fysioterapia Salminen',             ytunnus:'1230987-6', contact:'Tuulia Salminen',   title:'Toimitusjohtaja',       phone:'+358 50 123 4560', email:'tuulia@fterapiasalminen.fi',          deal:9600,  contactDate:'2026-08-04', nextContact:'2026-08-18', memo:'Pieni klinikka, palaveri sovittu 14.8. Tarvitsevat hoitoliinojen pesua.' },
-    // Tarjous lähetetty
-    { id:12, stage:'tarjous',        tag:'UUSI asiakas', company:'Pirkanmaan Hyvinvointipalvelut Oy', ytunnus:'2341098-7', contact:'Olli Hämäläinen',  title:'Talouspäällikkö',       phone:'+358 40 234 5671', email:'olli.hamalainen@phvp.fi',            deal:48000, contactDate:'2026-08-01', nextContact:'2026-08-04', memo:'Tarjous lähetetty 1.8., odottaa päätöstä. Suurin potentiaaliasiakas tällä hetkellä.' },
-    { id:13, stage:'tarjous',        tag:'VANHA asiakas',company:'Hotelli Torni Tampere Oy',          ytunnus:'3452109-8', contact:'Maria Nieminen',    title:'Hankintapäällikkö',     phone:'+358 44 345 6782', email:'maria.nieminen@hotelltorni.fi',       deal:30000, contactDate:'2026-08-04', nextContact:'2026-08-16', memo:'Tarjous 4.8. Neuvotellaan hinnasta, kilpailija myös mukana.' },
-    { id:14, stage:'tarjous',        tag:'UUSI asiakas', company:'Catering Hakala Oy',                ytunnus:'4563210-9', contact:'Ville Hakala',      title:'Toimitusjohtaja',       phone:'+358 50 456 7893', email:'ville.hakala@cateringhakala.fi',      deal:10800, contactDate:'2026-08-06', nextContact:'2026-08-13', memo:'Tarjous lähetetty 6.8. Odotetaan vastausta viikon sisällä.' },
-    // Asiakaspalvelu & Onboarding
-    { id:15, stage:'asiakaspalvelu', tag:'VANHA asiakas',company:'Tampereen Ammattiopisto TAO',       ytunnus:'5674321-0', contact:'Päivi Kuusisto',    title:'Hankintapäällikkö',     phone:'+358 40 567 8904', email:'paivi.kuusisto@tao.fi',               deal:16800, contactDate:'2026-07-28', nextContact:'2026-09-01', memo:'Sopimus allekirjoitettu 28.7. Aloitetaan syyskuussa. Aikataulutettu.' },
-    { id:16, stage:'asiakaspalvelu', tag:'VANHA asiakas',company:'Kiinteistöpalvelut Rajala Oy',      ytunnus:'6785432-1', contact:'Juha Rajala',       title:'Toimitusjohtaja',       phone:'+358 44 678 9015', email:'juha.rajala@rajalapalvelut.fi',       deal:13200, contactDate:'2026-08-01', nextContact:'2026-08-25', memo:'Onboarding käynnissä. Ensimmäinen nouto sovittu 19.8.' },
-    { id:17, stage:'asiakaspalvelu', tag:'UUSI asiakas', company:'Ravintola Aleksi Oy',               ytunnus:'7896543-2', contact:'Paula Aleksi',      title:'Ravintolapäällikkö',    phone:'+358 50 789 0126', email:'paula@ravintolaaeksi.fi',             deal:9600,  contactDate:'2026-08-04', nextContact:'2026-08-28', memo:'Uusi asiakas 4.8. Toimituspäivät sovittu — tiistaisin ja perjantaisin.' },
+    { id:1,  stage:'prospektit',     tag:'UUSI asiakas', company:'Hotelli Kauniala Oy',               ytunnus:'1234567-8', contact:'Juhani Virtanen',   title:'Toimitusjohtaja',    phone:'+358 40 123 4567', email:'juhani.virtanen@kauniala.fi',        deal:18000, contactDate:'',           nextContact:'2026-08-05', memo:'Löydetty verkosta, ei kontaktoitu vielä. Hotelli noin 50 huonetta, paljon liinavaatteita.' },
+    { id:2,  stage:'prospektit',     tag:'UUSI asiakas', company:'Tampereen Urheilukeskus Oy',        ytunnus:'2345678-9', contact:'Minna Korhonen',    title:'Hankintapäällikkö', phone:'+358 44 234 5678', email:'minna.korhonen@urheilukeskus.fi',    deal:24000, contactDate:'',           nextContact:'2026-08-15', memo:'Potentiaalinen asiakas urheilutekstiileille. Suositeltu verkoston kautta.' },
+    { id:3,  stage:'prospektit',     tag:'UUSI asiakas', company:'Rakennus Leinonen Oy',              ytunnus:'3456789-0', contact:'Pekka Leinonen',    title:'Toimitusjohtaja',    phone:'+358 50 345 6789', email:'pekka@rakennusleinonen.fi',          deal:9600,  contactDate:'',           nextContact:'2026-08-12', memo:'Rakennusyhtiö ~30 työntekijää. Tarvitsevat työvaatteiden pesua.' },
+    { id:4,  stage:'prospektit',     tag:'VANHA asiakas',company:'Lähipalvelut Mäkinen Oy',           ytunnus:'4567890-1', contact:'Hanna Mäkinen',     title:'Toimitusjohtaja',    phone:'+358 41 456 7890', email:'hanna@lahipalvelutmakinen.fi',       deal:6000,  contactDate:'',           nextContact:'2026-08-03', memo:'Pieni siivousyritys, kiinnostunut yritysasiakkuudesta. Soitettava kiireesti.' },
+    { id:5,  stage:'liidit',         tag:'UUSI asiakas', company:'Ravintola Kultainen Porsas Oy',     ytunnus:'5678901-2', contact:'Timo Rantanen',     title:'Ravintolapäällikkö', phone:'+358 40 567 8901', email:'timo.rantanen@kultainenporsas.fi',   deal:12000, contactDate:'2026-08-02', nextContact:'2026-08-14', memo:'Soitettu 2.8., kiinnostunut. Haluaa tarjouksen liinavaatteille ja uniformuille.' },
+    { id:6,  stage:'liidit',         tag:'UUSI asiakas', company:'Toimisto Aaltonen Oy',              ytunnus:'6789012-3', contact:'Kirsi Aaltonen',    title:'Toimistopäällikkö', phone:'+358 44 678 9012', email:'kirsi.aaltonen@aaltonen.fi',         deal:7200,  contactDate:'2026-07-30', nextContact:'2026-08-20', memo:'Sähköpostilla yhteys otettu, vastaavat ensi viikolla.' },
+    { id:7,  stage:'liidit',         tag:'UUSI asiakas', company:'Pelastuslaitos Pirkanmaa',          ytunnus:'7890123-4', contact:'Ari Heikkinen',     title:'Hankintapäällikkö', phone:'+358 50 789 0123', email:'ari.heikkinen@pelastuslaitos.fi',     deal:36000, contactDate:'2026-07-28', nextContact:'2026-08-22', memo:'Julkinen sektori, vaatii tarjouspyyntömenettelyn. Suuri potentiaali.' },
+    { id:8,  stage:'liidit',         tag:'VANHA asiakas',company:'Koulutuspalvelut Ylöjärvi',         ytunnus:'8901234-5', contact:'Seija Lähteenmäki', title:'Palvelupäällikkö',  phone:'+358 41 890 1234', email:'seija.lahteenmaki@kouluylojärvi.fi', deal:8400,  contactDate:'2026-08-01', nextContact:'2026-08-18', memo:'Koulu haluaa pesua lounasliinoille. Kontaktoitu messuilla elokuussa.' },
+    { id:9,  stage:'intro',          tag:'UUSI asiakas', company:'Siivouspalvelu Puhtola Oy',         ytunnus:'9012345-6', contact:'Risto Puhtola',     title:'Toimitusjohtaja',    phone:'+358 40 901 2345', email:'risto@puhtola.fi',                   deal:15600, contactDate:'2026-08-05', nextContact:'2026-08-09', memo:'Tapaaminen pidetty 5.8. Erittäin kiinnostunut. Odottaa tarjousta ensi viikolla.' },
+    { id:10, stage:'intro',          tag:'VANHA asiakas',company:'Majoituspalvelut Näsijärvi Oy',     ytunnus:'0123456-7', contact:'Leena Järvinen',    title:'Kiinteistöpäällikkö',phone:'+358 44 012 3456', email:'leena.jarvinen@nasijärvi.fi',        deal:21600, contactDate:'2026-08-07', nextContact:'2026-08-13', memo:'Intro palaveri 7.8. Tyytyväinen palvelukuvaukseen, pyysivät referenssejä.' },
+    { id:11, stage:'intro',          tag:'UUSI asiakas', company:'Fysioterapia Salminen',             ytunnus:'1230987-6', contact:'Tuulia Salminen',   title:'Toimitusjohtaja',    phone:'+358 50 123 4560', email:'tuulia@fterapiasalminen.fi',          deal:9600,  contactDate:'2026-08-04', nextContact:'2026-08-18', memo:'Pieni klinikka, palaveri sovittu 14.8. Tarvitsevat hoitoliinojen pesua.' },
+    { id:12, stage:'tarjous',        tag:'UUSI asiakas', company:'Pirkanmaan Hyvinvointipalvelut Oy', ytunnus:'2341098-7', contact:'Olli Hämäläinen',  title:'Talouspäällikkö',   phone:'+358 40 234 5671', email:'olli.hamalainen@phvp.fi',            deal:48000, contactDate:'2026-08-01', nextContact:'2026-08-04', memo:'Tarjous lähetetty 1.8., odottaa päätöstä. Suurin potentiaaliasiakas tällä hetkellä.' },
+    { id:13, stage:'tarjous',        tag:'VANHA asiakas',company:'Hotelli Torni Tampere Oy',          ytunnus:'3452109-8', contact:'Maria Nieminen',    title:'Hankintapäällikkö', phone:'+358 44 345 6782', email:'maria.nieminen@hotelltorni.fi',       deal:30000, contactDate:'2026-08-04', nextContact:'2026-08-16', memo:'Tarjous 4.8. Neuvotellaan hinnasta, kilpailija myös mukana.' },
+    { id:14, stage:'tarjous',        tag:'UUSI asiakas', company:'Catering Hakala Oy',                ytunnus:'4563210-9', contact:'Ville Hakala',      title:'Toimitusjohtaja',    phone:'+358 50 456 7893', email:'ville.hakala@cateringhakala.fi',      deal:10800, contactDate:'2026-08-06', nextContact:'2026-08-13', memo:'Tarjous lähetetty 6.8. Odotetaan vastausta viikon sisällä.' },
+    { id:15, stage:'asiakaspalvelu', tag:'VANHA asiakas',company:'Tampereen Ammattiopisto TAO',       ytunnus:'5674321-0', contact:'Päivi Kuusisto',    title:'Hankintapäällikkö', phone:'+358 40 567 8904', email:'paivi.kuusisto@tao.fi',               deal:16800, contactDate:'2026-07-28', nextContact:'2026-09-01', memo:'Sopimus allekirjoitettu 28.7. Aloitetaan syyskuussa. Aikataulutettu.' },
+    { id:16, stage:'asiakaspalvelu', tag:'VANHA asiakas',company:'Kiinteistöpalvelut Rajala Oy',      ytunnus:'6785432-1', contact:'Juha Rajala',       title:'Toimitusjohtaja',    phone:'+358 44 678 9015', email:'juha.rajala@rajalapalvelut.fi',       deal:13200, contactDate:'2026-08-01', nextContact:'2026-08-25', memo:'Onboarding käynnissä. Ensimmäinen nouto sovittu 19.8.' },
+    { id:17, stage:'asiakaspalvelu', tag:'UUSI asiakas', company:'Ravintola Aleksi Oy',               ytunnus:'7896543-2', contact:'Paula Aleksi',      title:'Ravintolapäällikkö', phone:'+358 50 789 0126', email:'paula@ravintolaaeksi.fi',             deal:9600,  contactDate:'2026-08-04', nextContact:'2026-08-28', memo:'Uusi asiakas 4.8. Toimituspäivät sovittu — tiistaisin ja perjantaisin.' },
   ],
   customers: [
-    { id:1, company:'Tampereen Ammattiopisto TAO',   contact:'Päivi Kuusisto',  phone:'+358 40 567 8904', email:'paivi.kuusisto@tao.fi',           pricing:'Standardi 3x/kk — 1 400 €/kk', notes:'Sopimus 3v, uusittu 2025-09. Erityistoimitus maanantaisin. Maksuaika 21 pv.' },
-    { id:2, company:'Kiinteistöpalvelut Rajala Oy',  contact:'Juha Rajala',     phone:'+358 44 678 9015', email:'juha.rajala@rajalapalvelut.fi',    pricing:'Perus 2x/kk — 550 €/kk',       notes:'Pitkäaikainen asiakas vuodesta 2022. Maksuaika 30 pv. Toimitus tiistaisin.' },
-    { id:3, company:'Ravintola Aleksi Oy',           contact:'Paula Aleksi',    phone:'+358 50 789 0126', email:'paula@ravintolaaeksi.fi',          pricing:'Perus 2x/kk — 400 €/kk',       notes:'Aloittanut 8/2026. Liinat ja uniformut. Sopimus toistaiseksi voimassa.' },
-    { id:4, company:'Hotelli Harmonia Oy',           contact:'Sanna Harmala',   phone:'+358 40 890 1237', email:'sanna@hotelliharmonia.fi',         pricing:'Premium 5x/vko — 3 200 €/kk',  notes:'VIP-asiakas. Laskutus kuukausittain etukäteen. Ei viivästyksiä.' },
-    { id:5, company:'Päiväkoti Aurinkoinen',         contact:'Maija Taipale',   phone:'+358 44 901 2348', email:'maija@paivakotiaurinkoinen.fi',    pricing:'Perus 1x/vko — 620 €/kk',      notes:'Kunta-asiakas. Budjetoitu vuosisopimukseen. Maksuaika 14 pv.' },
-    { id:6, company:'Lakiasiaintoimisto Helin',      contact:'Mikko Helin',     phone:'+358 50 012 3459', email:'mikko@helinlakiasiat.fi',          pricing:'Pieni 2x/kk — 280 €/kk',       notes:'Toimistotekstiilit. Erityisohje: ei tumman vihreää konepesua.' },
-    { id:7, company:'Siivouspalvelu Puhtola Oy',     contact:'Risto Puhtola',   phone:'+358 40 901 2345', email:'risto@puhtola.fi',                pricing:'Yritys 4x/kk — 960 €/kk',      notes:'Sopimus 1v, alkaen 2026-03. Työvaatteet ja moppipyykit.' },
-    { id:8, company:'Fysioterapia Salminen',         contact:'Tuulia Salminen', phone:'+358 50 123 4560', email:'tuulia@fterapiasalminen.fi',       pricing:'Perus 2x/kk — 400 €/kk',       notes:'Uusi asiakas 8/2026. Hoitoliinoja ja pyyheliinat. Toimitus tiistaisin.' },
+    { id:1,  company:'Tampereen Ammattiopisto TAO',   ytunnus:'5674321-0', industry:'Koulutus',           contact:'Päivi Kuusisto',  title:'Hankintapäällikkö', phone:'+358 40 567 8904', email:'paivi.kuusisto@tao.fi',           pricing:'Standardi 3x/kk — 1 400 €/kk', createdDate:'2025-09-01', notes:'Sopimus 3v, uusittu 2025-09. Erityistoimitus maanantaisin. Maksuaika 21 pv.' },
+    { id:2,  company:'Kiinteistöpalvelut Rajala Oy',  ytunnus:'6785432-1', industry:'Kiinteistöpalvelut',  contact:'Juha Rajala',     title:'Toimitusjohtaja',   phone:'+358 44 678 9015', email:'juha.rajala@rajalapalvelut.fi',    pricing:'Perus 2x/kk — 550 €/kk',       createdDate:'2022-03-15', notes:'Pitkäaikainen asiakas vuodesta 2022. Maksuaika 30 pv. Toimitus tiistaisin.' },
+    { id:3,  company:'Ravintola Aleksi Oy',           ytunnus:'7896543-2', industry:'Ravintola-ala',       contact:'Paula Aleksi',    title:'Ravintolapäällikkö',phone:'+358 50 789 0126', email:'paula@ravintolaaeksi.fi',          pricing:'Perus 2x/kk — 400 €/kk',       createdDate:'2026-08-04', notes:'Aloittanut 8/2026. Liinat ja uniformut. Sopimus toistaiseksi voimassa.' },
+    { id:4,  company:'Hotelli Harmonia Oy',           ytunnus:'8907654-3', industry:'Majoituspalvelut',    contact:'Sanna Harmala',   title:'Hankintapäällikkö', phone:'+358 40 890 1237', email:'sanna@hotelliharmonia.fi',         pricing:'Premium 5x/vko — 3 200 €/kk',  createdDate:'2024-01-10', notes:'VIP-asiakas. Laskutus kuukausittain etukäteen. Ei viivästyksiä.' },
+    { id:5,  company:'Päiväkoti Aurinkoinen',         ytunnus:'9018765-4', industry:'Koulutus',            contact:'Maija Taipale',   title:'Johtaja',           phone:'+358 44 901 2348', email:'maija@paivakotiaurinkoinen.fi',    pricing:'Perus 1x/vko — 620 €/kk',      createdDate:'2023-08-20', notes:'Kunta-asiakas. Budjetoitu vuosisopimukseen. Maksuaika 14 pv.' },
+    { id:6,  company:'Lakiasiaintoimisto Helin',      ytunnus:'0129876-5', industry:'Toimistopalvelut',    contact:'Mikko Helin',     title:'Toimitusjohtaja',   phone:'+358 50 012 3459', email:'mikko@helinlakiasiat.fi',          pricing:'Pieni 2x/kk — 280 €/kk',       createdDate:'2024-06-01', notes:'Toimistotekstiilit. Erityisohje: ei tumman vihreää konepesua.' },
+    { id:7,  company:'Siivouspalvelu Puhtola Oy',     ytunnus:'9012345-6', industry:'Siivouspalvelut',     contact:'Risto Puhtola',   title:'Toimitusjohtaja',   phone:'+358 40 901 2345', email:'risto@puhtola.fi',                pricing:'Yritys 4x/kk — 960 €/kk',      createdDate:'2026-03-01', notes:'Sopimus 1v, alkaen 2026-03. Työvaatteet ja moppipyykit.' },
+    { id:8,  company:'Fysioterapia Salminen',         ytunnus:'1230987-6', industry:'Terveys & hyvinvointi',contact:'Tuulia Salminen', title:'Toimitusjohtaja',   phone:'+358 50 123 4560', email:'tuulia@fterapiasalminen.fi',       pricing:'Perus 2x/kk — 400 €/kk',       createdDate:'2026-08-06', notes:'Uusi asiakas 8/2026. Hoitoliinoja ja pyyheliinat. Toimitus tiistaisin.' },
   ],
   _nextId: 18,
+  _nextCustId: 9,
 };
 
 // ── Helpers ──
@@ -502,12 +292,15 @@ function formatDate(d) { if (!d) return '—'; const [y,m,dd]=d.split('-'); retu
 function tagClass(tag) { return tag === 'UUSI asiakas' ? 'uusi' : 'vanha'; }
 function tagLabel(tag) { return tag === 'UUSI asiakas' ? 'NEW' : 'OLD'; }
 function leadById(id) { return DATA.leads.find(l => l.id === id); }
+function custById(id) { return DATA.customers.find(c => c.id === id); }
+function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
 
 function showView(name) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('view-' + name).classList.add('active');
   document.querySelector(`.nav-tab[data-view="${name}"]`).classList.add('active');
+  if (name === 'customers') refreshCustomerTable();
 }
 
 function showToast(msg) {
@@ -521,7 +314,28 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
   tab.addEventListener('click', () => showView(tab.dataset.view));
 });
 
-// ── Card surface element ──
+// ── Sync lead → customers when moved to Asiakaspalvelu ──
+function syncLeadToCustomers(lead) {
+  const exists = DATA.customers.find(c => c.ytunnus && c.ytunnus === lead.ytunnus && lead.ytunnus)
+               || DATA.customers.find(c => c.company.toLowerCase() === lead.company.toLowerCase());
+  if (exists) return; // already there
+  DATA.customers.push({
+    id: DATA._nextCustId++,
+    company: lead.company,
+    ytunnus: lead.ytunnus || '',
+    industry: 'Muu',
+    contact: lead.contact,
+    title: lead.title || '',
+    phone: lead.phone,
+    email: lead.email || '',
+    pricing: '—',
+    createdDate: TODAY,
+    notes: 'Siirretty CRM:stä automaattisesti.',
+  });
+  showToast(lead.company + ' lisätty Asiakkaisiin automaattisesti');
+}
+
+// ── Card surface ──
 function buildCard(lead) {
   const overdue = isOverdue(lead.nextContact);
   const card = document.createElement('div');
@@ -550,10 +364,9 @@ function updateColRevenue(stageId) {
 // ── Kanban ──
 function renderKanban() {
   const view = document.getElementById('view-kanban');
-
   const toolbar = document.createElement('div');
   toolbar.className = 'kanban-toolbar';
-  toolbar.innerHTML = `<button class="btn-import" onclick="document.getElementById('file-input').click()">＋ Lataa asiakaslista</button>`;
+  toolbar.innerHTML = `<button class="btn-primary" onclick="document.getElementById('file-input').click()">＋ Lataa asiakaslista</button>`;
   view.appendChild(toolbar);
 
   const board = document.createElement('div');
@@ -574,7 +387,6 @@ function renderKanban() {
     `;
     const container = col.querySelector(`#col-${stage.id}`);
     stageLeads.forEach(l => container.appendChild(buildCard(l)));
-
     const addBtn = document.createElement('button');
     addBtn.className = 'add-card-btn';
     addBtn.textContent = '＋ Lisää kortti';
@@ -582,7 +394,6 @@ function renderKanban() {
     col.appendChild(addBtn);
     board.appendChild(col);
   });
-
   view.appendChild(board);
 }
 
@@ -593,85 +404,48 @@ function openCardModal(id) {
     `<option value="${s.id}" ${s.id === lead.stage ? 'selected' : ''}>${s.label.replace('&amp;','&')}</option>`
   ).join('');
   const overdue = isOverdue(lead.nextContact);
-
   const modal = document.getElementById('card-modal');
   modal.innerHTML = `
     <div class="modal-box">
       <button class="modal-close" onclick="closeCardModal()">×</button>
-
       <div class="card-modal-header">
         <input class="card-modal-company-input" id="edit-company" value="${esc(lead.company)}" placeholder="Yrityksen nimi">
         <span class="lead-card-tag ${tagClass(lead.tag)}" style="margin-top:6px;flex-shrink:0">${tagLabel(lead.tag)}</span>
       </div>
-
       <div class="stage-select-wrap">
         <span class="stage-select-label">Vaihe</span>
         <select class="modal-stage-select" id="edit-stage">${stageOptions}</select>
       </div>
-
       <div class="form-section-title">Yritystiedot</div>
       <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Y-tunnus</label>
-          <input class="form-input" id="edit-ytunnus" value="${esc(lead.ytunnus||'')}" placeholder="1234567-8">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Asiakastyyppi</label>
+        <div class="form-group"><label class="form-label">Y-tunnus</label><input class="form-input" id="edit-ytunnus" value="${esc(lead.ytunnus||'')}" placeholder="1234567-8"></div>
+        <div class="form-group"><label class="form-label">Asiakastyyppi</label>
           <select class="form-select" id="edit-tag">
             <option value="UUSI asiakas" ${lead.tag==='UUSI asiakas'?'selected':''}>UUSI asiakas</option>
             <option value="VANHA asiakas" ${lead.tag==='VANHA asiakas'?'selected':''}>VANHA asiakas</option>
           </select>
         </div>
       </div>
-
       <div class="form-section-title">Yhteyshenkilö</div>
       <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Nimi</label>
-          <input class="form-input" id="edit-contact" value="${esc(lead.contact)}" placeholder="Etunimi Sukunimi">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Titteli</label>
-          <input class="form-input" id="edit-title" value="${esc(lead.title||'')}" placeholder="Toimitusjohtaja">
-        </div>
+        <div class="form-group"><label class="form-label">Nimi</label><input class="form-input" id="edit-contact" value="${esc(lead.contact)}" placeholder="Etunimi Sukunimi"></div>
+        <div class="form-group"><label class="form-label">Titteli</label><input class="form-input" id="edit-title" value="${esc(lead.title||'')}" placeholder="Toimitusjohtaja"></div>
       </div>
       <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Puhelinnumero</label>
-          <input class="form-input" id="edit-phone" value="${esc(lead.phone)}" placeholder="+358 40 000 0000">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Sähköposti</label>
-          <input class="form-input" id="edit-email" type="email" value="${esc(lead.email||'')}" placeholder="nimi@yritys.fi">
-        </div>
+        <div class="form-group"><label class="form-label">Puhelinnumero</label><input class="form-input" id="edit-phone" value="${esc(lead.phone)}" placeholder="+358 40 000 0000"></div>
+        <div class="form-group"><label class="form-label">Sähköposti</label><input class="form-input" type="email" id="edit-email" value="${esc(lead.email||'')}" placeholder="nimi@yritys.fi"></div>
       </div>
-
       <div class="form-section-title">Myynti</div>
       <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Revenue estimate (€/v)</label>
-          <input class="form-input" id="edit-deal" type="number" value="${lead.deal||''}" placeholder="12000">
-        </div>
-        <div class="form-group" style="display:flex;flex-direction:column;justify-content:flex-end">
-          <span style="font-size:12px;color:#888">Nykyinen: ${lead.deal ? lead.deal.toLocaleString('fi-FI') + ' €/v' : '—'}</span>
-        </div>
+        <div class="form-group"><label class="form-label">Revenue estimate (€/v)</label><input class="form-input" id="edit-deal" type="number" value="${lead.deal||''}" placeholder="12000"></div>
+        <div class="form-group" style="display:flex;flex-direction:column;justify-content:flex-end"><span style="font-size:12px;color:#888">Nykyinen: ${lead.deal ? lead.deal.toLocaleString('fi-FI') + ' €/v' : '—'}</span></div>
       </div>
       <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Kontaktointipäivä</label>
-          <input class="form-input" id="edit-contactDate" type="date" value="${lead.contactDate||''}">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Seuraava kontaktointi ${overdue ? '⚠' : ''}</label>
-          <input class="form-input" id="edit-nextContact" type="date" value="${lead.nextContact||''}" style="${overdue ? 'border-color:var(--coral)' : ''}">
-        </div>
+        <div class="form-group"><label class="form-label">Kontaktointipäivä</label><input class="form-input" id="edit-contactDate" type="date" value="${lead.contactDate||''}"></div>
+        <div class="form-group"><label class="form-label">Seuraava kontaktointi ${overdue?'⚠':''}</label><input class="form-input" id="edit-nextContact" type="date" value="${lead.nextContact||''}" style="${overdue?'border-color:var(--coral)':''}"></div>
       </div>
-
       <div class="form-section-title">Muistiinpano</div>
-      <div class="form-group">
-        <textarea class="form-textarea" id="edit-memo" placeholder="Viimeisin keskustelun yhteenveto…">${esc(lead.memo||'')}</textarea>
-      </div>
-
+      <div class="form-group"><textarea class="form-textarea" id="edit-memo" placeholder="Viimeisin keskustelun yhteenveto…">${esc(lead.memo||'')}</textarea></div>
       <div class="form-actions">
         <button class="form-cancel" onclick="closeCardModal()">Peruuta</button>
         <button class="form-submit" onclick="saveCard(${id})">Tallenna</button>
@@ -702,11 +476,9 @@ function saveCard(id) {
   lead.memo        = document.getElementById('edit-memo').value.trim();
   lead.stage       = newStage;
 
-  // Replace card in DOM
   const oldCard = document.querySelector(`.lead-card[data-id="${id}"]`);
   if (oldCard) {
     if (oldStage !== newStage) {
-      // Move to new column
       oldCard.remove();
       document.getElementById('col-' + newStage).appendChild(buildCard(lead));
       updateColRevenue(oldStage);
@@ -715,6 +487,12 @@ function saveCard(id) {
     }
   }
   updateColRevenue(newStage);
+
+  // Auto-sync to Asiakkaat when moved into Asiakaspalvelu
+  if (newStage === 'asiakaspalvelu' && oldStage !== 'asiakaspalvelu') {
+    syncLeadToCustomers(lead);
+  }
+
   closeCardModal();
   showToast('Tallennettu: ' + lead.company);
 }
@@ -726,73 +504,31 @@ function openAddCardModal(stageId) {
   modal.innerHTML = `
     <div class="modal-box">
       <button class="modal-close" onclick="closeAddCardModal()">×</button>
-      <h3 style="font-family:'Sora',sans-serif;font-size:16px;color:var(--navy);margin-bottom:16px">
-        Lisää kortti — ${stage.label.replace('&amp;','&')}
-      </h3>
+      <h3 style="font-family:'Sora',sans-serif;font-size:16px;color:var(--navy);margin-bottom:16px">Lisää kortti — ${stage.label.replace('&amp;','&')}</h3>
       <form onsubmit="submitAddCard(event,'${stageId}')">
-
         <div class="form-section-title">Yritystiedot</div>
         <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Yrityksen nimi *</label>
-            <input class="form-input" id="new-company" type="text" required placeholder="Yrityksen nimi">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Y-tunnus</label>
-            <input class="form-input" id="new-ytunnus" type="text" placeholder="1234567-8">
-          </div>
+          <div class="form-group"><label class="form-label">Yrityksen nimi *</label><input class="form-input" id="new-company" type="text" required placeholder="Yrityksen nimi"></div>
+          <div class="form-group"><label class="form-label">Y-tunnus</label><input class="form-input" id="new-ytunnus" type="text" placeholder="1234567-8"></div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Asiakastyyppi</label>
-          <select class="form-select" id="new-tag">
-            <option value="UUSI asiakas">UUSI asiakas</option>
-            <option value="VANHA asiakas">VANHA asiakas</option>
-          </select>
-        </div>
-
+        <div class="form-group"><label class="form-label">Asiakastyyppi</label><select class="form-select" id="new-tag"><option value="UUSI asiakas">UUSI asiakas</option><option value="VANHA asiakas">VANHA asiakas</option></select></div>
         <div class="form-section-title">Yhteyshenkilö</div>
         <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Nimi *</label>
-            <input class="form-input" id="new-contact" type="text" required placeholder="Etunimi Sukunimi">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Titteli</label>
-            <input class="form-input" id="new-title" type="text" placeholder="Toimitusjohtaja">
-          </div>
+          <div class="form-group"><label class="form-label">Nimi *</label><input class="form-input" id="new-contact" type="text" required placeholder="Etunimi Sukunimi"></div>
+          <div class="form-group"><label class="form-label">Titteli</label><input class="form-input" id="new-title" type="text" placeholder="Toimitusjohtaja"></div>
         </div>
         <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Puhelinnumero</label>
-            <input class="form-input" id="new-phone" type="text" placeholder="+358 40 000 0000">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Sähköposti</label>
-            <input class="form-input" id="new-email" type="email" placeholder="nimi@yritys.fi">
-          </div>
+          <div class="form-group"><label class="form-label">Puhelinnumero</label><input class="form-input" id="new-phone" type="text" placeholder="+358 40 000 0000"></div>
+          <div class="form-group"><label class="form-label">Sähköposti</label><input class="form-input" id="new-email" type="email" placeholder="nimi@yritys.fi"></div>
         </div>
-
         <div class="form-section-title">Myynti</div>
         <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Revenue estimate (€/v)</label>
-            <input class="form-input" id="new-deal" type="number" placeholder="12000">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Kontaktointipäivä</label>
-            <input class="form-input" id="new-contactDate" type="date">
-          </div>
+          <div class="form-group"><label class="form-label">Revenue estimate (€/v)</label><input class="form-input" id="new-deal" type="number" placeholder="12000"></div>
+          <div class="form-group"><label class="form-label">Kontaktointipäivä</label><input class="form-input" id="new-contactDate" type="date"></div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Seuraava kontaktointi *</label>
-          <input class="form-input" id="new-nextContact" type="date" required value="2026-08-13">
-        </div>
-
+        <div class="form-group"><label class="form-label">Seuraava kontaktointi *</label><input class="form-input" id="new-nextContact" type="date" required value="2026-08-13"></div>
         <div class="form-section-title">Muistiinpano</div>
-        <div class="form-group">
-          <textarea class="form-textarea" id="new-memo" placeholder="Viimeisin keskustelun yhteenveto…"></textarea>
-        </div>
-
+        <div class="form-group"><textarea class="form-textarea" id="new-memo" placeholder="Viimeisin keskustelun yhteenveto…"></textarea></div>
         <div class="form-actions">
           <button type="button" class="form-cancel" onclick="closeAddCardModal()">Peruuta</button>
           <button class="form-submit" type="submit">Lisää kortti</button>
@@ -809,57 +545,34 @@ function closeAddCardModal() { document.getElementById('add-card-modal').style.d
 function submitAddCard(e, stageId) {
   e.preventDefault();
   const lead = {
-    id: DATA._nextId++,
-    stage: stageId,
-    tag:         document.getElementById('new-tag').value,
-    company:     document.getElementById('new-company').value.trim(),
-    ytunnus:     document.getElementById('new-ytunnus').value.trim(),
-    contact:     document.getElementById('new-contact').value.trim(),
-    title:       document.getElementById('new-title').value.trim(),
-    phone:       document.getElementById('new-phone').value.trim() || '—',
-    email:       document.getElementById('new-email').value.trim(),
-    deal:        parseInt(document.getElementById('new-deal').value) || 0,
+    id: DATA._nextId++, stage: stageId,
+    tag: document.getElementById('new-tag').value,
+    company: document.getElementById('new-company').value.trim(),
+    ytunnus: document.getElementById('new-ytunnus').value.trim(),
+    contact: document.getElementById('new-contact').value.trim(),
+    title: document.getElementById('new-title').value.trim(),
+    phone: document.getElementById('new-phone').value.trim() || '—',
+    email: document.getElementById('new-email').value.trim(),
+    deal: parseInt(document.getElementById('new-deal').value) || 0,
     contactDate: document.getElementById('new-contactDate').value,
     nextContact: document.getElementById('new-nextContact').value,
-    memo:        document.getElementById('new-memo').value.trim(),
+    memo: document.getElementById('new-memo').value.trim(),
   };
   DATA.leads.push(lead);
   document.getElementById('col-' + stageId).appendChild(buildCard(lead));
   updateColRevenue(stageId);
+  if (stageId === 'asiakaspalvelu') syncLeadToCustomers(lead);
   closeAddCardModal();
   showToast('Kortti lisätty: ' + lead.company);
 }
 
-// ── File import ──
+// ── Kanban file import ──
 document.getElementById('file-input').addEventListener('change', function(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  this.value = '';
-  const ext = file.name.split('.').pop().toLowerCase();
-  if (ext === 'csv') {
-    const reader = new FileReader();
-    reader.onload = (ev) => importFromCSV(ev.target.result);
-    reader.readAsText(file, 'UTF-8');
-  } else if (ext === 'xlsx' || ext === 'xls') {
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      const wb = XLSX.read(ev.target.result, { type: 'array' });
-      const ws = wb.Sheets[wb.SheetNames[0]];
-      importFromRows(XLSX.utils.sheet_to_json(ws, { header: 1 }));
-    };
-    reader.readAsArrayBuffer(file);
-  } else {
-    showToast('Tuetut tiedostotyypit: CSV, XLSX, XLS');
-  }
+  const file = e.target.files[0]; if (!file) return; this.value = '';
+  parseFile(file, rows => importLeadsFromRows(rows));
 });
 
-function importFromCSV(text) {
-  const rows = text.split(/\r?\n/).filter(l => l.trim())
-    .map(l => l.split(/[,;]/).map(c => c.trim().replace(/^"|"$/g, '')));
-  importFromRows(rows);
-}
-
-function importFromRows(rows) {
+function importLeadsFromRows(rows) {
   if (rows.length < 2) { showToast('Tiedostossa ei löydy dataa.'); return; }
   const hdr = rows[0].map(h => (h||'').toLowerCase());
   const ci = (cands) => { for (const c of cands) { const i = hdr.findIndex(h => h.includes(c)); if (i>=0) return i; } return -1; };
@@ -869,12 +582,7 @@ function importFromRows(rows) {
   if (!dataRows.length) { showToast('Ei tuotavia rivejä löydy.'); return; }
   const container = document.getElementById('col-prospektit');
   dataRows.forEach(row => {
-    const lead = {
-      id: DATA._nextId++, stage:'prospektit', tag:'UUSI asiakas',
-      company: row[getC(cC,0)] || '—', contact: row[getC(nC,1)] || '—',
-      phone: row[getC(pC,2)] || '—', email:'', title:'', ytunnus:'',
-      deal:0, contactDate:'', nextContact:'2026-08-13', memo:'Tuotu asiakaslistasta',
-    };
+    const lead = { id: DATA._nextId++, stage:'prospektit', tag:'UUSI asiakas', company: row[getC(cC,0)]||'—', contact: row[getC(nC,1)]||'—', phone: row[getC(pC,2)]||'—', email:'', title:'', ytunnus:'', deal:0, contactDate:'', nextContact:'2026-08-13', memo:'Tuotu asiakaslistasta' };
     DATA.leads.push(lead);
     container.appendChild(buildCard(lead));
   });
@@ -882,67 +590,190 @@ function importFromRows(rows) {
   showToast(dataRows.length + ' kontaktia tuotu Prospektit-sarakkeeseen');
 }
 
-// ── Customers ──
+// ── Asiakkaat view ──
 function renderCustomers() {
-  const page = document.createElement('div');
-  page.className = 'customers-page';
-  page.innerHTML = `
-    <div class="customers-search-wrap">
-      <input class="customers-search" id="customers-search-input" type="text"
-        placeholder="Hae yrityksen nimellä tai yhteyshenkilöllä…"
-        oninput="filterCustomers(this.value)">
+  const view = document.getElementById('view-customers');
+  const industryOptions = INDUSTRIES.map(i => `<option value="${i}">${i}</option>`).join('');
+  view.innerHTML = `
+    <div class="customers-page">
+      <div class="customers-toolbar">
+        <div class="customers-filters">
+          <input class="customers-search" id="cust-search" type="text" placeholder="Hae nimellä, Y-tunnuksella, sähköpostilla…" oninput="refreshCustomerTable()">
+          <select class="filter-select" id="cust-industry" onchange="refreshCustomerTable()">${industryOptions}</select>
+          <input class="filter-date" id="cust-date-from" type="date" title="Asiakas alkaen" onchange="refreshCustomerTable()">
+          <span style="font-size:12px;color:#888">—</span>
+          <input class="filter-date" id="cust-date-to" type="date" title="Asiakas saakka" onchange="refreshCustomerTable()">
+        </div>
+        <button class="btn-primary" onclick="document.getElementById('customer-file-input').click()">＋ Lisää asiakaslista</button>
+      </div>
+      <div class="customers-table-wrap">
+        <table class="customers-table">
+          <thead>
+            <tr>
+              <th>Yritys</th>
+              <th>Y-tunnus</th>
+              <th>Yhteyshenkilö</th>
+              <th>Sähköposti</th>
+              <th>Puhelin</th>
+              <th>Toimiala</th>
+              <th>Sopimus</th>
+              <th>Asiakkaana alkaen</th>
+            </tr>
+          </thead>
+          <tbody id="customers-tbody"></tbody>
+        </table>
+      </div>
     </div>
-    <div class="customers-grid" id="customers-grid"></div>
   `;
-  document.getElementById('view-customers').appendChild(page);
-  renderCustomerCards(DATA.customers);
+  refreshCustomerTable();
 }
 
-function renderCustomerCards(customers) {
-  const grid = document.getElementById('customers-grid');
-  grid.innerHTML = '';
-  if (!customers.length) { grid.innerHTML = '<div class="customers-empty">Ei hakutuloksia.</div>'; return; }
-  customers.forEach(c => {
-    const card = document.createElement('div');
-    card.className = 'customer-card';
-    card.innerHTML = `<div class="customer-card-company">${c.company}</div><div class="customer-card-contact">${c.contact} · ${c.phone}</div><span class="customer-card-pricing">${c.pricing}</span>`;
-    card.addEventListener('click', () => openCustomerModal(c));
-    grid.appendChild(card);
+function getFilteredCustomers() {
+  const q = (document.getElementById('cust-search')?.value || '').toLowerCase().trim();
+  const ind = document.getElementById('cust-industry')?.value || 'Kaikki toimialat';
+  const from = document.getElementById('cust-date-from')?.value || '';
+  const to = document.getElementById('cust-date-to')?.value || '';
+  return DATA.customers.filter(c => {
+    if (q && !( c.company.toLowerCase().includes(q) || (c.ytunnus||'').toLowerCase().includes(q) || (c.contact||'').toLowerCase().includes(q) || (c.email||'').toLowerCase().includes(q) || (c.phone||'').toLowerCase().includes(q) )) return false;
+    if (ind !== 'Kaikki toimialat' && c.industry !== ind) return false;
+    if (from && c.createdDate && c.createdDate < from) return false;
+    if (to && c.createdDate && c.createdDate > to) return false;
+    return true;
   });
 }
 
-function filterCustomers(q) {
-  q = q.toLowerCase().trim();
-  renderCustomerCards(DATA.customers.filter(c => c.company.toLowerCase().includes(q) || c.contact.toLowerCase().includes(q)));
+function refreshCustomerTable() {
+  const tbody = document.getElementById('customers-tbody');
+  if (!tbody) return;
+  const customers = getFilteredCustomers();
+  if (!customers.length) {
+    tbody.innerHTML = '<tr class="customers-empty-row"><td colspan="8">Ei hakutuloksia.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = '';
+  customers.forEach(c => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="company-cell">${c.company}</td>
+      <td class="muted">${c.ytunnus||'—'}</td>
+      <td>${c.contact}${c.title ? '<br><span style="font-size:11px;color:#888">'+c.title+'</span>' : ''}</td>
+      <td class="muted">${c.email||'—'}</td>
+      <td class="muted">${c.phone}</td>
+      <td><span style="font-size:12px;background:rgba(20,55,90,0.08);padding:2px 8px;border-radius:20px">${c.industry||'—'}</span></td>
+      <td><span class="pricing-badge">${c.pricing}</span></td>
+      <td class="muted">${formatDate(c.createdDate)}</td>
+    `;
+    tr.addEventListener('click', () => openCustomerDetail(c.id));
+    tbody.appendChild(tr);
+  });
 }
 
-function openCustomerModal(c) {
-  const modal = document.getElementById('customer-modal');
+// ── Customer detail modal (editable) ──
+function openCustomerDetail(id) {
+  const c = custById(id);
+  const industryOptions = INDUSTRIES.slice(1).map(i => `<option value="${i}" ${c.industry===i?'selected':''}>${i}</option>`).join('');
+  const modal = document.getElementById('customer-detail-modal');
   modal.innerHTML = `
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeCustomerModal()">×</button>
-      <div class="customer-modal-header">
-        <div class="customer-modal-company">${c.company}</div>
-        <span class="customer-modal-pricing-badge">${c.pricing}</span>
+    <div class="modal-box wide">
+      <button class="modal-close" onclick="closeCustomerDetail()">×</button>
+      <input class="detail-company-input" id="dc-company" value="${esc(c.company)}" placeholder="Yrityksen nimi">
+      <div class="form-section-title">Yritystiedot</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Y-tunnus</label><input class="form-input" id="dc-ytunnus" value="${esc(c.ytunnus||'')}" placeholder="1234567-8"></div>
+        <div class="form-group"><label class="form-label">Toimiala</label><select class="form-select" id="dc-industry">${industryOptions}</select></div>
       </div>
-      <div class="customer-info-grid">
-        <div><div class="customer-info-label">Yhteyshenkilö</div><div class="customer-info-value">${c.contact}</div></div>
-        <div><div class="customer-info-label">Puhelinnumero</div><div class="customer-info-value">${c.phone}</div></div>
-        <div><div class="customer-info-label">Sähköposti</div><div class="customer-info-value">${c.email}</div></div>
-        <div><div class="customer-info-label">Sovittu hinnasto</div><div class="customer-info-value">${c.pricing}</div></div>
+      <div class="form-section-title">Yhteyshenkilö</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Nimi</label><input class="form-input" id="dc-contact" value="${esc(c.contact)}"></div>
+        <div class="form-group"><label class="form-label">Titteli</label><input class="form-input" id="dc-title" value="${esc(c.title||'')}" placeholder="Toimitusjohtaja"></div>
       </div>
-      <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#888;margin-bottom:6px">Muistiinpanot</div>
-      <div class="customer-notes-box">${c.notes}</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Puhelinnumero</label><input class="form-input" id="dc-phone" value="${esc(c.phone)}"></div>
+        <div class="form-group"><label class="form-label">Sähköposti</label><input class="form-input" type="email" id="dc-email" value="${esc(c.email||'')}"></div>
+      </div>
+      <div class="form-section-title">Sopimus & hinnoittelu</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Sovittu hinnasto</label><input class="form-input" id="dc-pricing" value="${esc(c.pricing)}" placeholder="Perus 2x/kk — 480 €/kk"></div>
+        <div class="form-group"><label class="form-label">Asiakkaana alkaen</label><input class="form-input" id="dc-createdDate" type="date" value="${c.createdDate||''}"></div>
+      </div>
+      <div class="form-section-title">Muistiinpanot</div>
+      <div class="form-group"><textarea class="form-textarea" id="dc-notes" placeholder="Erityisehdot, toimitusaikataulu, maksuaika…">${esc(c.notes||'')}</textarea></div>
+      <div class="form-actions">
+        <button class="form-cancel" onclick="closeCustomerDetail()">Peruuta</button>
+        <button class="form-submit" onclick="saveCustomer(${id})">Tallenna</button>
+      </div>
     </div>
   `;
   modal.style.display = 'flex';
-  modal.onclick = (e) => { if (e.target === modal) closeCustomerModal(); };
+  modal.onclick = (e) => { if (e.target === modal) closeCustomerDetail(); };
 }
 
-function closeCustomerModal() { document.getElementById('customer-modal').style.display = 'none'; }
+function closeCustomerDetail() { document.getElementById('customer-detail-modal').style.display = 'none'; }
 
-// ── XSS helper ──
-function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+function saveCustomer(id) {
+  const c = custById(id);
+  c.company     = document.getElementById('dc-company').value.trim();
+  c.ytunnus     = document.getElementById('dc-ytunnus').value.trim();
+  c.industry    = document.getElementById('dc-industry').value;
+  c.contact     = document.getElementById('dc-contact').value.trim();
+  c.title       = document.getElementById('dc-title').value.trim();
+  c.phone       = document.getElementById('dc-phone').value.trim();
+  c.email       = document.getElementById('dc-email').value.trim();
+  c.pricing     = document.getElementById('dc-pricing').value.trim();
+  c.createdDate = document.getElementById('dc-createdDate').value;
+  c.notes       = document.getElementById('dc-notes').value.trim();
+  closeCustomerDetail();
+  refreshCustomerTable();
+  showToast('Tallennettu: ' + c.company);
+}
+
+// ── Customer file import ──
+document.getElementById('customer-file-input').addEventListener('change', function(e) {
+  const file = e.target.files[0]; if (!file) return; this.value = '';
+  parseFile(file, rows => importCustomersFromRows(rows));
+});
+
+function importCustomersFromRows(rows) {
+  if (rows.length < 2) { showToast('Tiedostossa ei löydy dataa.'); return; }
+  const hdr = rows[0].map(h => (h||'').toLowerCase());
+  const ci = (cands) => { for (const c of cands) { const i = hdr.findIndex(h => h.includes(c)); if (i>=0) return i; } return -1; };
+  const cC = ci(['yritys','company','firma','org']); const nC = ci(['nimi','name','contact','yhteyshenkilö']); const pC = ci(['puhelin','phone','numero','gsm']); const eC = ci(['email','sähköposti','mail']);
+  const getC = (i, fb) => i >= 0 ? i : fb;
+  const dataRows = rows.slice(1).filter(r => r[getC(cC,0)]);
+  if (!dataRows.length) { showToast('Ei tuotavia rivejä löydy.'); return; }
+  dataRows.forEach(row => {
+    DATA.customers.push({
+      id: DATA._nextCustId++, company: row[getC(cC,0)]||'—',
+      ytunnus:'', industry:'Muu', contact: row[getC(nC,1)]||'—', title:'',
+      phone: row[getC(pC,2)]||'—', email: eC>=0 ? row[eC]||'' : '',
+      pricing:'—', createdDate: TODAY, notes:'Tuotu asiakaslistasta',
+    });
+  });
+  refreshCustomerTable();
+  showToast(dataRows.length + ' asiakasta tuotu');
+}
+
+// ── Shared file parser ──
+function parseFile(file, callback) {
+  const ext = file.name.split('.').pop().toLowerCase();
+  if (ext === 'csv') {
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const rows = ev.target.result.split(/\r?\n/).filter(l=>l.trim()).map(l=>l.split(/[,;]/).map(c=>c.trim().replace(/^"|"$/g,'')));
+      callback(rows);
+    };
+    reader.readAsText(file, 'UTF-8');
+  } else if (ext === 'xlsx' || ext === 'xls') {
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const wb = XLSX.read(ev.target.result, { type: 'array' });
+      callback(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1 }));
+    };
+    reader.readAsArrayBuffer(file);
+  } else {
+    showToast('Tuetut tiedostotyypit: CSV, XLSX, XLS');
+  }
+}
 
 // ── Init ──
 renderKanban();
