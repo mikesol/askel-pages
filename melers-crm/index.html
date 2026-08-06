@@ -23,20 +23,18 @@
 
     /* ── Nav ── */
     .nav {
-      background: var(--white); border-bottom: 2px solid var(--coral);
-      display: flex; align-items: center;
-      padding: 0 24px; height: 60px; gap: 32px; position: sticky; top: 0; z-index: 100;
-      box-shadow: 0 2px 8px rgba(20,55,90,0.08);
+      background: var(--navy); display: flex; align-items: center;
+      padding: 0 24px; height: 68px; gap: 32px; position: sticky; top: 0; z-index: 100;
     }
-    .nav-logo { height: 32px; flex-shrink: 0; }
-    .nav-divider { width: 1px; height: 28px; background: rgba(20,55,90,0.15); }
+    .nav-logo { height: 44px; flex-shrink: 0; }
+    .nav-divider { width: 1px; height: 28px; background: rgba(255,255,255,0.2); }
     .nav-tab {
-      color: rgba(20,55,90,0.45); font-family: 'Sora', sans-serif; font-weight: 600; font-size: 14px;
+      color: rgba(255,255,255,0.55); font-family: 'Sora', sans-serif; font-weight: 600; font-size: 14px;
       cursor: pointer; padding: 4px 0; border-bottom: 2px solid transparent;
       transition: color 0.15s, border-color 0.15s; user-select: none;
     }
-    .nav-tab.active { color: var(--navy); border-bottom-color: var(--coral); }
-    .nav-tab:hover { color: var(--navy); }
+    .nav-tab.active { color: var(--white); border-bottom-color: var(--coral); }
+    .nav-tab:hover { color: var(--white); }
 
     /* ── Views ── */
     .view { display: none; }
@@ -254,7 +252,7 @@
 <body>
 
 <nav class="nav">
-  <img src="logo-light.webp" alt="Melers" class="nav-logo">
+  <img src="logo-crm.png" alt="Melers" class="nav-logo">
   <div class="nav-divider"></div>
   <span class="nav-tab active" data-view="kanban">Myynti &amp; Asiakaspalvelu</span>
   <span class="nav-tab" data-view="customers">Asiakkaat</span>
