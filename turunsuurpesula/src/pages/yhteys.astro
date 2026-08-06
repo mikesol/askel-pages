@@ -3,60 +3,155 @@ import Layout from '../layouts/Layout.astro'
 ---
 <Layout title="Ota yhteyttä — Turun Suurpesula" description="Pyydä tarjous Turun Suurpesulan yritysasiakaspalvelusta — hotellit, vanhustenhoito ja hätäpesut. Vastaamme 24 tunnissa.">
 
-  <section class="bg-[#14375A] py-20">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-6">Yhteys</p>
-      <h1 class="font-merriweather font-normal text-white text-4xl md:text-5xl leading-snug mb-6">Pyydä maksuton tarjous</h1>
-      <p class="font-inter text-white/65 text-base leading-relaxed">Täytä lomake tai varaa aika kalenterista — palataan teille 24 tunnissa.</p>
+  <!-- HERO -->
+  <section class="bg-[#14375A] overflow-hidden min-h-[55vh] flex items-stretch">
+    <div class="w-full grid md:grid-cols-[55%_45%]">
+      <div class="flex items-center px-8 md:px-16 py-20 md:py-0">
+        <div class="max-w-lg">
+          <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-6">Ota yhteyttä</p>
+          <h1 class="font-merriweather font-normal text-white text-4xl md:text-5xl leading-snug mb-6">
+            Olemme täällä<br />
+            <span class="text-[#FF8F7A]">teitä varten</span>
+          </h1>
+          <p class="font-inter text-white/65 text-base leading-relaxed">Soita, täytä lomake tai varaa aika suoraan kalenterista — hoidetaan asia yhdessä.</p>
+        </div>
+      </div>
+      <div class="hidden md:block relative min-h-[55vh]">
+        <img src="/photo-baskets.webp" alt="Turun Suurpesula" class="absolute inset-0 w-full h-full object-cover object-center" />
+        <div class="absolute inset-0" style="background: linear-gradient(to right, #14375A 0%, #14375A 5%, transparent 45%)"></div>
+      </div>
     </div>
   </section>
 
-  <section class="bg-[#FF8F7A] py-20">
+  <!-- CONTACT BAR -->
+  <section class="bg-white border-b border-[#E9E4DF]">
     <div class="max-w-5xl mx-auto px-6">
-      <div class="grid md:grid-cols-2 gap-8 items-start">
-        <div class="bg-white rounded-2xl p-8 text-left">
-          <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-5">Tarjouspyyntö</p>
-          <div class="flex flex-col gap-4">
-            <input type="text" placeholder="Yrityksen nimi" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
-            <select class="font-inter text-[#14375A] bg-white border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]">
-              <option value="">Toimiala</option>
-              <option value="hotellit">Hotelli</option>
-              <option value="vanhustenhoito">Hoivakoti / vanhustenhoito</option>
-              <option value="hatapesut">Vahinkotapaus / vakuutusyhtiö / vahinkosaneeraus</option>
-              <option value="muu">Muu</option>
-            </select>
-            <input type="email" placeholder="Sähköposti" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
-            <input type="tel" placeholder="Puhelin" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
-            <textarea rows="4" placeholder="Kerro tarpeestanne — volyymi, toimiala, aikataulu, kiireellisyys..." class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A] resize-none"></textarea>
-            <button type="button" class="font-sora font-bold text-sm bg-[#FF8F7A] text-white px-6 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors mt-2">Lähetä tarjouspyyntö →</button>
+      <div class="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[#E9E4DF]">
+        <a href="tel:0222321300" class="flex items-center gap-4 px-8 py-7 hover:bg-[#F1F2F4] transition-colors group">
+          <div class="w-10 h-10 rounded-full bg-[#FFE6E2] text-[#FF8F7A] flex items-center justify-center shrink-0 group-hover:bg-[#FF8F7A] group-hover:text-white transition-colors">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
           </div>
-          <p class="font-inter text-[#14375A]/40 text-xs text-center mt-4">⏱ Vastaamme 24 tunnissa. Ei sitoumuksia.</p>
+          <div>
+            <p class="font-sora font-bold text-[#14375A] text-sm">Soita meille</p>
+            <p class="font-inter text-[#14375A]/60 text-sm">02 2321 300 · Hätäpesut 24/7</p>
+          </div>
+        </a>
+        <a href="https://maps.google.com/?q=Telekatu+6,+20360+Turku" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 px-8 py-7 hover:bg-[#F1F2F4] transition-colors group">
+          <div class="w-10 h-10 rounded-full bg-[#FFE6E2] text-[#FF8F7A] flex items-center justify-center shrink-0 group-hover:bg-[#FF8F7A] group-hover:text-white transition-colors">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <p class="font-sora font-bold text-[#14375A] text-sm">Toimipiste</p>
+            <p class="font-inter text-[#14375A]/60 text-sm">Telekatu 6, 20360 Turku</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM + CALENDAR -->
+  <section class="bg-[#F1F2F4] py-20">
+    <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-8 items-start">
+
+      <!-- Contact form -->
+      <div class="bg-white rounded-3xl p-8">
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-5">Tarjouspyyntö</p>
+        <div class="flex flex-col gap-4">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="flex flex-col gap-1.5">
+              <label class="font-sora text-xs font-bold text-[#14375A]">Yrityksen nimi</label>
+              <input type="text" placeholder="Yrityksen nimi" class="bg-[#F1F2F4] border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] placeholder-[#14375A]/30 outline-none focus:border-[#FF8F7A] transition-colors" />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="font-sora text-xs font-bold text-[#14375A]">Toimiala</label>
+              <select class="bg-[#F1F2F4] border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] outline-none focus:border-[#FF8F7A] transition-colors appearance-none">
+                <option value="">Valitse</option>
+                <option value="hotellit">Hotelli</option>
+                <option value="vanhustenhoito">Hoivakoti / vanhustenhoito</option>
+                <option value="hatapesut">Vahinkotapaus / vahinkosaneeraus</option>
+                <option value="muu">Muu</option>
+              </select>
+            </div>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="font-sora text-xs font-bold text-[#14375A]">Sähköposti</label>
+            <input type="email" placeholder="yritys@esimerkki.fi" class="bg-[#F1F2F4] border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] placeholder-[#14375A]/30 outline-none focus:border-[#FF8F7A] transition-colors" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="font-sora text-xs font-bold text-[#14375A]">Puhelin</label>
+            <input type="tel" placeholder="+358 XX XXX XXXX" class="bg-[#F1F2F4] border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] placeholder-[#14375A]/30 outline-none focus:border-[#FF8F7A] transition-colors" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="font-sora text-xs font-bold text-[#14375A]">Viesti</label>
+            <textarea rows="4" placeholder="Kerro tarpeestanne — volyymi, aikataulu, kiireellisyys..." class="bg-[#F1F2F4] border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] placeholder-[#14375A]/30 outline-none focus:border-[#FF8F7A] transition-colors resize-none"></textarea>
+          </div>
+          <button type="button" class="w-full bg-[#FF8F7A] text-white font-sora font-bold py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors text-sm">
+            Lähetä tarjouspyyntö →
+          </button>
+          <p class="font-inter text-xs text-[#14375A]/40 text-center">Vastaamme 24 tunnissa. Ei sitoumuksia.</p>
+        </div>
+      </div>
+
+      <!-- Palvelupäällikkö + calendar -->
+      <div class="flex flex-col gap-6">
+        <div class="bg-white rounded-3xl p-8 flex items-center gap-6">
+          <img src="/photo-palvelujohtaja.webp" alt="Palvelupäällikkö" class="w-20 h-20 rounded-full object-cover object-top shrink-0" />
+          <div class="flex-1">
+            <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-1">Palvelupäällikkö</p>
+            <p class="font-inter text-[#14375A]/65 text-sm leading-relaxed mb-3">Soita suoraan tai varaa tapaaminen alla olevasta kalenterista.</p>
+            <a href="tel:0222321300" class="font-sora font-bold text-[#14375A] text-xl hover:text-[#FF8F7A] transition-colors">02 2321 300</a>
+          </div>
         </div>
 
-        <div class="flex flex-col gap-6">
-          <div class="bg-white rounded-2xl overflow-hidden">
-            <div class="px-8 pt-8 pb-4">
-              <p class="font-sora font-bold text-xs uppercase tracking-widest text-[#FF8F7A] mb-1">Tai varaa tapaaminen</p>
-              <p class="font-inter text-[#14375A]/60 text-sm">Valitse sinulle sopiva aika suoraan kalenterista.</p>
-            </div>
-            <iframe
-              src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ14fXOqowBDfPHNey_5OQgSrmRjQjYI84HGqepJbs9BCIpRU9rp9u7PZ50LSc3TnnHgUshxJJQD?gv=true"
-              style="width: 100%; height: 480px; border: none"
-              title="Varaa tapaaminen"
-            ></iframe>
+        <div class="bg-white rounded-3xl overflow-hidden">
+          <div class="px-8 pt-7 pb-3">
+            <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-1">Varaa tapaaminen</p>
+            <p class="font-inter text-[#14375A]/60 text-sm">Valitse sinulle sopiva aika suoraan kalenterista.</p>
           </div>
+          <iframe
+            src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ14fXOqowBDfPHNey_5OQgSrmRjQjYI84HGqepJbs9BCIpRU9rp9u7PZ50LSc3TnnHgUshxJJQD?gv=true"
+            style="width: 100%; height: 600px; border: none"
+            title="Varaa tapaaminen"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          <div class="bg-[#14375A] rounded-2xl p-8 text-white">
-            <div class="flex items-center gap-4 mb-5">
-              <img src="/photo-palvelujohtaja.webp" alt="Palvelupäällikkö" class="w-14 h-14 rounded-full object-cover object-top shrink-0" />
-              <div>
-                <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-1">Soita suoraan</p>
-                <p class="font-inter text-white/60 text-sm">Hätäpesut: sama numero, 24/7.</p>
+  <!-- ADDRESS + VAN PHOTO -->
+  <section class="bg-white py-16">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div class="rounded-2xl overflow-hidden">
+          <img src="/photo-van-big.webp" alt="Turun Suurpesula — toimitus" class="w-full object-cover max-h-64 object-center" />
+        </div>
+        <div>
+          <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Toimipiste</p>
+          <h2 class="font-merriweather font-normal text-[#14375A] text-3xl mb-6">Löydät meidät Turusta</h2>
+          <div class="flex flex-col gap-5">
+            {[
+              { label: 'Osoite', value: 'Telekatu 6, 20360 Turku' },
+              { label: 'Yritysasiakkaat', value: 'Ma–Pe 6–17' },
+              { label: 'Hätäpesupäivystys', value: '24/7 — vesi-, palo- ja savuvahingot' },
+              { label: 'Vastausaika', value: '24 tuntia tarjouspyyntöihin' },
+            ].map((item) => (
+              <div class="flex items-start gap-4">
+                <div class="w-2 h-2 rounded-full bg-[#FF8F7A] shrink-0 mt-1.5"></div>
+                <div>
+                  <p class="font-sora font-bold text-[#14375A] text-sm">{item.label}</p>
+                  <p class="font-inter text-[#14375A]/60 text-sm">{item.value}</p>
+                </div>
               </div>
-            </div>
-            <a href="tel:0222321300" class="font-sora font-bold text-3xl hover:text-[#FF8F7A] transition-colors block mb-2">02 2321 300</a>
-            <p class="font-inter text-white/50 text-sm">Telekatu 6, 20360 Turku</p>
+            ))}
           </div>
+          <a href="https://maps.google.com/?q=Telekatu+6,+20360+Turku" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-8 font-sora font-bold text-sm text-[#14375A] hover:text-[#FF8F7A] transition-colors">
+            Avaa Google Mapsissa →
+          </a>
         </div>
       </div>
     </div>

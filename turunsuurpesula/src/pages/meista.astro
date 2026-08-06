@@ -1,38 +1,66 @@
 ---
 import Layout from '../layouts/Layout.astro'
 
-const timeline = [
-  { year: '2010', event: 'Turun Suurpesula perustetaan, kun pesulakapasiteetti kasvaa teollisuusluokkaan.' },
-  { year: 'Tänään', event: 'Yli 170 000 kg tekstiilejä vuodessa — hotelleille, hoivakodeille ja vahinkosaneeraukseen.' },
+const values = [
+  { title: 'Laatu', subtitle: 'Oikea tulos joka kerta', desc: 'Oikea pesuprosessi jokaiselle tekstiilille. Ammattilaismenetelmät, asiantunteva käsittely ja dokumentoitu jäljitettävyys — ei kompromisseja.' },
+  { title: 'Luotettavuus', subtitle: 'Sovitut aikataulut pidetään', desc: 'Säännölliset noudot ja toimitukset sovitun mukaan. Ei häiriöitä teidän arkeenne — tekstiilit ovat aina saatavilla oikeaan aikaan.' },
+  { title: 'Kumppanuus', subtitle: 'Nimetty palvelupäällikkö', desc: 'Yksi yhteyshenkilö tuntee tilanteenne. Ei jonoja, ei uudelleenselittämistä — nopea vastaus kun tarvitsette jotain.' },
 ]
 
-const values = [
-  { title: 'Luotettavuus', desc: 'Sovitut noudot ja toimitukset pidetään — ei yllätyksiä, ei katkoksia asiakkaan arkeen.' },
-  { title: 'Dokumentoitu laatu', desc: 'Jokainen erä kirjataan ja jäljitetään. Tärkeää sekä hoivakodeille että vakuutuskorvauksille.' },
-  { title: 'Joustavuus', desc: 'Volyymit vaihtelevat — palvelu skaalautuu sesonkien ja tarpeen mukaan.' },
+const timeline = [
+  { year: '2010', event: 'Turun Suurpesula perustetaan — teollisuuspesulakapasiteetti kasvaa merkittävästi Telekatu 6:ssa.' },
+  { year: '2020', event: 'Palveluvalikoima laajenee vahinkosaneerauksen tekstiilihuoltoon — 24/7-päivystys käynnistyy.' },
+  { year: '2026', event: 'Turun Suurpesula laajenee kasvavaan B2B-kysyntään — hotellit, hoivakodit ja vahinkosaneeraus.' },
 ]
 ---
+
 <Layout title="Meistä — Turun Suurpesula" description="Turun Suurpesula on teollisen mittakaavan tekstiilihuoltolaitos Turussa — perustettu 2010, kapasiteetti yli 170 000 kg vuodessa.">
 
-  <section class="bg-[#14375A] py-20">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-6">Meistä</p>
-      <h1 class="font-merriweather font-normal text-white text-4xl md:text-5xl leading-snug mb-6">Teollinen tekstiilihuolto — <span class="text-[#FF8F7A]">Turusta.</span></h1>
-      <p class="font-inter text-white/65 text-base leading-relaxed">Turun Suurpesula on kasvanut vuodesta 2010 lähtien teollisuusluokan tekstiilihuoltolaitokseksi, joka palvelee hotelleja, hoivakoteja ja vahinkosaneerausta Turun seudulla.</p>
+  <section class="bg-[#14375A] overflow-hidden min-h-[70vh] flex items-stretch">
+    <div class="w-full grid md:grid-cols-[50%_50%]">
+      <div class="flex items-center px-8 md:px-16 py-20 md:py-0">
+        <div class="max-w-lg">
+          <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-6">Meistä</p>
+          <h1 class="font-merriweather font-normal text-white text-4xl md:text-5xl leading-snug mb-6">
+            Teollinen tekstiilihuolto.<br />
+            <span class="text-[#FF8F7A]">Vuodesta 2010.</span>
+          </h1>
+          <p class="font-inter text-white/65 text-base leading-relaxed mb-10">
+            Turun Suurpesula on kasvanut yhdeksi Turun seudun suurimmista tekstiilihuoltolaitoksista. Alusta asti sama ajatus: hoidetaan tekstiilit niin hyvin, että asiakas voi keskittyä omaan ydinliiketoimintaansa.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            {['Laatu', 'Luotettavuus', 'Kumppanuus'].map((v) => (
+              <span class="font-sora font-bold text-xs tracking-wide text-white border border-white/25 px-4 py-2 rounded-full">{v}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div class="hidden md:block relative min-h-[70vh]">
+        <img src="/photo-towels.webp" alt="Turun Suurpesula — tekstiilihuolto" class="absolute inset-0 w-full h-full object-cover object-center" />
+        <div class="absolute inset-0" style="background: linear-gradient(to right, #14375A 0%, #14375A 5%, transparent 40%)"></div>
+      </div>
     </div>
   </section>
 
   <section class="bg-white py-20">
-    <div class="max-w-4xl mx-auto px-6">
-      <div class="mb-12 text-center">
-        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Historia</p>
-        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl">Kasvua teollisuusluokkaan</h2>
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-3">Arvomme</p>
+        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl">Mitä uskomme</h2>
       </div>
-      <div class="flex flex-col gap-6">
-        {timeline.map((t) => (
-          <div class="flex gap-6 items-start bg-[#F1F2F4] rounded-2xl p-7">
-            <div class="font-merriweather font-normal text-[#FF8F7A] text-2xl shrink-0 w-24">{t.year}</div>
-            <div class="font-inter text-[#14375A]/65 text-sm leading-relaxed">{t.event}</div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {values.map((v) => (
+          <div class="bg-[#F1F2F4] rounded-2xl p-8 flex flex-col gap-4">
+            <div class="text-[#FF8F7A]">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-sora font-bold text-[#14375A] text-xl mb-1">{v.title}</h3>
+              <p class="font-sora text-[#FF8F7A] text-xs font-semibold mb-3">{v.subtitle}</p>
+              <p class="font-inter text-[#14375A]/65 text-sm leading-relaxed">{v.desc}</p>
+            </div>
           </div>
         ))}
       </div>
@@ -40,16 +68,29 @@ const values = [
   </section>
 
   <section class="bg-[#F1F2F4] py-20">
-    <div class="max-w-5xl mx-auto px-6">
-      <div class="mb-12 text-center">
-        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Arvomme</p>
-        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl">Miten toimimme</h2>
+    <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-start">
+      <div>
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Tarina</p>
+        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl mb-6">Teollista tekstiilihuoltoa Turussa</h2>
+        <div class="flex flex-col gap-5 font-inter text-[#14375A]/65 text-base leading-relaxed">
+          <p>Turun Suurpesula perustettiin vuonna 2010, kun tarve teollisen mittakaavan tekstiilihuollolle Turussa kasvoi. Laitoksemme Telekatu 6:ssa on kasvanut yli 170 000 kg vuosikapasiteettiin.</p>
+          <p>Vuosien varrella olemme palvelleet hotelleja, hoivakoteja, ravintoloita ja vahinkosaneerausyrityksiä. Kasvu on ollut harkittua — emme koskaan laadun kustannuksella.</p>
+          <p>24/7-hätäpesupalvelu syntyi suoraan asiakkaiden tarpeesta: vesi- ja palövahingot eivät odota virka-aikaa. Teollinen kapasiteettimme mahdollistaa nopeat toimitukset myös suurissa vahingoissa.</p>
+        </div>
       </div>
-      <div class="grid md:grid-cols-3 gap-6">
-        {values.map((v) => (
-          <div class="bg-white rounded-2xl p-7">
-            <div class="font-sora font-bold text-[#14375A] text-base mb-2">{v.title}</div>
-            <div class="font-inter text-[#14375A]/60 text-sm leading-relaxed">{v.desc}</div>
+      <div class="flex flex-col gap-0">
+        {timeline.map((t, i) => (
+          <div class="flex gap-5">
+            <div class="flex flex-col items-center shrink-0">
+              <div class="w-10 h-10 rounded-full bg-[#14375A] text-white flex items-center justify-center font-sora font-bold text-xs shrink-0">
+                {t.year.slice(2)}
+              </div>
+              {i < timeline.length - 1 && <div class="w-px flex-1 bg-[#E9E4DF] my-1"></div>}
+            </div>
+            <div class="pb-8">
+              <p class="font-sora font-bold text-[#FF8F7A] text-xs mb-1">{t.year}</p>
+              <p class="font-inter text-[#14375A]/70 text-sm leading-relaxed">{t.event}</p>
+            </div>
           </div>
         ))}
       </div>
@@ -57,28 +98,39 @@ const values = [
   </section>
 
   <section class="bg-white py-20">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <div class="bg-[#14375A] rounded-3xl p-10 md:p-14">
-        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Laitoksemme</p>
-        <div class="grid grid-cols-2 gap-8 max-w-md mx-auto">
-          <div>
-            <div class="font-merriweather font-normal text-4xl text-[#FF8F7A] mb-1">170 000+ kg</div>
-            <div class="font-inter text-white/50 text-xs">vuosikapasiteetti</div>
-          </div>
-          <div>
-            <div class="font-merriweather font-normal text-4xl text-[#FF8F7A] mb-1">2010</div>
-            <div class="font-inter text-white/50 text-xs">perustamisvuosi</div>
-          </div>
-        </div>
-        <p class="font-inter text-white/60 text-sm mt-8">Telekatu 6, 20360 Turku</p>
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-3">Laitos</p>
+        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl">Teollisuuskapasiteetti</h2>
+        <p class="font-inter text-[#14375A]/55 text-base mt-4 max-w-lg mx-auto">
+          Yli <span class="font-semibold text-[#14375A]">170 000 kg</span> tekstiilejä vuodessa — kapasiteetti, johon pienemmät pesulat eivät pysty.
+        </p>
+      </div>
+      <div class="rounded-2xl overflow-hidden shadow-sm">
+        <img src="/photo-baskets.webp" alt="Turun Suurpesula — teollisuuslaitos" class="w-full object-cover max-h-80 object-center" />
       </div>
     </div>
   </section>
 
-  <section class="bg-[#FF8F7A] py-20">
+  <section class="bg-[#14375A] py-20">
     <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="font-merriweather font-normal text-white text-3xl md:text-4xl leading-snug mb-8">Tutustutaan tarpeisiinne</h2>
-      <a href="/yhteys" class="inline-flex items-center gap-2 bg-white text-[#14375A] font-sora font-bold px-8 py-4 rounded-full hover:bg-white/90 transition-colors text-sm">Ota yhteyttä →</a>
+      <div class="font-merriweather font-normal text-[#FF8F7A] text-6xl leading-none mb-4">&ldquo;</div>
+      <blockquote class="font-merriweather font-normal text-white text-2xl md:text-3xl leading-snug mb-6">
+        Teollinen kapasiteetti, inhimillinen palvelu.
+      </blockquote>
+      <p class="font-inter text-white/50 text-sm">Turun Suurpesula — Telekatu 6, Turku</p>
+    </div>
+  </section>
+
+  <section class="bg-[#FF8F7A] py-14">
+    <div class="max-w-3xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div>
+        <h2 class="font-merriweather font-normal text-white text-3xl mb-2">Pyydä tarjous</h2>
+        <p class="font-inter text-white/80 text-base">Palataan teille 24 tunnissa.</p>
+      </div>
+      <a href="/yhteys" class="font-sora font-bold bg-white text-[#FF8F7A] px-8 py-4 rounded-full hover:bg-[#FFE6E2] transition-colors shrink-0">
+        Ota yhteyttä →
+      </a>
     </div>
   </section>
 
