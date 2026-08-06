@@ -239,6 +239,33 @@
     }
     .detail-company-input:focus { outline: none; border-bottom-color: var(--coral); }
 
+    /* ── Comment log ── */
+    .log-scroll {
+      max-height: 160px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;
+      padding: 2px 0; margin-bottom: 10px;
+    }
+    .log-entry {
+      background: var(--bg-light); border-radius: 8px; padding: 8px 12px;
+    }
+    .log-entry-date { font-size: 10px; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
+    .log-entry-text { font-size: 13px; color: var(--navy); line-height: 1.5; white-space: pre-wrap; }
+    .log-empty { font-size: 13px; color: #bbb; font-style: italic; padding: 8px 0; }
+    .log-add-row { display: flex; gap: 8px; align-items: flex-end; }
+    .log-add-input {
+      flex: 1; padding: 8px 12px; border: 1.5px solid #ddd; border-radius: 8px;
+      font-family: 'Inter', sans-serif; font-size: 13px; color: var(--navy);
+      background: var(--white); resize: none; min-height: 38px; max-height: 80px;
+      line-height: 1.4; transition: border-color 0.15s;
+    }
+    .log-add-input:focus { outline: none; border-color: var(--coral); }
+    .log-add-btn {
+      padding: 8px 16px; background: var(--coral); color: var(--white);
+      font-family: 'Sora', sans-serif; font-weight: 700; font-size: 12px;
+      border: none; border-radius: 8px; cursor: pointer; white-space: nowrap;
+      transition: background 0.15s; flex-shrink: 0;
+    }
+    .log-add-btn:hover { background: var(--coral-hover); }
+
     /* ── Toast ── */
     .toast {
       position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
@@ -283,23 +310,23 @@ const STAGES = [
 
 const DATA = {
   leads: [
-    { id:1,  stage:'liidi',        tag:'UUSI asiakas', company:'Hotelli Kauniala Oy',               ytunnus:'1234567-8', contact:'Juhani Virtanen',   title:'Toimitusjohtaja',    phone:'+358 40 123 4567', email:'juhani.virtanen@kauniala.fi',        deal:18000, contactDate:'',           nextContact:'2026-08-05', memo:'Löydetty verkosta, ei kontaktoitu vielä. Hotelli noin 50 huonetta, paljon liinavaatteita.' },
-    { id:2,  stage:'liidi',        tag:'UUSI asiakas', company:'Tampereen Urheilukeskus Oy',        ytunnus:'2345678-9', contact:'Minna Korhonen',    title:'Hankintapäällikkö', phone:'+358 44 234 5678', email:'minna.korhonen@urheilukeskus.fi',    deal:24000, contactDate:'',           nextContact:'2026-08-15', memo:'Potentiaalinen asiakas urheilutekstiileille. Suositeltu verkoston kautta.' },
-    { id:3,  stage:'liidi',        tag:'UUSI asiakas', company:'Rakennus Leinonen Oy',              ytunnus:'3456789-0', contact:'Pekka Leinonen',    title:'Toimitusjohtaja',    phone:'+358 50 345 6789', email:'pekka@rakennusleinonen.fi',          deal:9600,  contactDate:'',           nextContact:'2026-08-12', memo:'Rakennusyhtiö ~30 työntekijää. Tarvitsevat työvaatteiden pesua.' },
-    { id:4,  stage:'liidi',        tag:'VANHA asiakas',company:'Lähipalvelut Mäkinen Oy',           ytunnus:'4567890-1', contact:'Hanna Mäkinen',     title:'Toimitusjohtaja',    phone:'+358 41 456 7890', email:'hanna@lahipalvelutmakinen.fi',       deal:6000,  contactDate:'',           nextContact:'2026-08-03', memo:'Pieni siivousyritys, kiinnostunut yritysasiakkuudesta. Soitettava kiireesti.' },
-    { id:5,  stage:'liidi',        tag:'UUSI asiakas', company:'Ravintola Kultainen Porsas Oy',     ytunnus:'5678901-2', contact:'Timo Rantanen',     title:'Ravintolapäällikkö', phone:'+358 40 567 8901', email:'timo.rantanen@kultainenporsas.fi',   deal:12000, contactDate:'2026-08-02', nextContact:'2026-08-14', memo:'Soitettu 2.8., kiinnostunut. Haluaa tarjouksen liinavaatteille ja uniformuille.' },
-    { id:6,  stage:'kartoitus',    tag:'UUSI asiakas', company:'Toimisto Aaltonen Oy',              ytunnus:'6789012-3', contact:'Kirsi Aaltonen',    title:'Toimistopäällikkö', phone:'+358 44 678 9012', email:'kirsi.aaltonen@aaltonen.fi',         deal:7200,  contactDate:'2026-07-30', nextContact:'2026-08-20', memo:'Sähköpostilla yhteys otettu. Tarve kartoitettu — toimistotekstiilit 2x/kk.' },
-    { id:7,  stage:'kartoitus',    tag:'UUSI asiakas', company:'Pelastuslaitos Pirkanmaa',          ytunnus:'7890123-4', contact:'Ari Heikkinen',     title:'Hankintapäällikkö', phone:'+358 50 789 0123', email:'ari.heikkinen@pelastuslaitos.fi',     deal:36000, contactDate:'2026-07-28', nextContact:'2026-08-22', memo:'Julkinen sektori, vaatii tarjouspyyntömenettelyn. Suuri potentiaali.' },
-    { id:8,  stage:'kartoitus',    tag:'VANHA asiakas',company:'Koulutuspalvelut Ylöjärvi',         ytunnus:'8901234-5', contact:'Seija Lähteenmäki', title:'Palvelupäällikkö',  phone:'+358 41 890 1234', email:'seija.lahteenmaki@kouluylojärvi.fi', deal:8400,  contactDate:'2026-08-01', nextContact:'2026-08-18', memo:'Koulu haluaa pesua lounasliinoille. Kontaktoitu messuilla elokuussa.' },
-    { id:9,  stage:'tarjous',      tag:'UUSI asiakas', company:'Siivouspalvelu Puhtola Oy',         ytunnus:'9012345-6', contact:'Risto Puhtola',     title:'Toimitusjohtaja',    phone:'+358 40 901 2345', email:'risto@puhtola.fi',                   deal:15600, contactDate:'2026-08-05', nextContact:'2026-08-09', memo:'Tarjous lähetetty 5.8. Erittäin kiinnostunut. Odottaa vastausta ensi viikolla.' },
-    { id:10, stage:'tarjous',      tag:'VANHA asiakas',company:'Majoituspalvelut Näsijärvi Oy',     ytunnus:'0123456-7', contact:'Leena Järvinen',    title:'Kiinteistöpäällikkö',phone:'+358 44 012 3456', email:'leena.jarvinen@nasijärvi.fi',        deal:21600, contactDate:'2026-08-07', nextContact:'2026-08-13', memo:'Palaveri 7.8. Tyytyväinen palvelukuvaukseen, pyysivät referenssejä.' },
-    { id:11, stage:'tarjous',      tag:'UUSI asiakas', company:'Fysioterapia Salminen',             ytunnus:'1230987-6', contact:'Tuulia Salminen',   title:'Toimitusjohtaja',    phone:'+358 50 123 4560', email:'tuulia@fterapiasalminen.fi',          deal:9600,  contactDate:'2026-08-04', nextContact:'2026-08-18', memo:'Tarjous lähetetty 6.8. Hoitoliinoja ja pyyheliinat.' },
-    { id:12, stage:'neuvottelu',   tag:'UUSI asiakas', company:'Pirkanmaan Hyvinvointipalvelut Oy', ytunnus:'2341098-7', contact:'Olli Hämäläinen',  title:'Talouspäällikkö',   phone:'+358 40 234 5671', email:'olli.hamalainen@phvp.fi',            deal:48000, contactDate:'2026-08-01', nextContact:'2026-08-04', memo:'Neuvottelu hinnasta käynnissä. Suurin potentiaaliasiakas tällä hetkellä.' },
-    { id:13, stage:'neuvottelu',   tag:'VANHA asiakas',company:'Hotelli Torni Tampere Oy',          ytunnus:'3452109-8', contact:'Maria Nieminen',    title:'Hankintapäällikkö', phone:'+358 44 345 6782', email:'maria.nieminen@hotelltorni.fi',       deal:30000, contactDate:'2026-08-04', nextContact:'2026-08-16', memo:'Neuvotellaan hinnasta, kilpailija myös mukana. Päätetään viikolla 34.' },
-    { id:14, stage:'neuvottelu',   tag:'UUSI asiakas', company:'Catering Hakala Oy',                ytunnus:'4563210-9', contact:'Ville Hakala',      title:'Toimitusjohtaja',    phone:'+358 50 456 7893', email:'ville.hakala@cateringhakala.fi',      deal:10800, contactDate:'2026-08-06', nextContact:'2026-08-13', memo:'Tarjous hyväksytty periaatteessa, sopimusehdot auki.' },
-    { id:15, stage:'kayttoonotto', tag:'VANHA asiakas',company:'Tampereen Ammattiopisto TAO',       ytunnus:'5674321-0', contact:'Päivi Kuusisto',    title:'Hankintapäällikkö', phone:'+358 40 567 8904', email:'paivi.kuusisto@tao.fi',               deal:16800, contactDate:'2026-07-28', nextContact:'2026-09-01', memo:'Sopimus allekirjoitettu 28.7. Aloitetaan syyskuussa. Aikataulutettu.' },
-    { id:16, stage:'kayttoonotto', tag:'VANHA asiakas',company:'Kiinteistöpalvelut Rajala Oy',      ytunnus:'6785432-1', contact:'Juha Rajala',       title:'Toimitusjohtaja',    phone:'+358 44 678 9015', email:'juha.rajala@rajalapalvelut.fi',       deal:13200, contactDate:'2026-08-01', nextContact:'2026-08-25', memo:'Onboarding käynnissä. Ensimmäinen nouto sovittu 19.8.' },
-    { id:17, stage:'kayttoonotto', tag:'UUSI asiakas', company:'Ravintola Aleksi Oy',               ytunnus:'7896543-2', contact:'Paula Aleksi',      title:'Ravintolapäällikkö', phone:'+358 50 789 0126', email:'paula@ravintolaaeksi.fi',             deal:9600,  contactDate:'2026-08-04', nextContact:'2026-08-28', memo:'Uusi asiakas 4.8. Toimituspäivät sovittu — tiistaisin ja perjantaisin.' },
+    { id:1,  stage:'liidi',        tag:'UUSI asiakas', company:'Hotelli Kauniala Oy',               ytunnus:'1234567-8', contact:'Juhani Virtanen',   title:'Toimitusjohtaja',    phone:'+358 40 123 4567', email:'juhani.virtanen@kauniala.fi',        deal:18000, contactDate:'',           nextContact:'2026-08-05', log:[{date:'2026-08-01',text:'Löydetty verkosta, ei kontaktoitu vielä. Hotelli noin 50 huonetta, paljon liinavaatteita.'}] },
+    { id:2,  stage:'liidi',        tag:'UUSI asiakas', company:'Tampereen Urheilukeskus Oy',        ytunnus:'2345678-9', contact:'Minna Korhonen',    title:'Hankintapäällikkö', phone:'+358 44 234 5678', email:'minna.korhonen@urheilukeskus.fi',    deal:24000, contactDate:'',           nextContact:'2026-08-15', log:[{date:'2026-07-28',text:'Potentiaalinen asiakas urheilutekstiileille. Suositeltu verkoston kautta.'}] },
+    { id:3,  stage:'liidi',        tag:'UUSI asiakas', company:'Rakennus Leinonen Oy',              ytunnus:'3456789-0', contact:'Pekka Leinonen',    title:'Toimitusjohtaja',    phone:'+358 50 345 6789', email:'pekka@rakennusleinonen.fi',          deal:9600,  contactDate:'',           nextContact:'2026-08-12', log:[{date:'2026-08-03',text:'Rakennusyhtiö ~30 työntekijää. Tarvitsevat työvaatteiden pesua.'}] },
+    { id:4,  stage:'liidi',        tag:'VANHA asiakas',company:'Lähipalvelut Mäkinen Oy',           ytunnus:'4567890-1', contact:'Hanna Mäkinen',     title:'Toimitusjohtaja',    phone:'+358 41 456 7890', email:'hanna@lahipalvelutmakinen.fi',       deal:6000,  contactDate:'',           nextContact:'2026-08-03', log:[{date:'2026-07-30',text:'Pieni siivousyritys, kiinnostunut yritysasiakkuudesta. Soitettava kiireesti.'}] },
+    { id:5,  stage:'liidi',        tag:'UUSI asiakas', company:'Ravintola Kultainen Porsas Oy',     ytunnus:'5678901-2', contact:'Timo Rantanen',     title:'Ravintolapäällikkö', phone:'+358 40 567 8901', email:'timo.rantanen@kultainenporsas.fi',   deal:12000, contactDate:'2026-08-02', nextContact:'2026-08-14', log:[{date:'2026-08-02',text:'Soitettu 2.8., kiinnostunut. Haluaa tarjouksen liinavaatteille ja uniformuille.'}] },
+    { id:6,  stage:'kartoitus',    tag:'UUSI asiakas', company:'Toimisto Aaltonen Oy',              ytunnus:'6789012-3', contact:'Kirsi Aaltonen',    title:'Toimistopäällikkö', phone:'+358 44 678 9012', email:'kirsi.aaltonen@aaltonen.fi',         deal:7200,  contactDate:'2026-07-30', nextContact:'2026-08-20', log:[{date:'2026-07-30',text:'Sähköpostilla yhteys otettu. Tarve kartoitettu — toimistotekstiilit 2x/kk.'}] },
+    { id:7,  stage:'kartoitus',    tag:'UUSI asiakas', company:'Pelastuslaitos Pirkanmaa',          ytunnus:'7890123-4', contact:'Ari Heikkinen',     title:'Hankintapäällikkö', phone:'+358 50 789 0123', email:'ari.heikkinen@pelastuslaitos.fi',     deal:36000, contactDate:'2026-07-28', nextContact:'2026-08-22', log:[{date:'2026-07-28',text:'Julkinen sektori, vaatii tarjouspyyntömenettelyn. Suuri potentiaali.'}] },
+    { id:8,  stage:'kartoitus',    tag:'VANHA asiakas',company:'Koulutuspalvelut Ylöjärvi',         ytunnus:'8901234-5', contact:'Seija Lähteenmäki', title:'Palvelupäällikkö',  phone:'+358 41 890 1234', email:'seija.lahteenmaki@kouluylojärvi.fi', deal:8400,  contactDate:'2026-08-01', nextContact:'2026-08-18', log:[{date:'2026-08-01',text:'Koulu haluaa pesua lounasliinoille. Kontaktoitu messuilla elokuussa.'}] },
+    { id:9,  stage:'tarjous',      tag:'UUSI asiakas', company:'Siivouspalvelu Puhtola Oy',         ytunnus:'9012345-6', contact:'Risto Puhtola',     title:'Toimitusjohtaja',    phone:'+358 40 901 2345', email:'risto@puhtola.fi',                   deal:15600, contactDate:'2026-08-05', nextContact:'2026-08-09', log:[{date:'2026-08-05',text:'Tarjous lähetetty 5.8. Erittäin kiinnostunut. Odottaa vastausta ensi viikolla.'}] },
+    { id:10, stage:'tarjous',      tag:'VANHA asiakas',company:'Majoituspalvelut Näsijärvi Oy',     ytunnus:'0123456-7', contact:'Leena Järvinen',    title:'Kiinteistöpäällikkö',phone:'+358 44 012 3456', email:'leena.jarvinen@nasijärvi.fi',        deal:21600, contactDate:'2026-08-07', nextContact:'2026-08-13', log:[{date:'2026-08-07',text:'Palaveri 7.8. Tyytyväinen palvelukuvaukseen, pyysivät referenssejä.'}] },
+    { id:11, stage:'tarjous',      tag:'UUSI asiakas', company:'Fysioterapia Salminen',             ytunnus:'1230987-6', contact:'Tuulia Salminen',   title:'Toimitusjohtaja',    phone:'+358 50 123 4560', email:'tuulia@fterapiasalminen.fi',          deal:9600,  contactDate:'2026-08-04', nextContact:'2026-08-18', log:[{date:'2026-08-04',text:'Tarjous lähetetty 6.8. Hoitoliinoja ja pyyheliinat.'}] },
+    { id:12, stage:'neuvottelu',   tag:'UUSI asiakas', company:'Pirkanmaan Hyvinvointipalvelut Oy', ytunnus:'2341098-7', contact:'Olli Hämäläinen',  title:'Talouspäällikkö',   phone:'+358 40 234 5671', email:'olli.hamalainen@phvp.fi',            deal:48000, contactDate:'2026-08-01', nextContact:'2026-08-04', log:[{date:'2026-08-01',text:'Neuvottelu hinnasta käynnissä. Suurin potentiaaliasiakas tällä hetkellä.'}] },
+    { id:13, stage:'neuvottelu',   tag:'VANHA asiakas',company:'Hotelli Torni Tampere Oy',          ytunnus:'3452109-8', contact:'Maria Nieminen',    title:'Hankintapäällikkö', phone:'+358 44 345 6782', email:'maria.nieminen@hotelltorni.fi',       deal:30000, contactDate:'2026-08-04', nextContact:'2026-08-16', log:[{date:'2026-08-04',text:'Neuvotellaan hinnasta, kilpailija myös mukana. Päätetään viikolla 34.'}] },
+    { id:14, stage:'neuvottelu',   tag:'UUSI asiakas', company:'Catering Hakala Oy',                ytunnus:'4563210-9', contact:'Ville Hakala',      title:'Toimitusjohtaja',    phone:'+358 50 456 7893', email:'ville.hakala@cateringhakala.fi',      deal:10800, contactDate:'2026-08-06', nextContact:'2026-08-13', log:[{date:'2026-08-06',text:'Tarjous hyväksytty periaatteessa, sopimusehdot auki.'}] },
+    { id:15, stage:'kayttoonotto', tag:'VANHA asiakas',company:'Tampereen Ammattiopisto TAO',       ytunnus:'5674321-0', contact:'Päivi Kuusisto',    title:'Hankintapäällikkö', phone:'+358 40 567 8904', email:'paivi.kuusisto@tao.fi',               deal:16800, contactDate:'2026-07-28', nextContact:'2026-09-01', log:[{date:'2026-07-28',text:'Sopimus allekirjoitettu 28.7. Aloitetaan syyskuussa. Aikataulutettu.'}] },
+    { id:16, stage:'kayttoonotto', tag:'VANHA asiakas',company:'Kiinteistöpalvelut Rajala Oy',      ytunnus:'6785432-1', contact:'Juha Rajala',       title:'Toimitusjohtaja',    phone:'+358 44 678 9015', email:'juha.rajala@rajalapalvelut.fi',       deal:13200, contactDate:'2026-08-01', nextContact:'2026-08-25', log:[{date:'2026-08-01',text:'Onboarding käynnissä. Ensimmäinen nouto sovittu 19.8.'}] },
+    { id:17, stage:'kayttoonotto', tag:'UUSI asiakas', company:'Ravintola Aleksi Oy',               ytunnus:'7896543-2', contact:'Paula Aleksi',      title:'Ravintolapäällikkö', phone:'+358 50 789 0126', email:'paula@ravintolaaeksi.fi',             deal:9600,  contactDate:'2026-08-04', nextContact:'2026-08-28', log:[{date:'2026-08-04',text:'Uusi asiakas 4.8. Toimituspäivät sovittu — tiistaisin ja perjantaisin.'}] },
   ],
   archivedLeads: [],
   customers: [
@@ -484,9 +511,13 @@ function openCardModal(id) {
         <div class="form-group"><label class="form-label">Kontaktointipäivä</label><input class="form-input" id="edit-contactDate" type="date" value="${lead.contactDate||''}"></div>
         <div class="form-group"><label class="form-label">Seuraava kontaktointi ${overdue?'⚠':''}</label><input class="form-input" id="edit-nextContact" type="date" value="${lead.nextContact||''}" style="${overdue?'border-color:var(--coral)':''}"></div>
       </div>
-      <div class="form-section-title">Muistiinpano</div>
-      <div class="form-group"><textarea class="form-textarea" id="edit-memo" placeholder="Viimeisin keskustelun yhteenveto…">${esc(lead.memo||'')}</textarea></div>
-      <div class="form-actions">
+      <div class="form-section-title">Muistiinpanot</div>
+      <div class="log-scroll" id="log-entries-${id}">${renderLogEntries(lead.log)}</div>
+      <div class="log-add-row">
+        <textarea class="log-add-input" id="log-input-${id}" placeholder="Lisää muistiinpano…" rows="2"></textarea>
+        <button class="log-add-btn" onclick="addLogEntry(${id})">Lisää</button>
+      </div>
+      <div class="form-actions" style="margin-top:16px">
         <button class="btn-danger" onclick="archiveCard(${id})">Arkistoi</button>
         <button class="form-cancel" onclick="closeCardModal()">Peruuta</button>
         <button class="form-submit" onclick="saveCard(${id})">Tallenna</button>
@@ -514,7 +545,6 @@ function saveCard(id) {
   lead.deal        = parseInt(document.getElementById('edit-deal').value) || 0;
   lead.contactDate = document.getElementById('edit-contactDate').value;
   lead.nextContact = document.getElementById('edit-nextContact').value;
-  lead.memo        = document.getElementById('edit-memo').value.trim();
   lead.stage       = newStage;
 
   const oldCard = document.querySelector(`.lead-card[data-id="${id}"]`);
@@ -536,6 +566,30 @@ function saveCard(id) {
 
   closeCardModal();
   showToast('Tallennettu: ' + lead.company);
+}
+
+// ── Log helpers ──
+function renderLogEntries(log) {
+  if (!log || !log.length) return '<div class="log-empty">Ei muistiinpanoja vielä.</div>';
+  return log.map(e => `
+    <div class="log-entry">
+      <div class="log-entry-date">${formatDate(e.date)}</div>
+      <div class="log-entry-text">${esc(e.text)}</div>
+    </div>
+  `).join('');
+}
+
+function addLogEntry(id) {
+  const lead = leadById(id);
+  const input = document.getElementById('log-input-' + id);
+  const text = input.value.trim();
+  if (!text) return;
+  if (!lead.log) lead.log = [];
+  lead.log.push({ date: TODAY, text });
+  input.value = '';
+  const container = document.getElementById('log-entries-' + id);
+  container.innerHTML = renderLogEntries(lead.log);
+  container.scrollTop = container.scrollHeight;
 }
 
 // ── Archive ──
@@ -659,7 +713,7 @@ function submitAddCard(e, stageId) {
     deal: parseInt(document.getElementById('new-deal').value) || 0,
     contactDate: document.getElementById('new-contactDate').value,
     nextContact: document.getElementById('new-nextContact').value,
-    memo: document.getElementById('new-memo').value.trim(),
+    log: document.getElementById('new-memo').value.trim() ? [{date: TODAY, text: document.getElementById('new-memo').value.trim()}] : [],
   };
   DATA.leads.push(lead);
   document.getElementById('col-' + stageId).appendChild(buildCard(lead));
@@ -685,7 +739,7 @@ function importLeadsFromRows(rows) {
   if (!dataRows.length) { showToast('Ei tuotavia rivejä löydy.'); return; }
   const container = document.getElementById('col-liidi');
   dataRows.forEach(row => {
-    const lead = { id: DATA._nextId++, stage:'liidi', tag:'UUSI asiakas', company: row[getC(cC,0)]||'—', contact: row[getC(nC,1)]||'—', phone: row[getC(pC,2)]||'—', email:'', title:'', ytunnus:'', deal:0, contactDate:'', nextContact:'2026-08-13', memo:'Tuotu asiakaslistasta' };
+    const lead = { id: DATA._nextId++, stage:'liidi', tag:'UUSI asiakas', company: row[getC(cC,0)]||'—', contact: row[getC(nC,1)]||'—', phone: row[getC(pC,2)]||'—', email:'', title:'', ytunnus:'', deal:0, contactDate:'', nextContact:'2026-08-13', log:[{date:TODAY,text:'Tuotu asiakaslistasta'}] };
     DATA.leads.push(lead);
     container.appendChild(buildCard(lead));
   });
