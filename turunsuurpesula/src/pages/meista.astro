@@ -1,0 +1,85 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+const timeline = [
+  { year: '2010', event: 'Turun Suurpesula perustetaan, kun pesulakapasiteetti kasvaa teollisuusluokkaan.' },
+  { year: 'Tänään', event: 'Yli 170 000 kg tekstiilejä vuodessa — hotelleille, hoivakodeille ja vahinkosaneeraukseen.' },
+]
+
+const values = [
+  { title: 'Luotettavuus', desc: 'Sovitut noudot ja toimitukset pidetään — ei yllätyksiä, ei katkoksia asiakkaan arkeen.' },
+  { title: 'Dokumentoitu laatu', desc: 'Jokainen erä kirjataan ja jäljitetään. Tärkeää sekä hoivakodeille että vakuutuskorvauksille.' },
+  { title: 'Joustavuus', desc: 'Volyymit vaihtelevat — palvelu skaalautuu sesonkien ja tarpeen mukaan.' },
+]
+---
+<Layout title="Meistä — Turun Suurpesula" description="Turun Suurpesula on teollisen mittakaavan tekstiilihuoltolaitos Turussa — perustettu 2010, kapasiteetti yli 170 000 kg vuodessa.">
+
+  <section class="bg-[#14375A] py-20">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-6">Meistä</p>
+      <h1 class="font-merriweather font-normal text-white text-4xl md:text-5xl leading-snug mb-6">Teollinen tekstiilihuolto — <span class="text-[#FF8F7A]">Turusta.</span></h1>
+      <p class="font-inter text-white/65 text-base leading-relaxed">Turun Suurpesula on kasvanut vuodesta 2010 lähtien teollisuusluokan tekstiilihuoltolaitokseksi, joka palvelee hotelleja, hoivakoteja ja vahinkosaneerausta Turun seudulla.</p>
+    </div>
+  </section>
+
+  <section class="bg-white py-20">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="mb-12 text-center">
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Historia</p>
+        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl">Kasvua teollisuusluokkaan</h2>
+      </div>
+      <div class="flex flex-col gap-6">
+        {timeline.map((t) => (
+          <div class="flex gap-6 items-start bg-[#F1F2F4] rounded-2xl p-7">
+            <div class="font-merriweather font-normal text-[#FF8F7A] text-2xl shrink-0 w-24">{t.year}</div>
+            <div class="font-inter text-[#14375A]/65 text-sm leading-relaxed">{t.event}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#F1F2F4] py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="mb-12 text-center">
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Arvomme</p>
+        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl">Miten toimimme</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {values.map((v) => (
+          <div class="bg-white rounded-2xl p-7">
+            <div class="font-sora font-bold text-[#14375A] text-base mb-2">{v.title}</div>
+            <div class="font-inter text-[#14375A]/60 text-sm leading-relaxed">{v.desc}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-20">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <div class="bg-[#14375A] rounded-3xl p-10 md:p-14">
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Laitoksemme</p>
+        <div class="grid grid-cols-2 gap-8 max-w-md mx-auto">
+          <div>
+            <div class="font-merriweather font-normal text-4xl text-[#FF8F7A] mb-1">170 000+ kg</div>
+            <div class="font-inter text-white/50 text-xs">vuosikapasiteetti</div>
+          </div>
+          <div>
+            <div class="font-merriweather font-normal text-4xl text-[#FF8F7A] mb-1">2010</div>
+            <div class="font-inter text-white/50 text-xs">perustamisvuosi</div>
+          </div>
+        </div>
+        <p class="font-inter text-white/60 text-sm mt-8">Telekatu 6, 20360 Turku</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#FF8F7A] py-20">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="font-merriweather font-normal text-white text-3xl md:text-4xl leading-snug mb-8">Tutustutaan tarpeisiinne</h2>
+      <a href="/yhteys" class="inline-flex items-center gap-2 bg-white text-[#14375A] font-sora font-bold px-8 py-4 rounded-full hover:bg-white/90 transition-colors text-sm">Ota yhteyttä →</a>
+    </div>
+  </section>
+
+</Layout>

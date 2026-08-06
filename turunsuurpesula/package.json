@@ -1,0 +1,15 @@
+{
+  "name": "turunsuurpesula",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "@tailwindcss/vite": "^4.1.7",
+    "astro": "^5.9.4",
+    "tailwindcss": "^4.1.7"
+  }
+}

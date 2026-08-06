@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+const benefits = [
+  { title: 'Hygieniastandardit täytetty', desc: 'Pesuprosessimme täyttää sosiaali- ja terveydenhuollon tekstiilihuollon vaatimukset.' },
+  { title: 'Ei sekaannuksia', desc: 'Asukkaiden vaatteet kirjataan ja palautetaan oikealle henkilölle — nimikoitu, jäljitettävä prosessi.' },
+  { title: 'ALV 0 % -hinnoittelu', desc: 'Palvelu toimitetaan arvonlisäverottomana — merkittävä kustannussäästö hoivakodin budjetille.' },
+  { title: 'Liinavaatevuokraus', desc: 'Ei omaa hankintaa eikä varastointia — vuokraamme liinavaatteet ja pyyhkeet tarpeenne mukaan.' },
+]
+
+const steps = [
+  { num: '1', title: 'Ota yhteyttä', desc: 'Kerro asukasmäärä ja tarpeenne — lähetämme tarjouksen 24 tunnissa.' },
+  { num: '2', title: 'Sovitaan aikataulu', desc: 'Räätälöimme noudot ja toimitukset hoivakotinne rytmiin.' },
+  { num: '3', title: 'Me hoidamme loput', desc: 'Tekstiilit noudetaan, pestään, nimikoidaan ja palautetaan oikealle asukkaalle.' },
+]
+
+const faqs = [
+  { q: 'Täyttääkö pesuprosessinne hoiva-alan hygieniastandardit?', a: 'Kyllä. Pesuprosessimme täyttää sosiaali- ja terveydenhuollon tekstiilihuollon vaatimukset.' },
+  { q: 'Miten estätte vaatteiden katoamisen tai sekaantumisen?', a: 'Jokainen asukkaan tekstiili nimikoidaan ja kirjataan — palautus tapahtuu aina oikealle henkilölle.' },
+  { q: 'Onko palvelu todella arvonlisäveroton?', a: 'Kyllä, hoivakodeille suunnattu tekstiilihuoltopalvelumme toimitetaan ALV 0 % -hinnoittelulla lainsäädännön mukaisesti.' },
+]
+---
+<Layout title="Vanhustenhoito — Turun Suurpesula" description="Hygieniastandardit täyttävä tekstiilihuolto hoivakodeille Turussa. Nimikoidut tekstiilit, ALV 0 % -hinnoittelu, tarjous 24 tunnissa.">
+
+  <section class="bg-[#14375A] py-20 md:py-28">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-6">Yrityksille · Vanhustenhoito</p>
+      <h1 class="font-merriweather font-normal text-white text-4xl md:text-5xl leading-snug mb-6">Hygieniastandardit täytetty — <span class="text-[#FF8F7A]">joka pesu.</span></h1>
+      <p class="font-inter text-white/65 text-base leading-relaxed mb-10">Nimikoitu, jäljitettävä prosessi ja ALV 0 % -hinnoittelu — luotettava tekstiilihuoltokumppani hoivakodeille.</p>
+      <a href="/yhteys" class="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-7 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors text-sm">Pyydä tarjous →</a>
+    </div>
+  </section>
+
+  <section class="bg-white py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-6">
+        {benefits.map((b) => (
+          <div class="bg-[#F1F2F4] rounded-2xl p-7 relative">
+            {b.title === 'ALV 0 % -hinnoittelu' && (
+              <span class="absolute top-6 right-6 bg-[#14375A] text-white font-sora font-bold text-[10px] tracking-widest uppercase px-2.5 py-1 rounded-full">ALV 0 %</span>
+            )}
+            <div class="font-sora font-bold text-[#14375A] text-base mb-2">{b.title}</div>
+            <div class="font-inter text-[#14375A]/60 text-sm leading-relaxed">{b.desc}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#F1F2F4] py-20">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="mb-12 text-center">
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Prosessi</p>
+        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl">Kolme askelta puhtaaseen ratkaisuun</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {steps.map((s) => (
+          <div class="bg-white rounded-2xl p-7">
+            <div class="font-merriweather font-normal text-6xl text-[#FF8F7A]/20 leading-none mb-4">{s.num}</div>
+            <div class="font-sora font-semibold text-[#14375A] text-lg mb-3">{s.title}</div>
+            <div class="font-inter text-[#14375A]/60 text-sm leading-relaxed">{s.desc}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-20">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="mb-12 text-center">
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Usein kysyttyä</p>
+        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl">Kysymyksiä ja vastauksia</h2>
+      </div>
+      <div class="flex flex-col divide-y divide-[#E9E4DF]">
+        {faqs.map((f) => (
+          <div class="py-6">
+            <div class="font-sora font-bold text-[#14375A] text-base mb-2">{f.q}</div>
+            <div class="font-inter text-[#14375A]/65 text-sm leading-relaxed">{f.a}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#FF8F7A] py-20">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="font-merriweather font-normal text-white text-3xl md:text-4xl leading-snug mb-8">Pyydä tarjous hoivakotinne tekstiilihuollolle</h2>
+      <a href="/yhteys" class="inline-flex items-center gap-2 bg-white text-[#14375A] font-sora font-bold px-8 py-4 rounded-full hover:bg-white/90 transition-colors text-sm">Ota yhteyttä →</a>
+    </div>
+  </section>
+
+</Layout>

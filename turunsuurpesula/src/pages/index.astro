@@ -1,0 +1,108 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+const stats = [
+  { value: '170 000+ kg', label: 'pestyä tekstiiliä vuodessa' },
+  { value: '2010', label: 'teollisuuskapasiteetti käytössä' },
+  { value: '24 h', label: 'tarjouksen toimitusaika' },
+  { value: '24/7', label: 'hätäpesupäivystys' },
+]
+
+const services = [
+  {
+    href: '/hotellit',
+    title: 'Hotellit',
+    desc: 'Nopea liinojen kierto ja liinavaatevuokraus — lakanat ja pyyhkeet takaisin käytössä ajoissa, joka kerta.',
+  },
+  {
+    href: '/vanhustenhoito',
+    title: 'Vanhustenhoito',
+    desc: 'Hygieniastandardit täyttävä prosessi, nimikoidut tekstiilit ja ALV 0 % -hinnoittelu hoivakodeille.',
+  },
+  {
+    href: '/hatapesut',
+    title: 'Hätäpesut ja vahinkotapaukset',
+    desc: '24/7-päivystys vesi-, palo- ja savuvahingoille. Yhteistyö vakuutusyhtiöiden ja vahinkosaneerausyritysten kanssa.',
+  },
+]
+
+const reasons = [
+  { title: 'Teollinen kapasiteetti', desc: 'Yli 170 000 kg vuodessa — pystymme ottamaan vastaan volyymejä, joihin pienemmät pesulat eivät kykene.' },
+  { title: 'Nimetty palvelupäällikkö', desc: 'Yksi yhteyshenkilö tuntee tilanteenne. Ei jonoja, ei uudelleenselittämistä.' },
+  { title: 'Joustava sopimus', desc: 'Skaalautuu tarpeen mukaan — enemmän sesonkina, vähemmän hiljaisena aikana.' },
+  { title: 'Dokumentoitu prosessi', desc: 'Jokainen erä kirjataan ja jäljitetään. Tärkeää sekä hoivakodeille että vakuutuskorvauksille.' },
+]
+---
+<Layout title="Turun Suurpesula — Teollinen tekstiilihuolto yrityksille" description="Turun Suurpesula huoltaa hotellien, hoivakotien ja vahinkosaneerauksen tekstiilit teollisella kapasiteetilla Turussa. Pyydä tarjous 24 tunnissa.">
+
+  <section class="bg-[#14375A] py-24 md:py-32">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-6">B2B-tekstiilihuolto Turussa</p>
+      <h1 class="font-merriweather font-normal text-white text-4xl md:text-6xl leading-snug mb-6">
+        Teollisen mittakaavan pesula —<br /><span class="text-[#FF8F7A]">yrityksille.</span>
+      </h1>
+      <p class="font-inter text-white/65 text-lg leading-relaxed mb-10 max-w-2xl mx-auto">
+        Turun Suurpesula huoltaa hotellien, hoivakotien ja vahinkosaneerauksen tekstiilit teollisella kapasiteetilla. Yksi sopimus, nimetty palvelupäällikkö, ei yllätyksiä.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/yhteys" class="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-7 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors text-sm">Pyydä tarjous →</a>
+        <a href="#palvelut" class="inline-flex items-center gap-2 border border-white/30 text-white font-sora font-bold px-7 py-3.5 rounded-full hover:border-white/60 transition-colors text-sm">Tutustu palveluihin</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#F1F2F4] py-14">
+    <div class="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      {stats.map((s) => (
+        <div>
+          <div class="font-merriweather font-normal text-3xl md:text-4xl text-[#14375A] mb-1">{s.value}</div>
+          <div class="font-inter text-[#14375A]/55 text-xs leading-snug">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="palvelut" class="bg-white py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="mb-12 text-center">
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Palvelemme</p>
+        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl">Ratkaisut kolmelle toimialalle</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {services.map((s) => (
+          <a href={s.href} class="block bg-[#F1F2F4] rounded-2xl p-8 hover:bg-[#E9E4DF] transition-colors">
+            <div class="font-sora font-bold text-[#14375A] text-lg mb-3">{s.title}</div>
+            <p class="font-inter text-[#14375A]/65 text-sm leading-relaxed mb-5">{s.desc}</p>
+            <span class="font-sora font-bold text-[#FF8F7A] text-sm">Lue lisää →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#F1F2F4] py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="mb-12 text-center">
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Miksi Turun Suurpesula</p>
+        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl">Me hoidamme — te teette omaa työtänne</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        {reasons.map((r) => (
+          <div class="bg-white rounded-2xl p-7">
+            <div class="font-sora font-bold text-[#14375A] text-base mb-2">{r.title}</div>
+            <div class="font-inter text-[#14375A]/60 text-sm leading-relaxed">{r.desc}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#FF8F7A] py-20">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="font-merriweather font-normal text-white text-4xl md:text-5xl leading-snug mb-4">Pyydä maksuton tarjous</h2>
+      <p class="font-inter text-white/80 text-base leading-relaxed mb-10 max-w-xl mx-auto">Kerro tarpeestanne — palaamme teille 24 tunnissa.</p>
+      <a href="/yhteys" class="inline-flex items-center gap-2 bg-white text-[#14375A] font-sora font-bold px-8 py-4 rounded-full hover:bg-white/90 transition-colors text-sm">Ota yhteyttä →</a>
+    </div>
+  </section>
+
+</Layout>

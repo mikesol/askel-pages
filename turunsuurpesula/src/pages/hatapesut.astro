@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+const benefits = [
+  { title: '24/7-päivystys', desc: 'Vesi-, palo- ja savuvahingot eivät odota virka-aikaa. Päivystyksemme vastaa ympäri vuorokauden.' },
+  { title: 'Yhteistyö vakuutusyhtiöiden kanssa', desc: 'Dokumentoitu prosessi tukee vahinkoilmoituksia ja korvauskäsittelyä — kuitit ja erittelyt suoraan teille tai vakuutusyhtiölle.' },
+  { title: 'Suurkapasiteetti', desc: 'Yli 170 000 kg/vuosi -laitos käsittelee suuretkin vahinkoerät nopeasti — kapasiteetti, johon pienemmät pesulat eivät pysty.' },
+  { title: 'Vahinkosaneerauskumppanuus', desc: 'Toimimme suoraan vahinkosaneerausyritysten kanssa osana korjausprosessia — ei ylimääräisiä välikäsiä.' },
+]
+
+const steps = [
+  { num: '1', title: 'Soita päivystykseen', desc: 'Tavoitat meidät ympäri vuorokauden — kerro vahingon laajuus ja sijainti.' },
+  { num: '2', title: 'Noudamme vahingoittuneet tekstiilit', desc: 'Nouto järjestyy nopeasti, tarvittaessa suoraan vahinkopaikalta.' },
+  { num: '3', title: 'Pesemme ja dokumentoimme', desc: 'Erikoiskäsittely vesi-, palo- ja savuvahingoille, dokumentoituna korvauskäsittelyä varten.' },
+]
+
+const faqs = [
+  { q: 'Kuinka nopeasti reagoitte hätätapauksessa?', a: 'Päivystyksemme vastaa ympäri vuorokauden. Nouto järjestetään mahdollisimman pian yhteydenoton jälkeen tilanteen laajuuden mukaan.' },
+  { q: 'Voitteko asioida suoraan vakuutusyhtiömme kanssa?', a: 'Kyllä. Dokumentoimme käsitellyt erät niin, että kuitit ja erittelyt käyvät suoraan vahinkoilmoituksen liitteeksi.' },
+  { q: 'Kuinka suuria vahinkoeriä pystytte käsittelemään?', a: 'Teollisuuslaitoksemme kapasiteetti on yli 170 000 kg vuodessa — pystymme ottamaan vastaan myös laajat, kokonaisten kiinteistöjen vahinkoerät.' },
+  { q: 'Teettekö yhteistyötä vahinkosaneerausyritysten kanssa?', a: 'Kyllä, toimimme suoraan osana vahinkosaneerausyritysten korjausprosessia ilman ylimääräisiä välikäsiä.' },
+]
+---
+<Layout title="Hätäpesut ja vahinkotapaukset — Turun Suurpesula" description="24/7-päivystys vesi-, palo- ja savuvahinkojen tekstiilihuoltoon Turussa. Yhteistyö vakuutusyhtiöiden ja vahinkosaneerausyritysten kanssa.">
+
+  <section class="bg-[#14375A] py-20 md:py-28">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-6">Yrityksille · Hätäpesut ja vahinkotapaukset</p>
+      <h1 class="font-merriweather font-normal text-white text-4xl md:text-5xl leading-snug mb-6">Kun vesivahinko ei odota, <span class="text-[#FF8F7A]">emme mekään.</span></h1>
+      <p class="font-inter text-white/65 text-base leading-relaxed mb-10">24/7-päivystys ja teollinen kapasiteetti vesi-, palo- ja savuvahinkojen tekstiilihuoltoon — yhteistyössä vakuutusyhtiöiden ja vahinkosaneerausyritysten kanssa.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="tel:0222321300" class="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-7 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors text-sm">Soita päivystykseen · 02 2321 300</a>
+        <a href="/yhteys" class="inline-flex items-center gap-2 border border-white/30 text-white font-sora font-bold px-7 py-3.5 rounded-full hover:border-white/60 transition-colors text-sm">Täytä lomake</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-6">
+        {benefits.map((b) => (
+          <div class="bg-[#F1F2F4] rounded-2xl p-7">
+            <div class="font-sora font-bold text-[#14375A] text-base mb-2">{b.title}</div>
+            <div class="font-inter text-[#14375A]/60 text-sm leading-relaxed">{b.desc}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#F1F2F4] py-20">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="mb-12 text-center">
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Prosessi</p>
+        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl">Kolme askelta vahingosta puhtaaseen ratkaisuun</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {steps.map((s) => (
+          <div class="bg-white rounded-2xl p-7">
+            <div class="font-merriweather font-normal text-6xl text-[#FF8F7A]/20 leading-none mb-4">{s.num}</div>
+            <div class="font-sora font-semibold text-[#14375A] text-lg mb-3">{s.title}</div>
+            <div class="font-inter text-[#14375A]/60 text-sm leading-relaxed">{s.desc}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-20">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="mb-12 text-center">
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Usein kysyttyä</p>
+        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl">Kysymyksiä ja vastauksia</h2>
+      </div>
+      <div class="flex flex-col divide-y divide-[#E9E4DF]">
+        {faqs.map((f) => (
+          <div class="py-6">
+            <div class="font-sora font-bold text-[#14375A] text-base mb-2">{f.q}</div>
+            <div class="font-inter text-[#14375A]/65 text-sm leading-relaxed">{f.a}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#FF8F7A] py-20">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="font-merriweather font-normal text-white text-3xl md:text-4xl leading-snug mb-4">Vahinko sattunut?</h2>
+      <p class="font-inter text-white/80 text-base leading-relaxed mb-8">Soita päivystykseen — vastaamme ympäri vuorokauden.</p>
+      <a href="tel:0222321300" class="inline-flex items-center gap-2 bg-white text-[#14375A] font-sora font-bold px-8 py-4 rounded-full hover:bg-white/90 transition-colors text-sm">02 2321 300 →</a>
+    </div>
+  </section>
+
+</Layout>
