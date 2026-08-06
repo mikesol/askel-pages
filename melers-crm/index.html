@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Melers CRM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #14375A;
+      --coral: #FF8F7A;
+      --coral-hover: #ff7a63;
+      --card-surface: #E9E4DF;
+      --bg-light: #F1F2F4;
+      --white: #FFFFFF;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var(--navy); min-height: 100vh; }
+    h1, h2, h3, h4 { font-family: 'Sora', sans-serif; }
+
+    /* ── Nav ── */
+    .nav {
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      height: 60px;
+      gap: 32px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo { height: 26px; fill: var(--white); flex-shrink: 0; }
+    .nav-divider { width: 1px; height: 28px; background: rgba(255,255,255,0.2); }
+    .nav-tab {
+      color: rgba(255,255,255,0.55);
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+      user-select: none;
+    }
+    .nav-tab.active { color: var(--white); border-bottom-color: var(--coral); }
+    .nav-tab:hover { color: var(--white); }
+
+    /* ── Views ── */
+    .view { display: none; }
+    .view.active { display: block; }
+
+    /* ── Modal overlay ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(20,55,90,0.55);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-box {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 520px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-size: 22px;
+      cursor: pointer;
+      color: #888;
+      line-height: 1;
+      background: none;
+      border: none;
+    }
+    .modal-close:hover { color: var(--navy); }
+
+    /* ── Kanban ── */
+    .kanban-board {
+      display: flex;
+      gap: 16px;
+      padding: 24px;
+      min-height: calc(100vh - 60px);
+      overflow-x: auto;
+      align-items: flex-start;
+    }
+    .kanban-col {
+      flex: 0 0 260px;
+      background: rgba(20,55,90,0.06);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .kanban-col-header {
+      background: var(--navy);
+      padding: 12px 16px;
+    }
+    .kanban-col-title {
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .kanban-col-revenue {
+      font-size: 11px;
+      color: rgba(255,255,255,0.6);
+      font-family: 'Inter', sans-serif;
+    }
+    .kanban-cards {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    /* ── Lead card ── */
+    .lead-card {
+      background: var(--card-surface);
+      border-radius: 8px;
+      padding: 14px;
+      cursor: pointer;
+      transition: box-shadow 0.15s, transform 0.1s;
+      border-left: 3px solid transparent;
+    }
+    .lead-card:hover {
+      box-shadow: 0 4px 12px rgba(20,55,90,0.15);
+      transform: translateY(-1px);
+    }
+    .lead-card-company {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .lead-card-contact {
+      font-size: 12px;
+      color: #555;
+      margin-bottom: 6px;
+    }
+    .lead-card-deal {
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .lead-card-deadline {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-bottom: 8px;
+    }
+    .lead-card-deadline.on-time {
+      background: rgba(20,55,90,0.1);
+      color: var(--navy);
+    }
+    .lead-card-deadline.overdue {
+      background: var(--coral);
+      color: var(--white);
+    }
+    .lead-card-memo {
+      font-size: 11px;
+      color: #666;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* ── Card modal content ── */
+    .modal-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #888;
+      margin-bottom: 4px;
+      margin-top: 16px;
+    }
+    .modal-label:first-of-type { margin-top: 0; }
+    .modal-value {
+      font-size: 14px;
+      color: var(--navy);
+      line-height: 1.5;
+    }
+    .modal-value.big {
+      font-family: 'Sora', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .modal-value.overdue {
+      color: var(--coral-hover);
+      font-weight: 600;
+    }
+    .modal-divider {
+      height: 1px;
+      background: var(--bg-light);
+      margin: 20px 0;
+    }
+    .modal-stage-select {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid var(--card-surface);
+      border-radius: 8px;
+      font-family: 'Sora', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      background: var(--bg-light);
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2314375A' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+    .modal-stage-select:focus { outline: 2px solid var(--coral); border-color: var(--coral); }
+    .modal-memo-full {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.6;
+      background: var(--bg-light);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    /* ── Customers view ── */
+    .customers-page { padding: 24px; max-width: 900px; margin: 0 auto; }
+    .customers-search-wrap { margin-bottom: 24px; }
+    .customers-search {
+      width: 100%;
+      padding: 12px 18px;
+      border: 1.5px solid #ddd;
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--navy);
+      background: var(--white);
+      transition: border-color 0.15s;
+    }
+    .customers-search:focus { outline: none; border-color: var(--coral); }
+    .customers-search::placeholder { color: #aaa; }
+    .customers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .customer-card {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 18px;
+      cursor: pointer;
+      transition: box-shadow 0.15s, transform 0.1s;
+      border-top: 3px solid var(--navy);
+    }
+    .customer-card:hover {
+      box-shadow: 0 6px 18px rgba(20,55,90,0.12);
+      transform: translateY(-2px);
+    }
+    .customer-card-company {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .customer-card-contact {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 4px;
+    }
+    .customer-card-pricing {
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--coral-hover);
+      background: rgba(255,143,122,0.1);
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .customers-empty {
+      grid-column: 1/-1;
+      text-align: center;
+      color: #aaa;
+      font-size: 14px;
+      padding: 40px 0;
+    }
+
+    /* ── Customer modal ── */
+    .customer-modal-header {
+      border-bottom: 2px solid var(--navy);
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+    .customer-modal-company {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--navy);
+    }
+    .customer-modal-pricing-badge {
+      display: inline-block;
+      margin-top: 8px;
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Sora', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 20px;
+    }
+    .customer-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .customer-info-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #888;
+      margin-bottom: 4px;
+    }
+    .customer-info-value {
+      font-size: 14px;
+      color: var(--navy);
+    }
+    .customer-notes-box {
+      background: var(--bg-light);
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 13px;
+      color: #555;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <svg class="nav-logo" viewBox="0 0 399.55 211.66" xmlns="http://www.w3.org/2000/svg">
+    <path d="M43.87,23.49c1.73-12.93,14.04-22.33,26.51-23.49h208.98c7.89,1.24,15.5,4.18,21.52,9.48,3.35,2.94,20.29,25.64,20.94,29.07.21,1.13.04,2.31.05,3.44-2.74-.28-6.53.71-9.01-.49-2-.97-14.08-20.5-18.47-24.53-3.62-3.33-9.07-6.42-14.02-6.98l-213.53.47c-7.76,2.8-12.13,8.83-12.96,17.04,2.32,44.41-3.13,92-.05,136.03.49,7.08,3.2,12.52,11,12.42,4.95-44.92,65.84-43.84,69.62,1.09l149.79-.19c1.58-.53,3.2-10.56,4.45-13.55,8.21-19.59,32.77-26.66,50.51-15.16,10.13,6.56,14.12,16.74,15.6,28.4,6.1.94,29.79.77,32.97-4.17,1.41-2.2,1.8-22.84.66-24.46-3.1-1.88-7.13-.51-10.83-1.17-12.6-2.23-16.8-24.72-4.17-26.71,2.58-.41,5.46.27,7.96-.05,1.39-.18,1.73.54,1.46-1.48-6.48-10.76-21.22-11.05-30.48-18.53l-31.01-41.99h-36c-2.9,0-3.23-7.47,0-9h40c.29,0,3.9,2.14,4.54,2.75,10.21,9.78,19.41,32.14,29.94,40.78,12.86,10.55,27.73,6.92,34.75,27.25,4.16,12.05,6.13,40.23,4.21,52.66-2.61,16.86-33.92,13.04-45.82,13.68-6.29,28.07-43.54,34.45-60.64,11.9-2.65-3.49-4.24-11.51-6.97-12.03l-150.07-.04c-4.04.5-5.42,7.85-8.21,11.79-13.05,18.43-42.39,18.16-55.66.2-1.71-2.32-5.02-11.1-5.55-11.45-1.19-.79-8.21-1.68-11.03-2.96-3.88-1.76-7.8-5.75-9.23-9.78-.34-.96-1.76-6.71-1.76-7.24v-66.5H2.37c-3.71,0-3.1-10,2-10h39.5v-16H13.37c-5.4,0-4.54-10-1-10h31.5c1.22-12.63-1.64-28.24,0-40.5ZM385.82,125.04c-7.01.27-15.35-2.83-13.9,7.37,1.28,9.04,8.84,7.77,15.95,7.57l-2.05-14.94ZM95.61,153.23c-32.21,5.06-22.53,57.13,11.08,47.07,27.4-8.2,18.74-51.76-11.08-47.07ZM316.63,153.26c-26.78,3.64-26.26,44.17-1.17,47.65,38.17,5.29,36.98-52.52,1.17-47.65Z"/>
+    <path d="M330.87,92.99l-22.99-31.52c-.93-2.39,5.88-2.79,6.92-.93,7.55,10.11,14.95,20.4,22.64,30.4,1.53,1.99,5.24,2.62,4.27,6.34-.18.71-2.04,2.71-2.35,2.71h-52l-2.34-3.68c-.29-1.04,2.02-3.32,2.34-3.32h43.5Z"/>
+    <g>
+      <path d="M226.87,127.98c-20.73,6.77-40.45,3.18-30.77-23.27,3-8.21,9.77-15.27,13.31-22.69,1.73-3.63,3.57-7.4,1.54-11.37-1.69-1.78-3.81-1.93-6.02-1.16-12.43,4.32-17.59,43.07-34.83,51.23-18.58,8.79-23.98-11-33.26-21.2-2.27-2.5-4.93-6.6-8.07-3.09-1.63,2.07,1.98,14.94,2.14,19.01s.47,9.31-2.54,12.53c-7.58-6.79-17.32-10.22-27.5-9.99,6.75-8.18,9.03-17.08,9.99-27.5.58-6.31-1.96-25.24,9.44-24.48s14.92,40.01,35.84,35.77c19.11-3.87,22.42-57.73,54.26-53.8,19.35,2.39,8.24,25.87,6.57,36.62-1.56,10.08-1.03,21.54,2.72,31.08l7.18,12.31Z"/>
+      <path d="M172.86,72.99c.51.57-5.92,12.32-6.8,13.69-5.02,7.85-10.77,13.84-20.34,7.95-10.78-6.63-12.42-33.02-24.6-35.42-2.75-.54-4.92-.6-6.77,1.78-.88-3.51,4.99-9.51,8.46-10.54,26.34-7.77,23.9,39.48,50.03,22.54Z"/>
+    </g>
+  </svg>
+  <div class="nav-divider"></div>
+  <span class="nav-tab active" data-view="kanban">Myynti &amp; Asiakaspalvelu</span>
+  <span class="nav-tab" data-view="customers">Asiakkaat</span>
+</nav>
+
+<div id="view-kanban" class="view active"></div>
+<div id="view-customers" class="view"></div>
+<div id="card-modal" class="modal-overlay" style="display:none"></div>
+<div id="customer-modal" class="modal-overlay" style="display:none"></div>
+
+<script>
+const TODAY = '2026-08-06';
+
+const STAGES = [
+  { id: 'prospektit',      label: 'Prospektit' },
+  { id: 'liidit',          label: 'Liidit' },
+  { id: 'intro',           label: 'Intro palaveri' },
+  { id: 'tarjous',         label: 'Tarjous lähetetty' },
+  { id: 'asiakaspalvelu',  label: 'Asiakaspalvelu &amp; Onboarding' },
+];
+
+const DATA = {
+  leads: [
+    // Prospektit
+    { id:1,  stage:'prospektit',     company:'Hotelli Kauniala Oy',               contact:'Juhani Virtanen',    phone:'+358 40 123 4567', deal:18000, nextContact:'2026-08-05', memo:'Löydetty verkosta, ei kontaktoitu vielä. Hotelli noin 50 huonetta, paljon liinavaatteita.' },
+    { id:2,  stage:'prospektit',     company:'Tampereen Urheilukeskus Oy',        contact:'Minna Korhonen',     phone:'+358 44 234 5678', deal:24000, nextContact:'2026-08-15', memo:'Potentiaalinen asiakas urheilutekstiileille. Suositeltu verkoston kautta.' },
+    { id:3,  stage:'prospektit',     company:'Rakennus Leinonen Oy',              contact:'Pekka Leinonen',     phone:'+358 50 345 6789', deal:9600,  nextContact:'2026-08-12', memo:'Rakennusyhtiö ~30 työntekijää. Tarvitsevat työvaatteiden pesua.' },
+    { id:4,  stage:'prospektit',     company:'Lähipalvelut Mäkinen Oy',           contact:'Hanna Mäkinen',      phone:'+358 41 456 7890', deal:6000,  nextContact:'2026-08-03', memo:'Pieni siivousyritys, kiinnostunut yritysasiakkuudesta. Soitettava kiireesti.' },
+    // Liidit
+    { id:5,  stage:'liidit',         company:'Ravintola Kultainen Porsas Oy',     contact:'Timo Rantanen',      phone:'+358 40 567 8901', deal:12000, nextContact:'2026-08-14', memo:'Soitettu 2.8., kiinnostunut. Haluaa tarjouksen liinavaatteille ja uniformuille.' },
+    { id:6,  stage:'liidit',         company:'Toimisto Aaltonen Oy',              contact:'Kirsi Aaltonen',     phone:'+358 44 678 9012', deal:7200,  nextContact:'2026-08-20', memo:'Sähköpostilla yhteys otettu, vastaavat ensi viikolla.' },
+    { id:7,  stage:'liidit',         company:'Pelastuslaitos Pirkanmaa',          contact:'Ari Heikkinen',      phone:'+358 50 789 0123', deal:36000, nextContact:'2026-08-22', memo:'Julkinen sektori, vaatii tarjouspyyntömenettelyn. Suuri potentiaali.' },
+    { id:8,  stage:'liidit',         company:'Koulutuspalvelut Ylöjärvi',         contact:'Seija Lähteenmäki',  phone:'+358 41 890 1234', deal:8400,  nextContact:'2026-08-18', memo:'Koulu haluaa pesua lounasliinoille. Kontaktoitu messuilla elokuussa.' },
+    // Intro palaveri
+    { id:9,  stage:'intro',          company:'Siivouspalvelu Puhtola Oy',         contact:'Risto Puhtola',      phone:'+358 40 901 2345', deal:15600, nextContact:'2026-08-09', memo:'Tapaaminen pidetty 5.8. Erittäin kiinnostunut. Odottaa tarjousta ensi viikolla.' },
+    { id:10, stage:'intro',          company:'Majoituspalvelut Näsijärvi Oy',     contact:'Leena Järvinen',     phone:'+358 44 012 3456', deal:21600, nextContact:'2026-08-13', memo:'Intro palaveri 7.8. Tyytyväinen palvelukuvaukseen, pyysivät referenssejä.' },
+    { id:11, stage:'intro',          company:'Fysioterapia Salminen',             contact:'Tuulia Salminen',    phone:'+358 50 123 4560', deal:9600,  nextContact:'2026-08-18', memo:'Pieni klinikka, palaveri sovittu 14.8. Tarvitsevat hoitoliinojen pesua.' },
+    // Tarjous lähetetty
+    { id:12, stage:'tarjous',        company:'Pirkanmaan Hyvinvointipalvelut Oy', contact:'Olli Hämäläinen',   phone:'+358 40 234 5671', deal:48000, nextContact:'2026-08-04', memo:'Tarjous lähetetty 1.8., odottaa päätöstä. Suurin potentiaaliasiakas tällä hetkellä.' },
+    { id:13, stage:'tarjous',        company:'Hotelli Torni Tampere Oy',          contact:'Maria Nieminen',     phone:'+358 44 345 6782', deal:30000, nextContact:'2026-08-16', memo:'Tarjous 4.8. Neuvotellaan hinnasta, kilpailija myös mukana.' },
+    { id:14, stage:'tarjous',        company:'Catering Hakala Oy',                contact:'Ville Hakala',       phone:'+358 50 456 7893', deal:10800, nextContact:'2026-08-13', memo:'Tarjous lähetetty 6.8. Odotetaan vastausta viikon sisällä.' },
+    // Asiakaspalvelu & Onboarding
+    { id:15, stage:'asiakaspalvelu', company:'Tampereen Ammattiopisto TAO',       contact:'Päivi Kuusisto',     phone:'+358 40 567 8904', deal:16800, nextContact:'2026-09-01', memo:'Sopimus allekirjoitettu 28.7. Aloitetaan syyskuussa. Aikataulutettu.' },
+    { id:16, stage:'asiakaspalvelu', company:'Kiinteistöpalvelut Rajala Oy',      contact:'Juha Rajala',        phone:'+358 44 678 9015', deal:13200, nextContact:'2026-08-25', memo:'Onboarding käynnissä. Ensimmäinen nouto sovittu 19.8.' },
+    { id:17, stage:'asiakaspalvelu', company:'Ravintola Aleksi Oy',               contact:'Paula Aleksi',       phone:'+358 50 789 0126', deal:9600,  nextContact:'2026-08-28', memo:'Uusi asiakas 4.8. Toimituspäivät sovittu — tiistaisin ja perjantaisin.' },
+  ],
+  customers: [
+    { id:1, company:'Tampereen Ammattiopisto TAO',   contact:'Päivi Kuusisto',  phone:'+358 40 567 8904', email:'paivi.kuusisto@tao.fi',           pricing:'Standardi 3x/kk — 1 400 €/kk', notes:'Sopimus 3v, uusittu 2025-09. Erityistoimitus maanantaisin. Maksuaika 21 pv.' },
+    { id:2, company:'Kiinteistöpalvelut Rajala Oy',  contact:'Juha Rajala',     phone:'+358 44 678 9015', email:'juha.rajala@rajalapalvelut.fi',    pricing:'Perus 2x/kk — 550 €/kk',       notes:'Pitkäaikainen asiakas vuodesta 2022. Maksuaika 30 pv. Toimitus tiistaisin.' },
+    { id:3, company:'Ravintola Aleksi Oy',           contact:'Paula Aleksi',    phone:'+358 50 789 0126', email:'paula@ravintolaaeksi.fi',          pricing:'Perus 2x/kk — 400 €/kk',       notes:'Aloittanut 8/2026. Liinat ja uniformut. Sopimus toistaiseksi voimassa.' },
+    { id:4, company:'Hotelli Harmonia Oy',           contact:'Sanna Harmala',   phone:'+358 40 890 1237', email:'sanna@hotelliharmonia.fi',         pricing:'Premium 5x/vko — 3 200 €/kk',  notes:'VIP-asiakas. Laskutus kuukausittain etukäteen. Ei viivästyksiä.' },
+    { id:5, company:'Päiväkoti Aurinkoinen',         contact:'Maija Taipale',   phone:'+358 44 901 2348', email:'maija@paivakotiaurinkoinen.fi',    pricing:'Perus 1x/vko — 620 €/kk',      notes:'Kunta-asiakas. Budjetoitu vuosisopimukseen. Maksuaika 14 pv.' },
+    { id:6, company:'Lakiasiaintoimisto Helin',      contact:'Mikko Helin',     phone:'+358 50 012 3459', email:'mikko@helinlakiasiat.fi',          pricing:'Pieni 2x/kk — 280 €/kk',       notes:'Toimistotekstiilit. Erityisohje: ei tumman vihreää konepesua.' },
+    { id:7, company:'Siivouspalvelu Puhtola Oy',     contact:'Risto Puhtola',   phone:'+358 40 901 2345', email:'risto@puhtola.fi',                pricing:'Yritys 4x/kk — 960 €/kk',      notes:'Sopimus 1v, alkaen 2026-03. Työvaatteet ja moppipyykit.' },
+    { id:8, company:'Fysioterapia Salminen',         contact:'Tuulia Salminen', phone:'+358 50 123 4560', email:'tuulia@fterapiasalminen.fi',       pricing:'Perus 2x/kk — 400 €/kk',       notes:'Uusi asiakas 8/2026. Hoitoliinoja ja pyyheliinat. Toimitus tiistaisin.' },
+  ],
+};
+
+function isOverdue(dateStr) { return dateStr < TODAY; }
+function formatDate(dateStr) {
+  const [y, m, d] = dateStr.split('-');
+  return `${d}.${m}.${y}`;
+}
+
+function showView(name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  document.querySelector(`.nav-tab[data-view="${name}"]`).classList.add('active');
+}
+
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => showView(tab.dataset.view));
+});
+
+// ── Kanban ──
+function renderKanban() {
+  const board = document.createElement('div');
+  board.className = 'kanban-board';
+
+  STAGES.forEach(stage => {
+    const stageLeads = DATA.leads.filter(l => l.stage === stage.id);
+    const totalRevenue = stageLeads.reduce((sum, l) => sum + l.deal, 0);
+
+    const col = document.createElement('div');
+    col.className = 'kanban-col';
+    col.innerHTML = `
+      <div class="kanban-col-header">
+        <div class="kanban-col-title">${stage.label}</div>
+        <div class="kanban-col-revenue">Revenue estimate: ${totalRevenue.toLocaleString('fi-FI')} €</div>
+      </div>
+      <div class="kanban-cards" id="col-${stage.id}"></div>
+    `;
+
+    const cardsContainer = col.querySelector(`#col-${stage.id}`);
+    stageLeads.forEach(lead => {
+      const overdue = isOverdue(lead.nextContact);
+      const card = document.createElement('div');
+      card.className = 'lead-card';
+      card.dataset.id = lead.id;
+      card.innerHTML = `
+        <div class="lead-card-company">${lead.company}</div>
+        <div class="lead-card-contact">${lead.contact} · ${lead.phone}</div>
+        <div class="lead-card-deal">${lead.deal.toLocaleString('fi-FI')} €/v</div>
+        <span class="lead-card-deadline ${overdue ? 'overdue' : 'on-time'}">
+          Kontaktointi: ${formatDate(lead.nextContact)}${overdue ? ' ⚠' : ''}
+        </span>
+        <div class="lead-card-memo">${lead.memo}</div>
+      `;
+      card.addEventListener('click', () => openCardModal(lead));
+      cardsContainer.appendChild(card);
+    });
+
+    board.appendChild(col);
+  });
+
+  document.getElementById('view-kanban').appendChild(board);
+}
+
+// ── Card modal ──
+function openCardModal(lead) {
+  const overdue = isOverdue(lead.nextContact);
+  const stageOptions = STAGES.map(s =>
+    `<option value="${s.id}" ${s.id === lead.stage ? 'selected' : ''}>${s.label}</option>`
+  ).join('');
+
+  const modal = document.getElementById('card-modal');
+  modal.innerHTML = `
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeCardModal()">×</button>
+      <div class="modal-label" style="margin-top:0">Yritys</div>
+      <div class="modal-value big">${lead.company}</div>
+
+      <div class="modal-label">Yhteyshenkilö</div>
+      <div class="modal-value">${lead.contact}</div>
+
+      <div class="modal-label">Puhelinnumero</div>
+      <div class="modal-value">${lead.phone}</div>
+
+      <div class="modal-label">Revenue estimate</div>
+      <div class="modal-value">${lead.deal.toLocaleString('fi-FI')} €/v</div>
+
+      <div class="modal-label">Seuraava kontaktointi</div>
+      <div class="modal-value ${overdue ? 'overdue' : ''}">${formatDate(lead.nextContact)}${overdue ? ' — ERÄÄNTYNYT ⚠' : ''}</div>
+
+      <div class="modal-divider"></div>
+
+      <div class="modal-label">Viimeisin muistiinpano</div>
+      <div class="modal-memo-full">${lead.memo}</div>
+
+      <div class="modal-divider"></div>
+
+      <div class="modal-label">Siirrä vaiheeseen →</div>
+      <select class="modal-stage-select" onchange="alert('Toiminto käytettävissä oikeassa järjestelmässä.')">
+        ${stageOptions}
+      </select>
+    </div>
+  `;
+  modal.style.display = 'flex';
+  modal.onclick = (e) => { if (e.target === modal) closeCardModal(); };
+}
+
+function closeCardModal() {
+  document.getElementById('card-modal').style.display = 'none';
+}
+
+// ── Customers ──
+function renderCustomers() {
+  const page = document.createElement('div');
+  page.className = 'customers-page';
+  page.innerHTML = `
+    <div class="customers-search-wrap">
+      <input
+        class="customers-search"
+        id="customers-search-input"
+        type="text"
+        placeholder="Hae yrityksen nimellä tai yhteyshenkilöllä…"
+        oninput="filterCustomers(this.value)"
+      >
+    </div>
+    <div class="customers-grid" id="customers-grid"></div>
+  `;
+  document.getElementById('view-customers').appendChild(page);
+  renderCustomerCards(DATA.customers);
+}
+
+function renderCustomerCards(customers) {
+  const grid = document.getElementById('customers-grid');
+  grid.innerHTML = '';
+  if (customers.length === 0) {
+    grid.innerHTML = '<div class="customers-empty">Ei hakutuloksia.</div>';
+    return;
+  }
+  customers.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'customer-card';
+    card.dataset.id = c.id;
+    card.innerHTML = `
+      <div class="customer-card-company">${c.company}</div>
+      <div class="customer-card-contact">${c.contact} · ${c.phone}</div>
+      <span class="customer-card-pricing">${c.pricing}</span>
+    `;
+    card.addEventListener('click', () => openCustomerModal(c));
+    grid.appendChild(card);
+  });
+}
+
+function filterCustomers(query) {
+  const q = query.toLowerCase().trim();
+  const filtered = DATA.customers.filter(c =>
+    c.company.toLowerCase().includes(q) || c.contact.toLowerCase().includes(q)
+  );
+  renderCustomerCards(filtered);
+}
+
+// ── Customer modal ──
+function openCustomerModal(customer) {
+  const modal = document.getElementById('customer-modal');
+  modal.innerHTML = `
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeCustomerModal()">×</button>
+      <div class="customer-modal-header">
+        <div class="customer-modal-company">${customer.company}</div>
+        <span class="customer-modal-pricing-badge">${customer.pricing}</span>
+      </div>
+      <div class="customer-info-grid">
+        <div class="customer-info-item">
+          <div class="customer-info-label">Yhteyshenkilö</div>
+          <div class="customer-info-value">${customer.contact}</div>
+        </div>
+        <div class="customer-info-item">
+          <div class="customer-info-label">Puhelinnumero</div>
+          <div class="customer-info-value">${customer.phone}</div>
+        </div>
+        <div class="customer-info-item">
+          <div class="customer-info-label">Sähköposti</div>
+          <div class="customer-info-value">${customer.email}</div>
+        </div>
+        <div class="customer-info-item">
+          <div class="customer-info-label">Sovittu hinnasto</div>
+          <div class="customer-info-value">${customer.pricing}</div>
+        </div>
+      </div>
+      <div class="modal-label">Muistiinpanot</div>
+      <div class="customer-notes-box">${customer.notes}</div>
+    </div>
+  `;
+  modal.style.display = 'flex';
+  modal.onclick = (e) => { if (e.target === modal) closeCustomerModal(); };
+}
+
+function closeCustomerModal() {
+  document.getElementById('customer-modal').style.display = 'none';
+}
+
+// ── Init ──
+renderKanban();
+renderCustomers();
+</script>
+
+</body>
+</html>
