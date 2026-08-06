@@ -50,6 +50,7 @@
       max-width: 560px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative;
     }
     .modal-box.wide { max-width: 700px; }
+    .modal-box.archive-box { max-width: 680px; }
     .modal-close {
       position: absolute; top: 16px; right: 20px; font-size: 22px;
       cursor: pointer; color: #888; line-height: 1; background: none; border: none;
@@ -58,7 +59,7 @@
 
     /* ── Kanban toolbar ── */
     .kanban-toolbar {
-      display: flex; align-items: center; justify-content: flex-end; padding: 16px 24px 0;
+      display: flex; align-items: center; justify-content: flex-end; padding: 16px 24px 0; gap: 10px;
     }
     .btn-primary {
       display: flex; align-items: center; gap: 8px;
@@ -67,6 +68,19 @@
       border: none; cursor: pointer; transition: background 0.15s;
     }
     .btn-primary:hover { background: #1a4a78; }
+    .btn-secondary {
+      display: flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--navy); font-family: 'Sora', sans-serif;
+      font-weight: 600; font-size: 13px; padding: 9px 18px; border-radius: 8px;
+      border: 1.5px solid rgba(20,55,90,0.3); cursor: pointer; transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-secondary:hover { border-color: var(--navy); }
+    .btn-danger {
+      padding: 11px 20px; background: transparent; color: #cc3333; font-family: 'Sora', sans-serif;
+      font-weight: 600; font-size: 14px; border: 1.5px solid #cc3333; border-radius: 8px;
+      cursor: pointer; transition: background 0.15s, color 0.15s;
+    }
+    .btn-danger:hover { background: #cc3333; color: var(--white); }
     #file-input { display: none; }
     #customer-file-input { display: none; }
 
@@ -124,7 +138,7 @@
     }
     .form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--coral); }
     .form-textarea { resize: vertical; min-height: 70px; line-height: 1.5; }
-    .form-actions { display: flex; gap: 10px; margin-top: 20px; }
+    .form-actions { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
     .form-submit { flex: 1; padding: 11px; background: var(--navy); color: var(--white); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 14px; border: none; border-radius: 8px; cursor: pointer; transition: background 0.15s; }
     .form-submit:hover { background: #1a4a78; }
     .form-cancel { padding: 11px 20px; background: transparent; color: #888; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 14px; border: 1.5px solid #ddd; border-radius: 8px; cursor: pointer; transition: border-color 0.15s, color 0.15s; }
@@ -149,16 +163,31 @@
     }
     .modal-stage-select:focus { outline: 2px solid var(--coral); }
 
+    /* ── Archive list ── */
+    .archive-list { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; max-height: 60vh; overflow-y: auto; }
+    .archive-item {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 12px 14px; background: var(--bg-light); border-radius: 8px;
+    }
+    .archive-item-info { flex: 1; }
+    .archive-item-company { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 13px; color: var(--navy); }
+    .archive-item-meta { font-size: 12px; color: #888; margin-top: 2px; }
+    .archive-empty { text-align: center; color: #aaa; padding: 32px; font-size: 14px; }
+    .btn-restore {
+      font-size: 12px; font-weight: 600; font-family: 'Sora', sans-serif;
+      padding: 5px 12px; border: 1.5px solid var(--navy); border-radius: 6px;
+      background: transparent; color: var(--navy); cursor: pointer; white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-restore:hover { background: var(--navy); color: var(--white); }
+
     /* ── Asiakkaat view ── */
     .customers-page { padding: 24px; }
-
     .customers-toolbar {
       display: flex; align-items: center; justify-content: space-between;
       margin-bottom: 16px; gap: 16px; flex-wrap: wrap;
     }
-    .customers-filters {
-      display: flex; align-items: center; gap: 10px; flex-wrap: wrap; flex: 1;
-    }
+    .customers-filters { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; flex: 1; }
     .customers-search {
       padding: 9px 14px; border: 1.5px solid #ddd; border-radius: 8px;
       font-family: 'Inter', sans-serif; font-size: 13px; color: var(--navy);
@@ -188,14 +217,12 @@
       text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
     }
     .customers-table tbody tr {
-      border-bottom: 1px solid var(--bg-light); cursor: pointer;
-      transition: background 0.12s;
+      border-bottom: 1px solid var(--bg-light); cursor: pointer; transition: background 0.12s;
     }
     .customers-table tbody tr:last-child { border-bottom: none; }
     .customers-table tbody tr:hover { background: rgba(20,55,90,0.04); }
     .customers-table td { padding: 12px 16px; font-size: 13px; color: var(--navy); vertical-align: middle; }
     .customers-table td.company-cell { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 14px; }
-    .customers-table td.company-cell:hover { text-decoration: underline; }
     .customers-table td.muted { color: #888; }
     .customers-empty-row td { padding: 40px; text-align: center; color: #aaa; font-size: 14px; }
     .pricing-badge {
@@ -236,6 +263,7 @@
 <div id="card-modal" class="modal-overlay" style="display:none"></div>
 <div id="add-card-modal" class="modal-overlay" style="display:none"></div>
 <div id="customer-detail-modal" class="modal-overlay" style="display:none"></div>
+<div id="archive-modal" class="modal-overlay" style="display:none"></div>
 <div class="toast" id="toast"></div>
 <input type="file" id="file-input" accept=".csv,.xlsx,.xls">
 <input type="file" id="customer-file-input" accept=".csv,.xlsx,.xls">
@@ -245,33 +273,34 @@ const TODAY = '2026-08-06';
 const INDUSTRIES = ['Kaikki toimialat','Ravintola-ala','Majoituspalvelut','Kiinteistöpalvelut','Koulutus','Terveys & hyvinvointi','Siivouspalvelut','Toimistopalvelut','Julkinen sektori','Muu'];
 
 const STAGES = [
-  { id: 'prospektit',      label: 'Prospektit' },
-  { id: 'liidit',          label: 'Liidit' },
-  { id: 'intro',           label: 'Intro palaveri' },
-  { id: 'tarjous',         label: 'Tarjous lähetetty' },
-  { id: 'asiakaspalvelu',  label: 'Asiakaspalvelu &amp; Onboarding' },
+  { id: 'liidi',        label: 'Liidi' },
+  { id: 'kartoitus',    label: 'Kartoitus' },
+  { id: 'tarjous',      label: 'Tarjous' },
+  { id: 'neuvottelu',   label: 'Neuvottelu' },
+  { id: 'kayttoonotto', label: 'Käyttöönotto' },
 ];
 
 const DATA = {
   leads: [
-    { id:1,  stage:'prospektit',     tag:'UUSI asiakas', company:'Hotelli Kauniala Oy',               ytunnus:'1234567-8', contact:'Juhani Virtanen',   title:'Toimitusjohtaja',    phone:'+358 40 123 4567', email:'juhani.virtanen@kauniala.fi',        deal:18000, contactDate:'',           nextContact:'2026-08-05', memo:'Löydetty verkosta, ei kontaktoitu vielä. Hotelli noin 50 huonetta, paljon liinavaatteita.' },
-    { id:2,  stage:'prospektit',     tag:'UUSI asiakas', company:'Tampereen Urheilukeskus Oy',        ytunnus:'2345678-9', contact:'Minna Korhonen',    title:'Hankintapäällikkö', phone:'+358 44 234 5678', email:'minna.korhonen@urheilukeskus.fi',    deal:24000, contactDate:'',           nextContact:'2026-08-15', memo:'Potentiaalinen asiakas urheilutekstiileille. Suositeltu verkoston kautta.' },
-    { id:3,  stage:'prospektit',     tag:'UUSI asiakas', company:'Rakennus Leinonen Oy',              ytunnus:'3456789-0', contact:'Pekka Leinonen',    title:'Toimitusjohtaja',    phone:'+358 50 345 6789', email:'pekka@rakennusleinonen.fi',          deal:9600,  contactDate:'',           nextContact:'2026-08-12', memo:'Rakennusyhtiö ~30 työntekijää. Tarvitsevat työvaatteiden pesua.' },
-    { id:4,  stage:'prospektit',     tag:'VANHA asiakas',company:'Lähipalvelut Mäkinen Oy',           ytunnus:'4567890-1', contact:'Hanna Mäkinen',     title:'Toimitusjohtaja',    phone:'+358 41 456 7890', email:'hanna@lahipalvelutmakinen.fi',       deal:6000,  contactDate:'',           nextContact:'2026-08-03', memo:'Pieni siivousyritys, kiinnostunut yritysasiakkuudesta. Soitettava kiireesti.' },
-    { id:5,  stage:'liidit',         tag:'UUSI asiakas', company:'Ravintola Kultainen Porsas Oy',     ytunnus:'5678901-2', contact:'Timo Rantanen',     title:'Ravintolapäällikkö', phone:'+358 40 567 8901', email:'timo.rantanen@kultainenporsas.fi',   deal:12000, contactDate:'2026-08-02', nextContact:'2026-08-14', memo:'Soitettu 2.8., kiinnostunut. Haluaa tarjouksen liinavaatteille ja uniformuille.' },
-    { id:6,  stage:'liidit',         tag:'UUSI asiakas', company:'Toimisto Aaltonen Oy',              ytunnus:'6789012-3', contact:'Kirsi Aaltonen',    title:'Toimistopäällikkö', phone:'+358 44 678 9012', email:'kirsi.aaltonen@aaltonen.fi',         deal:7200,  contactDate:'2026-07-30', nextContact:'2026-08-20', memo:'Sähköpostilla yhteys otettu, vastaavat ensi viikolla.' },
-    { id:7,  stage:'liidit',         tag:'UUSI asiakas', company:'Pelastuslaitos Pirkanmaa',          ytunnus:'7890123-4', contact:'Ari Heikkinen',     title:'Hankintapäällikkö', phone:'+358 50 789 0123', email:'ari.heikkinen@pelastuslaitos.fi',     deal:36000, contactDate:'2026-07-28', nextContact:'2026-08-22', memo:'Julkinen sektori, vaatii tarjouspyyntömenettelyn. Suuri potentiaali.' },
-    { id:8,  stage:'liidit',         tag:'VANHA asiakas',company:'Koulutuspalvelut Ylöjärvi',         ytunnus:'8901234-5', contact:'Seija Lähteenmäki', title:'Palvelupäällikkö',  phone:'+358 41 890 1234', email:'seija.lahteenmaki@kouluylojärvi.fi', deal:8400,  contactDate:'2026-08-01', nextContact:'2026-08-18', memo:'Koulu haluaa pesua lounasliinoille. Kontaktoitu messuilla elokuussa.' },
-    { id:9,  stage:'intro',          tag:'UUSI asiakas', company:'Siivouspalvelu Puhtola Oy',         ytunnus:'9012345-6', contact:'Risto Puhtola',     title:'Toimitusjohtaja',    phone:'+358 40 901 2345', email:'risto@puhtola.fi',                   deal:15600, contactDate:'2026-08-05', nextContact:'2026-08-09', memo:'Tapaaminen pidetty 5.8. Erittäin kiinnostunut. Odottaa tarjousta ensi viikolla.' },
-    { id:10, stage:'intro',          tag:'VANHA asiakas',company:'Majoituspalvelut Näsijärvi Oy',     ytunnus:'0123456-7', contact:'Leena Järvinen',    title:'Kiinteistöpäällikkö',phone:'+358 44 012 3456', email:'leena.jarvinen@nasijärvi.fi',        deal:21600, contactDate:'2026-08-07', nextContact:'2026-08-13', memo:'Intro palaveri 7.8. Tyytyväinen palvelukuvaukseen, pyysivät referenssejä.' },
-    { id:11, stage:'intro',          tag:'UUSI asiakas', company:'Fysioterapia Salminen',             ytunnus:'1230987-6', contact:'Tuulia Salminen',   title:'Toimitusjohtaja',    phone:'+358 50 123 4560', email:'tuulia@fterapiasalminen.fi',          deal:9600,  contactDate:'2026-08-04', nextContact:'2026-08-18', memo:'Pieni klinikka, palaveri sovittu 14.8. Tarvitsevat hoitoliinojen pesua.' },
-    { id:12, stage:'tarjous',        tag:'UUSI asiakas', company:'Pirkanmaan Hyvinvointipalvelut Oy', ytunnus:'2341098-7', contact:'Olli Hämäläinen',  title:'Talouspäällikkö',   phone:'+358 40 234 5671', email:'olli.hamalainen@phvp.fi',            deal:48000, contactDate:'2026-08-01', nextContact:'2026-08-04', memo:'Tarjous lähetetty 1.8., odottaa päätöstä. Suurin potentiaaliasiakas tällä hetkellä.' },
-    { id:13, stage:'tarjous',        tag:'VANHA asiakas',company:'Hotelli Torni Tampere Oy',          ytunnus:'3452109-8', contact:'Maria Nieminen',    title:'Hankintapäällikkö', phone:'+358 44 345 6782', email:'maria.nieminen@hotelltorni.fi',       deal:30000, contactDate:'2026-08-04', nextContact:'2026-08-16', memo:'Tarjous 4.8. Neuvotellaan hinnasta, kilpailija myös mukana.' },
-    { id:14, stage:'tarjous',        tag:'UUSI asiakas', company:'Catering Hakala Oy',                ytunnus:'4563210-9', contact:'Ville Hakala',      title:'Toimitusjohtaja',    phone:'+358 50 456 7893', email:'ville.hakala@cateringhakala.fi',      deal:10800, contactDate:'2026-08-06', nextContact:'2026-08-13', memo:'Tarjous lähetetty 6.8. Odotetaan vastausta viikon sisällä.' },
-    { id:15, stage:'asiakaspalvelu', tag:'VANHA asiakas',company:'Tampereen Ammattiopisto TAO',       ytunnus:'5674321-0', contact:'Päivi Kuusisto',    title:'Hankintapäällikkö', phone:'+358 40 567 8904', email:'paivi.kuusisto@tao.fi',               deal:16800, contactDate:'2026-07-28', nextContact:'2026-09-01', memo:'Sopimus allekirjoitettu 28.7. Aloitetaan syyskuussa. Aikataulutettu.' },
-    { id:16, stage:'asiakaspalvelu', tag:'VANHA asiakas',company:'Kiinteistöpalvelut Rajala Oy',      ytunnus:'6785432-1', contact:'Juha Rajala',       title:'Toimitusjohtaja',    phone:'+358 44 678 9015', email:'juha.rajala@rajalapalvelut.fi',       deal:13200, contactDate:'2026-08-01', nextContact:'2026-08-25', memo:'Onboarding käynnissä. Ensimmäinen nouto sovittu 19.8.' },
-    { id:17, stage:'asiakaspalvelu', tag:'UUSI asiakas', company:'Ravintola Aleksi Oy',               ytunnus:'7896543-2', contact:'Paula Aleksi',      title:'Ravintolapäällikkö', phone:'+358 50 789 0126', email:'paula@ravintolaaeksi.fi',             deal:9600,  contactDate:'2026-08-04', nextContact:'2026-08-28', memo:'Uusi asiakas 4.8. Toimituspäivät sovittu — tiistaisin ja perjantaisin.' },
+    { id:1,  stage:'liidi',        tag:'UUSI asiakas', company:'Hotelli Kauniala Oy',               ytunnus:'1234567-8', contact:'Juhani Virtanen',   title:'Toimitusjohtaja',    phone:'+358 40 123 4567', email:'juhani.virtanen@kauniala.fi',        deal:18000, contactDate:'',           nextContact:'2026-08-05', memo:'Löydetty verkosta, ei kontaktoitu vielä. Hotelli noin 50 huonetta, paljon liinavaatteita.' },
+    { id:2,  stage:'liidi',        tag:'UUSI asiakas', company:'Tampereen Urheilukeskus Oy',        ytunnus:'2345678-9', contact:'Minna Korhonen',    title:'Hankintapäällikkö', phone:'+358 44 234 5678', email:'minna.korhonen@urheilukeskus.fi',    deal:24000, contactDate:'',           nextContact:'2026-08-15', memo:'Potentiaalinen asiakas urheilutekstiileille. Suositeltu verkoston kautta.' },
+    { id:3,  stage:'liidi',        tag:'UUSI asiakas', company:'Rakennus Leinonen Oy',              ytunnus:'3456789-0', contact:'Pekka Leinonen',    title:'Toimitusjohtaja',    phone:'+358 50 345 6789', email:'pekka@rakennusleinonen.fi',          deal:9600,  contactDate:'',           nextContact:'2026-08-12', memo:'Rakennusyhtiö ~30 työntekijää. Tarvitsevat työvaatteiden pesua.' },
+    { id:4,  stage:'liidi',        tag:'VANHA asiakas',company:'Lähipalvelut Mäkinen Oy',           ytunnus:'4567890-1', contact:'Hanna Mäkinen',     title:'Toimitusjohtaja',    phone:'+358 41 456 7890', email:'hanna@lahipalvelutmakinen.fi',       deal:6000,  contactDate:'',           nextContact:'2026-08-03', memo:'Pieni siivousyritys, kiinnostunut yritysasiakkuudesta. Soitettava kiireesti.' },
+    { id:5,  stage:'liidi',        tag:'UUSI asiakas', company:'Ravintola Kultainen Porsas Oy',     ytunnus:'5678901-2', contact:'Timo Rantanen',     title:'Ravintolapäällikkö', phone:'+358 40 567 8901', email:'timo.rantanen@kultainenporsas.fi',   deal:12000, contactDate:'2026-08-02', nextContact:'2026-08-14', memo:'Soitettu 2.8., kiinnostunut. Haluaa tarjouksen liinavaatteille ja uniformuille.' },
+    { id:6,  stage:'kartoitus',    tag:'UUSI asiakas', company:'Toimisto Aaltonen Oy',              ytunnus:'6789012-3', contact:'Kirsi Aaltonen',    title:'Toimistopäällikkö', phone:'+358 44 678 9012', email:'kirsi.aaltonen@aaltonen.fi',         deal:7200,  contactDate:'2026-07-30', nextContact:'2026-08-20', memo:'Sähköpostilla yhteys otettu. Tarve kartoitettu — toimistotekstiilit 2x/kk.' },
+    { id:7,  stage:'kartoitus',    tag:'UUSI asiakas', company:'Pelastuslaitos Pirkanmaa',          ytunnus:'7890123-4', contact:'Ari Heikkinen',     title:'Hankintapäällikkö', phone:'+358 50 789 0123', email:'ari.heikkinen@pelastuslaitos.fi',     deal:36000, contactDate:'2026-07-28', nextContact:'2026-08-22', memo:'Julkinen sektori, vaatii tarjouspyyntömenettelyn. Suuri potentiaali.' },
+    { id:8,  stage:'kartoitus',    tag:'VANHA asiakas',company:'Koulutuspalvelut Ylöjärvi',         ytunnus:'8901234-5', contact:'Seija Lähteenmäki', title:'Palvelupäällikkö',  phone:'+358 41 890 1234', email:'seija.lahteenmaki@kouluylojärvi.fi', deal:8400,  contactDate:'2026-08-01', nextContact:'2026-08-18', memo:'Koulu haluaa pesua lounasliinoille. Kontaktoitu messuilla elokuussa.' },
+    { id:9,  stage:'tarjous',      tag:'UUSI asiakas', company:'Siivouspalvelu Puhtola Oy',         ytunnus:'9012345-6', contact:'Risto Puhtola',     title:'Toimitusjohtaja',    phone:'+358 40 901 2345', email:'risto@puhtola.fi',                   deal:15600, contactDate:'2026-08-05', nextContact:'2026-08-09', memo:'Tarjous lähetetty 5.8. Erittäin kiinnostunut. Odottaa vastausta ensi viikolla.' },
+    { id:10, stage:'tarjous',      tag:'VANHA asiakas',company:'Majoituspalvelut Näsijärvi Oy',     ytunnus:'0123456-7', contact:'Leena Järvinen',    title:'Kiinteistöpäällikkö',phone:'+358 44 012 3456', email:'leena.jarvinen@nasijärvi.fi',        deal:21600, contactDate:'2026-08-07', nextContact:'2026-08-13', memo:'Palaveri 7.8. Tyytyväinen palvelukuvaukseen, pyysivät referenssejä.' },
+    { id:11, stage:'tarjous',      tag:'UUSI asiakas', company:'Fysioterapia Salminen',             ytunnus:'1230987-6', contact:'Tuulia Salminen',   title:'Toimitusjohtaja',    phone:'+358 50 123 4560', email:'tuulia@fterapiasalminen.fi',          deal:9600,  contactDate:'2026-08-04', nextContact:'2026-08-18', memo:'Tarjous lähetetty 6.8. Hoitoliinoja ja pyyheliinat.' },
+    { id:12, stage:'neuvottelu',   tag:'UUSI asiakas', company:'Pirkanmaan Hyvinvointipalvelut Oy', ytunnus:'2341098-7', contact:'Olli Hämäläinen',  title:'Talouspäällikkö',   phone:'+358 40 234 5671', email:'olli.hamalainen@phvp.fi',            deal:48000, contactDate:'2026-08-01', nextContact:'2026-08-04', memo:'Neuvottelu hinnasta käynnissä. Suurin potentiaaliasiakas tällä hetkellä.' },
+    { id:13, stage:'neuvottelu',   tag:'VANHA asiakas',company:'Hotelli Torni Tampere Oy',          ytunnus:'3452109-8', contact:'Maria Nieminen',    title:'Hankintapäällikkö', phone:'+358 44 345 6782', email:'maria.nieminen@hotelltorni.fi',       deal:30000, contactDate:'2026-08-04', nextContact:'2026-08-16', memo:'Neuvotellaan hinnasta, kilpailija myös mukana. Päätetään viikolla 34.' },
+    { id:14, stage:'neuvottelu',   tag:'UUSI asiakas', company:'Catering Hakala Oy',                ytunnus:'4563210-9', contact:'Ville Hakala',      title:'Toimitusjohtaja',    phone:'+358 50 456 7893', email:'ville.hakala@cateringhakala.fi',      deal:10800, contactDate:'2026-08-06', nextContact:'2026-08-13', memo:'Tarjous hyväksytty periaatteessa, sopimusehdot auki.' },
+    { id:15, stage:'kayttoonotto', tag:'VANHA asiakas',company:'Tampereen Ammattiopisto TAO',       ytunnus:'5674321-0', contact:'Päivi Kuusisto',    title:'Hankintapäällikkö', phone:'+358 40 567 8904', email:'paivi.kuusisto@tao.fi',               deal:16800, contactDate:'2026-07-28', nextContact:'2026-09-01', memo:'Sopimus allekirjoitettu 28.7. Aloitetaan syyskuussa. Aikataulutettu.' },
+    { id:16, stage:'kayttoonotto', tag:'VANHA asiakas',company:'Kiinteistöpalvelut Rajala Oy',      ytunnus:'6785432-1', contact:'Juha Rajala',       title:'Toimitusjohtaja',    phone:'+358 44 678 9015', email:'juha.rajala@rajalapalvelut.fi',       deal:13200, contactDate:'2026-08-01', nextContact:'2026-08-25', memo:'Onboarding käynnissä. Ensimmäinen nouto sovittu 19.8.' },
+    { id:17, stage:'kayttoonotto', tag:'UUSI asiakas', company:'Ravintola Aleksi Oy',               ytunnus:'7896543-2', contact:'Paula Aleksi',      title:'Ravintolapäällikkö', phone:'+358 50 789 0126', email:'paula@ravintolaaeksi.fi',             deal:9600,  contactDate:'2026-08-04', nextContact:'2026-08-28', memo:'Uusi asiakas 4.8. Toimituspäivät sovittu — tiistaisin ja perjantaisin.' },
   ],
+  archivedLeads: [],
   customers: [
     { id:1,  company:'Tampereen Ammattiopisto TAO',   ytunnus:'5674321-0', industry:'Koulutus',           contact:'Päivi Kuusisto',  title:'Hankintapäällikkö', phone:'+358 40 567 8904', email:'paivi.kuusisto@tao.fi',           pricing:'Standardi 3x/kk — 1 400 €/kk', createdDate:'2025-09-01', notes:'Sopimus 3v, uusittu 2025-09. Erityistoimitus maanantaisin. Maksuaika 21 pv.' },
     { id:2,  company:'Kiinteistöpalvelut Rajala Oy',  ytunnus:'6785432-1', industry:'Kiinteistöpalvelut',  contact:'Juha Rajala',     title:'Toimitusjohtaja',   phone:'+358 44 678 9015', email:'juha.rajala@rajalapalvelut.fi',    pricing:'Perus 2x/kk — 550 €/kk',       createdDate:'2022-03-15', notes:'Pitkäaikainen asiakas vuodesta 2022. Maksuaika 30 pv. Toimitus tiistaisin.' },
@@ -293,7 +322,9 @@ function tagClass(tag) { return tag === 'UUSI asiakas' ? 'uusi' : 'vanha'; }
 function tagLabel(tag) { return tag === 'UUSI asiakas' ? 'NEW' : 'OLD'; }
 function leadById(id) { return DATA.leads.find(l => l.id === id); }
 function custById(id) { return DATA.customers.find(c => c.id === id); }
+function archivedById(id) { return DATA.archivedLeads.find(l => l.id === id); }
 function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+function stageLabel(id) { const s = STAGES.find(s => s.id === id); return s ? s.label : id; }
 
 function showView(name) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -314,11 +345,11 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
   tab.addEventListener('click', () => showView(tab.dataset.view));
 });
 
-// ── Sync lead → customers when moved to Asiakaspalvelu ──
+// ── Sync lead → customers when moved to Käyttöönotto ──
 function syncLeadToCustomers(lead) {
   const exists = DATA.customers.find(c => c.ytunnus && c.ytunnus === lead.ytunnus && lead.ytunnus)
                || DATA.customers.find(c => c.company.toLowerCase() === lead.company.toLowerCase());
-  if (exists) return; // already there
+  if (exists) return;
   DATA.customers.push({
     id: DATA._nextCustId++,
     company: lead.company,
@@ -361,12 +392,20 @@ function updateColRevenue(stageId) {
   if (el) el.textContent = 'Revenue estimate: ' + total.toLocaleString('fi-FI') + ' €';
 }
 
+function updateArchiveBtn() {
+  const btn = document.getElementById('archive-toggle-btn');
+  if (btn) btn.textContent = `Arkisto (${DATA.archivedLeads.length})`;
+}
+
 // ── Kanban ──
 function renderKanban() {
   const view = document.getElementById('view-kanban');
   const toolbar = document.createElement('div');
   toolbar.className = 'kanban-toolbar';
-  toolbar.innerHTML = `<button class="btn-primary" onclick="document.getElementById('file-input').click()">＋ Lataa asiakaslista</button>`;
+  toolbar.innerHTML = `
+    <button class="btn-secondary" id="archive-toggle-btn" onclick="openArchiveModal()">Arkisto (0)</button>
+    <button class="btn-primary" onclick="document.getElementById('file-input').click()">＋ Lataa asiakaslista</button>
+  `;
   view.appendChild(toolbar);
 
   const board = document.createElement('div');
@@ -401,7 +440,7 @@ function renderKanban() {
 function openCardModal(id) {
   const lead = leadById(id);
   const stageOptions = STAGES.map(s =>
-    `<option value="${s.id}" ${s.id === lead.stage ? 'selected' : ''}>${s.label.replace('&amp;','&')}</option>`
+    `<option value="${s.id}" ${s.id === lead.stage ? 'selected' : ''}>${s.label}</option>`
   ).join('');
   const overdue = isOverdue(lead.nextContact);
   const modal = document.getElementById('card-modal');
@@ -447,6 +486,7 @@ function openCardModal(id) {
       <div class="form-section-title">Muistiinpano</div>
       <div class="form-group"><textarea class="form-textarea" id="edit-memo" placeholder="Viimeisin keskustelun yhteenveto…">${esc(lead.memo||'')}</textarea></div>
       <div class="form-actions">
+        <button class="btn-danger" onclick="archiveCard(${id})">Arkistoi</button>
         <button class="form-cancel" onclick="closeCardModal()">Peruuta</button>
         <button class="form-submit" onclick="saveCard(${id})">Tallenna</button>
       </div>
@@ -488,13 +528,75 @@ function saveCard(id) {
   }
   updateColRevenue(newStage);
 
-  // Auto-sync to Asiakkaat when moved into Asiakaspalvelu
-  if (newStage === 'asiakaspalvelu' && oldStage !== 'asiakaspalvelu') {
+  // Auto-sync to Asiakkaat when moved into Käyttöönotto
+  if (newStage === 'kayttoonotto' && oldStage !== 'kayttoonotto') {
     syncLeadToCustomers(lead);
   }
 
   closeCardModal();
   showToast('Tallennettu: ' + lead.company);
+}
+
+// ── Archive ──
+function archiveCard(id) {
+  const lead = leadById(id);
+  if (!lead) return;
+  const oldStage = lead.stage;
+  lead.archivedDate = TODAY;
+  DATA.archivedLeads.push(lead);
+  DATA.leads = DATA.leads.filter(l => l.id !== id);
+  const card = document.querySelector(`.lead-card[data-id="${id}"]`);
+  if (card) card.remove();
+  updateColRevenue(oldStage);
+  updateArchiveBtn();
+  closeCardModal();
+  showToast(lead.company + ' arkistoitu');
+}
+
+function restoreCard(id) {
+  const lead = archivedById(id);
+  if (!lead) return;
+  delete lead.archivedDate;
+  DATA.archivedLeads = DATA.archivedLeads.filter(l => l.id !== id);
+  DATA.leads.push(lead);
+  document.getElementById('col-' + lead.stage).appendChild(buildCard(lead));
+  updateColRevenue(lead.stage);
+  updateArchiveBtn();
+  renderArchiveList();
+  showToast(lead.company + ' palautettu vaiheeseen: ' + stageLabel(lead.stage));
+}
+
+function openArchiveModal() {
+  const modal = document.getElementById('archive-modal');
+  modal.style.display = 'flex';
+  modal.onclick = (e) => { if (e.target === modal) closeArchiveModal(); };
+  renderArchiveList();
+}
+
+function closeArchiveModal() { document.getElementById('archive-modal').style.display = 'none'; }
+
+function renderArchiveList() {
+  const modal = document.getElementById('archive-modal');
+  const items = DATA.archivedLeads.length
+    ? DATA.archivedLeads.map(l => `
+        <div class="archive-item">
+          <div class="archive-item-info">
+            <div class="archive-item-company">${l.company}</div>
+            <div class="archive-item-meta">${stageLabel(l.stage)} · ${l.contact} · ${l.deal ? l.deal.toLocaleString('fi-FI') + ' €/v' : '—'}</div>
+          </div>
+          <button class="btn-restore" onclick="restoreCard(${l.id})">Palauta</button>
+        </div>
+      `).join('')
+    : '<div class="archive-empty">Arkisto on tyhjä.</div>';
+
+  modal.innerHTML = `
+    <div class="modal-box archive-box">
+      <button class="modal-close" onclick="closeArchiveModal()">×</button>
+      <h3 style="font-family:'Sora',sans-serif;font-size:16px;color:var(--navy);margin-bottom:4px">Arkisto</h3>
+      <p style="font-size:13px;color:#888;margin-bottom:0">Arkistoidut dealitkortit — palauta takaisin kanbannäkymään tarvittaessa.</p>
+      <div class="archive-list">${items}</div>
+    </div>
+  `;
 }
 
 // ── Add card modal ──
@@ -504,7 +606,7 @@ function openAddCardModal(stageId) {
   modal.innerHTML = `
     <div class="modal-box">
       <button class="modal-close" onclick="closeAddCardModal()">×</button>
-      <h3 style="font-family:'Sora',sans-serif;font-size:16px;color:var(--navy);margin-bottom:16px">Lisää kortti — ${stage.label.replace('&amp;','&')}</h3>
+      <h3 style="font-family:'Sora',sans-serif;font-size:16px;color:var(--navy);margin-bottom:16px">Lisää kortti — ${stage.label}</h3>
       <form onsubmit="submitAddCard(event,'${stageId}')">
         <div class="form-section-title">Yritystiedot</div>
         <div class="form-row">
@@ -561,7 +663,7 @@ function submitAddCard(e, stageId) {
   DATA.leads.push(lead);
   document.getElementById('col-' + stageId).appendChild(buildCard(lead));
   updateColRevenue(stageId);
-  if (stageId === 'asiakaspalvelu') syncLeadToCustomers(lead);
+  if (stageId === 'kayttoonotto') syncLeadToCustomers(lead);
   closeAddCardModal();
   showToast('Kortti lisätty: ' + lead.company);
 }
@@ -580,14 +682,14 @@ function importLeadsFromRows(rows) {
   const getC = (i, fb) => i >= 0 ? i : fb;
   const dataRows = rows.slice(1).filter(r => r[getC(cC,0)]);
   if (!dataRows.length) { showToast('Ei tuotavia rivejä löydy.'); return; }
-  const container = document.getElementById('col-prospektit');
+  const container = document.getElementById('col-liidi');
   dataRows.forEach(row => {
-    const lead = { id: DATA._nextId++, stage:'prospektit', tag:'UUSI asiakas', company: row[getC(cC,0)]||'—', contact: row[getC(nC,1)]||'—', phone: row[getC(pC,2)]||'—', email:'', title:'', ytunnus:'', deal:0, contactDate:'', nextContact:'2026-08-13', memo:'Tuotu asiakaslistasta' };
+    const lead = { id: DATA._nextId++, stage:'liidi', tag:'UUSI asiakas', company: row[getC(cC,0)]||'—', contact: row[getC(nC,1)]||'—', phone: row[getC(pC,2)]||'—', email:'', title:'', ytunnus:'', deal:0, contactDate:'', nextContact:'2026-08-13', memo:'Tuotu asiakaslistasta' };
     DATA.leads.push(lead);
     container.appendChild(buildCard(lead));
   });
-  updateColRevenue('prospektit');
-  showToast(dataRows.length + ' kontaktia tuotu Prospektit-sarakkeeseen');
+  updateColRevenue('liidi');
+  showToast(dataRows.length + ' kontaktia tuotu Liidi-sarakkeeseen');
 }
 
 // ── Asiakkaat view ──
