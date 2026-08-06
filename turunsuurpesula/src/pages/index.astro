@@ -13,18 +13,24 @@ const customerTypes = [
   {
     href: '/hotellit',
     label: 'Hotellit',
+    img: '/photo-hotel.webp',
+    imgAlt: 'Puhtaita liinavaatteita hotelleille',
     vatExempt: false,
     desc: 'Nopea liinojen kierto — lakanat ja pyyhkeet takaisin käyttöön ajoissa. Liinavaatevuokraus pitkäaikaisasiakkaille.',
   },
   {
     href: '/vanhustenhoito',
     label: 'Vanhustenhoito',
+    img: '/photo-towels.webp',
+    imgAlt: 'Tekstiilihuolto hoivakodeille',
     vatExempt: true,
     desc: 'Hygieniastandardit täytetty. Asukkaiden vaatteet kirjataan ja palautetaan oikealle henkilölle. ALV 0 % — merkittävä kustannussäästö.',
   },
   {
     href: '/hatapesut',
     label: 'Hätäpesut ja vahinkotapaukset',
+    img: '/photo-baskets.webp',
+    imgAlt: 'Hätäpesupalvelu vahingoille',
     vatExempt: false,
     desc: '24/7-päivystys vesi-, palo- ja savuvahingoille. Yhteistyö vakuutusyhtiöiden ja vahinkosaneerausyritysten kanssa.',
   },
@@ -45,38 +51,38 @@ const faqs = [
 ---
 <Layout title="Turun Suurpesula — Teollinen tekstiilihuolto yrityksille" description="Turun Suurpesula huoltaa hotellien, hoivakotien ja vahinkosaneerauksen tekstiilit teollisella kapasiteetilla Turussa. Pyydä tarjous 24 tunnissa.">
 
-  <!-- HERO: split-screen with van photo -->
-  <section class="bg-[#14375A] overflow-hidden min-h-screen flex items-stretch">
+  <!-- HERO: white layout with van photo (like Melers.fi) -->
+  <section class="bg-white overflow-hidden min-h-screen flex items-stretch">
     <div class="w-full grid md:grid-cols-[45%_55%]">
       <div class="flex items-center px-8 md:px-16 py-20 md:py-0">
         <div class="max-w-lg">
           <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-6">B2B-tekstiilihuolto · Turku</p>
-          <h1 class="font-merriweather font-normal text-white text-4xl md:text-5xl leading-snug mb-6">
+          <h1 class="font-merriweather font-normal text-[#14375A] text-4xl md:text-5xl leading-snug mb-6">
             Tekstiilihuolto —<br />
             <span class="text-[#FF8F7A]">sujuvasti ja luotettavasti</span>
           </h1>
-          <p class="font-inter text-white/65 text-base leading-relaxed mb-10">
+          <p class="font-inter text-[#14375A]/65 text-base leading-relaxed mb-10">
             Pesemme vuosittain yli 170 000 kg tekstiilejä hoivakodeille, hotelleille ja yrityksille. Yksi sopimus, nimetty palvelupäällikkö, ei häiriöitä arkeesi.
           </p>
           <div class="flex flex-wrap gap-4 mb-14">
             <a href="#yhteys" class="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-7 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors text-sm">Pyydä tarjous →</a>
-            <a href="#miten-toimii" class="inline-flex items-center gap-2 border border-white/30 text-white font-sora font-bold px-7 py-3.5 rounded-full hover:border-white/60 transition-colors text-sm">Miten se toimii?</a>
+            <a href="#miten-toimii" class="inline-flex items-center gap-2 border border-[#14375A]/30 text-[#14375A] font-sora font-bold px-7 py-3.5 rounded-full hover:border-[#14375A]/60 transition-colors text-sm">Miten se toimii?</a>
           </div>
-          <div class="grid grid-cols-2 gap-6 border-t border-white/10 pt-8">
+          <div class="grid grid-cols-2 gap-6 border-t border-[#14375A]/10 pt-8">
             <div>
               <div class="font-merriweather font-normal text-3xl text-[#FF8F7A] mb-1">170 000+</div>
-              <div class="font-inter text-white/50 text-xs leading-snug">kg tekstiilejä<br />vuodessa</div>
+              <div class="font-inter text-[#14375A]/50 text-xs leading-snug">kg tekstiilejä<br />vuodessa</div>
             </div>
             <div>
               <div class="font-merriweather font-normal text-3xl text-[#FF8F7A] mb-1">24 h</div>
-              <div class="font-inter text-white/50 text-xs leading-snug">tarjouksen<br />toimitusaika</div>
+              <div class="font-inter text-[#14375A]/50 text-xs leading-snug">tarjouksen<br />toimitusaika</div>
             </div>
           </div>
         </div>
       </div>
       <div class="hidden md:block relative min-h-screen">
         <img src="/photo-van-big.webp" alt="Turun Suurpesula — yrityskuljetus" class="absolute inset-0 w-full h-full object-cover object-center" />
-        <div class="absolute inset-0" style="background: linear-gradient(to right, #14375A 0%, #14375A 5%, transparent 40%)"></div>
+        <div class="absolute inset-0" style="background: linear-gradient(to right, #ffffff 0%, #ffffff 5%, transparent 40%)"></div>
       </div>
     </div>
   </section>
@@ -116,7 +122,7 @@ const faqs = [
     </div>
   </section>
 
-  <!-- CUSTOMER TYPES -->
+  <!-- CUSTOMER TYPES with images -->
   <section class="bg-white py-20">
     <div class="max-w-5xl mx-auto px-6">
       <div class="mb-12 text-center">
@@ -125,105 +131,25 @@ const faqs = [
       </div>
       <div class="grid md:grid-cols-3 gap-5">
         {customerTypes.map((c) => (
-          <a href={c.href} class="block bg-[#F1F2F4] rounded-2xl p-6 relative hover:bg-[#E9E4DF] transition-colors">
-            {c.vatExempt && (
-              <span class="absolute top-4 right-4 bg-[#14375A] text-white font-sora font-bold text-[10px] tracking-widest uppercase px-2.5 py-1 rounded-full">ALV 0 %</span>
-            )}
-            <div class="font-sora font-semibold text-[#14375A] text-base mb-2">{c.label}</div>
-            <div class="font-inter text-[#14375A]/65 text-sm leading-relaxed mb-4">{c.desc}</div>
-            <span class="font-sora font-bold text-[#FF8F7A] text-sm">Lue lisää →</span>
+          <a href={c.href} class="block bg-[#F1F2F4] rounded-2xl overflow-hidden hover:shadow-md transition-shadow group">
+            <div class="relative overflow-hidden h-44">
+              <img src={c.img} alt={c.imgAlt} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              {c.vatExempt && (
+                <span class="absolute top-3 right-3 bg-[#14375A] text-white font-sora font-bold text-[10px] tracking-widest uppercase px-2.5 py-1 rounded-full">ALV 0 %</span>
+              )}
+            </div>
+            <div class="p-6">
+              <div class="font-sora font-semibold text-[#14375A] text-base mb-2">{c.label}</div>
+              <div class="font-inter text-[#14375A]/65 text-sm leading-relaxed mb-4">{c.desc}</div>
+              <span class="font-sora font-bold text-[#FF8F7A] text-sm">Lue lisää →</span>
+            </div>
           </a>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- PROCESS + PALVELUPÄÄLLIKKÖ -->
-  <section id="miten-toimii" class="bg-[#F1F2F4] py-20">
-    <div class="max-w-4xl mx-auto px-6">
-      <div class="mb-12 text-center">
-        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Prosessi</p>
-        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl">Kolme askelta puhtaaseen ratkaisuun</h2>
-      </div>
-      <div class="grid md:grid-cols-3 gap-6 mb-8">
-        {steps.map((s) => (
-          <div class="bg-white rounded-2xl p-7">
-            <div class="font-merriweather font-normal text-6xl text-[#FF8F7A]/20 leading-none mb-4">{s.num}</div>
-            <div class="font-sora font-semibold text-[#14375A] text-lg mb-3">{s.title}</div>
-            <div class="font-inter text-[#14375A]/60 text-sm leading-relaxed">{s.desc}</div>
-          </div>
-        ))}
-      </div>
-      <div class="flex items-center gap-4 bg-white/60 rounded-2xl px-6 py-4 mb-8">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-[#FF8F7A] shrink-0">
-          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-          <polyline points="9 22 9 12 15 12 15 22"/>
-        </svg>
-        <p class="font-inter text-[#14375A]/65 text-sm">
-          Teollisuuslaitoksemme sijaitsee osoitteessa <span class="font-semibold text-[#14375A]">Telekatu 6, Turku</span> — kapasiteetti yli 170 000 kg vuodessa.
-        </p>
-      </div>
-      <div class="bg-white rounded-3xl overflow-hidden">
-        <div class="grid md:grid-cols-2">
-          <div class="p-8 flex flex-col justify-center gap-6">
-            <div class="flex items-center gap-4">
-              <img src="/photo-palvelujohtaja.webp" alt="Palvelupäällikkö" class="w-16 h-16 rounded-full object-cover object-top shrink-0" />
-              <div>
-                <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-1">Ota yhteyttä</p>
-                <p class="font-inter text-[#14375A]/70 text-sm leading-relaxed">Soita palvelupäällikölle suoraan tai varaa aika kalenterista.</p>
-              </div>
-            </div>
-            <a href="tel:0222321300" class="font-sora font-bold text-[#14375A] text-2xl hover:text-[#FF8F7A] transition-colors">02 2321 300</a>
-            <a href="#yhteys" class="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-7 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors text-sm w-fit">
-              Täytä lomake →
-            </a>
-          </div>
-          <div class="border-t md:border-t-0 md:border-l border-[#E9E4DF]">
-            <div class="px-6 pt-6 pb-2">
-              <p class="font-sora font-bold text-xs uppercase tracking-widest text-[#FF8F7A] mb-1">Varaa tapaaminen</p>
-              <p class="font-inter text-[#14375A]/60 text-sm">Valitse sinulle sopiva aika.</p>
-            </div>
-            <iframe
-              src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ14fXOqowBDfPHNey_5OQgSrmRjQjYI84HGqepJbs9BCIpRU9rp9u7PZ50LSc3TnnHgUshxJJQD?gv=true"
-              style="width: 100%; height: 420px; border: none"
-              title="Varaa tapaaminen"
-            ></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIAL -->
-  <section class="bg-[#14375A] py-20">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <div class="font-merriweather font-normal text-[#FF8F7A] text-6xl leading-none mb-6">&ldquo;</div>
-      <blockquote class="font-merriweather font-normal text-white text-2xl md:text-3xl leading-snug mb-8">
-        Luotettava kumppani jo vuosia. Tekstiilit aina ajallaan, ei yllätyksiä. Suosittelen kaikille hoivakodin johtajille.
-      </blockquote>
-      <p class="font-sora text-[#FF8F7A] font-bold text-sm tracking-wide">— Asiakas, Turku</p>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="bg-white py-20">
-    <div class="max-w-3xl mx-auto px-6">
-      <div class="mb-12 text-center">
-        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Usein kysyttyä</p>
-        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl">Kysymyksiä ja vastauksia</h2>
-      </div>
-      <div class="flex flex-col divide-y divide-[#E9E4DF]">
-        {faqs.map((f) => (
-          <div class="py-6">
-            <div class="font-sora font-bold text-[#14375A] text-base mb-2">{f.q}</div>
-            <div class="font-inter text-[#14375A]/65 text-sm leading-relaxed">{f.a}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT FORM + CALENDAR -->
+  <!-- CONTACT FORM + CALENDAR (moved up) -->
   <section id="yhteys" class="bg-[#FF8F7A] py-20">
     <div class="max-w-5xl mx-auto px-6">
       <div class="text-center mb-12">
@@ -263,6 +189,74 @@ const faqs = [
             title="Varaa tapaaminen"
           ></iframe>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS + PALVELUPÄÄLLIKKÖ -->
+  <section id="miten-toimii" class="bg-[#F1F2F4] py-20">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="mb-12 text-center">
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Prosessi</p>
+        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl">Kolme askelta puhtaaseen ratkaisuun</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6 mb-8">
+        {steps.map((s) => (
+          <div class="bg-white rounded-2xl p-7">
+            <div class="font-merriweather font-normal text-6xl text-[#FF8F7A]/20 leading-none mb-4">{s.num}</div>
+            <div class="font-sora font-semibold text-[#14375A] text-lg mb-3">{s.title}</div>
+            <div class="font-inter text-[#14375A]/60 text-sm leading-relaxed">{s.desc}</div>
+          </div>
+        ))}
+      </div>
+      <div class="flex items-center gap-4 bg-white/60 rounded-2xl px-6 py-4 mb-8">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-[#FF8F7A] shrink-0">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <p class="font-inter text-[#14375A]/65 text-sm">
+          Teollisuuslaitoksemme sijaitsee osoitteessa <span class="font-semibold text-[#14375A]">Telekatu 6, Turku</span> — kapasiteetti yli 170 000 kg vuodessa.
+        </p>
+      </div>
+      <div class="bg-white rounded-3xl p-8 flex flex-col md:flex-row items-center gap-6">
+        <img src="/photo-palvelujohtaja.webp" alt="Palvelupäällikkö" class="w-20 h-20 rounded-full object-cover object-top shrink-0" />
+        <div class="flex-1 text-center md:text-left">
+          <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-1">Nimetty palvelupäällikkö</p>
+          <p class="font-inter text-[#14375A]/70 text-sm leading-relaxed">Yksi yhteyshenkilö tuntee tilanteenne — ei jonoja, ei uudelleenselittämistä.</p>
+        </div>
+        <div class="flex flex-col gap-3 shrink-0">
+          <a href="tel:0222321300" class="font-sora font-bold text-[#14375A] text-xl hover:text-[#FF8F7A] transition-colors">02 2321 300</a>
+          <a href="#yhteys" class="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-6 py-3 rounded-full hover:bg-[#ff7a63] transition-colors text-sm">Täytä lomake →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="bg-[#14375A] py-20">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <div class="font-merriweather font-normal text-[#FF8F7A] text-6xl leading-none mb-6">&ldquo;</div>
+      <blockquote class="font-merriweather font-normal text-white text-2xl md:text-3xl leading-snug mb-8">
+        Luotettava kumppani jo vuosia. Tekstiilit aina ajallaan, ei yllätyksiä. Suosittelen kaikille hoivakodin johtajille.
+      </blockquote>
+      <p class="font-sora text-[#FF8F7A] font-bold text-sm tracking-wide">— Asiakas, Turku</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-white py-20">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="mb-12 text-center">
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Usein kysyttyä</p>
+        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl">Kysymyksiä ja vastauksia</h2>
+      </div>
+      <div class="flex flex-col divide-y divide-[#E9E4DF]">
+        {faqs.map((f) => (
+          <div class="py-6">
+            <div class="font-sora font-bold text-[#14375A] text-base mb-2">{f.q}</div>
+            <div class="font-inter text-[#14375A]/65 text-sm leading-relaxed">{f.a}</div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
