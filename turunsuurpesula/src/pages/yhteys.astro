@@ -7,48 +7,58 @@ import Layout from '../layouts/Layout.astro'
     <div class="max-w-3xl mx-auto px-6 text-center">
       <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-6">Yhteys</p>
       <h1 class="font-merriweather font-normal text-white text-4xl md:text-5xl leading-snug mb-6">Pyydä maksuton tarjous</h1>
-      <p class="font-inter text-white/65 text-base leading-relaxed">Täytä lomake tai soita suoraan — vastaamme 24 tunnissa.</p>
+      <p class="font-inter text-white/65 text-base leading-relaxed">Täytä lomake tai varaa aika kalenterista — palataan teille 24 tunnissa.</p>
     </div>
   </section>
 
-  <section class="bg-white py-20">
-    <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-10">
-
-      <div class="bg-[#F1F2F4] rounded-2xl p-8">
-        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-5">Tarjouspyyntö</p>
-        <div class="flex flex-col gap-4">
-          <input type="text" placeholder="Yrityksen nimi" class="font-inter text-[#14375A] placeholder-[#14375A]/40 bg-white border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
-          <select class="font-inter text-[#14375A] bg-white border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]">
-            <option value="">Toimiala</option>
-            <option value="hotellit">Hotelli</option>
-            <option value="vanhustenhoito">Hoivakoti / vanhustenhoito</option>
-            <option value="hatapesut">Vahinkotapaus / vakuutusyhtiö / vahinkosaneeraus</option>
-            <option value="muu">Muu</option>
-          </select>
-          <input type="email" placeholder="Sähköposti" class="font-inter text-[#14375A] placeholder-[#14375A]/40 bg-white border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
-          <input type="tel" placeholder="Puhelin" class="font-inter text-[#14375A] placeholder-[#14375A]/40 bg-white border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
-          <textarea rows="4" placeholder="Kerro tarpeestanne — volyymi, aikataulu, kiireellisyys..." class="font-inter text-[#14375A] placeholder-[#14375A]/40 bg-white border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A] resize-none"></textarea>
-          <button type="button" class="font-sora font-bold text-sm bg-[#FF8F7A] text-white px-6 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors mt-2">Lähetä tarjouspyyntö →</button>
+  <section class="bg-[#FF8F7A] py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-8 items-start">
+        <div class="bg-white rounded-2xl p-8 text-left">
+          <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-5">Tarjouspyyntö</p>
+          <div class="flex flex-col gap-4">
+            <input type="text" placeholder="Yrityksen nimi" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
+            <select class="font-inter text-[#14375A] bg-white border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]">
+              <option value="">Toimiala</option>
+              <option value="hotellit">Hotelli</option>
+              <option value="vanhustenhoito">Hoivakoti / vanhustenhoito</option>
+              <option value="hatapesut">Vahinkotapaus / vakuutusyhtiö / vahinkosaneeraus</option>
+              <option value="muu">Muu</option>
+            </select>
+            <input type="email" placeholder="Sähköposti" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
+            <input type="tel" placeholder="Puhelin" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
+            <textarea rows="4" placeholder="Kerro tarpeestanne — volyymi, toimiala, aikataulu, kiireellisyys..." class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A] resize-none"></textarea>
+            <button type="button" class="font-sora font-bold text-sm bg-[#FF8F7A] text-white px-6 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors mt-2">Lähetä tarjouspyyntö →</button>
+          </div>
+          <p class="font-inter text-[#14375A]/40 text-xs text-center mt-4">⏱ Vastaamme 24 tunnissa. Ei sitoumuksia.</p>
         </div>
-        <p class="font-inter text-[#14375A]/40 text-xs text-center mt-4">⏱ Vastaamme 24 tunnissa. Ei sitoumuksia.</p>
+
+        <div class="flex flex-col gap-6">
+          <div class="bg-white rounded-2xl overflow-hidden">
+            <div class="px-8 pt-8 pb-4">
+              <p class="font-sora font-bold text-xs uppercase tracking-widest text-[#FF8F7A] mb-1">Tai varaa tapaaminen</p>
+              <p class="font-inter text-[#14375A]/60 text-sm">Valitse sinulle sopiva aika suoraan kalenterista.</p>
+            </div>
+            <iframe
+              src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ14fXOqowBDfPHNey_5OQgSrmRjQjYI84HGqepJbs9BCIpRU9rp9u7PZ50LSc3TnnHgUshxJJQD?gv=true"
+              style="width: 100%; height: 480px; border: none"
+              title="Varaa tapaaminen"
+            ></iframe>
+          </div>
+
+          <div class="bg-[#14375A] rounded-2xl p-8 text-white">
+            <div class="flex items-center gap-4 mb-5">
+              <img src="/photo-palvelujohtaja.webp" alt="Palvelupäällikkö" class="w-14 h-14 rounded-full object-cover object-top shrink-0" />
+              <div>
+                <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-1">Soita suoraan</p>
+                <p class="font-inter text-white/60 text-sm">Hätäpesut: sama numero, 24/7.</p>
+              </div>
+            </div>
+            <a href="tel:0222321300" class="font-sora font-bold text-3xl hover:text-[#FF8F7A] transition-colors block mb-2">02 2321 300</a>
+            <p class="font-inter text-white/50 text-sm">Telekatu 6, 20360 Turku</p>
+          </div>
+        </div>
       </div>
-
-      <div class="flex flex-col gap-6">
-        <div class="bg-[#14375A] rounded-2xl p-8 text-white">
-          <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Soita suoraan</p>
-          <a href="tel:0222321300" class="font-sora font-bold text-3xl hover:text-[#FF8F7A] transition-colors block mb-2">02 2321 300</a>
-          <p class="font-inter text-white/50 text-sm">Hätäpesut ja vahinkotapaukset: sama numero, 24/7-päivystys.</p>
-        </div>
-        <div class="bg-[#F1F2F4] rounded-2xl p-8">
-          <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Toimipiste</p>
-          <p class="font-inter text-[#14375A]/70 text-sm leading-relaxed">Telekatu 6<br />20360 Turku</p>
-        </div>
-        <div class="bg-[#F1F2F4] rounded-2xl p-8">
-          <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Tapaamisen varaaminen</p>
-          <p class="font-inter text-[#14375A]/60 text-sm leading-relaxed">Suora kalenterivaraus lisätään pian. Toistaiseksi soita palvelupäällikölle tai täytä lomake — sovitaan aika teille sopivasti.</p>
-        </div>
-      </div>
-
     </div>
   </section>
 
