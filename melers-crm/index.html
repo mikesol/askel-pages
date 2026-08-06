@@ -264,6 +264,7 @@
 <div id="add-card-modal" class="modal-overlay" style="display:none"></div>
 <div id="customer-detail-modal" class="modal-overlay" style="display:none"></div>
 <div id="archive-modal" class="modal-overlay" style="display:none"></div>
+<div id="add-customer-modal" class="modal-overlay" style="display:none"></div>
 <div class="toast" id="toast"></div>
 <input type="file" id="file-input" accept=".csv,.xlsx,.xls">
 <input type="file" id="customer-file-input" accept=".csv,.xlsx,.xls">
@@ -319,7 +320,7 @@ const DATA = {
 function isOverdue(d) { return d && d < TODAY; }
 function formatDate(d) { if (!d) return '—'; const [y,m,dd]=d.split('-'); return `${dd}.${m}.${y}`; }
 function tagClass(tag) { return tag === 'UUSI asiakas' ? 'uusi' : 'vanha'; }
-function tagLabel(tag) { return tag === 'UUSI asiakas' ? 'NEW' : 'OLD'; }
+function tagLabel(tag) { return tag === 'UUSI asiakas' ? 'UUSI ASIAKAS' : 'VANHA ASIAKAS'; }
 function leadById(id) { return DATA.leads.find(l => l.id === id); }
 function custById(id) { return DATA.customers.find(c => c.id === id); }
 function archivedById(id) { return DATA.archivedLeads.find(l => l.id === id); }
@@ -403,6 +404,7 @@ function renderKanban() {
   const toolbar = document.createElement('div');
   toolbar.className = 'kanban-toolbar';
   toolbar.innerHTML = `
+    <div style="background:var(--navy);border-radius:8px;padding:5px 14px;margin-right:auto;flex-shrink:0"><img src="logo-nav.webp" alt="Melers" style="height:22px;display:block"></div>
     <button class="btn-secondary" id="archive-toggle-btn" onclick="openArchiveModal()">Arkisto (0)</button>
     <button class="btn-primary" onclick="document.getElementById('file-input').click()">＋ Lataa asiakaslista</button>
   `;
@@ -706,7 +708,10 @@ function renderCustomers() {
           <span style="font-size:12px;color:#888">—</span>
           <input class="filter-date" id="cust-date-to" type="date" title="Asiakas saakka" onchange="refreshCustomerTable()">
         </div>
-        <button class="btn-primary" onclick="document.getElementById('customer-file-input').click()">＋ Lisää asiakaslista</button>
+        <div style="display:flex;gap:8px">
+          <button class="btn-secondary" onclick="openAddCustomerModal()">＋ Lisää asiakas</button>
+          <button class="btn-primary" onclick="document.getElementById('customer-file-input').click()">＋ Lisää asiakaslista</button>
+        </div>
       </div>
       <div class="customers-table-wrap">
         <table class="customers-table">
@@ -875,6 +880,71 @@ function parseFile(file, callback) {
   } else {
     showToast('Tuetut tiedostotyypit: CSV, XLSX, XLS');
   }
+}
+
+// ── Add customer manually ──
+function openAddCustomerModal() {
+  const industryOptions = INDUSTRIES.slice(1).map(i => `<option value="${i}">${i}</option>`).join('');
+  const modal = document.getElementById('add-customer-modal');
+  modal.innerHTML = `
+    <div class="modal-box wide">
+      <button class="modal-close" onclick="closeAddCustomerModal()">×</button>
+      <h3 style="font-family:'Sora',sans-serif;font-size:16px;color:var(--navy);margin-bottom:16px">Lisää asiakas</h3>
+      <form onsubmit="submitAddCustomer(event)">
+        <div class="form-section-title">Yritystiedot</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Yrityksen nimi *</label><input class="form-input" id="nc-company" type="text" required placeholder="Yrityksen nimi"></div>
+          <div class="form-group"><label class="form-label">Y-tunnus</label><input class="form-input" id="nc-ytunnus" type="text" placeholder="1234567-8"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Toimiala</label><select class="form-select" id="nc-industry">${industryOptions}</select></div>
+        <div class="form-section-title">Yhteyshenkilö</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Nimi *</label><input class="form-input" id="nc-contact" type="text" required placeholder="Etunimi Sukunimi"></div>
+          <div class="form-group"><label class="form-label">Titteli</label><input class="form-input" id="nc-title" type="text" placeholder="Toimitusjohtaja"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Puhelinnumero</label><input class="form-input" id="nc-phone" type="text" placeholder="+358 40 000 0000"></div>
+          <div class="form-group"><label class="form-label">Sähköposti</label><input class="form-input" id="nc-email" type="email" placeholder="nimi@yritys.fi"></div>
+        </div>
+        <div class="form-section-title">Sopimus & hinnoittelu</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Sovittu hinnasto</label><input class="form-input" id="nc-pricing" type="text" placeholder="Perus 2x/kk — 480 €/kk"></div>
+          <div class="form-group"><label class="form-label">Asiakkaana alkaen</label><input class="form-input" id="nc-createdDate" type="date" value="${TODAY}"></div>
+        </div>
+        <div class="form-section-title">Muistiinpanot</div>
+        <div class="form-group"><textarea class="form-textarea" id="nc-notes" placeholder="Erityisehdot, toimitusaikataulu, maksuaika…"></textarea></div>
+        <div class="form-actions">
+          <button type="button" class="form-cancel" onclick="closeAddCustomerModal()">Peruuta</button>
+          <button class="form-submit" type="submit">Lisää asiakas</button>
+        </div>
+      </form>
+    </div>
+  `;
+  modal.style.display = 'flex';
+  modal.onclick = (e) => { if (e.target === modal) closeAddCustomerModal(); };
+}
+
+function closeAddCustomerModal() { document.getElementById('add-customer-modal').style.display = 'none'; }
+
+function submitAddCustomer(e) {
+  e.preventDefault();
+  const c = {
+    id: DATA._nextCustId++,
+    company:     document.getElementById('nc-company').value.trim(),
+    ytunnus:     document.getElementById('nc-ytunnus').value.trim(),
+    industry:    document.getElementById('nc-industry').value,
+    contact:     document.getElementById('nc-contact').value.trim(),
+    title:       document.getElementById('nc-title').value.trim(),
+    phone:       document.getElementById('nc-phone').value.trim() || '—',
+    email:       document.getElementById('nc-email').value.trim(),
+    pricing:     document.getElementById('nc-pricing').value.trim() || '—',
+    createdDate: document.getElementById('nc-createdDate').value,
+    notes:       document.getElementById('nc-notes').value.trim(),
+  };
+  DATA.customers.push(c);
+  closeAddCustomerModal();
+  refreshCustomerTable();
+  showToast('Asiakas lisätty: ' + c.company);
 }
 
 // ── Init ──
