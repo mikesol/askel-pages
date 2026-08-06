@@ -68,7 +68,7 @@
       background: var(--white);
       border-radius: 12px;
       padding: 32px;
-      max-width: 520px;
+      max-width: 560px;
       width: 100%;
       max-height: 90vh;
       overflow-y: auto;
@@ -93,7 +93,6 @@
       align-items: center;
       justify-content: flex-end;
       padding: 16px 24px 0;
-      gap: 12px;
     }
     .btn-import {
       display: flex;
@@ -130,10 +129,7 @@
       display: flex;
       flex-direction: column;
     }
-    .kanban-col-header {
-      background: var(--navy);
-      padding: 12px 16px;
-    }
+    .kanban-col-header { background: var(--navy); padding: 12px 16px; }
     .kanban-col-title {
       font-family: 'Sora', sans-serif;
       font-weight: 600;
@@ -154,7 +150,7 @@
       flex: 1;
     }
 
-    /* ── Lead card ── */
+    /* ── Lead card (surface) ── */
     .lead-card {
       background: var(--card-surface);
       border-radius: 8px;
@@ -189,19 +185,9 @@
       letter-spacing: 0.04em;
       white-space: nowrap;
     }
-    .lead-card-tag.uusi {
-      background: var(--coral);
-      color: var(--white);
-    }
-    .lead-card-tag.vanha {
-      background: rgba(20,55,90,0.15);
-      color: var(--navy);
-    }
-    .lead-card-contact {
-      font-size: 12px;
-      color: #555;
-      margin-bottom: 8px;
-    }
+    .lead-card-tag.uusi { background: var(--coral); color: var(--white); }
+    .lead-card-tag.vanha { background: rgba(20,55,90,0.15); color: var(--navy); }
+    .lead-card-contact { font-size: 12px; color: #555; margin-bottom: 8px; }
     .lead-card-deadline {
       display: inline-block;
       font-size: 11px;
@@ -209,14 +195,8 @@
       padding: 2px 8px;
       border-radius: 20px;
     }
-    .lead-card-deadline.on-time {
-      background: rgba(20,55,90,0.1);
-      color: var(--navy);
-    }
-    .lead-card-deadline.overdue {
-      background: var(--coral);
-      color: var(--white);
-    }
+    .lead-card-deadline.on-time { background: rgba(20,55,90,0.1); color: var(--navy); }
+    .lead-card-deadline.overdue { background: var(--coral); color: var(--white); }
 
     /* ── Add card button ── */
     .add-card-btn {
@@ -243,8 +223,21 @@
       background: rgba(20,55,90,0.04);
     }
 
-    /* ── Add card form ── */
-    .form-group { margin-bottom: 16px; }
+    /* ── Forms (add card + edit card) ── */
+    .form-section-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(20,55,90,0.4);
+      margin: 20px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--bg-light);
+    }
+    .form-section-title:first-of-type { margin-top: 0; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-group { margin-bottom: 12px; }
     .form-label {
       display: block;
       font-size: 11px;
@@ -252,23 +245,32 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: #888;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
-    .form-input, .form-select {
+    .form-input, .form-select, .form-textarea {
       width: 100%;
-      padding: 10px 14px;
+      padding: 9px 12px;
       border: 1.5px solid #ddd;
       border-radius: 8px;
       font-family: 'Inter', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       color: var(--navy);
       background: var(--white);
       transition: border-color 0.15s;
     }
-    .form-input:focus, .form-select:focus { outline: none; border-color: var(--coral); }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--coral);
+    }
+    .form-textarea { resize: vertical; min-height: 70px; line-height: 1.5; }
+    .form-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
     .form-submit {
-      width: 100%;
-      padding: 12px;
+      flex: 1;
+      padding: 11px;
       background: var(--navy);
       color: var(--white);
       font-family: 'Sora', sans-serif;
@@ -277,48 +279,66 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      margin-top: 8px;
       transition: background 0.15s;
     }
     .form-submit:hover { background: #1a4a78; }
+    .form-cancel {
+      padding: 11px 20px;
+      background: transparent;
+      color: #888;
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .form-cancel:hover { border-color: var(--navy); color: var(--navy); }
 
-    /* ── Card modal content ── */
-    .modal-label {
+    /* ── Card modal header ── */
+    .card-modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+    .card-modal-company-input {
+      font-family: 'Sora', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 2px 0;
+      color: var(--navy);
+      background: transparent;
+      width: 100%;
+      transition: border-color 0.15s;
+    }
+    .card-modal-company-input:focus {
+      outline: none;
+      border-bottom-color: var(--coral);
+    }
+
+    /* ── Stage select in card modal ── */
+    .stage-select-wrap { margin-top: 16px; }
+    .stage-select-label {
       font-size: 11px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: #888;
-      margin-bottom: 4px;
-      margin-top: 16px;
-    }
-    .modal-label:first-of-type { margin-top: 0; }
-    .modal-value {
-      font-size: 14px;
-      color: var(--navy);
-      line-height: 1.5;
-    }
-    .modal-value.big {
-      font-family: 'Sora', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-    }
-    .modal-value.overdue {
-      color: var(--coral-hover);
-      font-weight: 600;
-    }
-    .modal-divider {
-      height: 1px;
-      background: var(--bg-light);
-      margin: 20px 0;
+      margin-bottom: 5px;
+      display: block;
     }
     .modal-stage-select {
       width: 100%;
-      padding: 10px 14px;
-      border: 1.5px solid var(--card-surface);
+      padding: 9px 36px 9px 12px;
+      border: 1.5px solid #ddd;
       border-radius: 8px;
       font-family: 'Sora', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       color: var(--navy);
       background: var(--bg-light);
@@ -326,18 +346,9 @@
       appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2314375A' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: right 14px center;
-      padding-right: 36px;
+      background-position: right 12px center;
     }
-    .modal-stage-select:focus { outline: 2px solid var(--coral); border-color: var(--coral); }
-    .modal-memo-full {
-      font-size: 13px;
-      color: #555;
-      line-height: 1.6;
-      background: var(--bg-light);
-      border-radius: 8px;
-      padding: 12px;
-    }
+    .modal-stage-select:focus { outline: 2px solid var(--coral); }
 
     /* ── Customers view ── */
     .customers-page { padding: 24px; max-width: 900px; margin: 0 auto; }
@@ -355,11 +366,7 @@
     }
     .customers-search:focus { outline: none; border-color: var(--coral); }
     .customers-search::placeholder { color: #aaa; }
-    .customers-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 16px;
-    }
+    .customers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
     .customer-card {
       background: var(--white);
       border-radius: 10px;
@@ -368,22 +375,9 @@
       transition: box-shadow 0.15s, transform 0.1s;
       border-top: 3px solid var(--navy);
     }
-    .customer-card:hover {
-      box-shadow: 0 6px 18px rgba(20,55,90,0.12);
-      transform: translateY(-2px);
-    }
-    .customer-card-company {
-      font-family: 'Sora', sans-serif;
-      font-weight: 700;
-      font-size: 14px;
-      color: var(--navy);
-      margin-bottom: 6px;
-    }
-    .customer-card-contact {
-      font-size: 13px;
-      color: #555;
-      margin-bottom: 4px;
-    }
+    .customer-card:hover { box-shadow: 0 6px 18px rgba(20,55,90,0.12); transform: translateY(-2px); }
+    .customer-card-company { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 14px; color: var(--navy); margin-bottom: 6px; }
+    .customer-card-contact { font-size: 13px; color: #555; margin-bottom: 4px; }
     .customer-card-pricing {
       margin-top: 10px;
       font-size: 12px;
@@ -394,26 +388,11 @@
       padding: 3px 10px;
       border-radius: 20px;
     }
-    .customers-empty {
-      grid-column: 1/-1;
-      text-align: center;
-      color: #aaa;
-      font-size: 14px;
-      padding: 40px 0;
-    }
+    .customers-empty { grid-column: 1/-1; text-align: center; color: #aaa; font-size: 14px; padding: 40px 0; }
 
-    /* ── Customer modal ── */
-    .customer-modal-header {
-      border-bottom: 2px solid var(--navy);
-      padding-bottom: 16px;
-      margin-bottom: 20px;
-    }
-    .customer-modal-company {
-      font-family: 'Sora', sans-serif;
-      font-weight: 700;
-      font-size: 20px;
-      color: var(--navy);
-    }
+    /* ── Customer detail modal ── */
+    .customer-modal-header { border-bottom: 2px solid var(--navy); padding-bottom: 16px; margin-bottom: 20px; }
+    .customer-modal-company { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 20px; color: var(--navy); }
     .customer-modal-pricing-badge {
       display: inline-block;
       margin-top: 8px;
@@ -425,34 +404,12 @@
       padding: 5px 14px;
       border-radius: 20px;
     }
-    .customer-info-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-    .customer-info-label {
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: #888;
-      margin-bottom: 4px;
-    }
-    .customer-info-value {
-      font-size: 14px;
-      color: var(--navy);
-    }
-    .customer-notes-box {
-      background: var(--bg-light);
-      border-radius: 8px;
-      padding: 14px;
-      font-size: 13px;
-      color: #555;
-      line-height: 1.6;
-    }
+    .customer-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+    .customer-info-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #888; margin-bottom: 4px; }
+    .customer-info-value { font-size: 14px; color: var(--navy); }
+    .customer-notes-box { background: var(--bg-light); border-radius: 8px; padding: 14px; font-size: 13px; color: #555; line-height: 1.6; }
 
-    /* ── Import toast ── */
+    /* ── Toast ── */
     .toast {
       position: fixed;
       bottom: 24px;
@@ -504,27 +461,27 @@ const STAGES = [
 const DATA = {
   leads: [
     // Prospektit
-    { id:1,  stage:'prospektit',     tag:'UUSI asiakas', company:'Hotelli Kauniala Oy',               contact:'Juhani Virtanen',    phone:'+358 40 123 4567', deal:18000, nextContact:'2026-08-05', memo:'Löydetty verkosta, ei kontaktoitu vielä. Hotelli noin 50 huonetta, paljon liinavaatteita.' },
-    { id:2,  stage:'prospektit',     tag:'UUSI asiakas', company:'Tampereen Urheilukeskus Oy',        contact:'Minna Korhonen',     phone:'+358 44 234 5678', deal:24000, nextContact:'2026-08-15', memo:'Potentiaalinen asiakas urheilutekstiileille. Suositeltu verkoston kautta.' },
-    { id:3,  stage:'prospektit',     tag:'UUSI asiakas', company:'Rakennus Leinonen Oy',              contact:'Pekka Leinonen',     phone:'+358 50 345 6789', deal:9600,  nextContact:'2026-08-12', memo:'Rakennusyhtiö ~30 työntekijää. Tarvitsevat työvaatteiden pesua.' },
-    { id:4,  stage:'prospektit',     tag:'VANHA asiakas',company:'Lähipalvelut Mäkinen Oy',           contact:'Hanna Mäkinen',      phone:'+358 41 456 7890', deal:6000,  nextContact:'2026-08-03', memo:'Pieni siivousyritys, kiinnostunut yritysasiakkuudesta. Soitettava kiireesti.' },
+    { id:1,  stage:'prospektit',     tag:'UUSI asiakas', company:'Hotelli Kauniala Oy',               ytunnus:'1234567-8', contact:'Juhani Virtanen',   title:'Toimitusjohtaja',       phone:'+358 40 123 4567', email:'juhani.virtanen@kauniala.fi',        deal:18000, contactDate:'',           nextContact:'2026-08-05', memo:'Löydetty verkosta, ei kontaktoitu vielä. Hotelli noin 50 huonetta, paljon liinavaatteita.' },
+    { id:2,  stage:'prospektit',     tag:'UUSI asiakas', company:'Tampereen Urheilukeskus Oy',        ytunnus:'2345678-9', contact:'Minna Korhonen',    title:'Hankintapäällikkö',     phone:'+358 44 234 5678', email:'minna.korhonen@urheilukeskus.fi',    deal:24000, contactDate:'',           nextContact:'2026-08-15', memo:'Potentiaalinen asiakas urheilutekstiileille. Suositeltu verkoston kautta.' },
+    { id:3,  stage:'prospektit',     tag:'UUSI asiakas', company:'Rakennus Leinonen Oy',              ytunnus:'3456789-0', contact:'Pekka Leinonen',    title:'Toimitusjohtaja',       phone:'+358 50 345 6789', email:'pekka@rakennusleinonen.fi',          deal:9600,  contactDate:'',           nextContact:'2026-08-12', memo:'Rakennusyhtiö ~30 työntekijää. Tarvitsevat työvaatteiden pesua.' },
+    { id:4,  stage:'prospektit',     tag:'VANHA asiakas',company:'Lähipalvelut Mäkinen Oy',           ytunnus:'4567890-1', contact:'Hanna Mäkinen',     title:'Toimitusjohtaja',       phone:'+358 41 456 7890', email:'hanna@lahipalvelutmakinen.fi',       deal:6000,  contactDate:'',           nextContact:'2026-08-03', memo:'Pieni siivousyritys, kiinnostunut yritysasiakkuudesta. Soitettava kiireesti.' },
     // Liidit
-    { id:5,  stage:'liidit',         tag:'UUSI asiakas', company:'Ravintola Kultainen Porsas Oy',     contact:'Timo Rantanen',      phone:'+358 40 567 8901', deal:12000, nextContact:'2026-08-14', memo:'Soitettu 2.8., kiinnostunut. Haluaa tarjouksen liinavaatteille ja uniformuille.' },
-    { id:6,  stage:'liidit',         tag:'UUSI asiakas', company:'Toimisto Aaltonen Oy',              contact:'Kirsi Aaltonen',     phone:'+358 44 678 9012', deal:7200,  nextContact:'2026-08-20', memo:'Sähköpostilla yhteys otettu, vastaavat ensi viikolla.' },
-    { id:7,  stage:'liidit',         tag:'UUSI asiakas', company:'Pelastuslaitos Pirkanmaa',          contact:'Ari Heikkinen',      phone:'+358 50 789 0123', deal:36000, nextContact:'2026-08-22', memo:'Julkinen sektori, vaatii tarjouspyyntömenettelyn. Suuri potentiaali.' },
-    { id:8,  stage:'liidit',         tag:'VANHA asiakas',company:'Koulutuspalvelut Ylöjärvi',         contact:'Seija Lähteenmäki',  phone:'+358 41 890 1234', deal:8400,  nextContact:'2026-08-18', memo:'Koulu haluaa pesua lounasliinoille. Kontaktoitu messuilla elokuussa.' },
+    { id:5,  stage:'liidit',         tag:'UUSI asiakas', company:'Ravintola Kultainen Porsas Oy',     ytunnus:'5678901-2', contact:'Timo Rantanen',     title:'Ravintolapäällikkö',    phone:'+358 40 567 8901', email:'timo.rantanen@kultainenporsas.fi',   deal:12000, contactDate:'2026-08-02', nextContact:'2026-08-14', memo:'Soitettu 2.8., kiinnostunut. Haluaa tarjouksen liinavaatteille ja uniformuille.' },
+    { id:6,  stage:'liidit',         tag:'UUSI asiakas', company:'Toimisto Aaltonen Oy',              ytunnus:'6789012-3', contact:'Kirsi Aaltonen',    title:'Toimistopäällikkö',     phone:'+358 44 678 9012', email:'kirsi.aaltonen@aaltonen.fi',         deal:7200,  contactDate:'2026-07-30', nextContact:'2026-08-20', memo:'Sähköpostilla yhteys otettu, vastaavat ensi viikolla.' },
+    { id:7,  stage:'liidit',         tag:'UUSI asiakas', company:'Pelastuslaitos Pirkanmaa',          ytunnus:'7890123-4', contact:'Ari Heikkinen',     title:'Hankintapäällikkö',     phone:'+358 50 789 0123', email:'ari.heikkinen@pelastuslaitos.fi',     deal:36000, contactDate:'2026-07-28', nextContact:'2026-08-22', memo:'Julkinen sektori, vaatii tarjouspyyntömenettelyn. Suuri potentiaali.' },
+    { id:8,  stage:'liidit',         tag:'VANHA asiakas',company:'Koulutuspalvelut Ylöjärvi',         ytunnus:'8901234-5', contact:'Seija Lähteenmäki', title:'Palvelupäällikkö',      phone:'+358 41 890 1234', email:'seija.lahteenmaki@kouluylojärvi.fi', deal:8400,  contactDate:'2026-08-01', nextContact:'2026-08-18', memo:'Koulu haluaa pesua lounasliinoille. Kontaktoitu messuilla elokuussa.' },
     // Intro palaveri
-    { id:9,  stage:'intro',          tag:'UUSI asiakas', company:'Siivouspalvelu Puhtola Oy',         contact:'Risto Puhtola',      phone:'+358 40 901 2345', deal:15600, nextContact:'2026-08-09', memo:'Tapaaminen pidetty 5.8. Erittäin kiinnostunut. Odottaa tarjousta ensi viikolla.' },
-    { id:10, stage:'intro',          tag:'VANHA asiakas',company:'Majoituspalvelut Näsijärvi Oy',     contact:'Leena Järvinen',     phone:'+358 44 012 3456', deal:21600, nextContact:'2026-08-13', memo:'Intro palaveri 7.8. Tyytyväinen palvelukuvaukseen, pyysivät referenssejä.' },
-    { id:11, stage:'intro',          tag:'UUSI asiakas', company:'Fysioterapia Salminen',             contact:'Tuulia Salminen',    phone:'+358 50 123 4560', deal:9600,  nextContact:'2026-08-18', memo:'Pieni klinikka, palaveri sovittu 14.8. Tarvitsevat hoitoliinojen pesua.' },
+    { id:9,  stage:'intro',          tag:'UUSI asiakas', company:'Siivouspalvelu Puhtola Oy',         ytunnus:'9012345-6', contact:'Risto Puhtola',     title:'Toimitusjohtaja',       phone:'+358 40 901 2345', email:'risto@puhtola.fi',                   deal:15600, contactDate:'2026-08-05', nextContact:'2026-08-09', memo:'Tapaaminen pidetty 5.8. Erittäin kiinnostunut. Odottaa tarjousta ensi viikolla.' },
+    { id:10, stage:'intro',          tag:'VANHA asiakas',company:'Majoituspalvelut Näsijärvi Oy',     ytunnus:'0123456-7', contact:'Leena Järvinen',    title:'Kiinteistöpäällikkö',   phone:'+358 44 012 3456', email:'leena.jarvinen@nasijärvi.fi',        deal:21600, contactDate:'2026-08-07', nextContact:'2026-08-13', memo:'Intro palaveri 7.8. Tyytyväinen palvelukuvaukseen, pyysivät referenssejä.' },
+    { id:11, stage:'intro',          tag:'UUSI asiakas', company:'Fysioterapia Salminen',             ytunnus:'1230987-6', contact:'Tuulia Salminen',   title:'Toimitusjohtaja',       phone:'+358 50 123 4560', email:'tuulia@fterapiasalminen.fi',          deal:9600,  contactDate:'2026-08-04', nextContact:'2026-08-18', memo:'Pieni klinikka, palaveri sovittu 14.8. Tarvitsevat hoitoliinojen pesua.' },
     // Tarjous lähetetty
-    { id:12, stage:'tarjous',        tag:'UUSI asiakas', company:'Pirkanmaan Hyvinvointipalvelut Oy', contact:'Olli Hämäläinen',   phone:'+358 40 234 5671', deal:48000, nextContact:'2026-08-04', memo:'Tarjous lähetetty 1.8., odottaa päätöstä. Suurin potentiaaliasiakas tällä hetkellä.' },
-    { id:13, stage:'tarjous',        tag:'VANHA asiakas',company:'Hotelli Torni Tampere Oy',          contact:'Maria Nieminen',     phone:'+358 44 345 6782', deal:30000, nextContact:'2026-08-16', memo:'Tarjous 4.8. Neuvotellaan hinnasta, kilpailija myös mukana.' },
-    { id:14, stage:'tarjous',        tag:'UUSI asiakas', company:'Catering Hakala Oy',                contact:'Ville Hakala',       phone:'+358 50 456 7893', deal:10800, nextContact:'2026-08-13', memo:'Tarjous lähetetty 6.8. Odotetaan vastausta viikon sisällä.' },
+    { id:12, stage:'tarjous',        tag:'UUSI asiakas', company:'Pirkanmaan Hyvinvointipalvelut Oy', ytunnus:'2341098-7', contact:'Olli Hämäläinen',  title:'Talouspäällikkö',       phone:'+358 40 234 5671', email:'olli.hamalainen@phvp.fi',            deal:48000, contactDate:'2026-08-01', nextContact:'2026-08-04', memo:'Tarjous lähetetty 1.8., odottaa päätöstä. Suurin potentiaaliasiakas tällä hetkellä.' },
+    { id:13, stage:'tarjous',        tag:'VANHA asiakas',company:'Hotelli Torni Tampere Oy',          ytunnus:'3452109-8', contact:'Maria Nieminen',    title:'Hankintapäällikkö',     phone:'+358 44 345 6782', email:'maria.nieminen@hotelltorni.fi',       deal:30000, contactDate:'2026-08-04', nextContact:'2026-08-16', memo:'Tarjous 4.8. Neuvotellaan hinnasta, kilpailija myös mukana.' },
+    { id:14, stage:'tarjous',        tag:'UUSI asiakas', company:'Catering Hakala Oy',                ytunnus:'4563210-9', contact:'Ville Hakala',      title:'Toimitusjohtaja',       phone:'+358 50 456 7893', email:'ville.hakala@cateringhakala.fi',      deal:10800, contactDate:'2026-08-06', nextContact:'2026-08-13', memo:'Tarjous lähetetty 6.8. Odotetaan vastausta viikon sisällä.' },
     // Asiakaspalvelu & Onboarding
-    { id:15, stage:'asiakaspalvelu', tag:'VANHA asiakas',company:'Tampereen Ammattiopisto TAO',       contact:'Päivi Kuusisto',     phone:'+358 40 567 8904', deal:16800, nextContact:'2026-09-01', memo:'Sopimus allekirjoitettu 28.7. Aloitetaan syyskuussa. Aikataulutettu.' },
-    { id:16, stage:'asiakaspalvelu', tag:'VANHA asiakas',company:'Kiinteistöpalvelut Rajala Oy',      contact:'Juha Rajala',        phone:'+358 44 678 9015', deal:13200, nextContact:'2026-08-25', memo:'Onboarding käynnissä. Ensimmäinen nouto sovittu 19.8.' },
-    { id:17, stage:'asiakaspalvelu', tag:'UUSI asiakas', company:'Ravintola Aleksi Oy',               contact:'Paula Aleksi',       phone:'+358 50 789 0126', deal:9600,  nextContact:'2026-08-28', memo:'Uusi asiakas 4.8. Toimituspäivät sovittu — tiistaisin ja perjantaisin.' },
+    { id:15, stage:'asiakaspalvelu', tag:'VANHA asiakas',company:'Tampereen Ammattiopisto TAO',       ytunnus:'5674321-0', contact:'Päivi Kuusisto',    title:'Hankintapäällikkö',     phone:'+358 40 567 8904', email:'paivi.kuusisto@tao.fi',               deal:16800, contactDate:'2026-07-28', nextContact:'2026-09-01', memo:'Sopimus allekirjoitettu 28.7. Aloitetaan syyskuussa. Aikataulutettu.' },
+    { id:16, stage:'asiakaspalvelu', tag:'VANHA asiakas',company:'Kiinteistöpalvelut Rajala Oy',      ytunnus:'6785432-1', contact:'Juha Rajala',       title:'Toimitusjohtaja',       phone:'+358 44 678 9015', email:'juha.rajala@rajalapalvelut.fi',       deal:13200, contactDate:'2026-08-01', nextContact:'2026-08-25', memo:'Onboarding käynnissä. Ensimmäinen nouto sovittu 19.8.' },
+    { id:17, stage:'asiakaspalvelu', tag:'UUSI asiakas', company:'Ravintola Aleksi Oy',               ytunnus:'7896543-2', contact:'Paula Aleksi',      title:'Ravintolapäällikkö',    phone:'+358 50 789 0126', email:'paula@ravintolaaeksi.fi',             deal:9600,  contactDate:'2026-08-04', nextContact:'2026-08-28', memo:'Uusi asiakas 4.8. Toimituspäivät sovittu — tiistaisin ja perjantaisin.' },
   ],
   customers: [
     { id:1, company:'Tampereen Ammattiopisto TAO',   contact:'Päivi Kuusisto',  phone:'+358 40 567 8904', email:'paivi.kuusisto@tao.fi',           pricing:'Standardi 3x/kk — 1 400 €/kk', notes:'Sopimus 3v, uusittu 2025-09. Erityistoimitus maanantaisin. Maksuaika 21 pv.' },
@@ -540,14 +497,10 @@ const DATA = {
 };
 
 // ── Helpers ──
-function isOverdue(dateStr) { return dateStr < TODAY; }
-function formatDate(dateStr) {
-  const [y, m, d] = dateStr.split('-');
-  return `${d}.${m}.${y}`;
-}
-function tagClass(tag) {
-  return tag === 'UUSI asiakas' ? 'uusi' : 'vanha';
-}
+function isOverdue(d) { return d && d < TODAY; }
+function formatDate(d) { if (!d) return '—'; const [y,m,dd]=d.split('-'); return `${dd}.${m}.${y}`; }
+function tagClass(tag) { return tag === 'UUSI asiakas' ? 'uusi' : 'vanha'; }
+function leadById(id) { return DATA.leads.find(l => l.id === id); }
 
 function showView(name) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -567,7 +520,7 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
   tab.addEventListener('click', () => showView(tab.dataset.view));
 });
 
-// ── Card element builder ──
+// ── Card surface element ──
 function buildCard(lead) {
   const overdue = isOverdue(lead.nextContact);
   const card = document.createElement('div');
@@ -578,119 +531,191 @@ function buildCard(lead) {
       <div class="lead-card-company">${lead.company}</div>
       <span class="lead-card-tag ${tagClass(lead.tag)}">${lead.tag}</span>
     </div>
-    <div class="lead-card-contact">${lead.contact} · ${lead.phone}</div>
+    <div class="lead-card-contact">${lead.contact}${lead.title ? ' · ' + lead.title : ''}<br>${lead.phone}</div>
     <span class="lead-card-deadline ${overdue ? 'overdue' : 'on-time'}">
       Kontaktointi: ${formatDate(lead.nextContact)}${overdue ? ' ⚠' : ''}
     </span>
   `;
-  card.addEventListener('click', () => openCardModal(lead));
+  card.addEventListener('click', () => openCardModal(lead.id));
   return card;
 }
 
-// ── Update column revenue total ──
 function updateColRevenue(stageId) {
-  const stageLeads = DATA.leads.filter(l => l.stage === stageId);
-  const total = stageLeads.reduce((sum, l) => sum + (l.deal || 0), 0);
+  const total = DATA.leads.filter(l => l.stage === stageId).reduce((s,l) => s + (l.deal||0), 0);
   const el = document.getElementById('revenue-' + stageId);
   if (el) el.textContent = 'Revenue estimate: ' + total.toLocaleString('fi-FI') + ' €';
 }
 
-// ── Kanban render ──
+// ── Kanban ──
 function renderKanban() {
   const view = document.getElementById('view-kanban');
 
-  // Toolbar
   const toolbar = document.createElement('div');
   toolbar.className = 'kanban-toolbar';
-  toolbar.innerHTML = `
-    <button class="btn-import" onclick="document.getElementById('file-input').click()">
-      ＋ Lataa asiakaslista
-    </button>
-  `;
+  toolbar.innerHTML = `<button class="btn-import" onclick="document.getElementById('file-input').click()">＋ Lataa asiakaslista</button>`;
   view.appendChild(toolbar);
 
-  // Board
   const board = document.createElement('div');
   board.className = 'kanban-board';
 
   STAGES.forEach(stage => {
     const stageLeads = DATA.leads.filter(l => l.stage === stage.id);
-    const totalRevenue = stageLeads.reduce((sum, l) => sum + l.deal, 0);
-
+    const total = stageLeads.reduce((s,l) => s + l.deal, 0);
     const col = document.createElement('div');
     col.className = 'kanban-col';
     col.id = 'kanban-col-' + stage.id;
     col.innerHTML = `
       <div class="kanban-col-header">
         <div class="kanban-col-title">${stage.label}</div>
-        <div class="kanban-col-revenue" id="revenue-${stage.id}">Revenue estimate: ${totalRevenue.toLocaleString('fi-FI')} €</div>
+        <div class="kanban-col-revenue" id="revenue-${stage.id}">Revenue estimate: ${total.toLocaleString('fi-FI')} €</div>
       </div>
       <div class="kanban-cards" id="col-${stage.id}"></div>
     `;
+    const container = col.querySelector(`#col-${stage.id}`);
+    stageLeads.forEach(l => container.appendChild(buildCard(l)));
 
-    const cardsContainer = col.querySelector(`#col-${stage.id}`);
-    stageLeads.forEach(lead => cardsContainer.appendChild(buildCard(lead)));
-
-    // Add card button
     const addBtn = document.createElement('button');
     addBtn.className = 'add-card-btn';
-    addBtn.innerHTML = '＋ Lisää kortti';
+    addBtn.textContent = '＋ Lisää kortti';
     addBtn.addEventListener('click', () => openAddCardModal(stage.id));
     col.appendChild(addBtn);
-
     board.appendChild(col);
   });
 
   view.appendChild(board);
 }
 
-// ── Card detail modal ──
-function openCardModal(lead) {
-  const overdue = isOverdue(lead.nextContact);
+// ── Card detail modal (editable) ──
+function openCardModal(id) {
+  const lead = leadById(id);
   const stageOptions = STAGES.map(s =>
-    `<option value="${s.id}" ${s.id === lead.stage ? 'selected' : ''}>${s.label}</option>`
+    `<option value="${s.id}" ${s.id === lead.stage ? 'selected' : ''}>${s.label.replace('&amp;','&')}</option>`
   ).join('');
+  const overdue = isOverdue(lead.nextContact);
 
   const modal = document.getElementById('card-modal');
   modal.innerHTML = `
     <div class="modal-box">
       <button class="modal-close" onclick="closeCardModal()">×</button>
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:4px">
-        <div class="modal-value big" style="margin:0">${lead.company}</div>
-        <span class="lead-card-tag ${tagClass(lead.tag)}" style="margin-top:4px">${lead.tag}</span>
+
+      <div class="card-modal-header">
+        <input class="card-modal-company-input" id="edit-company" value="${esc(lead.company)}" placeholder="Yrityksen nimi">
+        <span class="lead-card-tag ${tagClass(lead.tag)}" style="margin-top:6px;flex-shrink:0">${lead.tag}</span>
       </div>
 
-      <div class="modal-label">Yhteyshenkilö</div>
-      <div class="modal-value">${lead.contact}</div>
+      <div class="stage-select-wrap">
+        <span class="stage-select-label">Vaihe</span>
+        <select class="modal-stage-select" id="edit-stage">${stageOptions}</select>
+      </div>
 
-      <div class="modal-label">Puhelinnumero</div>
-      <div class="modal-value">${lead.phone}</div>
+      <div class="form-section-title">Yritystiedot</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Y-tunnus</label>
+          <input class="form-input" id="edit-ytunnus" value="${esc(lead.ytunnus||'')}" placeholder="1234567-8">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Asiakastyyppi</label>
+          <select class="form-select" id="edit-tag">
+            <option value="UUSI asiakas" ${lead.tag==='UUSI asiakas'?'selected':''}>UUSI asiakas</option>
+            <option value="VANHA asiakas" ${lead.tag==='VANHA asiakas'?'selected':''}>VANHA asiakas</option>
+          </select>
+        </div>
+      </div>
 
-      <div class="modal-label">Revenue estimate</div>
-      <div class="modal-value">${lead.deal ? lead.deal.toLocaleString('fi-FI') + ' €/v' : '—'}</div>
+      <div class="form-section-title">Yhteyshenkilö</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Nimi</label>
+          <input class="form-input" id="edit-contact" value="${esc(lead.contact)}" placeholder="Etunimi Sukunimi">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Titteli</label>
+          <input class="form-input" id="edit-title" value="${esc(lead.title||'')}" placeholder="Toimitusjohtaja">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Puhelinnumero</label>
+          <input class="form-input" id="edit-phone" value="${esc(lead.phone)}" placeholder="+358 40 000 0000">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Sähköposti</label>
+          <input class="form-input" id="edit-email" type="email" value="${esc(lead.email||'')}" placeholder="nimi@yritys.fi">
+        </div>
+      </div>
 
-      <div class="modal-label">Seuraava kontaktointi</div>
-      <div class="modal-value ${overdue ? 'overdue' : ''}">${formatDate(lead.nextContact)}${overdue ? ' — ERÄÄNTYNYT ⚠' : ''}</div>
+      <div class="form-section-title">Myynti</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Revenue estimate (€/v)</label>
+          <input class="form-input" id="edit-deal" type="number" value="${lead.deal||''}" placeholder="12000">
+        </div>
+        <div class="form-group" style="display:flex;flex-direction:column;justify-content:flex-end">
+          <span style="font-size:12px;color:#888">Nykyinen: ${lead.deal ? lead.deal.toLocaleString('fi-FI') + ' €/v' : '—'}</span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Kontaktointipäivä</label>
+          <input class="form-input" id="edit-contactDate" type="date" value="${lead.contactDate||''}">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Seuraava kontaktointi ${overdue ? '⚠' : ''}</label>
+          <input class="form-input" id="edit-nextContact" type="date" value="${lead.nextContact||''}" style="${overdue ? 'border-color:var(--coral)' : ''}">
+        </div>
+      </div>
 
-      <div class="modal-divider"></div>
+      <div class="form-section-title">Muistiinpano</div>
+      <div class="form-group">
+        <textarea class="form-textarea" id="edit-memo" placeholder="Viimeisin keskustelun yhteenveto…">${esc(lead.memo||'')}</textarea>
+      </div>
 
-      <div class="modal-label">Viimeisin muistiinpano</div>
-      <div class="modal-memo-full">${lead.memo || '—'}</div>
-
-      <div class="modal-divider"></div>
-
-      <div class="modal-label">Siirrä vaiheeseen →</div>
-      <select class="modal-stage-select" onchange="alert('Toiminto käytettävissä oikeassa järjestelmässä.')">
-        ${stageOptions}
-      </select>
+      <div class="form-actions">
+        <button class="form-cancel" onclick="closeCardModal()">Peruuta</button>
+        <button class="form-submit" onclick="saveCard(${id})">Tallenna</button>
+      </div>
     </div>
   `;
   modal.style.display = 'flex';
   modal.onclick = (e) => { if (e.target === modal) closeCardModal(); };
 }
 
-function closeCardModal() {
-  document.getElementById('card-modal').style.display = 'none';
+function closeCardModal() { document.getElementById('card-modal').style.display = 'none'; }
+
+function saveCard(id) {
+  const lead = leadById(id);
+  const oldStage = lead.stage;
+  const newStage = document.getElementById('edit-stage').value;
+
+  lead.company     = document.getElementById('edit-company').value.trim();
+  lead.ytunnus     = document.getElementById('edit-ytunnus').value.trim();
+  lead.tag         = document.getElementById('edit-tag').value;
+  lead.contact     = document.getElementById('edit-contact').value.trim();
+  lead.title       = document.getElementById('edit-title').value.trim();
+  lead.phone       = document.getElementById('edit-phone').value.trim();
+  lead.email       = document.getElementById('edit-email').value.trim();
+  lead.deal        = parseInt(document.getElementById('edit-deal').value) || 0;
+  lead.contactDate = document.getElementById('edit-contactDate').value;
+  lead.nextContact = document.getElementById('edit-nextContact').value;
+  lead.memo        = document.getElementById('edit-memo').value.trim();
+  lead.stage       = newStage;
+
+  // Replace card in DOM
+  const oldCard = document.querySelector(`.lead-card[data-id="${id}"]`);
+  if (oldCard) {
+    if (oldStage !== newStage) {
+      // Move to new column
+      oldCard.remove();
+      document.getElementById('col-' + newStage).appendChild(buildCard(lead));
+      updateColRevenue(oldStage);
+    } else {
+      oldCard.replaceWith(buildCard(lead));
+    }
+  }
+  updateColRevenue(newStage);
+  closeCardModal();
+  showToast('Tallennettu: ' + lead.company);
 }
 
 // ── Add card modal ──
@@ -700,25 +725,21 @@ function openAddCardModal(stageId) {
   modal.innerHTML = `
     <div class="modal-box">
       <button class="modal-close" onclick="closeAddCardModal()">×</button>
-      <h3 style="font-family:'Sora',sans-serif;font-size:16px;color:var(--navy);margin-bottom:20px">
-        Lisää kortti — ${stage.label}
+      <h3 style="font-family:'Sora',sans-serif;font-size:16px;color:var(--navy);margin-bottom:16px">
+        Lisää kortti — ${stage.label.replace('&amp;','&')}
       </h3>
-      <form onsubmit="submitAddCard(event, '${stageId}')">
-        <div class="form-group">
-          <label class="form-label">Yritys *</label>
-          <input class="form-input" id="new-company" type="text" required placeholder="Yrityksen nimi">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Yhteyshenkilö *</label>
-          <input class="form-input" id="new-contact" type="text" required placeholder="Etunimi Sukunimi">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Puhelinnumero</label>
-          <input class="form-input" id="new-phone" type="text" placeholder="+358 40 000 0000">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Seuraava kontaktointi *</label>
-          <input class="form-input" id="new-deadline" type="date" required value="2026-08-13">
+      <form onsubmit="submitAddCard(event,'${stageId}')">
+
+        <div class="form-section-title">Yritystiedot</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Yrityksen nimi *</label>
+            <input class="form-input" id="new-company" type="text" required placeholder="Yrityksen nimi">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Y-tunnus</label>
+            <input class="form-input" id="new-ytunnus" type="text" placeholder="1234567-8">
+          </div>
         </div>
         <div class="form-group">
           <label class="form-label">Asiakastyyppi</label>
@@ -727,11 +748,54 @@ function openAddCardModal(stageId) {
             <option value="VANHA asiakas">VANHA asiakas</option>
           </select>
         </div>
-        <div class="form-group">
-          <label class="form-label">Muistiinpano</label>
-          <input class="form-input" id="new-memo" type="text" placeholder="Vapaamuotoinen muistiinpano">
+
+        <div class="form-section-title">Yhteyshenkilö</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nimi *</label>
+            <input class="form-input" id="new-contact" type="text" required placeholder="Etunimi Sukunimi">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Titteli</label>
+            <input class="form-input" id="new-title" type="text" placeholder="Toimitusjohtaja">
+          </div>
         </div>
-        <button class="form-submit" type="submit">Lisää kortti</button>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Puhelinnumero</label>
+            <input class="form-input" id="new-phone" type="text" placeholder="+358 40 000 0000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Sähköposti</label>
+            <input class="form-input" id="new-email" type="email" placeholder="nimi@yritys.fi">
+          </div>
+        </div>
+
+        <div class="form-section-title">Myynti</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Revenue estimate (€/v)</label>
+            <input class="form-input" id="new-deal" type="number" placeholder="12000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kontaktointipäivä</label>
+            <input class="form-input" id="new-contactDate" type="date">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Seuraava kontaktointi *</label>
+          <input class="form-input" id="new-nextContact" type="date" required value="2026-08-13">
+        </div>
+
+        <div class="form-section-title">Muistiinpano</div>
+        <div class="form-group">
+          <textarea class="form-textarea" id="new-memo" placeholder="Viimeisin keskustelun yhteenveto…"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="form-cancel" onclick="closeAddCardModal()">Peruuta</button>
+          <button class="form-submit" type="submit">Lisää kortti</button>
+        </div>
       </form>
     </div>
   `;
@@ -739,22 +803,24 @@ function openAddCardModal(stageId) {
   modal.onclick = (e) => { if (e.target === modal) closeAddCardModal(); };
 }
 
-function closeAddCardModal() {
-  document.getElementById('add-card-modal').style.display = 'none';
-}
+function closeAddCardModal() { document.getElementById('add-card-modal').style.display = 'none'; }
 
 function submitAddCard(e, stageId) {
   e.preventDefault();
   const lead = {
     id: DATA._nextId++,
     stage: stageId,
-    tag: document.getElementById('new-tag').value,
-    company: document.getElementById('new-company').value.trim(),
-    contact: document.getElementById('new-contact').value.trim(),
-    phone: document.getElementById('new-phone').value.trim() || '—',
-    deal: 0,
-    nextContact: document.getElementById('new-deadline').value,
-    memo: document.getElementById('new-memo').value.trim(),
+    tag:         document.getElementById('new-tag').value,
+    company:     document.getElementById('new-company').value.trim(),
+    ytunnus:     document.getElementById('new-ytunnus').value.trim(),
+    contact:     document.getElementById('new-contact').value.trim(),
+    title:       document.getElementById('new-title').value.trim(),
+    phone:       document.getElementById('new-phone').value.trim() || '—',
+    email:       document.getElementById('new-email').value.trim(),
+    deal:        parseInt(document.getElementById('new-deal').value) || 0,
+    contactDate: document.getElementById('new-contactDate').value,
+    nextContact: document.getElementById('new-nextContact').value,
+    memo:        document.getElementById('new-memo').value.trim(),
   };
   DATA.leads.push(lead);
   document.getElementById('col-' + stageId).appendChild(buildCard(lead));
@@ -768,7 +834,6 @@ document.getElementById('file-input').addEventListener('change', function(e) {
   const file = e.target.files[0];
   if (!file) return;
   this.value = '';
-
   const ext = file.name.split('.').pop().toLowerCase();
   if (ext === 'csv') {
     const reader = new FileReader();
@@ -779,8 +844,7 @@ document.getElementById('file-input').addEventListener('change', function(e) {
     reader.onload = (ev) => {
       const wb = XLSX.read(ev.target.result, { type: 'array' });
       const ws = wb.Sheets[wb.SheetNames[0]];
-      const rows = XLSX.utils.sheet_to_json(ws, { header: 1 });
-      importFromRows(rows);
+      importFromRows(XLSX.utils.sheet_to_json(ws, { header: 1 }));
     };
     reader.readAsArrayBuffer(file);
   } else {
@@ -789,54 +853,30 @@ document.getElementById('file-input').addEventListener('change', function(e) {
 });
 
 function importFromCSV(text) {
-  const lines = text.split(/\r?\n/).filter(l => l.trim());
-  const rows = lines.map(l => l.split(/[,;]/).map(c => c.trim().replace(/^"|"$/g, '')));
+  const rows = text.split(/\r?\n/).filter(l => l.trim())
+    .map(l => l.split(/[,;]/).map(c => c.trim().replace(/^"|"$/g, '')));
   importFromRows(rows);
 }
 
 function importFromRows(rows) {
   if (rows.length < 2) { showToast('Tiedostossa ei löydy dataa.'); return; }
-
-  // Detect header row: look for recognisable column names
-  const header = rows[0].map(h => h.toLowerCase());
-  const colIdx = (candidates) => {
-    for (const c of candidates) {
-      const i = header.findIndex(h => h.includes(c));
-      if (i >= 0) return i;
-    }
-    return -1;
-  };
-
-  const companyCol  = colIdx(['yritys', 'company', 'firma', 'org']);
-  const contactCol  = colIdx(['nimi', 'name', 'contact', 'yhteyshenkilö', 'henkilö']);
-  const phoneCol    = colIdx(['puhelin', 'phone', 'numero', 'gsm', 'mobile']);
-
-  // If no recognisable headers, assume col 0 = company, 1 = contact, 2 = phone
-  const getCol = (idx, fallback) => idx >= 0 ? idx : fallback;
-  const cC = getCol(companyCol, 0);
-  const nC = getCol(contactCol, 1);
-  const pC = getCol(phoneCol, 2);
-
-  const dataRows = rows.slice(1).filter(r => r[cC]);
+  const hdr = rows[0].map(h => (h||'').toLowerCase());
+  const ci = (cands) => { for (const c of cands) { const i = hdr.findIndex(h => h.includes(c)); if (i>=0) return i; } return -1; };
+  const cC = ci(['yritys','company','firma','org']); const nC = ci(['nimi','name','contact','yhteyshenkilö']); const pC = ci(['puhelin','phone','numero','gsm']);
+  const getC = (i, fb) => i >= 0 ? i : fb;
+  const dataRows = rows.slice(1).filter(r => r[getC(cC,0)]);
   if (!dataRows.length) { showToast('Ei tuotavia rivejä löydy.'); return; }
-
-  const colContainer = document.getElementById('col-prospektit');
+  const container = document.getElementById('col-prospektit');
   dataRows.forEach(row => {
     const lead = {
-      id: DATA._nextId++,
-      stage: 'prospektit',
-      tag: 'UUSI asiakas',
-      company: row[cC] || '—',
-      contact: row[nC] || '—',
-      phone: row[pC] || '—',
-      deal: 0,
-      nextContact: '2026-08-13',
-      memo: 'Tuotu asiakaslistasta',
+      id: DATA._nextId++, stage:'prospektit', tag:'UUSI asiakas',
+      company: row[getC(cC,0)] || '—', contact: row[getC(nC,1)] || '—',
+      phone: row[getC(pC,2)] || '—', email:'', title:'', ytunnus:'',
+      deal:0, contactDate:'', nextContact:'2026-08-13', memo:'Tuotu asiakaslistasta',
     };
     DATA.leads.push(lead);
-    colContainer.appendChild(buildCard(lead));
+    container.appendChild(buildCard(lead));
   });
-
   updateColRevenue('prospektit');
   showToast(dataRows.length + ' kontaktia tuotu Prospektit-sarakkeeseen');
 }
@@ -847,13 +887,9 @@ function renderCustomers() {
   page.className = 'customers-page';
   page.innerHTML = `
     <div class="customers-search-wrap">
-      <input
-        class="customers-search"
-        id="customers-search-input"
-        type="text"
+      <input class="customers-search" id="customers-search-input" type="text"
         placeholder="Hae yrityksen nimellä tai yhteyshenkilöllä…"
-        oninput="filterCustomers(this.value)"
-      >
+        oninput="filterCustomers(this.value)">
     </div>
     <div class="customers-grid" id="customers-grid"></div>
   `;
@@ -864,76 +900,52 @@ function renderCustomers() {
 function renderCustomerCards(customers) {
   const grid = document.getElementById('customers-grid');
   grid.innerHTML = '';
-  if (customers.length === 0) {
-    grid.innerHTML = '<div class="customers-empty">Ei hakutuloksia.</div>';
-    return;
-  }
+  if (!customers.length) { grid.innerHTML = '<div class="customers-empty">Ei hakutuloksia.</div>'; return; }
   customers.forEach(c => {
     const card = document.createElement('div');
     card.className = 'customer-card';
-    card.dataset.id = c.id;
-    card.innerHTML = `
-      <div class="customer-card-company">${c.company}</div>
-      <div class="customer-card-contact">${c.contact} · ${c.phone}</div>
-      <span class="customer-card-pricing">${c.pricing}</span>
-    `;
+    card.innerHTML = `<div class="customer-card-company">${c.company}</div><div class="customer-card-contact">${c.contact} · ${c.phone}</div><span class="customer-card-pricing">${c.pricing}</span>`;
     card.addEventListener('click', () => openCustomerModal(c));
     grid.appendChild(card);
   });
 }
 
-function filterCustomers(query) {
-  const q = query.toLowerCase().trim();
-  const filtered = DATA.customers.filter(c =>
-    c.company.toLowerCase().includes(q) || c.contact.toLowerCase().includes(q)
-  );
-  renderCustomerCards(filtered);
+function filterCustomers(q) {
+  q = q.toLowerCase().trim();
+  renderCustomerCards(DATA.customers.filter(c => c.company.toLowerCase().includes(q) || c.contact.toLowerCase().includes(q)));
 }
 
-// ── Customer modal ──
-function openCustomerModal(customer) {
+function openCustomerModal(c) {
   const modal = document.getElementById('customer-modal');
   modal.innerHTML = `
     <div class="modal-box">
       <button class="modal-close" onclick="closeCustomerModal()">×</button>
       <div class="customer-modal-header">
-        <div class="customer-modal-company">${customer.company}</div>
-        <span class="customer-modal-pricing-badge">${customer.pricing}</span>
+        <div class="customer-modal-company">${c.company}</div>
+        <span class="customer-modal-pricing-badge">${c.pricing}</span>
       </div>
       <div class="customer-info-grid">
-        <div class="customer-info-item">
-          <div class="customer-info-label">Yhteyshenkilö</div>
-          <div class="customer-info-value">${customer.contact}</div>
-        </div>
-        <div class="customer-info-item">
-          <div class="customer-info-label">Puhelinnumero</div>
-          <div class="customer-info-value">${customer.phone}</div>
-        </div>
-        <div class="customer-info-item">
-          <div class="customer-info-label">Sähköposti</div>
-          <div class="customer-info-value">${customer.email}</div>
-        </div>
-        <div class="customer-info-item">
-          <div class="customer-info-label">Sovittu hinnasto</div>
-          <div class="customer-info-value">${customer.pricing}</div>
-        </div>
+        <div><div class="customer-info-label">Yhteyshenkilö</div><div class="customer-info-value">${c.contact}</div></div>
+        <div><div class="customer-info-label">Puhelinnumero</div><div class="customer-info-value">${c.phone}</div></div>
+        <div><div class="customer-info-label">Sähköposti</div><div class="customer-info-value">${c.email}</div></div>
+        <div><div class="customer-info-label">Sovittu hinnasto</div><div class="customer-info-value">${c.pricing}</div></div>
       </div>
-      <div class="modal-label">Muistiinpanot</div>
-      <div class="customer-notes-box">${customer.notes}</div>
+      <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#888;margin-bottom:6px">Muistiinpanot</div>
+      <div class="customer-notes-box">${c.notes}</div>
     </div>
   `;
   modal.style.display = 'flex';
   modal.onclick = (e) => { if (e.target === modal) closeCustomerModal(); };
 }
 
-function closeCustomerModal() {
-  document.getElementById('customer-modal').style.display = 'none';
-}
+function closeCustomerModal() { document.getElementById('customer-modal').style.display = 'none'; }
+
+// ── XSS helper ──
+function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
 
 // ── Init ──
 renderKanban();
 renderCustomers();
 </script>
-
 </body>
 </html>
