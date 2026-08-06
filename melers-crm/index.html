@@ -500,6 +500,7 @@ const DATA = {
 function isOverdue(d) { return d && d < TODAY; }
 function formatDate(d) { if (!d) return '—'; const [y,m,dd]=d.split('-'); return `${dd}.${m}.${y}`; }
 function tagClass(tag) { return tag === 'UUSI asiakas' ? 'uusi' : 'vanha'; }
+function tagLabel(tag) { return tag === 'UUSI asiakas' ? 'NEW' : 'OLD'; }
 function leadById(id) { return DATA.leads.find(l => l.id === id); }
 
 function showView(name) {
@@ -529,7 +530,7 @@ function buildCard(lead) {
   card.innerHTML = `
     <div class="lead-card-top">
       <div class="lead-card-company">${lead.company}</div>
-      <span class="lead-card-tag ${tagClass(lead.tag)}">${lead.tag}</span>
+      <span class="lead-card-tag ${tagClass(lead.tag)}">${tagLabel(lead.tag)}</span>
     </div>
     <div class="lead-card-contact">${lead.contact}${lead.title ? ' · ' + lead.title : ''}<br>${lead.phone}</div>
     <span class="lead-card-deadline ${overdue ? 'overdue' : 'on-time'}">
@@ -600,7 +601,7 @@ function openCardModal(id) {
 
       <div class="card-modal-header">
         <input class="card-modal-company-input" id="edit-company" value="${esc(lead.company)}" placeholder="Yrityksen nimi">
-        <span class="lead-card-tag ${tagClass(lead.tag)}" style="margin-top:6px;flex-shrink:0">${lead.tag}</span>
+        <span class="lead-card-tag ${tagClass(lead.tag)}" style="margin-top:6px;flex-shrink:0">${tagLabel(lead.tag)}</span>
       </div>
 
       <div class="stage-select-wrap">
