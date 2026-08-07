@@ -55,7 +55,7 @@ const faqs = [
   { q: 'Kuinka usein nouto tapahtuu?', a: 'Sovitaan yhdessä: viikoittain, kaksi kertaa viikossa tai tarpeen mukaan. Aikataulua voidaan muuttaa joustavasti.' },
   { q: 'Onko minimisopimusta tai sitoutumisaikaa?', a: 'Sopimusehdot sovitaan aina asiakkaan tarpeen mukaan. Volyymi vaihtelee, enemmän kiireaikoina, vähemmän hiljaisina jaksoina. Joustamme teidän rytmiinne.' },
   { q: 'Täyttääkö pesuprosessinne hoiva-alan hygieniastandardit?', a: 'Kyllä. Pesuprosessimme täyttää sosiaali- ja terveydenhuollon tekstiilihuollon vaatimukset.' },
-  { q: 'Miten hinnoittelu toimii?', a: 'Volyymipohjainen, tarjous räätälöidään teidän tarpeenne mukaan. Mitä enemmän, sitä edullisemmin per kg.' },
+  { q: 'Miten hinnoittelu toimii?', a: 'Volyymipohjainen, tarjous räätälöidään teidän tarpeenne mukaan. Mitä enemmän pestävää, sitä edullisempi kokonaiskustannus. Kg tai kpl hinnoittelu, sovitaan yhdessä.' },
 ]
 ---
 <Layout title="Turun Suurpesula | Teollinen tekstiilihuolto yrityksille" description="Turun Suurpesula huoltaa hotellien, hoivakotien ja vahinkosaneerauksen tekstiilit teollisella kapasiteetilla Turussa. Pyydä tarjous 24 tunnissa.">
@@ -234,7 +234,18 @@ const faqs = [
           </div>
         ))}
       </div>
-      <div class="flex items-center gap-4 bg-white/60 rounded-2xl px-6 py-4 mb-8">
+      <div class="bg-white rounded-3xl p-8 flex flex-col md:flex-row items-center gap-6 mb-8">
+        <img src="/photo-palvelujohtaja.webp" alt="Palvelupäällikkö" class="w-20 h-20 rounded-full object-cover object-top shrink-0" />
+        <div class="flex-1 text-center md:text-left">
+          <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-1">Nimetty palvelupäällikkö</p>
+          <p class="font-inter text-[#14375A]/70 text-sm leading-relaxed">Yksi yhteyshenkilö tuntee tilanteenne, ei jonoja, ei uudelleenselittämistä. Soita heti.</p>
+        </div>
+        <div class="flex flex-col gap-3 shrink-0">
+          <a href="tel:0222321300" class="font-sora font-bold text-[#14375A] text-xl hover:text-[#FF8F7A] transition-colors">02 2321 300</a>
+          <a href="#yhteys" class="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-6 py-3 rounded-full hover:bg-[#ff7a63] transition-colors text-sm">Täytä lomake →</a>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 bg-white/60 rounded-2xl px-6 py-4">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-[#FF8F7A] shrink-0">
           <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
           <polyline points="9 22 9 12 15 12 15 22"/>
@@ -242,17 +253,6 @@ const faqs = [
         <p class="font-inter text-[#14375A]/65 text-sm">
           Teollisuuslaitoksemme sijaitsee osoitteessa <span class="font-semibold text-[#14375A]">Telekatu 6, Turku</span>, kapasiteetti yli 170 000 kg vuodessa.
         </p>
-      </div>
-      <div class="bg-white rounded-3xl p-8 flex flex-col md:flex-row items-center gap-6">
-        <img src="/photo-palvelujohtaja.webp" alt="Palvelupäällikkö" class="w-20 h-20 rounded-full object-cover object-top shrink-0" />
-        <div class="flex-1 text-center md:text-left">
-          <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-1">Nimetty palvelupäällikkö</p>
-          <p class="font-inter text-[#14375A]/70 text-sm leading-relaxed">Yksi yhteyshenkilö tuntee tilanteenne, ei jonoja, ei uudelleenselittämistä.</p>
-        </div>
-        <div class="flex flex-col gap-3 shrink-0">
-          <a href="tel:0222321300" class="font-sora font-bold text-[#14375A] text-xl hover:text-[#FF8F7A] transition-colors">02 2321 300</a>
-          <a href="#yhteys" class="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-6 py-3 rounded-full hover:bg-[#ff7a63] transition-colors text-sm">Täytä lomake →</a>
-        </div>
       </div>
     </div>
   </section>
@@ -265,6 +265,7 @@ const faqs = [
         Luotettava kumppani jo vuosia. Tekstiilit aina ajallaan, ei yllätyksiä. Suosittelen kaikille hoivakodin johtajille.
       </blockquote>
       <p class="font-sora text-[#FF8F7A] font-bold text-sm tracking-wide">Asiakas, Turku</p>
+      <p class="font-inter text-white/40 text-xs mt-1">Palvelukodin johtaja</p>
     </div>
   </section>
 
