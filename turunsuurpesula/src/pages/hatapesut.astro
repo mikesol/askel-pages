@@ -23,14 +23,22 @@ const faqs = [
 ---
 <Layout title="Hätäpesut ja vahinkotapaukset — Turun Suurpesula" description="24/7-päivystys vesi-, palo- ja savuvahinkojen tekstiilihuoltoon Turussa. Yhteistyö vakuutusyhtiöiden ja vahinkosaneerausyritysten kanssa.">
 
-  <section class="bg-[#14375A] py-20 md:py-28">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-6">Yrityksille · Hätäpesut ja vahinkotapaukset</p>
-      <h1 class="font-merriweather font-normal text-white text-4xl md:text-5xl leading-snug mb-6">Kun vesivahinko ei odota, <span class="text-[#FF8F7A]">emme mekään.</span></h1>
-      <p class="font-inter text-white/65 text-base leading-relaxed mb-10">24/7-päivystys ja teollinen kapasiteetti vesi-, palo- ja savuvahinkojen tekstiilihuoltoon — yhteistyössä vakuutusyhtiöiden ja vahinkosaneerausyritysten kanssa.</p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="tel:0222321300" class="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-7 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors text-sm">Soita päivystykseen · 02 2321 300</a>
-        <a href="/yhteys" class="inline-flex items-center gap-2 border border-white/30 text-white font-sora font-bold px-7 py-3.5 rounded-full hover:border-white/60 transition-colors text-sm">Täytä lomake</a>
+  <section class="bg-[#14375A] overflow-hidden">
+    <div class="w-full grid md:grid-cols-[55%_45%] min-h-[420px]">
+      <div class="flex items-center px-8 md:px-16 py-20">
+        <div class="max-w-lg">
+          <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-6">Yrityksille · Hätäpesut ja vahinkotapaukset</p>
+          <h1 class="font-merriweather font-normal text-white text-4xl md:text-5xl leading-snug mb-6">Kun vesivahinko ei odota, <span class="text-[#FF8F7A]">emme mekään.</span></h1>
+          <p class="font-inter text-white/65 text-base leading-relaxed mb-10">24/7-päivystys ja teollinen kapasiteetti vesi-, palo- ja savuvahinkojen tekstiilihuoltoon — yhteistyössä vakuutusyhtiöiden ja vahinkosaneerausyritysten kanssa.</p>
+          <div class="flex flex-wrap gap-4">
+            <a href="tel:0222321300" class="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-7 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors text-sm">Soita päivystykseen · 02 2321 300</a>
+            <a href="/yhteys" class="inline-flex items-center gap-2 border border-white/30 text-white font-sora font-bold px-7 py-3.5 rounded-full hover:border-white/60 transition-colors text-sm">Täytä lomake</a>
+          </div>
+        </div>
+      </div>
+      <div class="hidden md:block relative">
+        <img src="/photo-baskets.webp" alt="Hätäpesupalvelu vahingoille" class="absolute inset-0 w-full h-full object-cover object-center" />
+        <div class="absolute inset-0" style="background: linear-gradient(to right, #14375A 0%, #14375A 5%, transparent 40%)"></div>
       </div>
     </div>
   </section>

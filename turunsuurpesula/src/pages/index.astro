@@ -28,11 +28,20 @@ const customerTypes = [
   },
   {
     href: '/hatapesut',
-    label: 'Hätäpesut ja vahinkotapaukset',
+    label: 'Hätä ja vahinkotapaukset',
     img: '/photo-baskets.webp',
     imgAlt: 'Hätäpesupalvelu vahingoille',
     vatExempt: false,
     desc: '24/7-päivystys vesi-, palo- ja savuvahingoille. Yhteistyö vakuutusyhtiöiden ja vahinkosaneerausyritysten kanssa.',
+  },
+  {
+    href: '/yhteys',
+    label: 'Muut alat',
+    img: null,
+    imgAlt: '',
+    vatExempt: false,
+    desc: 'Ravintoloita, apteekkeja, vaateliikkeitä, lauttoja, mattopesuloita — olemme palvelleet monia toimialoja. Toimialasi ei näy listassa? Kysy silti.',
+    cta: 'Pyydä tarjous →',
   },
 ]
 
@@ -56,13 +65,13 @@ const faqs = [
     <div class="w-full grid md:grid-cols-[45%_55%]">
       <div class="flex items-center px-8 md:px-16 py-20 md:py-0">
         <div class="max-w-lg">
-          <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-6">B2B-tekstiilihuolto · Turku</p>
+          <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-6">Turun Suurpesulan Yrityspalvelut</p>
           <h1 class="font-merriweather font-normal text-[#14375A] text-4xl md:text-5xl leading-snug mb-6">
             Tekstiilihuolto —<br />
             <span class="text-[#FF8F7A]">sujuvasti ja luotettavasti</span>
           </h1>
           <p class="font-inter text-[#14375A]/65 text-base leading-relaxed mb-10">
-            Pesemme vuosittain yli 170 000 kg tekstiilejä hoivakodeille, hotelleille ja yrityksille. Yksi sopimus, nimetty palvelupäällikkö, ei häiriöitä arkeesi.
+            Pesemme vuosittain yli 170 000 kg tekstiilejä hoivakodeille, hotelleille ja muille yrityksille. Yksi sopimus, nimetty palvelupäällikkö, ei häiriöitä arkeesi.
           </p>
           <div class="flex flex-wrap gap-4 mb-14">
             <a href="#yhteys" class="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-7 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors text-sm">Pyydä tarjous →</a>
@@ -94,7 +103,10 @@ const faqs = [
         <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Miksi Turun Suurpesula?</p>
         <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl leading-snug mb-6">Me hoidamme —<br />te teette omaa työtänne</h2>
         <p class="font-inter text-[#14375A]/65 text-base leading-relaxed mb-4">
-          Tekstiilihuolto toimii parhaiten silloin, kun ette joudu ajattelemaan sitä. Säännölliset noudot sovitun aikataulun mukaan, kaikki kirjataan ja palautetaan — ei kadonneita pyyhkeitä, ei yllätyksiä.
+          Yli 20 vuoden kokemuksella olemme kasvaneet luotetuksi tekstiilihuoltokumppaniksi turkulaisille ja lähialueiden yrityksille. Asiakkainamme on useita hoivakoteja, hotelleja ja vakuutusyhtiöitä — mutta palvelemme myös työvaatetuksen, ravintoloiden ja monien muiden alojen tarpeita.
+        </p>
+        <p class="font-inter text-[#14375A]/65 text-base leading-relaxed mb-4">
+          Toimialasi ei näy listassa? Kysy silti — löydämme ratkaisun yhdessä.
         </p>
         <p class="font-inter text-[#14375A]/65 text-base leading-relaxed">
           Jokaisella asiakkaalla on nimetty palvelupäällikkö, joka tuntee teidän tilanteenne. Kun tarvitsette jotain, vastaukseen ei mene kauan.
@@ -106,12 +118,12 @@ const faqs = [
         </div>
         <div class="p-8">
           <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-5">Mitä saat meiltä</p>
-          <ul class="flex flex-col gap-5">
+          <ul class="flex flex-col gap-6">
             {services.map((s) => (
-              <li class="flex items-start gap-4">
-                <span class="text-[#FF8F7A] text-xl shrink-0 mt-0.5 w-6">{s.icon}</span>
+              <li class="flex items-start gap-5">
+                <span class="text-[#FF8F7A] text-3xl shrink-0 leading-none w-9 text-center">{s.icon}</span>
                 <div>
-                  <div class="font-sora font-bold text-[#14375A] text-sm mb-1">{s.title}</div>
+                  <div class="font-sora font-bold text-[#14375A] text-base mb-1">{s.title}</div>
                   <div class="font-inter text-[#14375A]/60 text-sm leading-relaxed">{s.desc}</div>
                 </div>
               </li>
@@ -126,22 +138,28 @@ const faqs = [
   <section class="bg-white py-20">
     <div class="max-w-5xl mx-auto px-6">
       <div class="mb-12 text-center">
-        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Palvelemme</p>
-        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl">Ratkaisut kolmelle toimialalle</h2>
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Palvelumme</p>
+        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl">Ratkaisut eri toimialoille</h2>
       </div>
-      <div class="grid md:grid-cols-3 gap-5">
+      <div class="grid md:grid-cols-4 gap-5">
         {customerTypes.map((c) => (
           <a href={c.href} class="block bg-[#F1F2F4] rounded-2xl overflow-hidden hover:shadow-md transition-shadow group">
-            <div class="relative overflow-hidden h-44">
-              <img src={c.img} alt={c.imgAlt} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-              {c.vatExempt && (
-                <span class="absolute top-3 right-3 bg-[#14375A] text-white font-sora font-bold text-[10px] tracking-widest uppercase px-2.5 py-1 rounded-full">ALV 0 %</span>
-              )}
-            </div>
+            {c.img ? (
+              <div class="relative overflow-hidden h-44">
+                <img src={c.img} alt={c.imgAlt} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                {c.vatExempt && (
+                  <span class="absolute top-3 right-3 bg-[#14375A] text-white font-sora font-bold text-[10px] tracking-widest uppercase px-2.5 py-1 rounded-full">ALV 0 %</span>
+                )}
+              </div>
+            ) : (
+              <div class="h-44 bg-[#14375A] flex items-center justify-center">
+                <span class="font-merriweather font-normal text-5xl text-[#FF8F7A]/40">?</span>
+              </div>
+            )}
             <div class="p-6">
               <div class="font-sora font-semibold text-[#14375A] text-base mb-2">{c.label}</div>
               <div class="font-inter text-[#14375A]/65 text-sm leading-relaxed mb-4">{c.desc}</div>
-              <span class="font-sora font-bold text-[#FF8F7A] text-sm">Lue lisää →</span>
+              <span class="font-sora font-bold text-[#FF8F7A] text-sm">{c.cta ?? 'Lue lisää →'}</span>
             </div>
           </a>
         ))}
