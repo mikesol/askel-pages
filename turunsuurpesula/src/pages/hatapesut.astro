@@ -3,13 +3,13 @@ import Layout from '../layouts/Layout.astro'
 
 const benefits = [
   { title: '24/7-päivystys', desc: 'Vesi-, palo- ja savuvahingot eivät odota virka-aikaa. Päivystyksemme vastaa ympäri vuorokauden.' },
-  { title: 'Yhteistyö vakuutusyhtiöiden kanssa', desc: 'Dokumentoitu prosessi tukee vahinkoilmoituksia ja korvauskäsittelyä — kuitit ja erittelyt suoraan teille tai vakuutusyhtiölle.' },
-  { title: 'Suurkapasiteetti', desc: 'Yli 170 000 kg/vuosi -laitos käsittelee suuretkin vahinkoerät nopeasti — kapasiteetti, johon pienemmät pesulat eivät pysty.' },
-  { title: 'Vahinkosaneerauskumppanuus', desc: 'Toimimme suoraan vahinkosaneerausyritysten kanssa osana korjausprosessia — ei ylimääräisiä välikäsiä.' },
+  { title: 'Yhteistyö vakuutusyhtiöiden kanssa', desc: 'Dokumentoitu prosessi tukee vahinkoilmoituksia ja korvauskäsittelyä, kuitit ja erittelyt suoraan teille tai vakuutusyhtiölle.' },
+  { title: 'Suurkapasiteetti', desc: 'Yli 170 000 kg/vuosi -laitos käsittelee suuretkin vahinkoerät nopeasti, kapasiteetti, johon pienemmät pesulat eivät pysty.' },
+  { title: 'Vahinkosaneerauskumppanuus', desc: 'Toimimme suoraan vahinkosaneerausyritysten kanssa osana korjausprosessia, ei ylimääräisiä välikäsiä.' },
 ]
 
 const steps = [
-  { num: '1', title: 'Soita päivystykseen', desc: 'Tavoitat meidät ympäri vuorokauden — kerro vahingon laajuus ja sijainti.' },
+  { num: '1', title: 'Soita päivystykseen', desc: 'Tavoitat meidät ympäri vuorokauden, kerro vahingon laajuus ja sijainti.' },
   { num: '2', title: 'Noudamme vahingoittuneet tekstiilit', desc: 'Nouto järjestyy nopeasti, tarvittaessa suoraan vahinkopaikalta.' },
   { num: '3', title: 'Pesemme ja dokumentoimme', desc: 'Erikoiskäsittely vesi-, palo- ja savuvahingoille, dokumentoituna korvauskäsittelyä varten.' },
 ]
@@ -17,11 +17,11 @@ const steps = [
 const faqs = [
   { q: 'Kuinka nopeasti reagoitte hätätapauksessa?', a: 'Päivystyksemme vastaa ympäri vuorokauden. Nouto järjestetään mahdollisimman pian yhteydenoton jälkeen tilanteen laajuuden mukaan.' },
   { q: 'Voitteko asioida suoraan vakuutusyhtiömme kanssa?', a: 'Kyllä. Dokumentoimme käsitellyt erät niin, että kuitit ja erittelyt käyvät suoraan vahinkoilmoituksen liitteeksi.' },
-  { q: 'Kuinka suuria vahinkoeriä pystytte käsittelemään?', a: 'Teollisuuslaitoksemme kapasiteetti on yli 170 000 kg vuodessa — pystymme ottamaan vastaan myös laajat, kokonaisten kiinteistöjen vahinkoerät.' },
+  { q: 'Kuinka suuria vahinkoeriä pystytte käsittelemään?', a: 'Teollisuuslaitoksemme kapasiteetti on yli 170 000 kg vuodessa, pystymme ottamaan vastaan myös laajat, kokonaisten kiinteistöjen vahinkoerät.' },
   { q: 'Teettekö yhteistyötä vahinkosaneerausyritysten kanssa?', a: 'Kyllä, toimimme suoraan osana vahinkosaneerausyritysten korjausprosessia ilman ylimääräisiä välikäsiä.' },
 ]
 ---
-<Layout title="Hätäpesut ja vahinkotapaukset — Turun Suurpesula" description="24/7-päivystys vesi-, palo- ja savuvahinkojen tekstiilihuoltoon Turussa. Yhteistyö vakuutusyhtiöiden ja vahinkosaneerausyritysten kanssa.">
+<Layout title="Hätäpesut ja vahinkotapaukset | Turun Suurpesula" description="24/7-päivystys vesi-, palo- ja savuvahinkojen tekstiilihuoltoon Turussa. Yhteistyö vakuutusyhtiöiden ja vahinkosaneerausyritysten kanssa.">
 
   <section class="bg-[#14375A] overflow-hidden">
     <div class="w-full grid md:grid-cols-[55%_45%] min-h-[420px]">
@@ -29,7 +29,7 @@ const faqs = [
         <div class="max-w-lg">
           <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-6">Yrityksille · Hätäpesut ja vahinkotapaukset</p>
           <h1 class="font-merriweather font-normal text-white text-4xl md:text-5xl leading-snug mb-6">Kun vesivahinko ei odota, <span class="text-[#FF8F7A]">emme mekään.</span></h1>
-          <p class="font-inter text-white/65 text-base leading-relaxed mb-10">24/7-päivystys ja teollinen kapasiteetti vesi-, palo- ja savuvahinkojen tekstiilihuoltoon — yhteistyössä vakuutusyhtiöiden ja vahinkosaneerausyritysten kanssa.</p>
+          <p class="font-inter text-white/65 text-base leading-relaxed mb-10">24/7-päivystys ja teollinen kapasiteetti vesi-, palo- ja savuvahinkojen tekstiilihuoltoon, yhteistyössä vakuutusyhtiöiden ja vahinkosaneerausyritysten kanssa.</p>
           <div class="flex flex-wrap gap-4">
             <a href="tel:0222321300" class="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-7 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors text-sm">Soita päivystykseen · 02 2321 300</a>
             <a href="/yhteys" class="inline-flex items-center gap-2 border border-white/30 text-white font-sora font-bold px-7 py-3.5 rounded-full hover:border-white/60 transition-colors text-sm">Täytä lomake</a>
@@ -94,7 +94,7 @@ const faqs = [
   <section class="bg-[#FF8F7A] py-20">
     <div class="max-w-3xl mx-auto px-6 text-center">
       <h2 class="font-merriweather font-normal text-white text-3xl md:text-4xl leading-snug mb-4">Vahinko sattunut?</h2>
-      <p class="font-inter text-white/80 text-base leading-relaxed mb-8">Soita päivystykseen — vastaamme ympäri vuorokauden.</p>
+      <p class="font-inter text-white/80 text-base leading-relaxed mb-8">Soita päivystykseen, vastaamme ympäri vuorokauden.</p>
       <a href="tel:0222321300" class="inline-flex items-center gap-2 bg-white text-[#14375A] font-sora font-bold px-8 py-4 rounded-full hover:bg-white/90 transition-colors text-sm">02 2321 300 →</a>
     </div>
   </section>

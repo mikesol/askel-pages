@@ -2,19 +2,19 @@
 import Layout from '../layouts/Layout.astro'
 
 const values = [
-  { title: 'Laatu', subtitle: 'Oikea tulos joka kerta', desc: 'Oikea pesuprosessi jokaiselle tekstiilille. Ammattilaismenetelmät, asiantunteva käsittely ja dokumentoitu jäljitettävyys — ei kompromisseja.' },
-  { title: 'Luotettavuus', subtitle: 'Sovitut aikataulut pidetään', desc: 'Säännölliset noudot ja toimitukset sovitun mukaan. Ei häiriöitä teidän arkeenne — tekstiilit ovat aina saatavilla oikeaan aikaan.' },
-  { title: 'Kumppanuus', subtitle: 'Nimetty palvelupäällikkö', desc: 'Yksi yhteyshenkilö tuntee tilanteenne. Ei jonoja, ei uudelleenselittämistä — nopea vastaus kun tarvitsette jotain.' },
+  { title: 'Laatu', subtitle: 'Oikea tulos joka kerta', desc: 'Oikea pesuprosessi jokaiselle tekstiilille. Ammattilaismenetelmät, asiantunteva käsittely ja dokumentoitu jäljitettävyys, ei kompromisseja.' },
+  { title: 'Luotettavuus', subtitle: 'Sovitut aikataulut pidetään', desc: 'Säännölliset noudot ja toimitukset sovitun mukaan. Ei häiriöitä teidän arkeenne, tekstiilit ovat aina saatavilla oikeaan aikaan.' },
+  { title: 'Kumppanuus', subtitle: 'Nimetty palvelupäällikkö', desc: 'Yksi yhteyshenkilö tuntee tilanteenne. Ei jonoja, ei uudelleenselittämistä, nopea vastaus kun tarvitsette jotain.' },
 ]
 
 const timeline = [
-  { year: '2010', event: 'Turun Suurpesula perustetaan — teollisuuspesulakapasiteetti kasvaa merkittävästi Telekatu 6:ssa.' },
-  { year: '2020', event: 'Palveluvalikoima laajenee vahinkosaneerauksen tekstiilihuoltoon — 24/7-päivystys käynnistyy.' },
-  { year: '2026', event: 'Turun Suurpesula laajenee kasvavaan B2B-kysyntään — hotellit, hoivakodit ja vahinkosaneeraus.' },
+  { year: '2010', event: 'Turun Suurpesula perustetaan, teollisuuspesulakapasiteetti kasvaa merkittävästi Telekatu 6:ssa.' },
+  { year: '2020', event: 'Palveluvalikoima laajenee vahinkosaneerauksen tekstiilihuoltoon, 24/7-päivystys käynnistyy.' },
+  { year: '2026', event: 'Turun Suurpesula laajenee kasvavaan B2B-kysyntään, hotellit, hoivakodit ja vahinkosaneeraus.' },
 ]
 ---
 
-<Layout title="Meistä — Turun Suurpesula" description="Turun Suurpesula on teollisen mittakaavan tekstiilihuoltolaitos Turussa — perustettu 2010, kapasiteetti yli 170 000 kg vuodessa.">
+<Layout title="Meistä | Turun Suurpesula" description="Turun Suurpesula on teollisen mittakaavan tekstiilihuoltolaitos Turussa, perustettu 2010, kapasiteetti yli 170 000 kg vuodessa.">
 
   <section class="bg-[#14375A] overflow-hidden min-h-[70vh] flex items-stretch">
     <div class="w-full grid md:grid-cols-[50%_50%]">
@@ -36,7 +36,7 @@ const timeline = [
         </div>
       </div>
       <div class="hidden md:block relative min-h-[70vh]">
-        <img src="/photo-towels.webp" alt="Turun Suurpesula — tekstiilihuolto" class="absolute inset-0 w-full h-full object-cover object-center" />
+        <img src="/photo-towels.webp" alt="Turun Suurpesula, tekstiilihuolto" class="absolute inset-0 w-full h-full object-cover object-center" />
         <div class="absolute inset-0" style="background: linear-gradient(to right, #14375A 0%, #14375A 5%, transparent 40%)"></div>
       </div>
     </div>
@@ -74,7 +74,7 @@ const timeline = [
         <h2 class="font-merriweather font-normal text-[#14375A] text-3xl mb-6">Teollista tekstiilihuoltoa Turussa</h2>
         <div class="flex flex-col gap-5 font-inter text-[#14375A]/65 text-base leading-relaxed">
           <p>Turun Suurpesula perustettiin vuonna 2010, kun tarve teollisen mittakaavan tekstiilihuollolle Turussa kasvoi. Laitoksemme Telekatu 6:ssa on kasvanut yli 170 000 kg vuosikapasiteettiin.</p>
-          <p>Vuosien varrella olemme palvelleet hotelleja, hoivakoteja, ravintoloita ja vahinkosaneerausyrityksiä. Kasvu on ollut harkittua — emme koskaan laadun kustannuksella.</p>
+          <p>Vuosien varrella olemme palvelleet hotelleja, hoivakoteja, ravintoloita ja vahinkosaneerausyrityksiä. Kasvu on ollut harkittua, emme koskaan laadun kustannuksella.</p>
           <p>24/7-hätäpesupalvelu syntyi suoraan asiakkaiden tarpeesta: vesi- ja palövahingot eivät odota virka-aikaa. Teollinen kapasiteettimme mahdollistaa nopeat toimitukset myös suurissa vahingoissa.</p>
         </div>
       </div>
@@ -103,11 +103,11 @@ const timeline = [
         <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-3">Laitos</p>
         <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl">Teollisuuskapasiteetti</h2>
         <p class="font-inter text-[#14375A]/55 text-base mt-4 max-w-lg mx-auto">
-          Yli <span class="font-semibold text-[#14375A]">170 000 kg</span> tekstiilejä vuodessa — kapasiteetti, johon pienemmät pesulat eivät pysty.
+          Yli <span class="font-semibold text-[#14375A]">170 000 kg</span> tekstiilejä vuodessa, kapasiteetti, johon pienemmät pesulat eivät pysty.
         </p>
       </div>
       <div class="rounded-2xl overflow-hidden shadow-sm">
-        <img src="/photo-baskets.webp" alt="Turun Suurpesula — teollisuuslaitos" class="w-full object-cover max-h-80 object-center" />
+        <img src="/photo-baskets.webp" alt="Turun Suurpesula, teollisuuslaitos" class="w-full object-cover max-h-80 object-center" />
       </div>
     </div>
   </section>
@@ -118,7 +118,7 @@ const timeline = [
       <blockquote class="font-merriweather font-normal text-white text-2xl md:text-3xl leading-snug mb-6">
         Teollinen kapasiteetti, inhimillinen palvelu.
       </blockquote>
-      <p class="font-inter text-white/50 text-sm">Turun Suurpesula — Telekatu 6, Turku</p>
+      <p class="font-inter text-white/50 text-sm">Turun Suurpesula, Telekatu 6, Turku</p>
     </div>
   </section>
 
