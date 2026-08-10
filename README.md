@@ -25,3 +25,4 @@ Published pages for Askel Ventures. Each folder is a site deployed to `<folder-n
 | samantha | https://samantha.askelventures.com |
 | helsinkimeetupday | https://helsinkimeetupday.askelventures.com |
 | turunsuurpesula | https://turunsuurpesula.askelventures.com |
+| tarjous-turunsuurpesula | https://tarjous-turunsuurpesula.askelventures.com |
