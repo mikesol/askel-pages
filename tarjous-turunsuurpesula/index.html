@@ -48,7 +48,7 @@
       color: rgba(255,255,255,0.45);
       margin-bottom: 3px;
     }
-    #fill-form input {
+    #fill-form input, #fill-form select {
       font-family: 'Inter', sans-serif;
       font-size: 13px;
       color: white;
@@ -60,8 +60,10 @@
       min-width: 155px;
       transition: border-color 0.15s;
     }
-    #fill-form input:focus { border-color: var(--coral); }
+    #fill-form select { min-width: 130px; }
+    #fill-form input:focus, #fill-form select:focus { border-color: var(--coral); }
     #fill-form input::placeholder { color: rgba(255,255,255,0.25); }
+    #fill-form select option { background: var(--navy); color: white; }
     #fill-form .print-btn {
       font-family: 'Sora', sans-serif;
       font-size: 12px;
@@ -112,6 +114,8 @@
         page-break-after: always;
         box-shadow: none;
       }
+      .no-print { display: none !important; }
+      [contenteditable] { outline: none; border: none !important; background: transparent !important; }
     }
 
     /* ============ SHARED SLIDE PARTS ============ */
@@ -488,11 +492,282 @@
     }
     #slide-6 .ref-pill { background: var(--gray); }
 
-    /* ============ SLIDE 8: CTA ============ */
-    #slide-8 { background: var(--navy); }
-    #slide-8 .slide-header { background: rgba(255,255,255,0.05); }
-    #slide-8 .slide-header .h-tag { color: rgba(255,255,255,0.25); }
-    #slide-8 .slide-body {
+    /* ============ SLIDE 8: PROPOSED PLAN ============ */
+    #slide-8 { background: var(--gray); }
+    .plan-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 28px;
+      flex: 1;
+    }
+    .plan-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px 22px;
+    }
+    .plan-card-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--coral);
+      margin-bottom: 12px;
+    }
+    .plan-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .plan-bullets li {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: rgba(20,55,90,0.75);
+      line-height: 1.5;
+      padding-left: 16px;
+      position: relative;
+    }
+    .plan-bullets li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--coral);
+      font-size: 11px;
+    }
+    .plan-sla-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: white;
+      border-radius: 14px;
+      padding: 16px 22px;
+      margin-top: 14px;
+    }
+    .plan-sla-icon { color: var(--coral); font-size: 18px; }
+    .plan-sla-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: rgba(20,55,90,0.75);
+      line-height: 1.5;
+    }
+    .plan-sla-text strong {
+      font-family: 'Sora', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--navy);
+      display: block;
+      margin-bottom: 2px;
+    }
+    /* editable hint */
+    [contenteditable]:focus {
+      outline: 2px dashed rgba(255,143,122,0.5);
+      border-radius: 4px;
+      background: rgba(255,143,122,0.04);
+    }
+    [contenteditable]:empty::before {
+      content: attr(data-placeholder);
+      color: rgba(20,55,90,0.3);
+      pointer-events: none;
+    }
+    .edit-hint {
+      font-family: 'Sora', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,143,122,0.6);
+      margin-bottom: 4px;
+    }
+
+    /* ============ SLIDE 9: PRICING ============ */
+    #slide-9 { background: white; }
+    .pricing-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .unit-toggle {
+      display: flex;
+      background: var(--gray);
+      border-radius: 20px;
+      padding: 3px;
+      gap: 2px;
+    }
+    .unit-btn {
+      font-family: 'Sora', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 17px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s;
+      color: rgba(20,55,90,0.45);
+      background: transparent;
+    }
+    .unit-btn.active {
+      background: var(--navy);
+      color: white;
+    }
+    .contract-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+    }
+    .contract-label {
+      font-family: 'Sora', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(20,55,90,0.45);
+      white-space: nowrap;
+    }
+    .contract-select {
+      font-family: 'Sora', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      background: var(--gray);
+      border: none;
+      border-radius: 10px;
+      padding: 6px 12px;
+      cursor: pointer;
+      outline: none;
+    }
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+    }
+    .pricing-table th {
+      font-family: 'Sora', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(20,55,90,0.4);
+      padding: 0 10px 10px;
+      text-align: left;
+      border-bottom: 2px solid var(--gray);
+    }
+    .pricing-table th.right, .pricing-table td.right { text-align: right; }
+    .pricing-table td {
+      padding: 10px 10px;
+      border-bottom: 1px solid var(--gray);
+      vertical-align: middle;
+    }
+    .pricing-table tr:last-child td { border-bottom: none; }
+    .pricing-table .td-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--navy);
+      min-width: 180px;
+    }
+    .pricing-table .td-name [contenteditable] {
+      display: inline-block;
+      min-width: 160px;
+    }
+    .pricing-table .td-num input {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--navy);
+      background: var(--gray);
+      border: none;
+      border-radius: 8px;
+      padding: 5px 10px;
+      width: 80px;
+      text-align: right;
+      outline: none;
+    }
+    .pricing-table .td-num input:focus { background: rgba(255,143,122,0.1); }
+    .td-unit {
+      font-family: 'Sora', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(20,55,90,0.4);
+      padding: 10px 4px;
+      white-space: nowrap;
+    }
+    .td-total {
+      font-family: 'Sora', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+      text-align: right;
+      white-space: nowrap;
+    }
+    .td-del {
+      width: 32px;
+      text-align: center;
+    }
+    .del-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: rgba(20,55,90,0.2);
+      font-size: 16px;
+      line-height: 1;
+      padding: 4px;
+      border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .del-btn:hover { color: #e05555; background: rgba(224,85,85,0.08); }
+    .total-row td {
+      border-top: 2px solid var(--navy) !important;
+      border-bottom: none !important;
+      padding-top: 14px !important;
+    }
+    .total-label {
+      font-family: 'Sora', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .total-amount {
+      font-family: 'Merriweather', serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--coral);
+      text-align: right;
+    }
+    .add-row-btn {
+      font-family: 'Sora', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--gray);
+      color: rgba(20,55,90,0.5);
+      border: 1.5px dashed rgba(20,55,90,0.2);
+      border-radius: 10px;
+      padding: 8px 18px;
+      cursor: pointer;
+      transition: all 0.15s;
+      margin-bottom: 16px;
+    }
+    .add-row-btn:hover { background: rgba(255,143,122,0.1); color: var(--coral); border-color: var(--coral); }
+    .pricing-note {
+      font-family: 'Inter', sans-serif;
+      font-size: 11.5px;
+      color: rgba(20,55,90,0.45);
+      line-height: 1.65;
+      border-left: 2px solid var(--taupe);
+      padding-left: 14px;
+      margin-top: auto;
+    }
+    .pricing-note strong { color: rgba(20,55,90,0.7); font-weight: 600; }
+
+    /* ============ SLIDE 10: CTA ============ */
+    #slide-10 { background: var(--navy); }
+    #slide-10 .slide-header { background: rgba(255,255,255,0.05); }
+    #slide-10 .slide-header .h-tag { color: rgba(255,255,255,0.25); }
+    #slide-10 .slide-body {
       align-items: center;
       justify-content: center;
       text-align: center;
@@ -924,11 +1199,110 @@
     </div>
   </div>
 
-  <!-- ===== SLIDE 8: CTA ===== -->
+  <!-- ===== SLIDE 8: PROPOSED PLAN ===== -->
   <div class="slide" id="slide-8">
     <div class="slide-header">
       <img class="h-logo" src="https://turunsuurpesula.askelventures.com/tsp-logo.png" alt="TSP" onerror="this.style.display='none'">
       <span class="h-tag" id="c-tag-8">—</span>
+    </div>
+    <div class="slide-body">
+      <p class="label-tag">Ehdotettu palveluratkaisu</p>
+      <h2 class="slide-title" style="font-size:32px; margin-bottom:24px;">Mitä tarjoamme teille</h2>
+      <div class="plan-grid">
+        <div class="plan-card">
+          <p class="plan-card-title">Palvelut</p>
+          <p class="edit-hint no-print">✏ Muokkaa tapaamisen mukaan</p>
+          <ul class="plan-bullets" id="plan-services">
+            <li contenteditable="true" data-placeholder="Lisää palvelu">Viikoittainen nouto ja toimitus, sovittu aikataulu</li>
+            <li contenteditable="true" data-placeholder="Lisää palvelu">Liinavaatehuolto — lakanat, pyyhkeet, vaatehuolto</li>
+            <li contenteditable="true" data-placeholder="Lisää palvelu">Hygieniastandardien mukainen pesuprosessi</li>
+            <li contenteditable="true" data-placeholder="Lisää palvelu">Nimetty palvelupäällikkö, suora puhelinnumero</li>
+          </ul>
+          <button class="add-row-btn no-print" style="margin-top:12px; font-size:10px;" onclick="addPlanItem('plan-services')">+ Lisää rivi</button>
+        </div>
+        <div class="plan-card">
+          <p class="plan-card-title">Aloitusaikataulu</p>
+          <p class="edit-hint no-print">✏ Muokkaa tapaamisen mukaan</p>
+          <ul class="plan-bullets" id="plan-timeline">
+            <li contenteditable="true">Sopimuksen allekirjoitus: <strong>—</strong></li>
+            <li contenteditable="true">Ensimmäinen nouto: <strong>—</strong></li>
+            <li contenteditable="true">Palvelupäällikön esittely: viikon sisällä</li>
+            <li contenteditable="true">Ensimmäinen katselmus: 30 päivää aloituksesta</li>
+          </ul>
+        </div>
+      </div>
+      <div class="plan-sla-row">
+        <span class="plan-sla-icon">✓</span>
+        <div class="plan-sla-text">
+          <strong>Palvelulupaus</strong>
+          <span contenteditable="true" data-placeholder="Kuvaile palvelulupaus...">Jos nouto tai toimitus myöhästyy sovitusta, ilmoitamme teille etukäteen. Reklamaatioihin vastataan 24 tunnissa. Palvelupäällikkönne on tavoitettavissa suoraan puhelimitse.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 9: PRICING ===== -->
+  <div class="slide" id="slide-9">
+    <div class="slide-header">
+      <img class="h-logo" src="https://turunsuurpesula.askelventures.com/tsp-logo.png" alt="TSP" onerror="this.style.display='none'">
+      <span class="h-tag" id="c-tag-9">—</span>
+    </div>
+    <div class="slide-body">
+      <p class="label-tag">Hintaehdotus</p>
+      <h2 class="slide-title" style="font-size:30px; margin-bottom:18px;">Alustava hinta-arvio</h2>
+
+      <div class="pricing-controls">
+        <div class="unit-toggle">
+          <button class="unit-btn active" id="btn-kg" onclick="setUnit('kg')">Per kg</button>
+          <button class="unit-btn" id="btn-kpl" onclick="setUnit('kpl')">Per kpl</button>
+        </div>
+        <div class="contract-wrap">
+          <span class="contract-label">Sopimuskausi</span>
+          <select class="contract-select" id="contract-term">
+            <option value="6 kk">6 kk</option>
+            <option value="12 kk" selected>12 kk</option>
+            <option value="24 kk">24 kk</option>
+            <option value="Avoin sopimus">Avoin sopimus</option>
+          </select>
+        </div>
+      </div>
+
+      <table class="pricing-table" id="pricing-table">
+        <thead>
+          <tr>
+            <th style="width:36px;" class="no-print"></th>
+            <th>Palvelu / tekstiili</th>
+            <th class="right" style="width:110px;">Määrä / kk</th>
+            <th style="width:52px;"></th>
+            <th class="right" style="width:100px;">Yksikköhinta</th>
+            <th class="right" style="width:110px;">Kk-hinta</th>
+          </tr>
+        </thead>
+        <tbody id="pricing-rows"></tbody>
+        <tfoot>
+          <tr class="total-row">
+            <td class="no-print"></td>
+            <td colspan="4" class="total-label">Arvioitu kuukausihinta yhteensä</td>
+            <td class="total-amount" id="grand-total">—</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <button class="add-row-btn no-print" onclick="addPricingRow()">+ Lisää palvelu</button>
+
+      <p class="pricing-note">
+        <strong>Huomio:</strong> Hinnat ovat alustavia arvioita tapaamisen pohjalta. Lopullinen hinta vahvistetaan tarjouskirjeessä volyymin ja sopimuskauden mukaan.
+        Hinnat <strong>sisältävät ALV 0 %</strong> hoiva-alan tekstiilihuollolle; muille toimialoille ALV 25,5 % lisätään tarjoukseen.
+        Sopimuskausi: <span id="contract-display">12 kk</span>.
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 10: CTA ===== -->
+  <div class="slide" id="slide-10">
+    <div class="slide-header" style="background:rgba(255,255,255,0.05);">
+      <img class="h-logo" src="https://turunsuurpesula.askelventures.com/tsp-logo.png" alt="TSP" onerror="this.style.display='none'">
+      <span class="h-tag" style="color:rgba(255,255,255,0.25);" id="c-tag-10">—</span>
     </div>
     <div class="slide-body">
       <p class="label-tag" style="color:rgba(255,143,122,0.7);">Seuraavat askeleet</p>
@@ -975,7 +1349,7 @@
 </div>
 
 <script>
-  // Default date
+  /* ===== FILL FORM ===== */
   const t = new Date();
   const pad = n => String(n).padStart(2,'0');
   document.getElementById('f-date').value = pad(t.getDate()) + '.' + pad(t.getMonth()+1) + '.' + t.getFullYear();
@@ -993,13 +1367,82 @@
     document.getElementById('c-seller-cta').textContent = seller || 'Myyjän nimi';
 
     const tagText = client ? 'Tarjous · ' + client : '—';
-    [2,3,4,5,6,7,8].forEach(n => {
+    [2,3,4,5,6,7,8,9,10].forEach(n => {
       const el = document.getElementById('c-tag-' + n);
       if (el) el.textContent = tagText;
     });
   }
-
   update();
+
+  /* ===== PLAN SLIDE — add bullet ===== */
+  function addPlanItem(listId) {
+    const ul = document.getElementById(listId);
+    const li = document.createElement('li');
+    li.contentEditable = 'true';
+    li.dataset.placeholder = 'Kirjoita tähän...';
+    ul.appendChild(li);
+    li.focus();
+  }
+
+  /* ===== PRICING ===== */
+  let currentUnit = 'kg';
+  const defaultRows = [
+    { name: 'Liinavaatteet & pyyhkeet', qty: 500, price: 0.85 },
+    { name: 'Työvaatetukset', qty: 100, price: 0.90 },
+    { name: 'Muut tekstiilit', qty: 80, price: 0.80 },
+  ];
+
+  function fmtEur(n) {
+    return n.toLocaleString('fi-FI', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+  }
+
+  function setUnit(unit) {
+    currentUnit = unit;
+    document.getElementById('btn-kg').classList.toggle('active', unit === 'kg');
+    document.getElementById('btn-kpl').classList.toggle('active', unit === 'kpl');
+    // update unit labels in table
+    document.querySelectorAll('.td-unit').forEach(el => el.textContent = unit);
+    recalc();
+  }
+
+  function recalc() {
+    let total = 0;
+    document.querySelectorAll('#pricing-rows tr').forEach(row => {
+      const qty = parseFloat(row.querySelector('.inp-qty').value) || 0;
+      const price = parseFloat(row.querySelector('.inp-price').value) || 0;
+      const lineTotal = qty * price;
+      total += lineTotal;
+      row.querySelector('.td-total').textContent = lineTotal > 0 ? fmtEur(lineTotal) : '—';
+    });
+    document.getElementById('grand-total').textContent = total > 0 ? fmtEur(total) : '—';
+  }
+
+  function addPricingRow(name, qty, price) {
+    const tbody = document.getElementById('pricing-rows');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="td-del no-print"><button class="del-btn" onclick="this.closest('tr').remove(); recalc();">×</button></td>
+      <td class="td-name"><span contenteditable="true">${name || ''}</span></td>
+      <td class="td-num right"><input class="inp-qty" type="number" min="0" step="1" value="${qty || ''}" placeholder="0" oninput="recalc()"></td>
+      <td class="td-unit">${currentUnit}</td>
+      <td class="td-num right"><input class="inp-price" type="number" min="0" step="0.01" value="${price || ''}" placeholder="0.00" oninput="recalc()"></td>
+      <td class="td-total right">—</td>
+    `;
+    tbody.appendChild(tr);
+    if (qty && price) recalc();
+  }
+
+  function initPricing() {
+    defaultRows.forEach(r => addPricingRow(r.name, r.qty, r.price));
+    recalc();
+  }
+
+  // Contract term display
+  document.getElementById('contract-term').addEventListener('change', function() {
+    document.getElementById('contract-display').textContent = this.value;
+  });
+
+  initPricing();
 </script>
 </body>
 </html>
