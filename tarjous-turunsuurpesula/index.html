@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarjous — Turun Suurpesula</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ============ RESET & BASE ============ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #14375A;
+      --coral: #FF8F7A;
+      --taupe: #E9E4DF;
+      --gray: #F1F2F4;
+      --white: #FFFFFF;
+    }
+    body { font-family: 'Inter', sans-serif; background: #D8D8D8; }
+
+    /* ============ FILL FORM ============ */
+    #fill-form {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--navy);
+      padding: 14px 28px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: 0 3px 16px rgba(0,0,0,0.25);
+    }
+    #fill-form .form-logo {
+      font-family: 'Sora', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--coral);
+      margin-right: 8px;
+      white-space: nowrap;
+    }
+    #fill-form .field { display: flex; flex-direction: column; }
+    #fill-form label {
+      font-family: 'Sora', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 3px;
+    }
+    #fill-form input {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: white;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 6px 12px;
+      outline: none;
+      min-width: 155px;
+      transition: border-color 0.15s;
+    }
+    #fill-form input:focus { border-color: var(--coral); }
+    #fill-form input::placeholder { color: rgba(255,255,255,0.25); }
+    #fill-form .print-btn {
+      font-family: 'Sora', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--coral);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 9px 22px;
+      cursor: pointer;
+      transition: background 0.15s;
+      margin-left: auto;
+      white-space: nowrap;
+    }
+    #fill-form .print-btn:hover { background: #ff7a63; }
+
+    /* ============ SLIDES WRAPPER ============ */
+    .slides-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      padding: 36px 24px 48px;
+    }
+
+    /* ============ SLIDE BASE ============ */
+    .slide {
+      width: 794px;
+      min-height: 1123px;
+      position: relative;
+      overflow: hidden;
+      background: white;
+      box-shadow: 0 6px 32px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ============ PRINT STYLES ============ */
+    @media print {
+      @page { size: A4 portrait; margin: 0; }
+      body { background: white; }
+      #fill-form { display: none !important; }
+      .slides-wrapper { padding: 0; gap: 0; background: white; }
+      .slide {
+        width: 210mm;
+        height: 297mm;
+        min-height: unset;
+        page-break-after: always;
+        box-shadow: none;
+      }
+    }
+
+    /* ============ SHARED SLIDE PARTS ============ */
+    .slide-header {
+      background: var(--navy);
+      padding: 22px 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .slide-header .h-logo { height: 26px; }
+    .slide-header .h-tag {
+      font-family: 'Sora', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.04em;
+    }
+    .slide-body {
+      padding: 48px 52px 44px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .label-tag {
+      font-family: 'Sora', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--coral);
+      margin-bottom: 14px;
+    }
+    .slide-title {
+      font-family: 'Merriweather', serif;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+
+    /* ============ SLIDE 1: COVER ============ */
+    #slide-1 { background: var(--navy); }
+    #slide-1 .cover-inner {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 60px 72px 52px;
+    }
+    .cover-deco-1 {
+      position: absolute;
+      right: -100px; top: 60px;
+      width: 440px; height: 440px;
+      border-radius: 50%;
+      background: rgba(255,143,122,0.07);
+      pointer-events: none;
+    }
+    .cover-deco-2 {
+      position: absolute;
+      right: 60px; bottom: -80px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: rgba(255,143,122,0.05);
+      pointer-events: none;
+    }
+    .cover-deco-3 {
+      position: absolute;
+      left: -60px; bottom: 160px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+      pointer-events: none;
+    }
+    .cover-logo-wrap { margin-bottom: auto; }
+    .cover-logo-img { height: 32px; }
+    .cover-logo-text {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--coral);
+      display: none;
+    }
+    .cover-spacer { flex: 1; }
+    .cover-kicker {
+      font-family: 'Sora', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--coral);
+      margin-bottom: 22px;
+    }
+    .cover-h1 {
+      font-family: 'Merriweather', serif;
+      font-size: 50px;
+      font-weight: 400;
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .cover-h1-client {
+      font-family: 'Merriweather', serif;
+      font-size: 50px;
+      font-weight: 400;
+      color: var(--coral);
+      line-height: 1.2;
+      margin-bottom: 44px;
+    }
+    .cover-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.75;
+      max-width: 460px;
+      margin-bottom: 56px;
+    }
+    .cover-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 22px;
+    }
+    .cover-footer-block { display: flex; flex-direction: column; gap: 5px; }
+    .cover-footer-block.right { text-align: right; }
+    .cover-footer-block.center { text-align: center; }
+    .cfl {
+      font-family: 'Sora', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.3);
+    }
+    .cfv {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ============ SLIDE 2: ABOUT ============ */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 36px;
+    }
+    .stat-box {
+      background: var(--gray);
+      border-radius: 16px;
+      padding: 26px 16px;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Merriweather', serif;
+      font-size: 30px;
+      font-weight: 400;
+      color: var(--coral);
+      display: block;
+      margin-bottom: 8px;
+    }
+    .stat-lbl {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: rgba(20,55,90,0.5);
+      line-height: 1.5;
+    }
+    .body-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: rgba(20,55,90,0.65);
+      line-height: 1.8;
+    }
+
+    /* ============ SLIDE 3: WHY US ============ */
+    #slide-3 { background: var(--gray); }
+    .value-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 28px;
+      flex: 1;
+    }
+    .value-row {
+      background: white;
+      border-radius: 14px;
+      padding: 18px 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+    }
+    .value-icon {
+      font-size: 20px;
+      color: var(--coral);
+      width: 28px;
+      text-align: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      line-height: 1;
+    }
+    .value-title {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .value-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 12.5px;
+      color: rgba(20,55,90,0.58);
+      line-height: 1.6;
+    }
+
+    /* ============ SLIDE 4: SERVICES ============ */
+    .service-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 28px;
+      flex: 1;
+    }
+    .svc-tile {
+      border-radius: 20px;
+      padding: 36px 30px;
+      display: flex;
+      flex-direction: column;
+    }
+    .svc-tile.t-navy { background: var(--navy); }
+    .svc-tile.t-coral { background: var(--coral); }
+    .svc-tile.t-gray { background: var(--gray); }
+    .svc-tile.t-taupe { background: var(--taupe); }
+    .svc-icon { font-size: 26px; margin-bottom: 18px; }
+    .svc-title {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+    .t-navy .svc-title, .t-coral .svc-title { color: white; }
+    .t-gray .svc-title, .t-taupe .svc-title { color: var(--navy); }
+    .svc-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 12.5px;
+      line-height: 1.65;
+    }
+    .t-navy .svc-desc { color: rgba(255,255,255,0.6); }
+    .t-coral .svc-desc { color: rgba(255,255,255,0.8); }
+    .t-gray .svc-desc, .t-taupe .svc-desc { color: rgba(20,55,90,0.6); }
+
+    /* ============ SLIDES 5–7: CASE STUDIES ============ */
+    #slide-5, #slide-7 { background: var(--gray); }
+    .case-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 28px;
+    }
+    .case-badge {
+      background: var(--navy);
+      color: white;
+      font-family: 'Sora', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 9px 20px;
+      border-radius: 24px;
+      display: inline-block;
+    }
+    .case-years-wrap { text-align: right; }
+    .case-years-num {
+      font-family: 'Merriweather', serif;
+      font-size: 48px;
+      font-weight: 400;
+      color: var(--coral);
+      line-height: 1;
+    }
+    .case-years-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: rgba(20,55,90,0.45);
+      margin-top: 3px;
+    }
+    .case-headline {
+      font-family: 'Merriweather', serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.4;
+      margin-bottom: 18px;
+    }
+    .case-quote {
+      font-family: 'Merriweather', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--navy);
+      line-height: 1.7;
+      border-left: 3px solid var(--coral);
+      padding-left: 18px;
+      margin-bottom: 26px;
+    }
+    .case-facts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+    .case-fact {
+      background: white;
+      border-radius: 12px;
+      padding: 16px 16px;
+    }
+    #slide-6 .case-fact { background: var(--gray); }
+    .case-fact-val {
+      font-family: 'Sora', sans-serif;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .case-fact-lbl {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: rgba(20,55,90,0.45);
+      line-height: 1.4;
+    }
+    .case-services-label {
+      font-family: 'Sora', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--coral);
+      margin-bottom: 10px;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .tag {
+      background: var(--navy);
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 11.5px;
+      padding: 5px 13px;
+      border-radius: 20px;
+    }
+    .refs-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(20,55,90,0.1);
+    }
+    .refs-lbl {
+      font-family: 'Sora', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(20,55,90,0.35);
+      flex-shrink: 0;
+    }
+    .ref-pill {
+      background: white;
+      border: 1px solid rgba(20,55,90,0.1);
+      border-radius: 8px;
+      padding: 7px 14px;
+      font-family: 'Sora', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    #slide-6 .ref-pill { background: var(--gray); }
+
+    /* ============ SLIDE 8: CTA ============ */
+    #slide-8 { background: var(--navy); }
+    #slide-8 .slide-header { background: rgba(255,255,255,0.05); }
+    #slide-8 .slide-header .h-tag { color: rgba(255,255,255,0.25); }
+    #slide-8 .slide-body {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .cta-headline {
+      font-family: 'Merriweather', serif;
+      font-size: 36px;
+      font-weight: 400;
+      color: white;
+      line-height: 1.3;
+      margin-bottom: 14px;
+      max-width: 500px;
+    }
+    .cta-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.75;
+      max-width: 400px;
+      margin-bottom: 44px;
+    }
+    .cta-steps {
+      display: flex;
+      gap: 0;
+      width: 100%;
+      max-width: 540px;
+      margin-bottom: 44px;
+    }
+    .cta-step {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+    .cta-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 21px;
+      left: 50%;
+      width: 100%;
+      height: 1px;
+      background: rgba(255,143,122,0.25);
+    }
+    .step-num {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255,143,122,0.12);
+      border: 1px solid rgba(255,143,122,0.35);
+      font-family: 'Sora', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--coral);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+    }
+    .step-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 5px;
+    }
+    .step-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.5;
+      padding: 0 6px;
+    }
+    .contact-box {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 30px 48px;
+      width: 100%;
+      max-width: 460px;
+    }
+    .contact-name {
+      font-family: 'Sora', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 4px;
+    }
+    .contact-role {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.38);
+      margin-bottom: 20px;
+    }
+    .contact-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .contact-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: rgba(255,255,255,0.72);
+    }
+    .contact-icon { color: var(--coral); font-size: 15px; }
+  </style>
+</head>
+<body>
+
+<!-- ===== FILL FORM ===== -->
+<div id="fill-form">
+  <span class="form-logo">Turun Suurpesula · Tarjouspohja</span>
+  <div class="field">
+    <label>Asiakkaan yritys</label>
+    <input type="text" id="f-client" placeholder="Yritys Oy" oninput="update()">
+  </div>
+  <div class="field">
+    <label>Yhteyshenkilö</label>
+    <input type="text" id="f-contact" placeholder="Etunimi Sukunimi" oninput="update()">
+  </div>
+  <div class="field">
+    <label>Päivämäärä</label>
+    <input type="text" id="f-date" placeholder="10.8.2026" oninput="update()">
+  </div>
+  <div class="field">
+    <label>Myyjä</label>
+    <input type="text" id="f-seller" placeholder="Myyjän nimi" oninput="update()">
+  </div>
+  <button class="print-btn" onclick="window.print()">⬇ Lataa PDF</button>
+</div>
+
+<div class="slides-wrapper">
+
+  <!-- ===== SLIDE 1: COVER ===== -->
+  <div class="slide" id="slide-1">
+    <div class="cover-deco-1"></div>
+    <div class="cover-deco-2"></div>
+    <div class="cover-deco-3"></div>
+    <div class="cover-inner">
+      <div class="cover-logo-wrap">
+        <img class="cover-logo-img" src="https://turunsuurpesula.askelventures.com/tsp-logo.png"
+             alt="Turun Suurpesula"
+             onerror="this.style.display='none'; document.getElementById('cover-logo-txt').style.display='block'">
+        <span class="cover-logo-text" id="cover-logo-txt">Turun Suurpesula</span>
+      </div>
+      <div class="cover-spacer"></div>
+      <p class="cover-kicker">Tarjous · Teollinen tekstiilihuolto</p>
+      <h1 class="cover-h1">Tekstiilihuolto —</h1>
+      <h1 class="cover-h1-client" id="c-client-cover">asiakkaan nimi</h1>
+      <p class="cover-sub">Luotettava kumppani hotellien, hoivakotien ja yritysten tekstiilihuoltoon Turun seudulla. 16 vuoden kokemus, nimetty palvelupäällikkö, ei yllätyksiä.</p>
+      <div class="cover-footer">
+        <div class="cover-footer-block">
+          <span class="cfl">Vastaanottaja</span>
+          <span class="cfv" id="c-contact-cover">—</span>
+        </div>
+        <div class="cover-footer-block center">
+          <span class="cfl">Päivämäärä</span>
+          <span class="cfv" id="c-date-cover">—</span>
+        </div>
+        <div class="cover-footer-block right">
+          <span class="cfl">Myyjä</span>
+          <span class="cfv" id="c-seller-cover">—</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 2: ABOUT ===== -->
+  <div class="slide" id="slide-2">
+    <div class="slide-header">
+      <img class="h-logo" src="https://turunsuurpesula.askelventures.com/tsp-logo.png" alt="TSP" onerror="this.style.display='none'">
+      <span class="h-tag" id="c-tag-2">—</span>
+    </div>
+    <div class="slide-body">
+      <p class="label-tag">Turun Suurpesula</p>
+      <h2 class="slide-title" style="font-size:36px; max-width:500px; margin-bottom:20px;">Turkulainen teollinen pesula — jo 16 vuotta</h2>
+      <p class="body-text">Turun Suurpesula on osa Melers Pesulapalvelut -konsernia — ammattimainen, vakavarainen ja kehittyvä tekstiilihuollon toimija Turun seudulla. Teollisuuslaitoksemme sijaitsee Telekatu 6:ssa Turussa.</p>
+      <p class="body-text" style="margin-top:14px;">Palvelemme hotelleja, hoivakoteja, vahinkosaneerausyrityksiä ja kymmeniä muita toimialoja. Jokaisella asiakkaalla on nimetty palvelupäällikkö — yksi yhteyshenkilö, ei jonoja, ei uudelleenselittämistä.</p>
+      <div class="stat-grid">
+        <div class="stat-box">
+          <span class="stat-num">16</span>
+          <span class="stat-lbl">vuotta alalla<br>Turun seudulla</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">1,2M+</span>
+          <span class="stat-lbl">kiloa tekstiilejä<br>pesty</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">170K</span>
+          <span class="stat-lbl">kg/v teollinen<br>kapasiteetti</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">24h</span>
+          <span class="stat-lbl">tarjousvastaus<br>aina</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 3: WHY US ===== -->
+  <div class="slide" id="slide-3">
+    <div class="slide-header">
+      <img class="h-logo" src="https://turunsuurpesula.askelventures.com/tsp-logo.png" alt="TSP" onerror="this.style.display='none'">
+      <span class="h-tag" id="c-tag-3">—</span>
+    </div>
+    <div class="slide-body">
+      <p class="label-tag">Miksi Turun Suurpesula?</p>
+      <h2 class="slide-title" style="font-size:34px; margin-bottom:6px;">Me hoidamme — te teette omaa työtänne</h2>
+      <div class="value-list">
+        <div class="value-row">
+          <span class="value-icon">◎</span>
+          <div>
+            <div class="value-title">Nimetty palvelupäällikkö</div>
+            <div class="value-desc">Yksi yhteyshenkilö tuntee tilanteenne. Ei jonoja, ei uudelleenselittämistä. Soita suoraan.</div>
+          </div>
+        </div>
+        <div class="value-row">
+          <span class="value-icon">✓</span>
+          <div>
+            <div class="value-title">Hygieniastandardit täytetty</div>
+            <div class="value-desc">Pesuprosessimme täyttää sosiaali- ja terveydenhuollon sekä hotellisektorin vaatimukset. Puhdas, turvallinen, dokumentoitu.</div>
+          </div>
+        </div>
+        <div class="value-row">
+          <span class="value-icon">↻</span>
+          <div>
+            <div class="value-title">Säännöllinen nouto ja toimitus</div>
+            <div class="value-desc">Sovitun aikataulun mukaan — viikoittain tai useammin. Ei häiriöitä toimintaanne.</div>
+          </div>
+        </div>
+        <div class="value-row">
+          <span class="value-icon">≡</span>
+          <div>
+            <div class="value-title">Volyymipohjainen hinnoittelu</div>
+            <div class="value-desc">Mitä enemmän, sen edullisemmin. Tarjoukset räätälöidään aina yksilöllisesti — kg tai kpl, sovitaan yhdessä.</div>
+          </div>
+        </div>
+        <div class="value-row">
+          <span class="value-icon">◻</span>
+          <div>
+            <div class="value-title">Liinavaatevuokraus</div>
+            <div class="value-desc">Pitkäaikaisasiakkaille tarjoamme liinavaatteiden ja pyyhkeiden vuokrauksen. Ei omaa hankintaa, ei varastointia.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 4: SERVICES ===== -->
+  <div class="slide" id="slide-4">
+    <div class="slide-header">
+      <img class="h-logo" src="https://turunsuurpesula.askelventures.com/tsp-logo.png" alt="TSP" onerror="this.style.display='none'">
+      <span class="h-tag" id="c-tag-4">—</span>
+    </div>
+    <div class="slide-body">
+      <p class="label-tag">Palvelumme</p>
+      <h2 class="slide-title" style="font-size:34px; margin-bottom:0;">Ratkaisut eri toimialoille</h2>
+      <div class="service-grid">
+        <div class="svc-tile t-navy">
+          <div class="svc-icon">🏨</div>
+          <div class="svc-title">Hotellit</div>
+          <div class="svc-desc">Nopea lakanoiden kierto. Lakanat ja pyyhkeet ajallaan — aina. Liinavaatevuokraus pitkäaikaisasiakkaille ilman omaa varastoa.</div>
+        </div>
+        <div class="svc-tile t-coral">
+          <div class="svc-icon">🏥</div>
+          <div class="svc-title">Hoiva- ja palvelutalot</div>
+          <div class="svc-desc">ALV 0 % — merkittävä kustannussäästö. Hygieniastandardit täytetty. Hoitohenkilökunnan aika vapautuu hoitotyöhön.</div>
+        </div>
+        <div class="svc-tile t-gray">
+          <div class="svc-icon">🚨</div>
+          <div class="svc-title">Vahinkopesut</div>
+          <div class="svc-desc">Teollinen kapasiteetti vesi-, palo- ja savuvahinkoihin. Yhteistyö vakuutusyhtiöiden ja vahinkosaneerausyritysten kanssa.</div>
+        </div>
+        <div class="svc-tile t-taupe">
+          <div class="svc-icon">◈</div>
+          <div class="svc-title">Muut alat</div>
+          <div class="svc-desc">Ravintolat, apteekit, vaateliikkeet, mattopesuloita, lauttoja, työvaatetusta. Jos et näe toimialaasi — kysy silti.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 5: CASE STUDY — HOIVAKOTI ===== -->
+  <div class="slide" id="slide-5">
+    <div class="slide-header">
+      <img class="h-logo" src="https://turunsuurpesula.askelventures.com/tsp-logo.png" alt="TSP" onerror="this.style.display='none'">
+      <span class="h-tag" id="c-tag-5">—</span>
+    </div>
+    <div class="slide-body">
+      <p class="label-tag">Asiakasesimerkki · Hoiva- ja palvelutalot</p>
+      <div class="case-top">
+        <span class="case-badge">Yrjö ja Hanna Kodit</span>
+        <div class="case-years-wrap">
+          <div class="case-years-num">5+</div>
+          <div class="case-years-sub">vuotta yhteistyötä</div>
+        </div>
+      </div>
+      <h2 class="case-headline">Luotettava tekstiilihuolto 15 hoivayksikköön ympäri Suomen</h2>
+      <p class="case-quote">"Luotettava kumppani jo vuosia. Tekstiilit aina ajallaan, ei yllätyksiä. Suosittelen kaikille hoivakodin johtajille."</p>
+      <div class="case-facts">
+        <div class="case-fact">
+          <div class="case-fact-val">~15</div>
+          <div class="case-fact-lbl">hoivayksikköä<br>Suomessa</div>
+        </div>
+        <div class="case-fact">
+          <div class="case-fact-val">~278</div>
+          <div class="case-fact-lbl">hoivahenkilöstöä</div>
+        </div>
+        <div class="case-fact">
+          <div class="case-fact-val">ALV 0 %</div>
+          <div class="case-fact-lbl">kustannussäästö<br>hoiva-alalle</div>
+        </div>
+      </div>
+      <div>
+        <p class="case-services-label">Mitä hoidamme</p>
+        <div class="tags">
+          <span class="tag">Viikoittaiset noudot</span>
+          <span class="tag">Liinavaatehuolto</span>
+          <span class="tag">Hygieniadokumentointi</span>
+          <span class="tag">ALV 0 % laskutus</span>
+          <span class="tag">Nimetty palvelupäällikkö</span>
+        </div>
+      </div>
+      <div class="refs-bar">
+        <span class="refs-lbl">Muita referenssejä</span>
+        <span class="ref-pill">Hesperia Care</span>
+        <span class="ref-pill">Myllykoti</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 6: CASE STUDY — HOTELLIT ===== -->
+  <div class="slide" id="slide-6">
+    <div class="slide-header">
+      <img class="h-logo" src="https://turunsuurpesula.askelventures.com/tsp-logo.png" alt="TSP" onerror="this.style.display='none'">
+      <span class="h-tag" id="c-tag-6">—</span>
+    </div>
+    <div class="slide-body">
+      <p class="label-tag">Asiakasesimerkki · Hotellit</p>
+      <div class="case-top">
+        <span class="case-badge">Hotelli Helmi</span>
+        <div class="case-years-wrap">
+          <div class="case-years-num">3+</div>
+          <div class="case-years-sub">vuotta yhteistyötä</div>
+        </div>
+      </div>
+      <h2 class="case-headline">Häiriötön lakanoiden kierto — housekeeping keskittyy olennaiseen</h2>
+      <p class="case-quote">"Liinavaatteet ovat aina paikalla kun tarvitaan. Emme enää mieti pyykkiä — se on isompi juttu kuin miltä kuulostaa."</p>
+      <div class="case-facts">
+        <div class="case-fact">
+          <div class="case-fact-val">2×/vko</div>
+          <div class="case-fact-lbl">nouto- ja<br>toimitusvuoro</div>
+        </div>
+        <div class="case-fact">
+          <div class="case-fact-val">0 kpl</div>
+          <div class="case-fact-lbl">omia liinavaatteita<br>varastossa</div>
+        </div>
+        <div class="case-fact">
+          <div class="case-fact-val">kg-hinta</div>
+          <div class="case-fact-lbl">volyymiin<br>skaalautuva</div>
+        </div>
+      </div>
+      <div>
+        <p class="case-services-label">Mitä hoidamme</p>
+        <div class="tags">
+          <span class="tag">Lakanat & pyyhkeet</span>
+          <span class="tag">Liinavaatevuokraus</span>
+          <span class="tag">Sopimustoimitus 2×/vko</span>
+          <span class="tag">Volyymipohjainen hinta</span>
+          <span class="tag">Nimetty palvelupäällikkö</span>
+        </div>
+      </div>
+      <div class="refs-bar">
+        <span class="refs-lbl">Muita referenssejä</span>
+        <span class="ref-pill">Turku-alueen hotellit</span>
+        <span class="ref-pill">Majoituspalvelut</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 7: CASE STUDY — VAHINKOPESUT ===== -->
+  <div class="slide" id="slide-7">
+    <div class="slide-header">
+      <img class="h-logo" src="https://turunsuurpesula.askelventures.com/tsp-logo.png" alt="TSP" onerror="this.style.display='none'">
+      <span class="h-tag" id="c-tag-7">—</span>
+    </div>
+    <div class="slide-body">
+      <p class="label-tag">Asiakasesimerkki · Vahinkopesut</p>
+      <div class="case-top">
+        <span class="case-badge">If Vahinkovakuutus</span>
+        <div class="case-years-wrap">
+          <div class="case-years-num">24h</div>
+          <div class="case-years-sub">reagointiaika</div>
+        </div>
+      </div>
+      <h2 class="case-headline">Teollinen kapasiteetti vesi-, palo- ja savuvahinkoihin</h2>
+      <p class="case-quote">"Nopea ja dokumentoitu prosessi. Vakuutusyhtiön kannalta juuri se mitä tarvitaan — ei soittelua, ei viivyttelyä."</p>
+      <div class="case-facts">
+        <div class="case-fact">
+          <div class="case-fact-val">24h</div>
+          <div class="case-fact-lbl">toimitusaika<br>vahingon jälkeen</div>
+        </div>
+        <div class="case-fact">
+          <div class="case-fact-val">3 tyyppiä</div>
+          <div class="case-fact-lbl">vesi · palo · savu</div>
+        </div>
+        <div class="case-fact">
+          <div class="case-fact-val">Dokumentoitu</div>
+          <div class="case-fact-lbl">korvausvaatimuksiin<br>sopiva raportointi</div>
+        </div>
+      </div>
+      <div>
+        <p class="case-services-label">Mitä hoidamme</p>
+        <div class="tags">
+          <span class="tag">Vesivahinkotekstiilit</span>
+          <span class="tag">Palo- & savuvahingot</span>
+          <span class="tag">Nopea kapasiteetti</span>
+          <span class="tag">Vakuutusraportointi</span>
+          <span class="tag">Saneerauskumppanuus</span>
+        </div>
+      </div>
+      <div class="refs-bar">
+        <span class="refs-lbl">Muita yhteistyötahoja</span>
+        <span class="ref-pill">Vakuutusyhtiöt</span>
+        <span class="ref-pill">Vahinkosaneeraus</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 8: CTA ===== -->
+  <div class="slide" id="slide-8">
+    <div class="slide-header">
+      <img class="h-logo" src="https://turunsuurpesula.askelventures.com/tsp-logo.png" alt="TSP" onerror="this.style.display='none'">
+      <span class="h-tag" id="c-tag-8">—</span>
+    </div>
+    <div class="slide-body">
+      <p class="label-tag" style="color:rgba(255,143,122,0.7);">Seuraavat askeleet</p>
+      <h2 class="cta-headline">Aloitetaan 30 minuutin tutustumisella</h2>
+      <p class="cta-sub">Ei sitoumuksia. Kerromme miten voimme auttaa juuri teidän tilanteeseenne — ja lähetämme tarjouksen 24 tunnissa.</p>
+      <div class="cta-steps">
+        <div class="cta-step">
+          <div class="step-num">1</div>
+          <div class="step-title">Ota yhteyttä</div>
+          <div class="step-desc">Soita tai lähetä sähköposti. Vastaamme 24h.</div>
+        </div>
+        <div class="cta-step">
+          <div class="step-num">2</div>
+          <div class="step-title">Sovitaan aikataulu</div>
+          <div class="step-desc">Räätälöimme noudot teidän rytmiin.</div>
+        </div>
+        <div class="cta-step">
+          <div class="step-num">3</div>
+          <div class="step-title">Me hoidamme loput</div>
+          <div class="step-desc">Tekstiilit noudetaan, pestään ja palautetaan.</div>
+        </div>
+      </div>
+      <div class="contact-box">
+        <div class="contact-name" id="c-seller-cta">Myyjän nimi</div>
+        <div class="contact-role">Turun Suurpesula · Palvelupäällikkö</div>
+        <div class="contact-rows">
+          <div class="contact-row">
+            <span class="contact-icon">☎</span>
+            <span>02 2321 300</span>
+          </div>
+          <div class="contact-row">
+            <span class="contact-icon">@</span>
+            <span>info@turunsuurpesula.fi</span>
+          </div>
+          <div class="contact-row">
+            <span class="contact-icon">◎</span>
+            <span>Telekatu 6, 20520 Turku</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Default date
+  const t = new Date();
+  const pad = n => String(n).padStart(2,'0');
+  document.getElementById('f-date').value = pad(t.getDate()) + '.' + pad(t.getMonth()+1) + '.' + t.getFullYear();
+
+  function update() {
+    const client = document.getElementById('f-client').value.trim();
+    const contact = document.getElementById('f-contact').value.trim();
+    const date = document.getElementById('f-date').value.trim();
+    const seller = document.getElementById('f-seller').value.trim();
+
+    document.getElementById('c-client-cover').textContent = client || 'asiakkaan nimi';
+    document.getElementById('c-contact-cover').textContent = contact || '—';
+    document.getElementById('c-date-cover').textContent = date || '—';
+    document.getElementById('c-seller-cover').textContent = seller || '—';
+    document.getElementById('c-seller-cta').textContent = seller || 'Myyjän nimi';
+
+    const tagText = client ? 'Tarjous · ' + client : '—';
+    [2,3,4,5,6,7,8].forEach(n => {
+      const el = document.getElementById('c-tag-' + n);
+      if (el) el.textContent = tagText;
+    });
+  }
+
+  update();
+</script>
+</body>
+</html>
