@@ -103,7 +103,7 @@
       display: flex; align-items: center; justify-content: space-between;
       flex-shrink: 0;
     }
-    .sh img { height: 24px; }
+    .sh img { height: 32px; }
     .sh-tag {
       font-family: 'Sora', sans-serif; font-size: 10px; font-weight: 600;
       color: rgba(255,255,255,0.3); letter-spacing: 0.04em;
@@ -153,18 +153,14 @@
     .deco-1 { width: 420px; height: 420px; right: -80px; top: 40px; background: rgba(255,143,122,0.07); }
     .deco-2 { width: 260px; height: 260px; right: 80px; bottom: -60px; background: rgba(255,143,122,0.05); }
     .deco-3 { width: 160px; height: 160px; left: -40px; bottom: 180px; background: rgba(255,255,255,0.025); }
-    /* cover photo */
-    .cover-photo {
-      position: absolute; right: 0; top: 0; bottom: 0; width: 46%;
-      overflow: hidden; pointer-events: none;
+    /* cover image box */
+    .cover-image-box {
+      flex: 1; min-height: 180px;
+      border-radius: 16px; overflow: hidden; margin-top: 28px;
     }
-    .cover-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center center; }
-    .cover-photo-fade {
-      position: absolute; inset: 0;
-      background: linear-gradient(to right, var(--navy) 0%, rgba(20,55,90,0.85) 20%, transparent 60%);
-    }
+    .cover-image-box img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; }
     /* thin coral accent line */
-    .cover-accent { width: 48px; height: 3px; background: var(--coral); border-radius: 2px; margin-bottom: auto; }
+    .cover-accent { width: 48px; height: 3px; background: var(--coral); border-radius: 2px; margin-top: 12px; margin-bottom: 28px; }
     .cover-logo { height: 30px; margin-bottom: 16px; }
     .cover-spacer { flex: 1; }
     .cover-kicker {
@@ -178,12 +174,12 @@
     }
     .cover-client {
       font-family: 'Merriweather', serif; font-size: 46px; font-weight: 400;
-      color: var(--coral); line-height: 1.2; margin-bottom: 40px;
+      color: var(--coral); line-height: 1.2; margin-bottom: 16px;
     }
     .cover-sub {
       font-family: 'Inter', sans-serif; font-size: 14px;
       color: rgba(255,255,255,0.45); line-height: 1.8;
-      max-width: 440px; margin-bottom: 48px;
+      max-width: 440px; margin-bottom: 16px;
     }
     .cover-footer {
       display: grid; grid-template-columns: 1fr 1fr 1fr;
@@ -210,24 +206,25 @@
     ════════════════════════════════════════════════ */
     #s2 { background: var(--gray); }
     .agenda-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 12px; margin-top: 28px; flex: 1;
+      display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+      gap: 14px; margin-top: 20px; flex: 1;
     }
     .agenda-item {
-      background: white; border-radius: 14px; padding: 22px 22px;
-      display: flex; align-items: flex-start; gap: 14px;
+      background: white; border-radius: 16px; padding: 28px 26px;
+      display: flex; flex-direction: column; gap: 10px;
     }
+    .agenda-icon { color: var(--coral); }
     .agenda-num {
-      font-family: 'Merriweather', serif; font-size: 36px; font-weight: 400;
-      color: rgba(20,55,90,0.08); line-height: 1; flex-shrink: 0; margin-top: -4px;
+      font-family: 'Sora', sans-serif; font-size: 10px; font-weight: 700;
+      color: rgba(20,55,90,0.20); letter-spacing: 0.08em;
     }
     .agenda-item-title {
-      font-family: 'Sora', sans-serif; font-weight: 700; font-size: 13px;
-      color: var(--navy); margin-bottom: 4px;
+      font-family: 'Sora', sans-serif; font-weight: 700; font-size: 16px;
+      color: var(--navy); margin-bottom: 0;
     }
     .agenda-item-desc {
-      font-family: 'Inter', sans-serif; font-size: 12px;
-      color: var(--navy40); line-height: 1.55;
+      font-family: 'Inter', sans-serif; font-size: 13px;
+      color: var(--navy65); line-height: 1.6;
     }
     .agenda-note {
       margin-top: 20px;
@@ -241,13 +238,18 @@
        SLIDE 3 — KUULIMME TEIDÄT
     ════════════════════════════════════════════════ */
     #s3 { background: white; }
+    #s3-new { display: flex; flex-direction: column; flex: 1; }
     .heard-grid {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: 14px; margin-top: 24px; flex: 1;
+      gap: 14px; margin-top: 20px; flex: 1;
     }
     .heard-card {
-      border-radius: 14px; padding: 22px 20px;
+      border-radius: 14px; padding: 24px 22px;
       display: flex; flex-direction: column; gap: 10px;
+    }
+    .s3-notes {
+      margin-top: 14px; background: var(--gray); border-radius: 14px;
+      padding: 20px 22px;
     }
     .heard-card.navy { background: var(--navy); }
     .heard-card.gray { background: var(--gray); }
@@ -296,13 +298,15 @@
       margin-bottom: 10px;
     }
     .existing-main { display: flex; flex-direction: column; gap: 14px; margin-top: 14px; }
+    .s3-photo { width: 100%; border-radius: 12px; overflow: hidden; margin-top: 14px; flex-shrink: 0; }
+    .s3-photo img { width: 100%; height: 170px; object-fit: cover; object-position: center 40%; display: block; }
 
     /* ═══════════════════════════════════════════════
        SLIDE 4 — RATKAISUMME
     ════════════════════════════════════════════════ */
     #s4 { background: var(--gray); }
     .solution-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; flex: 1; }
-    .sol-card { background: white; border-radius: 14px; padding: 24px 22px; }
+    .sol-card { background: white; border-radius: 14px; padding: 22px 20px; }
     .sol-card.accent { background: var(--navy); }
     .sol-label {
       font-family: 'Sora', sans-serif; font-size: 9px; font-weight: 700;
@@ -312,7 +316,7 @@
     .sol-card.accent .sol-label { color: rgba(255,143,122,0.7); }
     .sol-bullets { list-style: none; display: flex; flex-direction: column; gap: 9px; }
     .sol-bullets li {
-      font-family: 'Inter', sans-serif; font-size: 13px; color: var(--navy65);
+      font-family: 'Inter', sans-serif; font-size: 14px; color: var(--navy65);
       padding-left: 16px; position: relative; line-height: 1.5;
     }
     .sol-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--coral); font-size: 11px; top: 1px; }
@@ -327,55 +331,47 @@
       font-family: 'Inter', sans-serif; font-size: 13px; color: var(--navy65); line-height: 1.6;
     }
     .sol-commit-text strong { font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700; color: var(--navy); display: block; margin-bottom: 2px; }
+    .s4-photo { width: 100%; border-radius: 12px; overflow: hidden; margin-top: 14px; flex: 1; min-height: 120px; }
+    .s4-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 60%; display: block; }
 
     /* ═══════════════════════════════════════════════
-       SLIDE 5 — MIKSI TSP
+       SLIDE 5 — MIKSI TSP (story-based)
     ════════════════════════════════════════════════ */
     #s5 { background: white; }
-    .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 24px; }
-    .s5-photo { width: 100%; height: 110px; border-radius: 12px; overflow: hidden; margin-top: 14px; position: relative; }
-    .s5-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 55%; }
-    .s5-photo::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to right, rgba(20,55,90,0.55) 0%, transparent 35%, transparent 65%, rgba(20,55,90,0.55) 100%);
-    }
-    .stat-card { background: var(--gray); border-radius: 14px; padding: 24px 20px; text-align: center; }
-    .stat-n { font-family: 'Merriweather', serif; font-size: 38px; font-weight: 400; color: var(--coral); display: block; margin-bottom: 6px; }
-    .stat-l { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--navy40); line-height: 1.45; }
-    .diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; flex: 1; }
-    .diff-card {
-      background: var(--navy); border-radius: 14px; padding: 22px 18px;
-      display: flex; flex-direction: column; gap: 12px;
-    }
-    .diff-icon { color: var(--coral); }
-    .diff-title { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 13px; color: white; }
-    .diff-desc { font-family: 'Inter', sans-serif; font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.55; }
+    .s5-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 20px; align-items: start; }
+    .s5-story-text { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--navy65); line-height: 1.75; margin-bottom: 18px; }
+    .s5-timeline { display: flex; flex-direction: column; gap: 12px; }
+    .s5-tl-item { display: flex; gap: 12px; align-items: flex-start; }
+    .s5-tl-year { font-family: 'Sora', sans-serif; font-size: 10px; font-weight: 700; color: var(--coral); width: 32px; flex-shrink: 0; padding-top: 2px; }
+    .s5-tl-text { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--navy65); line-height: 1.5; }
+    .s5-right { display: flex; flex-direction: column; gap: 14px; }
+    .s5-photo-r { border-radius: 12px; overflow: hidden; height: 190px; }
+    .s5-photo-r img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; }
+    .s5-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .s5-stat { text-align: center; background: var(--gray); border-radius: 12px; padding: 14px 8px; }
+    .s5-stat-n { font-family: 'Merriweather', serif; font-size: 22px; font-weight: 400; color: var(--coral); display: block; margin-bottom: 4px; }
+    .s5-stat-l { font-family: 'Inter', sans-serif; font-size: 10px; color: var(--navy40); line-height: 1.4; }
+    .s5-trust { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--navy10); }
+    .s5-trust-item { display: flex; gap: 14px; align-items: flex-start; }
+    .s5-trust-icon { color: var(--coral); flex-shrink: 0; margin-top: 1px; }
+    .s5-trust-title { font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+    .s5-trust-desc { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--navy65); line-height: 1.5; }
 
     /* ═══════════════════════════════════════════════
-       SLIDE 6 — REFERENSSI
+       SLIDE 6 — CASE STUDY
     ════════════════════════════════════════════════ */
-    #s6 { background: var(--gray); }
-    .ref-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 22px; }
-    .ref-badge { background: var(--navy); color: white; font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 700; padding: 9px 20px; border-radius: 24px; }
-    .ref-metric { text-align: right; }
-    .ref-metric-num { font-family: 'Merriweather', serif; font-size: 48px; font-weight: 400; color: var(--coral); line-height: 1; }
-    .ref-metric-lbl { font-family: 'Inter', sans-serif; font-size: 11px; color: var(--navy40); margin-top: 3px; }
-    .ref-headline { font-family: 'Merriweather', serif; font-size: 24px; font-weight: 400; color: var(--navy); line-height: 1.4; margin-bottom: 16px; }
-    .ref-quote {
-      font-family: 'Merriweather', serif; font-size: 14px; font-style: italic;
-      color: var(--navy); line-height: 1.7;
-      border-left: 3px solid var(--coral); padding-left: 16px; margin-bottom: 22px;
-    }
-    .ref-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
-    .ref-fact { background: white; border-radius: 12px; padding: 14px 14px; }
-    .ref-fact-v { font-family: 'Sora', sans-serif; font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
-    .ref-fact-l { font-family: 'Inter', sans-serif; font-size: 11px; color: var(--navy40); line-height: 1.4; }
-    .ref-tags-label { font-family: 'Sora', sans-serif; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--coral); margin-bottom: 8px; }
-    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tag { background: var(--navy); color: white; font-family: 'Inter', sans-serif; font-size: 11.5px; padding: 5px 12px; border-radius: 20px; }
-    .ref-others { display: flex; align-items: center; gap: 10px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--navy10); }
-    .ref-others-lbl { font-family: 'Sora', sans-serif; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--navy20); flex-shrink: 0; }
-    .ref-other-pill { background: white; border: 1px solid var(--navy10); border-radius: 8px; padding: 6px 12px; font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700; color: var(--navy); }
+    #s6 { background: white; }
+    .cs-company { font-family: 'Merriweather', serif; font-size: 30px; font-weight: 400; color: var(--navy); margin-bottom: 6px; }
+    .cs-metric-row { display: flex; gap: 28px; margin-bottom: 18px; padding: 14px 18px; background: var(--gray); border-radius: 12px; }
+    .cs-metric-n { font-family: 'Merriweather', serif; font-size: 28px; font-weight: 400; color: var(--coral); line-height: 1; }
+    .cs-metric-l { font-family: 'Inter', sans-serif; font-size: 10px; color: var(--navy40); margin-top: 2px; }
+    .cs-headline { font-family: 'Merriweather', serif; font-size: 17px; font-weight: 400; color: var(--navy); line-height: 1.5; margin-bottom: 14px; }
+    .cs-quote { font-family: 'Merriweather', serif; font-style: italic; font-size: 14px; color: var(--navy); line-height: 1.75; border-left: 3px solid var(--coral); padding-left: 16px; margin-bottom: 18px; }
+    .cs-pills { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 18px; }
+    .cs-pills-lbl { font-family: 'Sora', sans-serif; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--navy20); margin-right: 4px; }
+    .cs-pill { background: var(--gray); color: var(--navy); font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700; padding: 5px 13px; border-radius: 20px; }
+    .cs-photo { border-radius: 14px; overflow: hidden; flex: 1; min-height: 160px; }
+    .cs-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     /* ═══════════════════════════════════════════════
        SLIDE 7 — PALVELUSUUNNITELMA
@@ -472,14 +468,14 @@
     #s9 .sh-tag { color: rgba(255,255,255,0.2); }
     #s9 .sb { align-items: center; justify-content: center; text-align: center; }
     #s9 .eyebrow { color: rgba(255,143,122,0.65); }
-    .cta-h { font-family: 'Merriweather', serif; font-size: 34px; font-weight: 400; color: white; line-height: 1.3; max-width: 480px; margin-bottom: 12px; }
-    .cta-sub { font-family: 'Inter', sans-serif; font-size: 13.5px; color: rgba(255,255,255,0.42); line-height: 1.75; max-width: 380px; margin-bottom: 40px; }
-    .cta-steps { display: flex; width: 100%; max-width: 520px; margin-bottom: 40px; }
+    .cta-h { font-family: 'Merriweather', serif; font-size: 40px; font-weight: 400; color: white; line-height: 1.25; max-width: 540px; margin-bottom: 14px; }
+    .cta-sub { font-family: 'Inter', sans-serif; font-size: 16px; color: rgba(255,255,255,0.45); line-height: 1.75; max-width: 420px; margin-bottom: 44px; }
+    .cta-steps { display: flex; width: 100%; max-width: 660px; margin-bottom: 44px; }
     .cta-step { flex: 1; text-align: center; position: relative; }
-    .cta-step:not(:last-child)::after { content: ''; position: absolute; top: 20px; left: 50%; width: 100%; height: 1px; background: rgba(255,143,122,0.2); }
-    .step-n { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,143,122,0.1); border: 1px solid rgba(255,143,122,0.3); font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 700; color: var(--coral); display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; }
-    .step-t { font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700; color: white; margin-bottom: 4px; }
-    .step-d { font-family: 'Inter', sans-serif; font-size: 10.5px; color: rgba(255,255,255,0.35); line-height: 1.5; padding: 0 4px; }
+    .cta-step:not(:last-child)::after { content: ''; position: absolute; top: 26px; left: 50%; width: 100%; height: 1px; background: rgba(255,143,122,0.2); }
+    .step-n { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,143,122,0.1); border: 1px solid rgba(255,143,122,0.3); font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 700; color: var(--coral); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    .step-t { font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 700; color: white; margin-bottom: 6px; }
+    .step-d { font-family: 'Inter', sans-serif; font-size: 12px; color: rgba(255,255,255,0.38); line-height: 1.55; padding: 0 6px; }
     .contact-box { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 28px 44px; max-width: 440px; width: 100%; }
     .contact-n { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; color: white; margin-bottom: 3px; }
     .contact-r { font-family: 'Inter', sans-serif; font-size: 11.5px; color: rgba(255,255,255,0.35); margin-bottom: 18px; }
@@ -538,13 +534,6 @@
 
 <!-- ═══ SLIDE 1: COVER ════════════════════════════ -->
 <div class="slide" id="s1">
-  <div class="deco deco-1"></div>
-  <div class="deco deco-2"></div>
-  <div class="deco deco-3"></div>
-  <div class="cover-photo">
-    <img src="https://turunsuurpesula.askelventures.com/photo-tsp-truck-summer.webp" alt="">
-    <div class="cover-photo-fade"></div>
-  </div>
   <div class="cover-wrap">
     <img class="cover-logo"
          src="https://turunsuurpesula.askelventures.com/tsp-logo-vector.svg"
@@ -553,8 +542,6 @@
          onerror="this.style.display='none';document.getElementById('cover-txt').style.display='block'">
     <span id="cover-txt" style="display:none;font-family:'Sora',sans-serif;font-weight:700;font-size:16px;color:var(--coral);">Turun Suurpesula</span>
     <div class="cover-accent"></div>
-
-    <div class="cover-spacer"></div>
 
     <div class="customer-badge new" id="cover-badge">
       <!-- icon: sparkle -->
@@ -567,6 +554,7 @@
     <h1 class="cover-client" id="c-client">asiakkaan nimi</h1>
     <p class="cover-sub">Luotettava kumppani tekstiilihuoltoon Turun seudulla — 16 vuoden kokemus, nimetty palvelupäällikkö, ei yllätyksiä.</p>
     <div class="cover-footer">
+
       <div class="cf-block">
         <span class="cf-l">Vastaanottaja</span>
         <span class="cf-v" id="c-contact">—</span>
@@ -580,6 +568,9 @@
         <span class="cf-v" id="c-seller">—</span>
       </div>
     </div>
+    <div class="cover-image-box">
+      <img src="https://turunsuurpesula.askelventures.com/photo-towels.webp" alt="Turun Suurpesula — tekstiilihuolto">
+    </div>
   </div>
 </div>
 
@@ -591,35 +582,40 @@
   </div>
   <div class="sb">
     <p class="eyebrow">Tässä tarjouksessa</p>
-    <h2 class="slide-h" style="font-size:34px; margin-bottom:6px;">Mitä käymme läpi</h2>
+    <h2 class="slide-h" style="font-size:34px; margin-bottom:14px;">Mitä käymme läpi</h2>
+    <p style="font-family:'Inter',sans-serif; font-size:13.5px; color:var(--navy65); line-height:1.75; max-width:520px; margin-bottom:0;">Tämä tarjous on rakennettu tapaamisen perusteella juuri teille. Alla agenda — käymme jokaisen kohdan läpi ja varmistamme, että ratkaisu sopii teidän toimintaanne.</p>
     <div class="agenda-grid">
       <div class="agenda-item">
-        <span class="agenda-num">1</span>
-        <div>
-          <div class="agenda-item-title">Kuulimme teidät</div>
-          <div class="agenda-item-desc">Kertaamme, mitä tapaamisessa nousi esille — haasteet, toiveet, nykytilanne.</div>
+        <div class="agenda-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
+        <span class="agenda-num">01</span>
+        <div class="agenda-item-title">Mitä kuulimme teiltä</div>
+        <div class="agenda-item-desc">Teillä nousi esiin nämä tarpeet ja haasteet — käymme ne yhdessä läpi ja varmistamme, että olemme ymmärtäneet oikein.</div>
       </div>
       <div class="agenda-item">
-        <span class="agenda-num">2</span>
-        <div>
-          <div class="agenda-item-title">Ratkaisumme</div>
-          <div class="agenda-item-desc">Ehdotettu palvelu juuri teille — mitä hoidamme, miten, millä aikataululla.</div>
+        <div class="agenda-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
         </div>
+        <span class="agenda-num">02</span>
+        <div class="agenda-item-title">Teille räätälöity ratkaisu</div>
+        <div class="agenda-item-desc">Ehdotuksemme, joka on rakennettu juuri teidän toimintaanne varten — mitä hoidamme, milloin ja millä ehdoilla.</div>
       </div>
       <div class="agenda-item">
-        <span class="agenda-num">3</span>
-        <div>
-          <div class="agenda-item-title">Miksi Turun Suurpesula</div>
-          <div class="agenda-item-desc">Lyhyesti: kokemus, kapasiteetti, ja mitä olemme tehneet vastaavissa tilanteissa.</div>
+        <div class="agenda-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
+        <span class="agenda-num">03</span>
+        <div class="agenda-item-title">Miksi valita meidät?</div>
+        <div class="agenda-item-desc">Lyhyesti, miksi satoja yrityksiä Turun seudulla ovat valinneet Turun Suurpesulan — ja mitä se tarkoittaa käytännössä.</div>
       </div>
       <div class="agenda-item">
-        <span class="agenda-num">4</span>
-        <div>
-          <div class="agenda-item-title">Hintaehdotus</div>
-          <div class="agenda-item-desc">Alustava hinnoittelu tapaamisen pohjalta. Lopullinen vahvistetaan tarjouksessa.</div>
+        <div class="agenda-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
         </div>
+        <span class="agenda-num">04</span>
+        <div class="agenda-item-title">Hintaehdotus</div>
+        <div class="agenda-item-desc">Selkeä, alustava hinta-arvio teidän tarpeisiinne — läpinäkyvä hinnoittelu ilman piilokustannuksia.</div>
       </div>
     </div>
     <div class="agenda-note">
@@ -663,6 +659,14 @@
           <button class="no-print add-row" style="margin-top:10px;" onclick="addBullet('bullets-needs')">+ Lisää</button>
         </div>
       </div>
+      <div class="s3-notes">
+        <p class="heard-card-label" style="color:var(--coral); font-family:'Sora',sans-serif; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:8px;">Muita huomioita tapaamisisesta</p>
+        <p class="prompt-hint no-print" style="margin-bottom:6px;">✏ Erityistoiveet, budjetti, aikataulu, esteet, muut kontaktit jne.</p>
+        <p contenteditable="true" data-ph="Kirjoita vapaasti muut huomiot tapaamisisesta..." style="font-family:'Inter',sans-serif; font-size:13px; color:var(--navy65); line-height:1.75; min-height:48px; display:block;"></p>
+      </div>
+    </div>
+    <div class="s3-photo">
+      <img src="https://turunsuurpesula.askelventures.com/photo-pesija.png" alt="Turun Suurpesula — pesulatyö">
     </div>
 
     <!-- EXISTING CUSTOMER version -->
@@ -715,7 +719,7 @@
   <div class="sb">
     <p class="eyebrow">Ehdotettu ratkaisu</p>
     <h2 class="slide-h" style="font-size:34px; margin-bottom:20px;">Mitä tarjoamme teille</h2>
-    <p class="prompt-hint no-print">✏ Muokkaa palvelut tapaamisen mukaan</p>
+    <p class="prompt-hint no-print">✏ Listaa palvelut tapaamisen perusteella — mitä konkreettisesti sovitaan hoidettavaksi? Mitä tekstiilejä, kuinka usein, missä muodossa?</p>
     <div class="solution-cols">
       <div class="sol-card">
         <p class="sol-label">Palvelut</p>
@@ -729,6 +733,7 @@
       </div>
       <div class="sol-card accent">
         <p class="sol-label">Käytännössä</p>
+        <p class="prompt-hint no-print" style="margin-bottom:8px;">✏ Noutoväli, toimitusaika, sopimuspituus, hinnoittelumalli</p>
         <ul class="sol-bullets" id="sol-practical">
           <li contenteditable="true" data-ph="Käytännön asia...">Nouto: <strong style="color:white;">kerran viikossa</strong>, sovittu päivä</li>
           <li contenteditable="true" data-ph="Käytännön asia...">Toimitus saman viikon aikana</li>
@@ -747,6 +752,9 @@
         <span contenteditable="true" data-ph="Kirjoita palvelulupaus...">Jos nouto tai toimitus myöhästyy sovitusta, ilmoitamme etukäteen. Reklamaatioihin vastataan 24 tunnissa. Palvelupäällikkönne on tavoitettavissa suoraan puhelimitse.</span>
       </div>
     </div>
+    <div class="s4-photo">
+      <img src="https://turunsuurpesula.askelventures.com/photo-baskets.webp" alt="Turun Suurpesula — tekstiilihuolto">
+    </div>
   </div>
 </div>
 
@@ -758,45 +766,76 @@
   </div>
   <div class="sb">
     <p class="eyebrow">Miksi Turun Suurpesula?</p>
-    <h2 class="slide-h" style="font-size:34px; margin-bottom:20px;">Kokemus ja kapasiteetti taustalla</h2>
-    <div class="stats-row">
-      <div class="stat-card">
-        <span class="stat-n">16</span>
-        <span class="stat-l">vuotta alalla<br>Turun seudulla</span>
+    <h2 class="slide-h" style="font-size:30px; margin-bottom:20px;">Turkulainen perheyritys.<br><span style="color:var(--coral);">Vuodesta 1967.</span></h2>
+    <div class="s5-cols">
+      <div class="s5-story">
+        <p class="s5-story-text">Pesutoiminta alkoi Kaskenkadussa 12 vuonna 1967. Vuonna 2001 Minna ja Mika Elers jatkoivat tätä perinnettä — ja vuonna 2010 syntyi Turun Suurpesula, kun kapasiteetti kasvoi teollisuusluokkaan. Yli 1 400 turkulaista yritystä on luottanut meihin vuosien varrella.</p>
+        <div class="s5-timeline">
+          <div class="s5-tl-item">
+            <span class="s5-tl-year">1967</span>
+            <span class="s5-tl-text">Pesutoiminta alkaa Kaskenkadussa 12 — perheyrityksen alku</span>
+          </div>
+          <div class="s5-tl-item">
+            <span class="s5-tl-year">2001</span>
+            <span class="s5-tl-text">Minna ja Mika Elers perustavat Pesulan, jatkaen pesulaperintöä</span>
+          </div>
+          <div class="s5-tl-item">
+            <span class="s5-tl-year">2010</span>
+            <span class="s5-tl-text">Turun Suurpesula perustetaan — B2B-kapasiteetti kasvaa teollisuusluokkaan</span>
+          </div>
+          <div class="s5-tl-item">
+            <span class="s5-tl-year">2026</span>
+            <span class="s5-tl-text">Osa Melers Pesulapalvelut -konsernia — selkeä omistus, pitkä sitoumus</span>
+          </div>
+        </div>
       </div>
-      <div class="stat-card">
-        <span class="stat-n">1,2M+</span>
-        <span class="stat-l">kiloa tekstiilejä<br>pesty</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-n">170K</span>
-        <span class="stat-l">kg vuosikapasiteetti<br>Telekatu 6, Turku</span>
+      <div class="s5-right">
+        <div class="s5-photo-r">
+          <img src="https://turunsuurpesula.askelventures.com/photo-pesija.png" alt="Turun Suurpesula — teollinen pesula">
+        </div>
+        <div class="s5-stats">
+          <div class="s5-stat">
+            <span class="s5-stat-n">1 400+</span>
+            <span class="s5-stat-l">yritystä palveltu<br>Turussa</span>
+          </div>
+          <div class="s5-stat">
+            <span class="s5-stat-n">1,2M+</span>
+            <span class="s5-stat-l">kg tekstiilejä<br>pesty</span>
+          </div>
+          <div class="s5-stat">
+            <span class="s5-stat-n">59</span>
+            <span class="s5-stat-l">vuotta<br>alalla</span>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="s5-photo">
-      <img src="https://turunsuurpesula.askelventures.com/photo-pesija.png" alt="Turun Suurpesula — teollinen pesula">
-    </div>
-    <div class="diff-grid">
-      <div class="diff-card">
-        <div class="diff-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+    <div class="s5-trust">
+      <div class="s5-trust-item">
+        <div class="s5-trust-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
-        <div class="diff-title">Nimetty palvelupäällikkö</div>
-        <div class="diff-desc">Yksi yhteyshenkilö tuntee tilanteenne. Soitat suoraan — ei jonoja, ei puhelinvaihteita.</div>
+        <div>
+          <div class="s5-trust-title">Nimetty palvelupäällikkö</div>
+          <div class="s5-trust-desc">Yksi yhteyshenkilö tuntee tilanteenne. Soitat suoraan — ei jonoja, ei puhelinvaihteita. Perheyrityksenä välitämme asiakkaidemme liiketoiminnasta.</div>
+        </div>
       </div>
-      <div class="diff-card">
-        <div class="diff-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div class="s5-trust-item">
+        <div class="s5-trust-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-        <div class="diff-title">Hygieniastandardit</div>
-        <div class="diff-desc">Hoiva-alan ja hotellisektorin vaatimukset täytetty. Dokumentoitu prosessi, auditointikelpoinen.</div>
+        <div>
+          <div class="s5-trust-title">Hygieniastandardit täytetty</div>
+          <div class="s5-trust-desc">Hoiva-alan ja hotellisektorin vaatimukset huomioitu. Dokumentoitu pesuprosessi, auditointikelpoinen — ei kompromisseja.</div>
+        </div>
       </div>
-      <div class="diff-card">
-        <div class="diff-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      <div class="s5-trust-item">
+        <div class="s5-trust-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
         </div>
-        <div class="diff-title">Volyymipohjainen hinta</div>
-        <div class="diff-desc">Mitä enemmän, sen edullisemmin. Tarjous räätälöidään aina. Liinavaatevuokraus pitkäaikaisille.</div>
+        <div>
+          <div class="s5-trust-title">Volyymipohjainen hinta</div>
+          <div class="s5-trust-desc">Mitä enemmän, sen edullisemmin. Tarjous räätälöidään aina. Pitkäaikaisille tarjoamme liinavaatevuokrauksen — ei omaa hankintaa, ei varastointia.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -837,23 +876,23 @@
           <div class="ts">
             <div class="ts-dot"><div class="ts-dot-inner"></div></div>
             <div class="ts-content">
-              <div class="ts-label">Ensimmäinen nouto</div>
-              <input class="ts-input no-print" type="text" placeholder="Pvm tai viikko" id="date-first">
-              <div class="ts-value print-only" id="date-first-print">—</div>
+              <div class="ts-label">Valmistelu ja mahdollisten tavaroiden toimitus</div>
+              <input class="ts-input no-print" type="text" placeholder="Pvm tai viikko" id="date-prep">
+              <div class="ts-value print-only" id="date-prep-print">—</div>
             </div>
           </div>
           <div class="ts">
             <div class="ts-dot"><div class="ts-dot-inner"></div></div>
             <div class="ts-content">
-              <div class="ts-label">Palvelupäällikön esittely</div>
-              <input class="ts-input no-print" type="text" placeholder="Viikon sisällä" id="date-pm">
-              <div class="ts-value print-only" id="date-pm-print">Viikon sisällä aloituksesta</div>
+              <div class="ts-label">Ensimmäinen nouto</div>
+              <input class="ts-input no-print" type="text" placeholder="Pvm tai viikko" id="date-first">
+              <div class="ts-value print-only" id="date-first-print">—</div>
             </div>
           </div>
           <div class="ts" style="padding-bottom:0;">
             <div class="ts-dot"><div class="ts-dot-inner"></div></div>
             <div class="ts-content">
-              <div class="ts-label">Ensimmäinen katselmus</div>
+              <div class="ts-label">Ensimmäinen katselmus palvelupäällikön kanssa</div>
               <input class="ts-input no-print" type="text" placeholder="30 pv aloituksesta" id="date-review">
               <div class="ts-value print-only" id="date-review-print">30 päivää aloituksesta</div>
             </div>
@@ -866,34 +905,25 @@
           <div class="ts">
             <div class="ts-dot"><div class="ts-dot-inner"></div></div>
             <div class="ts-content">
-              <div class="ts-label" style="color:white;">Myöhästyminen</div>
-              <div class="ts-value">Ilmoitamme aina etukäteen, jos nouto tai toimitus myöhästyy sovitusta.</div>
+              <div class="ts-label" style="color:white;">Ei yllätyksiä</div>
+              <div class="ts-value">Sovittu aikataulu pitää. Jos nouto tai toimitus myöhästyy, kuulette siitä meiltä etukäteen — ei jälkikäteen.</div>
             </div>
           </div>
           <div class="ts">
             <div class="ts-dot"><div class="ts-dot-inner"></div></div>
             <div class="ts-content">
-              <div class="ts-label" style="color:white;">Reklamaatiot</div>
-              <div class="ts-value">Käsittelemme reklamaatiot 24 tunnissa — nimetty palvelupäällikkö vastaa suoraan.</div>
+              <div class="ts-label" style="color:white;">Puhtaus taattu</div>
+              <div class="ts-value">Hygieniastandardit täytetty. Hoiva-alan ja hotellisektorin vaatimukset dokumentoitu — prosessi on aina auditointikelpoinen.</div>
             </div>
           </div>
           <div class="ts" style="padding-bottom:0;">
             <div class="ts-dot"><div class="ts-dot-inner"></div></div>
             <div class="ts-content">
-              <div class="ts-label" style="color:white;">Skaalautuvuus</div>
-              <div class="ts-value">Volyymi vaihtelee? Kapasiteettimme joustaa. Ei lisämaksuja sesongin aikana.</div>
+              <div class="ts-label" style="color:white;">Henkilökohtainen palvelu</div>
+              <div class="ts-value">Nimetty palvelupäällikkö koko sopimuksen ajan. Tavoitettavissa suoraan — ei jonoja, ei puhelinvaihteita.</div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="sla-row">
-      <div class="sla-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-      </div>
-      <div class="sla-content">
-        <div class="sla-title">Laadukas kumppanuus — ei vain palveluntarjoaja</div>
-        <div class="sla-text">Turun Suurpesula on osa Melers Pesulapalvelut -konsernia. Selkeä omistus, ammattimainen hallinto, pitkä sitoumus alalle. Ette ole tekemisissä oman pyykin peseytyvän yrityksen kanssa.</div>
       </div>
     </div>
   </div>
@@ -916,10 +946,13 @@
       <div class="contract-grp">
         <span class="contract-lbl">Sopimuskausi</span>
         <select class="contract-sel" id="contract-term" onchange="updateContractDisplay()">
+          <option value="3 kk">3 kk</option>
           <option value="6 kk">6 kk</option>
           <option value="12 kk" selected>12 kk</option>
-          <option value="24 kk">24 kk</option>
-          <option value="Avoin sopimus">Avoin sopimus</option>
+          <option value="2 vuotta">2 vuotta</option>
+          <option value="3 vuotta">3 vuotta</option>
+          <option value="4 vuotta">4 vuotta</option>
+          <option value="Toistaiseksi voimassa">Toistaiseksi voimassa</option>
         </select>
       </div>
     </div>
@@ -948,6 +981,7 @@
       <strong>Huomio:</strong> Hinnat ovat alustavia arvioita tapaamisen pohjalta. Lopullinen hinta vahvistetaan tarjouksessa volyymin ja sopimuskauden mukaan.
       Hoiva-alan tekstiilihuollolle ALV 0 %; muille toimialoille ALV 25,5 % lisätään.
       Sopimuskausi: <strong id="contract-display">12 kk</strong>.
+      <span id="contract-notice-tv" style="display:none;"> Toistaiseksi voimassa olevassa sopimuksessa irtisanomisaika on <strong>2 viikkoa</strong>.</span>
     </p>
   </div>
 </div>
@@ -955,13 +989,13 @@
 <!-- ═══ SLIDE 9: SEURAAVAT ASKELEET ══════════════ -->
 <div class="slide" id="s9">
   <div class="sh">
-    <img src="https://turunsuurpesula.askelventures.com/tsp-logo-vector.svg" style="filter:brightness(0) invert(1); opacity:0.5;" alt="TSP" onerror="this.style.display='none'">
+    <img src="https://turunsuurpesula.askelventures.com/tsp-logo-vector.svg" style="filter:brightness(0) invert(1); opacity:0.65; height:36px;" alt="TSP" onerror="this.style.display='none'">
     <span class="sh-tag" id="tag-9">—</span>
   </div>
   <div class="sb">
     <p class="eyebrow">Seuraavat askeleet</p>
-    <h2 class="cta-h">Aloitetaan 30 minuutin tutustumisella</h2>
-    <p class="cta-sub">Ei sitoumuksia. Tehdään yhdessä ratkaisu, joka toimii juuri teille.</p>
+    <h2 class="cta-h">Aloitetaan yhdessä</h2>
+    <p class="cta-sub">Ei sitoumuksia. Tehdään ratkaisu, joka toimii juuri teidän toimintaanne.</p>
     <div class="cta-steps">
       <div class="cta-step">
         <div class="step-n">1</div>
@@ -971,10 +1005,15 @@
       <div class="cta-step">
         <div class="step-n">2</div>
         <div class="step-t">Sopimus</div>
-        <div class="step-d">Allekirjoitamme sopimuksen, sovitaan aloituspäivä.</div>
+        <div class="step-d">Allekirjoitamme sopimuksen ja sovitaan aloituspäivä.</div>
       </div>
       <div class="cta-step">
         <div class="step-n">3</div>
+        <div class="step-t">Valmistelu</div>
+        <div class="step-d">Mahdollisten tuotteiden toimitus ja käytännön valmistelu.</div>
+      </div>
+      <div class="cta-step">
+        <div class="step-n">4</div>
         <div class="step-t">Aloitus</div>
         <div class="step-d">Ensimmäinen nouto sovittuna päivänä — me hoidamme loput.</div>
       </div>
@@ -989,13 +1028,14 @@
         </div>
         <div class="contact-row">
           <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <span>info@turunsuurpesula.fi</span>
+          <span>myynti@melers.fi</span>
         </div>
         <div class="contact-row">
-          <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span>Telekatu 6, 20520 Turku</span>
+          <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span>turunsuurpesula.fi &nbsp;·&nbsp; melers.fi</span>
         </div>
       </div>
+      <p style="font-family:'Inter',sans-serif; font-size:10px; color:rgba(255,255,255,0.2); margin-top:16px; line-height:1.5;">Turun Suurpesula on Melers Oy:n aputoiminimi.</p>
     </div>
   </div>
 </div>
@@ -1054,89 +1094,71 @@ function setCustomerType(type) {
   }
 }
 
-/* ── SECTOR / REFERENSSI ───────────────────────── */
+/* ── SECTORS / REFERENSSI ──────────────────────── */
 const sectors = {
   hoivakoti: {
     photo: 'photo-towels.webp', photoPos: 'center',
-    eyebrow: 'Asiakasesimerkki · Hoiva- ja palvelutalot',
+    sectorLabel: 'Hoiva- ja palvelutalot',
     badge: 'Yrjö ja Hanna Kodit',
-    metric: '5+', metricLbl: 'vuotta yhteistyötä',
+    metric: '5+', metricLabel: 'vuotta yhteistyötä',
+    metric2: '~15', metric2Label: 'hoivayksikköä Suomessa',
     headline: 'Luotettava tekstiilihuolto 15 hoivayksikköön ympäri Suomen',
     quote: '"Luotettava kumppani jo vuosia. Tekstiilit aina ajallaan, ei yllätyksiä. Suosittelen kaikille hoivakodin johtajille."',
-    facts: [
-      { v:'~15', l:'hoivayksikköä\nSuomessa' },
-      { v:'~278', l:'hoivahenkilöstöä' },
-      { v:'ALV 0 %', l:'kustannussäästö\nhoiva-alalle' },
-    ],
-    tags: ['Viikoittaiset noudot','Liinavaatehuolto','Hygieniadokumentointi','ALV 0 % laskutus','Nimetty palvelupäällikkö'],
-    others: ['Hesperia Care','Myllykoti'],
-    othersLbl: 'Muita referenssejä',
+    services: ['Viikoittaiset noudot', 'Liinavaatehuolto', 'Hygieniadokumentointi', 'ALV 0 % laskutus', 'Nimetty palvelupäällikkö'],
+    others: ['Hesperia Care', 'Myllykoti'],
   },
   hotelli: {
     photo: 'photo-hotel.webp', photoPos: 'center',
-    eyebrow: 'Asiakasesimerkki · Hotellit',
+    sectorLabel: 'Hotellit',
     badge: 'Hotelli Helmi',
-    metric: '3+', metricLbl: 'vuotta yhteistyötä',
-    headline: 'Häiriötön lakanoiden kierto — housekeeping keskittyy olennaiseen',
-    quote: '"Liinavaatteet ovat aina paikalla kun tarvitaan. Emme enää mieti pyykkiä — se on isompi juttu kuin miltä kuulostaa."',
-    facts: [
-      { v:'2×/vko', l:'nouto- ja\ntoimitusvuoro' },
-      { v:'0 kpl', l:'omia liinavaatteita\nvarastossa' },
-      { v:'kg-hinta', l:'volyymiin\nskaalautuva' },
-    ],
-    tags: ['Lakanat & pyyhkeet','Liinavaatevuokraus','Sopimustoimitus 2×/vko','Volyymipohjainen hinta'],
-    others: ['Turku-alueen hotellit','Majoituspalvelut'],
-    othersLbl: 'Muita referenssejä',
+    metric: '3+', metricLabel: 'vuotta yhteistyötä',
+    metric2: '52', metric2Label: 'huonetta palvelussa',
+    headline: 'Nopea lakanaankierto ja liinavaatevuokraus — ilman yhtään peruutusta',
+    quote: '"Pesulan vaihdon jälkeen emme ole kertaakaan joutuneet perumaan huonetta liinavaatteiden takia. Homma toimii."',
+    services: ['Lakanat ja pyyhkeet', 'Liinavaatevuokraus', 'Kaksi noutoa / viikko', 'Ravintolavaatteet', 'Nimetty palvelupäällikkö'],
+    others: ['Scandic Turku', 'Solo Sokos Hotel'],
   },
   vahinko: {
     photo: 'photo-savuvahinko.png', photoPos: 'center top',
-    eyebrow: 'Asiakasesimerkki · Vahinkopesut',
+    sectorLabel: 'Vahinkopesut / vakuutusyhtiöt',
     badge: 'If Vahinkovakuutus',
-    metric: '24h', metricLbl: 'reagointiaika',
-    headline: 'Teollinen kapasiteetti vesi-, palo- ja savuvahinkoihin',
-    quote: '"Nopea ja dokumentoitu prosessi. Vakuutusyhtiön kannalta juuri se mitä tarvitaan — ei soittelua, ei viivyttelyä."',
-    facts: [
-      { v:'24h', l:'toimitusaika\nvahingon jälkeen' },
-      { v:'3 tyyppiä', l:'vesi · palo · savu' },
-      { v:'Dokumentoitu', l:'korvausvaatimuksiin\nsopiva raportointi' },
-    ],
-    tags: ['Vesivahinkotekstiilit','Palo- & savuvahingot','Nopea kapasiteetti','Vakuutusraportointi'],
-    others: ['Vakuutusyhtiöt','Vahinkosaneeraus'],
-    othersLbl: 'Muita yhteistyötahoja',
+    metric: '24h', metricLabel: 'vasteaika',
+    metric2: '100+', metric2Label: 'vahinkokohteen tekstiiliä',
+    headline: 'Teollinen kapasiteetti vesi-, palo- ja savuvahinkoihin — ympärivuorokautisesti',
+    quote: '"Kun teollisuushallin palo löi tekstiilit, TSP otti ne vastaan saman tien. Kapasiteetti ja nopeus ylitti odotuksemme."',
+    services: ['Pikänouto vahinkokohteilta', 'Savuvahinkokäsittely', 'Vesivahingot', 'Dokumentaatio vakuutusyhtiölle', 'Ympärivuorokautinen vasteaika'],
+    others: ['LähiTapiola', 'Pohjola Vakuutus'],
   },
 };
 
 function setSector(key) {
-  const d = sectors[key];
-  const body = document.getElementById('ref-body');
-  const othersHTML = d.others.map(o=>`<span class="ref-other-pill">${o}</span>`).join('');
-  const factsHTML  = d.facts.map(f=>`<div class="ref-fact"><div class="ref-fact-v">${f.v}</div><div class="ref-fact-l">${f.l.replace('\n','<br>')}</div></div>`).join('');
-  const tagsHTML   = d.tags.map(t=>`<span class="tag">${t}</span>`).join('');
-  const BASE = 'https://turunsuurpesula.askelventures.com/';
-  body.innerHTML = `
-    <div style="display:grid; grid-template-columns:1fr 200px; gap:20px; flex:1;">
-      <div style="display:flex; flex-direction:column; min-width:0;">
-        <p class="eyebrow">${d.eyebrow}</p>
-        <div class="ref-top">
-          <span class="ref-badge">${d.badge}</span>
-          <div class="ref-metric">
-            <div class="ref-metric-num">${d.metric}</div>
-            <div class="ref-metric-lbl">${d.metricLbl}</div>
-          </div>
-        </div>
-        <h2 class="ref-headline">${d.headline}</h2>
-        <p class="ref-quote">${d.quote}</p>
-        <div class="ref-facts">${factsHTML}</div>
-        <p class="ref-tags-label">Mitä hoidamme</p>
-        <div class="tags">${tagsHTML}</div>
-        <div class="ref-others">
-          <span class="ref-others-lbl">${d.othersLbl}</span>
-          ${othersHTML}
-        </div>
+  const s = sectors[key] || sectors.hoivakoti;
+  document.getElementById('ref-body').innerHTML = `
+    <p class="eyebrow">Asiakasesimerkki · ${s.sectorLabel}</p>
+    <div class="cs-company">${s.badge}</div>
+    <div class="cs-metric-row">
+      <div class="cs-metric">
+        <div class="cs-metric-n">${s.metric}</div>
+        <div class="cs-metric-l">${s.metricLabel}</div>
       </div>
-      <div style="border-radius:16px; overflow:hidden; align-self:stretch;">
-        <img src="${BASE}${d.photo}" alt="" style="width:100%; height:100%; object-fit:cover; object-position:${d.photoPos}; display:block;">
+      <div style="width:1px;background:rgba(20,55,90,0.12);flex-shrink:0;"></div>
+      <div class="cs-metric">
+        <div class="cs-metric-n">${s.metric2}</div>
+        <div class="cs-metric-l">${s.metric2Label}</div>
       </div>
+    </div>
+    <p class="cs-headline">${s.headline}</p>
+    <blockquote class="cs-quote">${s.quote}</blockquote>
+    <div class="cs-pills">
+      <span class="cs-pills-lbl">Mitä hoidamme</span>
+      ${s.services.map(sv => `<span class="cs-pill">${sv}</span>`).join('')}
+    </div>
+    <div class="cs-pills" style="margin-top:-8px;">
+      <span class="cs-pills-lbl">Muita referenssejä</span>
+      ${s.others.map(o => `<span class="cs-pill" style="background:var(--navy);color:white;">${o}</span>`).join('')}
+    </div>
+    <div class="cs-photo" style="flex:1;">
+      <img src="https://turunsuurpesula.askelventures.com/${s.photo}" alt="${s.badge}" style="object-position:${s.photoPos};">
     </div>
   `;
 }
@@ -1195,11 +1217,14 @@ defaultRows.forEach(r=>addPricingRow(r.name,r.qty,r.price));
 recalc();
 
 function updateContractDisplay(){
-  document.getElementById('contract-display').textContent=document.getElementById('contract-term').value;
+  const v = document.getElementById('contract-term').value;
+  document.getElementById('contract-display').textContent = v;
+  const notice = document.getElementById('contract-notice-tv');
+  if (notice) notice.style.display = (v === 'Toistaiseksi voimassa') ? '' : 'none';
 }
 
 /* ── TIMELINE PRINT SYNC ───────────────────────── */
-['sign','first','pm','review'].forEach(id=>{
+['sign','prep','first','review'].forEach(id=>{
   const inp=document.getElementById('date-'+id);
   const prnt=document.getElementById('date-'+id+'-print');
   if(inp&&prnt){
