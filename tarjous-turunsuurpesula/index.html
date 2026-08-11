@@ -70,11 +70,35 @@
       margin-left: auto; white-space: nowrap; transition: background 0.15s;
     }
     .print-btn:hover { background: #f07a66; }
+    /* On desktop, mobile-row is invisible — children flow directly into the form flex row */
+    .mobile-row { display: contents; }
+
+    /* ── MOBILE FILL FORM ──────────────────────── */
+    @media (max-width: 840px) {
+      #fill-form {
+        flex-direction: column; align-items: stretch; gap: 10px;
+        padding: 12px 14px; position: relative; top: auto;
+      }
+      #fill-form .form-brand { font-size: 13px; }
+      .ff-sep { display: none; }
+      #fill-form .field { flex-direction: row; align-items: center; gap: 8px; justify-content: space-between; }
+      #fill-form label { margin-bottom: 0; white-space: nowrap; font-size: 9px; }
+      #fill-form input, #fill-form select { min-width: 0; flex: 1; }
+      #fill-form input.wide { min-width: 0; }
+      .toggle-group { flex: 1; justify-content: stretch; }
+      .toggle-opt { flex: 1; text-align: center; }
+      .print-btn { margin-left: 0; width: 100%; padding: 11px 20px; font-size: 13px; }
+      .mobile-row { display: flex; gap: 10px; width: 100%; }
+      .mobile-row .field { flex: 1; }
+    }
 
     /* ── SLIDES WRAPPER ─────────────────────────── */
     .slides-wrapper {
       display: flex; flex-direction: column; align-items: center;
       gap: 24px; padding: 28px 20px 40px;
+    }
+    @media (max-width: 840px) {
+      .slides-wrapper { padding: 16px 0 32px; gap: 14px; }
     }
 
     /* ── SLIDE BASE ─────────────────────────────── */
@@ -491,40 +515,47 @@
   <span class="form-brand">TSP Tarjouspohja</span>
   <div class="ff-sep"></div>
 
-  <div class="field">
-    <label>Asiakkaan yritys</label>
-    <input class="wide" type="text" id="f-client" placeholder="Yritys Oy" oninput="update()">
+  <div class="mobile-row">
+    <div class="field">
+      <label>Asiakkaan yritys</label>
+      <input class="wide" type="text" id="f-client" placeholder="Yritys Oy" oninput="update()">
+    </div>
+    <div class="field">
+      <label>Yhteyshenkilö</label>
+      <input type="text" id="f-contact" placeholder="Etunimi Sukunimi" oninput="update()">
+    </div>
   </div>
-  <div class="field">
-    <label>Yhteyshenkilö</label>
-    <input type="text" id="f-contact" placeholder="Etunimi Sukunimi" oninput="update()">
-  </div>
-  <div class="field">
-    <label>Päivämäärä</label>
-    <input type="text" id="f-date" placeholder="11.8.2026" oninput="update()">
-  </div>
-  <div class="field">
-    <label>Myyjä</label>
-    <input type="text" id="f-seller" placeholder="Oma nimi" oninput="update()">
+
+  <div class="mobile-row">
+    <div class="field">
+      <label>Päivämäärä</label>
+      <input type="text" id="f-date" placeholder="11.8.2026" oninput="update()">
+    </div>
+    <div class="field">
+      <label>Myyjä</label>
+      <input type="text" id="f-seller" placeholder="Oma nimi" oninput="update()">
+    </div>
   </div>
 
   <div class="ff-sep"></div>
 
-  <div class="field">
-    <label>Asiakas</label>
-    <div class="toggle-group">
-      <button class="toggle-opt active" id="btn-new" onclick="setCustomerType('new')">Uusi</button>
-      <button class="toggle-opt" id="btn-existing" onclick="setCustomerType('existing')">Olemassa oleva</button>
+  <div class="mobile-row">
+    <div class="field">
+      <label>Asiakas</label>
+      <div class="toggle-group">
+        <button class="toggle-opt active" id="btn-new" onclick="setCustomerType('new')">Uusi</button>
+        <button class="toggle-opt" id="btn-existing" onclick="setCustomerType('existing')">Olemassa oleva</button>
+      </div>
     </div>
-  </div>
 
-  <div class="field">
-    <label>Toimiala (referenssi)</label>
-    <select id="f-sector" onchange="setSector(this.value)">
-      <option value="hoivakoti">Hoivakoti / palvelutalo</option>
-      <option value="hotelli">Hotelli</option>
-      <option value="vahinko">Vahinkopesut / vakuutus</option>
-    </select>
+    <div class="field">
+      <label>Toimiala (referenssi)</label>
+      <select id="f-sector" onchange="setSector(this.value)">
+        <option value="hoivakoti">Hoivakoti / palvelutalo</option>
+        <option value="hotelli">Hotelli</option>
+        <option value="vahinko">Vahinkopesut / vakuutus</option>
+      </select>
+    </div>
   </div>
 
   <button class="print-btn" onclick="window.print()">⬇ Lataa PDF</button>
@@ -1231,6 +1262,25 @@ function updateContractDisplay(){
     inp.addEventListener('input',()=>{ prnt.textContent=inp.value||'—'; });
   }
 });
+
+/* ── MOBILE SLIDE SCALING ───────────────────────── */
+function scaleSlides(){
+  const vw = window.innerWidth;
+  const slides = document.querySelectorAll('.slide');
+  if(vw >= 840){
+    slides.forEach(s=>{ s.style.transform=''; s.style.marginBottom=''; });
+    return;
+  }
+  const scale = (vw - 8) / 794;
+  slides.forEach(s=>{
+    s.style.transform = `scale(${scale})`;
+    s.style.transformOrigin = 'top center';
+    // Compensate for the space the scaled slide no longer occupies
+    s.style.marginBottom = Math.round(1123 * (scale - 1)) + 'px';
+  });
+}
+scaleSlides();
+window.addEventListener('resize', scaleSlides);
 </script>
 </body>
 </html>
