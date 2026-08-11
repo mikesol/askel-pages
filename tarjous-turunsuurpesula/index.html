@@ -153,6 +153,16 @@
     .deco-1 { width: 420px; height: 420px; right: -80px; top: 40px; background: rgba(255,143,122,0.07); }
     .deco-2 { width: 260px; height: 260px; right: 80px; bottom: -60px; background: rgba(255,143,122,0.05); }
     .deco-3 { width: 160px; height: 160px; left: -40px; bottom: 180px; background: rgba(255,255,255,0.025); }
+    /* cover photo */
+    .cover-photo {
+      position: absolute; right: 0; top: 0; bottom: 0; width: 46%;
+      overflow: hidden; pointer-events: none;
+    }
+    .cover-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center center; }
+    .cover-photo-fade {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, var(--navy) 0%, rgba(20,55,90,0.85) 20%, transparent 60%);
+    }
     /* thin coral accent line */
     .cover-accent { width: 48px; height: 3px; background: var(--coral); border-radius: 2px; margin-bottom: auto; }
     .cover-logo { height: 30px; margin-bottom: 16px; }
@@ -323,6 +333,12 @@
     ════════════════════════════════════════════════ */
     #s5 { background: white; }
     .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 24px; }
+    .s5-photo { width: 100%; height: 110px; border-radius: 12px; overflow: hidden; margin-top: 14px; position: relative; }
+    .s5-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 55%; }
+    .s5-photo::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(20,55,90,0.55) 0%, transparent 35%, transparent 65%, rgba(20,55,90,0.55) 100%);
+    }
     .stat-card { background: var(--gray); border-radius: 14px; padding: 24px 20px; text-align: center; }
     .stat-n { font-family: 'Merriweather', serif; font-size: 38px; font-weight: 400; color: var(--coral); display: block; margin-bottom: 6px; }
     .stat-l { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--navy40); line-height: 1.45; }
@@ -525,9 +541,14 @@
   <div class="deco deco-1"></div>
   <div class="deco deco-2"></div>
   <div class="deco deco-3"></div>
+  <div class="cover-photo">
+    <img src="https://turunsuurpesula.askelventures.com/photo-tsp-truck-summer.webp" alt="">
+    <div class="cover-photo-fade"></div>
+  </div>
   <div class="cover-wrap">
     <img class="cover-logo"
-         src="https://turunsuurpesula.askelventures.com/tsp-logo.png"
+         src="https://turunsuurpesula.askelventures.com/tsp-logo-vector.svg"
+         style="filter:brightness(0) invert(1); opacity:0.9;"
          alt="Turun Suurpesula"
          onerror="this.style.display='none';document.getElementById('cover-txt').style.display='block'">
     <span id="cover-txt" style="display:none;font-family:'Sora',sans-serif;font-weight:700;font-size:16px;color:var(--coral);">Turun Suurpesula</span>
@@ -565,7 +586,7 @@
 <!-- ═══ SLIDE 2: AGENDA ══════════════════════════ -->
 <div class="slide" id="s2">
   <div class="sh">
-    <img src="https://turunsuurpesula.askelventures.com/tsp-logo.png" alt="TSP" onerror="this.style.display='none'">
+    <img src="https://turunsuurpesula.askelventures.com/tsp-logo-vector.svg" style="filter:brightness(0) invert(1); opacity:0.85;" alt="TSP" onerror="this.style.display='none'">
     <span class="sh-tag" id="tag-2">—</span>
   </div>
   <div class="sb">
@@ -610,7 +631,7 @@
 <!-- ═══ SLIDE 3: KUULIMME TEIDÄT ═════════════════ -->
 <div class="slide" id="s3">
   <div class="sh">
-    <img src="https://turunsuurpesula.askelventures.com/tsp-logo.png" alt="TSP" onerror="this.style.display='none'">
+    <img src="https://turunsuurpesula.askelventures.com/tsp-logo-vector.svg" style="filter:brightness(0) invert(1); opacity:0.85;" alt="TSP" onerror="this.style.display='none'">
     <span class="sh-tag" id="tag-3">—</span>
   </div>
   <div class="sb">
@@ -688,7 +709,7 @@
 <!-- ═══ SLIDE 4: RATKAISUMME ═════════════════════ -->
 <div class="slide" id="s4">
   <div class="sh">
-    <img src="https://turunsuurpesula.askelventures.com/tsp-logo.png" alt="TSP" onerror="this.style.display='none'">
+    <img src="https://turunsuurpesula.askelventures.com/tsp-logo-vector.svg" style="filter:brightness(0) invert(1); opacity:0.85;" alt="TSP" onerror="this.style.display='none'">
     <span class="sh-tag" id="tag-4">—</span>
   </div>
   <div class="sb">
@@ -732,7 +753,7 @@
 <!-- ═══ SLIDE 5: MIKSI TSP ═══════════════════════ -->
 <div class="slide" id="s5">
   <div class="sh">
-    <img src="https://turunsuurpesula.askelventures.com/tsp-logo.png" alt="TSP" onerror="this.style.display='none'">
+    <img src="https://turunsuurpesula.askelventures.com/tsp-logo-vector.svg" style="filter:brightness(0) invert(1); opacity:0.85;" alt="TSP" onerror="this.style.display='none'">
     <span class="sh-tag" id="tag-5">—</span>
   </div>
   <div class="sb">
@@ -751,6 +772,9 @@
         <span class="stat-n">170K</span>
         <span class="stat-l">kg vuosikapasiteetti<br>Telekatu 6, Turku</span>
       </div>
+    </div>
+    <div class="s5-photo">
+      <img src="https://turunsuurpesula.askelventures.com/photo-pesija.png" alt="Turun Suurpesula — teollinen pesula">
     </div>
     <div class="diff-grid">
       <div class="diff-card">
@@ -781,7 +805,7 @@
 <!-- ═══ SLIDE 6: REFERENSSI ══════════════════════ -->
 <div class="slide" id="s6">
   <div class="sh">
-    <img src="https://turunsuurpesula.askelventures.com/tsp-logo.png" alt="TSP" onerror="this.style.display='none'">
+    <img src="https://turunsuurpesula.askelventures.com/tsp-logo-vector.svg" style="filter:brightness(0) invert(1); opacity:0.85;" alt="TSP" onerror="this.style.display='none'">
     <span class="sh-tag" id="tag-6">—</span>
   </div>
   <div class="sb" id="ref-body">
@@ -792,7 +816,7 @@
 <!-- ═══ SLIDE 7: PALVELUSUUNNITELMA ══════════════ -->
 <div class="slide" id="s7">
   <div class="sh">
-    <img src="https://turunsuurpesula.askelventures.com/tsp-logo.png" alt="TSP" onerror="this.style.display='none'">
+    <img src="https://turunsuurpesula.askelventures.com/tsp-logo-vector.svg" style="filter:brightness(0) invert(1); opacity:0.85;" alt="TSP" onerror="this.style.display='none'">
     <span class="sh-tag" id="tag-7">—</span>
   </div>
   <div class="sb">
@@ -878,7 +902,7 @@
 <!-- ═══ SLIDE 8: HINTAEHDOTUS ════════════════════ -->
 <div class="slide" id="s8">
   <div class="sh">
-    <img src="https://turunsuurpesula.askelventures.com/tsp-logo.png" alt="TSP" onerror="this.style.display='none'">
+    <img src="https://turunsuurpesula.askelventures.com/tsp-logo-vector.svg" style="filter:brightness(0) invert(1); opacity:0.85;" alt="TSP" onerror="this.style.display='none'">
     <span class="sh-tag" id="tag-8">—</span>
   </div>
   <div class="sb">
@@ -931,7 +955,7 @@
 <!-- ═══ SLIDE 9: SEURAAVAT ASKELEET ══════════════ -->
 <div class="slide" id="s9">
   <div class="sh">
-    <img src="https://turunsuurpesula.askelventures.com/tsp-logo.png" alt="TSP" style="filter:brightness(0) invert(1); opacity:0.5;" onerror="this.style.display='none'">
+    <img src="https://turunsuurpesula.askelventures.com/tsp-logo-vector.svg" style="filter:brightness(0) invert(1); opacity:0.5;" alt="TSP" onerror="this.style.display='none'">
     <span class="sh-tag" id="tag-9">—</span>
   </div>
   <div class="sb">
@@ -1033,6 +1057,7 @@ function setCustomerType(type) {
 /* ── SECTOR / REFERENSSI ───────────────────────── */
 const sectors = {
   hoivakoti: {
+    photo: 'photo-towels.webp', photoPos: 'center',
     eyebrow: 'Asiakasesimerkki · Hoiva- ja palvelutalot',
     badge: 'Yrjö ja Hanna Kodit',
     metric: '5+', metricLbl: 'vuotta yhteistyötä',
@@ -1048,6 +1073,7 @@ const sectors = {
     othersLbl: 'Muita referenssejä',
   },
   hotelli: {
+    photo: 'photo-hotel.webp', photoPos: 'center',
     eyebrow: 'Asiakasesimerkki · Hotellit',
     badge: 'Hotelli Helmi',
     metric: '3+', metricLbl: 'vuotta yhteistyötä',
@@ -1063,6 +1089,7 @@ const sectors = {
     othersLbl: 'Muita referenssejä',
   },
   vahinko: {
+    photo: 'photo-savuvahinko.png', photoPos: 'center top',
     eyebrow: 'Asiakasesimerkki · Vahinkopesut',
     badge: 'If Vahinkovakuutus',
     metric: '24h', metricLbl: 'reagointiaika',
@@ -1085,23 +1112,31 @@ function setSector(key) {
   const othersHTML = d.others.map(o=>`<span class="ref-other-pill">${o}</span>`).join('');
   const factsHTML  = d.facts.map(f=>`<div class="ref-fact"><div class="ref-fact-v">${f.v}</div><div class="ref-fact-l">${f.l.replace('\n','<br>')}</div></div>`).join('');
   const tagsHTML   = d.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+  const BASE = 'https://turunsuurpesula.askelventures.com/';
   body.innerHTML = `
-    <p class="eyebrow">${d.eyebrow}</p>
-    <div class="ref-top">
-      <span class="ref-badge">${d.badge}</span>
-      <div class="ref-metric">
-        <div class="ref-metric-num">${d.metric}</div>
-        <div class="ref-metric-lbl">${d.metricLbl}</div>
+    <div style="display:grid; grid-template-columns:1fr 200px; gap:20px; flex:1;">
+      <div style="display:flex; flex-direction:column; min-width:0;">
+        <p class="eyebrow">${d.eyebrow}</p>
+        <div class="ref-top">
+          <span class="ref-badge">${d.badge}</span>
+          <div class="ref-metric">
+            <div class="ref-metric-num">${d.metric}</div>
+            <div class="ref-metric-lbl">${d.metricLbl}</div>
+          </div>
+        </div>
+        <h2 class="ref-headline">${d.headline}</h2>
+        <p class="ref-quote">${d.quote}</p>
+        <div class="ref-facts">${factsHTML}</div>
+        <p class="ref-tags-label">Mitä hoidamme</p>
+        <div class="tags">${tagsHTML}</div>
+        <div class="ref-others">
+          <span class="ref-others-lbl">${d.othersLbl}</span>
+          ${othersHTML}
+        </div>
       </div>
-    </div>
-    <h2 class="ref-headline">${d.headline}</h2>
-    <p class="ref-quote">${d.quote}</p>
-    <div class="ref-facts">${factsHTML}</div>
-    <p class="ref-tags-label">Mitä hoidamme</p>
-    <div class="tags">${tagsHTML}</div>
-    <div class="ref-others">
-      <span class="ref-others-lbl">${d.othersLbl}</span>
-      ${othersHTML}
+      <div style="border-radius:16px; overflow:hidden; align-self:stretch;">
+        <img src="${BASE}${d.photo}" alt="" style="width:100%; height:100%; object-fit:cover; object-position:${d.photoPos}; display:block;">
+      </div>
     </div>
   `;
 }
