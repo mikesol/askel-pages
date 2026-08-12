@@ -216,16 +216,17 @@ const faqs = [
         </div>
         <div class="grid md:grid-cols-2 gap-8 items-start">
           <div class="bg-white rounded-2xl p-8 text-left">
-            <div class="flex flex-col gap-4">
-              <input type="text" placeholder="Yrityksen nimi" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
-              <input type="text" placeholder="Toimiala (esim. hoivakoti, hotelli)" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
-              <input type="email" placeholder="Sähköposti" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
-              <input type="tel" placeholder="Puhelin" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
-              <textarea rows="3" placeholder="Kerro tarpestasi — volyymi, toimiala, aikataulu..." class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A] resize-none"></textarea>
-              <a href="/yhteys" class="block text-center font-sora font-bold text-sm bg-[#FF8F7A] text-white px-6 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors mt-2">
+            <form data-contact-form class="flex flex-col gap-4">
+              <input name="yritys" type="text" placeholder="Yrityksen nimi" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
+              <input name="toimiala" type="text" placeholder="Toimiala (esim. hoivakoti, hotelli)" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
+              <input name="email" type="email" required placeholder="Sähköposti" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
+              <input name="puhelin" type="tel" placeholder="Puhelin" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
+              <textarea name="viesti" rows="3" placeholder="Kerro tarpestasi — volyymi, toimiala, aikataulu..." class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A] resize-none"></textarea>
+              <button type="submit" class="block w-full text-center font-sora font-bold text-sm bg-[#FF8F7A] text-white px-6 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors mt-2 disabled:opacity-60">
                 Lähetä tarjouspyyntö →
-              </a>
-            </div>
+              </button>
+              <p data-form-status class="font-inter text-xs text-center mt-1"></p>
+            </form>
             <p class="font-inter text-[#14375A]/40 text-xs text-center mt-4">⏱ Vastaamme 24 tunnissa. Ei sitoumuksia.</p>
           </div>
           <div class="bg-white rounded-2xl overflow-hidden">

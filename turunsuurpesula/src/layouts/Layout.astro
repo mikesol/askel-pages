@@ -100,5 +100,40 @@ const navLinks = [
         </div>
       </div>
     </footer>
+
+    <script>
+      document.querySelectorAll('form[data-contact-form]').forEach((form) => {
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault()
+          const button = form.querySelector('button[type="submit"]')
+          const status = form.querySelector('[data-form-status]')
+          const label = button.textContent
+          button.disabled = true
+          button.textContent = 'Lähetetään...'
+          status.textContent = ''
+
+          const data = { source: window.location.pathname }
+          new FormData(form).forEach((v, k) => { data[k] = v })
+
+          try {
+            const r = await fetch('/api/form', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data),
+            })
+            if (!r.ok) throw new Error()
+            form.reset()
+            status.className = 'font-inter text-xs text-center mt-1 text-[#14375A]'
+            status.textContent = 'Kiitos! Viesti lähetetty, palataan teille 24 tunnissa.'
+          } catch {
+            status.className = 'font-inter text-xs text-center mt-1 text-red-500'
+            status.textContent = 'Lähetys epäonnistui. Soita 02 2321 300 tai myynti@melers.fi.'
+          } finally {
+            button.disabled = false
+            button.textContent = label
+          }
+        })
+      })
+    </script>
   </body>
 </html>
