@@ -198,7 +198,111 @@ async function loadDashboard() {
     </table>
   `;
 }
-async function loadOrders() { document.getElementById('view-orders').innerHTML = '<p style="padding:40px;color:var(--muted)">Ladataan...</p>'; }
+async function loadOrders() {
+  const { orders } = await api('/orders');
+  const byStatus = {};
+  STATUSES.forEach(s => byStatus[s] = []);
+  orders.forEach(o => { if (byStatus[o.status]) byStatus[o.status].push(o); });
+
+  const cols = STATUSES.map(s => `
+    <div class="kanban-col">
+      <div class="kanban-col-header">
+        <span>${STATUS_LABELS[s]}</span>
+        <span class="col-count">${byStatus[s].length}</span>
+      </div>
+      ${byStatus[s].map(o => `
+        <div class="order-card" onclick="openOrderDetail('${o.id}')">
+          <div class="oc-customer">${o.customer_name}</div>
+          <div class="oc-meta">${o.weight_kg} kg · ${(o.items||[]).map(i=>i.item_type).join(', ')}</div>
+          <div class="oc-meta" style="margin-top:4px">${fmtDateTime(o.received_at)}</div>
+        </div>`).join('')}
+    </div>`).join('');
+
+  document.getElementById('view-orders').innerHTML = `
+    <div class="toolbar">
+      <div class="section-title" style="margin:0">Tuotanto</div>
+      <div class="spacer"></div>
+      <button class="btn btn-primary" onclick="openNewOrderModal()">+ Uusi tilaus</button>
+    </div>
+    <div class="kanban">${cols}</div>`;
+}
+
+async function openOrderDetail(id) {
+  const { orders } = await api('/orders');
+  const o = orders.find(x => x.id === id);
+  if (!o) return;
+
+  const statusOpts = [...STATUSES, 'invoiced'].map(s =>
+    `<option value="${s}" ${o.status===s?'selected':''}>${STATUS_LABELS[s]||s}</option>`).join('');
+
+  openModal(`
+    <h2>Tilaus <code style="font-size:0.9rem">${o.id.slice(0,8)}</code></h2>
+    <div class="form-group"><label>Asiakas</label><div style="font-weight:600">${o.customer_name}</div></div>
+    <div class="form-row">
+      <div class="form-group"><label>Paino (kg)</label><input type="number" id="od-weight" value="${o.weight_kg}" step="0.1"></div>
+      <div class="form-group"><label>Tila</label><select id="od-status">${statusOpts}</select></div>
+    </div>
+    <div class="form-group"><label>Tuotteet</label><div style="font-size:0.875rem">${(o.items||[]).map(i=>`${i.item_type}: ${i.quantity} kpl`).join(', ')||'—'}</div></div>
+    <div class="form-group"><label>Huomiot</label><textarea id="od-notes">${o.notes||''}</textarea></div>
+    <div class="modal-footer">
+      ${o.status==='ready'?`<button class="btn btn-coral" onclick="createInvoiceFromOrder('${o.id}','${o.customer_id}',${o.weight_kg})">Luo lasku</button>`:''}
+      <button class="btn btn-ghost" onclick="closeModal()">Peruuta</button>
+      <button class="btn btn-primary" onclick="saveOrder('${o.id}')">Tallenna</button>
+    </div>
+  `);
+}
+
+async function saveOrder(id) {
+  const status = document.getElementById('od-status').value;
+  const weight_kg = parseFloat(document.getElementById('od-weight').value) || 0;
+  const notes = document.getElementById('od-notes').value;
+  await api(`/orders/${id}`, { method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ status, weight_kg, notes }) });
+  closeModal();
+  await loadOrders();
+}
+
+async function createInvoiceFromOrder(order_id, customer_id, weight_kg) {
+  // Get customer pricing to compute amount
+  const { customers } = await api('/customers');
+  const c = customers.find(x => x.id === customer_id);
+  const amount = c ? (c.pricing_type === 'per_kg' ? c.pricing_value * weight_kg : c.pricing_value) : 0;
+  await api('/invoices', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ customer_id, order_id, amount }) });
+  closeModal();
+  await loadOrders();
+}
+
+async function openNewOrderModal() {
+  const { customers } = await api('/customers');
+  const custOpts = customers.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+  const itemRows = () => ITEM_TYPES.map(t =>
+    `<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+      <span style="flex:1;font-size:0.875rem">${t}</span>
+      <input type="number" min="0" value="0" id="ni-${t}" style="width:70px;padding:4px 8px;border:1.5px solid var(--border);border-radius:4px">
+      <span style="font-size:0.8rem;color:var(--muted)">kpl</span>
+    </div>`).join('');
+
+  openModal(`
+    <h2>Uusi tilaus</h2>
+    <div class="form-group"><label>Asiakas</label><select id="ni-customer">${custOpts}</select></div>
+    <div class="form-group"><label>Paino (kg)</label><input type="number" id="ni-weight" step="0.1" placeholder="0.0"></div>
+    <div class="form-group"><label>Tuotteet</label>${itemRows()}</div>
+    <div class="form-group"><label>Huomiot</label><textarea id="ni-notes" placeholder="Lisätiedot..."></textarea></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal()">Peruuta</button>
+      <button class="btn btn-primary" onclick="submitNewOrder()">Lisää tilaus</button>
+    </div>
+  `);
+}
+
+async function submitNewOrder() {
+  const customer_id = document.getElementById('ni-customer').value;
+  const weight_kg = parseFloat(document.getElementById('ni-weight').value) || 0;
+  const notes = document.getElementById('ni-notes').value;
+  const items = ITEM_TYPES.map(t => ({ item_type: t, quantity: parseInt(document.getElementById('ni-'+t).value)||0 })).filter(i=>i.quantity>0);
+  await api('/orders', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ customer_id, weight_kg, notes, items }) });
+  closeModal();
+  await loadOrders();
+}
 async function loadCustomers() { document.getElementById('view-customers').innerHTML = '<p style="padding:40px;color:var(--muted)">Ladataan...</p>'; }
 async function loadBilling() { document.getElementById('view-billing').innerHTML = '<p style="padding:40px;color:var(--muted)">Ladataan...</p>'; }
 
