@@ -6,7 +6,10 @@ function cors(resp) {
 
 export async function onRequestPut({ env, params, request }) {
   const body = await request.json();
-  const completed_at = body.status === 'ready' ? Date.now() : null;
+  const current = await env.DB.prepare(`SELECT status, completed_at FROM orders WHERE id = ?`).bind(params.id).first();
+  const completed_at = body.status === 'ready'
+    ? (current?.completed_at || Date.now())
+    : (body.status === 'invoiced' ? current?.completed_at : null);
   await env.DB.prepare(
     `UPDATE orders SET status=?,weight_kg=?,notes=?,completed_at=? WHERE id=?`
   ).bind(
