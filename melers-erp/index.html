@@ -303,7 +303,126 @@ async function submitNewOrder() {
   closeModal();
   await loadOrders();
 }
-async function loadCustomers() { document.getElementById('view-customers').innerHTML = '<p style="padding:40px;color:var(--muted)">Ladataan...</p>'; }
+let allCustomers = [];
+
+async function loadCustomers(filter) {
+  const { customers } = await api('/customers');
+  allCustomers = customers;
+  renderCustomers(filter || '');
+}
+
+function renderCustomers(filter) {
+  const q = (filter||'').toLowerCase();
+  const filtered = allCustomers.filter(c =>
+    !q || c.name.toLowerCase().includes(q) || (c.ytunnus||'').includes(q) || (c.contact||'').toLowerCase().includes(q)
+  );
+  document.getElementById('view-customers').innerHTML = `
+    <div class="toolbar">
+      <input type="text" placeholder="Hae asiakasta..." oninput="renderCustomers(this.value)" value="${filter||''}" style="width:240px">
+      <div class="spacer"></div>
+      <button class="btn btn-primary" onclick="openNewCustomerModal()">+ Lisää asiakas</button>
+    </div>
+    <table>
+      <thead><tr><th>Yritys</th><th>Y-tunnus</th><th>Toimiala</th><th>Yhteyshenkilö</th><th>Hinnoittelu</th><th>Luotu</th></tr></thead>
+      <tbody>
+        ${filtered.map(c=>`<tr onclick="openCustomerDetail('${c.id}')">
+          <td><strong>${c.name}</strong></td>
+          <td>${c.ytunnus||'—'}</td>
+          <td>${c.industry||'—'}</td>
+          <td>${c.contact||'—'}</td>
+          <td>${c.pricing_type==='per_kg'?`${c.pricing_value} €/kg`:`${fmtEur(c.pricing_value)}/kk`}</td>
+          <td>${fmtDate(c.created_at)}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+async function openCustomerDetail(id) {
+  const { customer, order_count } = await api(`/customers/${id}`);
+  const c = customer;
+  const indOpts = INDUSTRIES.map(i=>`<option value="${i}" ${c.industry===i?'selected':''}>${i}</option>`).join('');
+  openModal(`
+    <h2>${c.name}</h2>
+    <div class="form-group"><label>Y-tunnus</label><input type="text" id="cd-ytunnus" value="${c.ytunnus||''}"></div>
+    <div class="form-group"><label>Toimiala</label><select id="cd-industry">${indOpts}</select></div>
+    <div class="form-row">
+      <div class="form-group"><label>Yhteyshenkilö</label><input type="text" id="cd-contact" value="${c.contact||''}"></div>
+      <div class="form-group"><label>Puhelin</label><input type="text" id="cd-phone" value="${c.phone||''}"></div>
+    </div>
+    <div class="form-group"><label>Sähköposti</label><input type="email" id="cd-email" value="${c.email||''}"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Hinnoittelutyyppi</label><select id="cd-ptype"><option value="per_kg" ${c.pricing_type==='per_kg'?'selected':''}>€/kg</option><option value="flat" ${c.pricing_type==='flat'?'selected':''}>€/kk (kiinteä)</option></select></div>
+      <div class="form-group"><label>Hinta</label><input type="number" id="cd-pvalue" step="0.01" value="${c.pricing_value||0}"></div>
+    </div>
+    <div class="form-group"><label>Sopimustiedot</label><textarea id="cd-notes">${c.contract_notes||''}</textarea></div>
+    <div style="font-size:0.85rem;color:var(--muted);margin-bottom:16px">Tilauksia yhteensä: <strong>${order_count}</strong></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal()">Peruuta</button>
+      <button class="btn btn-primary" onclick="saveCustomer('${c.id}','${c.name}')">Tallenna</button>
+    </div>
+  `);
+}
+
+async function saveCustomer(id, name) {
+  const body = {
+    name,
+    ytunnus: document.getElementById('cd-ytunnus').value,
+    industry: document.getElementById('cd-industry').value,
+    contact: document.getElementById('cd-contact').value,
+    phone: document.getElementById('cd-phone').value,
+    email: document.getElementById('cd-email').value,
+    pricing_type: document.getElementById('cd-ptype').value,
+    pricing_value: parseFloat(document.getElementById('cd-pvalue').value)||0,
+    contract_notes: document.getElementById('cd-notes').value,
+  };
+  await api(`/customers/${id}`, { method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+  closeModal();
+  await loadCustomers();
+}
+
+async function openNewCustomerModal() {
+  const indOpts = INDUSTRIES.map(i=>`<option value="${i}">${i}</option>`).join('');
+  openModal(`
+    <h2>Uusi asiakas</h2>
+    <div class="form-group"><label>Yrityksen nimi *</label><input type="text" id="nc-name" placeholder="Yritys Oy"></div>
+    <div class="form-group"><label>Y-tunnus</label><input type="text" id="nc-ytunnus" placeholder="0000000-0"></div>
+    <div class="form-group"><label>Toimiala</label><select id="nc-industry">${indOpts}</select></div>
+    <div class="form-row">
+      <div class="form-group"><label>Yhteyshenkilö</label><input type="text" id="nc-contact"></div>
+      <div class="form-group"><label>Puhelin</label><input type="text" id="nc-phone"></div>
+    </div>
+    <div class="form-group"><label>Sähköposti</label><input type="email" id="nc-email"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Hinnoittelutyyppi</label><select id="nc-ptype"><option value="per_kg">€/kg</option><option value="flat">€/kk (kiinteä)</option></select></div>
+      <div class="form-group"><label>Hinta</label><input type="number" id="nc-pvalue" step="0.01" value="0"></div>
+    </div>
+    <div class="form-group"><label>Sopimustiedot</label><textarea id="nc-notes"></textarea></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal()">Peruuta</button>
+      <button class="btn btn-primary" onclick="submitNewCustomer()">Lisää asiakas</button>
+    </div>
+  `);
+}
+
+async function submitNewCustomer() {
+  const name = document.getElementById('nc-name').value.trim();
+  if (!name) return alert('Yrityksen nimi vaaditaan.');
+  const body = {
+    name,
+    ytunnus: document.getElementById('nc-ytunnus').value,
+    industry: document.getElementById('nc-industry').value,
+    contact: document.getElementById('nc-contact').value,
+    phone: document.getElementById('nc-phone').value,
+    email: document.getElementById('nc-email').value,
+    pricing_type: document.getElementById('nc-ptype').value,
+    pricing_value: parseFloat(document.getElementById('nc-pvalue').value)||0,
+    contract_notes: document.getElementById('nc-notes').value,
+  };
+  await api('/customers', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+  closeModal();
+  await loadCustomers();
+}
 async function loadBilling() { document.getElementById('view-billing').innerHTML = '<p style="padding:40px;color:var(--muted)">Ladataan...</p>'; }
 
 // Boot
