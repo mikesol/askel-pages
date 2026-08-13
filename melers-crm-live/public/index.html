@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Melers CRM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <style>
+    :root {
+      --navy: #14375A;
+      --coral: #FF8F7A;
+      --coral-hover: #ff7a63;
+      --card-surface: #E9E4DF;
+      --bg-light: #F1F2F4;
+      --white: #FFFFFF;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var(--navy); min-height: 100vh; }
+    h1, h2, h3, h4 { font-family: 'Sora', sans-serif; }
+
+    /* ── Nav ── */
+    .nav {
+      background: var(--navy); display: flex; align-items: center;
+      padding: 0 24px; height: 68px; gap: 32px; position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { height: 44px; flex-shrink: 0; }
+    .nav-divider { width: 1px; height: 28px; background: rgba(255,255,255,0.2); }
+    .nav-tab {
+      color: rgba(255,255,255,0.55); font-family: 'Sora', sans-serif; font-weight: 600; font-size: 14px;
+      cursor: pointer; padding: 4px 0; border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s; user-select: none;
+    }
+    .nav-tab.active { color: var(--white); border-bottom-color: var(--coral); }
+    .nav-tab:hover { color: var(--white); }
+
+    /* ── Views ── */
+    .view { display: none; }
+    .view.active { display: block; }
+
+    /* ── Modal overlay ── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(20,55,90,0.55);
+      z-index: 200; display: flex; align-items: center; justify-content: center; padding: 24px;
+    }
+    .modal-box {
+      background: var(--white); border-radius: 12px; padding: 32px;
+      max-width: 560px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative;
+    }
+    .modal-box.wide { max-width: 700px; }
+    .modal-box.archive-box { max-width: 680px; }
+    .modal-close {
+      position: absolute; top: 16px; right: 20px; font-size: 22px;
+      cursor: pointer; color: #888; line-height: 1; background: none; border: none;
+    }
+    .modal-close:hover { color: var(--navy); }
+
+    /* ── Kanban toolbar ── */
+    .kanban-toolbar {
+      display: flex; align-items: center; justify-content: flex-end; padding: 16px 24px 0; gap: 10px;
+    }
+    .btn-primary {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--navy); color: var(--white); font-family: 'Sora', sans-serif;
+      font-weight: 600; font-size: 13px; padding: 9px 18px; border-radius: 8px;
+      border: none; cursor: pointer; transition: background 0.15s;
+    }
+    .btn-primary:hover { background: #1a4a78; }
+    .btn-secondary {
+      display: flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--navy); font-family: 'Sora', sans-serif;
+      font-weight: 600; font-size: 13px; padding: 9px 18px; border-radius: 8px;
+      border: 1.5px solid rgba(20,55,90,0.3); cursor: pointer; transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-secondary:hover { border-color: var(--navy); }
+    .btn-danger {
+      padding: 11px 20px; background: transparent; color: #cc3333; font-family: 'Sora', sans-serif;
+      font-weight: 600; font-size: 14px; border: 1.5px solid #cc3333; border-radius: 8px;
+      cursor: pointer; transition: background 0.15s, color 0.15s;
+    }
+    .btn-danger:hover { background: #cc3333; color: var(--white); }
+    #file-input { display: none; }
+    #customer-file-input { display: none; }
+
+    /* ── Kanban ── */
+    .kanban-board {
+      display: flex; gap: 16px; padding: 16px 24px 24px;
+      min-height: calc(100vh - 120px); overflow-x: auto; align-items: flex-start;
+    }
+    .kanban-col {
+      flex: 0 0 260px; background: rgba(20,55,90,0.06);
+      border-radius: 10px; overflow: hidden; display: flex; flex-direction: column;
+    }
+    .kanban-col-header { background: var(--navy); padding: 12px 16px; }
+    .kanban-col-title { font-family: 'Sora', sans-serif; font-weight: 600; font-size: 13px; color: var(--white); margin-bottom: 4px; }
+    .kanban-col-revenue { font-size: 11px; color: rgba(255,255,255,0.6); font-family: 'Inter', sans-serif; }
+    .kanban-cards { padding: 12px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+
+    /* ── Lead card ── */
+    .lead-card { background: var(--card-surface); border-radius: 8px; padding: 14px; cursor: pointer; transition: box-shadow 0.15s, transform 0.1s; }
+    .lead-card:hover { box-shadow: 0 4px 12px rgba(20,55,90,0.15); transform: translateY(-1px); }
+    .lead-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+    .lead-card-company { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 13px; color: var(--navy); }
+    .lead-card-tag { flex-shrink: 0; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+    .lead-card-tag.uusi { background: var(--coral); color: var(--white); }
+    .lead-card-tag.vanha { background: rgba(20,55,90,0.15); color: var(--navy); }
+    .lead-card-contact { font-size: 12px; color: #555; margin-bottom: 8px; }
+    .lead-card-deadline { display: inline-block; font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 20px; }
+    .lead-card-deadline.on-time { background: rgba(20,55,90,0.1); color: var(--navy); }
+    .lead-card-deadline.overdue { background: var(--coral); color: var(--white); }
+
+    /* ── Add card button ── */
+    .add-card-btn {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      width: calc(100% - 24px); margin: 0 12px 12px; padding: 8px;
+      background: transparent; border: 1.5px dashed rgba(20,55,90,0.25); border-radius: 8px;
+      color: rgba(20,55,90,0.45); font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 600;
+      cursor: pointer; transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+    .add-card-btn:hover { border-color: var(--navy); color: var(--navy); background: rgba(20,55,90,0.04); }
+
+    /* ── Forms ── */
+    .form-section-title {
+      font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em; color: rgba(20,55,90,0.4);
+      margin: 20px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--bg-light);
+    }
+    .form-section-title:first-of-type { margin-top: 0; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-group { margin-bottom: 12px; }
+    .form-label { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #888; margin-bottom: 5px; }
+    .form-input, .form-select, .form-textarea {
+      width: 100%; padding: 9px 12px; border: 1.5px solid #ddd; border-radius: 8px;
+      font-family: 'Inter', sans-serif; font-size: 13px; color: var(--navy);
+      background: var(--white); transition: border-color 0.15s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--coral); }
+    .form-textarea { resize: vertical; min-height: 70px; line-height: 1.5; }
+    .form-actions { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+    .form-submit { flex: 1; padding: 11px; background: var(--navy); color: var(--white); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 14px; border: none; border-radius: 8px; cursor: pointer; transition: background 0.15s; }
+    .form-submit:hover { background: #1a4a78; }
+    .form-cancel { padding: 11px 20px; background: transparent; color: #888; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 14px; border: 1.5px solid #ddd; border-radius: 8px; cursor: pointer; transition: border-color 0.15s, color 0.15s; }
+    .form-cancel:hover { border-color: var(--navy); color: var(--navy); }
+
+    /* ── Card modal header ── */
+    .card-modal-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
+    .card-modal-company-input {
+      font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 700; border: none;
+      border-bottom: 2px solid transparent; padding: 2px 0; color: var(--navy);
+      background: transparent; width: 100%; transition: border-color 0.15s;
+    }
+    .card-modal-company-input:focus { outline: none; border-bottom-color: var(--coral); }
+    .stage-select-wrap { margin-top: 16px; }
+    .stage-select-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #888; margin-bottom: 5px; display: block; }
+    .modal-stage-select {
+      width: 100%; padding: 9px 36px 9px 12px; border: 1.5px solid #ddd; border-radius: 8px;
+      font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 600; color: var(--navy);
+      background: var(--bg-light); cursor: pointer; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2314375A' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 12px center;
+    }
+    .modal-stage-select:focus { outline: 2px solid var(--coral); }
+
+    /* ── Archive list ── */
+    .archive-list { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; max-height: 60vh; overflow-y: auto; }
+    .archive-item {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 12px 14px; background: var(--bg-light); border-radius: 8px;
+    }
+    .archive-item-info { flex: 1; }
+    .archive-item-company { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 13px; color: var(--navy); }
+    .archive-item-meta { font-size: 12px; color: #888; margin-top: 2px; }
+    .archive-empty { text-align: center; color: #aaa; padding: 32px; font-size: 14px; }
+    .btn-restore {
+      font-size: 12px; font-weight: 600; font-family: 'Sora', sans-serif;
+      padding: 5px 12px; border: 1.5px solid var(--navy); border-radius: 6px;
+      background: transparent; color: var(--navy); cursor: pointer; white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-restore:hover { background: var(--navy); color: var(--white); }
+
+    /* ── Asiakkaat view ── */
+    .customers-page { padding: 24px; }
+    .customers-toolbar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px; gap: 16px; flex-wrap: wrap;
+    }
+    .customers-filters { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; flex: 1; }
+    .customers-search {
+      padding: 9px 14px; border: 1.5px solid #ddd; border-radius: 8px;
+      font-family: 'Inter', sans-serif; font-size: 13px; color: var(--navy);
+      background: var(--white); transition: border-color 0.15s; min-width: 220px;
+    }
+    .customers-search:focus { outline: none; border-color: var(--coral); }
+    .customers-search::placeholder { color: #aaa; }
+    .filter-select {
+      padding: 9px 12px; border: 1.5px solid #ddd; border-radius: 8px;
+      font-family: 'Inter', sans-serif; font-size: 13px; color: var(--navy);
+      background: var(--white); cursor: pointer;
+    }
+    .filter-select:focus { outline: none; border-color: var(--coral); }
+    .filter-date { padding: 9px 12px; border: 1.5px solid #ddd; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 13px; color: var(--navy); background: var(--white); }
+    .filter-date:focus { outline: none; border-color: var(--coral); }
+
+    /* ── Customer table ── */
+    .customers-table-wrap {
+      background: var(--white); border-radius: 10px; overflow: hidden;
+      box-shadow: 0 2px 8px rgba(20,55,90,0.06);
+    }
+    .customers-table { width: 100%; border-collapse: collapse; }
+    .customers-table thead tr { background: var(--navy); }
+    .customers-table thead th {
+      padding: 12px 16px; text-align: left; font-family: 'Sora', sans-serif;
+      font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.8);
+      text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
+    }
+    .customers-table tbody tr {
+      border-bottom: 1px solid var(--bg-light); cursor: pointer; transition: background 0.12s;
+    }
+    .customers-table tbody tr:last-child { border-bottom: none; }
+    .customers-table tbody tr:hover { background: rgba(20,55,90,0.04); }
+    .customers-table td { padding: 12px 16px; font-size: 13px; color: var(--navy); vertical-align: middle; }
+    .customers-table td.company-cell { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 14px; }
+    .customers-table td.muted { color: #888; }
+    .customers-empty-row td { padding: 40px; text-align: center; color: #aaa; font-size: 14px; }
+    .pricing-badge {
+      font-size: 11px; font-weight: 600; color: var(--coral-hover);
+      background: rgba(255,143,122,0.1); padding: 2px 8px; border-radius: 20px; white-space: nowrap;
+    }
+
+    /* ── Customer detail modal ── */
+    .detail-company-input {
+      font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 700;
+      border: none; border-bottom: 2px solid transparent; padding: 2px 0;
+      color: var(--navy); background: transparent; width: 100%; transition: border-color 0.15s;
+      margin-bottom: 20px;
+    }
+    .detail-company-input:focus { outline: none; border-bottom-color: var(--coral); }
+
+    /* ── Comment log ── */
+    .log-scroll {
+      max-height: 160px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;
+      padding: 2px 0; margin-bottom: 10px;
+    }
+    .log-entry {
+      background: var(--bg-light); border-radius: 8px; padding: 8px 12px;
+    }
+    .log-entry-date { font-size: 10px; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
+    .log-entry-text { font-size: 13px; color: var(--navy); line-height: 1.5; white-space: pre-wrap; }
+    .log-empty { font-size: 13px; color: #bbb; font-style: italic; padding: 8px 0; }
+    .log-add-row { display: flex; gap: 8px; align-items: flex-end; }
+    .log-add-input {
+      flex: 1; padding: 8px 12px; border: 1.5px solid #ddd; border-radius: 8px;
+      font-family: 'Inter', sans-serif; font-size: 13px; color: var(--navy);
+      background: var(--white); resize: none; min-height: 38px; max-height: 80px;
+      line-height: 1.4; transition: border-color 0.15s;
+    }
+    .log-add-input:focus { outline: none; border-color: var(--coral); }
+    .log-add-btn {
+      padding: 8px 16px; background: var(--coral); color: var(--white);
+      font-family: 'Sora', sans-serif; font-weight: 700; font-size: 12px;
+      border: none; border-radius: 8px; cursor: pointer; white-space: nowrap;
+      transition: background 0.15s; flex-shrink: 0;
+    }
+    .log-add-btn:hover { background: var(--coral-hover); }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: var(--navy); color: var(--white); font-family: 'Sora', sans-serif;
+      font-size: 13px; font-weight: 600; padding: 12px 24px; border-radius: 8px;
+      z-index: 300; opacity: 0; transition: opacity 0.3s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <img src="logo-crm.png" alt="Melers" class="nav-logo">
+  <div class="nav-divider"></div>
+  <span class="nav-tab active" data-view="kanban">Myynti &amp; Asiakaspalvelu</span>
+  <span class="nav-tab" data-view="customers">Asiakkaat</span>
+</nav>
+
+<div id="view-kanban" class="view active"></div>
+<div id="view-customers" class="view"></div>
+<div id="card-modal" class="modal-overlay" style="display:none"></div>
+<div id="add-card-modal" class="modal-overlay" style="display:none"></div>
+<div id="customer-detail-modal" class="modal-overlay" style="display:none"></div>
+<div id="archive-modal" class="modal-overlay" style="display:none"></div>
+<div id="add-customer-modal" class="modal-overlay" style="display:none"></div>
+<div class="toast" id="toast"></div>
+<input type="file" id="file-input" accept=".csv,.xlsx,.xls">
+<input type="file" id="customer-file-input" accept=".csv,.xlsx,.xls">
+
+<script>
+// ── Today ──
+const TODAY = new Date().toISOString().split('T')[0];
+const INDUSTRIES = ['Kaikki toimialat','Ravintola-ala','Majoituspalvelut','Kiinteistöpalvelut','Koulutus','Terveys & hyvinvointi','Siivouspalvelut','Toimistopalvelut','Julkinen sektori','Muu'];
+
+const STAGES = [
+  { id: 'liidi',        label: 'Liidi' },
+  { id: 'kartoitus',    label: 'Kartoitus' },
+  { id: 'tarjous',      label: 'Tarjous' },
+  { id: 'neuvottelu',   label: 'Neuvottelu' },
+  { id: 'kayttoonotto', label: 'Käyttöönotto' },
+];
+
+
+// ── In-memory cache (populated from API) ──
+const cache = { leads: [], archived: [], customers: [] };
+
+// ── API helper ──
+async function api(path, method = 'GET', body = null) {
+  const opts = { method, headers: { 'Content-Type': 'application/json' } };
+  if (body) opts.body = JSON.stringify(body);
+  const res = await fetch(path, opts);
+  if (!res.ok) throw new Error(`API ${method} ${path} → ${res.status}`);
+  return res.json();
+}
+
+// ── Loading overlay ──
+function showLoading(on) {
+  let el = document.getElementById('loading-overlay');
+  if (on && !el) {
+    el = document.createElement('div');
+    el.id = 'loading-overlay';
+    el.style.cssText = 'position:fixed;inset:0;background:rgba(20,55,90,0.18);z-index:999;display:flex;align-items:center;justify-content:center';
+    el.innerHTML = '<div style="background:#fff;border-radius:12px;padding:24px 40px;font-family:Sora,sans-serif;font-weight:600;color:#14375A;font-size:14px">Ladataan\u2026</div>';
+    document.body.appendChild(el);
+  } else if (!on && el) {
+    el.remove();
+  }
+}
+
+// ── Helpers ──
+function isOverdue(d) { return d && d < TODAY; }
+function formatDate(d) { if (!d) return '—'; const [y,m,dd]=d.split('-'); return `${dd}.${m}.${y}`; }
+function tagClass(tag) { return tag === 'UUSI asiakas' ? 'uusi' : 'vanha'; }
+function tagLabel(tag) { return tag === 'UUSI asiakas' ? 'UUSI ASIAKAS' : 'VANHA ASIAKAS'; }
+function leadById(id) { return cache.leads.find(l => l.id === id) || cache.archived.find(l => l.id === id); }
+function custById(id) { return cache.customers.find(c => c.id === id); }
+function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+function stageLabel(id) { const s = STAGES.find(s => s.id === id); return s ? s.label : id; }
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function showView(name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  document.querySelector(`.nav-tab[data-view="${name}"]`).classList.add('active');
+  if (name === 'customers') refreshCustomerTable();
+}
+
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => showView(tab.dataset.view));
+});
+
+// ── Auto-sync lead -> customers on Kayttoonotto ──
+async function syncLeadToCustomers(lead) {
+  const exists = cache.customers.find(c =>
+    (c.ytunnus && c.ytunnus === lead.ytunnus && lead.ytunnus) ||
+    c.company.toLowerCase() === lead.company.toLowerCase()
+  );
+  if (exists) return;
+  const data = await api('/api/customers', 'POST', {
+    company: lead.company, ytunnus: lead.ytunnus || '', industry: 'Muu',
+    contact: lead.contact, title: lead.title || '', phone: lead.phone || '',
+    email: lead.email || '', pricing: '—', created_date: TODAY, notes: 'Siirretty CRM:sta automaattisesti.',
+  });
+  cache.customers.push(data.customer);
+  showToast(lead.company + ' lisatty Asiakkaisiin automaattisesti');
+}
+
+// ── Card surface ──
+function buildCard(lead) {
+  const overdue = isOverdue(lead.next_contact);
+  const card = document.createElement('div');
+  card.className = 'lead-card';
+  card.dataset.id = lead.id;
+  card.innerHTML = `
+    <div class="lead-card-top">
+      <div class="lead-card-company">${lead.company}</div>
+      <span class="lead-card-tag ${tagClass(lead.tag)}">${tagLabel(lead.tag)}</span>
+    </div>
+    <div class="lead-card-contact">${lead.contact}${lead.title ? ' · ' + lead.title : ''}<br>${lead.phone || ''}</div>
+    <span class="lead-card-deadline ${overdue ? 'overdue' : 'on-time'}">
+      Kontaktointi: ${formatDate(lead.next_contact)}${overdue ? ' \u26A0' : ''}
+    </span>
+  `;
+  card.addEventListener('click', () => openCardModal(lead.id));
+  return card;
+}
+
+function updateColRevenue(stageId) {
+  const total = cache.leads.filter(l => l.stage === stageId).reduce((s,l) => s + (l.deal||0), 0);
+  const el = document.getElementById('revenue-' + stageId);
+  if (el) el.textContent = 'Revenue estimate: ' + total.toLocaleString('fi-FI') + ' \u20ac';
+}
+
+function updateArchiveBtn() {
+  const btn = document.getElementById('archive-toggle-btn');
+  if (btn) btn.textContent = `Arkisto (${cache.archived.length})`;
+}
+
+// ── Kanban ──
+function renderKanban() {
+  const view = document.getElementById('view-kanban');
+  view.innerHTML = '';
+  const toolbar = document.createElement('div');
+  toolbar.className = 'kanban-toolbar';
+  toolbar.innerHTML = `
+    <button class="btn-secondary" id="archive-toggle-btn" onclick="openArchiveModal()">Arkisto (${cache.archived.length})</button>
+    <button class="btn-primary" onclick="document.getElementById('file-input').click()">\uFF0B Lataa asiakaslista</button>
+  `;
+  view.appendChild(toolbar);
+
+  const board = document.createElement('div');
+  board.className = 'kanban-board';
+  STAGES.forEach(stage => {
+    const stageLeads = cache.leads.filter(l => l.stage === stage.id);
+    const total = stageLeads.reduce((s,l) => s + l.deal, 0);
+    const col = document.createElement('div');
+    col.className = 'kanban-col';
+    col.id = 'kanban-col-' + stage.id;
+    col.innerHTML = `
+      <div class="kanban-col-header">
+        <div class="kanban-col-title">${stage.label}</div>
+        <div class="kanban-col-revenue" id="revenue-${stage.id}">Revenue estimate: ${total.toLocaleString('fi-FI')} \u20ac</div>
+      </div>
+      <div class="kanban-cards" id="col-${stage.id}"></div>
+    `;
+    const container = col.querySelector(`#col-${stage.id}`);
+    stageLeads.forEach(l => container.appendChild(buildCard(l)));
+    const addBtn = document.createElement('button');
+    addBtn.className = 'add-card-btn';
+    addBtn.textContent = '\uFF0B Lisaa kortti';
+    addBtn.addEventListener('click', () => openAddCardModal(stage.id));
+    col.appendChild(addBtn);
+    board.appendChild(col);
+  });
+  view.appendChild(board);
+}
+
+// ── Card detail modal ──
+function openCardModal(id) {
+  const lead = leadById(id);
+  if (!lead) return;
+  const stageOptions = STAGES.map(s =>
+    `<option value="${s.id}" ${s.id === lead.stage ? 'selected' : ''}>${s.label}</option>`
+  ).join('');
+  const overdue = isOverdue(lead.next_contact);
+  const modal = document.getElementById('card-modal');
+  modal.innerHTML = `
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeCardModal()">&times;</button>
+      <div class="card-modal-header">
+        <input class="card-modal-company-input" id="edit-company" value="${esc(lead.company)}" placeholder="Yrityksen nimi">
+        <span class="lead-card-tag ${tagClass(lead.tag)}" style="margin-top:6px;flex-shrink:0">${tagLabel(lead.tag)}</span>
+      </div>
+      <div class="stage-select-wrap">
+        <span class="stage-select-label">Vaihe</span>
+        <select class="modal-stage-select" id="edit-stage">${stageOptions}</select>
+      </div>
+      <div class="form-section-title">Yritystiedot</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Y-tunnus</label><input class="form-input" id="edit-ytunnus" value="${esc(lead.ytunnus||'')}" placeholder="1234567-8"></div>
+        <div class="form-group"><label class="form-label">Asiakastyyppi</label>
+          <select class="form-select" id="edit-tag">
+            <option value="UUSI asiakas" ${lead.tag==='UUSI asiakas'?'selected':''}>UUSI asiakas</option>
+            <option value="VANHA asiakas" ${lead.tag==='VANHA asiakas'?'selected':''}>VANHA asiakas</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-section-title">Yhteyshenkilö</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Nimi</label><input class="form-input" id="edit-contact" value="${esc(lead.contact)}" placeholder="Etunimi Sukunimi"></div>
+        <div class="form-group"><label class="form-label">Titteli</label><input class="form-input" id="edit-title" value="${esc(lead.title||'')}" placeholder="Toimitusjohtaja"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Puhelinnumero</label><input class="form-input" id="edit-phone" value="${esc(lead.phone||'')}" placeholder="+358 40 000 0000"></div>
+        <div class="form-group"><label class="form-label">Sahkoposti</label><input class="form-input" type="email" id="edit-email" value="${esc(lead.email||'')}" placeholder="nimi@yritys.fi"></div>
+      </div>
+      <div class="form-section-title">Myynti</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Revenue estimate (\u20ac/v)</label><input class="form-input" id="edit-deal" type="number" value="${lead.deal||''}" placeholder="12000"></div>
+        <div class="form-group" style="display:flex;flex-direction:column;justify-content:flex-end"><span style="font-size:12px;color:#888">Nykyinen: ${lead.deal ? lead.deal.toLocaleString('fi-FI') + ' \u20ac/v' : '—'}</span></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Kontaktointipäivä</label><input class="form-input" id="edit-contact_date" type="date" value="${lead.contact_date||''}"></div>
+        <div class="form-group"><label class="form-label">Seuraava kontaktointi ${overdue?'\u26A0':''}</label><input class="form-input" id="edit-next_contact" type="date" value="${lead.next_contact||''}" style="${overdue?'border-color:var(--coral)':''}"></div>
+      </div>
+      <div class="form-section-title">Muistiinpanot</div>
+      <div class="log-scroll" id="log-entries-${id}">${renderLogEntries(lead.log)}</div>
+      <div class="log-add-row">
+        <textarea class="log-add-input" id="log-input-${id}" placeholder="Lisaa muistiinpano\u2026" rows="2"></textarea>
+        <button class="log-add-btn" onclick="addLogEntry(${id})">Lisaa</button>
+      </div>
+      <div class="form-actions" style="margin-top:16px">
+        <button class="btn-danger" onclick="archiveCard(${id})">Arkistoi</button>
+        <button class="form-cancel" onclick="closeCardModal()">Peruuta</button>
+        <button class="form-submit" onclick="saveCard(${id})">Tallenna</button>
+      </div>
+    </div>
+  `;
+  modal.style.display = 'flex';
+  modal.onclick = (e) => { if (e.target === modal) closeCardModal(); };
+}
+
+function closeCardModal() { document.getElementById('card-modal').style.display = 'none'; }
+
+async function saveCard(id) {
+  const lead = leadById(id);
+  const oldStage = lead.stage;
+  const newStage = document.getElementById('edit-stage').value;
+  const payload = {
+    stage: newStage,
+    tag: document.getElementById('edit-tag').value,
+    company: document.getElementById('edit-company').value.trim(),
+    ytunnus: document.getElementById('edit-ytunnus').value.trim(),
+    contact: document.getElementById('edit-contact').value.trim(),
+    title: document.getElementById('edit-title').value.trim(),
+    phone: document.getElementById('edit-phone').value.trim(),
+    email: document.getElementById('edit-email').value.trim(),
+    deal: parseInt(document.getElementById('edit-deal').value) || 0,
+    contact_date: document.getElementById('edit-contact_date').value,
+    next_contact: document.getElementById('edit-next_contact').value,
+  };
+  try {
+    const data = await api(`/api/leads/${id}`, 'PUT', payload);
+    Object.assign(lead, data.lead);
+    const oldCard = document.querySelector(`.lead-card[data-id="${id}"]`);
+    if (oldCard) {
+      if (oldStage !== newStage) {
+        oldCard.remove();
+        const col = document.getElementById('col-' + newStage);
+        if (col) col.appendChild(buildCard(lead));
+        updateColRevenue(oldStage);
+      } else {
+        oldCard.replaceWith(buildCard(lead));
+      }
+    }
+    updateColRevenue(newStage);
+    if (newStage === 'kayttoonotto' && oldStage !== 'kayttoonotto') {
+      await syncLeadToCustomers(lead);
+    }
+    closeCardModal();
+    showToast('Tallennettu: ' + lead.company);
+  } catch(e) {
+    showToast('Virhe tallennuksessa');
+  }
+}
+
+// ── Log helpers ──
+function renderLogEntries(log) {
+  if (!log || !log.length) return '<div class="log-empty">Ei muistiinpanoja viela.</div>';
+  return log.map(e => `
+    <div class="log-entry">
+      <div class="log-entry-date">${formatDate(e.date)}</div>
+      <div class="log-entry-text">${esc(e.text)}</div>
+    </div>
+  `).join('');
+}
+
+async function addLogEntry(id) {
+  const lead = leadById(id);
+  const input = document.getElementById('log-input-' + id);
+  const text = input.value.trim();
+  if (!text) return;
+  try {
+    const data = await api(`/api/leads/${id}/log`, 'POST', { date: TODAY, text });
+    lead.log = data.log;
+    input.value = '';
+    const container = document.getElementById('log-entries-' + id);
+    if (container) {
+      container.innerHTML = renderLogEntries(lead.log);
+      container.scrollTop = container.scrollHeight;
+    }
+  } catch(e) {
+    showToast('Virhe muistiinpanon tallennuksessa');
+  }
+}
+
+// ── Archive ──
+async function archiveCard(id) {
+  const lead = leadById(id);
+  if (!lead) return;
+  const oldStage = lead.stage;
+  try {
+    await api(`/api/leads/${id}`, 'DELETE');
+    cache.leads = cache.leads.filter(l => l.id !== id);
+    lead.archived = 1;
+    lead.archived_date = TODAY;
+    cache.archived.push(lead);
+    const card = document.querySelector(`.lead-card[data-id="${id}"]`);
+    if (card) card.remove();
+    updateColRevenue(oldStage);
+    updateArchiveBtn();
+    closeCardModal();
+    showToast(lead.company + ' arkistoitu');
+  } catch(e) {
+    showToast('Virhe arkistoinnissa');
+  }
+}
+
+async function restoreCard(id) {
+  try {
+    const data = await api(`/api/leads/${id}/restore`, 'POST');
+    const lead = data.lead;
+    cache.archived = cache.archived.filter(l => l.id !== id);
+    cache.leads.push(lead);
+    const col = document.getElementById('col-' + lead.stage);
+    if (col) col.appendChild(buildCard(lead));
+    updateColRevenue(lead.stage);
+    updateArchiveBtn();
+    renderArchiveList();
+    showToast(lead.company + ' palautettu vaiheeseen: ' + stageLabel(lead.stage));
+  } catch(e) {
+    showToast('Virhe palautuksessa');
+  }
+}
+
+function openArchiveModal() {
+  const modal = document.getElementById('archive-modal');
+  modal.style.display = 'flex';
+  modal.onclick = (e) => { if (e.target === modal) closeArchiveModal(); };
+  renderArchiveList();
+}
+function closeArchiveModal() { document.getElementById('archive-modal').style.display = 'none'; }
+
+function renderArchiveList() {
+  const modal = document.getElementById('archive-modal');
+  const items = cache.archived.length
+    ? cache.archived.map(l => `
+        <div class="archive-item">
+          <div class="archive-item-info">
+            <div class="archive-item-company">${l.company}</div>
+            <div class="archive-item-meta">${stageLabel(l.stage)} \u00B7 ${l.contact} \u00B7 ${l.deal ? l.deal.toLocaleString('fi-FI') + ' \u20ac/v' : '—'}</div>
+          </div>
+          <button class="btn-restore" onclick="restoreCard(${l.id})">Palauta</button>
+        </div>
+      `).join('')
+    : '<div class="archive-empty">Arkisto on tyhja.</div>';
+  modal.innerHTML = `
+    <div class="modal-box archive-box">
+      <button class="modal-close" onclick="closeArchiveModal()">&times;</button>
+      <h3 style="font-family:'Sora',sans-serif;font-size:16px;color:var(--navy);margin-bottom:4px">Arkisto</h3>
+      <p style="font-size:13px;color:#888;margin-bottom:0">Arkistoidut kortit — palauta takaisin kanbannakymaan tarvittaessa.</p>
+      <div class="archive-list">${items}</div>
+    </div>
+  `;
+}
+
+// ── Add card modal ──
+function openAddCardModal(stageId) {
+  const stage = STAGES.find(s => s.id === stageId);
+  const modal = document.getElementById('add-card-modal');
+  modal.innerHTML = `
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeAddCardModal()">&times;</button>
+      <h3 style="font-family:'Sora',sans-serif;font-size:16px;color:var(--navy);margin-bottom:16px">Lisaa kortti — ${stage.label}</h3>
+      <form onsubmit="submitAddCard(event,'${stageId}')">
+        <div class="form-section-title">Yritystiedot</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Yrityksen nimi *</label><input class="form-input" id="new-company" type="text" required placeholder="Yrityksen nimi"></div>
+          <div class="form-group"><label class="form-label">Y-tunnus</label><input class="form-input" id="new-ytunnus" type="text" placeholder="1234567-8"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Asiakastyyppi</label><select class="form-select" id="new-tag"><option value="UUSI asiakas">UUSI asiakas</option><option value="VANHA asiakas">VANHA asiakas</option></select></div>
+        <div class="form-section-title">Yhteyshenkilö</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Nimi *</label><input class="form-input" id="new-contact" type="text" required placeholder="Etunimi Sukunimi"></div>
+          <div class="form-group"><label class="form-label">Titteli</label><input class="form-input" id="new-title" type="text" placeholder="Toimitusjohtaja"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Puhelinnumero</label><input class="form-input" id="new-phone" type="text" placeholder="+358 40 000 0000"></div>
+          <div class="form-group"><label class="form-label">Sahkoposti</label><input class="form-input" id="new-email" type="email" placeholder="nimi@yritys.fi"></div>
+        </div>
+        <div class="form-section-title">Myynti</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Revenue estimate (\u20ac/v)</label><input class="form-input" id="new-deal" type="number" placeholder="12000"></div>
+          <div class="form-group"><label class="form-label">Kontaktointipäivä</label><input class="form-input" id="new-contact_date" type="date"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Seuraava kontaktointi *</label><input class="form-input" id="new-next_contact" type="date" required value="${TODAY}"></div>
+        <div class="form-section-title">Muistiinpano</div>
+        <div class="form-group"><textarea class="form-textarea" id="new-memo" placeholder="Viimeisin keskustelun yhteenveto\u2026"></textarea></div>
+        <div class="form-actions">
+          <button type="button" class="form-cancel" onclick="closeAddCardModal()">Peruuta</button>
+          <button class="form-submit" type="submit">Lisaa kortti</button>
+        </div>
+      </form>
+    </div>
+  `;
+  modal.style.display = 'flex';
+  modal.onclick = (e) => { if (e.target === modal) closeAddCardModal(); };
+}
+function closeAddCardModal() { document.getElementById('add-card-modal').style.display = 'none'; }
+
+async function submitAddCard(e, stageId) {
+  e.preventDefault();
+  const memo = document.getElementById('new-memo').value.trim();
+  const payload = {
+    stage: stageId,
+    tag: document.getElementById('new-tag').value,
+    company: document.getElementById('new-company').value.trim(),
+    ytunnus: document.getElementById('new-ytunnus').value.trim(),
+    contact: document.getElementById('new-contact').value.trim(),
+    title: document.getElementById('new-title').value.trim(),
+    phone: document.getElementById('new-phone').value.trim(),
+    email: document.getElementById('new-email').value.trim(),
+    deal: parseInt(document.getElementById('new-deal').value) || 0,
+    contact_date: document.getElementById('new-contact_date').value,
+    next_contact: document.getElementById('new-next_contact').value,
+    log: memo ? [{ date: TODAY, text: memo }] : [],
+  };
+  try {
+    const data = await api('/api/leads', 'POST', payload);
+    const lead = data.lead;
+    cache.leads.push(lead);
+    const col = document.getElementById('col-' + stageId);
+    if (col) col.appendChild(buildCard(lead));
+    updateColRevenue(stageId);
+    if (stageId === 'kayttoonotto') await syncLeadToCustomers(lead);
+    closeAddCardModal();
+    showToast('Kortti lisatty: ' + lead.company);
+  } catch(e) {
+    showToast('Virhe kortin lisayksessa');
+  }
+}
+
+// ── File import (kanban) ──
+document.getElementById('file-input').addEventListener('change', function(e) {
+  const file = e.target.files[0]; if (!file) return; this.value = '';
+  parseFile(file, rows => importLeadsFromRows(rows));
+});
+
+async function importLeadsFromRows(rows) {
+  if (rows.length < 2) { showToast('Tiedostossa ei loydy dataa.'); return; }
+  const hdr = rows[0].map(h => (h||'').toLowerCase());
+  const ci = (cands) => { for (const c of cands) { const i = hdr.findIndex(h => h.includes(c)); if (i>=0) return i; } return -1; };
+  const cC = ci(['yritys','company','firma','org']); const nC = ci(['nimi','name','contact']); const pC = ci(['puhelin','phone','numero','gsm']);
+  const getC = (i, fb) => i >= 0 ? i : fb;
+  const dataRows = rows.slice(1).filter(r => r[getC(cC,0)]);
+  if (!dataRows.length) { showToast('Ei tuotavia riveja loydy.'); return; }
+  let count = 0;
+  for (const row of dataRows) {
+    const payload = {
+      stage: 'liidi', tag: 'UUSI asiakas',
+      company: row[getC(cC,0)]||'—', contact: row[getC(nC,1)]||'—',
+      phone: row[getC(pC,2)]||'—', email: '', title: '', ytunnus: '',
+      deal: 0, contact_date: '', next_contact: TODAY,
+      log: [{ date: TODAY, text: 'Tuotu asiakaslistasta' }],
+    };
+    try {
+      const data = await api('/api/leads', 'POST', payload);
+      cache.leads.push(data.lead);
+      const col = document.getElementById('col-liidi');
+      if (col) col.appendChild(buildCard(data.lead));
+      count++;
+    } catch(err) { /* skip row */ }
+  }
+  updateColRevenue('liidi');
+  showToast(count + ' kontaktia tuotu Liidi-sarakkeeseen');
+}
+
+// ── Asiakkaat view ──
+function renderCustomers() {
+  const view = document.getElementById('view-customers');
+  const industryOptions = INDUSTRIES.map(i => `<option value="${i}">${i}</option>`).join('');
+  view.innerHTML = `
+    <div class="customers-page">
+      <div class="customers-toolbar">
+        <div class="customers-filters">
+          <input class="customers-search" id="cust-search" type="text" placeholder="Hae nimella, Y-tunnuksella, sahkopostilla\u2026" oninput="refreshCustomerTable()">
+          <select class="filter-select" id="cust-industry" onchange="refreshCustomerTable()">${industryOptions}</select>
+          <input class="filter-date" id="cust-date-from" type="date" title="Asiakas alkaen" onchange="refreshCustomerTable()">
+          <span style="font-size:12px;color:#888">—</span>
+          <input class="filter-date" id="cust-date-to" type="date" title="Asiakas saakka" onchange="refreshCustomerTable()">
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn-secondary" onclick="openAddCustomerModal()">\uFF0B Lisaa asiakas</button>
+          <button class="btn-primary" onclick="document.getElementById('customer-file-input').click()">\uFF0B Lisaa asiakaslista</button>
+        </div>
+      </div>
+      <div class="customers-table-wrap">
+        <table class="customers-table">
+          <thead><tr>
+            <th>Yritys</th><th>Y-tunnus</th><th>Yhteyshenkilö</th>
+            <th>Sahkoposti</th><th>Puhelin</th><th>Toimiala</th>
+            <th>Sopimus</th><th>Asiakkaana alkaen</th>
+          </tr></thead>
+          <tbody id="customers-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  `;
+  refreshCustomerTable();
+}
+
+function getFilteredCustomers() {
+  const q = (document.getElementById('cust-search')?.value || '').toLowerCase().trim();
+  const ind = document.getElementById('cust-industry')?.value || 'Kaikki toimialat';
+  const from = document.getElementById('cust-date-from')?.value || '';
+  const to = document.getElementById('cust-date-to')?.value || '';
+  return cache.customers.filter(c => {
+    if (q && !( c.company.toLowerCase().includes(q) || (c.ytunnus||'').toLowerCase().includes(q) || (c.contact||'').toLowerCase().includes(q) || (c.email||'').toLowerCase().includes(q) || (c.phone||'').toLowerCase().includes(q) )) return false;
+    if (ind !== 'Kaikki toimialat' && c.industry !== ind) return false;
+    if (from && c.created_date && c.created_date < from) return false;
+    if (to && c.created_date && c.created_date > to) return false;
+    return true;
+  });
+}
+
+function refreshCustomerTable() {
+  const tbody = document.getElementById('customers-tbody');
+  if (!tbody) return;
+  const customers = getFilteredCustomers();
+  if (!customers.length) {
+    tbody.innerHTML = '<tr class="customers-empty-row"><td colspan="8">Ei hakutuloksia.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = '';
+  customers.forEach(c => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="company-cell">${c.company}</td>
+      <td class="muted">${c.ytunnus||'—'}</td>
+      <td>${c.contact}${c.title ? '<br><span style="font-size:11px;color:#888">'+c.title+'</span>' : ''}</td>
+      <td class="muted">${c.email||'—'}</td>
+      <td class="muted">${c.phone||'—'}</td>
+      <td><span style="font-size:12px;background:rgba(20,55,90,0.08);padding:2px 8px;border-radius:20px">${c.industry||'—'}</span></td>
+      <td><span class="pricing-badge">${c.pricing}</span></td>
+      <td class="muted">${formatDate(c.created_date)}</td>
+    `;
+    tr.addEventListener('click', () => openCustomerDetail(c.id));
+    tbody.appendChild(tr);
+  });
+}
+
+function openCustomerDetail(id) {
+  const c = custById(id);
+  if (!c) return;
+  const industryOptions = INDUSTRIES.slice(1).map(i => `<option value="${i}" ${c.industry===i?'selected':''}>${i}</option>`).join('');
+  const modal = document.getElementById('customer-detail-modal');
+  modal.innerHTML = `
+    <div class="modal-box wide">
+      <button class="modal-close" onclick="closeCustomerDetail()">&times;</button>
+      <input class="detail-company-input" id="dc-company" value="${esc(c.company)}" placeholder="Yrityksen nimi">
+      <div class="form-section-title">Yritystiedot</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Y-tunnus</label><input class="form-input" id="dc-ytunnus" value="${esc(c.ytunnus||'')}"></div>
+        <div class="form-group"><label class="form-label">Toimiala</label><select class="form-select" id="dc-industry">${industryOptions}</select></div>
+      </div>
+      <div class="form-section-title">Yhteyshenkilö</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Nimi</label><input class="form-input" id="dc-contact" value="${esc(c.contact)}"></div>
+        <div class="form-group"><label class="form-label">Titteli</label><input class="form-input" id="dc-title" value="${esc(c.title||'')}" placeholder="Toimitusjohtaja"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Puhelinnumero</label><input class="form-input" id="dc-phone" value="${esc(c.phone||'')}"></div>
+        <div class="form-group"><label class="form-label">Sahkoposti</label><input class="form-input" type="email" id="dc-email" value="${esc(c.email||'')}"></div>
+      </div>
+      <div class="form-section-title">Sopimus & hinnoittelu</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Sovittu hinnasto</label><input class="form-input" id="dc-pricing" value="${esc(c.pricing)}" placeholder="Perus 2x/kk — 480 \u20ac/kk"></div>
+        <div class="form-group"><label class="form-label">Asiakkaana alkaen</label><input class="form-input" id="dc-created_date" type="date" value="${c.created_date||''}"></div>
+      </div>
+      <div class="form-section-title">Muistiinpanot</div>
+      <div class="form-group"><textarea class="form-textarea" id="dc-notes" placeholder="Erityisehdot, toimitusaikataulu, maksuaika\u2026">${esc(c.notes||'')}</textarea></div>
+      <div class="form-actions">
+        <button class="form-cancel" onclick="closeCustomerDetail()">Peruuta</button>
+        <button class="form-submit" onclick="saveCustomer(${id})">Tallenna</button>
+      </div>
+    </div>
+  `;
+  modal.style.display = 'flex';
+  modal.onclick = (e) => { if (e.target === modal) closeCustomerDetail(); };
+}
+function closeCustomerDetail() { document.getElementById('customer-detail-modal').style.display = 'none'; }
+
+async function saveCustomer(id) {
+  const payload = {
+    company: document.getElementById('dc-company').value.trim(),
+    ytunnus: document.getElementById('dc-ytunnus').value.trim(),
+    industry: document.getElementById('dc-industry').value,
+    contact: document.getElementById('dc-contact').value.trim(),
+    title: document.getElementById('dc-title').value.trim(),
+    phone: document.getElementById('dc-phone').value.trim(),
+    email: document.getElementById('dc-email').value.trim(),
+    pricing: document.getElementById('dc-pricing').value.trim(),
+    created_date: document.getElementById('dc-created_date').value,
+    notes: document.getElementById('dc-notes').value.trim(),
+  };
+  try {
+    const data = await api(`/api/customers/${id}`, 'PUT', payload);
+    const c = custById(id);
+    Object.assign(c, data.customer);
+    closeCustomerDetail();
+    refreshCustomerTable();
+    showToast('Tallennettu: ' + c.company);
+  } catch(e) {
+    showToast('Virhe tallennuksessa');
+  }
+}
+
+// ── Customer file import ──
+document.getElementById('customer-file-input').addEventListener('change', function(e) {
+  const file = e.target.files[0]; if (!file) return; this.value = '';
+  parseFile(file, rows => importCustomersFromRows(rows));
+});
+
+async function importCustomersFromRows(rows) {
+  if (rows.length < 2) { showToast('Tiedostossa ei loydy dataa.'); return; }
+  const hdr = rows[0].map(h => (h||'').toLowerCase());
+  const ci = (cands) => { for (const c of cands) { const i = hdr.findIndex(h => h.includes(c)); if (i>=0) return i; } return -1; };
+  const cC = ci(['yritys','company','firma','org']); const nC = ci(['nimi','name','contact']); const pC = ci(['puhelin','phone','numero','gsm']); const eC = ci(['email','sahkoposti','mail']);
+  const getC = (i, fb) => i >= 0 ? i : fb;
+  const dataRows = rows.slice(1).filter(r => r[getC(cC,0)]);
+  if (!dataRows.length) { showToast('Ei tuotavia riveja loydy.'); return; }
+  let count = 0;
+  for (const row of dataRows) {
+    const payload = {
+      company: row[getC(cC,0)]||'—', ytunnus: '', industry: 'Muu',
+      contact: row[getC(nC,1)]||'—', title: '',
+      phone: row[getC(pC,2)]||'—', email: eC>=0 ? row[eC]||'' : '',
+      pricing: '—', created_date: TODAY, notes: 'Tuotu asiakaslistasta',
+    };
+    try {
+      const data = await api('/api/customers', 'POST', payload);
+      cache.customers.push(data.customer);
+      count++;
+    } catch(err) { /* skip row */ }
+  }
+  refreshCustomerTable();
+  showToast(count + ' asiakasta tuotu');
+}
+
+// ── Shared file parser ──
+function parseFile(file, callback) {
+  const ext = file.name.split('.').pop().toLowerCase();
+  if (ext === 'csv') {
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const rows = ev.target.result.split(/\r?\n/).filter(l=>l.trim()).map(l=>l.split(/[,;]/).map(c=>c.trim().replace(/^"|"$/g,'')));
+      callback(rows);
+    };
+    reader.readAsText(file, 'UTF-8');
+  } else if (ext === 'xlsx' || ext === 'xls') {
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const wb = XLSX.read(ev.target.result, { type: 'array' });
+      callback(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1 }));
+    };
+    reader.readAsArrayBuffer(file);
+  } else {
+    showToast('Tuetut tiedostotyypit: CSV, XLSX, XLS');
+  }
+}
+
+// ── Add customer manually ──
+function openAddCustomerModal() {
+  const industryOptions = INDUSTRIES.slice(1).map(i => `<option value="${i}">${i}</option>`).join('');
+  const modal = document.getElementById('add-customer-modal');
+  modal.innerHTML = `
+    <div class="modal-box wide">
+      <button class="modal-close" onclick="closeAddCustomerModal()">&times;</button>
+      <h3 style="font-family:'Sora',sans-serif;font-size:16px;color:var(--navy);margin-bottom:16px">Lisaa asiakas</h3>
+      <form onsubmit="submitAddCustomer(event)">
+        <div class="form-section-title">Yritystiedot</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Yrityksen nimi *</label><input class="form-input" id="nc-company" type="text" required placeholder="Yrityksen nimi"></div>
+          <div class="form-group"><label class="form-label">Y-tunnus</label><input class="form-input" id="nc-ytunnus" type="text" placeholder="1234567-8"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Toimiala</label><select class="form-select" id="nc-industry">${industryOptions}</select></div>
+        <div class="form-section-title">Yhteyshenkilö</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Nimi *</label><input class="form-input" id="nc-contact" type="text" required placeholder="Etunimi Sukunimi"></div>
+          <div class="form-group"><label class="form-label">Titteli</label><input class="form-input" id="nc-title" type="text" placeholder="Toimitusjohtaja"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Puhelinnumero</label><input class="form-input" id="nc-phone" type="text" placeholder="+358 40 000 0000"></div>
+          <div class="form-group"><label class="form-label">Sahkoposti</label><input class="form-input" id="nc-email" type="email" placeholder="nimi@yritys.fi"></div>
+        </div>
+        <div class="form-section-title">Sopimus & hinnoittelu</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Sovittu hinnasto</label><input class="form-input" id="nc-pricing" type="text" placeholder="Perus 2x/kk — 480 \u20ac/kk"></div>
+          <div class="form-group"><label class="form-label">Asiakkaana alkaen</label><input class="form-input" id="nc-created_date" type="date" value="${TODAY}"></div>
+        </div>
+        <div class="form-section-title">Muistiinpanot</div>
+        <div class="form-group"><textarea class="form-textarea" id="nc-notes" placeholder="Erityisehdot, toimitusaikataulu, maksuaika\u2026"></textarea></div>
+        <div class="form-actions">
+          <button type="button" class="form-cancel" onclick="closeAddCustomerModal()">Peruuta</button>
+          <button class="form-submit" type="submit">Lisaa asiakas</button>
+        </div>
+      </form>
+    </div>
+  `;
+  modal.style.display = 'flex';
+  modal.onclick = (e) => { if (e.target === modal) closeAddCustomerModal(); };
+}
+function closeAddCustomerModal() { document.getElementById('add-customer-modal').style.display = 'none'; }
+
+async function submitAddCustomer(e) {
+  e.preventDefault();
+  const payload = {
+    company: document.getElementById('nc-company').value.trim(),
+    ytunnus: document.getElementById('nc-ytunnus').value.trim(),
+    industry: document.getElementById('nc-industry').value,
+    contact: document.getElementById('nc-contact').value.trim(),
+    title: document.getElementById('nc-title').value.trim(),
+    phone: document.getElementById('nc-phone').value.trim(),
+    email: document.getElementById('nc-email').value.trim(),
+    pricing: document.getElementById('nc-pricing').value.trim() || '—',
+    created_date: document.getElementById('nc-created_date').value,
+    notes: document.getElementById('nc-notes').value.trim(),
+  };
+  try {
+    const data = await api('/api/customers', 'POST', payload);
+    cache.customers.push(data.customer);
+    closeAddCustomerModal();
+    refreshCustomerTable();
+    showToast('Asiakas lisatty: ' + data.customer.company);
+  } catch(e) {
+    showToast('Virhe asiakkaan lisayksessa');
+  }
+}
+
+// ── Init ──
+async function init() {
+  showLoading(true);
+  try {
+    const [leadsData, customersData] = await Promise.all([
+      api('/api/leads'),
+      api('/api/customers'),
+    ]);
+    cache.leads = leadsData.leads;
+    cache.archived = leadsData.archived;
+    cache.customers = customersData.customers;
+  } catch(err) {
+    console.error('Failed to load data', err);
+  }
+  showLoading(false);
+  renderKanban();
+  renderCustomers();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
