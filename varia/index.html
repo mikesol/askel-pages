@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v1 — dark/teal brand, sourced from pitch v2 -->
+<!-- v2 — white/turquoise accent, sourced from pitch v2 -->
 <html lang="en">
 <head>
   <meta name="robots" content="noindex, nofollow">
@@ -16,13 +16,13 @@
     --bg-alt:  #0a0a0a;
     --surface: #111111;
     --white:   #ededed;
-    --teal:    #0D9488;
-    --teal-lt: #2DD4BF;
-    --dark:    #ededed;
+    --teal:    #06B6D4;
+    --teal-lt: #67E8F9;
+    --dark:    #ffffff;
     --mid:     #aaaaaa;
     --muted:   #555555;
     --border:  rgba(255,255,255,0.08);
-    --border-teal: rgba(13,148,136,0.25);
+    --border-teal: rgba(6,182,212,0.22);
   }
 
   .reveal-viewport { background: var(--bg); }
@@ -78,7 +78,7 @@
   .reveal h2 { font-size: clamp(1.8rem, 4vw, 3.4rem); }
 
   .reveal .accent {
-    background: linear-gradient(135deg, #0D9488 0%, #2DD4BF 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #06B6D4 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -99,7 +99,7 @@
   .rule {
     width: 44px;
     height: 2px;
-    background: linear-gradient(90deg, #0D9488, #2DD4BF);
+    background: linear-gradient(90deg, #ffffff, #06B6D4);
     margin-bottom: 1.3em;
     flex-shrink: 0;
   }
@@ -455,7 +455,7 @@
     font-family: 'DM Sans', system-ui, sans-serif;
     font-size: clamp(1rem, 2vw, 1.5rem);
     font-weight: 700;
-    background: linear-gradient(135deg, #0D9488 0%, #2DD4BF 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #06B6D4 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -591,7 +591,7 @@
   }
 
   .opp-stat-num.accent {
-    background: linear-gradient(135deg, #0D9488 0%, #2DD4BF 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #06B6D4 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -772,7 +772,7 @@
       <svg id="slide6-chart" viewBox="0 0 680 260" preserveAspectRatio="xMidYMid meet" style="width:100%;max-height:65vh;display:block;overflow:visible;">
 
         <!-- Zone shading: Askel operating zone -->
-        <rect x="195" y="35" width="285" height="175" fill="#0D9488" opacity="0.06" rx="2"/>
+        <rect x="195" y="35" width="285" height="175" fill="#06B6D4" opacity="0.06" rx="2"/>
 
         <!-- Grid lines at 2, 4, 6, 8, 10× -->
         <line x1="90" y1="181" x2="648" y2="181" stroke="rgba(255,255,255,0.07)" stroke-width="0.7"/>
@@ -796,8 +796,8 @@
         <text x="20" y="122" transform="rotate(-90,20,122)" text-anchor="middle" fill="#555555" font-size="7.5" font-family="DM Sans,system-ui,sans-serif" letter-spacing="1">EBITDA MULTIPLE</text>
 
         <!-- Legend -->
-        <line x1="92" y1="24" x2="110" y2="24" stroke="#0D9488" stroke-width="2.5"/>
-        <text x="114" y="27" fill="#2DD4BF" font-size="8" font-family="DM Sans,system-ui,sans-serif" font-weight="600">Askel path</text>
+        <line x1="92" y1="24" x2="110" y2="24" stroke="#06B6D4" stroke-width="2.5"/>
+        <text x="114" y="27" fill="#67E8F9" font-size="8" font-family="DM Sans,system-ui,sans-serif" font-weight="600">Askel path</text>
         <line x1="190" y1="24" x2="208" y2="24" stroke="#555555" stroke-width="1.5" stroke-dasharray="5,4"/>
         <text x="212" y="27" fill="#555555" font-size="8" font-family="DM Sans,system-ui,sans-serif">Market (no intervention)</text>
 
@@ -807,33 +807,33 @@
 
         <!-- Askel path — solid -->
         <path d="M 105,187 C 120,187 165,167 195,167 C 295,167 385,93 480,93"
-              fill="none" stroke="url(#tealGrad)" stroke-width="2.5" stroke-linecap="round"/>
+              fill="none" stroke="url(#cyanGrad)" stroke-width="2.5" stroke-linecap="round"/>
 
         <!-- Askel path — dashed continuation -->
         <path d="M 480,93 C 530,91 575,90 620,89"
-              fill="none" stroke="#0D9488" stroke-width="2" stroke-dasharray="5,4" opacity="0.4"/>
+              fill="none" stroke="#06B6D4" stroke-width="2" stroke-dasharray="5,4" opacity="0.4"/>
 
         <!-- Gradient def -->
         <defs>
-          <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#0D9488"/>
-            <stop offset="100%" stop-color="#2DD4BF"/>
+          <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="100%" stop-color="#06B6D4"/>
           </linearGradient>
         </defs>
 
         <!-- "Apply playbook" bracket -->
-        <line x1="195" y1="43" x2="480" y2="43" stroke="#0D9488" stroke-width="1"/>
-        <line x1="195" y1="43" x2="195" y2="51" stroke="#0D9488" stroke-width="1"/>
-        <line x1="480" y1="43" x2="480" y2="51" stroke="#0D9488" stroke-width="1"/>
-        <text x="337" y="40" text-anchor="middle" fill="#2DD4BF" font-size="8" font-family="DM Sans,system-ui,sans-serif" font-weight="700" letter-spacing="0.8">APPLY PLAYBOOK</text>
+        <line x1="195" y1="43" x2="480" y2="43" stroke="#06B6D4" stroke-width="1"/>
+        <line x1="195" y1="43" x2="195" y2="51" stroke="#06B6D4" stroke-width="1"/>
+        <line x1="480" y1="43" x2="480" y2="51" stroke="#06B6D4" stroke-width="1"/>
+        <text x="337" y="40" text-anchor="middle" fill="#67E8F9" font-size="8" font-family="DM Sans,system-ui,sans-serif" font-weight="700" letter-spacing="0.8">APPLY PLAYBOOK</text>
 
         <!-- "Buy here" marker -->
-        <circle cx="195" cy="167" r="5" fill="#000000" stroke="#0D9488" stroke-width="2"/>
-        <text x="154" y="157" fill="#2DD4BF" font-size="8.5" font-family="DM Sans,system-ui,sans-serif" font-weight="700">Buy here</text>
+        <circle cx="195" cy="167" r="5" fill="#000000" stroke="#06B6D4" stroke-width="2"/>
+        <text x="154" y="157" fill="#67E8F9" font-size="8.5" font-family="DM Sans,system-ui,sans-serif" font-weight="700">Buy here</text>
 
         <!-- "Sell here" marker -->
-        <circle cx="480" cy="93" r="5" fill="#000000" stroke="#2DD4BF" stroke-width="2"/>
-        <text x="489" y="106" fill="#2DD4BF" font-size="8.5" font-family="DM Sans,system-ui,sans-serif" font-weight="700">Sell here</text>
+        <circle cx="480" cy="93" r="5" fill="#000000" stroke="#67E8F9" stroke-width="2"/>
+        <text x="489" y="106" fill="#67E8F9" font-size="8.5" font-family="DM Sans,system-ui,sans-serif" font-weight="700">Sell here</text>
 
         <!-- "Next buyer's territory" label -->
         <text x="549" y="178" text-anchor="middle" fill="#555555" font-size="7.5" font-family="DM Sans,system-ui,sans-serif" font-style="italic">Next buyer's</text>
