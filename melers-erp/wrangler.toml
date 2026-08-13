@@ -1,10 +1,7 @@
-name = "melers-erp"
+pages_build_output_dir = "."
 compatibility_date = "2024-01-01"
 
 [[d1_databases]]
 binding = "DB"
 database_name = "melers-erp"
 database_id = "f3a2bd6b-262c-415e-b3bc-7f833a8772b9"
-
-[site]
-bucket = "."
