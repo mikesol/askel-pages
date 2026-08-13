@@ -174,7 +174,30 @@ async function loadView(name) {
   if (name === 'customers') await loadCustomers();
   if (name === 'billing') await loadBilling();
 }
-async function loadDashboard() { document.getElementById('view-dashboard').innerHTML = '<p style="padding:40px;color:var(--muted)">Ladataan...</p>'; }
+async function loadDashboard() {
+  const d = await api('/dashboard');
+  document.getElementById('view-dashboard').innerHTML = `
+    <div class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-label">Tilaukset tänään</div><div class="kpi-value">${d.orders_today}</div></div>
+      <div class="kpi-card"><div class="kpi-label">Kg käsitelty tänään</div><div class="kpi-value">${(d.kg_today||0).toFixed(1)} kg</div></div>
+      <div class="kpi-card"><div class="kpi-label">Liikevaihto tässä kuussa</div><div class="kpi-value">${fmtEur(d.revenue_mtd)}</div></div>
+      <div class="kpi-card" style="border-left-color:${d.overdue_invoices>0?'#ef4444':'var(--coral)'}"><div class="kpi-label">Erääntyneet laskut</div><div class="kpi-value" style="color:${d.overdue_invoices>0?'#ef4444':'var(--navy)'}">${d.overdue_invoices}</div></div>
+    </div>
+    <div class="section-title">Viimeisimmät tilaukset</div>
+    <table>
+      <thead><tr><th>Tilaus</th><th>Asiakas</th><th>Paino</th><th>Tila</th><th>Vastaanotettu</th></tr></thead>
+      <tbody>
+        ${d.recent_orders.map(o=>`<tr onclick="openOrderDetail('${o.id}')">
+          <td><code style="font-size:0.8rem">${o.id.slice(0,8)}</code></td>
+          <td>${o.customer_name}</td>
+          <td>${o.weight_kg} kg</td>
+          <td>${statusBadge(o.status)}</td>
+          <td>${fmtDateTime(o.received_at)}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  `;
+}
 async function loadOrders() { document.getElementById('view-orders').innerHTML = '<p style="padding:40px;color:var(--muted)">Ladataan...</p>'; }
 async function loadCustomers() { document.getElementById('view-customers').innerHTML = '<p style="padding:40px;color:var(--muted)">Ladataan...</p>'; }
 async function loadBilling() { document.getElementById('view-billing').innerHTML = '<p style="padding:40px;color:var(--muted)">Ladataan...</p>'; }
