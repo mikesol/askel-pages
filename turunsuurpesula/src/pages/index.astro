@@ -16,31 +16,31 @@ const customerTypes = [
     img: '/photo-hotel.webp',
     imgAlt: 'Puhtaita liinavaatteita hotelleille',
     vatExempt: false,
-    desc: 'Nopea liinojen kierto, lakanat ja pyyhkeet takaisin käyttöön ajoissa. Liinavaatevuokraus pitkäaikaisasiakkaille.',
+    desc: 'Nopea lakanoiden kierto, lakanat ja pyyhkeet takaisin käyttöön ajoissa. Liinavaatevuokraus pitkäaikaisasiakkaille.',
   },
   {
     href: '/vanhustenhoito',
-    label: 'Vanhustenhoito',
+    label: 'Hoiva- ja palvelutalot',
     img: '/photo-towels.webp',
-    imgAlt: 'Tekstiilihuolto hoivakodeille',
+    imgAlt: 'Tekstiilihuolto hoiva- ja palvelutaloille',
     vatExempt: true,
-    desc: 'Hygieniastandardit täytetty. Asukkaiden vaatteet kirjataan ja palautetaan oikealle henkilölle. ALV 0 %, merkittävä kustannussäästö.',
+    desc: 'Palvelu on ALV 0 %, mikä tuo merkittävän kustannussäästön. Hoitohenkilökunnan aika vapautuu hoitotyöhön, ei pyykkihuoltoon.',
   },
   {
     href: '/hatapesut',
-    label: 'Hätä ja vahinkotapaukset',
+    label: 'Vahinkopesut',
     img: '/photo-baskets.webp',
-    imgAlt: 'Hätäpesupalvelu vahingoille',
+    imgAlt: 'Vahinkopesut vesi-, palo- ja savuvahingoille',
     vatExempt: false,
-    desc: '24/7-päivystys vesi-, palo- ja savuvahingoille. Yhteistyö vakuutusyhtiöiden ja vahinkosaneerausyritysten kanssa.',
+    desc: 'Teollinen kapasiteetti vesi-, palo- ja savuvahinkojen tekstiilihuoltoon, yhteistyössä vakuutusyhtiöiden ja vahinkosaneerausyritysten kanssa.',
   },
   {
     href: '/yhteys',
     label: 'Muut alat',
-    img: null,
-    imgAlt: '',
+    img: '/photo-muut-alat.webp',
+    imgAlt: 'Teollinen pesula, muut toimialat',
     vatExempt: false,
-    desc: 'Ravintoloita, apteekkeja, vaateliikkeitä, lauttoja, mattopesuloita. Olemme palvelleet monia toimialoja. Toimialasi ei näy listassa? Kysy silti.',
+    desc: 'Ravintoloita, apteekkeja, vaateliikkeitä, risteilyalusten tekstiilihuoltoa, mattopesuloita ja paljon muuta. Jos toimialasi ei näy listassa, kysy silti.',
     cta: 'Pyydä tarjous →',
   },
 ]
@@ -60,7 +60,7 @@ const faqs = [
 ---
 <Layout title="Turun Suurpesula | Teollinen tekstiilihuolto yrityksille" description="Turun Suurpesula huoltaa hotellien, hoivakotien ja vahinkosaneerauksen tekstiilit teollisella kapasiteetilla Turussa. Pyydä tarjous 24 tunnissa.">
 
-  <!-- HERO: white layout with van photo (like Melers.fi) -->
+  <!-- HERO: white layout with hotel towels photo (like Melers.fi) -->
   <section class="bg-white overflow-hidden min-h-screen flex items-stretch">
     <div class="w-full grid md:grid-cols-[45%_55%]">
       <div class="flex items-center px-8 md:px-16 py-20 md:py-0">
@@ -71,7 +71,7 @@ const faqs = [
             <span class="text-[#FF8F7A]">sujuvasti ja luotettavasti</span>
           </h1>
           <p class="font-inter text-[#14375A]/65 text-base leading-relaxed mb-10">
-            Pesemme vuosittain yli 170 000 kg tekstiilejä hoivakodeille, hotelleille ja muille yrityksille. Yksi sopimus, nimetty palvelupäällikkö, ei häiriöitä arkeesi.
+            Yksi sopimus, nimetty palvelupäällikkö, ei häiriöitä arkeesi. Palvelemme hoivakoteja, hotelleja ja yrityksiä ympäri Turun seutua jo 16 vuoden kokemuksella.
           </p>
           <div class="flex flex-wrap gap-4 mb-14">
             <a href="#yhteys" class="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-7 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors text-sm">Pyydä tarjous →</a>
@@ -79,19 +79,35 @@ const faqs = [
           </div>
           <div class="grid grid-cols-2 gap-6 border-t border-[#14375A]/10 pt-8">
             <div>
-              <div class="font-merriweather font-normal text-3xl text-[#FF8F7A] mb-1">170 000+</div>
-              <div class="font-inter text-[#14375A]/50 text-xs leading-snug">kg tekstiilejä<br />vuodessa</div>
+              <div class="font-merriweather font-normal text-3xl text-[#FF8F7A] mb-1">16 vuotta</div>
+              <div class="font-inter text-[#14375A]/50 text-xs leading-snug">luotettava kumppani<br />Turun seudulla</div>
             </div>
             <div>
-              <div class="font-merriweather font-normal text-3xl text-[#FF8F7A] mb-1">24 h</div>
-              <div class="font-inter text-[#14375A]/50 text-xs leading-snug">tarjouksen<br />toimitusaika</div>
+              <div class="font-merriweather font-normal text-3xl text-[#FF8F7A] mb-1">1,2M+ kg</div>
+              <div class="font-inter text-[#14375A]/50 text-xs leading-snug">tekstiilejä pesty<br />asiakkaidemme puolesta</div>
             </div>
           </div>
         </div>
       </div>
       <div class="hidden md:block relative min-h-screen">
-        <img src="/photo-van-big.webp" alt="Turun Suurpesula, yrityskuljetus" class="absolute inset-0 w-full h-full object-cover object-center" />
-        <div class="absolute inset-0" style="background: linear-gradient(to right, #ffffff 0%, #ffffff 5%, transparent 40%)"></div>
+        <img src="/photo-hotel.webp" alt="Puhtaita liinavaatteita hotelleille" class="absolute inset-0 w-full h-full object-cover object-right" />
+        <div class="absolute inset-0" style="background: linear-gradient(to right, #ffffff 0%, #ffffff 5%, transparent 35%)"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUCK BANNER: Melers.fi style — contained rounded rectangle -->
+  <section class="bg-white py-12 md:py-16">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="relative overflow-hidden rounded-3xl h-72 md:h-80">
+        <img src="/photo-van-melers.webp" alt="Turun Suurpesula kuljetusauto" class="absolute inset-0 w-full h-full object-cover object-center" />
+        <div class="absolute inset-0 bg-[#14375A]/40 flex items-center px-10 md:px-14">
+          <div class="max-w-sm">
+            <p class="font-sora font-bold text-white/75 text-xs uppercase tracking-widest mb-3">Nouto ja toimitus Turussa</p>
+            <p class="font-merriweather font-normal text-white text-2xl md:text-3xl leading-snug mb-6">Haemme ja toimitamme<br />suoraan ovellenne.</p>
+            <a href="/yhteys" class="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-6 py-3 rounded-full hover:bg-[#ff7a63] transition-colors text-sm">Ota yhteyttä →</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -114,7 +130,7 @@ const faqs = [
       </div>
       <div class="bg-white rounded-3xl overflow-hidden shadow-sm">
         <div class="overflow-hidden max-h-48">
-          <img src="/photo-hotel.webp" alt="Puhtaita liinavaatteita hotelleille" class="w-full object-cover object-center" />
+          <img src="/photo-towels.webp" alt="Puhtaita liinavaatteita" class="w-full object-cover object-center" />
         </div>
         <div class="p-8">
           <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-5">Mitä saat meiltä</p>
@@ -159,7 +175,10 @@ const faqs = [
             <div class="p-6">
               <div class="font-sora font-semibold text-[#14375A] text-base mb-2">{c.label}</div>
               <div class="font-inter text-[#14375A]/65 text-sm leading-relaxed mb-4">{c.desc}</div>
-              <span class="font-sora font-bold text-[#FF8F7A] text-sm">{c.cta ?? 'Lue lisää →'}</span>
+              {c.cta
+                ? <span class="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-6 py-3 rounded-full text-sm group-hover:bg-[#ff7a63] transition-colors">{c.cta}</span>
+                : <span class="font-sora font-bold text-[#FF8F7A] text-sm">Lue lisää →</span>
+              }
             </div>
           </a>
         ))}
@@ -178,10 +197,10 @@ const faqs = [
       </div>
       <div class="grid md:grid-cols-2 gap-8 items-start">
         <div class="bg-white rounded-2xl p-8 text-left">
-          <form data-contact-form class="flex flex-col gap-4">
-            <input name="nimi" type="text" placeholder="Etu- ja sukunimi" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
-            <input name="yritys" type="text" placeholder="Yrityksen nimi" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
-            <select name="toimiala" class="font-inter text-[#14375A] bg-white border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]">
+          <div class="flex flex-col gap-4">
+            <input id="idx-nimi" type="text" placeholder="Etu- ja sukunimi" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
+            <input id="idx-yritys" type="text" placeholder="Yrityksen nimi" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
+            <select id="idx-toimiala" class="font-inter text-[#14375A] bg-white border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]">
               <option value="">Toimiala</option>
               <option value="hotellit">Hotelli</option>
               <option value="vanhustenhoito">Hoivakoti / vanhustenhoito</option>
@@ -194,16 +213,56 @@ const faqs = [
               <option value="tyovaatteet">Työvaatteet</option>
               <option value="muu">Muu ala</option>
             </select>
-            <input name="email" type="email" required placeholder="Sähköposti" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
-            <input name="puhelin" type="tel" placeholder="Puhelin" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
-            <textarea name="viesti" rows="3" placeholder="Kerro tarpeestanne, volyymi, toimiala, aikataulu..." class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A] resize-none"></textarea>
-            <button type="submit" class="font-sora font-bold text-sm bg-[#FF8F7A] text-white px-6 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors mt-2 disabled:opacity-60">
+            <input id="idx-email" type="email" placeholder="Sähköposti" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
+            <input id="idx-puhelin" type="tel" placeholder="Puhelin" class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A]" />
+            <textarea id="idx-viesti" rows="3" placeholder="Kerro tarpeestanne, volyymi, toimiala, aikataulu..." class="font-inter text-[#14375A] placeholder-[#14375A]/40 border border-[#E9E4DF] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF8F7A] resize-none"></textarea>
+            <button id="idx-submit" type="button" class="font-sora font-bold text-sm bg-[#FF8F7A] text-white px-6 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors mt-2">
               Lähetä tarjouspyyntö →
             </button>
-            <p data-form-status class="font-inter text-xs text-center mt-1"></p>
-          </form>
+            <p id="idx-status" class="font-inter text-xs text-center hidden"></p>
+          </div>
           <p class="font-inter text-[#14375A]/40 text-xs text-center mt-4">⏱ Vastaamme 24 tunnissa. Ei sitoumuksia.</p>
         </div>
+
+        <script>
+          document.getElementById('idx-submit').addEventListener('click', async () => {
+            const btn = document.getElementById('idx-submit');
+            const status = document.getElementById('idx-status');
+            const data = {
+              nimi: document.getElementById('idx-nimi').value.trim(),
+              yritys: document.getElementById('idx-yritys').value.trim(),
+              toimiala: document.getElementById('idx-toimiala').value,
+              email: document.getElementById('idx-email').value.trim(),
+              puhelin: document.getElementById('idx-puhelin').value.trim(),
+              viesti: document.getElementById('idx-viesti').value.trim(),
+              source: 'etusivu',
+            };
+            if (!data.email && !data.puhelin) {
+              status.textContent = 'Anna sähköposti tai puhelinnumero.';
+              status.className = 'font-inter text-xs text-center text-red-500';
+              status.classList.remove('hidden');
+              return;
+            }
+            btn.disabled = true;
+            btn.textContent = 'Lähetetään…';
+            try {
+              const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+              if (res.ok) {
+                btn.textContent = 'Lähetetty ✓';
+                status.textContent = 'Kiitos! Palaamme 24 tunnin sisällä.';
+                status.className = 'font-inter text-xs text-center text-green-600';
+              } else {
+                throw new Error('server error');
+              }
+            } catch {
+              btn.disabled = false;
+              btn.textContent = 'Lähetä tarjouspyyntö →';
+              status.textContent = 'Lähetys epäonnistui. Soita: 02 2321 300.';
+              status.className = 'font-inter text-xs text-center text-red-500';
+            }
+            status.classList.remove('hidden');
+          });
+        </script>
         <div class="bg-white rounded-2xl overflow-hidden">
           <div class="px-8 pt-8 pb-4">
             <p class="font-sora font-bold text-xs uppercase tracking-widest text-[#FF8F7A] mb-1">Tai varaa tapaaminen</p>

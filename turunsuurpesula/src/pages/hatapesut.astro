@@ -1,79 +1,397 @@
 ---
 import Layout from '../layouts/Layout.astro'
 
-const benefits = [
-  { title: '24/7-päivystys', desc: 'Vesi-, palo- ja savuvahingot eivät odota virka-aikaa. Päivystyksemme vastaa ympäri vuorokauden.' },
-  { title: 'Yhteistyö vakuutusyhtiöiden kanssa', desc: 'Dokumentoitu prosessi tukee vahinkoilmoituksia ja korvauskäsittelyä, kuitit ja erittelyt suoraan teille tai vakuutusyhtiölle.' },
-  { title: 'Suurkapasiteetti', desc: 'Yli 170 000 kg/vuosi -laitos käsittelee suuretkin vahinkoerät nopeasti, kapasiteetti, johon pienemmät pesulat eivät pysty.' },
-  { title: 'Vahinkosaneerauskumppanuus', desc: 'Toimimme suoraan vahinkosaneerausyritysten kanssa osana korjausprosessia, ei ylimääräisiä välikäsiä.' },
+const damageTypes = [
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7"><path d="M12 2c0 0-3 3.5-3 6.5A3 3 0 0 0 15 8.5C15 5.5 12 2 12 2z"/><path d="M5 11c0 0-2 2-2 4a2 2 0 0 0 4 0c0-2-2-4-2-4z"/><path d="M19 11c0 0-2 2-2 4a2 2 0 0 0 4 0c0-2-2-4-2-4z"/></svg>`,
+    title: 'Vesivahinko',
+    desc: 'Putkivuoto, tulva tai kosteusvaurio. Kosteat tekstiilit homehtuvat nopeasti. Nopea käsittely on tärkeää.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7"><circle cx="12" cy="8" r="3"/><path d="M6 16c0-2.2 2.7-4 6-4s6 1.8 6 4"/><circle cx="5" cy="14" r="2"/><circle cx="19" cy="14" r="2"/><path d="M3 20c0-1.1 1-2 2-2"/><path d="M21 20c0-1.1-1-2-2-2"/></svg>`,
+    title: 'Homevaurio',
+    desc: 'Kosteusvaurion seurauksena syntynyt homevaurio tekstiileissä. Erikoiskäsittely poistaa homeitiöt ja homeen hajun kuiduista.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>`,
+    title: 'Palovahinko',
+    desc: 'Palon jälkeen jääneet tekstiilit, myös vauriotta selvinneet. Savunhaju imeytyy syvään kuituihin ja vaatii kolmoispesua.',
+  },
 ]
 
 const steps = [
-  { num: '1', title: 'Soita päivystykseen', desc: 'Tavoitat meidät ympäri vuorokauden, kerro vahingon laajuus ja sijainti.' },
-  { num: '2', title: 'Noudamme vahingoittuneet tekstiilit', desc: 'Nouto järjestyy nopeasti, tarvittaessa suoraan vahinkopaikalta.' },
-  { num: '3', title: 'Pesemme ja dokumentoimme', desc: 'Erikoiskäsittely vesi-, palo- ja savuvahingoille, dokumentoituna korvauskäsittelyä varten.' },
+  { num: '1', title: 'Ota yhteyttä', desc: 'Soita tai täytä yhteyslomake. Kerro vahingon laajuus. Autamme arvioimaan, mitä voidaan pelastaa.' },
+  { num: '2', title: 'Nouto 1–2 päivässä', desc: 'Järjestämme noudon nopeasti, tarvittaessa suoraan vahinkopaikalta yhteistyössä vahinkosaneerausyrityksen kanssa.' },
+  { num: '3', title: 'Erikoiskäsittely', desc: 'Kolmoispesuprosessimme poistaa savun, häkäkaasun, homeen ja vesivahingon hajut. Dokumentoimme käsitellyt erät korvaushakemusta varten.' },
+  { num: '4', title: 'Toimitus ja dokumentit', desc: 'Palaute 1–2 viikossa. Kuitit ja erittelyt suoraan teille tai vakuutusyhtiöönne.' },
 ]
 
 const faqs = [
-  { q: 'Kuinka nopeasti reagoitte hätätapauksessa?', a: 'Päivystyksemme vastaa ympäri vuorokauden. Nouto järjestetään mahdollisimman pian yhteydenoton jälkeen tilanteen laajuuden mukaan.' },
-  { q: 'Voitteko asioida suoraan vakuutusyhtiömme kanssa?', a: 'Kyllä. Dokumentoimme käsitellyt erät niin, että kuitit ja erittelyt käyvät suoraan vahinkoilmoituksen liitteeksi.' },
-  { q: 'Kuinka suuria vahinkoeriä pystytte käsittelemään?', a: 'Teollisuuslaitoksemme kapasiteetti on yli 170 000 kg vuodessa, pystymme ottamaan vastaan myös laajat, kokonaisten kiinteistöjen vahinkoerät.' },
-  { q: 'Teettekö yhteistyötä vahinkosaneerausyritysten kanssa?', a: 'Kyllä, toimimme suoraan osana vahinkosaneerausyritysten korjausprosessia ilman ylimääräisiä välikäsiä.' },
+  { q: 'Kuinka nopeasti pystytte noutamaan tekstiilit?', a: 'Järjestämme noudon tyypillisesti 1–2 arkipäivässä yhteydenoton jälkeen. Vakavissa tapauksissa pyrimme nopeampaan aikatauluun.' },
+  { q: 'Kauanko käsittely kestää?', a: 'Suurin osa vahinkoeristä on valmis 1–2 viikossa. Laajuus vaikuttaa aikatauluun. Kerromme arvioidun valmistumispäivän jo vastaanotossa.' },
+  { q: 'Mitä kolmoispesutakuu tarkoittaa?', a: 'Pesemme vahinkotekstiilit erikoispesuaineilla kolmessa vaiheessa, kunnes savu-, häkä-, home- tai vesivahingon haju on poistunut. Jos haju jää, käsittelemme erän uudelleen veloituksetta.' },
+  { q: 'Voitteko asioida suoraan vakuutusyhtiömme tai vahinkosaneerausyrityksemme kanssa?', a: 'Kyllä. Dokumentoimme käsitellyt erät niin, että kuitit ja erittelyt käyvät suoraan vahinkoilmoituksen liitteeksi. Toimimme myös suoraan vahinkosaneerausyritysten kanssa osana korjausprosessia.' },
+  { q: 'Kuinka suuria vahinkoeriä pystytte käsittelemään?', a: 'Teollisuuslaitoksemme kapasiteetti on yli 170 000 kg vuodessa. Pystymme ottamaan vastaan myös laajat, kokonaisten kiinteistöjen vahinkoerät.' },
+  { q: 'Palveletteko sekä yksityishenkilöitä että yrityksiä?', a: 'Kyllä. Autamme niin kotitalouksia, taloyhtiöitä kuin yrityksiä ja vahinkosaneerausyrityksiä.' },
+  { q: 'Käsitteletkö myös muita erikoistapauksia, kuten öljyvahinkoja?', a: 'Kyllä, tapauskohtaisesti. Ota yhteyttä ja kerromme, voimmeko auttaa juuri teidän tilanteessanne.' },
 ]
 ---
-<Layout title="Hätäpesut ja vahinkotapaukset | Turun Suurpesula" description="24/7-päivystys vesi-, palo- ja savuvahinkojen tekstiilihuoltoon Turussa. Yhteistyö vakuutusyhtiöiden ja vahinkosaneerausyritysten kanssa.">
+<Layout title="Vahinkopesut: savupyykki, vesivahinko ja homevaurio | Turun Suurpesula" description="Savu-, vesi-, palo- ja homevahingon tekstiilihuolto Turussa. Nouto 1–2 päivässä, kolmoispesutakuu vaikeiden hajujen poistoon. Yhteistyö vakuutusyhtiöiden ja vahinkosaneerausyritysten kanssa.">
 
+  <!-- Hero -->
   <section class="bg-[#14375A] overflow-hidden">
-    <div class="w-full grid md:grid-cols-[55%_45%] min-h-[420px]">
-      <div class="flex items-center px-8 md:px-16 py-20">
+    <div class="w-full grid md:grid-cols-[48%_52%] min-h-[600px]">
+      <div class="flex items-center px-8 md:px-16 py-28">
         <div class="max-w-lg">
-          <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-6">Yrityksille · Hätäpesut ja vahinkotapaukset</p>
-          <h1 class="font-merriweather font-normal text-white text-4xl md:text-5xl leading-snug mb-6">Kun vesivahinko ei odota, <span class="text-[#FF8F7A]">emme mekään.</span></h1>
-          <p class="font-inter text-white/65 text-base leading-relaxed mb-10">24/7-päivystys ja teollinen kapasiteetti vesi-, palo- ja savuvahinkojen tekstiilihuoltoon, yhteistyössä vakuutusyhtiöiden ja vahinkosaneerausyritysten kanssa.</p>
+          <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-6">Yrityksille &amp; kotitalouksille · Vahinkopesut</p>
+          <h1 class="font-merriweather font-normal text-white text-4xl md:text-5xl leading-snug mb-5">Vesivahinko, homevaurio vai tulipalo? Tekstiilit voidaan <span class="text-[#FF8F7A]">pelastaa.</span></h1>
+          <p class="font-inter text-white/65 text-sm leading-relaxed mb-10">Nouto 1–2 päivässä, käsittely valmiina 1–2 viikossa.</p>
+          <div class="flex flex-wrap gap-4 mb-6">
+            <a href="#tarjouspyynto" class="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-7 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors text-sm">Ota yhteyttä →</a>
+            <a href="tel:0222321300" class="inline-flex items-center gap-2 border border-white/30 text-white font-sora font-bold px-7 py-3.5 rounded-full hover:border-white/60 transition-colors text-sm">02 2321 300</a>
+          </div>
           <div class="flex flex-wrap gap-4">
-            <a href="tel:0222321300" class="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-7 py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors text-sm">Soita päivystykseen · 02 2321 300</a>
-            <a href="/yhteys" class="inline-flex items-center gap-2 border border-white/30 text-white font-sora font-bold px-7 py-3.5 rounded-full hover:border-white/60 transition-colors text-sm">Täytä lomake</a>
+            <div class="inline-flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FF8F7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span class="font-sora text-xs font-semibold text-white/60">Vakuutusyhtiöiden luottama kumppani</span>
+            </div>
+            <div class="inline-flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FF8F7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+              <span class="font-sora text-xs font-semibold text-white/60">Kolmoispesutakuu</span>
+            </div>
           </div>
         </div>
       </div>
       <div class="hidden md:block relative">
-        <img src="/photo-baskets.webp" alt="Hätäpesupalvelu vahingoille" class="absolute inset-0 w-full h-full object-cover object-center" />
-        <div class="absolute inset-0" style="background: linear-gradient(to right, #14375A 0%, #14375A 5%, transparent 40%)"></div>
+        <img src="/photo-baskets.webp" alt="Tekstiilihuolto vahinkopesut" class="absolute inset-0 w-full h-full object-cover object-center" />
+        <div class="absolute inset-0" style="background: linear-gradient(to right, #14375A 0%, #14375A 5%, transparent 45%)"></div>
       </div>
     </div>
   </section>
 
+  <!-- Damage types -->
   <section class="bg-white py-20">
     <div class="max-w-5xl mx-auto px-6">
-      <div class="grid md:grid-cols-2 gap-6">
-        {benefits.map((b) => (
+      <div class="mb-12 text-center">
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Mitä käsittelemme</p>
+        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl">Kaikki vahinkotyypit yhden katon alta</h2>
+      </div>
+      <div class="grid sm:grid-cols-3 gap-6 mb-10">
+        {damageTypes.map((d) => (
           <div class="bg-[#F1F2F4] rounded-2xl p-7">
-            <div class="font-sora font-bold text-[#14375A] text-base mb-2">{b.title}</div>
-            <div class="font-inter text-[#14375A]/60 text-sm leading-relaxed">{b.desc}</div>
+            <div class="text-[#FF8F7A] mb-4" set:html={d.icon} />
+            <div class="font-sora font-bold text-[#14375A] text-base mb-2">{d.title}</div>
+            <div class="font-inter text-[#14375A]/60 text-sm leading-relaxed">{d.desc}</div>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="bg-[#F1F2F4] py-20">
-    <div class="max-w-4xl mx-auto px-6">
-      <div class="mb-12 text-center">
-        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Prosessi</p>
-        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl">Kolme askelta vahingosta puhtaaseen ratkaisuun</h2>
+  <!-- Damage banner -->
+  <section class="bg-white pb-4">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="rounded-2xl overflow-hidden h-56 relative">
+        <img src="/photo-gen-damage.webp" alt="Vesivahinko ja savuvahinko tekstiileissä" class="absolute inset-0 w-full h-full object-cover object-center" />
+        <div class="absolute inset-0 bg-[#14375A]/55"></div>
+        <div class="absolute bottom-6 left-7 flex flex-col gap-3">
+          <div>
+            <p class="font-sora font-bold text-white text-sm">Savu, vesi vai home — kaikki vaativat eri käsittelyn.</p>
+            <p class="font-inter text-white/80 text-sm">Kolmoispesuprosessimme on suunniteltu juuri näihin tilanteisiin.</p>
+          </div>
+          <a href="#tarjouspyynto" class="inline-flex items-center gap-2 bg-[#FF8F7A] text-white font-sora font-bold px-5 py-2.5 rounded-full hover:bg-[#ff7a63] transition-colors text-xs w-fit">Pyydä tarjous →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kalmasaneeraus -->
+  <section class="bg-white py-16">
+    <div class="max-w-2xl mx-auto px-6">
+      <div class="border border-[#E9E4DF] rounded-2xl px-8 py-10">
+        <div class="flex items-center gap-3 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#14375A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 opacity-40 shrink-0"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <p class="font-sora text-xs font-semibold tracking-widest text-[#14375A]/40 uppercase">Erikoistilanteet</p>
+        </div>
+        <h3 class="font-merriweather font-normal text-[#14375A] text-xl md:text-2xl mb-6">Jotkut tilanteet vaativat erityistä hienotunteisuutta. Me ymmärrämme sen.</h3>
+        <div>
+          <p class="font-inter text-[#14375A]/60 text-sm leading-relaxed">Kuolemantapauksen tai pitkään jatkuneen puutteellisen asumisen jälkeen tekstiilit vaativat erityistä käsittelyä. Hoidamme nämä tilanteet aina hienotunteisesti ja luottamuksellisesti.</p>
+        </div>
+        <p class="font-inter text-[#14375A]/50 text-xs leading-relaxed mt-6">Oma Palvelujohtajanne on tavoitettavissanne koko prosessin ajan. Te ette joudu selittelemään tilannetta useaan kertaan.</p>
+        <div class="mt-6 pt-6 border-t border-[#E9E4DF]">
+          <a href="tel:0222321300" class="font-sora font-bold text-[#14375A] text-sm hover:text-[#FF8F7A] transition-colors">Ota yhteyttä puhelimitse → 02 2321 300</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RFP Form -->
+  <section id="tarjouspyynto" class="bg-[#F1F2F4] py-20">
+    <div class="max-w-3xl mx-auto px-6">
+
+      <div class="bg-white rounded-3xl p-8 md:p-10">
+        <!-- Promise tags -->
+        <div class="flex flex-wrap gap-3 mb-7">
+          <span class="inline-flex items-center gap-2 bg-[#14375A] text-white font-sora font-bold text-xs px-5 py-2.5 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FF8F7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Tarjous 12 tunnin sisällä
+          </span>
+          <span class="inline-flex items-center gap-2 bg-[#14375A] text-white font-sora font-bold text-xs px-5 py-2.5 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FF8F7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Nimetty oma palvelupäällikkö
+          </span>
+        </div>
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-2">Tarjouspyyntö</p>
+        <h2 class="font-merriweather font-normal text-[#14375A] text-2xl md:text-3xl mb-8">Kuvaile tilanne, lähetämme tarjouksen</h2>
+
+        <div class="flex flex-col gap-6">
+
+          <!-- Contact info -->
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="flex flex-col gap-1.5">
+              <label class="font-sora text-xs font-bold text-[#14375A]">Nimi</label>
+              <input id="hata-nimi" type="text" placeholder="Etunimi Sukunimi" class="bg-[#F1F2F4] border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] placeholder-[#14375A]/30 outline-none focus:border-[#FF8F7A] transition-colors" />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="font-sora text-xs font-bold text-[#14375A]">Sähköposti</label>
+              <input id="hata-email" type="email" placeholder="nimi@esimerkki.fi" class="bg-[#F1F2F4] border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] placeholder-[#14375A]/30 outline-none focus:border-[#FF8F7A] transition-colors" />
+            </div>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="font-sora text-xs font-bold text-[#14375A]">Puhelinnumero</label>
+            <input id="hata-puhelin" type="tel" placeholder="050 123 4567" class="bg-[#F1F2F4] border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] placeholder-[#14375A]/30 outline-none focus:border-[#FF8F7A] transition-colors" />
+          </div>
+
+          <!-- Situation description -->
+          <div class="flex flex-col gap-1.5">
+            <label class="font-sora text-xs font-bold text-[#14375A]">Kuvaile tilanne</label>
+            <textarea id="hata-viesti" rows="3" placeholder="Esim. vesivuoto kylpyhuoneessa, savuvahinko makuuhuoneessa, palovahinko..." class="bg-[#F1F2F4] border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] placeholder-[#14375A]/30 outline-none focus:border-[#FF8F7A] transition-colors resize-none"></textarea>
+          </div>
+
+          <!-- Item types -->
+          <div class="flex flex-col gap-3">
+            <label class="font-sora text-xs font-bold text-[#14375A]">Mitä tekstiilejä on pestävänä? <span class="font-normal text-[#14375A]/40">(valitse kaikki sopivat)</span></label>
+            <div id="hata-tekstiilit" class="grid sm:grid-cols-2 gap-2">
+              {[
+                'Liinavaatteita',
+                'Arkivaatteita',
+                'Ulkovaatteita',
+                'Mattoja',
+                'Peittoja ja tyynyjä',
+                'Pressuja',
+                'Vilttejä',
+                'Verhoja',
+                'Sohvan päällisiä',
+                'Muuta',
+              ].map((item) => (
+                <label class="flex items-center gap-3 bg-[#F1F2F4] rounded-xl px-4 py-3 cursor-pointer hover:bg-[#FFE6E2] transition-colors group">
+                  <input type="checkbox" value={item} class="hata-tekstiili-cb w-4 h-4 accent-[#FF8F7A] shrink-0" />
+                  <span class="font-inter text-sm text-[#14375A]">{item}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <!-- Amount -->
+          <div class="flex flex-col gap-1.5">
+            <label class="font-sora text-xs font-bold text-[#14375A]">Arvioitu määrä <span class="font-normal text-[#14375A]/40">(esim. kpl, pussilakanasettiä, kg)</span></label>
+            <input id="hata-maara" type="text" placeholder="Esim. 3 vuodesettiä, 2 talvitakkia, n. 10 kg..." class="bg-[#F1F2F4] border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] placeholder-[#14375A]/30 outline-none focus:border-[#FF8F7A] transition-colors" />
+          </div>
+
+          <button id="hata-submit" type="button" class="w-full bg-[#FF8F7A] text-white font-sora font-bold py-4 rounded-full hover:bg-[#ff7a63] transition-colors text-sm">
+            Lähetä tarjouspyyntö →
+          </button>
+          <p id="hata-status" class="font-inter text-xs text-center hidden"></p>
+          <p class="font-inter text-xs text-[#14375A]/40 text-center">Tarjous 12 tunnin sisällä. Ei sitoumuksia.</p>
+        </div>
+
+        <script>
+          document.getElementById('hata-submit').addEventListener('click', async () => {
+            const btn = document.getElementById('hata-submit');
+            const status = document.getElementById('hata-status');
+            const tekstiilit = Array.from(document.querySelectorAll('.hata-tekstiili-cb:checked')).map(cb => cb.value);
+            const data = {
+              nimi: document.getElementById('hata-nimi').value.trim(),
+              email: document.getElementById('hata-email').value.trim(),
+              puhelin: document.getElementById('hata-puhelin').value.trim(),
+              viesti: document.getElementById('hata-viesti').value.trim(),
+              tekstiilit,
+              maara: document.getElementById('hata-maara').value.trim(),
+              source: 'hatapesut',
+            };
+            if (!data.email && !data.puhelin) {
+              status.textContent = 'Anna sähköposti tai puhelinnumero.';
+              status.className = 'font-inter text-xs text-center text-red-500';
+              status.classList.remove('hidden');
+              return;
+            }
+            btn.disabled = true;
+            btn.textContent = 'Lähetetään…';
+            try {
+              const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+              if (res.ok) {
+                btn.textContent = 'Lähetetty ✓';
+                status.textContent = 'Kiitos! Otamme yhteyttä 12 tunnin sisällä.';
+                status.className = 'font-inter text-xs text-center text-green-600';
+              } else {
+                throw new Error('server error');
+              }
+            } catch {
+              btn.disabled = false;
+              btn.textContent = 'Lähetä tarjouspyyntö →';
+              status.textContent = 'Lähetys epäonnistui. Hätätilanteessa soita: 02 2321 300 (24/7).';
+              status.className = 'font-inter text-xs text-center text-red-500';
+            }
+            status.classList.remove('hidden');
+          });
+        </script>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Service promises -->
+  <section class="bg-[#14375A] py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Mitä saat meiltä</p>
+        <h2 class="font-merriweather font-normal text-white text-3xl md:text-4xl leading-snug">Kolme asiaa, joihin voit luottaa.</h2>
       </div>
       <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white/10 rounded-2xl p-8 flex flex-col gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#FF8F7A]/20 flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FF8F7A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          </div>
+          <div class="font-sora font-bold text-white text-base">Kolmoispesuprosessi</div>
+          <div class="font-inter text-white/60 text-sm leading-relaxed">Kaikki vahinkotekstiilit käyvät läpi erityisen kolmivaiheisen pesuprosessimme erikoispesuaineilla. Savu, häkäkaasu ja home vaativat enemmän kuin tavallinen pesu. Meillä on siihen menetelmä.</div>
+        </div>
+        <div class="bg-white/10 rounded-2xl p-8 flex flex-col gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#FF8F7A]/20 flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FF8F7A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="font-sora font-bold text-white text-base">Oma Palvelupäällikkö</div>
+          <div class="font-inter text-white/60 text-sm leading-relaxed">Teille nimetään oma yhteyshenkilö koko prosessin ajaksi. Ei puhelinvaihteita, ei selittelyä uudelleen. Sama henkilö noudosta toimitukseen ja vakuutusyhtiöön asti.</div>
+        </div>
+        <div class="bg-white/10 rounded-2xl p-8 flex flex-col gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#FF8F7A]/20 flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FF8F7A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="font-sora font-bold text-white text-base">Nouto 1–2 päivässä</div>
+          <div class="font-inter text-white/60 text-sm leading-relaxed">Järjestämme noudon nopeasti, tarvittaessa suoraan vahinkopaikalta. Puhtaat tekstiilit toimitetaan takaisin 1–2 viikossa. Koko ajan tiedätte, missä mennään.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Personal Palvelujohtaja -->
+  <section class="bg-[#F1F2F4] py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Henkilökohtainen palvelu</p>
+      <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl leading-snug mb-10">Oma Palvelujohtaja. Koko prosessin ajan.</h2>
+      <div class="grid md:grid-cols-5 gap-6 items-stretch">
+        <!-- Left: trust column — photo + bio -->
+        <div class="md:col-span-2 flex flex-col gap-4">
+          <img src="/photo-palvelujohtaja-v3.webp" alt="Palvelujohtaja Turun Suurpesulassa" class="w-full rounded-2xl object-cover object-top" style="aspect-ratio: 4/5" />
+          <div class="bg-white rounded-2xl p-6 flex flex-col gap-3">
+            <p class="font-inter text-[#14375A]/65 text-sm leading-relaxed">Vahinko on stressaava tilanne. Ette joudu selittelemään asiaanne uudelle henkilölle joka kerta — sama Palvelujohtaja hoitaa kaiken noudosta vakuutusyhtiöön asti.</p>
+            <div class="flex items-center gap-2 pt-1">
+              <div class="w-2 h-2 rounded-full bg-[#FF8F7A] shrink-0"></div>
+              <p class="font-sora font-semibold text-[#14375A] text-xs">Sama henkilö. Alusta loppuun.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Right: action column — calendar -->
+        <div class="md:col-span-3 bg-white rounded-2xl overflow-hidden flex flex-col">
+          <div class="px-7 pt-7 pb-3">
+            <p class="font-sora font-bold text-xs uppercase tracking-widest text-[#FF8F7A] mb-1">Varaa tapaaminen</p>
+            <p class="font-inter text-[#14375A]/60 text-sm">Valitse sinulle sopiva aika suoraan kalenterista.</p>
+          </div>
+          <iframe
+            src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ14fXOqowBDfPHNey_5OQgSrmRjQjYI84HGqepJbs9BCIpRU9rp9u7PZ50LSc3TnnHgUshxJJQD?gv=true"
+            style="width: 100%; flex: 1; min-height: 500px; border: none"
+            title="Varaa tapaaminen"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process steps -->
+  <section class="bg-white py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="mb-12 text-center">
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Miten se toimii</p>
+        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl">Vahingosta puhtaaseen, neljässä askeleessa</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch mb-10">
         {steps.map((s) => (
-          <div class="bg-white rounded-2xl p-7">
+          <div class="bg-[#F1F2F4] rounded-2xl p-7 flex flex-col">
             <div class="font-merriweather font-normal text-6xl text-[#FF8F7A]/20 leading-none mb-4">{s.num}</div>
-            <div class="font-sora font-semibold text-[#14375A] text-lg mb-3">{s.title}</div>
+            <div class="font-sora font-semibold text-[#14375A] text-base mb-3">{s.title}</div>
             <div class="font-inter text-[#14375A]/60 text-sm leading-relaxed">{s.desc}</div>
           </div>
         ))}
       </div>
+      <!-- Van image -->
+      <div class="rounded-2xl overflow-hidden h-56 relative">
+        <img src="/photo-van-melers.webp" alt="Turun Suurpesulan noutoauto" class="absolute inset-0 w-full h-full object-cover object-center" />
+        <div class="absolute inset-0 bg-[#14375A]/40"></div>
+        <div class="absolute bottom-6 left-7">
+          <p class="font-sora font-bold text-white text-sm">Nouto suoraan teille</p>
+          <p class="font-inter text-white/80 text-sm">Tyypillisesti 1–2 arkipäivässä yhteydenoton jälkeen.</p>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- Partners -->
+  <section class="bg-[#F1F2F4] py-20">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Yhteistyökumppanit</p>
+        <h2 class="font-merriweather font-normal text-[#14375A] text-2xl md:text-3xl mb-4">Toimimme osana vahinkosaneerausprosessia</h2>
+        <p class="font-inter text-[#14375A]/65 text-base leading-relaxed max-w-2xl mx-auto">Oletteko vakuutusyhtiö tai vahinkosaneerausyritys? Meillä on selkeä prosessi kummallekin.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl p-8 flex flex-col gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#14375A]/10 flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#14375A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div class="font-sora font-bold text-[#14375A] text-lg mb-2">Vakuutusyhtiöille</div>
+            <div class="font-inter text-[#14375A]/65 text-sm leading-relaxed">Dokumentoimme jokaisen vahinkotekstiilikäsittelyn niin, että kuitit ja erittelyt käyvät suoraan vahinkoilmoituksen liitteeksi. Ei lisäselvittelyjä.</div>
+          </div>
+          <ul class="flex flex-col gap-2 mt-2">
+            {['Eritelty kuitti per vahinkoerä', 'Käsittelytiedot korvaushakemukseen', 'Suora yhteistyö tarvittaessa'].map(item => (
+              <li class="flex items-center gap-2 font-inter text-sm text-[#14375A]/70">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FF8F7A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0"><polyline points="20 6 9 17 4 12"/></svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="bg-white rounded-2xl p-8 flex flex-col gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#14375A]/10 flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#14375A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <div>
+            <div class="font-sora font-bold text-[#14375A] text-lg mb-2">Vahinkosaneerausyrityksille</div>
+            <div class="font-inter text-[#14375A]/65 text-sm leading-relaxed">Toimimme suoraan osana saneerausprojektianne. Sovimme noudot ja toimitukset teidän aikatauluunne, ilman välikäsiä tai lisäkoordinointia.</div>
+          </div>
+          <ul class="flex flex-col gap-2 mt-2">
+            {['Nouto suoraan vahinkokohteesta', 'Aikataulutettu toimitus projektin mukaan', 'Yksi yhteyshenkilö koko projektin ajan'].map(item => (
+              <li class="flex items-center gap-2 font-inter text-sm text-[#14375A]/70">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FF8F7A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0"><polyline points="20 6 9 17 4 12"/></svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
   <section class="bg-white py-20">
     <div class="max-w-3xl mx-auto px-6">
       <div class="mb-12 text-center">
@@ -91,11 +409,15 @@ const faqs = [
     </div>
   </section>
 
+  <!-- CTA -->
   <section class="bg-[#FF8F7A] py-20">
     <div class="max-w-3xl mx-auto px-6 text-center">
       <h2 class="font-merriweather font-normal text-white text-3xl md:text-4xl leading-snug mb-4">Vahinko sattunut?</h2>
-      <p class="font-inter text-white/80 text-base leading-relaxed mb-8">Soita päivystykseen, vastaamme ympäri vuorokauden.</p>
-      <a href="tel:0222321300" class="inline-flex items-center gap-2 bg-white text-[#14375A] font-sora font-bold px-8 py-4 rounded-full hover:bg-white/90 transition-colors text-sm">02 2321 300 →</a>
+      <p class="font-inter text-white/80 text-base leading-relaxed mb-8">Ota yhteyttä. Kerromme nopeasti, mitä voidaan tehdä, ja sovimme noudon.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#tarjouspyynto" class="inline-flex items-center justify-center gap-2 bg-white text-[#14375A] font-sora font-bold px-8 py-4 rounded-full hover:bg-white/90 transition-colors text-sm">Pyydä tarjous →</a>
+        <a href="tel:0222321300" class="inline-flex items-center justify-center gap-2 border-2 border-white text-white font-sora font-bold px-8 py-4 rounded-full hover:bg-white/10 transition-colors text-sm">Soita 02 2321 300</a>
+      </div>
     </div>
   </section>
 

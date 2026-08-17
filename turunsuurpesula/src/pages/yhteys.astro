@@ -61,15 +61,15 @@ import Layout from '../layouts/Layout.astro'
       <!-- Contact form -->
       <div class="bg-white rounded-3xl p-8">
         <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-5">Tarjouspyyntö</p>
-        <form data-contact-form class="flex flex-col gap-4">
+        <div id="yhteys-form" class="flex flex-col gap-4">
           <div class="grid grid-cols-2 gap-4">
             <div class="flex flex-col gap-1.5">
               <label class="font-sora text-xs font-bold text-[#14375A]">Yrityksen nimi</label>
-              <input name="yritys" type="text" placeholder="Yrityksen nimi" class="bg-[#F1F2F4] border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] placeholder-[#14375A]/30 outline-none focus:border-[#FF8F7A] transition-colors" />
+              <input id="yhteys-yritys" type="text" placeholder="Yrityksen nimi" class="bg-[#F1F2F4] border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] placeholder-[#14375A]/30 outline-none focus:border-[#FF8F7A] transition-colors" />
             </div>
             <div class="flex flex-col gap-1.5">
               <label class="font-sora text-xs font-bold text-[#14375A]">Toimiala</label>
-              <select name="toimiala" class="bg-[#F1F2F4] border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] outline-none focus:border-[#FF8F7A] transition-colors appearance-none">
+              <select id="yhteys-toimiala" class="bg-[#F1F2F4] border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] outline-none focus:border-[#FF8F7A] transition-colors appearance-none">
                 <option value="">Valitse</option>
                 <option value="hotellit">Hotelli</option>
                 <option value="vanhustenhoito">Hoivakoti / vanhustenhoito</option>
@@ -80,23 +80,62 @@ import Layout from '../layouts/Layout.astro'
           </div>
           <div class="flex flex-col gap-1.5">
             <label class="font-sora text-xs font-bold text-[#14375A]">Sähköposti</label>
-            <input name="email" type="email" required placeholder="yritys@esimerkki.fi" class="bg-[#F1F2F4] border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] placeholder-[#14375A]/30 outline-none focus:border-[#FF8F7A] transition-colors" />
+            <input id="yhteys-email" type="email" placeholder="yritys@esimerkki.fi" class="bg-[#F1F2F4] border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] placeholder-[#14375A]/30 outline-none focus:border-[#FF8F7A] transition-colors" />
           </div>
           <div class="flex flex-col gap-1.5">
             <label class="font-sora text-xs font-bold text-[#14375A]">Puhelin</label>
-            <input name="puhelin" type="tel" placeholder="+358 XX XXX XXXX" class="bg-[#F1F2F4] border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] placeholder-[#14375A]/30 outline-none focus:border-[#FF8F7A] transition-colors" />
+            <input id="yhteys-puhelin" type="tel" placeholder="+358 XX XXX XXXX" class="bg-[#F1F2F4] border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] placeholder-[#14375A]/30 outline-none focus:border-[#FF8F7A] transition-colors" />
           </div>
           <div class="flex flex-col gap-1.5">
             <label class="font-sora text-xs font-bold text-[#14375A]">Viesti</label>
-            <textarea name="viesti" rows="4" placeholder="Kerro tarpeestanne, volyymi, aikataulu, kiireellisyys..." class="bg-[#F1F2F4] border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] placeholder-[#14375A]/30 outline-none focus:border-[#FF8F7A] transition-colors resize-none"></textarea>
+            <textarea id="yhteys-viesti" rows="4" placeholder="Kerro tarpeestanne, volyymi, aikataulu, kiireellisyys..." class="bg-[#F1F2F4] border border-[#E9E4DF] rounded-xl px-4 py-3 font-inter text-sm text-[#14375A] placeholder-[#14375A]/30 outline-none focus:border-[#FF8F7A] transition-colors resize-none"></textarea>
           </div>
-          <button type="submit" class="w-full bg-[#FF8F7A] text-white font-sora font-bold py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors text-sm disabled:opacity-60">
+          <button id="yhteys-submit" type="button" class="w-full bg-[#FF8F7A] text-white font-sora font-bold py-3.5 rounded-full hover:bg-[#ff7a63] transition-colors text-sm">
             Lähetä tarjouspyyntö →
           </button>
-          <p data-form-status class="font-inter text-xs text-center mt-1"></p>
+          <p id="yhteys-status" class="font-inter text-xs text-center hidden"></p>
           <p class="font-inter text-xs text-[#14375A]/40 text-center">Vastaamme 24 tunnissa. Ei sitoumuksia.</p>
-        </form>
+        </div>
       </div>
+
+      <script>
+        document.getElementById('yhteys-submit').addEventListener('click', async () => {
+          const btn = document.getElementById('yhteys-submit');
+          const status = document.getElementById('yhteys-status');
+          const data = {
+            yritys: document.getElementById('yhteys-yritys').value.trim(),
+            toimiala: document.getElementById('yhteys-toimiala').value,
+            email: document.getElementById('yhteys-email').value.trim(),
+            puhelin: document.getElementById('yhteys-puhelin').value.trim(),
+            viesti: document.getElementById('yhteys-viesti').value.trim(),
+            source: 'yhteys',
+          };
+          if (!data.email && !data.puhelin) {
+            status.textContent = 'Anna sähköposti tai puhelinnumero.';
+            status.className = 'font-inter text-xs text-center text-red-500';
+            return;
+          }
+          btn.disabled = true;
+          btn.textContent = 'Lähetetään…';
+          try {
+            const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+            if (res.ok) {
+              btn.textContent = 'Lähetetty ✓';
+              btn.className = btn.className.replace('bg-[#FF8F7A]', 'bg-green-500').replace('hover:bg-[#ff7a63]', '');
+              status.textContent = 'Kiitos! Palaamme 24 tunnin sisällä.';
+              status.className = 'font-inter text-xs text-center text-green-600';
+            } else {
+              throw new Error('server error');
+            }
+          } catch {
+            btn.disabled = false;
+            btn.textContent = 'Lähetä tarjouspyyntö →';
+            status.textContent = 'Lähetys epäonnistui. Kokeile soittaa: 02 2321 300.';
+            status.className = 'font-inter text-xs text-center text-red-500';
+          }
+          status.classList.remove('hidden');
+        });
+      </script>
 
       <!-- Palvelupäällikkö + calendar -->
       <div class="flex flex-col gap-6">
@@ -129,7 +168,7 @@ import Layout from '../layouts/Layout.astro'
     <div class="max-w-5xl mx-auto px-6">
       <div class="grid md:grid-cols-2 gap-8 items-center">
         <div class="rounded-2xl overflow-hidden">
-          <img src="/photo-van-big.webp" alt="Turun Suurpesula, toimitus" class="w-full object-cover max-h-64 object-center" />
+          <img src="/photo-van-melers.webp" alt="Turun Suurpesula, toimitus" class="w-full object-cover max-h-64 object-center" />
         </div>
         <div>
           <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Toimipiste</p>

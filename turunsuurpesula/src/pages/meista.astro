@@ -2,19 +2,20 @@
 import Layout from '../layouts/Layout.astro'
 
 const values = [
-  { title: 'Laatu', subtitle: 'Oikea tulos joka kerta', desc: 'Oikea pesuprosessi jokaiselle tekstiilille. Ammattilaismenetelmät, asiantunteva käsittely ja dokumentoitu jäljitettävyys, ei kompromisseja.' },
-  { title: 'Luotettavuus', subtitle: 'Sovitut aikataulut pidetään', desc: 'Säännölliset noudot ja toimitukset sovitun mukaan. Ei häiriöitä teidän arkeenne, tekstiilit ovat aina saatavilla oikeaan aikaan.' },
-  { title: 'Kumppanuus', subtitle: 'Nimetty palvelupäällikkö', desc: 'Yksi yhteyshenkilö tuntee tilanteenne. Ei jonoja, ei uudelleenselittämistä, nopea vastaus kun tarvitsette jotain.' },
+  { title: 'Laatu', subtitle: 'Oikea tulos joka kerta', desc: 'Oikea pesuohjelma jokaiselle tekstiilille. Ammattilaismenetelmät, asiantunteva käsittely ja laadukkaat pesuaineet — ei kompromisseja.' },
+  { title: 'Helppous', subtitle: 'Varaa helposti, me hoidamme loput', desc: 'Tilaa verkossa tai soittamalla, nouto ovelta, toimitus sovitusti. Pesutilauksen tekeminen kestää minuutin — pesula ei saa olla lisävaiva.' },
+  { title: 'Ystävällisyys', subtitle: 'Henkilökohtainen palvelu', desc: 'Tuttu kasvo, nimetty palvelupäällikkö, nopea vastaus. Olemme ihmisiä ihmisille — jokaisella asiakkaalla on oma yhteyshenkilö.' },
 ]
 
 const timeline = [
-  { year: '2010', event: 'Turun Suurpesula perustetaan, teollisuuspesulakapasiteetti kasvaa merkittävästi Telekatu 6:ssa.' },
-  { year: '2020', event: 'Palveluvalikoima laajenee vahinkosaneerauksen tekstiilihuoltoon, 24/7-päivystys käynnistyy.' },
-  { year: '2026', event: 'Turun Suurpesula laajenee kasvavaan B2B-kysyntään, hotellit, hoivakodit ja vahinkosaneeraus.' },
+  { year: '1967', event: 'Pesutoiminta alkaa Kaskenkadussa 12 — sama osoite, jossa toimimme tänäkin päivänä.' },
+  { year: '2001', event: 'Minna ja Mika Elers perustavat Pesulan ja jatkavat pitkää pesulaperintöä.' },
+  { year: '2010', event: 'Turun Suurpesula perustetaan — teollisuuspesulakapasiteetti kasvaa merkittävästi.' },
+  { year: '2026', event: 'Uusi brändi, sama lupaus: Kotiovelle. Puhtaana.' },
 ]
 ---
 
-<Layout title="Meistä | Turun Suurpesula" description="Turun Suurpesula on teollisen mittakaavan tekstiilihuoltolaitos Turussa, perustettu 2010, kapasiteetti yli 170 000 kg vuodessa.">
+<Layout title="Meistä | Turun Suurpesula" description="Turun Suurpesula on kasvanut kahden sukupolven huolellisen työn tuloksena. Alusta asti sama ajatus: hoidetaan pyykit niin hyvin, että asiakas voi keskittyä muuhun.">
 
   <section class="bg-[#14375A] overflow-hidden min-h-[70vh] flex items-stretch">
     <div class="w-full grid md:grid-cols-[50%_50%]">
@@ -22,14 +23,14 @@ const timeline = [
         <div class="max-w-lg">
           <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-6">Meistä</p>
           <h1 class="font-merriweather font-normal text-white text-4xl md:text-5xl leading-snug mb-6">
-            Teollinen tekstiilihuolto.<br />
-            <span class="text-[#FF8F7A]">Vuodesta 2010.</span>
+            Turkulainen perheyritys.<br />
+            <span class="text-[#FF8F7A]">Vuodesta 1967.</span>
           </h1>
           <p class="font-inter text-white/65 text-base leading-relaxed mb-10">
-            Turun Suurpesula on kasvanut yhdeksi Turun seudun suurimmista tekstiilihuoltolaitoksista. Alusta asti sama ajatus: hoidetaan tekstiilit niin hyvin, että asiakas voi keskittyä omaan ydinliiketoimintaansa.
+            Melers on syntynyt turkulaisesta yrittäjyydestä ja kasvanut kahden sukupolven huolellisen työn tuloksena. Alusta asti sama ajatus: hoidetaan pyykit niin hyvin, että asiakas voi keskittyä muuhun.
           </p>
           <div class="flex flex-wrap gap-3">
-            {['Laatu', 'Luotettavuus', 'Kumppanuus'].map((v) => (
+            {['Laatu', 'Helppous', 'Ystävällisyys'].map((v) => (
               <span class="font-sora font-bold text-xs tracking-wide text-white border border-white/25 px-4 py-2 rounded-full">{v}</span>
             ))}
           </div>
@@ -71,11 +72,11 @@ const timeline = [
     <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-start">
       <div>
         <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Tarina</p>
-        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl mb-6">Teollista tekstiilihuoltoa Turussa</h2>
+        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl mb-6">Puhtautta Turussa yli puoli vuosisataa</h2>
         <div class="flex flex-col gap-5 font-inter text-[#14375A]/65 text-base leading-relaxed">
-          <p>Turun Suurpesula perustettiin vuonna 2010, kun tarve teollisen mittakaavan tekstiilihuollolle Turussa kasvoi. Laitoksemme Telekatu 6:ssa on kasvanut yli 170 000 kg vuosikapasiteettiin.</p>
-          <p>Vuosien varrella olemme palvelleet hotelleja, hoivakoteja, ravintoloita ja vahinkosaneerausyrityksiä. Kasvu on ollut harkittua, emme koskaan laadun kustannuksella.</p>
-          <p>24/7-hätäpesupalvelu syntyi suoraan asiakkaiden tarpeesta: vesi- ja palövahingot eivät odota virka-aikaa. Teollinen kapasiteettimme mahdollistaa nopeat toimitukset myös suurissa vahingoissa.</p>
+          <p>Pesutoiminta Kaskenkadussa 12 alkoi jo vuonna 1967. Vuonna 2001 Minna ja Mika Elers jatkoivat tätä perinnettä perustamalla Pesulan — ja vuonna 2010 syntyi Turun Suurpesula, kun kapasiteetti kasvoi teollisuusluokkaan.</p>
+          <p>Vuosikymmenten aikana olemme palvelleet tuhansia turkulaisperheitä, hoivakoteja, hotelleja ja ravintoloita. Kasvamme harkitusti — emme koskaan laadun kustannuksella.</p>
+          <p>Kotiinkuljetuspalvelu syntyi kuuntelemalla asiakkaitamme: elämä on kiireistä, pesula ei saa olla se lisähuoli. Nyt haemme ja toimitamme suoraan ovellesi.</p>
         </div>
       </div>
       <div class="flex flex-col gap-0">
@@ -98,16 +99,14 @@ const timeline = [
   </section>
 
   <section class="bg-white py-20">
-    <div class="max-w-5xl mx-auto px-6">
-      <div class="text-center mb-12">
-        <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-3">Laitos</p>
-        <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl">Teollisuuskapasiteetti</h2>
-        <p class="font-inter text-[#14375A]/55 text-base mt-4 max-w-lg mx-auto">
-          Yli <span class="font-semibold text-[#14375A]">170 000 kg</span> tekstiilejä vuodessa, kapasiteetti, johon pienemmät pesulat eivät pysty.
-        </p>
-      </div>
-      <div class="rounded-2xl overflow-hidden shadow-sm">
-        <img src="/photo-baskets.webp" alt="Turun Suurpesula, teollisuuslaitos" class="w-full object-cover max-h-80 object-center" />
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <p class="font-sora text-xs font-bold tracking-widest text-[#FF8F7A] uppercase mb-4">Tiimi</p>
+      <h2 class="font-merriweather font-normal text-[#14375A] text-3xl md:text-4xl mb-6">Teitä palvelevat</h2>
+      <p class="font-inter text-[#14375A]/55 text-base max-w-lg mx-auto leading-relaxed">
+        Tiimimme yhteenlaskettu kokemus pesulaalalta on yli <span class="font-semibold text-[#14375A]">79 vuotta</span>. Jokainen tekstiili käsitellään ammattitaidolla.
+      </p>
+      <div class="mt-10 rounded-2xl overflow-hidden shadow-sm max-w-3xl mx-auto">
+        <img src="/photo-baskets.webp" alt="Turun Suurpesula tiimi" class="w-full object-cover max-h-72 object-center" />
       </div>
     </div>
   </section>
@@ -116,17 +115,17 @@ const timeline = [
     <div class="max-w-3xl mx-auto px-6 text-center">
       <div class="font-merriweather font-normal text-[#FF8F7A] text-6xl leading-none mb-4">&ldquo;</div>
       <blockquote class="font-merriweather font-normal text-white text-2xl md:text-3xl leading-snug mb-6">
-        Teollinen kapasiteetti, inhimillinen palvelu.
+        Puhdasta arkea pehmeällä otteella.
       </blockquote>
-      <p class="font-inter text-white/50 text-sm">Turun Suurpesula, Telekatu 6, Turku</p>
+      <p class="font-inter text-white/50 text-sm">Kotiovelle. Puhtaana. — Melers Pesulapalvelut, Turku</p>
     </div>
   </section>
 
   <section class="bg-[#FF8F7A] py-14">
     <div class="max-w-3xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
       <div>
-        <h2 class="font-merriweather font-normal text-white text-3xl mb-2">Pyydä tarjous</h2>
-        <p class="font-inter text-white/80 text-base">Palataan teille 24 tunnissa.</p>
+        <h2 class="font-merriweather font-normal text-white text-3xl mb-2">Tule tutustumaan</h2>
+        <p class="font-inter text-white/80 text-base">Tai tilaa ensimmäinen nouto verkossa.</p>
       </div>
       <a href="/yhteys" class="font-sora font-bold bg-white text-[#FF8F7A] px-8 py-4 rounded-full hover:bg-[#FFE6E2] transition-colors shrink-0">
         Ota yhteyttä →
