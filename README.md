@@ -27,3 +27,4 @@ Published pages for Askel Ventures. Each folder is a site deployed to `<folder-n
 | turunsuurpesula | https://turunsuurpesula.askelventures.com |
 | tarjous-turunsuurpesula | https://tarjous-turunsuurpesula.askelventures.com |
 | varia | https://varia.askelventures.com |
+| buukkaus | https://buukkaus.askelventures.com |
