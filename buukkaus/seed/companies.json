@@ -1,0 +1,13 @@
+[
+  {
+    "slug": "turun-suurpesula",
+    "label": "Turun Suurpesula",
+    "icps": [
+      {"slug": "hotellit", "label": "Hotellit"},
+      {"slug": "palvelutalot", "label": "Palvelutalot"},
+      {"slug": "vahinkosaneeraus", "label": "Vahinkosaneeraus"},
+      {"slug": "airbnb", "label": "Airbnb"},
+      {"slug": "siivousyritykset", "label": "Siivousyritykset"}
+    ]
+  }
+]

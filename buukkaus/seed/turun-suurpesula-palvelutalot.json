@@ -1,0 +1,36 @@
+{
+  "company": "turun-suurpesula",
+  "icp": "palvelutalot",
+  "label": "Palvelutalot",
+  "updatedAt": "2026-08-18T00:00:00.000Z",
+  "opening": "Hei, tässä [NIMI] Turun Suurpesulasta. Tavoittelen [HENKILÖÄ].\n\nHei [NIMI], soitan palvelutalojen pyykkihuollosta. Tämä on lyhyt myyntipuhelu – voinko käyttää 30 sekuntia siihen, miksi soitin?",
+  "reason": "Palvelutaloissa osa pyykeistä hoidetaan yleensä itse ja osa pesulassa, ja käytännössä ongelmia syntyy välillä siitä, ettei pesulan noutorytmi jousta tarpeen mukaan tai eri toimipisteiden pyykit pysy selkeästi erillään.",
+  "discoveryQuestions": [
+    "Miten teillä pyykkihuolto on tällä hetkellä järjestetty?",
+    "Jos nykyinen pesula: Entä jos pyykkiä tulee esimerkiksi kesällä tavallista enemmän – saatteko tarvittaessa ylimääräisen noudon tai nopeasti lisää liinavaatteita?",
+    "Jos useita toimipisteitä: Miten eri toimipisteiden pyykit erotellaan teillä? Onko ollut koskaan ongelmia sen kanssa, että eri yksiköiden pyykkejä sekoittuu?"
+  ],
+  "objections": [
+    {"trigger": "Ei kiinnosta.", "response": "Ymmärrän. En yritä myydä tässä puhelimessa mitään. Kysyn vain yhden asian: miten teillä tämä on tällä hetkellä järjestetty? Jos edelleen ei: Onko teillä nykyinen pesulakumppani jo pitkäaikainen, vai kilpailutatteko näitä palveluita aika ajoin? Jos ehdoton ei: Tiedättekö muuten, milloin teillä seuraavan kerran on tarkoitus kilpailuttaa pesulapalvelut?"},
+    {"trigger": "Meillä on jo pesula.", "response": "Joo, ymmärrän. Suurimmalla osalla yrityksistä, joihin soitamme, on jo joku pesulakumppani. Kysynkin siksi: oletteko olleet nykyiseen palveluun täysin tyytyväisiä? Jos kyllä: Milloin teillä yleensä kilpailutetaan pesulapalvelut seuraavan kerran?"},
+    {"trigger": "Meillä on sopimus.", "response": "Selvä. Milloin sopimuksenne päättyy tai milloin sitä seuraavan kerran voidaan kilpailuttaa? Älä yritä rikkoa sopimusta – tavoite on saada tuleva kilpailutus kirjattua ylös."},
+    {"trigger": "Laita sähköpostia.", "response": "Totta kai. Jotta lähetän teille jotain oikeasti relevanttia, kysyn yhden nopean asian: miten teillä pesulapalvelut on tällä hetkellä järjestetty? Jos ei halua keskustella: Selvä. Milloin teillä yleensä seuraavan kerran kilpailutetaan pesulapalvelut?"},
+    {"trigger": "Ei ole aikaa.", "response": "Ymmärrän. Tämä kestää oikeasti vain hetken. Kysyn yhden asian: käytättekö tällä hetkellä pesulapalvelua vai hoidatteko pesut itse? Jos ei edelleenkään: Ei mitään. Milloin olisi parempi hetki?"},
+    {"trigger": "Ei ole meidän vastuullamme.", "response": "Selvä. Kuka teillä yleensä vastaa pesulapalveluiden hankinnasta tai kilpailutuksesta? Kun nimi saadaan: Selvä, kiitos. Voinko tavoitella häntä suoraan?"},
+    {"trigger": "Me hoidamme pesut itse.", "response": "Selvä. Onko se teille tällä hetkellä toimiva ratkaisu? Jos kyllä: Oletteko ajatelleet pitää sen näin myös pidemmällä aikavälillä vai voisiko ulkopuolinen pesula joskus tulla kyseeseen?"},
+    {"trigger": "Olemme tyytyväisiä nykyiseen pesulaan.", "response": "Hienoa, hyvä että toimii. Milloin teillä yleensä seuraavan kerran kilpailutetaan pesulapalvelut?"},
+    {"trigger": "Ei ole budjettia.", "response": "Ymmärrän. Onko kyse siitä, että pesulapalveluille ei ole tällä hetkellä budjettia lainkaan, vai onko nykyinen ratkaisu vain budjetoitu jo tälle kaudelle? Jos budjetti on käytetty: Milloin seuraava budjetointikierros on?"},
+    {"trigger": "Ei ole tarvetta.", "response": "Selvä. Onko kyse siitä, että nykyinen ratkaisu toimii hyvin, vai ettei teillä yksinkertaisesti ole tarvetta pesulapalvelulle? Jos nykyinen ratkaisu toimii: Milloin teillä seuraavan kerran kilpailutetaan se?"},
+    {"trigger": "Soita puolen vuoden päästä.", "response": "Totta kai. Onko puolen vuoden päästä silloin myös teidän seuraava kilpailutus tai sopimuksen uusiminen?"},
+    {"trigger": "Mistä sait numeroni?", "response": "Yrityksen yhteystiedoista / julkisista yritystiedoista. Soitan, koska työskentelemme alan yritysten kanssa täällä Turun alueella. Kysyn nopeasti: miten teillä pesulapalvelut on tällä hetkellä järjestetty?"},
+    {"trigger": "Olen kokouksessa.", "response": "Totta kai, en pidä sinua. Milloin olisi parempi aika soittaa?"}
+  ],
+  "bookingAsk": "Ymmärrän. Meillä jokaisella asiakkaalla on nimetty palvelupäällikkö ja noutoja voidaan sovittaa tarpeen mukaan. Voisin varata teille 15 minuutin keskustelun meidän palvelupäällikön kanssa ja katsoa, voisimmeko tehdä tuosta teille hieman helpompaa. Kävisikö [A] vai [B]?",
+  "rules": [
+    "Älä puhu liikaa. Avaus → kysymys → hiljaa.",
+    "Älä selitä palvelua, ellei asiakas anna siihen syytä.",
+    "Älä väittele nykyisestä pesulasta. Meidän ei tarvitse todistaa, että nykyinen toimittaja on huono.",
+    "Älä kysy \"onko kiinnostusta?\" — kysy mieluummin \"Miten teillä tämä toimii tällä hetkellä?\" ja tapaamisen kohdalla \"Sopisiko [A] vai [B]?\"",
+    "Tavoite ei ole myydä pesulapalvelua puhelimessa. Tavoite on: löytää relevantti ongelma → saada lupa jatkaa keskustelua → varata aika palvelupäällikölle."
+  ]
+}
