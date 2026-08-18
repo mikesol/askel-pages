@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<!-- v3-draft — Find/Fund/Grow restructure, 11 slides, stock photo placeholders -->
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Askel Ventures – Investor Deck (Draft)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<style>
+  :root {
+    --bg:      #f2eeea;
+    --bg-alt:  #ece8e3;
+    --white:   #faf8f5;
+    --red:     #c0392b;
+    --dark:    #1a1108;
+    --mid:     #4a3f35;
+    --muted:   #8a7d72;
+    --border:  #d5cec6;
+  }
+
+  .reveal-viewport { background: var(--bg); }
+
+  .reveal {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    color: var(--dark);
+  }
+
+  /* ── Slide base ─────────────────────── */
+  .reveal,
+  .reveal .slides,
+  .reveal .slides section {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    left: 0 !important;
+    top: 0 !important;
+    transform: none !important;
+  }
+
+  .reveal .slides section {
+    text-align: left;
+    height: 100vh !important;
+    height: 100dvh !important;
+    min-height: unset;
+    padding: 5.5vh 7vw;
+    box-sizing: border-box;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: flex-start;
+    justify-content: safe center;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* ── Headings ───────────────────────── */
+  .reveal h1, .reveal h2 {
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    text-transform: none;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--dark);
+    margin: 0 0 0.55em 0;
+    text-shadow: none;
+    word-break: normal;
+  }
+
+  .reveal h1 { font-size: clamp(2.6rem, 6.5vw, 5.2rem); }
+  .reveal h2 { font-size: clamp(1.8rem, 4vw, 3.4rem); }
+
+  .reveal .accent { color: var(--red); }
+
+  /* ── Section label ──────────────────── */
+  .label {
+    font-family: 'Open Sans', sans-serif;
+    font-size: clamp(0.6rem, 1.1vw, 0.72rem);
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1em;
+  }
+
+  /* ── Engine label (FIND / FUND / GROW) ── */
+  .engine {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7em;
+    margin-bottom: 1em;
+  }
+
+  .engine-word {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(0.85rem, 1.6vw, 1.15rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--red);
+  }
+
+  .engine-step {
+    font-family: 'Open Sans', sans-serif;
+    font-size: clamp(0.55rem, 0.9vw, 0.65rem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.35em 0.8em;
+    border-radius: 999px;
+  }
+
+  /* ── Red rule ───────────────────────── */
+  .rule {
+    width: 44px;
+    height: 3px;
+    background: var(--red);
+    margin-bottom: 1.3em;
+    flex-shrink: 0;
+  }
+
+  /* ── Cover ──────────────────────────── */
+  .slide-cover {
+    background: var(--white) !important;
+    justify-content: space-between !important;
+    padding-top: 8vh !important;
+    padding-bottom: 7vh !important;
+  }
+
+  .slide-cover.photo-bg {
+    background-size: cover !important;
+    background-position: center !important;
+    position: relative;
+  }
+
+  .slide-cover.photo-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(250,248,245,0.62) 0%, rgba(250,248,245,0.92) 100%);
+    z-index: 0;
+  }
+
+  .slide-cover.photo-bg > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .wordmark {
+    font-size: clamp(0.6rem, 1.1vw, 0.72rem);
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .cover-body { flex: 1; display: flex; align-items: center; }
+
+  .cover-cta-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.6em;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--dark);
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+    font-size: clamp(0.72rem, 1.05vw, 0.82rem);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 1.1em 3.6em;
+    border-radius: 999px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    transition: opacity 0.15s, box-shadow 0.15s;
+    white-space: nowrap;
+  }
+  .cta-btn:hover { opacity: 0.75; box-shadow: 0 3px 10px rgba(0,0,0,0.15); }
+
+  .cover-tagline {
+    font-size: clamp(0.62rem, 1.1vw, 0.8rem);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-top: 1.5px solid var(--border);
+    padding-top: 1.3em;
+    max-width: 660px;
+  }
+
+  /* ── Bullet points ──────────────────── */
+  .points {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.3em 4vw;
+    max-width: 900px;
+  }
+
+  .points.single {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+  }
+
+  .point {
+    display: flex;
+    gap: 0.75em;
+    align-items: flex-start;
+  }
+
+  .point-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--red);
+    margin-top: 0.42em;
+    flex-shrink: 0;
+  }
+
+  .point-text {
+    font-size: clamp(0.75rem, 1.2vw, 0.88rem);
+    line-height: 1.65;
+    color: var(--mid);
+  }
+
+  .point-text strong {
+    color: var(--dark);
+    font-weight: 600;
+    display: block;
+  }
+
+  /* ── Generic split layout (content + photo) ── */
+  .slide-split {
+    display: flex;
+    gap: 3vw;
+    flex: 1;
+    min-height: 0;
+    align-items: stretch;
+  }
+
+  .split-content {
+    flex: 1 1 56%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.1em;
+  }
+
+  .split-photo {
+    flex: 0 0 40%;
+    max-width: 40%;
+    display: flex;
+  }
+
+  .split-photo.narrow {
+    flex: 0 0 28%;
+    max-width: 28%;
+  }
+
+  .split-photo img {
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 3px;
+    display: block;
+  }
+
+  /* ── Overview fact table ────────────── */
+  .overview-table {
+    display: flex;
+    flex-direction: column;
+    max-width: 640px;
+  }
+
+  .ov-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5em;
+    padding: 0.6em 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ov-key {
+    font-size: clamp(0.56rem, 0.9vw, 0.66rem);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    flex: 0 0 34%;
+    padding-top: 0.1em;
+  }
+
+  .ov-val {
+    font-size: clamp(0.72rem, 1.1vw, 0.85rem);
+    color: var(--mid);
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .ov-val strong { color: var(--dark); font-weight: 600; }
+
+  /* ── Dimension grid (What is a boring business) ── */
+  .dimension-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em 2.5vw;
+  }
+
+  .dimension {
+    border-top: 1.5px solid var(--border);
+    padding-top: 0.7em;
+  }
+
+  .dimension-title {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(0.82rem, 1.4vw, 1rem);
+    color: var(--dark);
+    margin-bottom: 0.3em;
+    text-transform: none;
+  }
+
+  .dimension-title .num { color: var(--red); margin-right: 0.35em; }
+
+  .dimension-desc {
+    font-size: clamp(0.66rem, 1vw, 0.78rem);
+    color: var(--mid);
+    line-height: 1.55;
+  }
+
+  /* ── Roadmap grid (Proof of Playbook) ── */
+  .roadmap-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8em 1.6vw;
+  }
+
+  .roadmap-item {
+    display: flex;
+    gap: 0.7em;
+    align-items: flex-start;
+    border: 1.5px solid var(--border);
+    padding: 0.8em 1em;
+    border-radius: 3px;
+    background: var(--white);
+  }
+
+  .roadmap-check {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--red);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.68rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0.1em;
+  }
+
+  .roadmap-text strong {
+    display: block;
+    color: var(--dark);
+    font-weight: 600;
+    font-size: clamp(0.7rem, 1.05vw, 0.82rem);
+    margin-bottom: 0.15em;
+  }
+
+  .roadmap-text span {
+    font-size: clamp(0.62rem, 0.95vw, 0.73rem);
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── Flywheel (reused for Model + Vision) ── */
+  .flywheel-outer {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    margin-bottom: 1.4em;
+  }
+
+  .flywheel {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    min-width: max-content;
+  }
+
+  .fw-step {
+    text-align: center;
+    padding: 0.9em 1em;
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    min-width: 96px;
+    flex: 1;
+  }
+
+  .fw-label {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(0.65rem, 1.1vw, 0.8rem);
+    color: var(--red);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.3em;
+  }
+
+  .fw-desc {
+    font-size: clamp(0.58rem, 0.9vw, 0.7rem);
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .fw-arrow {
+    font-size: 1em;
+    color: var(--red);
+    padding: 0 0.25em;
+    align-self: center;
+    flex-shrink: 0;
+    opacity: 0.45;
+  }
+
+  /* ── Stat strip (Find) ─────────────── */
+  .stat-strip {
+    display: flex;
+    gap: 0;
+    margin-bottom: 1em;
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    border-left: 1.5px solid var(--border);
+    padding: 0.4em 1.4em 0.4em 1em;
+    flex: 1;
+    min-width: 110px;
+  }
+
+  .stat-item:first-child { border-left: none; padding-left: 0; }
+
+  .stat-num {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(1.2rem, 2.4vw, 1.7rem);
+    color: var(--red);
+    line-height: 1.1;
+    margin-bottom: 0.15em;
+  }
+
+  .stat-lbl {
+    font-size: clamp(0.56rem, 0.9vw, 0.66rem);
+    color: var(--muted);
+    line-height: 1.35;
+  }
+
+  /* ── Pipeline flow (Find) ───────────── */
+  .pipeline {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 1em;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .pipe-stage {
+    text-align: center;
+    padding: 0.6em 1em;
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    flex: 1;
+    min-width: 78px;
+  }
+
+  .pipe-label {
+    font-size: clamp(0.56rem, 0.9vw, 0.66rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.2em;
+  }
+
+  .pipe-count {
+    font-size: clamp(0.9rem, 1.6vw, 1.2rem);
+    font-family: 'Anton', sans-serif;
+    color: var(--dark);
+  }
+
+  .pipe-arrow {
+    font-size: 0.9em;
+    color: var(--red);
+    padding: 0 0.3em;
+    flex-shrink: 0;
+    opacity: 0.45;
+  }
+
+  /* ── Vision number ──────────────────── */
+  .vision-number {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2.6rem, 6.5vw, 4.6rem);
+    color: var(--red);
+    line-height: 0.95;
+    margin-bottom: 0.1em;
+  }
+
+  .vision-sub {
+    font-size: clamp(0.62rem, 1vw, 0.75rem);
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.3em;
+  }
+
+  /* ── Terms ──────────────────────────── */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1em 3vw;
+  }
+
+  .term {
+    border-top: 1.5px solid var(--border);
+    padding-top: 0.75em;
+  }
+
+  .term-label {
+    font-size: clamp(0.56rem, 0.9vw, 0.66rem);
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.35em;
+  }
+
+  .term-value {
+    font-size: clamp(0.7rem, 1.1vw, 0.82rem);
+    color: var(--mid);
+    line-height: 1.6;
+  }
+
+  .term-value strong {
+    color: var(--dark);
+    font-weight: 600;
+  }
+
+  /* ── Opportunity stat strip ────────── */
+  .opp-stats {
+    display: flex;
+    gap: 2.5vw;
+    margin: 0 0 0.4em 0;
+    flex-wrap: wrap;
+  }
+
+  .opp-stat {
+    border-top: 2px solid var(--red);
+    padding-top: 0.5em;
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .opp-stat-num {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+    color: var(--dark);
+    line-height: 1;
+    margin-bottom: 0.2em;
+  }
+
+  .opp-stat-num.accent { color: var(--red); }
+
+  .opp-stat-lbl {
+    font-size: clamp(0.56rem, 0.9vw, 0.66rem);
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* ── Team ───────────────────────────── */
+  .team-layout {
+    display: flex;
+    gap: 2.5vw;
+    align-items: stretch;
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .team-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .team-photo-wrap {
+    flex: 0 0 42%;
+    max-width: 42%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .team-photo {
+    flex: 1;
+    width: 100%;
+    min-height: 200px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 3px;
+    display: block;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1em 3vw;
+  }
+
+  .team-member {
+    border-top: 1.5px solid var(--border);
+    padding-top: 0.8em;
+  }
+
+  .team-name {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    color: var(--dark);
+    margin-bottom: 0.2em;
+  }
+
+  .team-tag {
+    font-size: clamp(0.52rem, 0.85vw, 0.62rem);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-left: 0.4em;
+    vertical-align: middle;
+  }
+
+  .team-obsession {
+    font-size: clamp(0.66rem, 1vw, 0.78rem);
+    font-weight: 700;
+    color: var(--red);
+    font-style: italic;
+    margin-bottom: 0.4em;
+    line-height: 1.4;
+  }
+
+  .team-desc {
+    font-size: clamp(0.68rem, 1.05vw, 0.8rem);
+    color: var(--mid);
+    line-height: 1.6;
+  }
+
+  /* ── Chart callout ──────────────────── */
+  .stage-callout {
+    display: flex;
+    gap: 3vw;
+    margin-top: 0.6em;
+    flex-wrap: wrap;
+  }
+
+  .stage-callout-stat {
+    border-top: 1.5px solid var(--border);
+    padding-top: 0.55em;
+    flex: 1;
+    min-width: 130px;
+  }
+
+  .stage-callout-label {
+    font-size: clamp(0.54rem, 0.85vw, 0.62rem);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.2em;
+  }
+
+  .stage-callout-value {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(0.9rem, 1.7vw, 1.25rem);
+    color: var(--red);
+  }
+
+  .team-note {
+    font-size: clamp(0.64rem, 1vw, 0.75rem);
+    color: var(--muted);
+    font-style: italic;
+    border-left: 2.5px solid var(--red);
+    padding-left: 0.75em;
+    max-width: 700px;
+    line-height: 1.55;
+  }
+
+  /* ── Reveal overrides ───────────────── */
+  .reveal .progress { color: var(--red); height: 3px; }
+  .reveal .controls { color: var(--red); }
+  .reveal .slide-number {
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.7rem;
+    top: 14px;
+    bottom: unset;
+    right: 14px;
+  }
+
+  /* ── Mobile ─────────────────────────── */
+  @media (max-width: 600px) {
+    .reveal .slides section { padding: 5vh 6vw; }
+
+    .reveal h1 { font-size: 2.4rem; }
+    .reveal h2 { font-size: 1.7rem; }
+
+    .points,
+    .team-grid,
+    .terms-grid,
+    .dimension-grid,
+    .roadmap-grid {
+      grid-template-columns: 1fr !important;
+      gap: 1em 0;
+    }
+
+    .flywheel-outer { overflow-x: scroll; -webkit-overflow-scrolling: touch; }
+    .flywheel { flex-wrap: nowrap; min-width: max-content; gap: 0.35em; }
+    .fw-step { flex: 0 0 auto; box-sizing: content-box; min-width: 80px; padding: 0.6em 0.5em; }
+    .fw-arrow { display: none; }
+
+    .pipeline { overflow-x: scroll; }
+    .stat-strip { flex-wrap: wrap; }
+    .opp-stats { flex-wrap: wrap; }
+
+    .slide-split { flex-direction: column; }
+    .split-photo, .split-photo.narrow { flex: none; max-width: 100%; width: 100%; min-height: unset; }
+    .split-photo img { height: 22vh; min-height: unset; }
+
+    .team-layout { flex-direction: column; }
+    .team-photo-wrap { flex: none; max-width: 100%; width: 100%; min-height: unset; }
+    .team-photo { height: 28vh; }
+  }
+</style>
+</head>
+<body>
+
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ── 1. COVER ────────────────────── -->
+    <section class="slide-cover photo-bg" data-background-color="#faf8f5" style="background-image:url('https://picsum.photos/seed/askel-hero/1920/1200?grayscale');">
+      <div class="wordmark">Askel Ventures</div>
+      <div class="cover-body">
+        <h1>Acquiring <span class="accent">boring businesses.</span><br>Building compounding value.</h1>
+      </div>
+      <div class="cover-tagline">
+        Micro private equity &nbsp;·&nbsp; Nordic small business acquisitions
+      </div>
+    </section>
+
+    <!-- ── 2. OVERVIEW (new) ───────────── -->
+    <section data-background-color="#faf8f5">
+      <div class="label">Overview</div>
+      <div class="rule"></div>
+      <h2>Askel Ventures <span class="accent">at a glance.</span></h2>
+      <div class="slide-split">
+        <div class="split-content">
+          <div class="overview-table">
+            <div class="ov-row"><div class="ov-key">Company</div><div class="ov-val"><strong>Askel Ventures Oy</strong></div></div>
+            <div class="ov-row"><div class="ov-key">Strategy</div><div class="ov-val">Micro private equity — buy, operate, grow, selectively exit</div></div>
+            <div class="ov-row"><div class="ov-key">Sectors</div><div class="ov-val">Cleaning, laundry, waste collection, maintenance, industrial trades</div></div>
+            <div class="ov-row"><div class="ov-key">Geography</div><div class="ov-val"><strong>Finland</strong> (primary) · Sweden &amp; Estonia (secondary)</div></div>
+            <div class="ov-row"><div class="ov-key">Team</div><div class="ov-val">4 founders, serial entrepreneurs, hands-on operators</div></div>
+            <div class="ov-row"><div class="ov-key">Deal profile</div><div class="ov-val">Revenue €400K–1.5M · EBITDA €100K+ · entry ≤€1M</div></div>
+            <div class="ov-row"><div class="ov-key">Platform</div><div class="ov-val"><strong>Steve</strong> — proprietary AI sourcing system, live and sourcing today</div></div>
+            <div class="ov-row"><div class="ov-key">Advantage</div><div class="ov-val">Documented operational playbook + AI sourcing — no passive PE competes here</div></div>
+            <div class="ov-row"><div class="ov-key">Round</div><div class="ov-val">Raising up to <strong>€1M</strong>, ordinary shares, min ticket €100K</div></div>
+            <div class="ov-row"><div class="ov-key">Mission</div><div class="ov-val">Acquiring boring businesses. Building compounding value.</div></div>
+          </div>
+        </div>
+        <div class="split-photo">
+          <img src="https://picsum.photos/seed/askel-industrial/900/1100?grayscale" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 3. THE OPPORTUNITY ──────────── -->
+    <section data-background-color="#faf8f5">
+      <div class="label">The Opportunity</div>
+      <div class="rule"></div>
+      <h2>A wave of <span class="accent">succession transitions</span><br>no one is equipped to handle.</h2>
+      <div class="slide-split">
+        <div class="split-content">
+          <div class="opp-stats">
+            <div class="opp-stat">
+              <div class="opp-stat-num">73,000+</div>
+              <div class="opp-stat-lbl">Finnish entrepreneurs aged 54+</div>
+            </div>
+            <div class="opp-stat">
+              <div class="opp-stat-num">34,000</div>
+              <div class="opp-stat-lbl">intend to sell to an outside buyer within the decade</div>
+            </div>
+            <div class="opp-stat">
+              <div class="opp-stat-num accent">20,000+</div>
+              <div class="opp-stat-lbl">viable businesses at closure risk — no suitable buyer exists</div>
+            </div>
+          </div>
+          <div class="points single">
+            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>The silver tsunami is here.</strong> Essential small businesses are profitable and resilient — but founder-led and approaching succession transition.</div></div>
+            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Structural gap in the market.</strong> Too small for traditional private equity, too operationally demanding for passive investors.</div></div>
+            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Attractive entry multiples.</strong> Stable, cash-generative businesses at 3–4× EBITDA — unavailable at scale in any other asset class.</div></div>
+          </div>
+        </div>
+        <div class="split-photo">
+          <img src="https://picsum.photos/seed/askel-succession/900/1100?grayscale" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 4. FIND ──────────────────────── -->
+    <section data-background-color="#faf8f5">
+      <div class="engine"><span class="engine-word">Find</span><span class="engine-step">01 / 03</span></div>
+      <div class="rule"></div>
+      <h2>We find acquisition targets<br><span class="accent">before they reach the market.</span></h2>
+      <div class="slide-split">
+        <div class="split-content">
+          <div class="stat-strip">
+            <div class="stat-item"><div class="stat-num">94+</div><div class="stat-lbl">companies analyzed</div></div>
+            <div class="stat-item"><div class="stat-num">100+</div><div class="stat-lbl">brokers tracked</div></div>
+            <div class="stat-item"><div class="stat-num">50-item</div><div class="stat-lbl">DD framework</div></div>
+            <div class="stat-item"><div class="stat-num">&lt;100 days</div><div class="stat-lbl">first close</div></div>
+          </div>
+          <div class="pipeline">
+            <div class="pipe-stage"><div class="pipe-label">Sourcing</div><div class="pipe-count">Weekly</div></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-stage"><div class="pipe-label">Screening</div><div class="pipe-count">Active</div></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-stage"><div class="pipe-label">IC</div><div class="pipe-count">Selective</div></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-stage"><div class="pipe-label">DD</div><div class="pipe-count">Rigorous</div></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-stage"><div class="pipe-label">Acquired</div><div class="pipe-count">✓</div></div>
+          </div>
+          <div class="points single">
+            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Steve — AI sourcing agent.</strong> Runs weekly sweeps across broker networks and weak signals, scores targets against thesis criteria. Human judgment closes; AI never sleeps.</div></div>
+            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Broker network.</strong> Active relationships with 100+ brokers across Finland and Scandinavia — many of our best leads arrive off-market.</div></div>
+          </div>
+        </div>
+        <div class="split-photo">
+          <img src="https://picsum.photos/seed/askel-sourcing/900/1100?grayscale" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 5. WHAT IS A BORING BUSINESS (new) ── -->
+    <section data-background-color="#faf8f5">
+      <div class="label">What Is a Boring Business</div>
+      <div class="rule"></div>
+      <h2>"Boring" is a <span class="accent">feature,</span><br>not a compromise.</h2>
+      <div class="slide-split">
+        <div class="split-content">
+          <div class="dimension-grid">
+            <div class="dimension"><div class="dimension-title"><span class="num">01</span>Essential, not optional</div><div class="dimension-desc">Customers can't skip it — cleaning, waste, laundry, maintenance.</div></div>
+            <div class="dimension"><div class="dimension-title"><span class="num">02</span>Recurring, not one-off</div><div class="dimension-desc">Contracts and repeat relationships, not project-by-project revenue.</div></div>
+            <div class="dimension"><div class="dimension-title"><span class="num">03</span>Low disruption risk</div><div class="dimension-desc">No venture-backed competitor is reinventing industrial laundry.</div></div>
+            <div class="dimension"><div class="dimension-title"><span class="num">04</span>Undermanaged, not broken</div><div class="dimension-desc">Profitable today, run on paper and instinct — not systems.</div></div>
+            <div class="dimension"><div class="dimension-title"><span class="num">05</span>Founder-dependent</div><div class="dimension-desc">One person's retirement is the whole risk — and the whole opportunity.</div></div>
+            <div class="dimension"><div class="dimension-title"><span class="num">06</span>Real, proven cash flow</div><div class="dimension-desc">10+ years old, real customers, no story — just proof.</div></div>
+          </div>
+        </div>
+        <div class="split-photo narrow">
+          <img src="https://picsum.photos/seed/askel-laundry/700/1100?grayscale" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 6. GROW ──────────────────────── -->
+    <section data-background-color="#faf8f5">
+      <div class="engine"><span class="engine-word">Grow</span><span class="engine-step">03 / 03</span></div>
+      <div class="rule"></div>
+      <h2><span class="accent">The Askel Effect</span> — how boring<br>becomes extraordinary.</h2>
+      <div class="slide-split">
+        <div class="split-content">
+          <div class="points single">
+            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Full digital transformation.</strong> Paper-operated businesses become modern — admin, reporting, and scheduling digitalized.</div></div>
+            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Commercial development.</strong> Proactive outreach, digital channels, systematic lead generation — areas previous owners left untouched.</div></div>
+            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>The AI layer.</strong> Agents and automation deployed against specific, real operational problems. This is where asymmetric upside gets built.</div></div>
+            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>From owner-led to professionally-led.</strong> Dedicated operators, stronger governance, systems that scale without founder dependency.</div></div>
+          </div>
+          <div class="stage-callout">
+            <div class="stage-callout-stat"><div class="stage-callout-label">EBITDA growth</div><div class="stage-callout-value">€250k → €1.5m</div></div>
+            <div class="stage-callout-stat"><div class="stage-callout-label">Multiple expansion</div><div class="stage-callout-value">3–4× → 6–8×</div></div>
+          </div>
+        </div>
+        <div class="split-photo">
+          <svg viewBox="0 0 340 420" preserveAspectRatio="xMidYMid meet" style="width:100%;height:100%;">
+            <rect x="0" y="0" width="340" height="420" fill="#faf8f5" rx="3"/>
+            <line x1="40" y1="60" x2="40" y2="360" stroke="#d5cec6" stroke-width="1"/>
+            <line x1="40" y1="360" x2="300" y2="360" stroke="#d5cec6" stroke-width="1"/>
+            <line x1="40" y1="290" x2="300" y2="290" stroke="#e5dfd8" stroke-width="0.7"/>
+            <line x1="40" y1="220" x2="300" y2="220" stroke="#e5dfd8" stroke-width="0.7"/>
+            <line x1="40" y1="150" x2="300" y2="150" stroke="#e5dfd8" stroke-width="0.7"/>
+            <line x1="40" y1="80"  x2="300" y2="80"  stroke="#e5dfd8" stroke-width="0.7"/>
+            <text x="34" y="293" text-anchor="end" fill="#8a7d72" font-size="10" font-family="Open Sans,sans-serif">2×</text>
+            <text x="34" y="223" text-anchor="end" fill="#8a7d72" font-size="10" font-family="Open Sans,sans-serif">4×</text>
+            <text x="34" y="153" text-anchor="end" fill="#8a7d72" font-size="10" font-family="Open Sans,sans-serif">6×</text>
+            <text x="34" y="83"  text-anchor="end" fill="#8a7d72" font-size="10" font-family="Open Sans,sans-serif">8×</text>
+            <path d="M 55,340 C 90,335 120,300 160,240 C 200,180 230,130 270,100" fill="none" stroke="#c0392b" stroke-width="3" stroke-linecap="round"/>
+            <path d="M 55,352 C 100,350 170,345 270,340" fill="none" stroke="#8a7d72" stroke-width="2" stroke-dasharray="5,4"/>
+            <circle cx="55" cy="340" r="6" fill="#faf8f5" stroke="#c0392b" stroke-width="2.5"/>
+            <text x="55" y="378" text-anchor="middle" fill="#4a3f35" font-size="10" font-family="Open Sans,sans-serif" font-weight="600">Buy</text>
+            <circle cx="270" cy="100" r="6" fill="#faf8f5" stroke="#c0392b" stroke-width="2.5"/>
+            <text x="270" y="378" text-anchor="middle" fill="#4a3f35" font-size="10" font-family="Open Sans,sans-serif" font-weight="600">Sell</text>
+            <text x="170" y="40" text-anchor="middle" fill="#c0392b" font-size="10" font-family="Open Sans,sans-serif" font-weight="700" letter-spacing="1">APPLY PLAYBOOK</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 7. PROOF OF PLAYBOOK (new) ──── -->
+    <section data-background-color="#faf8f5">
+      <div class="label">Proof of Playbook</div>
+      <div class="rule"></div>
+      <h2>We're not pitching a plan.<br>We're <span class="accent">showing our work.</span></h2>
+      <div class="slide-split">
+        <div class="split-content">
+          <div class="roadmap-grid">
+            <div class="roadmap-item"><div class="roadmap-check">✓</div><div class="roadmap-text"><strong>35-point Screening Checklist</strong><span>Applied to every lead before it reaches IC</span></div></div>
+            <div class="roadmap-item"><div class="roadmap-check">✓</div><div class="roadmap-text"><strong>20-point Due Diligence</strong><span>Framework that closed our first deal in &lt;100 days</span></div></div>
+            <div class="roadmap-item"><div class="roadmap-check">✓</div><div class="roadmap-text"><strong>Knowledge Transfer charter</strong><span>Post-acquisition handover, every time</span></div></div>
+            <div class="roadmap-item"><div class="roadmap-check">✓</div><div class="roadmap-text"><strong>Key hire recruitment</strong><span>Filled critical operating roles at Melers</span></div></div>
+            <div class="roadmap-item"><div class="roadmap-check">✓</div><div class="roadmap-text"><strong>Sales CRM built &amp; live</strong><span>From spreadsheets to a real system</span></div></div>
+            <div class="roadmap-item"><div class="roadmap-check">✓</div><div class="roadmap-text"><strong>Sales SOP active</strong><span>€100,000 in qualified pipeline, running today</span></div></div>
+          </div>
+        </div>
+        <div class="split-photo narrow">
+          <img src="https://picsum.photos/seed/askel-checklist/700/1100?grayscale" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 8. FUND ──────────────────────── -->
+    <section data-background-color="#faf8f5">
+      <div class="engine"><span class="engine-word">Fund</span><span class="engine-step">02 / 03</span></div>
+      <div class="rule"></div>
+      <h2>Equity in Askel Ventures.<br><span class="accent">Raising up to €1M.</span></h2>
+      <div class="slide-split">
+        <div class="split-content">
+          <div class="terms-grid">
+            <div class="term"><div class="term-label">Instrument</div><div class="term-value"><strong>Ordinary shares</strong> via private placement. Same share class as founders — no preference stack.</div></div>
+            <div class="term"><div class="term-label">Use of funds</div><div class="term-value">Next 5 acquisitions to reach compounding scale.</div></div>
+            <div class="term"><div class="term-label">Financial target</div><div class="term-value">Grow portfolio companies <strong>10–20%/yr.</strong> Exit at 6–8× EBITDA. Target holdco IRR 25–35%.</div></div>
+            <div class="term"><div class="term-label">Minimum ticket</div><div class="term-value"><strong>€100,000.</strong> Closing on a rolling basis.</div></div>
+          </div>
+        </div>
+        <div class="split-photo">
+          <img src="https://picsum.photos/seed/askel-handshake/900/1100?grayscale" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 9. THE VISION (new) ─────────── -->
+    <section data-background-color="#faf8f5">
+      <div class="label">The Vision</div>
+      <div class="rule"></div>
+      <h2>One acquisition is proof.<br>A portfolio is <span class="accent">the business.</span></h2>
+      <div class="slide-split">
+        <div class="split-content">
+          <div class="vision-sub">Compounding toward</div>
+          <div class="vision-number">€100M+</div>
+          <div class="points single">
+            <div class="point"><div class="point-dot"></div><div class="point-text">A portfolio of 3–5 verticals — cleaning, laundry, waste, maintenance, trades — running roll-ups within each.</div></div>
+            <div class="point"><div class="point-dot"></div><div class="point-text">Selective exits of mature companies at premium multiples, proceeds reinvested into the next wave.</div></div>
+            <div class="point"><div class="point-dot"></div><div class="point-text">Not a thesis — a trajectory already underway, with acquisition #1 cash-flowing and #2 closing.</div></div>
+          </div>
+        </div>
+        <div class="split-photo">
+          <img src="https://picsum.photos/seed/askel-skyline/900/1100?grayscale" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 10. THE TEAM ─────────────────── -->
+    <section data-background-color="#faf8f5">
+      <div class="label">The Team</div>
+      <div class="rule"></div>
+      <h2>Four founders. <span class="accent">Four obsessions.</span></h2>
+      <div class="team-layout">
+        <div class="team-content">
+          <div class="team-grid">
+            <div class="team-member">
+              <div class="team-name">Varia Wahlroos-Kaitila <span class="team-tag">CEO</span></div>
+              <div class="team-obsession">Obsesses over whether the numbers and the people both check out.</div>
+              <div class="team-desc">Founded 5 companies, built one to €2M ARR, ran the bank negotiations that got Melers over the line.</div>
+            </div>
+            <div class="team-member">
+              <div class="team-name">Niklas Slotte <span class="team-tag">CRO</span></div>
+              <div class="team-obsession">Obsesses over whether it'll actually sell.</div>
+              <div class="team-desc">Scaled a business to €8M ARR internationally. Sharp commercial read on any deal.</div>
+            </div>
+            <div class="team-member">
+              <div class="team-name">Mikael Ylinen <span class="team-tag">Board</span></div>
+              <div class="team-obsession">Obsesses over whether the operation survives contact with reality.</div>
+              <div class="team-desc">Decades of operational depth — on the ground and in the boardroom.</div>
+            </div>
+            <div class="team-member">
+              <div class="team-name">Mike Solomon <span class="team-tag">CTO</span></div>
+              <div class="team-obsession">Obsesses over whether it can run itself.</div>
+              <div class="team-desc">PhD Mathematics, Stanford. Built Steve, the AI sourcing system doing deal discovery right now.</div>
+            </div>
+          </div>
+        </div>
+        <div class="team-photo-wrap">
+          <img class="team-photo" src="askel-team-cropped.webp" alt="Askel Ventures founding team">
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 11. CLOSING ──────────────────── -->
+    <section class="slide-cover photo-bg" data-background-color="#faf8f5" style="background-image:url('https://picsum.photos/seed/askel-close/1920/1200?grayscale');">
+      <div class="wordmark">Askel Ventures</div>
+      <div class="cover-body">
+        <div class="cover-cta-block">
+          <h1>Acquiring <span class="accent">boring businesses.</span><br>Building compounding value.</h1>
+          <a href="https://calendar.google.com/appointments/schedules/AcZssZ3nIFYnBCPbFINd2KpVepM5rtsSx1N0eQBgBG5w1xDcDRHhXTZBtXfoUq1X0R3D10zVGDz9qqZc" target="_blank" class="cta-btn">Book a conversation →</a>
+        </div>
+      </div>
+      <div class="cover-tagline">
+        Micro private equity &nbsp;·&nbsp; Nordic small business acquisitions
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    center: false,
+    controls: true,
+    controlsTutorial: false,
+    controlsLayout: 'bottom-right',
+    progress: true,
+    slideNumber: 'c/t',
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    touch: true,
+    keyboard: true,
+    disableLayout: true,
+  });
+</script>
+
+</body>
+</html>
