@@ -3,106 +3,199 @@
 <head>
 <meta charset="UTF-8">
 <title>Buukkaus — Askel Ventures</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --navy: #14375A;
+    --navy-dark: #0D2740;
     --coral: #FF8F7A;
+    --coral-dark: #E8735E;
     --bg: #F5F7FA;
     --panel: #FFFFFF;
     --text: #1A2733;
     --muted: #5B6B7A;
     --border: #E1E6EC;
+    --green: #2E9E6D;
   }
-  * { box-sizing: border-box; }
-  body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
-  h1, h2, .brand { font-family: 'Sora', sans-serif; }
-  header {
-    background: var(--navy); color: white; padding: 16px 24px;
-    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text);
+    overscroll-behavior-y: none;
   }
-  header .brand { font-size: 20px; font-weight: 700; margin-right: auto; }
-  select, .edit-toggle {
-    font-family: inherit; font-size: 14px; padding: 8px 12px;
-    border-radius: 8px; border: none; cursor: pointer;
+  h1, h2, h3, .brand, .cat-h { font-family: 'Sora', sans-serif; }
+  button { font-family: inherit; }
+  .app { max-width: 560px; margin: 0 auto; min-height: 100%; display: flex; flex-direction: column; }
+  .hidden { display: none !important; }
+
+  /* ---------- top bar ---------- */
+  .topbar {
+    background: var(--navy); color: white; padding: 14px 16px;
+    display: flex; align-items: center; gap: 10px; position: sticky; top: 0; z-index: 20;
   }
-  .edit-toggle { background: var(--coral); color: var(--navy); font-weight: 600; }
-  .edit-toggle.active { background: white; }
-  .icp-tabs {
-    display: flex; gap: 8px; padding: 16px 24px; flex-wrap: wrap;
-    background: var(--panel); border-bottom: 1px solid var(--border);
+  .topbar .back {
+    background: rgba(255,255,255,0.12); border: none; color: white; width: 38px; height: 38px;
+    border-radius: 10px; font-size: 18px; cursor: pointer; flex-shrink: 0;
   }
-  .icp-tab {
-    padding: 8px 16px; border-radius: 999px; border: 1px solid var(--border);
-    background: var(--bg); cursor: pointer; font-size: 14px; font-weight: 500;
+  .topbar .title { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 16px; flex: 1; min-width: 0; }
+  .topbar .title .sub { display: block; font-family: 'Inter', sans-serif; font-weight: 400; font-size: 12px; opacity: 0.7; }
+  .icon-btn {
+    background: rgba(255,255,255,0.12); border: none; color: white; width: 38px; height: 38px;
+    border-radius: 10px; font-size: 16px; cursor: pointer; flex-shrink: 0;
   }
-  .icp-tab.active { background: var(--navy); color: white; border-color: var(--navy); }
-  main { max-width: 880px; margin: 0 auto; padding: 24px; padding-bottom: 100px; }
+  .icon-btn.active { background: var(--coral); color: var(--navy-dark); }
+
+  /* ---------- picker screen ---------- */
+  .picker { padding: 28px 20px; flex: 1; }
+  .picker-head { font-size: 22px; font-weight: 800; margin: 0 0 4px; }
+  .picker-sub { color: var(--muted); font-size: 14px; margin: 0 0 24px; }
+  select.company-select {
+    width: 100%; font-family: inherit; font-size: 15px; padding: 12px 14px; margin-bottom: 20px;
+    border-radius: 10px; border: 1px solid var(--border); background: var(--panel);
+  }
+  .icp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .icp-card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 16px;
+    padding: 22px 12px; text-align: center; cursor: pointer; display: flex; flex-direction: column;
+    align-items: center; gap: 8px; font-family: inherit; color: inherit;
+  }
+  .icp-card .emoji { font-size: 34px; line-height: 1; }
+  .icp-card .label { font-weight: 700; font-size: 15px; }
+  .icp-card:active { background: #EFF3F8; }
+  .add-icp-card {
+    border: 1.5px dashed var(--border); color: var(--muted); background: transparent;
+    border-radius: 16px; padding: 22px 12px; cursor: pointer; font-size: 14px; font-weight: 600;
+    font-family: inherit;
+  }
+
+  /* ---------- script screen ---------- */
+  main { flex: 1; padding: 16px 16px 100px; }
+  .quote-block {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+    padding: 16px 18px; margin-bottom: 14px;
+  }
+  .quote-block h2 {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--coral-dark);
+    font-weight: 700; margin: 0 0 8px;
+  }
+  .quote-block .script-text { font-size: 17px; line-height: 1.5; white-space: pre-wrap; margin: 0; }
+  .quote-block .reason-text { font-size: 13.5px; color: var(--muted); margin: 8px 0 0; line-height: 1.4; }
+  ul.plain { margin: 0; padding-left: 18px; }
+  ul.plain li { font-size: 15px; line-height: 1.55; margin-bottom: 5px; }
+
+  .section-divider {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted);
+    font-weight: 700; margin: 22px 0 10px; display: flex; align-items: center; gap: 8px;
+  }
+  .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .cat-group { margin-bottom: 14px; }
+  .cat-h { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-weight: 700; margin: 0 0 8px; }
+  .obj-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .obj-pill {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 999px;
+    padding: 11px 16px; font-size: 14.5px; font-weight: 600; cursor: pointer; color: var(--text);
+  }
+  .obj-pill:active { background: var(--navy); color: white; border-color: var(--navy); }
+
+  .book-btn {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 15;
+    display: flex; justify-content: center; padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    background: linear-gradient(to top, var(--bg) 60%, transparent);
+  }
+  .book-btn button {
+    width: 100%; max-width: 528px; background: var(--coral); color: var(--navy-dark); border: none;
+    border-radius: 14px; padding: 16px; font-size: 16px; font-weight: 800; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(20,55,90,0.25);
+  }
+
+  /* ---------- answer / booking / info full panels ---------- */
+  .panel-back {
+    display: inline-flex; align-items: center; gap: 6px; background: none; border: none;
+    color: var(--navy); font-weight: 700; font-size: 14px; cursor: pointer; padding: 0 0 16px; margin: 0;
+  }
+  .answer-trigger {
+    font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted);
+    font-weight: 700; margin: 0 0 6px;
+  }
+  .answer-say {
+    font-size: 21px; line-height: 1.5; font-weight: 600; white-space: pre-wrap;
+    background: var(--panel); border: 1px solid var(--border); border-left: 5px solid var(--coral);
+    border-radius: 14px; padding: 20px; margin: 0;
+  }
+  .booking-say {
+    font-size: 18px; line-height: 1.55; white-space: pre-wrap;
+    background: var(--panel); border: 1px solid var(--border); border-left: 5px solid var(--green);
+    border-radius: 14px; padding: 20px; margin: 0 0 14px;
+  }
+  .info-note { color: var(--muted); font-size: 13px; margin: 0 0 14px; }
+
+  /* ---------- edit mode ---------- */
   section.block {
     background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
-    padding: 20px 24px; margin-bottom: 16px;
+    padding: 18px 20px; margin-bottom: 14px;
   }
   section.block h2 {
-    font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em;
-    color: var(--muted); margin: 0 0 10px;
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--muted); margin: 0 0 10px; font-weight: 700;
   }
-  section.block p, section.block .script-text { font-size: 17px; line-height: 1.5; white-space: pre-wrap; margin: 0; }
-  ul.plain { margin: 0; padding-left: 20px; }
-  ul.plain li { font-size: 16px; line-height: 1.6; margin-bottom: 6px; }
-  .objection-search {
-    width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border);
-    font-size: 14px; margin-bottom: 12px;
-  }
-  .objection { padding: 12px 0; border-bottom: 1px solid var(--border); }
-  .objection:last-child { border-bottom: none; }
-  .objection .trigger { font-weight: 600; margin-bottom: 4px; }
-  .objection .response { color: var(--muted); line-height: 1.5; }
   textarea, input[type=text] {
     width: 100%; font-family: 'Inter', sans-serif; font-size: 15px; padding: 10px 12px;
     border-radius: 8px; border: 1px solid var(--border); line-height: 1.5; resize: vertical;
   }
-  .obj-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: flex-start; }
-  .obj-row > div { flex: 1; }
-  .obj-row .row-remove {
+  .obj-row {
+    display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .obj-row-top { display: flex; gap: 8px; }
+  .obj-row-top > input[type=text] { flex: 1; }
+  .obj-row select { font-family: inherit; font-size: 14px; padding: 9px 10px; border-radius: 8px; border: 1px solid var(--border); }
+  .row-remove {
     background: none; border: 1px solid var(--border); border-radius: 8px;
-    cursor: pointer; padding: 8px 10px; color: var(--muted);
+    cursor: pointer; padding: 8px 10px; color: var(--muted); flex-shrink: 0;
   }
   .add-btn {
     background: var(--bg); border: 1px dashed var(--border); border-radius: 8px;
-    padding: 8px 14px; cursor: pointer; font-size: 14px; color: var(--muted);
+    padding: 9px 14px; cursor: pointer; font-size: 14px; color: var(--muted); font-weight: 600;
   }
   .save-bar {
     position: fixed; bottom: 0; left: 0; right: 0; background: var(--navy);
-    padding: 14px 24px; display: flex; gap: 12px; justify-content: flex-end;
+    padding: 14px 16px calc(14px + env(safe-area-inset-bottom)); display: flex; gap: 12px; justify-content: center; z-index: 20;
   }
-  .save-bar button { padding: 10px 20px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; font-size: 14px; }
-  .save-bar .save { background: var(--coral); color: var(--navy); }
+  .save-bar .inner { display: flex; gap: 12px; width: 100%; max-width: 528px; }
+  .save-bar button { flex: 1; padding: 13px 20px; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; font-size: 14px; }
+  .save-bar .save { background: var(--coral); color: var(--navy-dark); }
   .save-bar .discard { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.4); }
-  .hidden { display: none; }
-  .updated-at { font-size: 12px; color: var(--muted); margin-top: 8px; }
-  .add-inline { background: transparent; border: none; color: white; cursor: pointer; font-size: 13px; text-decoration: underline; }
+  .updated-at { font-size: 12px; color: var(--muted); margin-top: 10px; text-align: center; }
 </style>
 </head>
 <body>
-<header>
-  <div class="brand">🦔 Buukkaus</div>
-  <select id="companySelect"></select>
-  <button id="addCompanyBtn" class="add-inline hidden">+ yritys</button>
-  <button id="editToggle" class="edit-toggle">Edit</button>
-</header>
-<div class="icp-tabs" id="icpTabs"></div>
-<main id="main"></main>
-<div class="save-bar hidden" id="saveBar">
-  <button class="discard" id="discardBtn">Discard</button>
-  <button class="save" id="saveBtn">Save changes</button>
+<div class="app">
+  <div id="topbar"></div>
+  <div id="screen"></div>
 </div>
 <script>
-const state = { companies: [], icps: {}, company: null, icp: null, editMode: false, draft: null };
+const ICP_ICONS = {
+  hotellit: '🏨', palvelutalot: '🏥', vahinkosaneeraus: '🔥', airbnb: '🏠',
+  siivousyritykset: '🧹', paivakodit: '👶', ravintolat: '🍽️', toimistot: '🏢',
+};
+const ICP_ICON_FALLBACK = '🏢';
+const CATEGORY_ORDER = ['Torjuva', 'Nykyinen kumppani', 'Tilanne', 'Yhteystiedot'];
+const CATEGORY_FALLBACK = 'Muut';
+
+const state = {
+  companies: [], icps: {}, company: null, icp: null,
+  view: 'picker',      // 'picker' | 'script'
+  screen: 'main',      // 'main' | 'objection' | 'booking' | 'info' | 'edit'
+  openObjIdx: null,
+  editMode: false, draft: null,
+};
 
 function key(company, icp) { return `${company}:${icp}`; }
+function icpIcon(slug) { return ICP_ICONS[slug] || ICP_ICON_FALLBACK; }
 
 async function api(path, method = 'GET', body = null) {
   const opts = { method, headers: {} };
@@ -113,7 +206,7 @@ async function api(path, method = 'GET', body = null) {
 }
 
 function slugify(label) {
-  return label.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  return label.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
     .replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 }
 
@@ -125,119 +218,235 @@ async function init() {
   const data = await api('/api/data');
   state.companies = data.companies;
   state.icps = data.icps;
-  if (state.companies.length) {
-    state.company = state.companies[0].slug;
-    if (state.companies[0].icps.length) state.icp = state.companies[0].icps[0].slug;
-  }
-  renderCompanySelect();
-  renderIcpTabs();
-  renderMain();
-  updateEditUI();
+  if (state.companies.length) state.company = state.companies[0].slug;
+  render();
 }
 
-function renderCompanySelect() {
-  const sel = document.getElementById('companySelect');
-  sel.innerHTML = state.companies.map(c =>
-    `<option value="${c.slug}" ${c.slug === state.company ? 'selected' : ''}>${escapeHtml(c.label)}</option>`
-  ).join('');
-  sel.onchange = () => {
-    if (state.editMode && !confirm('Hylätäänkö tallentamattomat muutokset?')) { sel.value = state.company; return; }
-    state.editMode = false; state.draft = null;
-    state.company = sel.value;
-    const c = state.companies.find(c => c.slug === state.company);
-    state.icp = c && c.icps.length ? c.icps[0].slug : null;
-    renderIcpTabs(); renderMain(); updateEditUI();
+function currentCompany() { return state.companies.find(c => c.slug === state.company); }
+function currentDoc() { return state.editMode ? state.draft : state.icps[key(state.company, state.icp)]; }
+
+function render() {
+  renderTopbar();
+  const screenEl = document.getElementById('screen');
+  if (state.view === 'picker') { screenEl.innerHTML = pickerTemplate(); wirePicker(); return; }
+
+  if (state.screen === 'main') { screenEl.innerHTML = mainTemplate(); wireMain(); }
+  else if (state.screen === 'objection') { screenEl.innerHTML = objectionTemplate(); wireBack(); }
+  else if (state.screen === 'booking') { screenEl.innerHTML = bookingTemplate(); wireBack(); }
+  else if (state.screen === 'info') { screenEl.innerHTML = infoTemplate(); wireBack(); }
+  else if (state.screen === 'edit') { screenEl.innerHTML = editTemplate(); wireEditHandlers(); }
+}
+
+/* ---------------- top bar ---------------- */
+function renderTopbar() {
+  const bar = document.getElementById('topbar');
+  if (state.view === 'picker') { bar.innerHTML = ''; return; }
+
+  const company = currentCompany();
+  const icpEntry = company && company.icps.find(i => i.slug === state.icp);
+  let titleHtml, leftBtn, rightBtns = '';
+
+  if (state.screen === 'main') {
+    titleHtml = `${escapeHtml(company ? company.label : '')}<span class="sub">${escapeHtml(icpEntry ? icpEntry.label : '')}</span>`;
+    leftBtn = `<button class="back" id="topBack">←</button>`;
+    rightBtns = `
+      <button class="icon-btn" id="infoBtn" title="Ohjeet">ℹ️</button>
+      <button class="icon-btn" id="editToggle">✎</button>
+    `;
+  } else {
+    const back = { objection: 'main', booking: 'main', info: 'main', edit: 'main' }[state.screen] || 'main';
+    titleHtml = ({
+      objection: 'Vastaväite', booking: 'Buukkaus', info: 'Ohjeet', edit: 'Muokkaa',
+    })[state.screen] || '';
+    leftBtn = `<button class="back" id="topBack" data-to="${back}">←</button>`;
+  }
+
+  bar.innerHTML = `<div class="topbar">${leftBtn}<div class="title">${titleHtml}</div>${rightBtns}</div>`;
+
+  const backBtn = document.getElementById('topBack');
+  if (backBtn) backBtn.onclick = () => {
+    if (state.screen === 'main') { state.view = 'picker'; state.icp = null; }
+    else if (state.screen === 'edit') {
+      if (state.editMode && !confirm('Hylätäänkö tallentamattomat muutokset?')) return;
+      state.editMode = false; state.draft = null; state.screen = 'main';
+    } else { state.screen = backBtn.dataset.to || 'main'; }
+    render();
+  };
+  const infoBtn = document.getElementById('infoBtn');
+  if (infoBtn) infoBtn.onclick = () => { state.screen = 'info'; render(); };
+  const editToggle = document.getElementById('editToggle');
+  if (editToggle) editToggle.onclick = () => {
+    const existing = state.icps[key(state.company, state.icp)];
+    state.draft = existing ? JSON.parse(JSON.stringify(existing)) : null;
+    state.editMode = true;
+    state.screen = 'edit';
+    render();
   };
 }
 
-function renderIcpTabs() {
-  const wrap = document.getElementById('icpTabs');
-  const company = state.companies.find(c => c.slug === state.company);
+function wireBack() { /* handled in renderTopbar */ }
+
+/* ---------------- picker screen ---------------- */
+function pickerTemplate() {
+  const company = currentCompany();
   const icps = company ? company.icps : [];
-  wrap.innerHTML = icps.map(i =>
-    `<button class="icp-tab ${i.slug === state.icp ? 'active' : ''}" data-slug="${i.slug}">${escapeHtml(i.label)}</button>`
-  ).join('') + (state.editMode ? `<button class="add-btn" id="addIcpBtn">+ ICP</button>` : '');
-  wrap.querySelectorAll('.icp-tab').forEach(btn => {
-    btn.onclick = () => {
-      if (state.editMode && !confirm('Hylätäänkö tallentamattomat muutokset?')) return;
-      state.editMode = false; state.draft = null;
-      state.icp = btn.dataset.slug;
-      renderIcpTabs(); renderMain(); updateEditUI();
+  const companySelect = state.companies.length > 1 ? `
+    <select class="company-select" id="companySelect">
+      ${state.companies.map(c => `<option value="${c.slug}" ${c.slug === state.company ? 'selected' : ''}>${escapeHtml(c.label)}</option>`).join('')}
+    </select>` : '';
+  return `
+    <div class="picker">
+      <h1 class="picker-head">🦔 Mikä ala?</h1>
+      <p class="picker-sub">Valitse toimiala, niin näet suoraan vastaväitteet.</p>
+      ${companySelect}
+      <div class="icp-grid" id="icpGrid">
+        ${icps.map(i => `
+          <button type="button" class="icp-card" data-slug="${i.slug}">
+            <div class="emoji">${icpIcon(i.slug)}</div>
+            <div class="label">${escapeHtml(i.label)}</div>
+          </button>
+        `).join('')}
+        <button type="button" class="add-icp-card" id="addIcpBtn">+ Uusi toimiala</button>
+      </div>
+    </div>
+  `;
+}
+
+function wirePicker() {
+  const sel = document.getElementById('companySelect');
+  if (sel) sel.onchange = () => { state.company = sel.value; render(); };
+  document.querySelectorAll('.icp-card').forEach(card => {
+    card.onclick = () => {
+      state.icp = card.dataset.slug;
+      state.view = 'script'; state.screen = 'main'; state.openObjIdx = null;
+      render();
     };
   });
   const addIcpBtn = document.getElementById('addIcpBtn');
   if (addIcpBtn) addIcpBtn.onclick = addIcp;
 }
 
-function currentDoc() {
-  return state.editMode ? state.draft : state.icps[key(state.company, state.icp)];
+/* ---------------- main script screen ---------------- */
+function groupObjections(objections) {
+  const groups = {};
+  objections.forEach((o, idx) => {
+    const cat = (o.category || '').trim() || CATEGORY_FALLBACK;
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push({ ...o, idx });
+  });
+  const order = [...CATEGORY_ORDER.filter(c => groups[c]),
+    ...Object.keys(groups).filter(c => !CATEGORY_ORDER.includes(c) && c !== CATEGORY_FALLBACK).sort(),
+    ...(groups[CATEGORY_FALLBACK] ? [CATEGORY_FALLBACK] : [])];
+  return order.map(cat => ({ cat, items: groups[cat] }));
 }
 
-function renderMain() {
-  const main = document.getElementById('main');
-  const doc = currentDoc();
-  if (!doc) { main.innerHTML = '<p style="padding:24px">Ei sisältöä.</p>'; return; }
-  main.innerHTML = state.editMode ? editTemplate(doc) : readTemplate(doc);
-  if (state.editMode) wireEditHandlers(doc);
-  else wireObjectionSearch(doc);
-}
-
-function readTemplate(doc) {
+function mainTemplate() {
+  const doc = state.icps[key(state.company, state.icp)];
+  if (!doc) return `<main><p>Ei sisältöä tälle toimialalle vielä.</p></main>`;
+  const groups = groupObjections(doc.objections || []);
   return `
-    <section class="block"><h2>Avaus</h2><p class="script-text">${escapeHtml(doc.opening)}</p></section>
-    <section class="block"><h2>Syy soitolle</h2><p class="script-text">${escapeHtml(doc.reason)}</p></section>
-    <section class="block"><h2>Discovery-kysymykset</h2>
-      <ul class="plain">${doc.discoveryQuestions.map(q => `<li>${escapeHtml(q)}</li>`).join('')}</ul>
-    </section>
-    <section class="block"><h2>Vastaväitteet</h2>
-      <input class="objection-search" id="objSearch" placeholder="Hae vastaväitettä...">
-      <div id="objList">${objectionListHtml(doc.objections)}</div>
-    </section>
-    <section class="block"><h2>Buukkauspyyntö</h2><p class="script-text">${escapeHtml(doc.bookingAsk)}</p></section>
-    <section class="block"><h2>Säännöt</h2>
-      <ul class="plain">${doc.rules.map(r => `<li>${escapeHtml(r)}</li>`).join('')}</ul>
-    </section>
-    <div class="updated-at">Päivitetty: ${doc.updatedAt ? new Date(doc.updatedAt).toLocaleString('fi-FI') : '—'}</div>
+    <main>
+      <div class="quote-block">
+        <h2>Avaus</h2>
+        <p class="script-text">${escapeHtml(doc.opening)}</p>
+        ${doc.reason ? `<p class="reason-text">${escapeHtml(doc.reason)}</p>` : ''}
+      </div>
+      ${doc.discoveryQuestions && doc.discoveryQuestions.length ? `
+        <div class="quote-block">
+          <h2>Discovery</h2>
+          <ul class="plain">${doc.discoveryQuestions.map(q => `<li>${escapeHtml(q)}</li>`).join('')}</ul>
+        </div>` : ''}
+
+      <div class="section-divider">Vastaväitteet</div>
+      ${groups.map(g => `
+        <div class="cat-group">
+          <div class="cat-h">${escapeHtml(g.cat)}</div>
+          <div class="obj-pills">
+            ${g.items.map(o => `<button class="obj-pill" data-idx="${o.idx}">${escapeHtml(o.trigger)}</button>`).join('')}
+          </div>
+        </div>
+      `).join('') || '<p style="color:var(--muted);font-size:14px;">Ei vielä vastaväitteitä.</p>'}
+    </main>
+    <div class="book-btn"><button id="bookBtn">📅 Buukkaa palaveri</button></div>
   `;
 }
 
-function objectionListHtml(objections) {
-  return objections.map(o => `
-    <div class="objection">
-      <div class="trigger">${escapeHtml(o.trigger)}</div>
-      <div class="response">${escapeHtml(o.response)}</div>
-    </div>
-  `).join('');
+function wireMain() {
+  document.querySelectorAll('.obj-pill').forEach(btn => {
+    btn.onclick = () => { state.openObjIdx = parseInt(btn.dataset.idx, 10); state.screen = 'objection'; render(); };
+  });
+  const bookBtn = document.getElementById('bookBtn');
+  if (bookBtn) bookBtn.onclick = () => { state.screen = 'booking'; render(); };
 }
 
-function wireObjectionSearch(doc) {
-  const input = document.getElementById('objSearch');
-  const list = document.getElementById('objList');
-  if (!input) return;
-  input.oninput = () => {
-    const q = input.value.toLowerCase();
-    const filtered = doc.objections.filter(o =>
-      o.trigger.toLowerCase().includes(q) || o.response.toLowerCase().includes(q)
-    );
-    list.innerHTML = objectionListHtml(filtered);
-  };
-}
-
-function editTemplate(doc) {
+/* ---------------- objection answer screen ---------------- */
+function objectionTemplate() {
+  const doc = state.icps[key(state.company, state.icp)];
+  const o = doc && doc.objections[state.openObjIdx];
+  if (!o) return `<main><p>Vastaväitettä ei löytynyt.</p></main>`;
   return `
-    <section class="block"><h2>Avaus</h2><textarea rows="3" data-field="opening">${escapeHtml(doc.opening)}</textarea></section>
-    <section class="block"><h2>Syy soitolle</h2><textarea rows="3" data-field="reason">${escapeHtml(doc.reason)}</textarea></section>
-    <section class="block"><h2>Discovery-kysymykset (yksi per rivi)</h2><textarea rows="4" data-field="discoveryQuestions">${escapeHtml(doc.discoveryQuestions.join('\n'))}</textarea></section>
-    <section class="block"><h2>Vastaväitteet</h2>
-      <div id="objEditList"></div>
-      <button class="add-btn" id="addObjBtn">+ vastaväite</button>
-    </section>
-    <section class="block"><h2>Buukkauspyyntö</h2><textarea rows="3" data-field="bookingAsk">${escapeHtml(doc.bookingAsk)}</textarea></section>
-    <section class="block"><h2>Säännöt (yksi per rivi)</h2><textarea rows="4" data-field="rules">${escapeHtml(doc.rules.join('\n'))}</textarea></section>
+    <main>
+      <p class="answer-trigger">${escapeHtml(o.trigger)}</p>
+      <p class="answer-say">${escapeHtml(o.response)}</p>
+    </main>
   `;
 }
 
-function wireEditHandlers(doc) {
+/* ---------------- booking screen ---------------- */
+function bookingTemplate() {
+  const doc = state.icps[key(state.company, state.icp)];
+  if (!doc) return `<main></main>`;
+  return `
+    <main>
+      <p class="booking-say">${escapeHtml(doc.bookingAsk)}</p>
+      <p class="info-note">Kirjaa buukkaus normaaliin tapaan CRM:ään — automaattinen synkronointi ei ole vielä käytössä.</p>
+    </main>
+  `;
+}
+
+/* ---------------- info (rules) screen ---------------- */
+function infoTemplate() {
+  const doc = state.icps[key(state.company, state.icp)];
+  if (!doc) return `<main></main>`;
+  return `
+    <main>
+      <div class="quote-block">
+        <h2>Buukkaajan säännöt</h2>
+        <ul class="plain">${(doc.rules || []).map(r => `<li>${escapeHtml(r)}</li>`).join('')}</ul>
+      </div>
+      <div class="updated-at">Sisältö päivitetty: ${doc.updatedAt ? new Date(doc.updatedAt).toLocaleString('fi-FI') : '—'}</div>
+    </main>
+  `;
+}
+
+/* ---------------- edit screen ---------------- */
+function editTemplate() {
+  const doc = state.draft;
+  if (!doc) return `<main><p>Ei sisältöä muokattavaksi.</p></main>`;
+  const allCategories = [...new Set([...CATEGORY_ORDER, ...(doc.objections || []).map(o => o.category).filter(Boolean)])];
+  return `
+    <main>
+      <section class="block"><h2>Avaus</h2><textarea rows="3" data-field="opening">${escapeHtml(doc.opening)}</textarea></section>
+      <section class="block"><h2>Syy soitolle</h2><textarea rows="2" data-field="reason">${escapeHtml(doc.reason)}</textarea></section>
+      <section class="block"><h2>Discovery-kysymykset (yksi per rivi)</h2><textarea rows="3" data-field="discoveryQuestions">${escapeHtml((doc.discoveryQuestions || []).join('\n'))}</textarea></section>
+      <section class="block">
+        <h2>Vastaväitteet</h2>
+        <datalist id="categoryOptions">${allCategories.map(c => `<option value="${escapeHtml(c)}">`).join('')}</datalist>
+        <div id="objEditList"></div>
+        <button class="add-btn" id="addObjBtn">+ vastaväite</button>
+      </section>
+      <section class="block"><h2>Buukkauspyyntö</h2><textarea rows="3" data-field="bookingAsk">${escapeHtml(doc.bookingAsk)}</textarea></section>
+      <section class="block"><h2>Säännöt (yksi per rivi)</h2><textarea rows="4" data-field="rules">${escapeHtml((doc.rules || []).join('\n'))}</textarea></section>
+    </main>
+    <div class="save-bar"><div class="inner">
+      <button class="discard" id="discardBtn">Hylkää</button>
+      <button class="save" id="saveBtn">Tallenna</button>
+    </div></div>
+  `;
+}
+
+function wireEditHandlers() {
+  const doc = state.draft;
   document.querySelectorAll('[data-field]').forEach(el => {
     el.oninput = () => {
       const f = el.dataset.field;
@@ -248,22 +457,38 @@ function wireEditHandlers(doc) {
       }
     };
   });
-  renderObjEditList(doc);
+  renderObjEditList();
   document.getElementById('addObjBtn').onclick = () => {
-    doc.objections.push({ trigger: '', response: '' });
-    renderObjEditList(doc);
+    doc.objections.push({ trigger: '', response: '', category: '' });
+    renderObjEditList();
+  };
+  document.getElementById('discardBtn').onclick = () => {
+    state.editMode = false; state.draft = null; state.screen = 'main';
+    render();
+  };
+  document.getElementById('saveBtn').onclick = async () => {
+    doc.company = state.company; doc.icp = state.icp;
+    const result = await api('/api/icp', 'POST', doc);
+    state.icps[key(state.company, state.icp)] = result.icp;
+    state.editMode = false; state.draft = null; state.screen = 'main';
+    render();
   };
 }
 
-function renderObjEditList(doc) {
+function renderObjEditList() {
+  const doc = state.draft;
   const wrap = document.getElementById('objEditList');
   wrap.innerHTML = doc.objections.map((o, i) => `
     <div class="obj-row">
-      <div>
+      <div class="obj-row-top">
         <input type="text" placeholder="Vastaväite" data-obj="${i}" data-part="trigger" value="${escapeHtml(o.trigger)}">
-        <textarea rows="2" placeholder="Vastaus" data-obj="${i}" data-part="response">${escapeHtml(o.response)}</textarea>
+        <select data-obj="${i}" data-part="category">
+          <option value="">${CATEGORY_FALLBACK}</option>
+          ${CATEGORY_ORDER.map(c => `<option value="${c}" ${o.category === c ? 'selected' : ''}>${c}</option>`).join('')}
+        </select>
+        <button class="row-remove" data-remove="${i}">✕</button>
       </div>
-      <button class="row-remove" data-remove="${i}">✕</button>
+      <textarea rows="2" placeholder="Vastaus" data-obj="${i}" data-part="response">${escapeHtml(o.response)}</textarea>
     </div>
   `).join('');
   wrap.querySelectorAll('[data-obj]').forEach(el => {
@@ -273,86 +498,22 @@ function renderObjEditList(doc) {
     };
   });
   wrap.querySelectorAll('[data-remove]').forEach(el => {
-    el.onclick = () => {
-      doc.objections.splice(parseInt(el.dataset.remove, 10), 1);
-      renderObjEditList(doc);
-    };
+    el.onclick = () => { doc.objections.splice(parseInt(el.dataset.remove, 10), 1); renderObjEditList(); };
   });
 }
 
-function updateEditUI() {
-  document.getElementById('editToggle').classList.toggle('active', state.editMode);
-  document.getElementById('editToggle').textContent = state.editMode ? 'Katselu' : 'Edit';
-  document.getElementById('saveBar').classList.toggle('hidden', !state.editMode);
-  document.getElementById('addCompanyBtn').classList.toggle('hidden', !state.editMode);
-}
-
-document.getElementById('editToggle').onclick = () => {
-  if (!state.editMode) {
-    const existing = state.icps[key(state.company, state.icp)];
-    state.draft = existing ? JSON.parse(JSON.stringify(existing)) : null;
-    state.editMode = true;
-  } else {
-    if (!confirm('Hylätäänkö tallentamattomat muutokset?')) return;
-    state.editMode = false;
-    state.draft = null;
-  }
-  renderIcpTabs(); renderMain(); updateEditUI();
-};
-
-document.getElementById('discardBtn').onclick = () => {
-  state.editMode = false;
-  state.draft = null;
-  renderIcpTabs(); renderMain(); updateEditUI();
-};
-
-document.getElementById('saveBtn').onclick = async () => {
-  const doc = state.draft;
-  doc.company = state.company;
-  doc.icp = state.icp;
-  const result = await api('/api/icp', 'POST', doc);
-  state.icps[key(state.company, state.icp)] = result.icp;
-  state.editMode = false;
-  state.draft = null;
-  renderIcpTabs(); renderMain(); updateEditUI();
-};
-
+/* ---------------- add ICP / company (from picker, edit-only actions) ---------------- */
 async function addIcp() {
-  const label = prompt('Uuden ICP:n nimi (esim. "Ravintolat"):');
+  if (!state.company) return;
+  const label = prompt('Uuden toimialan nimi (esim. "Ravintolat"):');
   if (!label) return;
   const slug = slugify(label);
-  const doc = {
-    company: state.company, icp: slug, label,
-    opening: '', reason: '', discoveryQuestions: [], objections: [], bookingAsk: '', rules: []
-  };
+  const doc = { company: state.company, icp: slug, label, opening: '', reason: '', discoveryQuestions: [], objections: [], bookingAsk: '', rules: [] };
   const result = await api('/api/icp', 'POST', doc);
   state.icps[key(state.company, slug)] = result.icp;
-  const companyEntry = state.companies.find(c => c.slug === state.company);
-  companyEntry.icps.push({ slug, label });
-  state.icp = slug;
-  state.draft = JSON.parse(JSON.stringify(result.icp));
-  state.editMode = true;
-  renderIcpTabs(); renderMain(); updateEditUI();
+  currentCompany().icps.push({ slug, label });
+  render();
 }
-
-document.getElementById('addCompanyBtn').onclick = async () => {
-  const label = prompt('Uuden yrityksen nimi:');
-  if (!label) return;
-  const slug = slugify(label);
-  const icpLabel = prompt('Ensimmäisen ICP:n nimi:') || 'Yleinen';
-  const icpSlug = slugify(icpLabel);
-  const doc = {
-    company: slug, companyLabel: label, icp: icpSlug, label: icpLabel,
-    opening: '', reason: '', discoveryQuestions: [], objections: [], bookingAsk: '', rules: []
-  };
-  const result = await api('/api/icp', 'POST', doc);
-  state.companies.push({ slug, label, icps: [{ slug: icpSlug, label: icpLabel }] });
-  state.icps[key(slug, icpSlug)] = result.icp;
-  state.company = slug; state.icp = icpSlug;
-  state.draft = JSON.parse(JSON.stringify(result.icp));
-  state.editMode = true;
-  renderCompanySelect(); renderIcpTabs(); renderMain(); updateEditUI();
-};
 
 init();
 </script>
