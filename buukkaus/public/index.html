@@ -82,7 +82,7 @@
     font-weight: 700; margin: 0 0 8px;
   }
   .quote-block .script-text { font-size: 17px; line-height: 1.5; white-space: pre-wrap; margin: 0; }
-  .quote-block .reason-text { font-size: 13.5px; color: var(--muted); margin: 8px 0 0; line-height: 1.4; }
+  .reason-text { font-size: 15px; color: var(--muted); margin: 8px 0 0; line-height: 1.5; white-space: pre-wrap; }
   ul.plain { margin: 0; padding-left: 18px; }
   ul.plain li { font-size: 15px; line-height: 1.55; margin-bottom: 5px; }
 
@@ -93,7 +93,15 @@
   .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
   .cat-group { margin-bottom: 14px; }
-  .cat-h { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-weight: 700; margin: 0 0 8px; }
+  .cat-h { font-size: 16px; letter-spacing: 0.01em; color: var(--navy); font-weight: 800; margin: 0 0 9px; }
+  .opening-pill {
+    width: 100%; text-align: left; background: var(--panel); border: 1px solid var(--border);
+    border-left: 5px solid var(--coral); border-radius: 14px; padding: 14px 16px; margin-bottom: 14px;
+    cursor: pointer; font-family: inherit; display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; color: inherit;
+  }
+  .opening-pill .label { font-weight: 700; font-size: 15.5px; }
+  .opening-pill .chevron { color: var(--muted); font-size: 20px; }
   .obj-pills { display: flex; flex-wrap: wrap; gap: 8px; }
   .obj-pill {
     background: var(--panel); border: 1px solid var(--border); border-radius: 999px;
@@ -231,6 +239,7 @@ function render() {
   if (state.view === 'picker') { screenEl.innerHTML = pickerTemplate(); wirePicker(); return; }
 
   if (state.screen === 'main') { screenEl.innerHTML = mainTemplate(); wireMain(); }
+  else if (state.screen === 'opening') { screenEl.innerHTML = openingTemplate(); wireBack(); }
   else if (state.screen === 'objection') { screenEl.innerHTML = objectionTemplate(); wireBack(); }
   else if (state.screen === 'booking') { screenEl.innerHTML = bookingTemplate(); wireBack(); }
   else if (state.screen === 'info') { screenEl.innerHTML = infoTemplate(); wireBack(); }
@@ -254,9 +263,9 @@ function renderTopbar() {
       <button class="icon-btn" id="editToggle">✎</button>
     `;
   } else {
-    const back = { objection: 'main', booking: 'main', info: 'main', edit: 'main' }[state.screen] || 'main';
+    const back = { opening: 'main', objection: 'main', booking: 'main', info: 'main', edit: 'main' }[state.screen] || 'main';
     titleHtml = ({
-      objection: 'Vastaväite', booking: 'Buukkaus', info: 'Ohjeet', edit: 'Muokkaa',
+      opening: 'Avaus', objection: 'Vastaväite', booking: 'Buukkaus', info: 'Ohjeet', edit: 'Muokkaa',
     })[state.screen] || '';
     leftBtn = `<button class="back" id="topBack" data-to="${back}">←</button>`;
   }
@@ -346,11 +355,10 @@ function mainTemplate() {
   const groups = groupObjections(doc.objections || []);
   return `
     <main>
-      <div class="quote-block">
-        <h2>Avaus</h2>
-        <p class="script-text">${escapeHtml(doc.opening)}</p>
-        ${doc.reason ? `<p class="reason-text">${escapeHtml(doc.reason)}</p>` : ''}
-      </div>
+      <button type="button" class="opening-pill" id="openingBtn">
+        <span class="label">🗣️ Avaus</span>
+        <span class="chevron">›</span>
+      </button>
       ${doc.discoveryQuestions && doc.discoveryQuestions.length ? `
         <div class="quote-block">
           <h2>Discovery</h2>
@@ -372,11 +380,25 @@ function mainTemplate() {
 }
 
 function wireMain() {
+  const openingBtn = document.getElementById('openingBtn');
+  if (openingBtn) openingBtn.onclick = () => { state.screen = 'opening'; render(); };
   document.querySelectorAll('.obj-pill').forEach(btn => {
     btn.onclick = () => { state.openObjIdx = parseInt(btn.dataset.idx, 10); state.screen = 'objection'; render(); };
   });
   const bookBtn = document.getElementById('bookBtn');
   if (bookBtn) bookBtn.onclick = () => { state.screen = 'booking'; render(); };
+}
+
+/* ---------------- opening screen ---------------- */
+function openingTemplate() {
+  const doc = state.icps[key(state.company, state.icp)];
+  if (!doc) return `<main></main>`;
+  return `
+    <main>
+      <p class="answer-say">${escapeHtml(doc.opening)}</p>
+      ${doc.reason ? `<p class="reason-text" style="margin-top:14px;">${escapeHtml(doc.reason)}</p>` : ''}
+    </main>
+  `;
 }
 
 /* ---------------- objection answer screen ---------------- */
