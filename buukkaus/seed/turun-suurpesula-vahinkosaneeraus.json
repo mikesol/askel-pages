@@ -78,7 +78,7 @@
     {
       "trigger": "Ei sovi meille.",
       "response": "Selvä, ymmärrän. Mikä tekee siitä juuri teille sopimattoman — onko kyse esimerkiksi volyymista, aikataulusta vai jostain muusta? Miten teillä pesulapalvelut hoidetaan tällä hetkellä?",
-      "category": "Tilanne"
+      "category": "Sopivuus"
     }
   ],
   "bookingAsk": "Tämä on juuri se alue, jossa me Turun Suurpesulassa toimimme. Meillä on vahinkotekstiileille teollinen kapasiteetti ja tarvittaessa tekstiilit voidaan käsitellä useamman kerran. Olisiko järkevää, että meidän palvelupäällikkö käy teidän kanssanne 15 minuutissa läpi, miten voisimme toimia teille esimerkiksi lisäkapasiteettina tai kiireellisissä tapauksissa? Sopisiko [A] vai [B]? Jos he ovat täysin tyytyväisiä nykyiseen kumppaniin: Hyvä, kuulostaa siltä että teillä on toimiva kumppani. Me voimme myös toimia tarvittaessa lisäkapasiteettina, jos tulee tavallista suurempi vahinko. Voisin laittaa palvelupäällikkömme yhteystiedot teille sähköpostilla, niin tiedätte kenelle soittaa tarvittaessa.",

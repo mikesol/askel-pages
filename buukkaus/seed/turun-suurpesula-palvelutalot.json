@@ -79,7 +79,7 @@
     {
       "trigger": "Ei sovi meille.",
       "response": "Selvä, ymmärrän. Mikä tekee siitä juuri teille sopimattoman — onko kyse esimerkiksi volyymista, aikataulusta vai jostain muusta? Miten teillä pesulapalvelut hoidetaan tällä hetkellä?",
-      "category": "Tilanne"
+      "category": "Sopivuus"
     }
   ],
   "bookingAsk": "Ymmärrän. Meillä jokaisella asiakkaalla on nimetty palvelupäällikkö ja noutoja voidaan sovittaa tarpeen mukaan. Voisin varata teille 15 minuutin keskustelun meidän palvelupäällikön kanssa ja katsoa, voisimmeko tehdä tuosta teille hieman helpompaa. Kävisikö [A] vai [B]?",

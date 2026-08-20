@@ -79,7 +79,7 @@
     {
       "trigger": "Ei sovi meille.",
       "response": "Selvä, ymmärrän. Mikä tekee siitä juuri teille sopimattoman — onko kyse esimerkiksi volyymista, aikataulusta vai jostain muusta? Miten teillä pesulapalvelut hoidetaan tällä hetkellä?",
-      "category": "Tilanne"
+      "category": "Sopivuus"
     }
   ],
   "bookingAsk": "Ymmärrän. Me Turun Suurpesulalla pystymme joustamaan nouto- ja toimitusrytmissä tarpeen mukaan, ja tarjoamme pitkäaikaisasiakkaille myös liinavaatevuokrausta. Voisin varata teille lyhyen 15 minuutin keskustelun meidän palvelupäällikön kanssa, niin hän voisi katsoa teidän nykyisen mallinne läpi. Kävisikö [A] vai [B]?",

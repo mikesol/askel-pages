@@ -77,7 +77,7 @@
     {
       "trigger": "Ei sovi meille.",
       "response": "Selvä, ymmärrän. Mikä tekee siitä juuri teille sopimattoman — onko kyse esimerkiksi volyymista, aikataulusta vai jostain muusta? Miten teillä pesulapalvelut hoidetaan tällä hetkellä?",
-      "category": "Tilanne"
+      "category": "Sopivuus"
     }
   ],
   "bookingAsk": "Jos kiinnostuu: Me Turun Suurpesulassa hoidamme noudon, pesun ja palautuksen, joten teidän ei tarvitsisi itse ottaa pesupuolta hoidettavaksi. Voisin järjestää 15 minuutin keskustelun meidän palvelupäällikön kanssa ja katsoa, voisiko tästä rakentaa teille toimivan yhteistyömallin. Sopisiko [A] vai [B]?",
