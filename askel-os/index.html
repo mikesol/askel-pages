@@ -664,6 +664,190 @@
       border-color: rgba(255,255,255,0.16); background: rgba(255,255,255,0.03); outline: none;
     }
     @media (max-width: 900px) { .inv-board { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ── Grow ── */
+    .grow-portfolio-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+    .grow-pf-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: inherit; transition: border-color .15s; cursor: pointer; }
+    .grow-pf-card:hover { border-color: var(--border-hover); }
+    .grow-pf-logo-wrap { background: #fff; border-radius: 8px; padding: 8px 10px; display: flex; align-items: center; justify-content: center; height: 52px; }
+    .grow-pf-logo { max-height: 34px; max-width: 100%; object-fit: contain; }
+    .grow-pf-initials { width: 52px; height: 52px; border-radius: 8px; background: var(--elevated); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; color: var(--text); }
+    .grow-pf-name { font-weight: 600; font-size: 13.5px; }
+    .grow-pf-badge { font-size: 10.5px; padding: 2px 8px; border-radius: 20px; width: fit-content; }
+    .grow-pf-badge.green { background: rgba(46,204,113,0.14); color: var(--green); }
+    .grow-pf-badge.yellow { background: rgba(243,156,18,0.12); color: var(--yellow); }
+    .grow-pf-card.locked { align-items: center; justify-content: center; text-align: center; opacity: 0.38; min-height: 140px; border-style: dashed; cursor: default; }
+    .grow-pf-card.locked .lock { font-size: 22px; margin-bottom: 6px; }
+    .grow-pf-card.locked .lk-name { font-size: 12px; color: var(--subtle); }
+    .grow-pf-card.stack-lib { border-color: rgba(46,204,113,0.4); background: rgba(46,204,113,0.05); justify-content: center; }
+    .grow-pf-card.stack-lib:hover { border-color: rgba(46,204,113,0.7); }
+    .grow-pf-card.stack-lib .grow-pf-name { font-size: 15px; }
+    .grow-pf-card.stack-lib .stack-lib-desc { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+    /* Grow: KPI bar */
+    .grow-kpi-strip { display: flex; gap: 14px; margin-bottom: 24px; }
+    .grow-kpi-tile { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; flex: 1; }
+    .grow-kpi-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+    .grow-kpi-value { font-size: 22px; font-weight: 700; color: var(--text); }
+    .grow-kpi-note { font-size: 11.5px; color: var(--subtle); margin-top: 4px; }
+
+    /* Grow: company detail */
+    .grow-company-header { display: flex; align-items: center; gap: 18px; margin-bottom: 28px; }
+    .grow-company-logo-wrap { background: #fff; border-radius: 10px; padding: 10px 14px; display: flex; align-items: center; justify-content: center; height: 60px; flex-shrink: 0; }
+    .grow-company-logo { max-height: 38px; max-width: 160px; object-fit: contain; }
+    .grow-company-initials { width: 60px; height: 60px; border-radius: 10px; background: var(--elevated); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 22px; color: var(--text); flex-shrink: 0; }
+    .grow-company-name { font-size: 28px; font-weight: 700; line-height: 1.1; }
+    .grow-company-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+    .grow-dd-banner { background: rgba(243,156,18,0.08); border: 1px solid rgba(243,156,18,0.2); border-radius: 10px; padding: 12px 16px; font-size: 13px; color: var(--yellow); margin-bottom: 20px; }
+
+    /* Grow: section cards (reused by Knowledge Transfer EPICs) */
+    .grow-sections { display: flex; flex-direction: column; gap: 12px; max-width: 820px; }
+    .grow-sec { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .grow-sec-header { padding: 16px 20px; display: flex; align-items: center; gap: 12px; cursor: pointer; user-select: none; }
+    .grow-sec-header:hover { background: rgba(255,255,255,0.02); }
+    .grow-sec-title { font-weight: 600; font-size: 14.5px; flex: 1; }
+    .grow-sec-prog { font-size: 11px; color: var(--muted); white-space: nowrap; }
+    .grow-sec-chevron { font-size: 12px; color: var(--subtle); transition: transform .2s; flex-shrink: 0; }
+    .grow-sec-chevron.open { transform: rotate(90deg); }
+    .grow-sec-body { padding: 0 20px 20px; border-top: 1px solid var(--border); display: none; }
+    .grow-sec-body.open { display: block; padding-top: 14px; }
+    .grow-task { display: flex; align-items: flex-start; gap: 10px; padding: 6px 0; border-bottom: 1px solid var(--border); }
+    .grow-task:last-child { border-bottom: none; }
+    .grow-task input[type=checkbox] { margin-top: 3px; flex-shrink: 0; accent-color: var(--green); cursor: pointer; }
+    .grow-task label { font-size: 13.5px; cursor: pointer; line-height: 1.45; }
+    .grow-task.done label { text-decoration: line-through; color: var(--muted); }
+
+    /* Grow: hero box (OKRs) */
+    .grow-hero-card { border-radius: 16px; overflow: hidden; border: 1px solid; max-width: 820px; margin-bottom: 28px; }
+    .grow-hero-card.okr { border-color: rgba(46,204,113,0.4); background: rgba(46,204,113,0.05); }
+    .grow-hero-header { padding: 16px 20px 14px; border-bottom: 1px solid; }
+    .grow-hero-header.okr { border-color: rgba(46,204,113,0.25); background: rgba(46,204,113,0.09); }
+    .grow-hero-title { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: 0.01em; }
+    .grow-hero-sub { font-size: 11.5px; color: var(--muted); margin-top: 3px; }
+    .grow-hero-body { padding: 16px 20px; }
+    .grow-okr-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .grow-okr-num { width: 20px; height: 20px; border-radius: 50%; background: rgba(46,204,113,0.2); color: var(--green); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .grow-okr-input { flex: 1; background: transparent; border: none; border-bottom: 1px solid transparent; font-size: 13px; color: var(--text); font-family: inherit; outline: none; padding: 2px 4px; }
+    .grow-okr-input:hover { border-bottom-color: rgba(46,204,113,0.3); }
+    .grow-okr-input:focus { border-bottom-color: var(--green); background: rgba(46,204,113,0.04); }
+    .grow-okr-add { margin-top: 10px; font-size: 12px; color: var(--green); background: transparent; border: 1px dashed rgba(46,204,113,0.4); border-radius: 7px; padding: 5px 12px; cursor: pointer; font-family: inherit; }
+    .grow-okr-add:hover { background: rgba(46,204,113,0.08); }
+
+    /* Grow: sub-section labels */
+    .grow-subsec-label { font-size: 18px; font-weight: 700; margin: 32px 0 14px; }
+    .grow-subsec-label:first-child { margin-top: 0; }
+    .grow-subsec-count { font-size: 12px; color: var(--muted); font-weight: 400; margin-left: 6px; }
+
+    /* Grow: search/filter bar (Playbooks + Stack Library) */
+    .grow-filter-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+    .grow-filter-search { flex: 1; min-width: 200px; background: var(--elevated); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; font-size: 13px; color: var(--text); font-family: inherit; outline: none; }
+    .grow-filter-search:focus { border-color: var(--border-hover); }
+    .grow-tag-chip { font-size: 12px; padding: 5px 12px; border-radius: 20px; background: var(--elevated); border: 1px solid var(--border); color: var(--muted); cursor: pointer; font-family: inherit; white-space: nowrap; }
+    .grow-tag-chip.active { background: var(--text); color: #000; border-color: var(--text); font-weight: 600; }
+    .grow-portfolio-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); cursor: pointer; user-select: none; margin-left: auto; white-space: nowrap; }
+    .grow-toggle-switch { position: relative; width: 34px; height: 19px; border-radius: 20px; background: var(--elevated); border: 1px solid var(--border); transition: background .15s, border-color .15s; flex-shrink: 0; }
+    .grow-toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 13px; height: 13px; border-radius: 50%; background: var(--muted); transition: transform .15s, background .15s; }
+    .grow-toggle-switch.on { background: rgba(46,204,113,0.25); border-color: rgba(46,204,113,0.5); }
+    .grow-toggle-switch.on::after { transform: translateX(15px); background: var(--green); }
+    .grow-empty-state { padding: 28px 20px; text-align: center; color: var(--subtle); font-size: 13px; border: 1px dashed var(--border); border-radius: 12px; max-width: 820px; }
+
+    /* Grow: stack cards (Playbooks & Skill Stacks) */
+    .stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 8px; }
+    .stack-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .stack-card-top { display: flex; justify-content: space-between; align-items: center; }
+    .stack-tag { font-size: 10.5px; font-weight: 700; padding: 2px 9px; border-radius: 20px; width: fit-content; text-transform: uppercase; letter-spacing: 0.04em; }
+    .stack-tag.sales        { background: rgba(46,204,113,0.14); color: var(--green); }
+    .stack-tag.marketing    { background: rgba(243,156,18,0.12); color: var(--yellow); }
+    .stack-tag.recruitment  { background: rgba(224,76,62,0.14);  color: var(--red-light); }
+    .stack-tag.ops          { background: rgba(93,173,226,0.14); color: var(--blue); }
+    .stack-tag.finance      { background: rgba(192,57,43,0.16);  color: var(--red); }
+    .stack-tag.tech         { background: rgba(255,255,255,0.08); color: var(--muted); }
+    .stack-steps-count { font-size: 11px; color: var(--muted); white-space: nowrap; }
+    .stack-title { font-size: 15px; font-weight: 700; line-height: 1.3; }
+    .stack-bar { display: flex; gap: 3px; margin: 2px 0; }
+    .stack-bar-seg { flex: 1; height: 6px; border-radius: 3px; }
+    .stack-outcome { font-size: 12.5px; color: var(--text); line-height: 1.4; }
+    .stack-provenance { font-family: 'SF Mono', ui-monospace, Menlo, Consolas, monospace; font-size: 11px; color: var(--subtle); padding-top: 8px; margin-top: 2px; border-top: 1px dashed var(--border); }
+    .stack-provenance.wide { color: var(--muted); }
+    .stack-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; gap: 8px; }
+    .stack-owner-updated { display: flex; align-items: center; gap: 8px; min-width: 0; }
+    .stack-updated { font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .stack-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .stack-btn { font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 7px; cursor: pointer; font-family: inherit; border: 1px solid var(--border); background: var(--elevated); color: var(--text); white-space: nowrap; }
+    .stack-btn:hover { border-color: var(--border-hover); }
+    .stack-btn.primary { background: var(--green); color: #000; border: none; }
+    .stack-btn.primary:hover { opacity: 0.88; }
+    .stack-btn:disabled { opacity: 0.4; cursor: default; }
+    .stack-btn:disabled:hover { border-color: var(--border); }
+
+    /* Grow: View Stack modal */
+    .stack-modal-steps { list-style: none; counter-reset: stackstep; margin: 10px 0 16px; padding: 0; }
+    .stack-modal-steps li { counter-increment: stackstep; display: flex; gap: 10px; font-size: 13.5px; padding: 6px 0; border-bottom: 1px solid var(--border); line-height: 1.4; }
+    .stack-modal-steps li:last-child { border-bottom: none; }
+    .stack-modal-steps li::before { content: counter(stackstep); flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; background: var(--elevated); color: var(--muted); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    .stack-modal-templates { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+    .stack-modal-template { font-size: 13px; }
+    .stack-modal-template a { color: var(--blue); text-decoration: none; }
+    .stack-modal-template a:hover { text-decoration: underline; }
+    .stack-modal-template .none { color: var(--subtle); }
+    .stack-modal-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 6px; }
+    .company-picker-list { display: flex; flex-direction: column; gap: 6px; margin: 12px 0 4px; }
+    .company-picker-opt { text-align: left; background: var(--elevated); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; font-size: 13.5px; color: var(--text); cursor: pointer; font-family: inherit; }
+    .company-picker-opt:hover { border-color: var(--border-hover); }
+
+    /* Grow: tools we build */
+    .tool-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 8px; }
+    .tool-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .tool-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .tool-type { font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .tool-name { font-size: 14.5px; font-weight: 700; margin-top: 2px; line-height: 1.3; }
+    .tool-status { font-size: 10px; font-weight: 700; padding: 2px 9px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; flex-shrink: 0; }
+    .tool-status.live       { background: rgba(46,204,113,0.14); color: var(--green); }
+    .tool-status.in-dev     { background: rgba(243,156,18,0.12); color: var(--yellow); }
+    .tool-status.deprecated { background: rgba(192,57,43,0.14); color: var(--red-light); }
+    .tool-link { font-size: 12px; color: var(--blue); text-decoration: none; }
+    .tool-link:hover { text-decoration: underline; }
+    .tool-link.none { color: var(--subtle); }
+    .tool-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; gap: 8px; }
+    .tool-reused-badge { font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: var(--elevated); color: var(--muted); cursor: default; }
+    .tool-reused-badge.active { background: rgba(46,204,113,0.16); color: var(--green); }
+    .tool-template-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 18px; }
+    .tool-template-card { background: var(--elevated); border: 1px solid var(--border); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+    .tool-template-name { font-size: 13.5px; font-weight: 700; }
+    .tool-template-desc { font-size: 12px; color: var(--muted); line-height: 1.4; flex: 1; }
+    .tool-template-fork { align-self: flex-start; font-size: 12px; font-weight: 600; color: var(--green); background: rgba(46,204,113,0.1); border: 1px solid rgba(46,204,113,0.35); border-radius: 7px; padding: 5px 14px; cursor: pointer; font-family: inherit; }
+    .tool-template-fork:hover { background: rgba(46,204,113,0.18); }
+
+    /* Grow: request new tool form */
+    .grow-request-tool-toggle { margin-top: 4px; font-size: 12.5px; font-weight: 600; color: var(--green); background: rgba(46,204,113,0.08); border: 1px dashed rgba(46,204,113,0.4); border-radius: 8px; padding: 8px 16px; cursor: pointer; font-family: inherit; }
+    .grow-request-tool-toggle:hover { background: rgba(46,204,113,0.16); }
+    .grow-request-form { margin-top: 14px; background: var(--elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; max-width: 520px; display: flex; flex-direction: column; gap: 12px; }
+    .grow-request-field label { font-size: 11px; color: var(--subtle); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; display: block; margin-bottom: 5px; }
+    .grow-request-form textarea, .grow-request-form select { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 7px; padding: 8px 10px; font-size: 13px; color: var(--text); font-family: inherit; }
+    .grow-request-form textarea { resize: vertical; min-height: 56px; }
+    .grow-request-radio-row { display: flex; gap: 16px; font-size: 12.5px; color: var(--text); }
+    .grow-request-radio-row label { text-transform: none; font-weight: 400; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 0; letter-spacing: normal; }
+    .grow-request-btns { display: flex; gap: 8px; }
+    .grow-request-warn { font-size: 12px; color: var(--yellow); background: rgba(243,156,18,0.1); border: 1px solid rgba(243,156,18,0.25); border-radius: 8px; padding: 8px 12px; }
+    .grow-request-confirm { font-size: 12.5px; color: var(--green); background: rgba(46,204,113,0.1); border: 1px solid rgba(46,204,113,0.25); border-radius: 8px; padding: 8px 12px; margin-top: 4px; max-width: 520px; }
+
+    /* Grow: Talk to Steve */
+    .grow-steve-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-bottom: 20px; max-width: 820px; }
+    .grow-steve-header { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--subtle); margin-bottom: 12px; }
+    .grow-steve-msgs { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+    .grow-steve-msg { font-size: 13.5px; line-height: 1.5; padding: 9px 13px; border-radius: 10px; max-width: 88%; }
+    .grow-steve-msg.partner { background: var(--elevated); color: var(--text); align-self: flex-end; border-bottom-right-radius: 3px; }
+    .grow-steve-msg.steve { background: rgba(192,57,43,0.12); border: 1px solid rgba(192,57,43,0.18); color: var(--text); align-self: flex-start; border-bottom-left-radius: 3px; }
+    .grow-steve-input-row { display: flex; gap: 8px; }
+    .grow-steve-input { flex: 1; background: var(--elevated); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; font-size: 13px; color: var(--muted); font-family: inherit; outline: none; }
+    .grow-steve-send { background: var(--red); color: #fff; border: none; border-radius: 8px; padding: 8px 14px; font-size: 14px; cursor: default; opacity: 0.5; }
+    .grow-steve-note { font-size: 10.5px; color: var(--subtle); margin-top: 8px; }
+
+    @media (max-width: 900px) {
+      .grow-portfolio-row { grid-template-columns: repeat(2, 1fr); }
+      .grow-kpi-strip { flex-direction: column; }
+      .stack-grid, .tool-grid, .tool-template-row { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -781,7 +965,7 @@
       engines: {
         find:  { name: "Find",  active: 52, accent: true,  built: true,  purpose: "Acquire great businesses — sourcing, screening, IC, due diligence, LOI, close." },
         fund:  { name: "Fund",  active: null, accent: false, built: false, purpose: "Secure capital — investor CRM, fundraising, bank & seller financing." },
-        grow:  { name: "Grow",  active: null, accent: false, built: false, purpose: "Increase enterprise value — integration, ops, sales, SOPs, KPI reporting." }
+        grow:  { name: "Grow",  active: 2, accent: false, built: true, purpose: "Increase enterprise value — integration, ops, sales, SOPs, KPI reporting." }
       },
       fund: {
         askel: {
@@ -1844,6 +2028,690 @@
       ]
     };
 
+    // ── Grow data ──
+    DATA.grow = {
+      lockedSlots: 8,
+      templates: [
+        { id: 'tpl-financial-analysis', name: 'Financial Analysis Sheet', desc: 'Prospekti valuation sheet — fork for any new acquisition' },
+        { id: 'tpl-kt-charter', name: 'KT Charter Template', desc: '6-EPIC Knowledge Transfer charter for a new portfolio company' },
+        { id: 'tpl-cold-email-fi', name: 'Cold Email Template (FI)', desc: 'Finnish outreach template, sender: Niklas Slotte' }
+      ],
+      companies: [
+        {
+          id: "melers",
+          name: "Melers Oy",
+          logo: "img/melers-logo.png",
+          status: "active",
+          statusLabel: "Active portfolio",
+          okrs: [
+            "Grow monthly revenue from €51K to €58K",
+            "Hire and onboard 1 operator by end of Q3 2026",
+            "Achieve 4.7+ Google rating within 6 months",
+            "Complete all Knowledge Transfer milestones"
+          ],
+          kt: {
+            epics: [
+              { key: "banking", title: "1 — Banking Transfer & Setup", tasks: [
+                { text: "Transfer Aktia bank account ownership and all logins", done: false },
+                { text: "Transfer payment terminals (iZettle / Viva Wallet / PayPal)", done: false }
+              ]},
+              { key: "daily-ops", title: "2 — Daily Ops", tasks: [
+                { text: "Take over sales inbox, pricing list, and CRM", done: false },
+                { text: "Transfer website and all marketing accounts to Askel", done: false },
+                { text: "Issue new employment contracts, define roles and KPIs", done: false }
+              ]},
+              { key: "invoicing", title: "3 — Invoicing", tasks: [
+                { text: "Set up new purchase invoice process", done: false },
+                { text: "Import customer data and pricing list to accounting system (Fivaldi or equivalent)", done: false },
+                { text: "Define clean handoff from sales to invoicing", done: false }
+              ]},
+              { key: "recruiting", title: "4 — Recruiting", tasks: [
+                { text: "Post operator, driver, and handyman roles (target 30–50 applicants each)", done: false },
+                { text: "Run interview rounds (top 8 per role)", done: false }
+              ]},
+              { key: "onboarding", title: "5 — Recruit Onboarding", tasks: [
+                { text: "Sign employment contracts for all new hires", done: false },
+                { text: "Create role-specific onboarding method — easy role ownership", done: false }
+              ]},
+              { key: "admin", title: "6 — Admin & Management", tasks: [
+                { text: "Google Workspace and Drive folders set up", done: false },
+                { text: "Password safe set up and shared with all 4 Askel partners", done: false },
+                { text: "Standing weekly meeting schedule set with operator and board", done: false }
+              ]}
+            ]
+          },
+          stacks: [
+            {
+              id: "stack-recruitment-pipeline-v1", title: "Recruitment Pipeline v1", tag: "Recruitment",
+              provenance: { company: "Melers Oy", date: "2026-07", reusedAt: [] },
+              outcome: "Reduces time-to-hire by ~50%",
+              steps: ["Define role & KPIs", "Write Finnish job description", "Post to 2+ job boards", "First-round screen calls", "Top 8 interviews", "Offer & contract"],
+              templates: [{ label: "Duunitori post template", url: null }, { label: "Interview scorecard", url: null }],
+              owner: "Niklas", updatedAt: "2w ago"
+            },
+            {
+              id: "stack-sales-inbox-crm", title: "Sales Inbox & CRM Handover", tag: "Sales",
+              provenance: { company: "Melers Oy", date: "2026-07", reusedAt: [] },
+              outcome: "Enables new operator to own pipeline from day 1",
+              steps: ["Document current inbound lead-to-booking flow step by step", "Hand over sales inbox and CRM login to new operator", "Migrate active pipeline and price list into CRM", "Walk new operator through top 10 active deals", "Confirm operator can independently quote and close a booking"],
+              templates: [{ label: "CRM setup guide", url: null }, { label: "Pricing list template", url: null }],
+              owner: "Varia", updatedAt: "4d ago"
+            },
+            {
+              id: "stack-monthly-invoicing", title: "Monthly Invoicing Run", tag: "Finance",
+              provenance: { company: "Melers Oy", date: "2026-06", reusedAt: [] },
+              outcome: "Zero missed invoices since adoption",
+              steps: ["Import customer data and pricing list into Fivaldi", "Run monthly invoice batch from CRM export", "Reconcile invoices against bank statement", "Chase overdue invoices past 14 days"],
+              templates: [{ label: "Fivaldi import guide", url: null }],
+              owner: "Varia", updatedAt: "1mo ago"
+            },
+            {
+              id: "stack-gws-onboarding", title: "Google Workspace Onboarding", tag: "Ops",
+              provenance: { company: "Melers Oy", date: "2026-07", reusedAt: [] },
+              outcome: "All staff set up in < 1 day",
+              steps: ["Create Google Workspace account and assign Drive folder access", "Set up company email alias and signature", "Add to shared calendar and weekly check-in invite"],
+              templates: [{ label: "Drive folder structure doc", url: null }],
+              owner: "Mike", updatedAt: "3d ago"
+            },
+            {
+              id: "stack-marketing-minimum", title: "Marketing Minimum Setup", tag: "Marketing",
+              provenance: { company: "Melers Oy", date: "2026-06", reusedAt: [] },
+              outcome: "Covers website + 2 social channels",
+              steps: ["Set up Google Business Profile and confirm listing details", "Publish/refresh melers.fi with current pricing and services", "Set up Instagram business account and posting cadence", "Launch one local flyer distribution", "Track and review CAC monthly"],
+              templates: [],
+              owner: "Micke", updatedAt: "5d ago"
+            }
+          ],
+          tools: [
+            { id: "tool-melers-crm-live", name: "Melers CRM Live", type: "CRM", status: "live", url: "https://melers-crm-live.askelventures.com", devOwner: "Mike", reusedAt: [] },
+            { id: "tool-melers-booking", name: "melers.fi booking system", type: "Website", status: "live", url: "https://melers.fi", devOwner: "Mike", reusedAt: [] },
+            { id: "tool-turun-suurpesula", name: "Turun Suurpesula site", type: "Website", status: "live", url: "https://turunsuurpesula.fi", devOwner: "Mike", reusedAt: [] },
+            { id: "tool-melers-erp", name: "Melers ERP PoC", type: "Internal App", status: "in-dev", url: "https://melers-erp.askelventures.com", devOwner: "Mike", reusedAt: [] }
+          ]
+        },
+        {
+          id: "auran-pesupojat",
+          name: "Auran Pesupojat Oy",
+          logo: null,
+          initials: "AP",
+          status: "closing",
+          statusLabel: "Deal closing",
+          ddBanner: "Deal hasn't closed yet — this Grow plan is being prepared ahead of time. Sections are editable, but no actions are live yet.",
+          okrs: [
+            "Complete Knowledge Transfer within 30 days of close",
+            "Hire and onboard 1 operator by end of year",
+            "Reach first profitable month post-acquisition",
+            "Document all key processes in Drive"
+          ],
+          kt: {
+            epics: [
+              { key: "banking", title: "1 — Banking Transfer & Setup", tasks: [
+                { text: "Transfer company bank account ownership and logins on close date", done: false },
+                { text: "Transfer payment terminals if any", done: false }
+              ]},
+              { key: "daily-ops", title: "2 — Daily Ops", tasks: [
+                { text: "Take over sales inbox, customer list, and pricing", done: false },
+                { text: "Transfer website, email accounts, and marketing assets", done: false },
+                { text: "Agree transition period with seller Nella — how long, what role", done: false },
+                { text: "Issue new employment contracts, define roles and KPIs", done: false }
+              ]},
+              { key: "invoicing", title: "3 — Invoicing", tasks: [
+                { text: "Set up new purchase invoice process", done: false },
+                { text: "Transfer customer data and pricing to accounting system", done: false }
+              ]},
+              { key: "recruiting", title: "4 — Recruiting", tasks: [
+                { text: "Map team structure and identify any gaps to fill post-close", done: false },
+                { text: "Post any open roles and run interview rounds", done: false }
+              ]},
+              { key: "onboarding", title: "5 — Recruit Onboarding", tasks: [
+                { text: "Create role-specific onboarding method for operator and key staff", done: false }
+              ]},
+              { key: "admin", title: "6 — Admin & Management", tasks: [
+                { text: "Set up Google Workspace and Drive folder for Auran Pesupojat", done: false },
+                { text: "Password safe set up and shared with all 4 Askel partners", done: false },
+                { text: "Standing weekly meeting schedule set with operator and board", done: false }
+              ]}
+            ]
+          },
+          stacks: [],
+          tools: []
+        }
+      ]
+    };
+
+    // ── Grow: in-session state ──
+    const growKtOpen = {}; // `${cid}:${epicKey}` → bool
+    const growStackSearch = {}; // scope (cid or 'stack-library') → string
+    const growStackTagFilter = {}; // scope → tag or 'All'
+    const growPortfolioWide = {}; // cid → bool
+    let growStackIdCounter = 100;
+    let growToolIdCounter = 100;
+    let growViewingStack = null; // { stackId, ownerCid } — View Stack modal
+    let growCloneStack = null; // { stackId, ownerCid } — clone company-picker modal
+    const growToolFormOpen = {}; // cid → bool
+    const growToolConfirmMsg = {}; // cid → string|null
+
+    const STACK_TAGS = ['Sales', 'Marketing', 'Recruitment', 'Ops', 'Finance', 'Tech'];
+
+    function editGrowOkr(cid, idx, val) {
+      const co = DATA.grow.companies.find(c => c.id === cid);
+      if (co) co.okrs[idx] = val;
+    }
+    function addGrowOkr(cid) {
+      const co = DATA.grow.companies.find(c => c.id === cid);
+      if (!co) return;
+      co.okrs.push('New objective');
+      const box = document.getElementById(`grow-okr-box-${cid}`);
+      if (box) box.innerHTML = growOkrBoxInner(co);
+    }
+
+    function growOkrBoxInner(co) {
+      const rows = co.okrs.map((okr, i) => `
+        <div class="grow-okr-row">
+          <span class="grow-okr-num">${i + 1}</span>
+          <input type="text" class="grow-okr-input" value="${escapeAttr(okr)}"
+            onchange="editGrowOkr('${escapeAttr(co.id)}',${i},this.value)">
+        </div>
+      `).join('');
+      return rows + `<button class="grow-okr-add" onclick="addGrowOkr('${escapeAttr(co.id)}')">+ Add OKR</button>`;
+    }
+
+    function renderGrowHero(co) {
+      return `
+        <div class="grow-hero-card okr">
+          <div class="grow-hero-header okr">
+            <div class="grow-hero-title">Vision & Roadmap</div>
+            <div class="grow-hero-sub">OKRs for ${escapeHtml(co.name)} — editable</div>
+          </div>
+          <div class="grow-hero-body" id="grow-okr-box-${escapeAttr(co.id)}">
+            ${growOkrBoxInner(co)}
+          </div>
+        </div>
+      `;
+    }
+
+    // ── Grow: Knowledge Transfer EPICs ──
+    function growKtKey(cid, ek) { return `${cid}:${ek}`; }
+
+    function toggleGrowKt(cid, ek) {
+      const k = growKtKey(cid, ek);
+      growKtOpen[k] = !growKtOpen[k];
+      const body = document.getElementById(`grow-kt-body-${cid}-${ek}`);
+      const chev = document.getElementById(`grow-kt-chev-${cid}-${ek}`);
+      if (body) body.classList.toggle('open', growKtOpen[k]);
+      if (chev) chev.classList.toggle('open', growKtOpen[k]);
+    }
+
+    function toggleGrowKtTask(cid, ek, idx) {
+      const co = DATA.grow.companies.find(c => c.id === cid);
+      const epic = co && co.kt.epics.find(e => e.key === ek);
+      if (!epic) return;
+      epic.tasks[idx].done = !epic.tasks[idx].done;
+      const hdr = document.getElementById(`grow-kt-header-${cid}-${ek}`);
+      const body = document.getElementById(`grow-kt-body-${cid}-${ek}`);
+      if (hdr) hdr.innerHTML = growKtHeaderInner(cid, epic);
+      if (body) body.innerHTML = growKtBodyInner(cid, epic);
+    }
+
+    function growKtProgress(epic) {
+      const done = epic.tasks.filter(t => t.done).length;
+      return `${done} / ${epic.tasks.length} done`;
+    }
+
+    function growKtHeaderInner(cid, epic) {
+      const isOpen = !!growKtOpen[growKtKey(cid, epic.key)];
+      return `
+        <span class="grow-sec-title">${escapeHtml(epic.title)}</span>
+        <span class="grow-sec-prog">${growKtProgress(epic)}</span>
+        <span class="grow-sec-chevron${isOpen ? ' open' : ''}" id="grow-kt-chev-${escapeAttr(cid)}-${escapeAttr(epic.key)}">▶</span>
+      `;
+    }
+
+    function growKtBodyInner(cid, epic) {
+      return epic.tasks.map((t, i) => `
+        <div class="grow-task${t.done ? ' done' : ''}">
+          <input type="checkbox" id="gkt-${escapeAttr(cid)}-${escapeAttr(epic.key)}-${i}" ${t.done ? 'checked' : ''}
+            onclick="toggleGrowKtTask('${escapeAttr(cid)}','${escapeAttr(epic.key)}',${i})">
+          <label for="gkt-${escapeAttr(cid)}-${escapeAttr(epic.key)}-${i}">${escapeHtml(t.text)}</label>
+        </div>
+      `).join('');
+    }
+
+    function renderGrowKt(co) {
+      co.kt.epics.forEach((e, i) => {
+        const k = growKtKey(co.id, e.key);
+        if (!(k in growKtOpen)) growKtOpen[k] = i === 0;
+      });
+      const cards = co.kt.epics.map(epic => {
+        const isOpen = !!growKtOpen[growKtKey(co.id, epic.key)];
+        return `
+          <div class="grow-sec">
+            <div class="grow-sec-header" id="grow-kt-header-${escapeAttr(co.id)}-${escapeAttr(epic.key)}"
+              onclick="toggleGrowKt('${escapeAttr(co.id)}','${escapeAttr(epic.key)}')">
+              ${growKtHeaderInner(co.id, epic)}
+            </div>
+            <div class="grow-sec-body${isOpen ? ' open' : ''}" id="grow-kt-body-${escapeAttr(co.id)}-${escapeAttr(epic.key)}">
+              ${growKtBodyInner(co.id, epic)}
+            </div>
+          </div>
+        `;
+      }).join('');
+      return `
+        <div class="grow-subsec-label">Knowledge Transfer</div>
+        <div class="grow-sections">${cards}</div>
+      `;
+    }
+
+    // ── Grow: Playbooks & Skill Stacks ──
+    function stackTagClass(tag) { return (tag || '').toLowerCase(); }
+    function stackBarColor(tag) {
+      const map = {
+        Sales: 'rgba(46,204,113,0.55)', Marketing: 'rgba(243,156,18,0.5)', Recruitment: 'rgba(224,76,62,0.55)',
+        Ops: 'rgba(93,173,226,0.55)', Finance: 'rgba(192,57,43,0.55)', Tech: 'rgba(255,255,255,0.25)'
+      };
+      return map[tag] || 'var(--border-hover)';
+    }
+
+    function growStacksAllFlat() {
+      const out = [];
+      DATA.grow.companies.forEach(co => (co.stacks || []).forEach(s => out.push({ stack: s, ownerCid: co.id, ownerName: co.name })));
+      return out;
+    }
+
+    function growFilterStacks(list, search, tag) {
+      const q = (search || '').toLowerCase();
+      return list.filter(({ stack }) => {
+        if (tag && tag !== 'All' && stack.tag !== tag) return false;
+        if (!q) return true;
+        return stack.title.toLowerCase().includes(q) || stack.tag.toLowerCase().includes(q) || stack.outcome.toLowerCase().includes(q);
+      });
+    }
+
+    function stackCardHtml(stack, ownerCid, ownerName, opts) {
+      opts = opts || {};
+      const viewingCid = opts.viewingCid || null;
+      const wide = !!opts.wide;
+      const bars = stack.steps.map(() => `<div class="stack-bar-seg" style="background:${stackBarColor(stack.tag)}"></div>`).join('');
+      const reusedCount = stack.provenance.reusedAt.length;
+      const provenance = `${escapeHtml(ownerName)} · ${escapeHtml(stack.provenance.date)} · reused at ${reusedCount} other compan${reusedCount === 1 ? 'y' : 'ies'}${stack.cloned ? ' · (clone)' : ''}`;
+      let cloneBtn;
+      if (viewingCid && ownerCid === viewingCid) {
+        cloneBtn = `<button class="stack-btn" disabled>Already here</button>`;
+      } else if (viewingCid) {
+        const targetName = (DATA.grow.companies.find(c => c.id === viewingCid) || {}).name || 'this company';
+        cloneBtn = `<button class="stack-btn primary" onclick="cloneStackToCompany('${escapeAttr(stack.id)}','${escapeAttr(ownerCid)}','${escapeAttr(viewingCid)}')">Clone to ${escapeHtml(targetName)}</button>`;
+      } else {
+        cloneBtn = `<button class="stack-btn primary" onclick="openCloneCompanyPicker('${escapeAttr(stack.id)}','${escapeAttr(ownerCid)}')">Clone…</button>`;
+      }
+      return `
+        <div class="stack-card">
+          <div class="stack-card-top">
+            <span class="stack-tag ${stackTagClass(stack.tag)}">${escapeHtml(stack.tag)}</span>
+            <span class="stack-steps-count">${stack.steps.length} steps</span>
+          </div>
+          <div class="stack-title">${escapeHtml(stack.title)}</div>
+          <div class="stack-bar">${bars}</div>
+          <div class="stack-outcome">${escapeHtml(stack.outcome)}</div>
+          <div class="stack-provenance${wide ? ' wide' : ''}">${provenance}</div>
+          <div class="stack-card-footer">
+            <div class="stack-owner-updated">
+              ${stack.owner ? `<span class="owner-avatar" title="${escapeAttr(stack.owner)}">${escapeHtml(PARTNER_INITIALS[stack.owner] || stack.owner[0])}</span>` : ''}
+              <span class="stack-updated">updated ${escapeHtml(stack.updatedAt)}</span>
+            </div>
+            <div class="stack-actions">
+              <button class="stack-btn" onclick="openViewStackModal('${escapeAttr(stack.id)}','${escapeAttr(ownerCid)}')">View Stack</button>
+              ${cloneBtn}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function growStackFilterBarHtml(scope, opts) {
+      opts = opts || {};
+      const search = growStackSearch[scope] || '';
+      const activeTag = growStackTagFilter[scope] || 'All';
+      const tags = ['All', ...STACK_TAGS];
+      const chips = tags.map(t => `<button class="grow-tag-chip${t === activeTag ? ' active' : ''}" onclick="setStackTagFilter('${escapeAttr(scope)}','${escapeAttr(t)}')">${escapeHtml(t)}</button>`).join('');
+      const portfolioToggle = opts.showPortfolioToggle ? `
+        <span class="grow-portfolio-toggle" onclick="togglePortfolioWide('${escapeAttr(scope)}')">
+          Search across portfolio
+          <span class="grow-toggle-switch${growPortfolioWide[scope] ? ' on' : ''}"></span>
+        </span>
+      ` : '';
+      return `
+        <div class="grow-filter-bar" id="stack-filterbar-${escapeAttr(scope)}">
+          <input type="text" class="grow-filter-search" placeholder="Search playbooks…" value="${escapeAttr(search)}"
+            oninput="setStackSearch('${escapeAttr(scope)}', this.value)">
+          ${chips}
+          ${portfolioToggle}
+        </div>
+      `;
+    }
+
+    function growStackGridHtml(scope, co) {
+      const wide = !!growPortfolioWide[co.id];
+      const search = growStackSearch[scope] || '';
+      const tag = growStackTagFilter[scope] || 'All';
+      const pool = wide ? growStacksAllFlat() : (co.stacks || []).map(s => ({ stack: s, ownerCid: co.id, ownerName: co.name }));
+      const filtered = growFilterStacks(pool, search, tag);
+      const cards = filtered.map(({ stack, ownerCid, ownerName }) => stackCardHtml(stack, ownerCid, ownerName, { viewingCid: co.id, wide })).join('');
+      const inner = filtered.length
+        ? `<div class="stack-grid">${cards}</div>`
+        : `<div class="grow-empty-state">${wide ? 'No playbooks match this search across the portfolio yet.' : 'No playbooks here yet — flip “Search across portfolio” to browse and clone one from another company.'}</div>`;
+      return `<div id="stack-grid-${escapeAttr(scope)}">${inner}</div>`;
+    }
+
+    function growStackLibraryGridHtml() {
+      const scope = 'stack-library';
+      const search = growStackSearch[scope] || '';
+      const tag = growStackTagFilter[scope] || 'All';
+      const filtered = growFilterStacks(growStacksAllFlat(), search, tag);
+      const cards = filtered.map(({ stack, ownerCid, ownerName }) => stackCardHtml(stack, ownerCid, ownerName, { wide: true })).join('');
+      const inner = filtered.length ? `<div class="stack-grid">${cards}</div>` : `<div class="grow-empty-state">No playbooks match this search yet.</div>`;
+      return `<div id="stack-grid-${scope}">${inner}</div>`;
+    }
+
+    function reRenderGrowStacksGridOnly(scope) {
+      const grid = document.getElementById(`stack-grid-${scope}`);
+      if (!grid) return;
+      if (scope === 'stack-library') { grid.outerHTML = growStackLibraryGridHtml(); return; }
+      const co = DATA.grow.companies.find(c => c.id === scope);
+      if (co) grid.outerHTML = growStackGridHtml(scope, co);
+    }
+
+    function reRenderGrowStacksScope(scope) {
+      const bar = document.getElementById(`stack-filterbar-${scope}`);
+      if (bar) bar.outerHTML = growStackFilterBarHtml(scope, { showPortfolioToggle: scope !== 'stack-library' });
+      reRenderGrowStacksGridOnly(scope);
+    }
+
+    function setStackSearch(scope, val) {
+      growStackSearch[scope] = val;
+      reRenderGrowStacksGridOnly(scope);
+    }
+    function setStackTagFilter(scope, tag) {
+      growStackTagFilter[scope] = tag;
+      reRenderGrowStacksScope(scope);
+    }
+    function togglePortfolioWide(cid) {
+      growPortfolioWide[cid] = !growPortfolioWide[cid];
+      reRenderGrowStacksScope(cid);
+    }
+
+    function renderGrowStacksSection(co) {
+      return `
+        <div class="grow-subsec-label">Playbooks & Skill Stacks<span class="grow-subsec-count">${(co.stacks || []).length}</span></div>
+        ${growStackFilterBarHtml(co.id, { showPortfolioToggle: true })}
+        ${growStackGridHtml(co.id, co)}
+      `;
+    }
+
+    // ── Grow: View Stack + Clone modals (shared #modal-overlay pattern) ──
+    function findStackAnywhere(stackId) {
+      for (const co of DATA.grow.companies) {
+        const s = (co.stacks || []).find(s => s.id === stackId);
+        if (s) return { stack: s, ownerCid: co.id, ownerName: co.name };
+      }
+      return null;
+    }
+
+    function ensureModalOverlay() {
+      let overlay = document.getElementById('modal-overlay');
+      if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'modal-overlay';
+        overlay.className = 'modal-overlay';
+        document.body.appendChild(overlay);
+      }
+      return overlay;
+    }
+
+    function openViewStackModal(stackId, ownerCid) {
+      growViewingStack = { stackId, ownerCid };
+      const overlay = ensureModalOverlay();
+      overlay.innerHTML = stackModalHtml();
+      overlay.onclick = (e) => { if (e.target === overlay) closeViewStackModal(); };
+      overlay.style.display = 'flex';
+    }
+
+    function stackModalHtml() {
+      if (!growViewingStack) return '';
+      const found = findStackAnywhere(growViewingStack.stackId);
+      if (!found) return '';
+      const { stack, ownerCid, ownerName } = found;
+      const steps = stack.steps.map(s => `<li>${escapeHtml(s)}</li>`).join('');
+      const templates = (stack.templates || []).length ? stack.templates.map(t => `
+        <div class="stack-modal-template">${t.url ? `<a href="${escapeAttr(t.url)}" target="_blank" rel="noopener">${escapeHtml(t.label)}</a>` : `${escapeHtml(t.label)} <span class="none">— No link yet</span>`}</div>
+      `).join('') : `<div class="stack-modal-template"><span class="none">No templates linked yet</span></div>`;
+      const reusedCount = stack.provenance.reusedAt.length;
+      return `
+        <div class="modal">
+          <button class="modal-close" onclick="closeViewStackModal()">×</button>
+          <div class="modal-section-title" style="margin-top:0;">${escapeHtml(stack.title)}</div>
+          <div class="stack-provenance" style="margin-bottom:14px;">${escapeHtml(ownerName)} · ${escapeHtml(stack.provenance.date)} · reused at ${reusedCount} other compan${reusedCount === 1 ? 'y' : 'ies'}</div>
+          <ol class="stack-modal-steps">${steps}</ol>
+          <div class="grow-subsec-label" style="font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--subtle);margin:0 0 8px;">Templates</div>
+          <div class="stack-modal-templates">${templates}</div>
+          <div class="stack-modal-footer">
+            <button class="stack-btn" onclick="closeViewStackModal()">Close</button>
+            <button class="stack-btn primary" onclick="openCloneCompanyPicker('${escapeAttr(stack.id)}','${escapeAttr(ownerCid)}')">Clone…</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function closeViewStackModal() {
+      growViewingStack = null;
+      const overlay = document.getElementById('modal-overlay');
+      if (overlay) { overlay.style.display = 'none'; overlay.innerHTML = ''; overlay.onclick = null; }
+    }
+
+    function openCloneCompanyPicker(stackId, ownerCid) {
+      growCloneStack = { stackId, ownerCid };
+      const overlay = ensureModalOverlay();
+      overlay.innerHTML = cloneCompanyPickerHtml();
+      overlay.onclick = (e) => { if (e.target === overlay) closeCloneCompanyPicker(); };
+      overlay.style.display = 'flex';
+    }
+
+    function cloneCompanyPickerHtml() {
+      if (!growCloneStack) return '';
+      const opts = DATA.grow.companies.map(co => `
+        <button class="company-picker-opt" onclick="cloneStackToCompany('${escapeAttr(growCloneStack.stackId)}','${escapeAttr(growCloneStack.ownerCid)}','${escapeAttr(co.id)}')" ${co.id === growCloneStack.ownerCid ? 'disabled' : ''}>${escapeHtml(co.name)}${co.id === growCloneStack.ownerCid ? ' (source)' : ''}</button>
+      `).join('');
+      return `
+        <div class="modal">
+          <button class="modal-close" onclick="closeCloneCompanyPicker()">×</button>
+          <div class="modal-section-title" style="margin-top:0;">Clone playbook to…</div>
+          <div class="company-picker-list">${opts}</div>
+        </div>
+      `;
+    }
+
+    function closeCloneCompanyPicker() {
+      growCloneStack = null;
+      const overlay = document.getElementById('modal-overlay');
+      if (overlay) { overlay.style.display = 'none'; overlay.innerHTML = ''; overlay.onclick = null; }
+    }
+
+    function cloneStackToCompany(stackId, fromCid, toCid) {
+      const found = findStackAnywhere(stackId);
+      if (!found) return;
+      const { stack, ownerCid } = found;
+      if (ownerCid === toCid) return;
+      const toCo = DATA.grow.companies.find(c => c.id === toCid);
+      if (!toCo) return;
+      growStackIdCounter++;
+      const clone = JSON.parse(JSON.stringify(stack));
+      clone.id = `stack-${growStackIdCounter}`;
+      clone.provenance = { company: stack.provenance.company, date: stack.provenance.date, reusedAt: [] };
+      clone.cloned = true;
+      if (!toCo.stacks) toCo.stacks = [];
+      toCo.stacks.push(clone);
+      if (!stack.provenance.reusedAt.includes(toCid)) stack.provenance.reusedAt.push(toCid);
+      closeViewStackModal();
+      closeCloneCompanyPicker();
+      render();
+    }
+
+    // ── Grow: Tools We Build ──
+    function toolCardHtml(tool) {
+      const reusedCount = (tool.reusedAt || []).length;
+      const reusedNames = (tool.reusedAt || []).map(id => (DATA.grow.companies.find(c => c.id === id) || {}).name || id).join(', ');
+      const link = tool.url
+        ? `<a class="tool-link" href="${escapeAttr(tool.url)}" target="_blank" rel="noopener">${escapeHtml(tool.url.replace(/^https?:\/\//, ''))}</a>`
+        : `<span class="tool-link none">—</span>`;
+      return `
+        <div class="tool-card">
+          <div class="tool-card-top">
+            <div>
+              <div class="tool-type">${escapeHtml(tool.type)}</div>
+              <div class="tool-name">${escapeHtml(tool.name)}</div>
+            </div>
+            <span class="tool-status ${escapeAttr(tool.status)}">${escapeHtml(tool.status)}</span>
+          </div>
+          ${link}
+          <div class="tool-card-footer">
+            ${tool.devOwner ? `<span class="owner-avatar" title="${escapeAttr(tool.devOwner)}">${escapeHtml(PARTNER_INITIALS[tool.devOwner] || tool.devOwner[0])}</span>` : `<span></span>`}
+            <span class="tool-reused-badge${reusedCount ? ' active' : ''}" title="${reusedCount ? escapeAttr('Reused at ' + reusedNames) : 'Not reused elsewhere yet'}">Reused at ${reusedCount}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function growToolGridHtml(cid, co) {
+      const cards = (co.tools || []).map(t => toolCardHtml(t)).join('');
+      const inner = (co.tools || []).length ? `<div class="tool-grid">${cards}</div>` : `<div class="grow-empty-state">No tools built for ${escapeHtml(co.name)} yet — fork a template below or request one.</div>`;
+      return `<div id="tool-grid-${escapeAttr(cid)}">${inner}</div>`;
+    }
+
+    function forkTemplate(cid, templateId) {
+      const co = DATA.grow.companies.find(c => c.id === cid);
+      const tpl = DATA.grow.templates.find(t => t.id === templateId);
+      if (!co || !tpl) return;
+      growToolIdCounter++;
+      if (!co.tools) co.tools = [];
+      co.tools.push({
+        id: `tool-${growToolIdCounter}`, name: `${tpl.name} (forked)`, type: 'KT Template',
+        status: 'in-dev', url: null, devOwner: null, reusedAt: []
+      });
+      const grid = document.getElementById(`tool-grid-${cid}`);
+      if (grid) grid.outerHTML = growToolGridHtml(cid, co);
+      const count = document.getElementById(`tools-count-${cid}`);
+      if (count) count.textContent = co.tools.length;
+    }
+
+    function toggleToolRequestForm(cid) {
+      growToolFormOpen[cid] = !growToolFormOpen[cid];
+      const wrap = document.getElementById(`tool-request-wrap-${cid}`);
+      if (wrap) wrap.outerHTML = growToolRequestWrapHtml(cid);
+    }
+
+    function checkDuplicateTool(cid, text) {
+      const co = DATA.grow.companies.find(c => c.id === cid);
+      if (!co || !text.trim()) return null;
+      const words = text.toLowerCase().split(/\s+/).filter(w => w.length > 3);
+      if (!words.length) return null;
+      const match = (co.tools || []).find(t => words.some(w => t.name.toLowerCase().includes(w)));
+      return match ? match.name : null;
+    }
+
+    function onToolRequestInput(cid) {
+      const desc = (document.getElementById(`tool-req-desc-${cid}`) || {}).value || '';
+      const dup = checkDuplicateTool(cid, desc);
+      const warnEl = document.getElementById(`tool-req-warn-${cid}`);
+      if (warnEl) warnEl.innerHTML = dup ? `<div class="grow-request-warn">Similar tool exists: ${escapeHtml(dup)} — review before submitting.</div>` : '';
+    }
+
+    function submitToolRequest(cid) {
+      const co = DATA.grow.companies.find(c => c.id === cid);
+      if (!co) return;
+      const descEl = document.getElementById(`tool-req-desc-${cid}`);
+      const desc = descEl ? descEl.value : '';
+      const areaEl = document.getElementById(`tool-req-area-${cid}`);
+      const area = areaEl ? areaEl.value : 'Other';
+      const urgencyEl = document.querySelector(`input[name="tool-req-urgency-${cid}"]:checked`);
+      const urgency = urgencyEl ? urgencyEl.value : 'medium';
+      if (!desc.trim()) return;
+      growToolIdCounter++;
+      if (!co.tools) co.tools = [];
+      co.tools.push({
+        id: `tool-${growToolIdCounter}`, name: desc.trim().slice(0, 60), type: area,
+        status: 'in-dev', url: null, devOwner: null, reusedAt: [], urgency
+      });
+      growToolFormOpen[cid] = false;
+      growToolConfirmMsg[cid] = 'Submitted — added to backlog.';
+      const grid = document.getElementById(`tool-grid-${cid}`);
+      if (grid) grid.outerHTML = growToolGridHtml(cid, co);
+      const count = document.getElementById(`tools-count-${cid}`);
+      if (count) count.textContent = co.tools.length;
+      const wrap = document.getElementById(`tool-request-wrap-${cid}`);
+      if (wrap) wrap.outerHTML = growToolRequestWrapHtml(cid);
+    }
+
+    function growToolRequestWrapHtml(cid) {
+      const open = !!growToolFormOpen[cid];
+      const confirm = growToolConfirmMsg[cid] ? `<div class="grow-request-confirm">✅ ${escapeHtml(growToolConfirmMsg[cid])}</div>` : '';
+      const toggleBtn = !open ? `<button class="grow-request-tool-toggle" onclick="toggleToolRequestForm('${escapeAttr(cid)}')">+ Request New Tool</button>` : '';
+      const form = open ? `
+        <div class="grow-request-form">
+          <div class="grow-request-field">
+            <label>Problem description</label>
+            <textarea id="tool-req-desc-${escapeAttr(cid)}" oninput="onToolRequestInput('${escapeAttr(cid)}')" placeholder="What's broken or missing?"></textarea>
+          </div>
+          <div id="tool-req-warn-${escapeAttr(cid)}"></div>
+          <div class="grow-request-field">
+            <label>Function area</label>
+            <select id="tool-req-area-${escapeAttr(cid)}">
+              ${['Sales','Marketing','Ops','Finance','Tech','Other'].map(a => `<option value="${escapeAttr(a)}">${escapeHtml(a)}</option>`).join('')}
+            </select>
+          </div>
+          <div class="grow-request-field">
+            <label>Urgency</label>
+            <div class="grow-request-radio-row">
+              ${['low','medium','high'].map((u, i) => `<label><input type="radio" name="tool-req-urgency-${escapeAttr(cid)}" value="${u}" ${i === 1 ? 'checked' : ''}> ${escapeHtml(u)}</label>`).join('')}
+            </div>
+          </div>
+          <div class="grow-request-btns">
+            <button class="stack-btn primary" onclick="submitToolRequest('${escapeAttr(cid)}')">Submit</button>
+            <button class="stack-btn" onclick="toggleToolRequestForm('${escapeAttr(cid)}')">Cancel</button>
+          </div>
+        </div>
+      ` : '';
+      return `<div id="tool-request-wrap-${escapeAttr(cid)}">${toggleBtn}${form}${confirm}</div>`;
+    }
+
+    function renderGrowToolsSection(co) {
+      const templatesHtml = (DATA.grow.templates || []).map(t => `
+        <div class="tool-template-card">
+          <div class="tool-template-name">${escapeHtml(t.name)}</div>
+          <div class="tool-template-desc">${escapeHtml(t.desc)}</div>
+          <button class="tool-template-fork" onclick="forkTemplate('${escapeAttr(co.id)}','${escapeAttr(t.id)}')">Fork</button>
+        </div>
+      `).join('');
+      return `
+        <div class="grow-subsec-label">Tools We Build<span class="grow-subsec-count" id="tools-count-${escapeAttr(co.id)}">${(co.tools || []).length}</span></div>
+        ${growToolGridHtml(co.id, co)}
+        <div class="tool-templates-label">Templates — fork these</div>
+        <div class="tool-template-row">${templatesHtml}</div>
+        ${growToolRequestWrapHtml(co.id)}
+      `;
+    }
+
+    // ── Grow: 🦔 Stack Library page ──
+    function renderStackLibrary() {
+      return `
+        ${crumbs([{ label: 'Company', path: '/' }, { label: 'Grow', path: '/grow' }, { label: '🦔 Stack Library' }])}
+        <div class="greeting">
+          <div class="greeting-text" style="font-size:32px;">🦔 Stack Library</div>
+          <div class="greeting-sub">Cross-portfolio SOP search — find what's worked, then clone it.</div>
+        </div>
+        ${growStackFilterBarHtml('stack-library', { showPortfolioToggle: false })}
+        ${growStackLibraryGridHtml()}
+      `;
+    }
+
     const ROADMAP_GOALS = DATA.okrs.map(o => o.label);
 
     // ── OWNER PICKER (shared component — Sourcing, Screening, IC) ──
@@ -2084,8 +2952,12 @@
         app.innerHTML = renderInvestorCRM();
       } else if (parts[0] === 'fund') {
         app.innerHTML = renderFund();
+      } else if (parts[0] === 'grow' && parts.length === 3 && parts[1] === 'company') {
+        app.innerHTML = renderGrowCompany(parts[2]);
+      } else if (parts[0] === 'grow' && parts.length === 2 && parts[1] === 'stack-library') {
+        app.innerHTML = renderStackLibrary();
       } else if (parts[0] === 'grow') {
-        app.innerHTML = renderPlaceholderEngine(parts[0]);
+        app.innerHTML = renderGrow();
       } else {
         app.innerHTML = renderCompany();
         renderCalendar();
@@ -3747,19 +4619,110 @@
       `;
     }
 
-    // ── Grow placeholder ──
-    function renderPlaceholderEngine(key) {
-      const e = DATA.engines[key];
+    // ── Grow ──
+    function renderGrow() {
+      const g = DATA.grow;
+      const companyCards = g.companies.map(c => {
+        const logoHtml = c.logo
+          ? `<div class="grow-pf-logo-wrap"><img class="grow-pf-logo" src="${escapeAttr(c.logo)}" alt="${escapeAttr(c.name)}"></div>`
+          : `<div class="grow-pf-initials">${escapeHtml(c.initials || c.name.slice(0,2).toUpperCase())}</div>`;
+        const badgeClass = c.status === 'active' ? 'green' : 'yellow';
+        return `
+          <a class="grow-pf-card" href="#/grow/company/${c.id}" onclick="navigate('/grow/company/${c.id}'); return false;">
+            ${logoHtml}
+            <div class="grow-pf-name">${escapeHtml(c.name)}</div>
+            <span class="grow-pf-badge ${badgeClass}">${escapeHtml(c.statusLabel)}</span>
+          </a>
+        `;
+      }).join('');
+      const lockedCards = Array.from({ length: g.lockedSlots }, (_, i) => `
+        <div class="grow-pf-card locked">
+          <div class="lock">🔒</div>
+          <div class="lk-name">Company ${g.companies.length + i + 1}</div>
+        </div>
+      `).join('');
+      const totalStacks = g.companies.reduce((n, c) => n + (c.stacks || []).length, 0);
+      const stackLibCard = `
+        <a class="grow-pf-card stack-lib" href="#/grow/stack-library" onclick="navigate('/grow/stack-library'); return false;">
+          <div class="grow-pf-name">🦔 Stack Library</div>
+          <div class="stack-lib-desc">Cross-portfolio playbook search</div>
+        </a>
+      `;
       return `
-        ${crumbs([{ label: 'Company', path: '/' }, { label: e.name }])}
+        ${crumbs([{ label: 'Company', path: '/' }, { label: 'Grow' }])}
         <div class="greeting">
-          <div class="greeting-text" style="font-size:36px;">${e.name}</div>
-          <div class="greeting-sub">${e.purpose}</div>
+          <div class="greeting-text" style="font-size:36px;">🌱 Grow</div>
+          <div class="greeting-sub">Increase enterprise value — integration, ops, sales, SOPs, and KPI reporting.</div>
         </div>
-        <div class="card static card-pad" style="max-width:520px;">
-          <div class="sec-label">Coming in a later iteration</div>
-          <div class="card-desc">This engine's metro-map and workflow pages aren't built yet — this pass focuses on validating the navigation model using Find as the deep example. If that model tests well, Fund and Grow get the same treatment next.</div>
+
+        <div class="grow-kpi-strip">
+          <div class="grow-kpi-tile">
+            <div class="grow-kpi-label">Portfolio EBITDA target</div>
+            <div class="grow-kpi-value">+10%</div>
+            <div class="grow-kpi-note">in 6 months across active portfolio companies</div>
+          </div>
+          <div class="grow-kpi-tile">
+            <div class="grow-kpi-label">Active companies</div>
+            <div class="grow-kpi-value">${g.companies.length}</div>
+            <div class="grow-kpi-note">Melers Oy · Auran Pesupojat Oy (closing)</div>
+          </div>
+          <div class="grow-kpi-tile">
+            <div class="grow-kpi-label">Playbooks live</div>
+            <div class="grow-kpi-value">${totalStacks}</div>
+            <div class="grow-kpi-note">across the 🦔 Stack Library — cloneable to any portfolio company</div>
+          </div>
         </div>
+
+        <div class="sec-label">Portfolio companies</div>
+        <div class="grow-portfolio-row">
+          ${companyCards}
+          ${stackLibCard}
+          ${lockedCards}
+        </div>
+      `;
+    }
+
+    function renderGrowCompany(id) {
+      const g = DATA.grow;
+      const co = g.companies.find(c => c.id === id);
+      if (!co) return renderGrow();
+
+      const logoHtml = co.logo
+        ? `<div class="grow-company-logo-wrap"><img class="grow-company-logo" src="${escapeAttr(co.logo)}" alt="${escapeAttr(co.name)}"></div>`
+        : `<div class="grow-company-initials">${escapeHtml(co.initials || co.name.slice(0,2).toUpperCase())}</div>`;
+
+      const steveChat = `
+        <div class="grow-steve-card">
+          <div class="grow-steve-header">🦔 Talk to Steve</div>
+          <div class="grow-steve-msgs">
+            <div class="grow-steve-msg partner">What should we focus on first for ${escapeHtml(co.name)}?</div>
+            <div class="grow-steve-msg steve">Good question. My read: start with Knowledge Transfer — nothing else stacks well until the handover is locked. Once banking, ops, and passwords are settled, Recruiting is the next unlock since everything downstream (sales SOP, training videos, marketing) depends on having the right people running the show. Software and marketing can run in parallel after that.</div>
+            <div class="grow-steve-msg partner">How do we track EBITDA growth here?</div>
+            <div class="grow-steve-msg steve">🦔 Honestly, not wired yet — the +10% target lives in Fund (revenue, costs, management fee) but none of those numbers flow into Grow yet. When you're ready to wire this, I'd suggest pulling the monthly liquidity snapshot from Fund and computing a trailing EBITDA delta. For now, the best proxy is checking the Fund page for this company and eyeballing the trend.</div>
+          </div>
+          <div class="grow-steve-input-row">
+            <input type="text" class="grow-steve-input" placeholder="Ask Steve something about ${escapeHtml(co.name)}…" disabled>
+            <button class="grow-steve-send" disabled>→</button>
+          </div>
+          <div class="grow-steve-note">Static demo — live Steve input coming in a future iteration</div>
+        </div>
+      `;
+
+      return `
+        ${crumbs([{ label: 'Company', path: '/' }, { label: 'Grow', path: '/grow' }, { label: co.name }])}
+        <div class="grow-company-header">
+          ${logoHtml}
+          <div>
+            <div class="grow-company-name">${escapeHtml(co.name)}</div>
+            <div class="grow-company-sub">${escapeHtml(co.statusLabel)} · Grow plan</div>
+          </div>
+        </div>
+        ${co.ddBanner ? `<div class="grow-dd-banner">⚠️ ${escapeHtml(co.ddBanner)}</div>` : ''}
+        ${renderGrowHero(co)}
+        ${steveChat}
+        ${renderGrowKt(co)}
+        ${renderGrowStacksSection(co)}
+        ${renderGrowToolsSection(co)}
       `;
     }
 
