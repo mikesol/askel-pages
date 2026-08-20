@@ -391,7 +391,11 @@ function wireMain() {
     btn.onclick = () => { state.openObjIdx = parseInt(btn.dataset.idx, 10); state.screen = 'objection'; render(); };
   });
   const bookBtn = document.getElementById('bookBtn');
-  if (bookBtn) bookBtn.onclick = () => { state.screen = 'booking'; render(); };
+  if (bookBtn) bookBtn.onclick = () => {
+    window.open(PALVELUPAALLIKKO_CALENDAR_URL, '_blank', 'noopener');
+    state.screen = 'booking';
+    render();
+  };
 }
 
 /* ---------------- opening screen ---------------- */
