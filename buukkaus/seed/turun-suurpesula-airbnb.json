@@ -3,7 +3,7 @@
   "icp": "airbnb",
   "label": "Airbnb",
   "updatedAt": "2026-08-18T00:00:00.000Z",
-  "opening": "Hei, tässä [NIMI] Turun Suurpesulasta. Tavoittelen [HENKILÖÄ].\n\nHei [NIMI], huomasin että hallinnoitte useampaa lyhytaikaisen majoituksen kohdetta. Soitan pyykkihuollosta – voinko kysyä yhden nopean kysymyksen?",
+  "opening": "Hei, tässä [NIMI] Turun Suurpesulasta. Tavoittelen [HENKILÖÄ].\n\nHei [NIMI], teemme yhteistyötä usean Airbnb-/lyhytaikaismajoitustoimijan kanssa Turun seudulla. Huomasin että hallinnoitte useampaa lyhytaikaisen majoituksen kohdetta. Soitan pyykkihuollosta – voinko kysyä yhden nopean kysymyksen?",
   "reason": "Hoidatteko tällä hetkellä kohteiden lakanat ja pyyhkeet itse vai käytättekö pesulaa? Tässä ei vielä väitetä, että asiakkaalla on ongelma — ensimmäinen tavoite on validoida, onko ongelmaa.",
   "discoveryQuestions": [
     "Jos hoitavat itse: Kuinka paljon aikaa pyykkihuolto teiltä suunnilleen vie viikossa?"
@@ -73,6 +73,11 @@
       "trigger": "Olen kokouksessa.",
       "response": "Totta kai, en pidä sinua. Milloin olisi parempi aika soittaa?",
       "category": "Torjuva"
+    },
+    {
+      "trigger": "Ei sovi meille.",
+      "response": "Selvä, ymmärrän. Mikä tekee siitä juuri teille sopimattoman — onko kyse esimerkiksi volyymista, aikataulusta vai jostain muusta? Miten teillä pesulapalvelut hoidetaan tällä hetkellä?",
+      "category": "Tilanne"
     }
   ],
   "bookingAsk": "Jos paljon aikaa kuluu: Ymmärrän. Me voisimme ottaa tuon kokonaan pois teidän arjestanne noudolla, pesulla ja toimituksella. Olisiko järkevää ottaa 15 minuutin keskustelu meidän palvelupäällikön kanssa ja katsoa, mitä se käytännössä tarkoittaisi teidän kohteillanne?",
@@ -81,6 +86,11 @@
     "Älä selitä palvelua, ellei asiakas anna siihen syytä.",
     "Älä väittele nykyisestä pesulasta. Meidän ei tarvitse todistaa, että nykyinen toimittaja on huono.",
     "Älä kysy \"onko kiinnostusta?\" — kysy mieluummin \"Miten teillä tämä toimii tällä hetkellä?\" ja tapaamisen kohdalla \"Sopisiko [A] vai [B]?\"",
-    "Tavoite ei ole myydä pesulapalvelua puhelimessa. Tavoite on: löytää relevantti ongelma → saada lupa jatkaa keskustelua → varata aika palvelupäällikölle."
-  ]
+    "Tavoite ei ole myydä pesulapalvelua puhelimessa. Tavoite on: löytää relevantti ongelma → saada lupa jatkaa keskustelua → varata aika palvelupäällikölle.",
+    "Vastaajaan: jätä 1–2 vastaajaviestiä, älä enempää — se tuplaa sähköpostien vastausprosentin, mutta liian moni viesti laskee tavoitettavuutta. Lähetä aina lyhyt sähköposti heti vastaajaviestin jälkeen.",
+    "Soita ensisijaisesti aamupäivisin (paras tavoitettavuus n. klo 10) — iltapäivällä tavoitettavuus laskee.",
+    "Jos puhelu katkeaa tai asiakas laittaa luurin kiinni: täysin normaalia (n. 11 % kaikista vastaväitteistä) — älä ota henkilökohtaisesti, kirjaa \"Ei tavoitettu\" ja siirry seuraavaan.",
+    "Soita samalle kontaktille korkeintaan 5 kertaa — sen jälkeen tavoitettavuus laskee merkittävästi. Siirry sitten seuraavaan liidiin."
+  ],
+  "voicemail": "Hei, tässä [NIMI] Turun Suurpesulasta. Soitin pesula- ja liinavaatepalveluihin liittyen — pahoittelut, etten tavoittanut. Lähetän teille vielä lyhyen sähköpostin samasta asiasta, jotta ehditte tutustua rauhassa. Jos ehditte, soittakaa mielellään takaisin numeroon [PUHELINNUMERO]. Kiitos ja hyvää päivänjatkoa!"
 }

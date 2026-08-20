@@ -29,6 +29,7 @@ export async function onRequest(context) {
     label: body.label || icp,
     opening: body.opening || '',
     reason: body.reason || '',
+    voicemail: body.voicemail || '',
     discoveryQuestions: Array.isArray(body.discoveryQuestions) ? body.discoveryQuestions : [],
     objections: Array.isArray(body.objections) ? body.objections : [],
     bookingAsk: body.bookingAsk || '',

@@ -3,7 +3,7 @@
   "icp": "siivousyritykset",
   "label": "Siivousyritykset",
   "updatedAt": "2026-08-18T00:00:00.000Z",
-  "opening": "Hei, tässä [NIMI] Turun Suurpesulasta. Tavoittelen [HENKILÖÄ].\n\nHei [NIMI], teillä näyttää olevan paljon lyhytaikaisen majoituksen asiakkaita. Soitan itse asiassa yhteistyöasiassa – voinko kysyä yhden nopean kysymyksen? Tämä on kumppanuus-/channel-scripti, ei normaali asiakasbuukkaus.",
+  "opening": "Hei, tässä [NIMI] Turun Suurpesulasta. Tavoittelen [HENKILÖÄ].\n\nHei [NIMI], teemme yhteistyötä useiden siivousyritysten kanssa Turun seudulla. Teillä näyttää olevan paljon lyhytaikaisen majoituksen asiakkaita. Soitan itse asiassa yhteistyöasiassa – voinko kysyä yhden nopean kysymyksen? Tämä on kumppanuus-/channel-scripti, ei normaali asiakasbuukkaus.",
   "reason": "Kun teidän Airbnb-asiakkaillanne on lakanat ja pyyhkeet hoidettavana, järjestävätkö he pesut yleensä itse?",
   "discoveryQuestions": [
     "Jos kyllä: Oletteko koskaan miettineet, että voisitte tarjota asiakkaillenne pesulapalvelun kumppanin kautta samalla kun te hoidatte siivouksen?"
@@ -73,6 +73,11 @@
       "trigger": "Olen kokouksessa.",
       "response": "Totta kai, en pidä sinua. Milloin olisi parempi aika soittaa?",
       "category": "Torjuva"
+    },
+    {
+      "trigger": "Ei sovi meille.",
+      "response": "Selvä, ymmärrän. Mikä tekee siitä juuri teille sopimattoman — onko kyse esimerkiksi volyymista, aikataulusta vai jostain muusta? Miten teillä pesulapalvelut hoidetaan tällä hetkellä?",
+      "category": "Tilanne"
     }
   ],
   "bookingAsk": "Jos kiinnostuu: Me Turun Suurpesulassa hoidamme noudon, pesun ja palautuksen, joten teidän ei tarvitsisi itse ottaa pesupuolta hoidettavaksi. Voisin järjestää 15 minuutin keskustelun meidän palvelupäällikön kanssa ja katsoa, voisiko tästä rakentaa teille toimivan yhteistyömallin. Sopisiko [A] vai [B]?",
@@ -81,6 +86,11 @@
     "Älä selitä palvelua, ellei asiakas anna siihen syytä.",
     "Älä väittele nykyisestä pesulasta. Meidän ei tarvitse todistaa, että nykyinen toimittaja on huono.",
     "Älä kysy \"onko kiinnostusta?\" — kysy mieluummin \"Miten teillä tämä toimii tällä hetkellä?\" ja tapaamisen kohdalla \"Sopisiko [A] vai [B]?\"",
-    "Tavoite ei ole myydä pesulapalvelua puhelimessa. Tavoite on: löytää relevantti ongelma → saada lupa jatkaa keskustelua → varata aika palvelupäällikölle."
-  ]
+    "Tavoite ei ole myydä pesulapalvelua puhelimessa. Tavoite on: löytää relevantti ongelma → saada lupa jatkaa keskustelua → varata aika palvelupäällikölle.",
+    "Vastaajaan: jätä 1–2 vastaajaviestiä, älä enempää — se tuplaa sähköpostien vastausprosentin, mutta liian moni viesti laskee tavoitettavuutta. Lähetä aina lyhyt sähköposti heti vastaajaviestin jälkeen.",
+    "Soita ensisijaisesti aamupäivisin (paras tavoitettavuus n. klo 10) — iltapäivällä tavoitettavuus laskee.",
+    "Jos puhelu katkeaa tai asiakas laittaa luurin kiinni: täysin normaalia (n. 11 % kaikista vastaväitteistä) — älä ota henkilökohtaisesti, kirjaa \"Ei tavoitettu\" ja siirry seuraavaan.",
+    "Soita samalle kontaktille korkeintaan 5 kertaa — sen jälkeen tavoitettavuus laskee merkittävästi. Siirry sitten seuraavaan liidiin."
+  ],
+  "voicemail": "Hei, tässä [NIMI] Turun Suurpesulasta. Soitin pesula- ja liinavaatepalveluihin liittyen — pahoittelut, etten tavoittanut. Lähetän teille vielä lyhyen sähköpostin samasta asiasta, jotta ehditte tutustua rauhassa. Jos ehditte, soittakaa mielellään takaisin numeroon [PUHELINNUMERO]. Kiitos ja hyvää päivänjatkoa!"
 }

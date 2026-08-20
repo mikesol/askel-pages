@@ -94,14 +94,15 @@
 
   .cat-group { margin-bottom: 14px; }
   .cat-h { font-size: 16px; letter-spacing: 0.01em; color: var(--navy); font-weight: 800; margin: 0 0 9px; }
+  .top-pills { display: flex; gap: 10px; margin-bottom: 14px; }
   .opening-pill {
-    width: 100%; text-align: left; background: var(--panel); border: 1px solid var(--border);
-    border-left: 5px solid var(--coral); border-radius: 14px; padding: 14px 16px; margin-bottom: 14px;
+    flex: 1; min-width: 0; text-align: left; background: var(--panel); border: 1px solid var(--border);
+    border-left: 5px solid var(--coral); border-radius: 14px; padding: 14px 16px;
     cursor: pointer; font-family: inherit; display: flex; align-items: center; justify-content: space-between;
     gap: 10px; color: inherit;
   }
-  .opening-pill .label { font-weight: 700; font-size: 15.5px; }
-  .opening-pill .chevron { color: var(--muted); font-size: 20px; }
+  .opening-pill .label { font-weight: 700; font-size: 15.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .opening-pill .chevron { color: var(--muted); font-size: 20px; flex-shrink: 0; }
   .obj-pills { display: flex; flex-wrap: wrap; gap: 8px; }
   .obj-pill {
     background: var(--panel); border: 1px solid var(--border); border-radius: 999px;
@@ -261,6 +262,7 @@ function render() {
 
   if (state.screen === 'main') { screenEl.innerHTML = mainTemplate(); wireMain(); }
   else if (state.screen === 'opening') { screenEl.innerHTML = openingTemplate(); wireBack(); }
+  else if (state.screen === 'voicemail') { screenEl.innerHTML = voicemailTemplate(); wireBack(); }
   else if (state.screen === 'objection') { screenEl.innerHTML = objectionTemplate(); wireBack(); }
   else if (state.screen === 'objection-edit') { screenEl.innerHTML = objectionEditTemplate(); wireObjectionEdit(); }
   else if (state.screen === 'booking') { screenEl.innerHTML = bookingTemplate(); wireBack(); }
@@ -286,10 +288,11 @@ function renderTopbar() {
     `;
   } else {
     const back = {
-      opening: 'main', objection: 'main', 'objection-edit': 'objection', booking: 'main', info: 'main', edit: 'main',
+      opening: 'main', voicemail: 'main', objection: 'main', 'objection-edit': 'objection',
+      booking: 'main', info: 'main', edit: 'main',
     }[state.screen] || 'main';
     titleHtml = ({
-      opening: 'Avaus', objection: 'Vastaväite', 'objection-edit': 'Muokkaa vastausta',
+      opening: 'Avaus', voicemail: 'Vastaajaviesti', objection: 'Vastaväite', 'objection-edit': 'Muokkaa vastausta',
       booking: 'Buukkaus', info: 'Ohjeet', edit: 'Muokkaa',
     })[state.screen] || '';
     leftBtn = `<button class="back" id="topBack" data-to="${back}">←</button>`;
@@ -395,10 +398,17 @@ function mainTemplate() {
   const groups = groupObjections(doc.objections || []);
   return `
     <main>
-      <button type="button" class="opening-pill" id="openingBtn">
-        <span class="label">🗣️ Avaus</span>
-        <span class="chevron">›</span>
-      </button>
+      <div class="top-pills">
+        <button type="button" class="opening-pill" id="openingBtn">
+          <span class="label">🗣️ Avaus</span>
+          <span class="chevron">›</span>
+        </button>
+        ${doc.voicemail ? `
+        <button type="button" class="opening-pill" id="voicemailBtn">
+          <span class="label">📼 Vastaaja</span>
+          <span class="chevron">›</span>
+        </button>` : ''}
+      </div>
       ${doc.discoveryQuestions && doc.discoveryQuestions.length ? `
         <div class="quote-block">
           <h2>Discovery</h2>
@@ -422,6 +432,8 @@ function mainTemplate() {
 function wireMain() {
   const openingBtn = document.getElementById('openingBtn');
   if (openingBtn) openingBtn.onclick = () => { state.screen = 'opening'; render(); };
+  const voicemailBtn = document.getElementById('voicemailBtn');
+  if (voicemailBtn) voicemailBtn.onclick = () => { state.screen = 'voicemail'; render(); };
   document.querySelectorAll('.obj-pill').forEach(btn => {
     btn.onclick = () => { state.openObjIdx = parseInt(btn.dataset.idx, 10); state.screen = 'objection'; render(); };
   });
@@ -441,6 +453,17 @@ function openingTemplate() {
     <main>
       <p class="answer-say">${escapeHtml(doc.opening)}</p>
       ${doc.reason ? `<p class="reason-text" style="margin-top:14px;">${escapeHtml(doc.reason)}</p>` : ''}
+    </main>
+  `;
+}
+
+/* ---------------- voicemail screen ---------------- */
+function voicemailTemplate() {
+  const doc = state.icps[key(state.company, state.icp)];
+  if (!doc || !doc.voicemail) return `<main><p>Ei vastaajaviestiä tälle toimialalle.</p></main>`;
+  return `
+    <main>
+      <p class="answer-say">${escapeHtml(doc.voicemail)}</p>
     </main>
   `;
 }
@@ -558,6 +581,7 @@ function editTemplate() {
     <main>
       <section class="block"><h2>Avaus</h2><textarea rows="3" data-field="opening">${escapeHtml(doc.opening)}</textarea></section>
       <section class="block"><h2>Syy soitolle</h2><textarea rows="2" data-field="reason">${escapeHtml(doc.reason)}</textarea></section>
+      <section class="block"><h2>Vastaajaviesti</h2><textarea rows="3" data-field="voicemail">${escapeHtml(doc.voicemail || '')}</textarea></section>
       <section class="block"><h2>Discovery-kysymykset (yksi per rivi)</h2><textarea rows="3" data-field="discoveryQuestions">${escapeHtml((doc.discoveryQuestions || []).join('\n'))}</textarea></section>
       <section class="block">
         <h2>Vastaväitteet</h2>
