@@ -139,6 +139,11 @@
     background: var(--panel); border: 1px solid var(--border); border-left: 5px solid var(--green);
     border-radius: 14px; padding: 20px; margin: 0 0 14px;
   }
+  .calendar-link {
+    display: block; text-align: center; background: var(--coral); color: var(--navy-dark); text-decoration: none;
+    font-weight: 800; font-size: 16.5px; padding: 16px; border-radius: 14px; margin: 0 0 14px;
+  }
+  .calendar-link:active { background: var(--coral-dark); }
   .info-note { color: var(--muted); font-size: 13px; margin: 0 0 14px; }
 
   /* ---------- edit mode ---------- */
@@ -415,13 +420,16 @@ function objectionTemplate() {
 }
 
 /* ---------------- booking screen ---------------- */
+const PALVELUPAALLIKKO_CALENDAR_URL = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ14fXOqowBDfPHNey_5OQgSrmRjQjYI84HGqepJbs9BCIpRU9rp9u7PZ50LSc3TnnHgUshxJJQD?gv=true';
+
 function bookingTemplate() {
   const doc = state.icps[key(state.company, state.icp)];
   if (!doc) return `<main></main>`;
   return `
     <main>
       <p class="booking-say">${escapeHtml(doc.bookingAsk)}</p>
-      <p class="info-note">Kirjaa buukkaus normaaliin tapaan CRM:ään — automaattinen synkronointi ei ole vielä käytössä.</p>
+      <a class="calendar-link" href="${PALVELUPAALLIKKO_CALENDAR_URL}" target="_blank" rel="noopener">📅 Varaa aika palvelupäälliköltä</a>
+      <p class="info-note">Valitse asiakkaalle sopiva aika suoraan kalenterista puhelun aikana. Kirjaa buukkaus lisäksi normaaliin tapaan CRM:ään — automaattinen synkronointi ei ole vielä käytössä.</p>
     </main>
   `;
 }
