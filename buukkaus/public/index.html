@@ -146,6 +146,15 @@
   }
   .calendar-link:active { background: var(--coral-dark); }
   .info-note { color: var(--muted); font-size: 13px; margin: 0 0 14px; }
+  .crm-btn {
+    display: block; width: 100%; text-align: center; background: var(--navy); color: white; border: none;
+    font-weight: 800; font-size: 16.5px; padding: 16px; border-radius: 14px; margin: 0 0 8px;
+    cursor: pointer; font-family: inherit;
+  }
+  .crm-btn:active { background: var(--navy-dark); }
+  .crm-sent { text-align: center; padding: 40px 20px 16px; }
+  .crm-sent-icon { font-size: 48px; margin-bottom: 12px; }
+  .crm-sent-text { font-size: 19px; font-weight: 700; margin: 0 0 10px; }
 
   /* ---------- edit mode ---------- */
   section.block {
@@ -218,10 +227,12 @@ const CATEGORY_FALLBACK = 'Muut';
 const state = {
   companies: [], icps: {}, company: null, icp: null,
   view: 'picker',      // 'picker' | 'script'
-  screen: 'main',      // 'main' | 'objection' | 'objection-edit' | 'booking' | 'info' | 'edit'
+  screen: 'main',      // 'main' | 'objection' | 'objection-edit' | 'booking' | 'crm-lead' | 'info' | 'edit'
   openObjIdx: null,
   editMode: false, draft: null,
   objDraft: null,
+  crmLead: { companyName: '', phone: '', notes: '' },
+  crmLeadSent: false,
 };
 
 function key(company, icp) { return `${company}:${icp}`; }
@@ -265,7 +276,8 @@ function render() {
   else if (state.screen === 'voicemail') { screenEl.innerHTML = voicemailTemplate(); wireBack(); }
   else if (state.screen === 'objection') { screenEl.innerHTML = objectionTemplate(); wireBack(); }
   else if (state.screen === 'objection-edit') { screenEl.innerHTML = objectionEditTemplate(); wireObjectionEdit(); }
-  else if (state.screen === 'booking') { screenEl.innerHTML = bookingTemplate(); wireBack(); }
+  else if (state.screen === 'booking') { screenEl.innerHTML = bookingTemplate(); wireBooking(); }
+  else if (state.screen === 'crm-lead') { screenEl.innerHTML = crmLeadTemplate(); wireCrmLead(); }
   else if (state.screen === 'info') { screenEl.innerHTML = infoTemplate(); wireBack(); }
   else if (state.screen === 'edit') { screenEl.innerHTML = editTemplate(); wireEditHandlers(); }
 }
@@ -289,11 +301,11 @@ function renderTopbar() {
   } else {
     const back = {
       opening: 'main', voicemail: 'main', objection: 'main', 'objection-edit': 'objection',
-      booking: 'main', info: 'main', edit: 'main',
+      booking: 'main', 'crm-lead': 'booking', info: 'main', edit: 'main',
     }[state.screen] || 'main';
     titleHtml = ({
       opening: 'Avaus', voicemail: 'Vastaajaviesti', objection: 'Vastaväite', 'objection-edit': 'Muokkaa vastausta',
-      booking: 'Buukkaus', info: 'Ohjeet', edit: 'Muokkaa',
+      booking: 'Buukkaus', 'crm-lead': 'Lähetä liidi CRM:ään', info: 'Ohjeet', edit: 'Muokkaa',
     })[state.screen] || '';
     leftBtn = `<button class="back" id="topBack" data-to="${back}">←</button>`;
     if (state.screen === 'objection') {
@@ -552,9 +564,77 @@ function bookingTemplate() {
     <main>
       <p class="booking-say">${escapeHtml(doc.bookingAsk)}</p>
       <a class="calendar-link" href="${PALVELUPAALLIKKO_CALENDAR_URL}" target="_blank" rel="noopener">📅 Varaa aika palvelupäälliköltä</a>
-      <p class="info-note">Valitse asiakkaalle sopiva aika suoraan kalenterista puhelun aikana. Kirjaa buukkaus lisäksi normaaliin tapaan CRM:ään — automaattinen synkronointi ei ole vielä käytössä.</p>
+      <p class="info-note">Valitse asiakkaalle sopiva aika suoraan kalenterista puhelun aikana.</p>
+      <button type="button" class="crm-btn" id="crmLeadBtn">📤 Lähetä liidi CRM:ään</button>
+      <p class="info-note">Kun aika on varattu, lähetä liidin tiedot Melers CRM:ään.</p>
     </main>
   `;
+}
+
+function wireBooking() {
+  const crmLeadBtn = document.getElementById('crmLeadBtn');
+  if (crmLeadBtn) crmLeadBtn.onclick = () => {
+    state.crmLead = { companyName: '', phone: '', notes: '' };
+    state.crmLeadSent = false;
+    state.screen = 'crm-lead';
+    render();
+  };
+}
+
+/* ---------------- CRM lead screen (demo — not wired to a real CRM) ---------------- */
+function crmLeadTemplate() {
+  if (state.crmLeadSent) {
+    return `
+      <main>
+        <div class="crm-sent">
+          <div class="crm-sent-icon">✅</div>
+          <p class="crm-sent-text">Liidi lähetetty Melers CRM:ään.</p>
+          <p class="info-note">Demo — ei vielä yhdistetty oikeaan CRM-järjestelmään. Kirjaa buukkaus toistaiseksi myös normaaliin tapaan.</p>
+        </div>
+        <button type="button" class="crm-btn" id="crmLeadDone">Valmis — takaisin alkuun</button>
+      </main>
+    `;
+  }
+  const lead = state.crmLead;
+  return `
+    <main>
+      <section class="block">
+        <h2>Yrityksen nimi (asiakas)</h2>
+        <input type="text" id="crmCompanyName" value="${escapeHtml(lead.companyName)}" placeholder="esim. Hotelli Merituuli">
+      </section>
+      <section class="block">
+        <h2>Puhelinnumero</h2>
+        <input type="text" id="crmPhone" value="${escapeHtml(lead.phone)}" placeholder="+358...">
+      </section>
+      <section class="block">
+        <h2>Mitä keskusteltiin</h2>
+        <textarea id="crmNotes" rows="5" placeholder="Lyhyt yhteenveto puhelusta, vastaväitteet, sovittu aika...">${escapeHtml(lead.notes)}</textarea>
+      </section>
+    </main>
+    <div class="save-bar"><div class="inner">
+      <button class="save" id="crmSubmit" style="width:100%;">Lähetä CRM:ään</button>
+    </div></div>
+  `;
+}
+
+function wireCrmLead() {
+  if (state.crmLeadSent) {
+    document.getElementById('crmLeadDone').onclick = () => {
+      state.crmLeadSent = false;
+      state.crmLead = { companyName: '', phone: '', notes: '' };
+      state.view = 'picker'; state.icp = null;
+      render();
+    };
+    return;
+  }
+  const lead = state.crmLead;
+  document.getElementById('crmCompanyName').oninput = e => { lead.companyName = e.target.value; };
+  document.getElementById('crmPhone').oninput = e => { lead.phone = e.target.value; };
+  document.getElementById('crmNotes').oninput = e => { lead.notes = e.target.value; };
+  document.getElementById('crmSubmit').onclick = () => {
+    state.crmLeadSent = true;
+    render();
+  };
 }
 
 /* ---------------- info (rules) screen ---------------- */
