@@ -159,6 +159,15 @@
     width: 100%; font-family: 'Inter', sans-serif; font-size: 15px; padding: 10px 12px;
     border-radius: 8px; border: 1px solid var(--border); line-height: 1.5; resize: vertical;
   }
+  .edit-cat-group { margin-bottom: 18px; }
+  .edit-cat-header {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px;
+  }
+  .edit-cat-h { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); font-weight: 700; }
+  .cat-delete {
+    background: none; border: none; color: #C0392B; font-size: 12.5px; font-weight: 700;
+    cursor: pointer; padding: 4px 2px; font-family: inherit; flex-shrink: 0;
+  }
   .obj-row {
     display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; padding-bottom: 12px;
     border-bottom: 1px solid var(--border);
@@ -174,6 +183,12 @@
     background: var(--bg); border: 1px dashed var(--border); border-radius: 8px;
     padding: 9px 14px; cursor: pointer; font-size: 14px; color: var(--muted); font-weight: 600;
   }
+  .danger-btn {
+    display: block; width: 100%; text-align: center; background: transparent; color: #C0392B;
+    border: 1px solid #F0C4BE; border-radius: 10px; padding: 12px; font-weight: 700; font-size: 14px;
+    cursor: pointer; font-family: inherit; margin-top: 4px;
+  }
+  .danger-btn:active { background: #FDEDEB; }
   .save-bar {
     position: fixed; bottom: 0; left: 0; right: 0; background: var(--navy);
     padding: 14px 16px calc(14px + env(safe-area-inset-bottom)); display: flex; gap: 12px; justify-content: center; z-index: 20;
@@ -464,6 +479,7 @@ function objectionEditTemplate() {
         <h2>Paras vastaus</h2>
         <textarea id="objEditResponse" rows="7">${escapeHtml(draft.response)}</textarea>
       </section>
+      <button type="button" class="danger-btn" id="objEditDelete">🗑 Poista tämä vastaväite</button>
     </main>
     <div class="save-bar"><div class="inner">
       <button class="discard" id="objEditDiscard">Hylkää</button>
@@ -479,6 +495,17 @@ function wireObjectionEdit() {
   document.getElementById('objEditResponse').oninput = e => { draft.response = e.target.value; };
   document.getElementById('objEditDiscard').onclick = () => {
     state.objDraft = null; state.screen = 'objection'; render();
+  };
+  document.getElementById('objEditDelete').onclick = async () => {
+    if (!confirm('Poistetaanko tämä vastaväite pysyvästi?')) return;
+    const liveDoc = state.icps[key(state.company, state.icp)];
+    const updatedDoc = JSON.parse(JSON.stringify(liveDoc));
+    updatedDoc.objections.splice(state.openObjIdx, 1);
+    updatedDoc.company = state.company; updatedDoc.icp = state.icp;
+    const result = await api('/api/icp', 'POST', updatedDoc);
+    state.icps[key(state.company, state.icp)] = result.icp;
+    state.objDraft = null; state.openObjIdx = null; state.screen = 'main';
+    render();
   };
   document.getElementById('objEditSave').onclick = async () => {
     const liveDoc = state.icps[key(state.company, state.icp)];
@@ -581,19 +608,28 @@ function wireEditHandlers() {
 function renderObjEditList() {
   const doc = state.draft;
   const wrap = document.getElementById('objEditList');
-  wrap.innerHTML = doc.objections.map((o, i) => `
-    <div class="obj-row">
-      <div class="obj-row-top">
-        <input type="text" placeholder="Vastaväite" data-obj="${i}" data-part="trigger" value="${escapeHtml(o.trigger)}">
-        <select data-obj="${i}" data-part="category">
-          <option value="">${CATEGORY_FALLBACK}</option>
-          ${CATEGORY_ORDER.map(c => `<option value="${c}" ${o.category === c ? 'selected' : ''}>${c}</option>`).join('')}
-        </select>
-        <button class="row-remove" data-remove="${i}">✕</button>
+  const groups = groupObjections(doc.objections || []);
+  wrap.innerHTML = groups.map(g => `
+    <div class="edit-cat-group">
+      <div class="edit-cat-header">
+        <span class="edit-cat-h">${escapeHtml(g.cat)}</span>
+        <button type="button" class="cat-delete" data-cat="${escapeHtml(g.cat)}">🗑 Poista kategoria</button>
       </div>
-      <textarea rows="2" placeholder="Vastaus" data-obj="${i}" data-part="response">${escapeHtml(o.response)}</textarea>
+      ${g.items.map(o => `
+        <div class="obj-row">
+          <div class="obj-row-top">
+            <input type="text" placeholder="Vastaväite" data-obj="${o.idx}" data-part="trigger" value="${escapeHtml(o.trigger)}">
+            <select data-obj="${o.idx}" data-part="category">
+              <option value="">${CATEGORY_FALLBACK}</option>
+              ${CATEGORY_ORDER.map(c => `<option value="${c}" ${o.category === c ? 'selected' : ''}>${c}</option>`).join('')}
+            </select>
+            <button type="button" class="row-remove" data-remove="${o.idx}">✕</button>
+          </div>
+          <textarea rows="2" placeholder="Vastaus" data-obj="${o.idx}" data-part="response">${escapeHtml(o.response)}</textarea>
+        </div>
+      `).join('')}
     </div>
-  `).join('');
+  `).join('') || '<p style="color:var(--muted);font-size:14px;">Ei vielä vastaväitteitä.</p>';
   wrap.querySelectorAll('[data-obj]').forEach(el => {
     el.oninput = () => {
       const i = parseInt(el.dataset.obj, 10);
@@ -602,6 +638,15 @@ function renderObjEditList() {
   });
   wrap.querySelectorAll('[data-remove]').forEach(el => {
     el.onclick = () => { doc.objections.splice(parseInt(el.dataset.remove, 10), 1); renderObjEditList(); };
+  });
+  wrap.querySelectorAll('.cat-delete').forEach(el => {
+    el.onclick = () => {
+      const cat = el.dataset.cat;
+      const count = doc.objections.filter(o => ((o.category || '').trim() || CATEGORY_FALLBACK) === cat).length;
+      if (!confirm(`Poistetaanko kategoria "${cat}" ja sen ${count} vastaväitettä?`)) return;
+      doc.objections = doc.objections.filter(o => ((o.category || '').trim() || CATEGORY_FALLBACK) !== cat);
+      renderObjEditList();
+    };
   });
 }
 
