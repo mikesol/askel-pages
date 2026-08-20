@@ -155,7 +155,7 @@
     font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em;
     color: var(--muted); margin: 0 0 10px; font-weight: 700;
   }
-  textarea, input[type=text] {
+  textarea, input[type=text], select.block-select {
     width: 100%; font-family: 'Inter', sans-serif; font-size: 15px; padding: 10px 12px;
     border-radius: 8px; border: 1px solid var(--border); line-height: 1.5; resize: vertical;
   }
@@ -202,9 +202,10 @@ const CATEGORY_FALLBACK = 'Muut';
 const state = {
   companies: [], icps: {}, company: null, icp: null,
   view: 'picker',      // 'picker' | 'script'
-  screen: 'main',      // 'main' | 'objection' | 'booking' | 'info' | 'edit'
+  screen: 'main',      // 'main' | 'objection' | 'objection-edit' | 'booking' | 'info' | 'edit'
   openObjIdx: null,
   editMode: false, draft: null,
+  objDraft: null,
 };
 
 function key(company, icp) { return `${company}:${icp}`; }
@@ -246,6 +247,7 @@ function render() {
   if (state.screen === 'main') { screenEl.innerHTML = mainTemplate(); wireMain(); }
   else if (state.screen === 'opening') { screenEl.innerHTML = openingTemplate(); wireBack(); }
   else if (state.screen === 'objection') { screenEl.innerHTML = objectionTemplate(); wireBack(); }
+  else if (state.screen === 'objection-edit') { screenEl.innerHTML = objectionEditTemplate(); wireObjectionEdit(); }
   else if (state.screen === 'booking') { screenEl.innerHTML = bookingTemplate(); wireBack(); }
   else if (state.screen === 'info') { screenEl.innerHTML = infoTemplate(); wireBack(); }
   else if (state.screen === 'edit') { screenEl.innerHTML = editTemplate(); wireEditHandlers(); }
@@ -268,11 +270,17 @@ function renderTopbar() {
       <button class="icon-btn" id="editToggle">✎</button>
     `;
   } else {
-    const back = { opening: 'main', objection: 'main', booking: 'main', info: 'main', edit: 'main' }[state.screen] || 'main';
+    const back = {
+      opening: 'main', objection: 'main', 'objection-edit': 'objection', booking: 'main', info: 'main', edit: 'main',
+    }[state.screen] || 'main';
     titleHtml = ({
-      opening: 'Avaus', objection: 'Vastaväite', booking: 'Buukkaus', info: 'Ohjeet', edit: 'Muokkaa',
+      opening: 'Avaus', objection: 'Vastaväite', 'objection-edit': 'Muokkaa vastausta',
+      booking: 'Buukkaus', info: 'Ohjeet', edit: 'Muokkaa',
     })[state.screen] || '';
     leftBtn = `<button class="back" id="topBack" data-to="${back}">←</button>`;
+    if (state.screen === 'objection') {
+      rightBtns = `<button class="icon-btn" id="objEditBtn" title="Muokkaa vastausta">✎</button>`;
+    }
   }
 
   bar.innerHTML = `<div class="topbar">${leftBtn}<div class="title">${titleHtml}</div>${rightBtns}</div>`;
@@ -283,11 +291,23 @@ function renderTopbar() {
     else if (state.screen === 'edit') {
       if (state.editMode && !confirm('Hylätäänkö tallentamattomat muutokset?')) return;
       state.editMode = false; state.draft = null; state.screen = 'main';
+    } else if (state.screen === 'objection-edit') {
+      if (!confirm('Hylätäänkö tallentamattomat muutokset?')) return;
+      state.objDraft = null; state.screen = 'objection';
     } else { state.screen = backBtn.dataset.to || 'main'; }
     render();
   };
   const infoBtn = document.getElementById('infoBtn');
   if (infoBtn) infoBtn.onclick = () => { state.screen = 'info'; render(); };
+  const objEditBtn = document.getElementById('objEditBtn');
+  if (objEditBtn) objEditBtn.onclick = () => {
+    const doc = state.icps[key(state.company, state.icp)];
+    const o = doc && doc.objections[state.openObjIdx];
+    if (!o) return;
+    state.objDraft = { ...o };
+    state.screen = 'objection-edit';
+    render();
+  };
   const editToggle = document.getElementById('editToggle');
   if (editToggle) editToggle.onclick = () => {
     const existing = state.icps[key(state.company, state.icp)];
@@ -421,6 +441,55 @@ function objectionTemplate() {
       <p class="answer-say">${escapeHtml(o.response)}</p>
     </main>
   `;
+}
+
+/* ---------------- objection edit screen ---------------- */
+function objectionEditTemplate() {
+  const draft = state.objDraft;
+  if (!draft) return `<main><p>Ei muokattavaa.</p></main>`;
+  return `
+    <main>
+      <section class="block">
+        <h2>Vastaväite</h2>
+        <input type="text" id="objEditTrigger" value="${escapeHtml(draft.trigger)}">
+      </section>
+      <section class="block">
+        <h2>Kategoria</h2>
+        <select class="block-select" id="objEditCategory">
+          <option value="">${CATEGORY_FALLBACK}</option>
+          ${CATEGORY_ORDER.map(c => `<option value="${escapeHtml(c)}" ${draft.category === c ? 'selected' : ''}>${escapeHtml(c)}</option>`).join('')}
+        </select>
+      </section>
+      <section class="block">
+        <h2>Paras vastaus</h2>
+        <textarea id="objEditResponse" rows="7">${escapeHtml(draft.response)}</textarea>
+      </section>
+    </main>
+    <div class="save-bar"><div class="inner">
+      <button class="discard" id="objEditDiscard">Hylkää</button>
+      <button class="save" id="objEditSave">Tallenna</button>
+    </div></div>
+  `;
+}
+
+function wireObjectionEdit() {
+  const draft = state.objDraft;
+  document.getElementById('objEditTrigger').oninput = e => { draft.trigger = e.target.value; };
+  document.getElementById('objEditCategory').onchange = e => { draft.category = e.target.value; };
+  document.getElementById('objEditResponse').oninput = e => { draft.response = e.target.value; };
+  document.getElementById('objEditDiscard').onclick = () => {
+    state.objDraft = null; state.screen = 'objection'; render();
+  };
+  document.getElementById('objEditSave').onclick = async () => {
+    const liveDoc = state.icps[key(state.company, state.icp)];
+    const updatedDoc = JSON.parse(JSON.stringify(liveDoc));
+    updatedDoc.objections[state.openObjIdx] = { ...draft };
+    updatedDoc.company = state.company; updatedDoc.icp = state.icp;
+    const result = await api('/api/icp', 'POST', updatedDoc);
+    state.icps[key(state.company, state.icp)] = result.icp;
+    state.objDraft = null; state.screen = 'objection';
+    render();
+  };
 }
 
 /* ---------------- booking screen ---------------- */
