@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v3-draft — Find/Fund/Grow restructure, 11 slides, stock photo placeholders -->
+<!-- v4-draft — Find/Fund/Grow restructure, 12 slides, stock photo placeholders -->
 <html lang="en">
 <head>
   <meta name="robots" content="noindex, nofollow">
@@ -272,6 +272,12 @@
     object-position: center;
     border-radius: 3px;
     display: block;
+  }
+
+  /* ── Diagonal-cut photo modifier ────── */
+  .split-photo.slant img {
+    clip-path: polygon(16% 0, 100% 0, 100% 100%, 0% 100%);
+    border-radius: 0;
   }
 
   /* ── Overview fact table ────────────── */
@@ -743,6 +749,7 @@
     .slide-split { flex-direction: column; }
     .split-photo, .split-photo.narrow { flex: none; max-width: 100%; width: 100%; min-height: unset; }
     .split-photo img { height: 22vh; min-height: unset; }
+    .split-photo.slant img { clip-path: none; }
 
     .team-layout { flex-direction: column; }
     .team-photo-wrap { flex: none; max-width: 100%; width: 100%; min-height: unset; }
@@ -814,9 +821,9 @@
             </div>
           </div>
           <div class="points single">
-            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>The silver tsunami is here.</strong> Essential small businesses are profitable and resilient — but founder-led and approaching succession transition.</div></div>
-            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Structural gap in the market.</strong> Too small for traditional private equity, too operationally demanding for passive investors.</div></div>
-            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Attractive entry multiples.</strong> Stable, cash-generative businesses at 3–4× EBITDA — unavailable at scale in any other asset class.</div></div>
+            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Why now.</strong> The silver tsunami is here — essential small businesses are profitable and resilient, but founder-led and approaching succession transition.</div></div>
+            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Why the gap exists.</strong> These targets are too small for traditional private equity, too operationally demanding for passive investors.</div></div>
+            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Why the entry is attractive.</strong> Stable, cash-generative businesses at 3–4× EBITDA — unavailable at scale in any other asset class.</div></div>
           </div>
         </div>
         <div class="split-photo">
@@ -947,6 +954,26 @@
       </div>
     </section>
 
+    <!-- ── 7b. CASE STUDY: MELERS OY (new) ── -->
+    <section data-background-color="#faf8f5">
+      <div class="label">Case Study</div>
+      <div class="rule"></div>
+      <h2>Deal #1: <span class="accent">Melers Oy.</span></h2>
+      <div class="slide-split">
+        <div class="split-content">
+          <div class="terms-grid">
+            <div class="term"><div class="term-label">Deal overview</div><div class="term-value">Commercial dry cleaning &amp; laundry, Turku region. Operating since <strong>1967</strong>. 100% acquisition, closed <strong>Jan 2026</strong>.</div></div>
+            <div class="term"><div class="term-label">Business snapshot</div><div class="term-value">Revenue <strong>~€490K</strong>, EBITDA <strong>€115K</strong> (23% margin). 400 customers, B2B/B2C mix.</div></div>
+            <div class="term"><div class="term-label">Financing</div><div class="term-value">€400K purchase price — funded via bank loan (Finnvera-backed), seller earn-out, and founder equity. No outside capital needed for deal #1.</div></div>
+            <div class="term"><div class="term-label">Value-creation plan</div><div class="term-value">Workflow automation, AI-enabled booking &amp; customer service, standardized SOPs. Target: <strong>+30–100% EBITDA</strong> within 24 months.</div></div>
+          </div>
+        </div>
+        <div class="split-photo slant">
+          <img src="https://picsum.photos/seed/askel-melers-case/900/1100?grayscale" alt="">
+        </div>
+      </div>
+    </section>
+
     <!-- ── 8. FUND ──────────────────────── -->
     <section data-background-color="#faf8f5">
       <div class="engine"><span class="engine-word">Fund</span><span class="engine-step">02 / 03</span></div>
@@ -959,6 +986,8 @@
             <div class="term"><div class="term-label">Use of funds</div><div class="term-value">Next 5 acquisitions to reach compounding scale.</div></div>
             <div class="term"><div class="term-label">Financial target</div><div class="term-value">Grow portfolio companies <strong>10–20%/yr.</strong> Exit at 6–8× EBITDA. Target holdco IRR 25–35%.</div></div>
             <div class="term"><div class="term-label">Minimum ticket</div><div class="term-value"><strong>€100,000.</strong> Closing on a rolling basis.</div></div>
+            <div class="term"><div class="term-label">Exit strategy</div><div class="term-value">Scale &amp; sell each portfolio company at <strong>5–10×</strong> entry value, or hold for long-term dividend income.</div></div>
+            <div class="term"><div class="term-label">Dividend timeline</div><div class="term-value">Predictable payouts starting <strong>Year 3</strong>, distributed pro-rata to shareholders.</div></div>
           </div>
         </div>
         <div class="split-photo">
@@ -982,7 +1011,7 @@
             <div class="point"><div class="point-dot"></div><div class="point-text">Not a thesis — a trajectory already underway, with acquisition #1 cash-flowing and #2 closing.</div></div>
           </div>
         </div>
-        <div class="split-photo">
+        <div class="split-photo slant">
           <img src="https://picsum.photos/seed/askel-skyline/900/1100?grayscale" alt="">
         </div>
       </div>
@@ -1029,7 +1058,12 @@
       <div class="wordmark">Askel Ventures</div>
       <div class="cover-body">
         <div class="cover-cta-block">
-          <h1>Acquiring <span class="accent">boring businesses.</span><br>Building compounding value.</h1>
+          <h1>Choose your <span class="accent">next step.</span></h1>
+          <div class="points single">
+            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>The data.</strong> Ask us for full financials, deal terms, and the current pipeline.</div></div>
+            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>The introduction.</strong> Meet Melers Oy — our first live case, cash-flowing today.</div></div>
+            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>The conversation.</strong> 30 minutes, no pitch — just questions.</div></div>
+          </div>
           <a href="https://calendar.google.com/appointments/schedules/AcZssZ3nIFYnBCPbFINd2KpVepM5rtsSx1N0eQBgBG5w1xDcDRHhXTZBtXfoUq1X0R3D10zVGDz9qqZc" target="_blank" class="cta-btn">Book a conversation →</a>
         </div>
       </div>
