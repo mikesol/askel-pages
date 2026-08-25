@@ -89,6 +89,14 @@
 
   .reveal .accent { color: var(--red); }
 
+  /* ── Brand gradient hue (orange → lilac) ── */
+  .hue-gradient {
+    background: linear-gradient(90deg, #e8935a 0%, #7b6fd6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
   /* ── Act label (wayfinding for solo readers) ── */
   .act-label {
     display: inline-flex;
@@ -99,13 +107,19 @@
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--turquoise);
-    opacity: 0.75;
+    opacity: 0.85;
     margin-bottom: 1em;
   }
 
+  .act-label .act-text {
+    background: linear-gradient(90deg, #e8935a 0%, #7b6fd6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
   .act-label .act-num {
-    color: var(--turquoise);
+    color: #7b6fd6;
     border: 1px solid var(--border);
     border-radius: 999px;
     width: 1.7em;
@@ -124,8 +138,11 @@
     font-weight: 700;
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: var(--turquoise);
     margin-bottom: 1em;
+    background: linear-gradient(90deg, #e8935a 0%, #7b6fd6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
   /* ── Engine label (FIND / FUND / GROW) ── */
@@ -142,7 +159,10 @@
     font-size: clamp(0.85rem, 1.6vw, 1.15rem);
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--turquoise);
+    background: linear-gradient(90deg, #e8935a 0%, #7b6fd6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
   .engine-step {
@@ -892,7 +912,7 @@
 
     <!-- ── 2. OVERVIEW (new) ───────────── -->
     <section data-background-color="#000000">
-      <div class="act-label"><span class="act-num">I</span>The Case</div>
+      <div class="act-label"><span class="act-num">I</span><span class="act-text">The Case</span></div>
       <div class="label">Overview</div>
       <div class="rule"></div>
       <h2>Askel Ventures <span class="accent">at a glance.</span></h2>
@@ -919,7 +939,7 @@
 
     <!-- ── 2b. 3X WHY ASKEL (new) ──────── -->
     <section data-background-color="#000000">
-      <div class="act-label"><span class="act-num">I</span>The Case</div>
+      <div class="act-label"><span class="act-num">I</span><span class="act-text">The Case</span></div>
       <div class="label">3x Why</div>
       <div class="rule"></div>
       <h2>Why <span class="accent">Askel,</span> why now, why us.</h2>
@@ -940,7 +960,7 @@
 
     <!-- ── 3. THE OPPORTUNITY ──────────── -->
     <section data-background-color="#000000">
-      <div class="act-label"><span class="act-num">I</span>The Case</div>
+      <div class="act-label"><span class="act-num">I</span><span class="act-text">The Case</span></div>
       <div class="label">The Opportunity</div>
       <div class="rule"></div>
       <h2>A wave of <span class="accent">succession transitions</span><br>no one is equipped to handle.</h2>
@@ -974,7 +994,7 @@
 
     <!-- ── 4. FIND ──────────────────────── -->
     <section data-background-color="#000000">
-      <div class="act-label"><span class="act-num">II</span>The Engine</div>
+      <div class="act-label"><span class="act-num">II</span><span class="act-text">The Engine</span></div>
       <div class="engine"><span class="engine-word">Find</span><span class="engine-step">01 / 03</span></div>
       <div class="rule"></div>
       <h2>We find acquisition targets<br><span class="accent">before they reach the market.</span></h2>
@@ -1010,7 +1030,7 @@
 
     <!-- ── 5. WHAT IS A BORING BUSINESS (new) ── -->
     <section data-background-color="#000000">
-      <div class="act-label"><span class="act-num">II</span>The Engine</div>
+      <div class="act-label"><span class="act-num">II</span><span class="act-text">The Engine</span></div>
       <div class="label">What Is a Boring Business</div>
       <div class="rule"></div>
       <h2>"Boring" is a <span class="accent">feature,</span><br>not a compromise.</h2>
@@ -1033,7 +1053,7 @@
 
     <!-- ── 6. GROW ──────────────────────── -->
     <section data-background-color="#000000">
-      <div class="act-label"><span class="act-num">II</span>The Engine</div>
+      <div class="act-label"><span class="act-num">II</span><span class="act-text">The Engine</span></div>
       <div class="engine"><span class="engine-word">Grow</span><span class="engine-step">03 / 03</span></div>
       <div class="rule"></div>
       <h2><span class="accent">The Askel Effect</span> — how boring<br>becomes extraordinary.</h2>
@@ -1077,7 +1097,7 @@
 
     <!-- ── 7. PROOF OF PLAYBOOK (new) ──── -->
     <section data-background-color="#000000">
-      <div class="act-label"><span class="act-num">II</span>The Engine</div>
+      <div class="act-label"><span class="act-num">II</span><span class="act-text">The Engine</span></div>
       <div class="label">Proof of Playbook</div>
       <div class="rule"></div>
       <h2>We're not pitching a plan.<br>We're <span class="accent">showing our work.</span></h2>
@@ -1100,7 +1120,7 @@
 
     <!-- ── 7b. CASE STUDY: MELERS OY (new) ── -->
     <section data-background-color="#000000">
-      <div class="act-label"><span class="act-num">II</span>The Engine</div>
+      <div class="act-label"><span class="act-num">II</span><span class="act-text">The Engine</span></div>
       <div class="label">Case Study</div>
       <div class="rule"></div>
       <h2>Deal #1: <span class="accent">Melers Oy.</span></h2>
@@ -1136,7 +1156,7 @@
 
     <!-- ── 7c. WHY THIS MATTERS TO YOU (new) ── -->
     <section data-background-color="#000000">
-      <div class="act-label"><span class="act-num">II</span>The Engine</div>
+      <div class="act-label"><span class="act-num">II</span><span class="act-text">The Engine</span></div>
       <div class="label">Why This Matters To You</div>
       <div class="rule"></div>
       <h2>Real cash flow. <span class="accent">Real ownership.</span></h2>
@@ -1157,7 +1177,7 @@
 
     <!-- ── 8. FUND ──────────────────────── -->
     <section data-background-color="#000000">
-      <div class="act-label"><span class="act-num">II</span>The Engine</div>
+      <div class="act-label"><span class="act-num">II</span><span class="act-text">The Engine</span></div>
       <div class="engine"><span class="engine-word">Fund</span><span class="engine-step">02 / 03</span></div>
       <div class="rule"></div>
       <h2>Equity in Askel Ventures.<br><span class="accent">Raising up to €1M.</span></h2>
@@ -1180,7 +1200,7 @@
 
     <!-- ── 9. THE VISION (new) ─────────── -->
     <section data-background-color="#000000">
-      <div class="act-label"><span class="act-num">III</span>The Ask</div>
+      <div class="act-label"><span class="act-num">III</span><span class="act-text">The Ask</span></div>
       <div class="label">The Vision</div>
       <div class="rule"></div>
       <h2>One acquisition is proof.<br>A portfolio is <span class="accent">the business.</span></h2>
@@ -1202,7 +1222,7 @@
 
     <!-- ── 10. THE TEAM ─────────────────── -->
     <section data-background-color="#000000">
-      <div class="act-label"><span class="act-num">III</span>The Ask</div>
+      <div class="act-label"><span class="act-num">III</span><span class="act-text">The Ask</span></div>
       <div class="label">The Team</div>
       <div class="rule"></div>
       <h2>Four founders. <span class="accent">Four obsessions.</span></h2>
