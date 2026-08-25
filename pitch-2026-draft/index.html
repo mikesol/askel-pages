@@ -485,6 +485,8 @@
     line-height: 1.6;
   }
 
+  .tagline strong { color: var(--dark); font-weight: 700; }
+
   .dimension {
     border-top: 1.5px solid var(--border);
     padding-top: 0.7em;
@@ -632,6 +634,33 @@
   }
 
   .case-links a:hover { border-bottom-color: var(--dark); }
+
+  .partner-logos {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-bottom: 1.4em;
+  }
+
+  .partner-logos-label {
+    font-size: clamp(0.58rem, 0.85vw, 0.66rem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-right: 0.3em;
+  }
+
+  .partner-logo-card {
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 0.4em 0.9em;
+    display: flex;
+    align-items: center;
+    height: 34px;
+  }
+
+  .partner-logo-card img { height: 100%; width: auto; display: block; }
 
   /* ── Stat strip (Find) ─────────────── */
   .stat-strip {
@@ -1181,10 +1210,15 @@
         <img class="case-logo" src="melers-logo.png" alt="Melers logo">
       </div>
       <div class="terms-grid" style="margin-bottom:1.2em;">
-        <div class="term"><div class="term-label">Deal overview</div><div class="term-value">Commercial dry cleaning &amp; laundry, Turku region — operating since <strong>1967</strong>. 100% acquisition, closed <strong>Jan 2026</strong> in <strong>&lt;100 days</strong>.</div></div>
-        <div class="term"><div class="term-label">Business snapshot</div><div class="term-value">Revenue <strong>~€490K</strong>, EBITDA <strong>€115K</strong> (23% margin). 400 customers, B2B/B2C mix.<div class="case-links"><a href="https://melers.fi" target="_blank" rel="noopener">melers.fi ↗</a><a href="https://turunsuurpesula.fi" target="_blank" rel="noopener">turunsuurpesula.fi ↗</a></div></div></div>
-        <div class="term"><div class="term-label">Financing</div><div class="term-value"><strong>€400K</strong> purchase price — bank loan (Finnvera-backed), seller earn-out, founder equity. No outside capital needed.</div></div>
+        <div class="term"><div class="term-label">Deal overview</div><div class="term-value">Commercial dry cleaning &amp; laundry, Turku region — operating since <strong>1967</strong> (founded 2001). 100% acquisition, closed <strong>Jan 2026</strong> in <strong>&lt;100 days</strong>.</div></div>
+        <div class="term"><div class="term-label">Business snapshot</div><div class="term-value">Revenue <strong>~€490K</strong>, EBITDA <strong>€115K</strong> (23% margin). 400 customers, 60/40 B2B/B2C mix. 4.5 FTE + 2 owners transitioning.<div class="case-links"><a href="https://melers.fi" target="_blank" rel="noopener">melers.fi ↗</a><a href="https://turunsuurpesula.fi" target="_blank" rel="noopener">turunsuurpesula.fi ↗</a></div></div></div>
+        <div class="term"><div class="term-label">Financing</div><div class="term-value"><strong>€400K</strong> purchase price — OP bank loan (Finnvera-backed), seller earn-out, founder equity. No outside capital needed.</div></div>
         <div class="term"><div class="term-label">Value-creation plan</div><div class="term-value">Workflow automation, AI-enabled booking &amp; customer service, standardized SOPs. Target: <strong>+30–100% EBITDA</strong> in 24 months.</div></div>
+      </div>
+      <div class="partner-logos">
+        <span class="partner-logos-label">Backed by</span>
+        <div class="partner-logo-card"><img src="op-logo.svg" alt="OP"></div>
+        <div class="partner-logo-card"><img src="business-finland-logo.jpg" alt="Business Finland"></div>
       </div>
       <div class="label-row">
         <div class="label">What We've Already Done</div>
@@ -1211,6 +1245,7 @@
           <div class="fw-step"><div class="fw-label">Growth Stage</div><div class="fw-desc"><div>Tracking toward EBITDA target</div><div>Positioned for deal #2</div></div></div>
         </div>
       </div>
+      <div class="tagline"><strong>Proof-of-concept.</strong> Deal #1 exists to prove the playbook works — turning an owner-operated business into a professionally managed, data-driven one. Everything above is real, not projected.</div>
     </section>
 
     <!-- ── 10. THE VISION (new) ────────── -->
