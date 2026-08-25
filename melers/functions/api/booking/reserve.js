@@ -8,9 +8,28 @@ function helsinkiToday() {
   return new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Helsinki' });
 }
 
+// ISO-8601 week number (Mon-start, week 1 = week containing the year's first Thursday).
+function getISOWeek(d) {
+  const date = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+  const dayNum = (date.getUTCDay() + 6) % 7;
+  date.setUTCDate(date.getUTCDate() - dayNum + 3);
+  const firstThursday = new Date(Date.UTC(date.getUTCFullYear(), 0, 4));
+  const firstThursdayDayNum = (firstThursday.getUTCDay() + 6) % 7;
+  firstThursday.setUTCDate(firstThursday.getUTCDate() - firstThursdayDayNum + 3);
+  return 1 + Math.round((date - firstThursday) / 604800000);
+}
+
+// Fridays on even ISO weeks (parillinen viikko) are closed for booking — even-week overwork fix.
+function isBlockedFriday(d) {
+  return d.getUTCDay() === 5 && getISOWeek(d) % 2 === 0;
+}
+
 function isValidSlotDate(dateStr) {
   const d = new Date(dateStr + 'T12:00:00Z');
-  return d.getUTCDay() === 2 || d.getUTCDay() === 5;
+  const day = d.getUTCDay();
+  if (day !== 2 && day !== 5) return false;
+  if (isBlockedFriday(d)) return false;
+  return true;
 }
 
 export async function onRequestPost(context) {

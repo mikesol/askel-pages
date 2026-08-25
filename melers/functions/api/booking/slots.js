@@ -7,7 +7,23 @@ function helsinkiToday() {
   return new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Helsinki' }); // "YYYY-MM-DD"
 }
 
-// Next N Tue/Fri dates from tomorrow (Helsinki).
+// ISO-8601 week number (Mon-start, week 1 = week containing the year's first Thursday).
+function getISOWeek(d) {
+  const date = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+  const dayNum = (date.getUTCDay() + 6) % 7;
+  date.setUTCDate(date.getUTCDate() - dayNum + 3);
+  const firstThursday = new Date(Date.UTC(date.getUTCFullYear(), 0, 4));
+  const firstThursdayDayNum = (firstThursday.getUTCDay() + 6) % 7;
+  firstThursday.setUTCDate(firstThursday.getUTCDate() - firstThursdayDayNum + 3);
+  return 1 + Math.round((date - firstThursday) / 604800000);
+}
+
+// Fridays on even ISO weeks (parillinen viikko) are closed for booking — even-week overwork fix.
+function isBlockedFriday(d) {
+  return d.getUTCDay() === 5 && getISOWeek(d) % 2 === 0;
+}
+
+// Next N Tue/Fri dates from tomorrow (Helsinki), skipping blocked even-week Fridays.
 function deliveryDates(n = 60) {
   const today = helsinkiToday();
   const dates = [];
@@ -15,7 +31,7 @@ function deliveryDates(n = 60) {
   d.setUTCDate(d.getUTCDate() + 1);
   while (dates.length < n) {
     const day = d.getUTCDay();
-    if (day === 2 || day === 5) dates.push({ date: d.toISOString().slice(0, 10), day });
+    if ((day === 2 || day === 5) && !isBlockedFriday(d)) dates.push({ date: d.toISOString().slice(0, 10), day });
     d.setUTCDate(d.getUTCDate() + 1);
   }
   return dates;
