@@ -202,7 +202,12 @@
 
   .cover-body { flex: 1; display: flex; align-items: center; }
 
-  .hue-turquoise { color: #dde9eb; }
+  .hue-turquoise {
+    background: linear-gradient(90deg, var(--dark) 0%, var(--dark) 45%, #8fd0d6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 
   .not-a-fund {
     display: inline-flex;
