@@ -380,6 +380,29 @@
     border-radius: 0;
   }
 
+  /* ── Corner triangle photo (Find) ──── */
+  .slide-corner-photo { position: relative; overflow: hidden; }
+
+  .corner-photo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 38%;
+    height: 52%;
+    z-index: 0;
+    clip-path: polygon(100% 0, 100% 100%, 0 0);
+  }
+
+  .corner-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .content-narrow { max-width: 58%; }
+
   /* ── Full-height bleed photo (Overview) ── */
   .slide-photo-bleed {
     position: relative;
@@ -920,6 +943,9 @@
 
     .bleed-photo { position: relative; width: 100%; height: 22vh; order: -1; margin-bottom: 1em; }
     .content-clear { padding-right: 0; }
+
+    .corner-photo { position: relative; width: 100%; height: 22vh; clip-path: none; order: -1; margin-bottom: 1em; }
+    .content-narrow { max-width: 100%; }
   }
 </style>
 </head>
@@ -1012,37 +1038,34 @@
     </section>
 
     <!-- ── 4. FIND ──────────────────────── -->
-    <section data-background-color="#000000">
+    <section class="slide-corner-photo" data-background-color="#000000">
+      <div class="corner-photo"><img src="https://picsum.photos/seed/askel-sourcing/900/900?grayscale" alt=""></div>
       <div class="act-label"><span class="act-num">II</span><span class="act-text">The Engine</span></div>
       <div class="engine"><span class="engine-word">Find</span><span class="engine-step">01 / 03</span></div>
       <div class="rule"></div>
-      <h2>We find acquisition targets<br><span class="accent">before they reach the market.</span></h2>
-      <div class="slide-split">
-        <div class="split-content">
-          <div class="stat-strip">
-            <div class="stat-item"><div class="stat-num">94+</div><div class="stat-lbl">companies analyzed</div></div>
-            <div class="stat-item"><div class="stat-num">100+</div><div class="stat-lbl">brokers tracked</div></div>
-            <div class="stat-item"><div class="stat-num">50-item</div><div class="stat-lbl">DD framework</div></div>
-            <div class="stat-item"><div class="stat-num">&lt;100 days</div><div class="stat-lbl">first close</div></div>
-          </div>
-          <div class="pipeline">
-            <div class="pipe-stage"><div class="pipe-label">Sourcing</div><div class="pipe-count">Weekly</div></div>
-            <div class="pipe-arrow">→</div>
-            <div class="pipe-stage"><div class="pipe-label">Screening</div><div class="pipe-count">Active</div></div>
-            <div class="pipe-arrow">→</div>
-            <div class="pipe-stage"><div class="pipe-label">IC</div><div class="pipe-count">Selective</div></div>
-            <div class="pipe-arrow">→</div>
-            <div class="pipe-stage"><div class="pipe-label">DD</div><div class="pipe-count">Rigorous</div></div>
-            <div class="pipe-arrow">→</div>
-            <div class="pipe-stage"><div class="pipe-label">Acquired</div><div class="pipe-count">✓</div></div>
-          </div>
-          <div class="points single">
-            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Steve — AI sourcing agent.</strong> Runs weekly sweeps across broker networks and weak signals, scores targets against thesis criteria. Human judgment closes; AI never sleeps.</div></div>
-            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Broker network.</strong> Active relationships with 100+ brokers across Finland and Scandinavia — many of our best leads arrive off-market.</div></div>
-          </div>
+      <h2>How we find acquisition targets<br><span class="accent">before they reach the market.</span></h2>
+      <div class="content-narrow">
+        <div class="stat-strip">
+          <div class="stat-item"><div class="stat-num">20+</div><div class="stat-lbl">active brokers</div></div>
+          <div class="stat-item"><div class="stat-num">400</div><div class="stat-lbl">deal pipeline ("salkku")</div></div>
+          <div class="stat-item"><div class="stat-num">31-point</div><div class="stat-lbl">screening process</div></div>
+          <div class="stat-item"><div class="stat-num">&lt;100 days</div><div class="stat-lbl">first close</div></div>
         </div>
-        <div class="split-photo">
-          <img src="https://picsum.photos/seed/askel-sourcing/900/1100?grayscale" alt="">
+        <div class="pipeline">
+          <div class="pipe-stage"><div class="pipe-label">Sourcing</div><div class="pipe-count">Weekly</div></div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-stage"><div class="pipe-label">Screening</div><div class="pipe-count">Active</div></div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-stage"><div class="pipe-label">IC</div><div class="pipe-count">Selective</div></div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-stage"><div class="pipe-label">DD</div><div class="pipe-count">Rigorous</div></div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-stage"><div class="pipe-label">Acquired</div><div class="pipe-count">✓</div></div>
+        </div>
+        <div class="points single">
+          <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Steve — AI sourcing agent.</strong> Scans marketplace listings and finds weak signals — owners nearing retirement, flagged through social media and public news — scored against thesis fit.</div></div>
+          <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Broker network.</strong> 20+ active brokers working with us, access to off-market deals, and a live deal pipeline ("salkku") of 400 cases.</div></div>
+          <div class="point"><div class="point-dot"></div><div class="point-text"><strong>Rigorous process.</strong> 31-point screening, an Investment Committee decision process, and a repeatable Due Diligence template for every deal.</div></div>
         </div>
       </div>
     </section>
