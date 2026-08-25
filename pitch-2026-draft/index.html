@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v4-draft — Find/Fund/Grow restructure, 12 slides, stock photo placeholders -->
+<!-- v5-draft — dark theme matching askelventures.com (black/white/DM Sans), 14 slides -->
 <html lang="en">
 <head>
   <meta name="robots" content="noindex, nofollow">
@@ -8,26 +8,39 @@
 <title>Askel Ventures – Investor Deck (Draft)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
 <style>
   :root {
-    --bg:      #f2eeea;
-    --bg-alt:  #ece8e3;
-    --white:   #faf8f5;
-    --red:     #c0392b;
-    --dark:    #1a1108;
-    --mid:     #4a3f35;
-    --muted:   #8a7d72;
-    --border:  #d5cec6;
+    --bg:      #000000;
+    --bg-alt:  #0a0a0a;
+    --white:   #111111;
+    --red:     #ffffff;
+    --dark:    #ededed;
+    --mid:     #a8a8a8;
+    --muted:   #888888;
+    --border:  rgba(255,255,255,0.1);
   }
 
+  html, body { background: #000000; }
   .reveal-viewport { background: var(--bg); }
 
   .reveal {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 18px;
     color: var(--dark);
+  }
+
+  /* Subtle grain overlay, matches askelventures.com */
+  .reveal-viewport::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 128px 128px;
   }
 
   /* ── Slide base ─────────────────────── */
@@ -59,11 +72,11 @@
 
   /* ── Headings ───────────────────────── */
   .reveal h1, .reveal h2 {
-    font-family: 'Anton', sans-serif;
-    font-weight: 400;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
     text-transform: none;
-    line-height: 1.0;
-    letter-spacing: -0.01em;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
     color: var(--dark);
     margin: 0 0 0.55em 0;
     text-shadow: none;
@@ -80,7 +93,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.55em;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: clamp(0.5rem, 0.8vw, 0.6rem);
     font-weight: 700;
     letter-spacing: 0.2em;
@@ -105,7 +118,7 @@
 
   /* ── Section label ──────────────────── */
   .label {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: clamp(0.6rem, 1.1vw, 0.72rem);
     font-weight: 700;
     letter-spacing: 0.28em;
@@ -123,7 +136,8 @@
   }
 
   .engine-word {
-    font-family: 'Anton', sans-serif;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
     font-size: clamp(0.85rem, 1.6vw, 1.15rem);
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -131,7 +145,7 @@
   }
 
   .engine-step {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: clamp(0.55rem, 0.9vw, 0.65rem);
     font-weight: 700;
     letter-spacing: 0.15em;
@@ -169,7 +183,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(250,248,245,0.62) 0%, rgba(250,248,245,0.92) 100%);
+    background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.9) 100%);
     z-index: 0;
   }
 
@@ -197,20 +211,20 @@
 
   .cta-btn {
     display: inline-block;
-    background: var(--dark);
+    background: transparent;
     color: #fff;
     text-decoration: none;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: clamp(0.72rem, 1.05vw, 0.82rem);
     font-weight: 600;
     letter-spacing: 0.04em;
-    padding: 1.1em 3.6em;
+    padding: 1.05em 3.6em;
     border-radius: 999px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
-    transition: opacity 0.15s, box-shadow 0.15s;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: border-color 0.15s, background 0.15s;
     white-space: nowrap;
   }
-  .cta-btn:hover { opacity: 0.75; box-shadow: 0 3px 10px rgba(0,0,0,0.15); }
+  .cta-btn:hover { border-color: rgba(255,255,255,0.55); background: rgba(255,255,255,0.06); }
 
   .cover-tagline {
     font-size: clamp(0.62rem, 1.1vw, 0.8rem);
@@ -355,7 +369,8 @@
   }
 
   .dimension-title {
-    font-family: 'Anton', sans-serif;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
     font-size: clamp(0.82rem, 1.4vw, 1rem);
     color: var(--dark);
     margin-bottom: 0.3em;
@@ -392,7 +407,7 @@
     height: 20px;
     border-radius: 50%;
     background: var(--red);
-    color: #fff;
+    color: #000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -442,7 +457,8 @@
   }
 
   .fw-label {
-    font-family: 'Anton', sans-serif;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
     font-size: clamp(0.6rem, 1vw, 0.72rem);
     color: var(--red);
     letter-spacing: 0.03em;
@@ -495,7 +511,8 @@
   .stat-item:first-child { border-left: none; padding-left: 0; }
 
   .stat-num {
-    font-family: 'Anton', sans-serif;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
     font-size: clamp(1.2rem, 2.4vw, 1.7rem);
     color: var(--red);
     line-height: 1.1;
@@ -538,7 +555,8 @@
 
   .pipe-count {
     font-size: clamp(0.9rem, 1.6vw, 1.2rem);
-    font-family: 'Anton', sans-serif;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
     color: var(--dark);
   }
 
@@ -552,7 +570,8 @@
 
   /* ── Vision number ──────────────────── */
   .vision-number {
-    font-family: 'Anton', sans-serif;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
     font-size: clamp(2.6rem, 6.5vw, 4.6rem);
     color: var(--red);
     line-height: 0.95;
@@ -579,7 +598,8 @@
   .callout-box {
     border: 1.5px solid var(--red);
     padding: 0.9em 1.3em;
-    font-family: 'Anton', sans-serif;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
     font-size: clamp(0.9rem, 1.7vw, 1.2rem);
     color: var(--dark);
     text-align: center;
@@ -628,7 +648,8 @@
   }
 
   .opp-stat-num {
-    font-family: 'Anton', sans-serif;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
     font-size: clamp(1.3rem, 2.6vw, 1.9rem);
     color: var(--dark);
     line-height: 1;
@@ -690,7 +711,8 @@
   }
 
   .team-name {
-    font-family: 'Anton', sans-serif;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
     font-size: clamp(0.9rem, 1.5vw, 1.1rem);
     color: var(--dark);
     margin-bottom: 0.2em;
@@ -746,7 +768,8 @@
   }
 
   .stage-callout-value {
-    font-family: 'Anton', sans-serif;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
     font-size: clamp(0.9rem, 1.7vw, 1.25rem);
     color: var(--red);
   }
@@ -767,7 +790,7 @@
   .reveal .slide-number {
     background: transparent;
     color: var(--muted);
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 0.7rem;
     top: 14px;
     bottom: unset;
@@ -816,7 +839,7 @@
   <div class="slides">
 
     <!-- ── 1. COVER ────────────────────── -->
-    <section class="slide-cover photo-bg" data-background-color="#faf8f5" style="background-image:url('https://picsum.photos/seed/askel-hero/1920/1200?grayscale');">
+    <section class="slide-cover photo-bg" data-background-color="#000000" style="background-image:url('https://picsum.photos/seed/askel-hero/1920/1200?grayscale');">
       <div class="wordmark">Askel Ventures</div>
       <div class="cover-body">
         <h1>Acquiring <span class="accent">boring businesses.</span><br>Building compounding value.</h1>
@@ -827,7 +850,7 @@
     </section>
 
     <!-- ── 2. OVERVIEW (new) ───────────── -->
-    <section data-background-color="#faf8f5">
+    <section data-background-color="#000000">
       <div class="act-label"><span class="act-num">I</span>The Case</div>
       <div class="label">Overview</div>
       <div class="rule"></div>
@@ -854,7 +877,7 @@
     </section>
 
     <!-- ── 2b. 3X WHY ASKEL (new) ──────── -->
-    <section data-background-color="#faf8f5">
+    <section data-background-color="#000000">
       <div class="act-label"><span class="act-num">I</span>The Case</div>
       <div class="label">3x Why</div>
       <div class="rule"></div>
@@ -875,7 +898,7 @@
     </section>
 
     <!-- ── 3. THE OPPORTUNITY ──────────── -->
-    <section data-background-color="#faf8f5">
+    <section data-background-color="#000000">
       <div class="act-label"><span class="act-num">I</span>The Case</div>
       <div class="label">The Opportunity</div>
       <div class="rule"></div>
@@ -909,7 +932,7 @@
     </section>
 
     <!-- ── 4. FIND ──────────────────────── -->
-    <section data-background-color="#faf8f5">
+    <section data-background-color="#000000">
       <div class="act-label"><span class="act-num">II</span>The Engine</div>
       <div class="engine"><span class="engine-word">Find</span><span class="engine-step">01 / 03</span></div>
       <div class="rule"></div>
@@ -945,7 +968,7 @@
     </section>
 
     <!-- ── 5. WHAT IS A BORING BUSINESS (new) ── -->
-    <section data-background-color="#faf8f5">
+    <section data-background-color="#000000">
       <div class="act-label"><span class="act-num">II</span>The Engine</div>
       <div class="label">What Is a Boring Business</div>
       <div class="rule"></div>
@@ -968,7 +991,7 @@
     </section>
 
     <!-- ── 6. GROW ──────────────────────── -->
-    <section data-background-color="#faf8f5">
+    <section data-background-color="#000000">
       <div class="act-label"><span class="act-num">II</span>The Engine</div>
       <div class="engine"><span class="engine-word">Grow</span><span class="engine-step">03 / 03</span></div>
       <div class="rule"></div>
@@ -988,31 +1011,31 @@
         </div>
         <div class="split-photo">
           <svg viewBox="0 0 340 420" preserveAspectRatio="xMidYMid meet" style="width:100%;height:100%;">
-            <rect x="0" y="0" width="340" height="420" fill="#faf8f5" rx="3"/>
-            <line x1="40" y1="60" x2="40" y2="360" stroke="#d5cec6" stroke-width="1"/>
-            <line x1="40" y1="360" x2="300" y2="360" stroke="#d5cec6" stroke-width="1"/>
-            <line x1="40" y1="290" x2="300" y2="290" stroke="#e5dfd8" stroke-width="0.7"/>
-            <line x1="40" y1="220" x2="300" y2="220" stroke="#e5dfd8" stroke-width="0.7"/>
-            <line x1="40" y1="150" x2="300" y2="150" stroke="#e5dfd8" stroke-width="0.7"/>
-            <line x1="40" y1="80"  x2="300" y2="80"  stroke="#e5dfd8" stroke-width="0.7"/>
-            <text x="34" y="293" text-anchor="end" fill="#8a7d72" font-size="10" font-family="Open Sans,sans-serif">2×</text>
-            <text x="34" y="223" text-anchor="end" fill="#8a7d72" font-size="10" font-family="Open Sans,sans-serif">4×</text>
-            <text x="34" y="153" text-anchor="end" fill="#8a7d72" font-size="10" font-family="Open Sans,sans-serif">6×</text>
-            <text x="34" y="83"  text-anchor="end" fill="#8a7d72" font-size="10" font-family="Open Sans,sans-serif">8×</text>
-            <path d="M 55,340 C 90,335 120,300 160,240 C 200,180 230,130 270,100" fill="none" stroke="#c0392b" stroke-width="3" stroke-linecap="round"/>
-            <path d="M 55,352 C 100,350 170,345 270,340" fill="none" stroke="#8a7d72" stroke-width="2" stroke-dasharray="5,4"/>
-            <circle cx="55" cy="340" r="6" fill="#faf8f5" stroke="#c0392b" stroke-width="2.5"/>
-            <text x="55" y="378" text-anchor="middle" fill="#4a3f35" font-size="10" font-family="Open Sans,sans-serif" font-weight="600">Buy</text>
-            <circle cx="270" cy="100" r="6" fill="#faf8f5" stroke="#c0392b" stroke-width="2.5"/>
-            <text x="270" y="378" text-anchor="middle" fill="#4a3f35" font-size="10" font-family="Open Sans,sans-serif" font-weight="600">Sell</text>
-            <text x="170" y="40" text-anchor="middle" fill="#c0392b" font-size="10" font-family="Open Sans,sans-serif" font-weight="700" letter-spacing="1">APPLY PLAYBOOK</text>
+            <rect x="0" y="0" width="340" height="420" fill="#0a0a0a" rx="3"/>
+            <line x1="40" y1="60" x2="40" y2="360" stroke="rgba(255,255,255,0.16)" stroke-width="1"/>
+            <line x1="40" y1="360" x2="300" y2="360" stroke="rgba(255,255,255,0.16)" stroke-width="1"/>
+            <line x1="40" y1="290" x2="300" y2="290" stroke="rgba(255,255,255,0.08)" stroke-width="0.7"/>
+            <line x1="40" y1="220" x2="300" y2="220" stroke="rgba(255,255,255,0.08)" stroke-width="0.7"/>
+            <line x1="40" y1="150" x2="300" y2="150" stroke="rgba(255,255,255,0.08)" stroke-width="0.7"/>
+            <line x1="40" y1="80"  x2="300" y2="80"  stroke="rgba(255,255,255,0.08)" stroke-width="0.7"/>
+            <text x="34" y="293" text-anchor="end" fill="#888888" font-size="10" font-family="DM Sans,sans-serif">2×</text>
+            <text x="34" y="223" text-anchor="end" fill="#888888" font-size="10" font-family="DM Sans,sans-serif">4×</text>
+            <text x="34" y="153" text-anchor="end" fill="#888888" font-size="10" font-family="DM Sans,sans-serif">6×</text>
+            <text x="34" y="83"  text-anchor="end" fill="#888888" font-size="10" font-family="DM Sans,sans-serif">8×</text>
+            <path d="M 55,340 C 90,335 120,300 160,240 C 200,180 230,130 270,100" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+            <path d="M 55,352 C 100,350 170,345 270,340" fill="none" stroke="#888888" stroke-width="2" stroke-dasharray="5,4"/>
+            <circle cx="55" cy="340" r="6" fill="#0a0a0a" stroke="#ffffff" stroke-width="2.5"/>
+            <text x="55" y="378" text-anchor="middle" fill="#a8a8a8" font-size="10" font-family="DM Sans,sans-serif" font-weight="600">Buy</text>
+            <circle cx="270" cy="100" r="6" fill="#0a0a0a" stroke="#ffffff" stroke-width="2.5"/>
+            <text x="270" y="378" text-anchor="middle" fill="#a8a8a8" font-size="10" font-family="DM Sans,sans-serif" font-weight="600">Sell</text>
+            <text x="170" y="40" text-anchor="middle" fill="#ffffff" font-size="10" font-family="DM Sans,sans-serif" font-weight="700" letter-spacing="1">APPLY PLAYBOOK</text>
           </svg>
         </div>
       </div>
     </section>
 
     <!-- ── 7. PROOF OF PLAYBOOK (new) ──── -->
-    <section data-background-color="#faf8f5">
+    <section data-background-color="#000000">
       <div class="act-label"><span class="act-num">II</span>The Engine</div>
       <div class="label">Proof of Playbook</div>
       <div class="rule"></div>
@@ -1035,7 +1058,7 @@
     </section>
 
     <!-- ── 7b. CASE STUDY: MELERS OY (new) ── -->
-    <section data-background-color="#faf8f5">
+    <section data-background-color="#000000">
       <div class="act-label"><span class="act-num">II</span>The Engine</div>
       <div class="label">Case Study</div>
       <div class="rule"></div>
@@ -1071,7 +1094,7 @@
     </section>
 
     <!-- ── 7c. WHY THIS MATTERS TO YOU (new) ── -->
-    <section data-background-color="#faf8f5">
+    <section data-background-color="#000000">
       <div class="act-label"><span class="act-num">II</span>The Engine</div>
       <div class="label">Why This Matters To You</div>
       <div class="rule"></div>
@@ -1092,7 +1115,7 @@
     </section>
 
     <!-- ── 8. FUND ──────────────────────── -->
-    <section data-background-color="#faf8f5">
+    <section data-background-color="#000000">
       <div class="act-label"><span class="act-num">II</span>The Engine</div>
       <div class="engine"><span class="engine-word">Fund</span><span class="engine-step">02 / 03</span></div>
       <div class="rule"></div>
@@ -1115,7 +1138,7 @@
     </section>
 
     <!-- ── 9. THE VISION (new) ─────────── -->
-    <section data-background-color="#faf8f5">
+    <section data-background-color="#000000">
       <div class="act-label"><span class="act-num">III</span>The Ask</div>
       <div class="label">The Vision</div>
       <div class="rule"></div>
@@ -1137,7 +1160,7 @@
     </section>
 
     <!-- ── 10. THE TEAM ─────────────────── -->
-    <section data-background-color="#faf8f5">
+    <section data-background-color="#000000">
       <div class="act-label"><span class="act-num">III</span>The Ask</div>
       <div class="label">The Team</div>
       <div class="rule"></div>
@@ -1174,7 +1197,7 @@
     </section>
 
     <!-- ── 11. CLOSING ──────────────────── -->
-    <section class="slide-cover photo-bg" data-background-color="#faf8f5" style="background-image:url('https://picsum.photos/seed/askel-close/1920/1200?grayscale');">
+    <section class="slide-cover photo-bg" data-background-color="#000000" style="background-image:url('https://picsum.photos/seed/askel-close/1920/1200?grayscale');">
       <div class="wordmark">Askel Ventures</div>
       <div class="cover-body">
         <div class="cover-cta-block">
