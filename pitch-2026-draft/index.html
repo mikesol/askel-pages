@@ -405,27 +405,39 @@
   }
 
   .fw-step {
-    text-align: center;
-    padding: 0.9em 1em;
+    text-align: left;
+    padding: 0.8em 0.9em;
     border: 1.5px solid var(--border);
     background: var(--white);
-    min-width: 96px;
+    min-width: 122px;
     flex: 1;
   }
 
   .fw-label {
     font-family: 'Anton', sans-serif;
-    font-size: clamp(0.65rem, 1.1vw, 0.8rem);
+    font-size: clamp(0.6rem, 1vw, 0.72rem);
     color: var(--red);
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
-    margin-bottom: 0.3em;
+    margin-bottom: 0.4em;
   }
 
   .fw-desc {
-    font-size: clamp(0.58rem, 0.9vw, 0.7rem);
+    font-size: clamp(0.54rem, 0.85vw, 0.64rem);
     color: var(--muted);
-    line-height: 1.4;
+    line-height: 1.45;
+  }
+
+  .fw-desc div {
+    padding-left: 0.7em;
+    position: relative;
+    margin-top: 0.25em;
+  }
+
+  .fw-desc div::before {
+    content: '–';
+    position: absolute;
+    left: 0;
   }
 
   .fw-arrow {
@@ -992,17 +1004,32 @@
       <div class="label">Case Study</div>
       <div class="rule"></div>
       <h2>Deal #1: <span class="accent">Melers Oy.</span></h2>
-      <div class="slide-split">
-        <div class="split-content">
-          <div class="terms-grid">
-            <div class="term"><div class="term-label">Deal overview</div><div class="term-value">Commercial dry cleaning &amp; laundry, Turku region. Operating since <strong>1967</strong>. 100% acquisition, closed <strong>Jan 2026</strong>.</div></div>
-            <div class="term"><div class="term-label">Business snapshot</div><div class="term-value">Revenue <strong>~€490K</strong>, EBITDA <strong>€115K</strong> (23% margin). 400 customers, B2B/B2C mix.</div></div>
-            <div class="term"><div class="term-label">Financing</div><div class="term-value">€400K purchase price — funded via bank loan (Finnvera-backed), seller earn-out, and founder equity. No outside capital needed for deal #1.</div></div>
-            <div class="term"><div class="term-label">Value-creation plan</div><div class="term-value">Workflow automation, AI-enabled booking &amp; customer service, standardized SOPs. Target: <strong>+30–100% EBITDA</strong> within 24 months.</div></div>
-          </div>
-        </div>
-        <div class="split-photo slant">
-          <img src="https://picsum.photos/seed/askel-melers-case/900/1100?grayscale" alt="">
+      <div class="terms-grid" style="margin-bottom:1.2em;">
+        <div class="term"><div class="term-label">Deal overview</div><div class="term-value">Commercial dry cleaning &amp; laundry, Turku region. Operating since <strong>1967</strong>. 100% acquisition, closed <strong>Jan 2026</strong>.</div></div>
+        <div class="term"><div class="term-label">Business snapshot</div><div class="term-value">Revenue <strong>~€490K</strong>, EBITDA <strong>€115K</strong> (23% margin). 400 customers, B2B/B2C mix.</div></div>
+        <div class="term"><div class="term-label">Financing</div><div class="term-value">€400K purchase price — funded via bank loan (Finnvera-backed), seller earn-out, and founder equity. No outside capital needed for deal #1.</div></div>
+        <div class="term"><div class="term-label">Value-creation plan</div><div class="term-value">Workflow automation, AI-enabled booking &amp; customer service, standardized SOPs. Target: <strong>+30–100% EBITDA</strong> within 24 months.</div></div>
+      </div>
+      <div class="label">What We've Already Done</div>
+      <div class="flywheel-outer">
+        <div class="flywheel">
+          <div class="fw-step"><div class="fw-label">Screening</div><div class="fw-desc"><div>35-point checklist applied</div><div>Passed thesis &amp; financial fit</div></div></div>
+          <div class="fw-arrow">→</div>
+          <div class="fw-step"><div class="fw-label">Due Diligence</div><div class="fw-desc"><div>20-point DD framework run</div><div>Contracts &amp; assets verified</div></div></div>
+          <div class="fw-arrow">→</div>
+          <div class="fw-step"><div class="fw-label">Financing</div><div class="fw-desc"><div>€400K secured, Finnvera-backed</div><div>Seller earn-out + founder equity</div></div></div>
+          <div class="fw-arrow">→</div>
+          <div class="fw-step"><div class="fw-label">Knowledge Transfer</div><div class="fw-desc"><div>Seller stayed 3 months to hand over</div><div>KT charter &amp; video training built</div></div></div>
+          <div class="fw-arrow">→</div>
+          <div class="fw-step"><div class="fw-label">Recruitment</div><div class="fw-desc"><div>Key operating hire recruited</div><div>New operator onboarded &amp; trained</div></div></div>
+          <div class="fw-arrow">→</div>
+          <div class="fw-step"><div class="fw-label">Marketing</div><div class="fw-desc"><div>Modern brand &amp; systems stood up</div><div>First systematic outreach, ever</div></div></div>
+          <div class="fw-arrow">→</div>
+          <div class="fw-step"><div class="fw-label">Sales System</div><div class="fw-desc"><div>CRM built &amp; live</div><div>SOP active, €100K pipeline</div></div></div>
+          <div class="fw-arrow">→</div>
+          <div class="fw-step"><div class="fw-label">R&amp;D w/ Business Finland</div><div class="fw-desc"><div>Enrolled in R&amp;D funding program</div><div>Co-funding digitalization roadmap</div></div></div>
+          <div class="fw-arrow">→</div>
+          <div class="fw-step"><div class="fw-label">Growth Stage</div><div class="fw-desc"><div>Tracking toward EBITDA target</div><div>Positioned for deal #2</div></div></div>
         </div>
       </div>
     </section>
