@@ -525,27 +525,27 @@
 
   .fw-step {
     text-align: left;
-    padding: 0.8em 0.9em;
+    padding: 0.9em 1.05em;
     border: 1.5px solid var(--border);
     background: var(--white);
-    min-width: 122px;
+    min-width: 160px;
     flex: 1;
   }
 
   .fw-label {
     font-family: 'DM Sans', sans-serif;
     font-weight: 700;
-    font-size: clamp(0.6rem, 1vw, 0.72rem);
+    font-size: clamp(0.68rem, 1.1vw, 0.8rem);
     color: var(--red);
     letter-spacing: 0.03em;
     text-transform: uppercase;
-    margin-bottom: 0.4em;
+    margin-bottom: 0.45em;
   }
 
   .fw-desc {
-    font-size: clamp(0.54rem, 0.85vw, 0.64rem);
+    font-size: clamp(0.72rem, 1.05vw, 0.84rem);
     color: var(--muted);
-    line-height: 1.45;
+    line-height: 1.5;
   }
 
   .fw-desc strong { color: var(--dark); font-weight: 700; }
@@ -570,6 +570,68 @@
     flex-shrink: 0;
     opacity: 0.45;
   }
+
+  /* ── Label row + scroll hint (Case Study) ── */
+  .label-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1em;
+  }
+
+  .label-row .label { margin-bottom: 1em; }
+
+  .scroll-hint {
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(0.58rem, 0.85vw, 0.66rem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+  }
+
+  .scroll-arrow {
+    display: inline-block;
+    animation: scrollBounce 1.4s ease-in-out infinite;
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { transform: translateX(0); opacity: 0.5; }
+    50% { transform: translateX(6px); opacity: 1; }
+  }
+
+  /* ── Case Study header + logo ──────── */
+  .case-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2em;
+  }
+
+  .case-logo {
+    height: clamp(36px, 4vw, 52px);
+    width: auto;
+    opacity: 0.95;
+  }
+
+  .case-links {
+    display: flex;
+    gap: 1.2em;
+    margin-top: 0.5em;
+  }
+
+  .case-links a {
+    color: var(--dark);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    font-size: clamp(0.64rem, 0.95vw, 0.74rem);
+    padding-bottom: 0.1em;
+  }
+
+  .case-links a:hover { border-bottom-color: var(--dark); }
 
   /* ── Stat strip (Find) ─────────────── */
   .stat-strip {
@@ -1114,14 +1176,20 @@
       <div class="act-label"><span class="act-num">II</span><span class="act-text">The Engine</span></div>
       <div class="label">Case Study</div>
       <div class="rule"></div>
-      <h2>Deal #1: <span class="accent">Melers Oy.</span></h2>
-      <div class="terms-grid" style="margin-bottom:1.2em;">
-        <div class="term"><div class="term-label">Deal overview</div><div class="term-value">Commercial dry cleaning &amp; laundry, Turku region. Operating since <strong>1967</strong>. 100% acquisition, closed <strong>Jan 2026</strong> — sourced to close in <strong>&lt;100 days</strong>.</div></div>
-        <div class="term"><div class="term-label">Business snapshot</div><div class="term-value">Revenue <strong>~€490K</strong>, EBITDA <strong>€115K</strong> (23% margin). 400 customers, B2B/B2C mix.</div></div>
-        <div class="term"><div class="term-label">Financing</div><div class="term-value">€400K purchase price — funded via bank loan (Finnvera-backed), seller earn-out, and founder equity. No outside capital needed for deal #1.</div></div>
-        <div class="term"><div class="term-label">Value-creation plan</div><div class="term-value">Workflow automation, AI-enabled booking &amp; customer service, standardized SOPs. Target: <strong>+30–100% EBITDA</strong> within 24 months.</div></div>
+      <div class="case-header">
+        <h2>Deal #1: <span class="accent">Melers Oy.</span></h2>
+        <img class="case-logo" src="melers-logo.png" alt="Melers logo">
       </div>
-      <div class="label">What We've Already Done</div>
+      <div class="terms-grid" style="margin-bottom:1.2em;">
+        <div class="term"><div class="term-label">Deal overview</div><div class="term-value">Commercial dry cleaning &amp; laundry, Turku region — operating since <strong>1967</strong>. 100% acquisition, closed <strong>Jan 2026</strong> in <strong>&lt;100 days</strong>.</div></div>
+        <div class="term"><div class="term-label">Business snapshot</div><div class="term-value">Revenue <strong>~€490K</strong>, EBITDA <strong>€115K</strong> (23% margin). 400 customers, B2B/B2C mix.<div class="case-links"><a href="https://melers.fi" target="_blank" rel="noopener">melers.fi ↗</a><a href="https://turunsuurpesula.fi" target="_blank" rel="noopener">turunsuurpesula.fi ↗</a></div></div></div>
+        <div class="term"><div class="term-label">Financing</div><div class="term-value"><strong>€400K</strong> purchase price — bank loan (Finnvera-backed), seller earn-out, founder equity. No outside capital needed.</div></div>
+        <div class="term"><div class="term-label">Value-creation plan</div><div class="term-value">Workflow automation, AI-enabled booking &amp; customer service, standardized SOPs. Target: <strong>+30–100% EBITDA</strong> in 24 months.</div></div>
+      </div>
+      <div class="label-row">
+        <div class="label">What We've Already Done</div>
+        <div class="scroll-hint">Scroll to explore <span class="scroll-arrow">→</span></div>
+      </div>
       <div class="flywheel-outer">
         <div class="flywheel">
           <div class="fw-step"><div class="fw-label">Screening</div><div class="fw-desc"><div><strong>35-point</strong> checklist applied</div><div>Passed thesis &amp; financial fit</div></div></div>
