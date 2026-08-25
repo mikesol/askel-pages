@@ -529,6 +529,7 @@
     text-align: left;
     padding: 0.9em 1.05em;
     border: 1.5px solid var(--border);
+    border-radius: 8px;
     background: var(--white);
     min-width: 160px;
     flex: 1;
@@ -605,18 +606,42 @@
     50% { transform: translateX(6px); opacity: 1; }
   }
 
-  /* ── Case Study header + logo ──────── */
-  .case-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2em;
+  .scroll-progress-track {
+    width: 100%;
+    height: 3px;
+    background: var(--border);
+    border-radius: 999px;
+    margin-top: 0.7em;
+    overflow: hidden;
   }
 
-  .case-logo {
-    height: clamp(36px, 4vw, 52px);
+  .scroll-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #e8935a 0%, #7b6fd6 100%);
+    border-radius: 999px;
+  }
+
+  /* ── Case Study title + watermark logo ── */
+  .case-title-wrap {
+    position: relative;
+  }
+
+  .case-title-wrap h2 {
+    position: relative;
+    z-index: 1;
+  }
+
+  .case-logo-bg {
+    position: absolute;
+    z-index: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: clamp(70px, 9vw, 130px);
     width: auto;
-    opacity: 0.95;
+    opacity: 0.16;
+    pointer-events: none;
   }
 
   .case-links {
@@ -1205,9 +1230,9 @@
       <div class="act-label"><span class="act-num">II</span><span class="act-text">The Engine</span></div>
       <div class="label">Case Study</div>
       <div class="rule"></div>
-      <div class="case-header">
-        <h2>Deal #1: <span class="accent">Melers Oy.</span></h2>
-        <img class="case-logo" src="melers-logo.png" alt="Melers logo">
+      <div class="case-title-wrap">
+        <img class="case-logo-bg" src="melers-logo.png" alt="">
+        <h2>Proof-of-concept: <span class="accent">Melers Oy.</span></h2>
       </div>
       <div class="terms-grid" style="margin-bottom:1.2em;">
         <div class="term"><div class="term-label">Deal overview</div><div class="term-value">Commercial dry cleaning &amp; laundry, Turku region — operating since <strong>1967</strong> (founded 2001). 100% acquisition, closed <strong>Jan 2026</strong> in <strong>&lt;100 days</strong>.</div></div>
@@ -1224,7 +1249,7 @@
         <div class="label">What We've Already Done</div>
         <div class="scroll-hint">Scroll to explore <span class="scroll-arrow">→</span></div>
       </div>
-      <div class="flywheel-outer">
+      <div class="flywheel-outer" id="case-study-flywheel">
         <div class="flywheel">
           <div class="fw-step"><div class="fw-label">Screening</div><div class="fw-desc"><div><strong>35-point</strong> checklist applied</div><div>Passed thesis &amp; financial fit</div></div></div>
           <div class="fw-arrow">→</div>
@@ -1245,7 +1270,7 @@
           <div class="fw-step"><div class="fw-label">Growth Stage</div><div class="fw-desc"><div>Tracking toward EBITDA target</div><div>Positioned for deal #2</div></div></div>
         </div>
       </div>
-      <div class="tagline"><strong>Proof-of-concept.</strong> Deal #1 exists to prove the playbook works — turning an owner-operated business into a professionally managed, data-driven one. Everything above is real, not projected.</div>
+      <div class="scroll-progress-track"><div class="scroll-progress-fill" data-progress-for="case-study-flywheel"></div></div>
     </section>
 
     <!-- ── 10. THE VISION (new) ────────── -->
@@ -1344,6 +1369,18 @@
     touch: true,
     keyboard: true,
     disableLayout: true,
+  });
+
+  document.querySelectorAll('.scroll-progress-fill[data-progress-for]').forEach(function (fill) {
+    var outer = document.getElementById(fill.getAttribute('data-progress-for'));
+    if (!outer) return;
+    function update() {
+      var max = outer.scrollWidth - outer.clientWidth;
+      fill.style.width = (max > 0 ? (outer.scrollLeft / max) * 100 : 0) + '%';
+    }
+    outer.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
   });
 </script>
 
