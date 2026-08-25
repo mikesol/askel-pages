@@ -202,6 +202,36 @@
 
   .cover-body { flex: 1; display: flex; align-items: center; }
 
+  .not-a-fund {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6em;
+    margin-top: 1.4em;
+  }
+
+  .not-a-fund-pill {
+    display: inline-block;
+    padding: 0.65em 1.4em;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    font-size: clamp(0.62rem, 1vw, 0.72rem);
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .not-a-fund-sub {
+    font-size: clamp(0.6rem, 0.95vw, 0.68rem);
+    color: var(--muted);
+    letter-spacing: 0.02em;
+    padding-left: 0.3em;
+  }
+
   .cover-cta-block {
     display: flex;
     flex-direction: column;
@@ -842,10 +872,13 @@
     <section class="slide-cover photo-bg" data-background-color="#000000" style="background-image:url('https://picsum.photos/seed/askel-hero/1920/1200?grayscale');">
       <div class="wordmark">Askel Ventures</div>
       <div class="cover-body">
-        <h1>Acquiring <span class="accent">boring businesses.</span><br>Building compounding value.</h1>
-      </div>
-      <div class="cover-tagline">
-        Micro private equity &nbsp;·&nbsp; Nordic small business acquisitions
+        <div>
+          <h1>Acquiring <span class="accent">boring businesses.</span><br>Building compounding value.</h1>
+          <div class="not-a-fund">
+            <div class="not-a-fund-pill">Not a fund*</div>
+            <div class="not-a-fund-sub">*Just four founders building a boring business portfolio.</div>
+          </div>
+        </div>
       </div>
     </section>
 
