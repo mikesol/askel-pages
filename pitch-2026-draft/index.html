@@ -507,52 +507,6 @@
     line-height: 1.55;
   }
 
-  /* ── Roadmap grid (Proof of Playbook) ── */
-  .roadmap-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.8em 1.6vw;
-  }
-
-  .roadmap-item {
-    display: flex;
-    gap: 0.7em;
-    align-items: flex-start;
-    border: 1.5px solid var(--border);
-    padding: 0.8em 1em;
-    border-radius: 3px;
-    background: var(--white);
-  }
-
-  .roadmap-check {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--red);
-    color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.68rem;
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-top: 0.1em;
-  }
-
-  .roadmap-text strong {
-    display: block;
-    color: var(--dark);
-    font-weight: 600;
-    font-size: clamp(0.7rem, 1.05vw, 0.82rem);
-    margin-bottom: 0.15em;
-  }
-
-  .roadmap-text span {
-    font-size: clamp(0.62rem, 0.95vw, 0.73rem);
-    color: var(--muted);
-    line-height: 1.5;
-  }
-
   /* ── Flywheel (reused for Model + Vision) ── */
   .flywheel-outer {
     width: 100%;
@@ -593,6 +547,8 @@
     color: var(--muted);
     line-height: 1.45;
   }
+
+  .fw-desc strong { color: var(--dark); font-weight: 700; }
 
   .fw-desc div {
     padding-left: 0.7em;
@@ -929,8 +885,7 @@
     .points,
     .team-grid,
     .terms-grid,
-    .dimension-grid,
-    .roadmap-grid {
+    .dimension-grid {
       grid-template-columns: 1fr !important;
       gap: 1em 0;
     }
@@ -1154,37 +1109,14 @@
       </div>
     </section>
 
-    <!-- ── 9. PROOF OF PLAYBOOK (new) ──── -->
-    <section data-background-color="#000000">
-      <div class="act-label"><span class="act-num">II</span><span class="act-text">The Engine</span></div>
-      <div class="label">Proof of Playbook</div>
-      <div class="rule"></div>
-      <h2>We're not pitching a plan.<br>We're <span class="accent">showing our work.</span></h2>
-      <div class="slide-split">
-        <div class="split-content">
-          <div class="roadmap-grid">
-            <div class="roadmap-item"><div class="roadmap-check">✓</div><div class="roadmap-text"><strong>35-point Screening Checklist</strong><span>Applied to every lead before it reaches IC</span></div></div>
-            <div class="roadmap-item"><div class="roadmap-check">✓</div><div class="roadmap-text"><strong>20-point Due Diligence</strong><span>Framework that closed our first deal in &lt;100 days</span></div></div>
-            <div class="roadmap-item"><div class="roadmap-check">✓</div><div class="roadmap-text"><strong>Knowledge Transfer charter</strong><span>Post-acquisition handover, every time</span></div></div>
-            <div class="roadmap-item"><div class="roadmap-check">✓</div><div class="roadmap-text"><strong>Key hire recruitment</strong><span>Filled critical operating roles at Melers</span></div></div>
-            <div class="roadmap-item"><div class="roadmap-check">✓</div><div class="roadmap-text"><strong>Sales CRM built &amp; live</strong><span>From spreadsheets to a real system</span></div></div>
-            <div class="roadmap-item"><div class="roadmap-check">✓</div><div class="roadmap-text"><strong>Sales SOP active</strong><span>€100,000 in qualified pipeline, running today</span></div></div>
-          </div>
-        </div>
-        <div class="split-photo narrow">
-          <img src="https://picsum.photos/seed/askel-checklist/700/1100?grayscale" alt="">
-        </div>
-      </div>
-    </section>
-
-    <!-- ── 10. CASE STUDY: MELERS OY (new) ── -->
+    <!-- ── 9. CASE STUDY: MELERS OY (new) ── -->
     <section data-background-color="#000000">
       <div class="act-label"><span class="act-num">II</span><span class="act-text">The Engine</span></div>
       <div class="label">Case Study</div>
       <div class="rule"></div>
       <h2>Deal #1: <span class="accent">Melers Oy.</span></h2>
       <div class="terms-grid" style="margin-bottom:1.2em;">
-        <div class="term"><div class="term-label">Deal overview</div><div class="term-value">Commercial dry cleaning &amp; laundry, Turku region. Operating since <strong>1967</strong>. 100% acquisition, closed <strong>Jan 2026</strong>.</div></div>
+        <div class="term"><div class="term-label">Deal overview</div><div class="term-value">Commercial dry cleaning &amp; laundry, Turku region. Operating since <strong>1967</strong>. 100% acquisition, closed <strong>Jan 2026</strong> — sourced to close in <strong>&lt;100 days</strong>.</div></div>
         <div class="term"><div class="term-label">Business snapshot</div><div class="term-value">Revenue <strong>~€490K</strong>, EBITDA <strong>€115K</strong> (23% margin). 400 customers, B2B/B2C mix.</div></div>
         <div class="term"><div class="term-label">Financing</div><div class="term-value">€400K purchase price — funded via bank loan (Finnvera-backed), seller earn-out, and founder equity. No outside capital needed for deal #1.</div></div>
         <div class="term"><div class="term-label">Value-creation plan</div><div class="term-value">Workflow automation, AI-enabled booking &amp; customer service, standardized SOPs. Target: <strong>+30–100% EBITDA</strong> within 24 months.</div></div>
@@ -1192,11 +1124,11 @@
       <div class="label">What We've Already Done</div>
       <div class="flywheel-outer">
         <div class="flywheel">
-          <div class="fw-step"><div class="fw-label">Screening</div><div class="fw-desc"><div>35-point checklist applied</div><div>Passed thesis &amp; financial fit</div></div></div>
+          <div class="fw-step"><div class="fw-label">Screening</div><div class="fw-desc"><div><strong>35-point</strong> checklist applied</div><div>Passed thesis &amp; financial fit</div></div></div>
           <div class="fw-arrow">→</div>
-          <div class="fw-step"><div class="fw-label">Due Diligence</div><div class="fw-desc"><div>20-point DD framework run</div><div>Contracts &amp; assets verified</div></div></div>
+          <div class="fw-step"><div class="fw-label">Due Diligence</div><div class="fw-desc"><div><strong>20-point</strong> DD framework run</div><div>Contracts &amp; assets verified</div></div></div>
           <div class="fw-arrow">→</div>
-          <div class="fw-step"><div class="fw-label">Financing</div><div class="fw-desc"><div>€400K secured, Finnvera-backed</div><div>Seller earn-out + founder equity</div></div></div>
+          <div class="fw-step"><div class="fw-label">Financing</div><div class="fw-desc"><div><strong>€400K</strong> secured, Finnvera-backed</div><div>Seller earn-out + founder equity</div></div></div>
           <div class="fw-arrow">→</div>
           <div class="fw-step"><div class="fw-label">Knowledge Transfer</div><div class="fw-desc"><div>Seller stayed 3 months to hand over</div><div>KT charter &amp; video training built</div></div></div>
           <div class="fw-arrow">→</div>
@@ -1204,7 +1136,7 @@
           <div class="fw-arrow">→</div>
           <div class="fw-step"><div class="fw-label">Marketing</div><div class="fw-desc"><div>Modern brand &amp; systems stood up</div><div>First systematic outreach, ever</div></div></div>
           <div class="fw-arrow">→</div>
-          <div class="fw-step"><div class="fw-label">Sales System</div><div class="fw-desc"><div>CRM built &amp; live</div><div>SOP active, €100K pipeline</div></div></div>
+          <div class="fw-step"><div class="fw-label">Sales System</div><div class="fw-desc"><div>CRM built &amp; live</div><div>SOP active, <strong>€100K</strong> pipeline</div></div></div>
           <div class="fw-arrow">→</div>
           <div class="fw-step"><div class="fw-label">R&amp;D w/ Business Finland</div><div class="fw-desc"><div>Enrolled in R&amp;D funding program</div><div>Co-funding digitalization roadmap</div></div></div>
           <div class="fw-arrow">→</div>
@@ -1213,7 +1145,7 @@
       </div>
     </section>
 
-    <!-- ── 11. THE VISION (new) ────────── -->
+    <!-- ── 10. THE VISION (new) ────────── -->
     <section data-background-color="#000000">
       <div class="act-label"><span class="act-num">III</span><span class="act-text">The Ask</span></div>
       <div class="label">The Vision</div>
@@ -1235,7 +1167,7 @@
       </div>
     </section>
 
-    <!-- ── 12. THE TEAM ─────────────────── -->
+    <!-- ── 11. THE TEAM ─────────────────── -->
     <section data-background-color="#000000">
       <div class="act-label"><span class="act-num">III</span><span class="act-text">The Ask</span></div>
       <div class="label">The Team</div>
@@ -1272,7 +1204,7 @@
       </div>
     </section>
 
-    <!-- ── 13. CLOSING ──────────────────── -->
+    <!-- ── 12. CLOSING ──────────────────── -->
     <section class="slide-cover photo-bg" data-background-color="#000000" style="background-image:url('https://picsum.photos/seed/askel-close/1920/1200?grayscale');">
       <div class="wordmark">Askel Ventures</div>
       <div class="cover-body">
