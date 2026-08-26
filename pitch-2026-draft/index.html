@@ -564,6 +564,30 @@
     border-color: var(--cat-grow);
   }
 
+  .fw-step.fw-next {
+    border-style: dashed;
+    border-top-style: dashed;
+    border-color: var(--border);
+    border-top-color: var(--muted);
+    background: transparent;
+    opacity: 0.55;
+  }
+
+  .fw-next-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.35em;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: clamp(0.52rem, 0.75vw, 0.6rem);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.55em;
+  }
+
+  .fw-step.fw-next .fw-label { color: var(--mid); }
+
   .fw-label {
     font-family: 'DM Sans', sans-serif;
     font-weight: 700;
@@ -603,6 +627,7 @@
   .cat-dot.cat-find { background: var(--cat-find); }
   .cat-dot.cat-fund { background: var(--cat-fund); }
   .cat-dot.cat-grow { background: var(--cat-grow); }
+  .cat-dot.cat-next { background: transparent; border: 1.5px dashed var(--muted); }
 
   .fw-desc {
     font-size: clamp(0.72rem, 1.05vw, 0.84rem);
@@ -1319,6 +1344,7 @@
           <span class="cat-dot cat-find"></span>Find
           <span class="cat-dot cat-fund"></span>Fund
           <span class="cat-dot cat-grow"></span>Grow
+          <span class="cat-dot cat-next"></span>Next
         </div>
         <div class="scroll-hint">Scroll to explore <span class="scroll-arrow">→</span></div>
       </div>
@@ -1339,6 +1365,10 @@
           <div class="fw-step cat-grow"><div class="fw-label">Sales</div><div class="fw-desc"><div>CRM built &amp; live, incl. sales rep hired</div><div>SOP active — <strong>3-year, €60K</strong> contract secured</div></div></div>
           <div class="fw-arrow">→</div>
           <div class="fw-step cat-grow"><div class="fw-label">R&amp;D</div><div class="fw-desc"><div>Enrolled in R&amp;D funding programs</div><div>Custom software dev started (CRM, ERP, invoicing)</div></div></div>
+          <div class="fw-arrow">→</div>
+          <div class="fw-step fw-next"><div class="fw-next-tag">Next Up</div><div class="fw-label">Team Recruitment</div><div class="fw-desc"><div>Role definition &amp; company team structuring</div></div></div>
+          <div class="fw-arrow">→</div>
+          <div class="fw-step fw-next"><div class="fw-next-tag">Next Up</div><div class="fw-label">Management Recruitment</div><div class="fw-desc"><div>Growth talent</div></div></div>
         </div>
       </div>
       <div class="scroll-progress-track"><div class="scroll-progress-fill" data-progress-for="case-study-flywheel"></div></div>
