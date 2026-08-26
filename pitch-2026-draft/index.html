@@ -832,22 +832,155 @@
     opacity: 0.45;
   }
 
-  /* ── Vision number ──────────────────── */
-  .vision-number {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 700;
-    font-size: clamp(2.6rem, 6.5vw, 4.6rem);
-    color: var(--red);
-    line-height: 0.95;
-    margin-bottom: 0.1em;
+  /* ── Vision caption + footnote ──────── */
+  .vision-caption {
+    font-size: clamp(0.8rem, 1.3vw, 0.95rem);
+    color: var(--mid);
+    margin-bottom: 0.9em;
   }
 
-  .vision-sub {
-    font-size: clamp(0.62rem, 1vw, 0.75rem);
+  .vision-caption strong {
+    color: var(--dark);
+    font-weight: 700;
+  }
+
+  .vision-footnote {
+    font-size: clamp(0.68rem, 1vw, 0.78rem);
     color: var(--muted);
-    letter-spacing: 0.1em;
+    line-height: 1.55;
+    margin-top: 1.2em;
+    border-top: 1.5px solid var(--border);
+    padding-top: 0.9em;
+  }
+
+  /* ── Vision portfolio tree ──────────── */
+  .vtree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 1.1em 0 0.2em;
+  }
+
+  .vtree-root {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+    color: var(--dark);
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    border-radius: 8px;
+    padding: 0.7em 1.8em;
+    position: relative;
+  }
+
+  .vtree-root::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 1.5px;
+    height: 24px;
+    background: rgba(255,255,255,0.28);
+    transform: translateX(-50%);
+  }
+
+  .vtree-verticals {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 1.2%;
+    margin-top: 24px;
+    padding-top: 24px;
+    position: relative;
+  }
+
+  .vtree-verticals::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 12.5%;
+    right: 12.5%;
+    height: 1.5px;
+    background: rgba(255,255,255,0.28);
+  }
+
+  .vtree-vertical {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .vtree-vertical::before {
+    content: '';
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    width: 1.5px;
+    height: 24px;
+    background: rgba(255,255,255,0.28);
+  }
+
+  .vtree-vbox {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: clamp(0.62rem, 0.95vw, 0.74rem);
+    letter-spacing: 0.02em;
     text-transform: uppercase;
-    margin-bottom: 0.3em;
+    color: var(--dark);
+    background: var(--white);
+    border: 1.5px solid var(--cat-grow);
+    border-radius: 6px;
+    padding: 0.7em 0.4em;
+    position: relative;
+  }
+
+  .vtree-vbox.vtree-locked {
+    border-style: dashed;
+    border-color: var(--muted);
+    color: var(--mid);
+    opacity: 0.7;
+  }
+
+  .vtree-vbox::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 1.5px;
+    height: 16px;
+    background: rgba(255,255,255,0.28);
+    transform: translateX(-50%);
+  }
+
+  .vtree-companies {
+    width: 100%;
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+  }
+
+  .vtree-co {
+    font-size: clamp(0.56rem, 0.82vw, 0.66rem);
+    color: var(--muted);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 0.4em 0.4em;
+    text-align: center;
+    line-height: 1.25;
+  }
+
+  .vtree-co.vtree-locked {
+    border-style: dashed;
+    opacity: 0.55;
   }
 
   /* ── Terms ──────────────────────────── */
@@ -1352,24 +1485,55 @@
     </section>
 
     <!-- ── 10. THE VISION (new) ────────── -->
-    <section data-background-color="#000000">
-      <div class="act-label"><span class="act-num">III</span><span class="act-text">The Ask</span></div>
-      <div class="label">The Vision</div>
-      <div class="rule"></div>
-      <h2>One acquisition is proof.<br>A portfolio is <span class="accent">the business.</span></h2>
-      <div class="slide-split">
-        <div class="split-content">
-          <div class="vision-sub">Compounding toward</div>
-          <div class="vision-number">€100M+</div>
-          <div class="points single">
-            <div class="point"><div class="point-dot"></div><div class="point-text">A portfolio of 3–5 verticals — cleaning, laundry, waste, maintenance, trades — running roll-ups within each.</div></div>
-            <div class="point"><div class="point-dot"></div><div class="point-text">Selective exits of mature companies at premium multiples, proceeds reinvested into the next wave.</div></div>
-            <div class="point"><div class="point-dot"></div><div class="point-text">Not a thesis — a trajectory already underway, with acquisition #1 cash-flowing and #2 closing.</div></div>
+    <section class="slide-photo-bleed" data-background-color="#000000">
+      <div class="bleed-photo"><img src="https://picsum.photos/seed/askel-skyline/900/1900?grayscale" alt=""></div>
+      <div class="content-clear">
+        <div class="act-label"><span class="act-num">III</span><span class="act-text">The Ask</span></div>
+        <div class="label">The Vision</div>
+        <div class="rule"></div>
+        <h2>One acquisition is proof.<br>A portfolio is <span class="accent">the business.</span></h2>
+        <div class="vision-caption">Compounding toward <strong>€100M+</strong> — a portfolio of verticals, each run as its own roll-up.</div>
+
+        <div class="vtree">
+          <div class="vtree-root">Askel Ventures</div>
+          <div class="vtree-verticals">
+            <div class="vtree-vertical">
+              <div class="vtree-vbox">Commercial Laundry</div>
+              <div class="vtree-companies">
+                <div class="vtree-co">Melers Oy</div>
+                <div class="vtree-co">Auran Pesupojat Oy</div>
+                <div class="vtree-co vtree-locked">Company 3 Oy</div>
+                <div class="vtree-co vtree-locked">Company 4 Oy</div>
+              </div>
+            </div>
+            <div class="vtree-vertical">
+              <div class="vtree-vbox vtree-locked">Waste Management</div>
+              <div class="vtree-companies">
+                <div class="vtree-co vtree-locked">Company Oy</div>
+                <div class="vtree-co vtree-locked">Company Oy</div>
+                <div class="vtree-co vtree-locked">Company Oy</div>
+              </div>
+            </div>
+            <div class="vtree-vertical">
+              <div class="vtree-vbox vtree-locked">Industry 3</div>
+              <div class="vtree-companies">
+                <div class="vtree-co vtree-locked">Company Oy</div>
+                <div class="vtree-co vtree-locked">Company Oy</div>
+                <div class="vtree-co vtree-locked">Company Oy</div>
+              </div>
+            </div>
+            <div class="vtree-vertical">
+              <div class="vtree-vbox vtree-locked">Industry 4</div>
+              <div class="vtree-companies">
+                <div class="vtree-co vtree-locked">Company Oy</div>
+                <div class="vtree-co vtree-locked">Company Oy</div>
+                <div class="vtree-co vtree-locked">Company Oy</div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="split-photo slant">
-          <img src="https://picsum.photos/seed/askel-skyline/900/1100?grayscale" alt="">
-        </div>
+
+        <div class="vision-footnote">Not a thesis — a trajectory already underway, with acquisition #1 (Melers) cash-flowing and #2 (Auran Pesupojat) closing. Selective exits of mature companies at premium multiples fund the next wave.</div>
       </div>
     </section>
 
