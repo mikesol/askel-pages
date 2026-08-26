@@ -1088,6 +1088,26 @@
     min-height: 0;
   }
 
+  .team-credentials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em 0.8em;
+    margin-top: 1.8em;
+  }
+
+  .team-cred {
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(0.56rem, 0.8vw, 0.64rem);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    padding: 0.35em 0.8em;
+    border-radius: 999px;
+  }
+
   .team-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1610,6 +1630,13 @@
               <div class="team-desc">Right fit: the reason this scales past deal #1 without headcount scaling with it. PhD Mathematics, Stanford.</div>
             </div>
           </div>
+        </div>
+        <div class="team-credentials">
+          <div class="team-cred">10 companies founded</div>
+          <div class="team-cred">€8M ARR scaled internationally</div>
+          <div class="team-cred">Stanford · Hanken ×2 · PhD Mathematics</div>
+          <div class="team-cred">AI &amp; full-stack systems</div>
+          <div class="team-cred">VC-backed + traditional business experience</div>
         </div>
       </div>
     </section>
