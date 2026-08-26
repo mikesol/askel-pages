@@ -263,6 +263,69 @@
     padding-left: 0.3em;
   }
 
+  .not-a-fund-pill.big {
+    padding: 0.9em 2em;
+    font-size: clamp(1.1rem, 2.4vw, 1.8rem);
+    letter-spacing: 0.14em;
+  }
+
+  /* ── Closing: choose your next adventure ── */
+  .next-step-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.3em;
+    max-width: 920px;
+  }
+
+  .next-step-block h2 {
+    margin: 0.3em 0 0;
+  }
+
+  .next-step-disclaimer {
+    font-size: clamp(0.68rem, 1vw, 0.8rem);
+    color: var(--muted);
+    font-style: italic;
+    margin-top: -0.9em;
+  }
+
+  .next-step-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 2.4em;
+    width: 100%;
+  }
+
+  .next-step-item {
+    padding: 0.75em 0;
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .ns-person {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: clamp(0.72rem, 1.1vw, 0.85rem);
+    color: #fff;
+  }
+
+  .ns-person::before {
+    content: '→ ';
+    opacity: 0.5;
+  }
+
+  .ns-topic {
+    font-size: clamp(0.64rem, 0.92vw, 0.74rem);
+    color: var(--muted);
+    line-height: 1.4;
+    margin-top: 0.15em;
+  }
+
+  .next-step-footnote {
+    font-size: clamp(0.64rem, 0.9vw, 0.74rem);
+    color: var(--muted);
+    font-style: italic;
+  }
+
   .cover-cta-block {
     display: flex;
     flex-direction: column;
@@ -1645,13 +1708,40 @@
     <section class="slide-cover photo-bg" data-background-color="#000000" style="background-image:url('https://picsum.photos/seed/askel-close/1920/1200?grayscale');">
       <div class="wordmark">Askel Ventures</div>
       <div class="cover-body">
-        <div class="cover-cta-block">
-          <h1>Choose your <span class="accent">next step.</span></h1>
-          <div class="points single">
-            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>The data.</strong> Ask us for full financials, deal terms, and the current pipeline.</div></div>
-            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>The introduction.</strong> Meet Melers Oy — our first live case, cash-flowing today.</div></div>
-            <div class="point"><div class="point-dot"></div><div class="point-text"><strong>The conversation.</strong> 30 minutes, no pitch — just questions.</div></div>
+        <div class="next-step-block">
+          <div class="not-a-fund">
+            <div class="not-a-fund-pill big">Not a fund*</div>
+            <div class="not-a-fund-sub">*Just four founders building a boring business portfolio.</div>
           </div>
+          <h2>Choose your next adventure.</h2>
+          <div class="next-step-disclaimer">Which topic interests you the most?</div>
+          <div class="next-step-grid">
+            <div class="next-step-item">
+              <div class="ns-person">Talk to Mike</div>
+              <div class="ns-topic">How to set up AI agents for yourself <em>(60-min workshop)</em></div>
+            </div>
+            <div class="next-step-item">
+              <div class="ns-person">Talk to Mikael</div>
+              <div class="ns-topic">Due diligence for hardware equipment — what to lease, what to buy</div>
+            </div>
+            <div class="next-step-item">
+              <div class="ns-person">Talk to Varia</div>
+              <div class="ns-topic">Simple marketing &amp; sales SOPs — branding, website, outbound</div>
+            </div>
+            <div class="next-step-item">
+              <div class="ns-person">Talk to Niklas</div>
+              <div class="ns-topic">How we run financial analysis during due diligence</div>
+            </div>
+            <div class="next-step-item">
+              <div class="ns-person">Talk to Mike</div>
+              <div class="ns-topic">How Steve finds deals before they hit the market</div>
+            </div>
+            <div class="next-step-item">
+              <div class="ns-person">Talk to any of us</div>
+              <div class="ns-topic">No pitch — just 30 minutes answering your questions</div>
+            </div>
+          </div>
+          <div class="next-step-footnote">Or just stop by — our office at Mikonkatu 9, or brunch with Varia at her place.</div>
           <a href="https://calendar.google.com/appointments/schedules/AcZssZ3nIFYnBCPbFINd2KpVepM5rtsSx1N0eQBgBG5w1xDcDRHhXTZBtXfoUq1X0R3D10zVGDz9qqZc" target="_blank" class="cta-btn">Book a conversation →</a>
         </div>
       </div>
