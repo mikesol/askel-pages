@@ -514,27 +514,11 @@
 
   /* ── Flywheel (reused for Model + Vision) ── */
   .flywheel-outer {
-    position: relative;
     width: 100%;
     overflow-x: auto;
     touch-action: pan-x;
     margin-bottom: 1.4em;
   }
-
-  .flywheel-outer::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: clamp(40px, 6vw, 90px);
-    background: linear-gradient(90deg, transparent, var(--bg) 85%);
-    pointer-events: none;
-    z-index: 2;
-    transition: opacity 0.3s ease;
-  }
-
-  .flywheel-outer.at-end::after { opacity: 0; }
 
   .flywheel {
     display: flex;
@@ -678,10 +662,7 @@
     border: 1px solid var(--border);
     border-radius: 999px;
     background: rgba(255,255,255,0.06);
-    transition: opacity 0.3s ease;
   }
-
-  .scroll-hint.is-done { opacity: 0; }
 
   .scroll-arrow {
     display: inline-block;
@@ -1471,16 +1452,15 @@
   document.querySelectorAll('.scroll-progress-fill[data-progress-for]').forEach(function (fill) {
     var outer = document.getElementById(fill.getAttribute('data-progress-for'));
     if (!outer) return;
-    var hint = outer.parentElement.querySelector('.scroll-hint');
+    var ticking = false;
     function update() {
       var max = outer.scrollWidth - outer.clientWidth;
-      var pct = max > 0 ? (outer.scrollLeft / max) * 100 : 0;
-      fill.style.width = pct + '%';
-      var atEnd = max <= 0 || outer.scrollLeft >= max - 2;
-      outer.classList.toggle('at-end', atEnd);
-      if (hint) hint.classList.toggle('is-done', atEnd);
+      fill.style.width = (max > 0 ? (outer.scrollLeft / max) * 100 : 0) + '%';
+      ticking = false;
     }
-    outer.addEventListener('scroll', update, { passive: true });
+    outer.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
     window.addEventListener('resize', update);
     update();
   });
