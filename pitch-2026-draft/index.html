@@ -289,6 +289,38 @@
 
   .next-step-block .not-a-fund { margin-top: 0; }
 
+  .closing-slide .cover-body {
+    align-items: flex-start;
+    padding-top: 1vh;
+  }
+
+  .closing-corner {
+    position: absolute !important;
+    right: 7vw !important;
+    bottom: 6vh !important;
+    left: auto !important;
+    top: auto !important;
+    max-width: 420px;
+    text-align: right;
+    z-index: 1;
+  }
+
+  .closing-corner .closing-headline {
+    font-size: clamp(0.85rem, 1.5vw, 1.15rem) !important;
+    line-height: 1.25;
+  }
+
+  .closing-corner .not-a-fund {
+    align-items: flex-end;
+    margin-top: 0.6em;
+  }
+
+  .closing-corner .not-a-fund-sub {
+    text-align: right;
+    padding-left: 0;
+    padding-right: 0.2em;
+  }
+
   .next-step-disclaimer {
     font-size: clamp(0.68rem, 1vw, 0.8rem);
     color: var(--muted);
@@ -1712,15 +1744,10 @@
     </section>
 
     <!-- ── 12. CLOSING ──────────────────── -->
-    <section class="slide-cover photo-bg" data-background-color="#000000" style="background-image:url('https://picsum.photos/seed/askel-close/1920/1200?grayscale');">
+    <section class="slide-cover photo-bg closing-slide" data-background-color="#000000" style="background-image:url('https://picsum.photos/seed/askel-close/1920/1200?grayscale');">
       <div class="wordmark">Askel Ventures</div>
       <div class="cover-body">
         <div class="next-step-block">
-          <h1 class="closing-headline">Acquiring <span class="hue-turquoise">boring</span> businesses.<br>Building compounding value.</h1>
-          <div class="not-a-fund">
-            <div class="not-a-fund-pill">Not a fund*</div>
-            <div class="not-a-fund-sub">*Just four founders building a boring business portfolio.</div>
-          </div>
           <h2>Choose your next adventure.</h2>
           <div class="next-step-disclaimer">Which topic interests you the most?</div>
           <div class="next-step-grid">
@@ -1743,6 +1770,13 @@
           </div>
           <div class="next-step-footnote">Or just stop by — our office at Mikonkatu 9, or brunch with Varia at her place.</div>
           <a href="https://calendar.google.com/appointments/schedules/AcZssZ3nIFYnBCPbFINd2KpVepM5rtsSx1N0eQBgBG5w1xDcDRHhXTZBtXfoUq1X0R3D10zVGDz9qqZc" target="_blank" class="cta-btn">Book a conversation →</a>
+        </div>
+      </div>
+      <div class="closing-corner">
+        <h1 class="closing-headline">Acquiring <span class="hue-turquoise">boring</span> businesses.<br>Building compounding value.</h1>
+        <div class="not-a-fund">
+          <div class="not-a-fund-pill">Not a fund*</div>
+          <div class="not-a-fund-sub">*Just four founders building a boring business portfolio.</div>
         </div>
       </div>
     </section>
