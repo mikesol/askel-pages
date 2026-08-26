@@ -1081,35 +1081,25 @@
   /* ── Team ───────────────────────────── */
   .team-layout {
     display: flex;
-    gap: 2.5vw;
-    align-items: stretch;
+    flex-direction: column;
+    justify-content: center;
     width: 100%;
     flex: 1;
     min-height: 0;
   }
 
-  .team-content {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .team-photo-wrap {
-    flex: 0 0 42%;
-    max-width: 42%;
-    display: flex;
-    flex-direction: column;
+  .team-photo-band {
+    flex-shrink: 0;
+    width: calc(100% + 14vw);
+    margin: 1.6em -7vw -5.5vh;
   }
 
   .team-photo {
-    flex: 1;
     width: 100%;
-    min-height: 200px;
+    height: 20vh;
+    min-height: 150px;
     object-fit: cover;
-    object-position: center top;
-    border-radius: 3px;
+    object-position: center 25%;
     display: block;
   }
 
@@ -1240,9 +1230,8 @@
     .split-photo img { height: 22vh; min-height: unset; }
     .split-photo.slant img { clip-path: none; }
 
-    .team-layout { flex-direction: column; }
-    .team-photo-wrap { flex: none; max-width: 100%; width: 100%; min-height: unset; }
-    .team-photo { height: 28vh; }
+    .team-photo-band { width: 100%; margin: 1em 0 0; }
+    .team-photo { height: 18vh; min-height: unset; }
 
     .bleed-photo { position: relative; width: 100%; height: 22vh; order: -1; margin-bottom: 1em; }
     .content-clear { padding-right: 0; }
@@ -1564,33 +1553,31 @@
       <div class="rule"></div>
       <h2>Four founders. <span class="accent">Four obsessions.</span></h2>
       <div class="team-layout">
-        <div class="team-content">
-          <div class="team-grid">
-            <div class="team-member">
-              <div class="team-name">Varia Wahlroos-Kaitila <span class="team-tag">CEO</span></div>
-              <div class="team-obsession">Why: has built and sold companies before — knows firsthand what it takes to get a deal over the line, and what happens after.</div>
-              <div class="team-desc">Right fit: the operator who turns due diligence into a closed deal. Founded 5 companies, built one to €2M ARR, ran the bank negotiations that closed Melers.</div>
-            </div>
-            <div class="team-member">
-              <div class="team-name">Niklas Slotte <span class="team-tag">CRO</span></div>
-              <div class="team-obsession">Why: scaled revenue from zero internationally — knows what actually makes a boring business sellable and growable.</div>
-              <div class="team-desc">Right fit: the commercial engine behind every acquisition's growth plan. Scaled a business to €8M ARR internationally.</div>
-            </div>
-            <div class="team-member">
-              <div class="team-name">Mikael Ylinen <span class="team-tag">Board</span></div>
-              <div class="team-obsession">Why: decades on the ground running operations — the reality check every deal needs before it's signed.</div>
-              <div class="team-desc">Right fit: makes sure the plan survives contact with an actual workforce. Deep operational experience, on the ground and in the boardroom.</div>
-            </div>
-            <div class="team-member">
-              <div class="team-name">Mike Solomon <span class="team-tag">CTO</span></div>
-              <div class="team-obsession">Why: built Steve, the AI system sourcing every deal in this pipeline — believes boring businesses are where AI proves it creates value, not hype.</div>
-              <div class="team-desc">Right fit: the reason this scales past deal #1 without headcount scaling with it. PhD Mathematics, Stanford.</div>
-            </div>
+        <div class="team-grid">
+          <div class="team-member">
+            <div class="team-name">Varia Wahlroos-Kaitila <span class="team-tag">CEO</span></div>
+            <div class="team-obsession">Why: has built and sold companies before — knows firsthand what it takes to get a deal over the line, and what happens after.</div>
+            <div class="team-desc">Right fit: the operator who turns due diligence into a closed deal. Founded 5 companies, built one to €2M ARR, ran the bank negotiations that closed Melers.</div>
+          </div>
+          <div class="team-member">
+            <div class="team-name">Niklas Slotte <span class="team-tag">CRO</span></div>
+            <div class="team-obsession">Why: scaled revenue from zero internationally — knows what actually makes a boring business sellable and growable.</div>
+            <div class="team-desc">Right fit: the commercial engine behind every acquisition's growth plan. Scaled a business to €8M ARR internationally.</div>
+          </div>
+          <div class="team-member">
+            <div class="team-name">Mikael Ylinen <span class="team-tag">Board</span></div>
+            <div class="team-obsession">Why: decades on the ground running operations — the reality check every deal needs before it's signed.</div>
+            <div class="team-desc">Right fit: makes sure the plan survives contact with an actual workforce. Deep operational experience, on the ground and in the boardroom.</div>
+          </div>
+          <div class="team-member">
+            <div class="team-name">Mike Solomon <span class="team-tag">CTO</span></div>
+            <div class="team-obsession">Why: built Steve, the AI system sourcing every deal in this pipeline — believes boring businesses are where AI proves it creates value, not hype.</div>
+            <div class="team-desc">Right fit: the reason this scales past deal #1 without headcount scaling with it. PhD Mathematics, Stanford.</div>
           </div>
         </div>
-        <div class="team-photo-wrap">
-          <img class="team-photo" src="askel-team-cropped.webp" alt="Askel Ventures founding team">
-        </div>
+      </div>
+      <div class="team-photo-band">
+        <img class="team-photo" src="askel-team-cropped.webp" alt="Askel Ventures founding team">
       </div>
     </section>
 
