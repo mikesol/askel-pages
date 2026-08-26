@@ -274,13 +274,20 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.3em;
+    gap: 0.9em;
     max-width: 920px;
   }
 
   .next-step-block h2 {
-    margin: 0.3em 0 0;
+    margin: 0.2em 0 0;
   }
+
+  .closing-headline {
+    font-size: clamp(1.3rem, 2.6vw, 2.1rem) !important;
+    margin-bottom: 0 !important;
+  }
+
+  .next-step-block .not-a-fund { margin-top: 0; }
 
   .next-step-disclaimer {
     font-size: clamp(0.68rem, 1vw, 0.8rem);
@@ -1709,7 +1716,7 @@
       <div class="wordmark">Askel Ventures</div>
       <div class="cover-body">
         <div class="next-step-block">
-          <h1>Acquiring <span class="hue-turquoise">boring</span> businesses.<br>Building compounding value.</h1>
+          <h1 class="closing-headline">Acquiring <span class="hue-turquoise">boring</span> businesses.<br>Building compounding value.</h1>
           <div class="not-a-fund">
             <div class="not-a-fund-pill">Not a fund*</div>
             <div class="not-a-fund-sub">*Just four founders building a boring business portfolio.</div>
