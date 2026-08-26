@@ -864,15 +864,32 @@
 
   .vtree-root {
     font-family: 'DM Sans', sans-serif;
-    font-weight: 700;
-    font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+    text-align: center;
     color: var(--dark);
     background: rgba(255,255,255,0.08);
     border: 1.5px solid rgba(255,255,255,0.3);
     border-radius: 8px;
-    padding: 0.7em 1.8em;
+    padding: 0.65em 1.8em;
     position: relative;
   }
+
+  .vtree-root-name {
+    font-weight: 700;
+    font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+  }
+
+  .vtree-root-tags {
+    font-weight: 600;
+    font-size: clamp(0.56rem, 0.8vw, 0.66rem);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.35em;
+  }
+
+  .vtree-root-tags .vt-find { color: var(--cat-find); }
+  .vtree-root-tags .vt-fund { color: var(--cat-fund); }
+  .vtree-root-tags .vt-grow { color: var(--cat-grow); }
 
   .vtree-root::after {
     content: '';
@@ -1495,7 +1512,10 @@
         <div class="vision-caption">Compounding toward <strong>€100M+</strong> — a portfolio of verticals, each run as its own roll-up.</div>
 
         <div class="vtree">
-          <div class="vtree-root">Askel Ventures</div>
+          <div class="vtree-root">
+            <div class="vtree-root-name">Askel Ventures, LLC</div>
+            <div class="vtree-root-tags">We <span class="vt-find">FIND</span>, <span class="vt-fund">FUND</span> &amp; <span class="vt-grow">GROW</span> companies</div>
+          </div>
           <div class="vtree-verticals">
             <div class="vtree-vertical">
               <div class="vtree-vbox">Commercial Laundry</div>
