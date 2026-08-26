@@ -21,6 +21,9 @@
     --muted:   #888888;
     --border:  rgba(255,255,255,0.1);
     --turquoise: #8fd0d6;
+    --cat-find: #7b6fd6;
+    --cat-fund: #8fd0d6;
+    --cat-grow: #e8935a;
   }
 
   html, body { background: #000000; }
@@ -511,12 +514,28 @@
 
   /* ── Flywheel (reused for Model + Vision) ── */
   .flywheel-outer {
+    position: relative;
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     touch-action: pan-x;
     margin-bottom: 1.4em;
   }
+
+  .flywheel-outer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: clamp(40px, 6vw, 90px);
+    background: linear-gradient(90deg, transparent, var(--bg) 85%);
+    pointer-events: none;
+    z-index: 2;
+    transition: opacity 0.3s ease;
+  }
+
+  .flywheel-outer.at-end::after { opacity: 0; }
 
   .flywheel {
     display: flex;
@@ -529,10 +548,20 @@
     text-align: left;
     padding: 0.9em 1.05em;
     border: 1.5px solid var(--border);
+    border-top: 3px solid transparent;
     border-radius: 8px;
     background: var(--white);
     min-width: 160px;
     flex: 1;
+  }
+
+  .fw-step.cat-find { border-top-color: var(--cat-find); }
+  .fw-step.cat-fund { border-top-color: var(--cat-fund); }
+  .fw-step.cat-grow { border-top-color: var(--cat-grow); }
+
+  .fw-step.fw-highlight {
+    background: rgba(255,255,255,0.06);
+    border-color: var(--cat-grow);
   }
 
   .fw-label {
@@ -544,6 +573,36 @@
     text-transform: uppercase;
     margin-bottom: 0.45em;
   }
+
+  .fw-step.cat-find .fw-label { color: var(--cat-find); }
+  .fw-step.cat-fund .fw-label { color: var(--cat-fund); }
+  .fw-step.cat-grow .fw-label { color: var(--cat-grow); }
+
+  /* ── Category legend ── */
+  .cat-legend {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(0.56rem, 0.8vw, 0.64rem);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .cat-dot {
+    width: 0.55em;
+    height: 0.55em;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 0.2em;
+    flex-shrink: 0;
+  }
+
+  .cat-dot.cat-find { background: var(--cat-find); }
+  .cat-dot.cat-fund { background: var(--cat-fund); }
+  .cat-dot.cat-grow { background: var(--cat-grow); }
 
   .fw-desc {
     font-size: clamp(0.72rem, 1.05vw, 0.84rem);
@@ -586,18 +645,27 @@
 
   .scroll-hint {
     font-family: 'DM Sans', sans-serif;
-    font-size: clamp(0.58rem, 0.85vw, 0.66rem);
-    font-weight: 700;
+    font-size: clamp(0.6rem, 0.9vw, 0.7rem);
+    font-weight: 800;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--dark);
     display: flex;
     align-items: center;
-    gap: 0.4em;
+    gap: 0.45em;
+    padding: 0.4em 0.85em;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.06);
+    transition: opacity 0.3s ease;
   }
+
+  .scroll-hint.is-done { opacity: 0; }
 
   .scroll-arrow {
     display: inline-block;
+    color: var(--cat-grow);
+    font-weight: 900;
     animation: scrollBounce 1.4s ease-in-out infinite;
   }
 
@@ -1247,27 +1315,30 @@
       </div>
       <div class="label-row">
         <div class="label">What We've Already Done</div>
+        <div class="cat-legend">
+          <span class="cat-dot cat-find"></span>Find
+          <span class="cat-dot cat-fund"></span>Fund
+          <span class="cat-dot cat-grow"></span>Grow
+        </div>
         <div class="scroll-hint">Scroll to explore <span class="scroll-arrow">→</span></div>
       </div>
       <div class="flywheel-outer" id="case-study-flywheel">
         <div class="flywheel">
-          <div class="fw-step"><div class="fw-label">Screening</div><div class="fw-desc"><div><strong>35-point</strong> checklist applied</div><div>Passed thesis &amp; financial fit</div></div></div>
+          <div class="fw-step cat-find"><div class="fw-label">Screening</div><div class="fw-desc"><div><strong>35-point</strong> checklist applied</div><div>Passed thesis &amp; financial fit</div></div></div>
           <div class="fw-arrow">→</div>
-          <div class="fw-step"><div class="fw-label">Due Diligence</div><div class="fw-desc"><div><strong>20-point</strong> DD framework run</div><div>Contracts &amp; assets verified</div></div></div>
+          <div class="fw-step cat-find"><div class="fw-label">Due Diligence</div><div class="fw-desc"><div><strong>20-point</strong> DD framework run</div><div>Contracts &amp; assets verified</div></div></div>
           <div class="fw-arrow">→</div>
-          <div class="fw-step"><div class="fw-label">Financing</div><div class="fw-desc"><div><strong>€400K</strong> secured, Finnvera-backed</div><div>Seller earn-out + founder equity</div></div></div>
+          <div class="fw-step cat-fund"><div class="fw-label">Financing</div><div class="fw-desc"><div>Price <strong>€400K</strong> — OP bank secured, <strong>70%</strong> Finnvera-backed</div><div><strong>€100K</strong> seller earn-out + seller-incentivizing sales bonus</div></div></div>
           <div class="fw-arrow">→</div>
-          <div class="fw-step"><div class="fw-label">Knowledge Transfer</div><div class="fw-desc"><div>Seller stayed 3 months to hand over</div><div>KT charter &amp; video training built</div></div></div>
+          <div class="fw-step cat-grow fw-highlight"><div class="fw-label">Knowledge Transfer</div><div class="fw-desc"><div>Seller stayed 3 months to hand over (<strong>24-month</strong> consulting)</div><div>Video training library built for new operator</div></div></div>
           <div class="fw-arrow">→</div>
-          <div class="fw-step"><div class="fw-label">Recruitment</div><div class="fw-desc"><div>Key operating hire recruited</div><div>New operator onboarded &amp; trained</div></div></div>
+          <div class="fw-step cat-grow"><div class="fw-label">Recruitment</div><div class="fw-desc"><div>Key operating hire recruited</div><div>New operator onboarded &amp; trained</div></div></div>
           <div class="fw-arrow">→</div>
-          <div class="fw-step"><div class="fw-label">Marketing</div><div class="fw-desc"><div>Modern brand &amp; systems stood up</div><div>First systematic outreach, ever</div></div></div>
+          <div class="fw-step cat-grow"><div class="fw-label">Marketing</div><div class="fw-desc"><div>New modern branding</div><div>SOP active: brand-aligned materials, Google Ads, website</div></div></div>
           <div class="fw-arrow">→</div>
-          <div class="fw-step"><div class="fw-label">Sales System</div><div class="fw-desc"><div>CRM built &amp; live</div><div>SOP active, <strong>€100K</strong> pipeline</div></div></div>
+          <div class="fw-step cat-grow"><div class="fw-label">Sales</div><div class="fw-desc"><div>CRM built &amp; live, incl. sales rep hired</div><div>SOP active — <strong>3-year, €60K</strong> contract secured</div></div></div>
           <div class="fw-arrow">→</div>
-          <div class="fw-step"><div class="fw-label">R&amp;D w/ Business Finland</div><div class="fw-desc"><div>Enrolled in R&amp;D funding program</div><div>Co-funding digitalization roadmap</div></div></div>
-          <div class="fw-arrow">→</div>
-          <div class="fw-step"><div class="fw-label">Growth Stage</div><div class="fw-desc"><div>Tracking toward EBITDA target</div><div>Positioned for deal #2</div></div></div>
+          <div class="fw-step cat-grow"><div class="fw-label">R&amp;D</div><div class="fw-desc"><div>Enrolled in R&amp;D funding programs</div><div>Custom software dev started (CRM, ERP, invoicing)</div></div></div>
         </div>
       </div>
       <div class="scroll-progress-track"><div class="scroll-progress-fill" data-progress-for="case-study-flywheel"></div></div>
@@ -1374,9 +1445,14 @@
   document.querySelectorAll('.scroll-progress-fill[data-progress-for]').forEach(function (fill) {
     var outer = document.getElementById(fill.getAttribute('data-progress-for'));
     if (!outer) return;
+    var hint = outer.parentElement.querySelector('.scroll-hint');
     function update() {
       var max = outer.scrollWidth - outer.clientWidth;
-      fill.style.width = (max > 0 ? (outer.scrollLeft / max) * 100 : 0) + '%';
+      var pct = max > 0 ? (outer.scrollLeft / max) * 100 : 0;
+      fill.style.width = pct + '%';
+      var atEnd = max <= 0 || outer.scrollLeft >= max - 2;
+      outer.classList.toggle('at-end', atEnd);
+      if (hint) hint.classList.toggle('is-done', atEnd);
     }
     outer.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
