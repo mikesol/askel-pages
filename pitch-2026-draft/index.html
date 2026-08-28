@@ -640,26 +640,12 @@
     color: var(--dark);
   }
 
-  /* ── Case Study title + watermark logo ── */
-  .case-title-wrap {
-    position: relative;
-  }
-
-  .case-title-wrap h2 {
-    position: relative;
-    z-index: 1;
-  }
-
-  .case-logo-bg {
-    position: absolute;
-    z-index: 0;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    height: clamp(70px, 9vw, 130px);
+  /* ── Case Study logo (bottom-left corner mark) ── */
+  .case-logo-corner {
+    height: clamp(36px, 5vw, 56px);
     width: auto;
-    opacity: 0.85;
-    pointer-events: none;
+    margin-top: 1.4em;
+    opacity: 0.9;
   }
 
   .case-links {
@@ -1459,12 +1445,9 @@
         <div class="act-label"><span class="act-num">II</span><span class="act-text">The Engine</span></div>
         <div class="label">Case Study</div>
         <div class="rule"></div>
-        <div class="case-title-wrap">
-          <img class="case-logo-bg" src="melers-logo.png" alt="">
-          <h2>Proof-of-concept: <span class="accent">Melers Oy.</span></h2>
-        </div>
+        <h2>Proof-of-concept: <span class="accent">Melers Oy.</span></h2>
         <div class="terms-grid" style="margin-bottom:1.2em;">
-          <div class="term"><div class="term-label">Deal overview</div><div class="term-value">Commercial dry cleaning &amp; laundry, Turku region — operating since <strong>1967</strong> (founded 2001). 100% acquisition, closed <strong>Jan 2026</strong> in <strong>&lt;100 days</strong>.</div></div>
+          <div class="term"><div class="term-label">Deal overview</div><div class="term-value">Commercial laundry for elderly care and hotels &amp; consumer dry cleaning, Turku region — operating since <strong>1967</strong> (founded 2001). 100% acquisition, closed <strong>Jan 2026</strong> in <strong>&lt;100 days</strong>.</div></div>
           <div class="term"><div class="term-label">Business snapshot</div><div class="term-value">Revenue <strong>~€490K</strong>, EBITDA <strong>€115K</strong> (23% margin). 400 customers, 60/40 B2B/B2C mix. Acquired at <strong>~3.5x</strong> EBITDA.<div class="case-links"><a href="https://melers.fi" target="_blank" rel="noopener">melers.fi ↗</a><a href="https://turunsuurpesula.fi" target="_blank" rel="noopener">turunsuurpesula.fi ↗</a></div></div></div>
           <div class="term"><div class="term-label">Financing</div><div class="term-value"><strong>€400K</strong> purchase price — <strong>55%</strong> bank loan (OP, Finnvera-backed), <strong>25%</strong> seller financing, <strong>20%</strong> founder equity (cash). No outside capital needed.</div></div>
           <div class="term"><div class="term-label">Value-creation plan</div><div class="term-value">New modern branding, AI-enabled ERP, standardized sales &amp; marketing operating practices, new outbound sales system, growth-minded operator. Target: <strong>min. +10% YoY</strong> EBITDA growth.</div></div>
@@ -1481,6 +1464,7 @@
           <span class="ask-tag">Marketing system</span>
           <span class="ask-tag">Sales system</span>
         </div>
+        <img class="case-logo-corner" src="melers-logo.png" alt="Melers">
       </div>
     </section>
 
