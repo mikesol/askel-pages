@@ -614,184 +614,30 @@
     line-height: 1.55;
   }
 
-  /* ── Flywheel (reused for Model + Vision) ── */
-  .flywheel-outer {
-    width: 100%;
-    overflow-x: auto;
-    touch-action: pan-x;
-    margin-bottom: 1.4em;
-  }
-
-  .flywheel {
+  /* ── Ask-us-about tags (Case Study) ── */
+  .ask-tags {
     display: flex;
-    align-items: stretch;
-    gap: 0;
-    min-width: max-content;
-  }
-
-  .fw-step {
-    text-align: left;
-    padding: 0.9em 1.05em;
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    background: var(--white);
-    min-width: 160px;
-    flex: 1;
-    box-shadow: inset 0 3px 0 0 transparent;
-  }
-
-  .fw-step.cat-find { box-shadow: inset 0 3px 0 0 var(--cat-find); }
-  .fw-step.cat-fund { box-shadow: inset 0 3px 0 0 var(--cat-fund); }
-  .fw-step.cat-grow { box-shadow: inset 0 3px 0 0 var(--cat-grow); }
-
-  .fw-step.fw-highlight {
-    background: rgba(255,255,255,0.06);
-  }
-
-  .fw-step.fw-next {
-    border: 1.5px dashed var(--muted);
-    background: transparent;
-    opacity: 0.55;
-    box-shadow: none;
-  }
-
-  .fw-next-tag {
-    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.35em;
-    font-family: 'DM Sans', sans-serif;
+    gap: 0.6em;
+    margin-top: 1.2em;
+  }
+
+  .ask-tags-label {
+    font-size: clamp(0.58rem, 0.85vw, 0.66rem);
     font-weight: 700;
-    font-size: clamp(0.52rem, 0.75vw, 0.6rem);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 0.55em;
-  }
-
-  .fw-step.fw-next .fw-label { color: var(--mid); }
-
-  .fw-label {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 700;
-    font-size: clamp(0.68rem, 1.1vw, 0.8rem);
-    color: var(--red);
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    margin-bottom: 0.45em;
-  }
-
-  .fw-step.cat-find .fw-label { color: var(--cat-find); }
-  .fw-step.cat-fund .fw-label { color: var(--cat-fund); }
-  .fw-step.cat-grow .fw-label { color: var(--cat-grow); }
-
-  /* ── Category legend ── */
-  .cat-legend {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-    font-family: 'DM Sans', sans-serif;
-    font-size: clamp(0.56rem, 0.8vw, 0.64rem);
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .cat-dot {
-    width: 0.55em;
-    height: 0.55em;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 0.2em;
-    flex-shrink: 0;
-  }
-
-  .cat-dot.cat-find { background: var(--cat-find); }
-  .cat-dot.cat-fund { background: var(--cat-fund); }
-  .cat-dot.cat-grow { background: var(--cat-grow); }
-  .cat-dot.cat-next { background: transparent; border: 1.5px dashed var(--muted); }
-
-  .fw-desc {
-    font-size: clamp(0.72rem, 1.05vw, 0.84rem);
-    color: var(--muted);
-    line-height: 1.5;
-  }
-
-  .fw-desc strong { color: var(--dark); font-weight: 700; }
-
-  .fw-desc div {
-    padding-left: 0.7em;
-    position: relative;
-    margin-top: 0.25em;
-  }
-
-  .fw-desc div::before {
-    content: '–';
-    position: absolute;
-    left: 0;
-  }
-
-  .fw-arrow {
-    font-size: 1em;
-    color: var(--red);
-    padding: 0 0.25em;
-    align-self: center;
-    flex-shrink: 0;
-    opacity: 0.45;
-  }
-
-  /* ── Label row + scroll hint (Case Study) ── */
-  .label-row {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1em;
-  }
-
-  .label-row .label { margin-bottom: 1em; }
-
-  .scroll-hint {
-    font-family: 'DM Sans', sans-serif;
-    font-size: clamp(0.6rem, 0.9vw, 0.7rem);
-    font-weight: 800;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--dark);
-    display: flex;
-    align-items: center;
-    gap: 0.45em;
-    padding: 0.4em 0.85em;
+    color: var(--muted);
+    margin-right: 0.3em;
+  }
+
+  .ask-tag {
     border: 1px solid var(--border);
     border-radius: 999px;
-    background: rgba(255,255,255,0.06);
-  }
-
-  .scroll-arrow {
-    display: inline-block;
-    color: var(--cat-grow);
-    font-weight: 900;
-    animation: scrollBounce 1.4s ease-in-out infinite;
-  }
-
-  @keyframes scrollBounce {
-    0%, 100% { transform: translateX(0); opacity: 0.5; }
-    50% { transform: translateX(6px); opacity: 1; }
-  }
-
-  .scroll-progress-track {
-    width: 100%;
-    height: 3px;
-    background: var(--border);
-    border-radius: 999px;
-    margin-top: 0.7em;
-    overflow: hidden;
-  }
-
-  .scroll-progress-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #e8935a 0%, #7b6fd6 100%);
-    border-radius: 999px;
+    padding: 0.4em 0.9em;
+    font-size: clamp(0.68rem, 0.95vw, 0.78rem);
+    color: var(--dark);
   }
 
   /* ── Case Study title + watermark logo ── */
@@ -1366,13 +1212,6 @@
       gap: 1em 0;
     }
 
-    .flywheel-outer { overflow-x: scroll; }
-    .flywheel { flex-wrap: nowrap; min-width: max-content; gap: 0.35em; }
-    .fw-step { flex: 0 0 auto; box-sizing: content-box; min-width: 80px; padding: 0.6em 0.5em; }
-    .fw-arrow { display: none; }
-
-    .label-row { flex-wrap: wrap; row-gap: 0.5em; }
-
     .pipeline { overflow-x: scroll; }
     .stat-strip { flex-wrap: wrap; }
     .stat-item { border-left: none !important; padding-left: 0 !important; }
@@ -1612,59 +1451,35 @@
     </section>
 
     <!-- ── 9. CASE STUDY: MELERS OY (new) ── -->
-    <section data-background-color="#000000">
-      <div class="act-label"><span class="act-num">II</span><span class="act-text">The Engine</span></div>
-      <div class="label">Case Study</div>
-      <div class="rule"></div>
-      <div class="case-title-wrap">
-        <img class="case-logo-bg" src="melers-logo.png" alt="">
-        <h2>Proof-of-concept: <span class="accent">Melers Oy.</span></h2>
-      </div>
-      <div class="terms-grid" style="margin-bottom:1.2em;">
-        <div class="term"><div class="term-label">Deal overview</div><div class="term-value">Commercial dry cleaning &amp; laundry, Turku region — operating since <strong>1967</strong> (founded 2001). 100% acquisition, closed <strong>Jan 2026</strong> in <strong>&lt;100 days</strong>.</div></div>
-        <div class="term"><div class="term-label">Business snapshot</div><div class="term-value">Revenue <strong>~€490K</strong>, EBITDA <strong>€115K</strong> (23% margin). 400 customers, 60/40 B2B/B2C mix. Acquired at <strong>~3.5x</strong> EBITDA.<div class="case-links"><a href="https://melers.fi" target="_blank" rel="noopener">melers.fi ↗</a><a href="https://turunsuurpesula.fi" target="_blank" rel="noopener">turunsuurpesula.fi ↗</a></div></div></div>
-        <div class="term"><div class="term-label">Financing</div><div class="term-value"><strong>€400K</strong> purchase price — <strong>55%</strong> bank loan (OP, Finnvera-backed), <strong>25%</strong> seller financing, <strong>20%</strong> founder equity (cash). No outside capital needed.</div></div>
-        <div class="term"><div class="term-label">Value-creation plan</div><div class="term-value">New modern branding, AI-enabled ERP, standardized sales &amp; marketing operating practices, new outbound sales system, growth-minded operator. Target: <strong>min. +10% YoY</strong> EBITDA growth.</div></div>
-      </div>
-      <div class="partner-logos">
-        <span class="partner-logos-label">Backed by</span>
-        <div class="partner-logo-card"><img src="op-logo.svg" alt="OP"></div>
-        <div class="partner-logo-card"><img src="business-finland-logo.jpg" alt="Business Finland"></div>
-      </div>
-      <div class="label-row">
-        <div class="label">What We've Already Done</div>
-        <div class="cat-legend">
-          <span class="cat-dot cat-find"></span>Find
-          <span class="cat-dot cat-fund"></span>Fund
-          <span class="cat-dot cat-grow"></span>Grow
-          <span class="cat-dot cat-next"></span>Next
+    <section class="slide-photo-bleed" data-background-color="#000000">
+      <div class="bleed-photo"><img src="case-study-stock.jpg" alt="Industrial laundry facility with rows of washing machines (stock photo, placeholder)"></div>
+      <div class="content-clear">
+        <div class="act-label"><span class="act-num">II</span><span class="act-text">The Engine</span></div>
+        <div class="label">Case Study</div>
+        <div class="rule"></div>
+        <div class="case-title-wrap">
+          <img class="case-logo-bg" src="melers-logo.png" alt="">
+          <h2>Proof-of-concept: <span class="accent">Melers Oy.</span></h2>
         </div>
-        <div class="scroll-hint">Scroll to explore <span class="scroll-arrow">→</span></div>
-      </div>
-      <div class="flywheel-outer" id="case-study-flywheel">
-        <div class="flywheel">
-          <div class="fw-step cat-find"><div class="fw-label">Screening</div><div class="fw-desc"><div><strong>35-point</strong> checklist applied</div><div>Passed thesis &amp; financial fit</div></div></div>
-          <div class="fw-arrow">→</div>
-          <div class="fw-step cat-find"><div class="fw-label">Due Diligence</div><div class="fw-desc"><div><strong>20-point</strong> DD framework run</div><div>Contracts &amp; assets verified</div></div></div>
-          <div class="fw-arrow">→</div>
-          <div class="fw-step cat-fund"><div class="fw-label">Financing</div><div class="fw-desc"><div>Price <strong>€400K</strong> — OP bank secured, <strong>70%</strong> Finnvera-backed</div><div><strong>€100K</strong> seller earn-out + seller-incentivizing sales bonus</div></div></div>
-          <div class="fw-arrow">→</div>
-          <div class="fw-step cat-grow fw-highlight"><div class="fw-label">Knowledge Transfer</div><div class="fw-desc"><div>Seller stayed 3 months to hand over (<strong>24-month</strong> consulting)</div><div>Video training library built for new operator</div></div></div>
-          <div class="fw-arrow">→</div>
-          <div class="fw-step cat-grow"><div class="fw-label">Recruitment</div><div class="fw-desc"><div>Key operating hire recruited</div><div>New operator onboarded &amp; trained</div></div></div>
-          <div class="fw-arrow">→</div>
-          <div class="fw-step cat-grow"><div class="fw-label">Marketing</div><div class="fw-desc"><div>New modern branding</div><div>SOP active: brand-aligned materials, Google Ads, website</div></div></div>
-          <div class="fw-arrow">→</div>
-          <div class="fw-step cat-grow"><div class="fw-label">Sales</div><div class="fw-desc"><div>CRM built &amp; live, incl. sales rep hired</div><div>SOP active — <strong>3-year, €60K</strong> contract secured</div></div></div>
-          <div class="fw-arrow">→</div>
-          <div class="fw-step cat-grow"><div class="fw-label">R&amp;D</div><div class="fw-desc"><div>Enrolled in R&amp;D funding programs</div><div>Custom software dev started (CRM, ERP, invoicing)</div></div></div>
-          <div class="fw-arrow">→</div>
-          <div class="fw-step fw-next"><div class="fw-next-tag">Next Up</div><div class="fw-label">Team Recruitment</div><div class="fw-desc"><div>Role definition &amp; company team structuring</div></div></div>
-          <div class="fw-arrow">→</div>
-          <div class="fw-step fw-next"><div class="fw-next-tag">Next Up</div><div class="fw-label">Management Recruitment</div><div class="fw-desc"><div>Growth talent</div></div></div>
+        <div class="terms-grid" style="margin-bottom:1.2em;">
+          <div class="term"><div class="term-label">Deal overview</div><div class="term-value">Commercial dry cleaning &amp; laundry, Turku region — operating since <strong>1967</strong> (founded 2001). 100% acquisition, closed <strong>Jan 2026</strong> in <strong>&lt;100 days</strong>.</div></div>
+          <div class="term"><div class="term-label">Business snapshot</div><div class="term-value">Revenue <strong>~€490K</strong>, EBITDA <strong>€115K</strong> (23% margin). 400 customers, 60/40 B2B/B2C mix. Acquired at <strong>~3.5x</strong> EBITDA.<div class="case-links"><a href="https://melers.fi" target="_blank" rel="noopener">melers.fi ↗</a><a href="https://turunsuurpesula.fi" target="_blank" rel="noopener">turunsuurpesula.fi ↗</a></div></div></div>
+          <div class="term"><div class="term-label">Financing</div><div class="term-value"><strong>€400K</strong> purchase price — <strong>55%</strong> bank loan (OP, Finnvera-backed), <strong>25%</strong> seller financing, <strong>20%</strong> founder equity (cash). No outside capital needed.</div></div>
+          <div class="term"><div class="term-label">Value-creation plan</div><div class="term-value">New modern branding, AI-enabled ERP, standardized sales &amp; marketing operating practices, new outbound sales system, growth-minded operator. Target: <strong>min. +10% YoY</strong> EBITDA growth.</div></div>
+        </div>
+        <div class="partner-logos">
+          <span class="partner-logos-label">Backed by</span>
+          <div class="partner-logo-card"><img src="op-logo.svg" alt="OP"></div>
+          <div class="partner-logo-card"><img src="business-finland-logo.jpg" alt="Business Finland"></div>
+        </div>
+        <div class="ask-tags">
+          <span class="ask-tags-label">Ask us about</span>
+          <span class="ask-tag">Video training library</span>
+          <span class="ask-tag">Recruitment</span>
+          <span class="ask-tag">Marketing system</span>
+          <span class="ask-tag">Sales system</span>
         </div>
       </div>
-      <div class="scroll-progress-track"><div class="scroll-progress-fill" data-progress-for="case-study-flywheel"></div></div>
     </section>
 
     <!-- ── 10. THE VISION (new) ────────── -->
@@ -1836,21 +1651,6 @@
     disableLayout: true,
   });
 
-  document.querySelectorAll('.scroll-progress-fill[data-progress-for]').forEach(function (fill) {
-    var outer = document.getElementById(fill.getAttribute('data-progress-for'));
-    if (!outer) return;
-    var ticking = false;
-    function update() {
-      var max = outer.scrollWidth - outer.clientWidth;
-      fill.style.width = (max > 0 ? (outer.scrollLeft / max) * 100 : 0) + '%';
-      ticking = false;
-    }
-    outer.addEventListener('scroll', function () {
-      if (!ticking) { ticking = true; requestAnimationFrame(update); }
-    }, { passive: true });
-    window.addEventListener('resize', update);
-    update();
-  });
 </script>
 
 </body>
