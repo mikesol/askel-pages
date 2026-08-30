@@ -191,7 +191,7 @@
 
   /* ── Cover ──────────────────────────── */
   .slide-cover {
-    background-color: var(--white) !important;
+    background: var(--white) !important;
     justify-content: space-between !important;
     padding-top: 8vh !important;
     padding-bottom: 7vh !important;
@@ -223,6 +223,30 @@
     text-transform: uppercase;
     color: var(--muted);
   }
+
+  /* ── Founder story interlude (inset, centered image) ── */
+  .slide-story {
+    background: #000000 !important;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3vh;
+    padding-top: 8vh !important;
+    padding-bottom: 7vh !important;
+  }
+
+  .slide-story .wordmark { align-self: flex-start; margin-bottom: -1vh; }
+
+  .story-image {
+    max-height: 52vh;
+    max-width: 62%;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  .story-points { max-width: 640px; }
 
   .cover-body { flex: 1; display: flex; align-items: center; }
 
@@ -1284,46 +1308,42 @@
     </section>
 
     <!-- ── Founder story 1/4 ────────────── -->
-    <section class="slide-cover photo-bg" data-background-color="#000000" style="background-image:url('founder-story-1.jpg');">
+    <section class="slide-story" data-background-color="#000000">
       <div class="wordmark">Askel Ventures</div>
-      <div class="cover-body">
-        <div class="points single">
-          <div class="point"><div class="point-dot"></div><div class="point-text">Deal flow doesn't wait for a desk.</div></div>
-          <div class="point"><div class="point-dot"></div><div class="point-text">Screening targets between meetings, wherever we are.</div></div>
-        </div>
+      <img class="story-image" src="founder-story-1.jpg" alt="Sourcing from the road">
+      <div class="points single story-points">
+        <div class="point"><div class="point-dot"></div><div class="point-text">Deal flow doesn't wait for a desk.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text">Screening targets between meetings, wherever we are.</div></div>
       </div>
     </section>
 
     <!-- ── Founder story 2/4 ────────────── -->
-    <section class="slide-cover photo-bg" data-background-color="#000000" style="background-image:url('founder-story-2.jpg');">
+    <section class="slide-story" data-background-color="#000000">
       <div class="wordmark">Askel Ventures</div>
-      <div class="cover-body">
-        <div class="points single">
-          <div class="point"><div class="point-dot"></div><div class="point-text">Melers Oy — the shop floor, not the deck.</div></div>
-          <div class="point"><div class="point-dot"></div><div class="point-text">Every acquisition starts with walking the floor.</div></div>
-        </div>
+      <img class="story-image" src="founder-story-2.jpg" alt="Melers Oy shop floor">
+      <div class="points single story-points">
+        <div class="point"><div class="point-dot"></div><div class="point-text">Melers Oy — the shop floor, not the deck.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text">Every acquisition starts with walking the floor.</div></div>
       </div>
     </section>
 
     <!-- ── Founder story 3/4 ────────────── -->
-    <section class="slide-cover photo-bg" data-background-color="#000000" style="background-image:url('founder-story-3.jpg');">
+    <section class="slide-story" data-background-color="#000000">
       <div class="wordmark">Askel Ventures</div>
-      <div class="cover-body">
-        <div class="points single">
-          <div class="point"><div class="point-dot"></div><div class="point-text">Diligence, done in person.</div></div>
-          <div class="point"><div class="point-dot"></div><div class="point-text">Getting to know the business before we buy it.</div></div>
-        </div>
+      <img class="story-image" src="founder-story-3.jpg" alt="Founders on site at Melers">
+      <div class="points single story-points">
+        <div class="point"><div class="point-dot"></div><div class="point-text">Diligence, done in person.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text">Getting to know the business before we buy it.</div></div>
       </div>
     </section>
 
     <!-- ── Founder story 4/4 ────────────── -->
-    <section class="slide-cover photo-bg" data-background-color="#000000" style="background-image:url('founder-story-4.jpg');">
+    <section class="slide-story" data-background-color="#000000">
       <div class="wordmark">Askel Ventures</div>
-      <div class="cover-body">
-        <div class="points single">
-          <div class="point"><div class="point-dot"></div><div class="point-text">Deal closed. Now the real work begins.</div></div>
-          <div class="point"><div class="point-dot"></div><div class="point-text">Building the playbook, one acquisition at a time.</div></div>
-        </div>
+      <img class="story-image" src="founder-story-4.jpg" alt="Founders celebrating the closed deal">
+      <div class="points single story-points">
+        <div class="point"><div class="point-dot"></div><div class="point-text">Deal closed. Now the real work begins.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text">Building the playbook, one acquisition at a time.</div></div>
       </div>
     </section>
 
