@@ -29,3 +29,4 @@ Published pages for Askel Ventures. Each folder is a site deployed to `<folder-n
 | varia | https://varia.askelventures.com |
 | buukkaus | https://buukkaus.askelventures.com |
 | pitch-2026-draft | https://pitch-2026-draft.askelventures.com |
+| pitch-2026-draft-fi | https://pitch-2026-draft-fi.askelventures.com |
