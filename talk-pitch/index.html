@@ -264,6 +264,21 @@
     box-shadow: 0 20px 60px rgba(0,0,0,0.5);
   }
 
+  .story-clock {
+    display: flex;
+    align-items: baseline;
+    gap: 2.5vw;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .story-clock-time, .story-clock-temp {
+    font-size: clamp(2.4rem, 6vw, 4.6rem);
+    font-weight: 700;
+    color: var(--dark);
+  }
+
+  .story-clock-temp { color: var(--turquoise); }
+
   .cover-body { flex: 1; display: flex; align-items: center; }
 
   .hue-turquoise {
@@ -1331,18 +1346,28 @@
         <img src="founder-story-6-throwback-2.jpg" alt="Varia Instagram throwback 2">
         <img src="founder-story-6-throwback-3.jpg" alt="Varia Instagram throwback 3">
       </div>
+      <div class="points single story-points">
+        <div class="point"><div class="point-dot"></div><div class="point-text">Bangkok, new business 🚀 — fear ain't got nothing on me.</div></div>
+      </div>
     </section>
 
     <!-- ── Founder story 2: Incerto ────── -->
     <section class="slide-story" data-background-color="#000000">
       <div class="wordmark">Askel Ventures</div>
       <img class="story-image" src="founder-story-0-taleb.jpg" alt="Nassim Nicholas Taleb's Incerto collection">
+      <div class="points single story-points">
+        <div class="point"><div class="point-dot"></div><div class="point-text">Black Swans &amp; Barbells as philosophy after the pandemic.</div></div>
+      </div>
     </section>
 
     <!-- ── Founder story 3: Antler ─────── -->
     <section class="slide-story" data-background-color="#000000">
       <div class="wordmark">Askel Ventures</div>
       <img class="story-image" src="founder-story-5-antler.jpg" alt="Antler cohort group photo" style="max-width:80%;">
+      <div class="points single story-points">
+        <div class="point"><div class="point-dot"></div><div class="point-text">Recruiting team.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text">If you want to go far, go as a team.</div></div>
+      </div>
     </section>
 
     <!-- ── Founder story 4: team pic ────── -->
@@ -1350,8 +1375,7 @@
       <div class="wordmark">Askel Ventures</div>
       <img class="story-image" src="founder-story-3.jpg" alt="Founders on site at Melers">
       <div class="points single story-points">
-        <div class="point"><div class="point-dot"></div><div class="point-text">Diligence, done in person.</div></div>
-        <div class="point"><div class="point-dot"></div><div class="point-text">Getting to know the business before we buy it.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text">Found the team whose boots are on the ground.</div></div>
       </div>
     </section>
 
@@ -1360,8 +1384,7 @@
       <div class="wordmark">Askel Ventures</div>
       <img class="story-image" src="founder-story-1.jpg" alt="Sourcing from the road">
       <div class="points single story-points">
-        <div class="point"><div class="point-dot"></div><div class="point-text">Deal flow doesn't wait for a desk.</div></div>
-        <div class="point"><div class="point-dot"></div><div class="point-text">Screening targets between meetings, wherever we are.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text">Built company OS and Steve AI to help us make things 10x faster.</div></div>
       </div>
     </section>
 
@@ -1370,8 +1393,7 @@
       <div class="wordmark">Askel Ventures</div>
       <img class="story-image" src="founder-story-4.jpg" alt="Founders celebrating the closed deal">
       <div class="points single story-points">
-        <div class="point"><div class="point-dot"></div><div class="point-text">Deal closed. Now the real work begins.</div></div>
-        <div class="point"><div class="point-dot"></div><div class="point-text">Building the playbook, one acquisition at a time.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text">Deals keep coming in.</div></div>
       </div>
     </section>
 
@@ -1382,9 +1404,12 @@
         <img src="founder-story-2.jpg" alt="Melers Oy shop floor">
         <img src="founder-story-2b-delivery.jpg" alt="Night delivery at the loading dock">
       </div>
+      <div class="story-clock">
+        <span class="story-clock-time">5:32</span>
+        <span class="story-clock-temp">-17°C</span>
+      </div>
       <div class="points single story-points">
-        <div class="point"><div class="point-dot"></div><div class="point-text">Melers Oy — the shop floor, not the deck.</div></div>
-        <div class="point"><div class="point-dot"></div><div class="point-text">Every acquisition starts with walking the floor.</div></div>
+        <div class="point"><div class="point-dot"></div><div class="point-text">Building the playbook for growth.</div></div>
       </div>
     </section>
 
