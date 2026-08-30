@@ -248,6 +248,22 @@
 
   .story-points { max-width: 640px; }
 
+  .story-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2vw;
+  }
+
+  .story-row img {
+    max-height: 62vh;
+    max-width: 26vw;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
   .cover-body { flex: 1; display: flex; align-items: center; }
 
   .hue-turquoise {
@@ -1357,6 +1373,16 @@
     <section class="slide-story" data-background-color="#000000">
       <div class="wordmark">Askel Ventures</div>
       <img class="story-image" src="founder-story-5-antler.jpg" alt="Antler cohort group photo" style="max-width:80%;">
+    </section>
+
+    <!-- ── Founder story 6: throwback ──── -->
+    <section class="slide-story" data-background-color="#000000">
+      <div class="wordmark">Askel Ventures</div>
+      <div class="story-row">
+        <img src="founder-story-6-throwback-1.jpg" alt="Varia Instagram throwback 1">
+        <img src="founder-story-6-throwback-2.jpg" alt="Varia Instagram throwback 2">
+        <img src="founder-story-6-throwback-3.jpg" alt="Varia Instagram throwback 3">
+      </div>
     </section>
 
     <!-- ── 1b. COVER (second) — pitch starts here ── -->
