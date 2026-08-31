@@ -149,7 +149,7 @@
       font-family: 'DM Sans', sans-serif;
       font-weight: 700; font-size: 44px; letter-spacing: -0.02em; line-height: 1.05;
       text-transform: none;
-      background: linear-gradient(135deg, #ededed 40%, rgba(237,237,237,0.35));
+      background: var(--brand-gradient);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
     .greeting-sub { margin-top: 10px; font-size: 13px; color: var(--muted); line-height: 1.5; max-width: 640px; }
@@ -188,6 +188,11 @@
 
     /* ── SECTION GRID ── */
     .section-row { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .section-row .card { position: relative; }
+    .section-row .card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--brand-gradient);
+    }
 
     /* ── ROADMAP LIST ── */
     .roadmap-list { display: flex; flex-direction: column; gap: 14px; }
@@ -559,12 +564,12 @@
     }
     .fab-new-task {
       position: fixed; right: 28px; bottom: 28px; z-index: 150;
-      background: var(--red); color: var(--bg); border: none; border-radius: 999px;
+      background: var(--brand-gradient); color: var(--text); border: none; border-radius: 999px;
       padding: 14px 22px; font-size: 13.5px; font-weight: 700; font-family: inherit;
-      cursor: pointer; box-shadow: 0 6px 20px rgba(255,255,255,0.18);
-      transition: transform .15s, box-shadow .15s;
+      cursor: pointer; box-shadow: 0 6px 20px rgba(123,111,214,0.35);
+      transition: transform .15s, box-shadow .15s, filter .15s;
     }
-    .fab-new-task:hover { background: var(--red-light); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(255,255,255,0.25); }
+    .fab-new-task:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(232,147,90,0.45); }
     .modal {
       background: var(--surface); border: 1px solid var(--border-hover); border-radius: 14px;
       width: 100%; max-width: 560px; padding: 24px 26px; margin-bottom: 60px;
@@ -3064,7 +3069,7 @@
       return `
         ${crumbs([{ label: 'Company', path: '/' }, { label: 'Grow', path: '/grow' }, { label: '🦔 Stack & Tools Library' }])}
         <div class="greeting">
-          <div class="greeting-text" style="font-size:32px;">🦔 Stack & Tools Library</div>
+          <div class="greeting-text" style="font-size:32px;"><span class="greeting-emoji">🦔</span> Stack & Tools Library</div>
           <div class="greeting-sub">Cross-portfolio SOP search — find what's worked, then clone it.</div>
         </div>
         <div class="sec-label">Playbooks & Skill Stacks</div>
@@ -4858,7 +4863,7 @@
       return `
         ${crumbs([{ label: 'Company', path: '/' }, { label: 'Fund' }])}
         <div class="greeting">
-          <div class="greeting-text">💰 Fund</div>
+          <div class="greeting-text"><span class="greeting-emoji">💰</span> Fund</div>
           <div class="greeting-sub">Financial health across Askel Ventures and its portfolio companies</div>
         </div>
         <div class="fund-banner">Early sketch — layout under active review with Varia, numbers not yet wired to a real data source.</div>
@@ -5037,7 +5042,7 @@
       return `
         ${crumbs([{ label: 'Company', path: '/' }, { label: 'Grow' }])}
         <div class="greeting">
-          <div class="greeting-text" style="font-size:36px;">🌱 Grow</div>
+          <div class="greeting-text" style="font-size:36px;"><span class="greeting-emoji">🌱</span> Grow</div>
           <div class="greeting-sub">Increase enterprise value — integration, ops, sales, SOPs, and KPI reporting.</div>
         </div>
 
