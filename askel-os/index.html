@@ -2103,6 +2103,7 @@
               outcome: "Reduces time-to-hire by ~50%",
               steps: ["Define role & KPIs", "Write Finnish job description", "Post to 2+ job boards", "First-round screen calls", "Top 8 interviews", "Offer & contract"],
               templates: [{ label: "Duunitori post template", url: null }, { label: "Interview scorecard", url: null }],
+              apps: [], links: [], setupEstimate: null,
               owner: "Niklas", updatedAt: "2w ago"
             },
             {
@@ -2111,6 +2112,7 @@
               outcome: "Enables new operator to own pipeline from day 1",
               steps: ["Document current inbound lead-to-booking flow step by step", "Hand over sales inbox and CRM login to new operator", "Migrate active pipeline and price list into CRM", "Walk new operator through top 10 active deals", "Confirm operator can independently quote and close a booking"],
               templates: [{ label: "CRM setup guide", url: null }, { label: "Pricing list template", url: null }],
+              apps: [], links: [], setupEstimate: null,
               owner: "Varia", updatedAt: "4d ago"
             },
             {
@@ -2119,6 +2121,7 @@
               outcome: "Zero missed invoices since adoption",
               steps: ["Import customer data and pricing list into Fivaldi", "Run monthly invoice batch from CRM export", "Reconcile invoices against bank statement", "Chase overdue invoices past 14 days"],
               templates: [{ label: "Fivaldi import guide", url: null }],
+              apps: [], links: [], setupEstimate: null,
               owner: "Varia", updatedAt: "1mo ago"
             },
             {
@@ -2127,6 +2130,7 @@
               outcome: "All staff set up in < 1 day",
               steps: ["Create Google Workspace account and assign Drive folder access", "Set up company email alias and signature", "Add to shared calendar and weekly check-in invite"],
               templates: [{ label: "Drive folder structure doc", url: null }],
+              apps: [], links: [], setupEstimate: null,
               owner: "Mike", updatedAt: "3d ago"
             },
             {
@@ -2135,6 +2139,7 @@
               outcome: "Covers website + 2 social channels",
               steps: ["Set up Google Business Profile and confirm listing details", "Publish/refresh melers.fi with current pricing and services", "Set up Instagram business account and posting cadence", "Launch one local flyer distribution", "Track and review CAC monthly"],
               templates: [],
+              apps: [], links: [], setupEstimate: null,
               owner: "Micke", updatedAt: "5d ago"
             }
           ],
@@ -2207,6 +2212,9 @@
     const growToolFormOpen = {}; // cid → bool
     const growToolConfirmMsg = {}; // cid → string|null
     let growToolLibrarySearch = '';
+    const growStackEditMode = {}; // stackId → bool — unified Stack modal lock (false/undefined) vs unlock (true)
+    let growStackDraftId = null; // id of a just-created, still-blank-titled stack; dropped if closed empty
+    let growSetupStackFor = null; // stackId currently going through the Setup Stack partner picker
 
     const STACK_TAGS = ['Sales', 'Marketing', 'Recruitment', 'Ops', 'Finance', 'Tech'];
 
