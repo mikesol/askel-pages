@@ -2757,89 +2757,49 @@
       render();
     }
 
-    // ── Grow: Create new Stack (modal — fields TBD, functional placeholder per Varia) ──
-    let growCreateStackFor = null; // company id, or null when opened from the Library (needs a company picker)
-
+    // ── Grow: Create new Stack — blank draft + open it straight in the unified modal's edit mode ──
     function openCreateStackModal(cid) {
-      growCreateStackFor = cid;
+      if (cid) { createDraftStackFor(cid); return; }
       const overlay = ensureModalOverlay();
-      overlay.innerHTML = createStackModalHtml();
-      overlay.onclick = (e) => { if (e.target === overlay) closeCreateStackModal(); };
+      overlay.innerHTML = createStackCompanyPickerHtml();
+      overlay.onclick = (e) => { if (e.target === overlay) closeCreateStackCompanyPicker(); };
       overlay.style.display = 'flex';
     }
 
-    function createStackModalHtml() {
-      const companySelect = !growCreateStackFor ? `
-        <div class="grow-request-field">
-          <label>Company</label>
-          <select id="create-stack-company">
-            ${DATA.grow.companies.map(co => `<option value="${escapeAttr(co.id)}">${escapeHtml(co.name)}</option>`).join('')}
-          </select>
-        </div>
-      ` : '';
+    function createStackCompanyPickerHtml() {
+      const opts = DATA.grow.companies.map(co => `
+        <button class="company-picker-opt" onclick="createDraftStackFor('${escapeAttr(co.id)}')">${escapeHtml(co.name)}</button>
+      `).join('');
       return `
         <div class="modal">
-          <button class="modal-close" onclick="closeCreateStackModal()">×</button>
-          <div class="modal-section-title" style="margin-top:0;">Create new Stack</div>
-          <div class="grow-request-form" style="margin-top:0; padding:0; border:none; background:none;">
-            ${companySelect}
-            <div class="grow-request-field">
-              <label>Title</label>
-              <input type="text" id="create-stack-title" placeholder="e.g. Customer Onboarding SOP">
-            </div>
-            <div class="grow-request-field">
-              <label>Category</label>
-              <select id="create-stack-tag">${STACK_TAGS.map(t => `<option value="${escapeAttr(t)}">${escapeHtml(t)}</option>`).join('')}</select>
-            </div>
-            <div class="grow-request-field">
-              <label>Outcome</label>
-              <input type="text" id="create-stack-outcome" placeholder="What does this achieve?">
-            </div>
-            <div class="grow-request-field">
-              <label>Steps (one per line)</label>
-              <textarea id="create-stack-steps" placeholder="Step 1&#10;Step 2&#10;..."></textarea>
-            </div>
-            <div id="create-stack-warn"></div>
-          </div>
-          <div class="stack-modal-footer">
-            <button class="stack-btn" onclick="closeCreateStackModal()">Cancel</button>
-            <button class="stack-btn primary" onclick="submitCreateStack()">Create Stack</button>
-          </div>
+          <button class="modal-close" onclick="closeCreateStackCompanyPicker()">×</button>
+          <div class="modal-section-title" style="margin-top:0;">Create new Stack for…</div>
+          <div class="company-picker-list">${opts}</div>
         </div>
       `;
     }
 
-    function closeCreateStackModal() {
-      growCreateStackFor = null;
+    function closeCreateStackCompanyPicker() {
       const overlay = document.getElementById('modal-overlay');
       if (overlay) { overlay.style.display = 'none'; overlay.innerHTML = ''; overlay.onclick = null; }
     }
 
-    function submitCreateStack() {
-      const targetCid = growCreateStackFor || (document.getElementById('create-stack-company') || {}).value;
-      const co = DATA.grow.companies.find(c => c.id === targetCid);
-      const title = ((document.getElementById('create-stack-title') || {}).value || '').trim();
-      const tag = (document.getElementById('create-stack-tag') || {}).value || STACK_TAGS[0];
-      const outcome = ((document.getElementById('create-stack-outcome') || {}).value || '').trim();
-      const steps = ((document.getElementById('create-stack-steps') || {}).value || '').split('\n').map(s => s.trim()).filter(Boolean);
-      const warnEl = document.getElementById('create-stack-warn');
-      if (!co || !title || !steps.length) {
-        if (warnEl) warnEl.innerHTML = `<div class="grow-request-warn">Title and at least one step are required.</div>`;
-        return;
-      }
+    function createDraftStackFor(cid) {
+      const co = DATA.grow.companies.find(c => c.id === cid);
+      if (!co) return;
       growStackIdCounter++;
+      const id = `stack-${growStackIdCounter}`;
       co.stacks = co.stacks || [];
       co.stacks.push({
-        id: `stack-${growStackIdCounter}`,
-        title, tag, outcome: outcome || '—',
-        steps,
+        id, title: '', tag: STACK_TAGS[0], outcome: '',
+        steps: [], templates: [], apps: [], links: [],
+        setupEstimate: null,
         provenance: { company: co.name, date: 'now', reusedAt: [] },
-        owner: null,
-        updatedAt: 'just now',
-        templates: []
+        owner: null, updatedAt: 'just now'
       });
-      closeCreateStackModal();
-      render();
+      growStackDraftId = id;
+      growStackEditMode[id] = true;
+      openViewStackModal(id, cid);
     }
 
     // ── Grow: Tools We Build ──
