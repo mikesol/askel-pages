@@ -178,7 +178,7 @@
     /* ── ROADMAP LIST ── */
     .roadmap-list { display: flex; flex-direction: column; gap: 14px; }
     .roadmap-item { }
-    .roadmap-label { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+    .roadmap-label { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
     .roadmap-note { font-size: 11.5px; color: var(--muted); margin-bottom: 6px; }
     .okr-bar { height: 6px; background: var(--elevated); border-radius: 3px; overflow: hidden; }
     .okr-fill { height: 100%; background: var(--red); border-radius: 3px; }
@@ -978,9 +978,9 @@
     const DATA = {
       vision: "Acquire and grow the best small businesses in the Nordics using technology and operational excellence.",
       okrs: [
-        { label: "🏢 Acquire 5 companies", pct: 20, note: "1 acquired (Melers Oy) · 1 in Due Diligence (Auran Pesupojat Oy)" },
-        { label: "💰 Raise €8M", pct: 0, note: "Not yet tracked anywhere in the repo — placeholder target" },
-        { label: "📈 Grow EBITDA by 35%", pct: 0, note: "Not yet tracked anywhere in the repo — placeholder target" }
+        { label: "🔍 Acquire 5 companies", pct: 20, note: "1 acquired (Melers Oy) · 1 in Due Diligence (Auran Pesupojat Oy)", engine: "find" },
+        { label: "💰 Raise €8M", pct: 0, note: "Not yet tracked anywhere in the repo — placeholder target", engine: "fund" },
+        { label: "🌱 Grow EBITDA by 35%", pct: 0, note: "Not yet tracked anywhere in the repo — placeholder target", engine: "grow" }
       ],
       focus: [
         null, // computed at render time by ddFocusLine()
@@ -989,7 +989,7 @@
       ],
       engines: {
         find:  { name: "Find",  active: 52, accent: true,  built: true,  purpose: "Acquire great businesses — sourcing, screening, IC, due diligence, LOI, close." },
-        fund:  { name: "Fund",  active: null, accent: false, built: false, purpose: "Secure capital — investor CRM, fundraising, bank & seller financing." },
+        fund:  { name: "Fund",  active: 27, accent: false, built: true, purpose: "Secure capital — investor CRM, fundraising, bank & seller financing." },
         grow:  { name: "Grow",  active: 2, accent: false, built: true, purpose: "Increase enterprise value — integration, ops, sales, SOPs, KPI reporting." }
       },
       fund: {
@@ -3358,7 +3358,7 @@
     function renderCompany() {
       const okrRows = DATA.okrs.map(o => `
         <div class="roadmap-item">
-          <div class="roadmap-label">${o.label}</div>
+          <div class="roadmap-label"><span class="kc-tag ${engineTagClass(o.engine)}">${o.engine}</span> ${o.label}</div>
           <div class="okr-bar"><div class="okr-fill" style="width:${o.pct}%"></div></div>
           <div class="roadmap-note">${o.note}</div>
         </div>
