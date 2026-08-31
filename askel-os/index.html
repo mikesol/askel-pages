@@ -2737,6 +2737,64 @@
       if (overlay) { overlay.style.display = 'none'; overlay.innerHTML = ''; overlay.onclick = null; }
     }
 
+    function openStackSetupPicker(stackId) {
+      growSetupStackFor = stackId;
+      const overlay = ensureModalOverlay();
+      overlay.innerHTML = stackSetupPickerHtml();
+      overlay.onclick = (e) => { if (e.target === overlay) closeStackSetupPicker(); };
+      overlay.style.display = 'flex';
+    }
+
+    function stackSetupPickerHtml() {
+      if (!growSetupStackFor) return '';
+      const opts = PARTNERS.map(p => `
+        <button class="company-picker-opt" onclick="pushStackToKanban('${escapeAttr(growSetupStackFor)}','${escapeAttr(p)}')">
+          <span class="owner-avatar" title="${escapeAttr(p)}">${escapeHtml(PARTNER_INITIALS[p] || p[0])}</span>
+          ${escapeHtml(p)}
+        </button>
+      `).join('');
+      return `
+        <div class="modal">
+          <button class="modal-close" onclick="closeStackSetupPicker()">×</button>
+          <div class="modal-section-title" style="margin-top:0;">Assign "Setup Stack" to…</div>
+          <div class="company-picker-list">${opts}</div>
+        </div>
+      `;
+    }
+
+    function closeStackSetupPicker() {
+      growSetupStackFor = null;
+      const overlay = document.getElementById('modal-overlay');
+      if (overlay) { overlay.style.display = 'none'; overlay.innerHTML = ''; overlay.onclick = null; }
+    }
+
+    function pushStackToKanban(stackId, owner) {
+      const found = findStackAnywhere(stackId);
+      if (!found) return;
+      const { stack } = found;
+      kanban.cards.push({
+        id: nextKanbanId(),
+        title: `Set up: ${stack.title}`,
+        column: 'To Do',
+        deadline: '',
+        estimate: stack.setupEstimate,
+        owner,
+        engine: 'grow',
+        goal: ROADMAP_GOALS[0],
+        desc: stack.outcome,
+        checklist: stack.steps.map(s => ({ text: s, done: false })),
+        comments: [],
+        attachments: [
+          ...(stack.templates || []).map(t => `${t.label}${t.url ? ' — ' + t.url : ''}`),
+          ...(stack.apps || []).map(a => `${a.label}${a.url ? ' — ' + a.url : ''}`),
+          ...(stack.links || []).map(l => `${l.label}${l.url ? ' — ' + l.url : ''}`)
+        ]
+      });
+      closeStackSetupPicker();
+      closeViewStackModal();
+      render();
+    }
+
     function cloneStackToCompany(stackId, fromCid, toCid) {
       const found = findStackAnywhere(stackId);
       if (!found) return;
