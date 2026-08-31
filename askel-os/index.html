@@ -679,10 +679,6 @@
     .grow-pf-card.locked { align-items: center; justify-content: center; text-align: center; opacity: 0.38; min-height: 140px; border-style: dashed; cursor: default; }
     .grow-pf-card.locked .lock { font-size: 22px; margin-bottom: 6px; }
     .grow-pf-card.locked .lk-name { font-size: 12px; color: var(--subtle); }
-    .grow-pf-card.stack-lib { border-color: rgba(46,204,113,0.4); background: rgba(46,204,113,0.05); justify-content: center; }
-    .grow-pf-card.stack-lib:hover { border-color: rgba(46,204,113,0.7); }
-    .grow-pf-card.stack-lib .grow-pf-name { font-size: 15px; }
-    .grow-pf-card.stack-lib .stack-lib-desc { font-size: 11px; color: var(--muted); line-height: 1.4; }
 
     /* Grow: KPI bar */
     .grow-kpi-strip { display: flex; gap: 14px; margin-bottom: 24px; }
@@ -690,6 +686,15 @@
     .grow-kpi-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
     .grow-kpi-value { font-size: 22px; font-weight: 700; color: var(--text); }
     .grow-kpi-note { font-size: 11.5px; color: var(--subtle); margin-top: 4px; }
+    .grow-kpi-tile.glass {
+      background: linear-gradient(160deg, rgba(224,76,62,0.16), rgba(255,255,255,0.04));
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(224,76,62,0.45); border-radius: 16px;
+      text-decoration: none; color: inherit; display: block; cursor: pointer;
+      transition: border-color .15s, transform .15s;
+    }
+    .grow-kpi-tile.glass:hover { border-color: rgba(224,76,62,0.8); transform: translateY(-1px); }
+    .grow-kpi-tile.glass .grow-kpi-label { color: var(--red-light); }
 
     /* Grow: company detail */
     .grow-company-header { display: flex; align-items: center; gap: 18px; margin-bottom: 28px; }
@@ -808,6 +813,7 @@
     .tool-link { font-size: 12px; color: var(--blue); text-decoration: none; }
     .tool-link:hover { text-decoration: underline; }
     .tool-link.none { color: var(--subtle); }
+    .tool-provenance { font-family: 'SF Mono', ui-monospace, Menlo, Consolas, monospace; font-size: 11px; color: var(--subtle); padding-top: 8px; margin-top: 2px; border-top: 1px dashed var(--border); }
     .tool-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; gap: 8px; }
     .tool-reused-badge { font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: var(--elevated); color: var(--muted); cursor: default; }
     .tool-reused-badge.active { background: rgba(46,204,113,0.16); color: var(--green); }
@@ -2190,6 +2196,7 @@
     let growCloneStack = null; // { stackId, ownerCid } — clone company-picker modal
     const growToolFormOpen = {}; // cid → bool
     const growToolConfirmMsg = {}; // cid → string|null
+    let growToolLibrarySearch = '';
 
     const STACK_TAGS = ['Sales', 'Marketing', 'Recruitment', 'Ops', 'Finance', 'Tech'];
 
@@ -2315,6 +2322,12 @@
     function growStacksAllFlat() {
       const out = [];
       DATA.grow.companies.forEach(co => (co.stacks || []).forEach(s => out.push({ stack: s, ownerCid: co.id, ownerName: co.name })));
+      return out;
+    }
+
+    function growToolsAllFlat() {
+      const out = [];
+      DATA.grow.companies.forEach(co => (co.tools || []).forEach(t => out.push({ tool: t, ownerCid: co.id, ownerName: co.name })));
       return out;
     }
 
@@ -2556,7 +2569,8 @@
     }
 
     // ── Grow: Tools We Build ──
-    function toolCardHtml(tool) {
+    function toolCardHtml(tool, opts) {
+      opts = opts || {};
       const reusedCount = (tool.reusedAt || []).length;
       const reusedNames = (tool.reusedAt || []).map(id => (DATA.grow.companies.find(c => c.id === id) || {}).name || id).join(', ');
       const link = tool.url
@@ -2572,6 +2586,7 @@
             <span class="tool-status ${escapeAttr(tool.status)}">${escapeHtml(tool.status)}</span>
           </div>
           ${link}
+          ${opts.ownerName ? `<div class="tool-provenance">${escapeHtml(opts.ownerName)}</div>` : ''}
           <div class="tool-card-footer">
             ${tool.devOwner ? `<span class="owner-avatar" title="${escapeAttr(tool.devOwner)}">${escapeHtml(PARTNER_INITIALS[tool.devOwner] || tool.devOwner[0])}</span>` : `<span></span>`}
             <span class="tool-reused-badge${reusedCount ? ' active' : ''}" title="${reusedCount ? escapeAttr('Reused at ' + reusedNames) : 'Not reused elsewhere yet'}">Reused at ${reusedCount}</span>
@@ -2584,6 +2599,26 @@
       const cards = (co.tools || []).map(t => toolCardHtml(t)).join('');
       const inner = (co.tools || []).length ? `<div class="tool-grid">${cards}</div>` : `<div class="grow-empty-state">No tools built for ${escapeHtml(co.name)} yet — fork a template below or request one.</div>`;
       return `<div id="tool-grid-${escapeAttr(cid)}">${inner}</div>`;
+    }
+
+    function growFilterTools(list, search) {
+      const q = (search || '').toLowerCase();
+      if (!q) return list;
+      return list.filter(({ tool, ownerName }) =>
+        tool.name.toLowerCase().includes(q) || tool.type.toLowerCase().includes(q) || ownerName.toLowerCase().includes(q));
+    }
+
+    function growToolLibraryGridHtml() {
+      const filtered = growFilterTools(growToolsAllFlat(), growToolLibrarySearch);
+      const cards = filtered.map(({ tool, ownerName }) => toolCardHtml(tool, { ownerName })).join('');
+      const inner = filtered.length ? `<div class="tool-grid">${cards}</div>` : `<div class="grow-empty-state">No tools match this search yet.</div>`;
+      return `<div id="tool-grid-library">${inner}</div>`;
+    }
+
+    function setToolLibrarySearch(val) {
+      growToolLibrarySearch = val;
+      const grid = document.getElementById('tool-grid-library');
+      if (grid) grid.outerHTML = growToolLibraryGridHtml();
     }
 
     function forkTemplate(cid, templateId) {
@@ -2699,16 +2734,24 @@
       `;
     }
 
-    // ── Grow: 🦔 Stack Library page ──
+    // ── Grow: 🦔 Stack & Tools Library page ──
     function renderStackLibrary() {
       return `
-        ${crumbs([{ label: 'Company', path: '/' }, { label: 'Grow', path: '/grow' }, { label: '🦔 Stack Library' }])}
+        ${crumbs([{ label: 'Company', path: '/' }, { label: 'Grow', path: '/grow' }, { label: '🦔 Stack & Tools Library' }])}
         <div class="greeting">
-          <div class="greeting-text" style="font-size:32px;">🦔 Stack Library</div>
+          <div class="greeting-text" style="font-size:32px;">🦔 Stack & Tools Library</div>
           <div class="greeting-sub">Cross-portfolio SOP search — find what's worked, then clone it.</div>
         </div>
+        <div class="sec-label">Playbooks & Skill Stacks</div>
         ${growStackFilterBarHtml('stack-library', { showPortfolioToggle: false })}
         ${growStackLibraryGridHtml()}
+
+        <div class="sec-label" style="margin-top:32px;">Tools We Build</div>
+        <div class="grow-filter-bar">
+          <input type="text" class="grow-filter-search" placeholder="Search tools…" value="${escapeAttr(growToolLibrarySearch)}"
+            oninput="setToolLibrarySearch(this.value)">
+        </div>
+        ${growToolLibraryGridHtml()}
       `;
     }
 
@@ -4642,12 +4685,7 @@
         </div>
       `).join('');
       const totalStacks = g.companies.reduce((n, c) => n + (c.stacks || []).length, 0);
-      const stackLibCard = `
-        <a class="grow-pf-card stack-lib" href="#/grow/stack-library" onclick="navigate('/grow/stack-library'); return false;">
-          <div class="grow-pf-name">🦔 Stack Library</div>
-          <div class="stack-lib-desc">Cross-portfolio playbook search</div>
-        </a>
-      `;
+      const totalTools = g.companies.reduce((n, c) => n + (c.tools || []).length, 0);
       return `
         ${crumbs([{ label: 'Company', path: '/' }, { label: 'Grow' }])}
         <div class="greeting">
@@ -4669,14 +4707,18 @@
           <div class="grow-kpi-tile">
             <div class="grow-kpi-label">Playbooks live</div>
             <div class="grow-kpi-value">${totalStacks}</div>
-            <div class="grow-kpi-note">across the 🦔 Stack Library — cloneable to any portfolio company</div>
+            <div class="grow-kpi-note">across the 🦔 Stack & Tools Library — cloneable to any portfolio company</div>
           </div>
+          <a class="grow-kpi-tile glass" href="#/grow/stack-library" onclick="navigate('/grow/stack-library'); return false;">
+            <div class="grow-kpi-label">🦔 Stack & Tools Library</div>
+            <div class="grow-kpi-value">${totalStacks + totalTools}</div>
+            <div class="grow-kpi-note">${totalStacks} playbooks · ${totalTools} tools — cross-portfolio search →</div>
+          </a>
         </div>
 
         <div class="sec-label">Portfolio companies</div>
         <div class="grow-portfolio-row">
           ${companyCards}
-          ${stackLibCard}
           ${lockedCards}
         </div>
       `;
