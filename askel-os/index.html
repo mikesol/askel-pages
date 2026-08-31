@@ -757,7 +757,7 @@
     .grow-empty-state { padding: 28px 20px; text-align: center; color: var(--subtle); font-size: 13px; border: 1px dashed var(--border); border-radius: 12px; max-width: 820px; }
 
     /* Grow: stack cards (Playbooks & Skill Stacks) */
-    .stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 8px; }
+    .stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 8px; max-height: 620px; overflow-y: auto; padding-right: 4px; }
     .stack-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
     .stack-card-top { display: flex; justify-content: space-between; align-items: center; }
     .stack-tag { font-size: 10.5px; font-weight: 700; padding: 2px 9px; border-radius: 20px; width: fit-content; text-transform: uppercase; letter-spacing: 0.04em; }
@@ -801,7 +801,7 @@
     .company-picker-opt:hover { border-color: var(--border-hover); }
 
     /* Grow: tools we build */
-    .tool-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 8px; }
+    .tool-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 8px; max-height: 620px; overflow-y: auto; padding-right: 4px; }
     .tool-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
     .tool-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
     .tool-type { font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
@@ -2392,12 +2392,14 @@
           <span class="grow-toggle-switch${growPortfolioWide[scope] ? ' on' : ''}"></span>
         </span>
       ` : '';
+      const createCid = scope === 'stack-library' ? null : scope;
       return `
         <div class="grow-filter-bar" id="stack-filterbar-${escapeAttr(scope)}">
           <input type="text" class="grow-filter-search" placeholder="Search playbooks…" value="${escapeAttr(search)}"
             oninput="setStackSearch('${escapeAttr(scope)}', this.value)">
           ${chips}
           ${portfolioToggle}
+          <button class="grow-request-tool-toggle" onclick="openCreateStackModal(${createCid ? `'${escapeAttr(createCid)}'` : 'null'})">+ Create New Stack</button>
         </div>
       `;
     }
@@ -2568,6 +2570,91 @@
       render();
     }
 
+    // ── Grow: Create new Stack (modal — fields TBD, functional placeholder per Varia) ──
+    let growCreateStackFor = null; // company id, or null when opened from the Library (needs a company picker)
+
+    function openCreateStackModal(cid) {
+      growCreateStackFor = cid;
+      const overlay = ensureModalOverlay();
+      overlay.innerHTML = createStackModalHtml();
+      overlay.onclick = (e) => { if (e.target === overlay) closeCreateStackModal(); };
+      overlay.style.display = 'flex';
+    }
+
+    function createStackModalHtml() {
+      const companySelect = !growCreateStackFor ? `
+        <div class="grow-request-field">
+          <label>Company</label>
+          <select id="create-stack-company">
+            ${DATA.grow.companies.map(co => `<option value="${escapeAttr(co.id)}">${escapeHtml(co.name)}</option>`).join('')}
+          </select>
+        </div>
+      ` : '';
+      return `
+        <div class="modal">
+          <button class="modal-close" onclick="closeCreateStackModal()">×</button>
+          <div class="modal-section-title" style="margin-top:0;">Create new Stack</div>
+          <div class="grow-request-form" style="margin-top:0; padding:0; border:none; background:none;">
+            ${companySelect}
+            <div class="grow-request-field">
+              <label>Title</label>
+              <input type="text" id="create-stack-title" placeholder="e.g. Customer Onboarding SOP">
+            </div>
+            <div class="grow-request-field">
+              <label>Category</label>
+              <select id="create-stack-tag">${STACK_TAGS.map(t => `<option value="${escapeAttr(t)}">${escapeHtml(t)}</option>`).join('')}</select>
+            </div>
+            <div class="grow-request-field">
+              <label>Outcome</label>
+              <input type="text" id="create-stack-outcome" placeholder="What does this achieve?">
+            </div>
+            <div class="grow-request-field">
+              <label>Steps (one per line)</label>
+              <textarea id="create-stack-steps" placeholder="Step 1&#10;Step 2&#10;..."></textarea>
+            </div>
+            <div id="create-stack-warn"></div>
+          </div>
+          <div class="stack-modal-footer">
+            <button class="stack-btn" onclick="closeCreateStackModal()">Cancel</button>
+            <button class="stack-btn primary" onclick="submitCreateStack()">Create Stack</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function closeCreateStackModal() {
+      growCreateStackFor = null;
+      const overlay = document.getElementById('modal-overlay');
+      if (overlay) { overlay.style.display = 'none'; overlay.innerHTML = ''; overlay.onclick = null; }
+    }
+
+    function submitCreateStack() {
+      const targetCid = growCreateStackFor || (document.getElementById('create-stack-company') || {}).value;
+      const co = DATA.grow.companies.find(c => c.id === targetCid);
+      const title = ((document.getElementById('create-stack-title') || {}).value || '').trim();
+      const tag = (document.getElementById('create-stack-tag') || {}).value || STACK_TAGS[0];
+      const outcome = ((document.getElementById('create-stack-outcome') || {}).value || '').trim();
+      const steps = ((document.getElementById('create-stack-steps') || {}).value || '').split('\n').map(s => s.trim()).filter(Boolean);
+      const warnEl = document.getElementById('create-stack-warn');
+      if (!co || !title || !steps.length) {
+        if (warnEl) warnEl.innerHTML = `<div class="grow-request-warn">Title and at least one step are required.</div>`;
+        return;
+      }
+      growStackIdCounter++;
+      co.stacks = co.stacks || [];
+      co.stacks.push({
+        id: `stack-${growStackIdCounter}`,
+        title, tag, outcome: outcome || '—',
+        steps,
+        provenance: { company: co.name, date: 'now', reusedAt: [] },
+        owner: null,
+        updatedAt: 'just now',
+        templates: []
+      });
+      closeCreateStackModal();
+      render();
+    }
+
     // ── Grow: Tools We Build ──
     function toolCardHtml(tool, opts) {
       opts = opts || {};
@@ -2621,6 +2708,14 @@
       if (grid) grid.outerHTML = growToolLibraryGridHtml();
     }
 
+    function refreshToolGrid(cid) {
+      const grid = document.getElementById(`tool-grid-${escapeAttr(cid)}`);
+      if (!grid) return;
+      if (cid === 'library') { grid.outerHTML = growToolLibraryGridHtml(); return; }
+      const co = DATA.grow.companies.find(c => c.id === cid);
+      if (co) grid.outerHTML = growToolGridHtml(cid, co);
+    }
+
     function forkTemplate(cid, templateId) {
       const co = DATA.grow.companies.find(c => c.id === cid);
       const tpl = DATA.grow.templates.find(t => t.id === templateId);
@@ -2631,8 +2726,7 @@
         id: `tool-${growToolIdCounter}`, name: `${tpl.name} (forked)`, type: 'KT Template',
         status: 'in-dev', url: null, devOwner: null, reusedAt: []
       });
-      const grid = document.getElementById(`tool-grid-${cid}`);
-      if (grid) grid.outerHTML = growToolGridHtml(cid, co);
+      refreshToolGrid(cid);
       const count = document.getElementById(`tools-count-${cid}`);
       if (count) count.textContent = co.tools.length;
     }
@@ -2644,11 +2738,11 @@
     }
 
     function checkDuplicateTool(cid, text) {
-      const co = DATA.grow.companies.find(c => c.id === cid);
-      if (!co || !text.trim()) return null;
+      if (!text.trim()) return null;
+      const pool = cid === 'library' ? growToolsAllFlat().map(x => x.tool) : ((DATA.grow.companies.find(c => c.id === cid) || {}).tools || []);
       const words = text.toLowerCase().split(/\s+/).filter(w => w.length > 3);
       if (!words.length) return null;
-      const match = (co.tools || []).find(t => words.some(w => t.name.toLowerCase().includes(w)));
+      const match = pool.find(t => words.some(w => t.name.toLowerCase().includes(w)));
       return match ? match.name : null;
     }
 
@@ -2660,7 +2754,8 @@
     }
 
     function submitToolRequest(cid) {
-      const co = DATA.grow.companies.find(c => c.id === cid);
+      const targetCid = cid === 'library' ? (document.getElementById(`tool-req-company-${cid}`) || {}).value : cid;
+      const co = DATA.grow.companies.find(c => c.id === targetCid);
       if (!co) return;
       const descEl = document.getElementById(`tool-req-desc-${cid}`);
       const desc = descEl ? descEl.value : '';
@@ -2677,8 +2772,7 @@
       });
       growToolFormOpen[cid] = false;
       growToolConfirmMsg[cid] = 'Submitted — added to backlog.';
-      const grid = document.getElementById(`tool-grid-${cid}`);
-      if (grid) grid.outerHTML = growToolGridHtml(cid, co);
+      refreshToolGrid(cid);
       const count = document.getElementById(`tools-count-${cid}`);
       if (count) count.textContent = co.tools.length;
       const wrap = document.getElementById(`tool-request-wrap-${cid}`);
@@ -2688,9 +2782,18 @@
     function growToolRequestWrapHtml(cid) {
       const open = !!growToolFormOpen[cid];
       const confirm = growToolConfirmMsg[cid] ? `<div class="grow-request-confirm">✅ ${escapeHtml(growToolConfirmMsg[cid])}</div>` : '';
-      const toggleBtn = !open ? `<button class="grow-request-tool-toggle" onclick="toggleToolRequestForm('${escapeAttr(cid)}')">+ Request New Tool</button>` : '';
+      const toggleBtn = !open ? `<button class="grow-request-tool-toggle" onclick="toggleToolRequestForm('${escapeAttr(cid)}')">+ Build a New Tool</button>` : '';
+      const companySelect = (open && cid === 'library') ? `
+        <div class="grow-request-field">
+          <label>Company</label>
+          <select id="tool-req-company-${escapeAttr(cid)}">
+            ${DATA.grow.companies.map(co => `<option value="${escapeAttr(co.id)}">${escapeHtml(co.name)}</option>`).join('')}
+          </select>
+        </div>
+      ` : '';
       const form = open ? `
         <div class="grow-request-form">
+          ${companySelect}
           <div class="grow-request-field">
             <label>Problem description</label>
             <textarea id="tool-req-desc-${escapeAttr(cid)}" oninput="onToolRequestInput('${escapeAttr(cid)}')" placeholder="What's broken or missing?"></textarea>
@@ -2752,6 +2855,7 @@
             oninput="setToolLibrarySearch(this.value)">
         </div>
         ${growToolLibraryGridHtml()}
+        ${growToolRequestWrapHtml('library')}
       `;
     }
 
