@@ -1,0 +1,369 @@
+{
+ "generated": "2026-09-04T06:03:53.258010+00:00",
+ "window_start": "2026-09-04",
+ "retro_date": "2026-10-25",
+ "baseline": {
+  "generated": "2026-09-04T06:03:42.887369+00:00",
+  "window": [
+   "2026-08-04",
+   "2026-09-04"
+  ],
+  "count": 41,
+  "cards": [
+   {
+    "id": "6a94f0ce54dcd50f52725190",
+    "name": "PROSPEKTI: Kiinteistöhuolto Ronkainen Oy, Jyväskylä  HINTA: ei myynnissä (H3)  TULOS: 210-218K€/v",
+    "list": "Prospecting",
+    "created": "2026-08-31",
+    "source_guess": "H3"
+   },
+   {
+    "id": "6a794c511deefbd9f95f714d",
+    "name": "PROSPEKTI: Varpaisjärven Pesula Oy (Varpaisjärvi, Pohjois-Karjala)",
+    "list": "Prospecting",
+    "created": "2026-08-10",
+    "source_guess": "H3"
+   },
+   {
+    "id": "6a794c5da2c64077fb2b8509",
+    "name": "PROSPEKTI: Pellesmäen Autohuolto Oy (Hiltulanlahti, Kuopio)",
+    "list": "Prospecting",
+    "created": "2026-08-10",
+    "source_guess": "H3"
+   },
+   {
+    "id": "6a794c6bd0a5fff613e15fca",
+    "name": "PROSPEKTI: Ylä-Kainuun Jätehuolto Oy (Puolanka, Kainuu)",
+    "list": "Prospecting",
+    "created": "2026-08-10",
+    "source_guess": "H3"
+   },
+   {
+    "id": "6a794c790d14794c3e46b0bb",
+    "name": "PROSPEKTI: Ullven Oy (Pirkkala, Tampere) ⚡ Exit-signaalit",
+    "list": "Prospecting",
+    "created": "2026-08-10",
+    "source_guess": "H3"
+   },
+   {
+    "id": "6a794c8614017fbe8bf13455",
+    "name": "PROSPEKTI: Liaton Oy (Kempele/Oulu, Pohjois-Pohjanmaa)",
+    "list": "Prospecting",
+    "created": "2026-08-10",
+    "source_guess": "H3"
+   },
+   {
+    "id": "6a827b76594e696c82846e03",
+    "name": "PROSPEKTI: Jauhemaalausyritys Etelä-Suomi (firmakauppa FK73154)  HINTA: 585 000€  LV: 595 000€",
+    "list": "Prospecting",
+    "created": "2026-08-17",
+    "source_guess": "H1"
+   },
+   {
+    "id": "6a827b83c37ee3e188266cf3",
+    "name": "PROSPEKTI: Kuljetusyritys Etelä-Savo #114066  HINTA: tarjous  LV: ?  (80+ vuotta toiminnassa)",
+    "list": "Prospecting",
+    "created": "2026-08-17",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a827b85b252746d823e4db8",
+    "name": "PROSPEKTI: Hautaustoimisto Lepistö Oy, Outokumpu #112103  HINTA: tarjous  LV: ?",
+    "list": "Prospecting",
+    "created": "2026-08-17",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a827b875c451cb19b470061",
+    "name": "PROSPEKTI: Hautaustoimisto Elimäki/Kouvola #114652  HINTA: tarjous  LV: ?  (ainoa paikkakunnalla)",
+    "list": "Prospecting",
+    "created": "2026-08-17",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a827b885621b62f14908e18",
+    "name": "PROSPEKTI: Hautaustoimisto Etelä-Pohjanmaa #107973  HINTA: tarjous  LV: ?  (omistaa kiinteistön)",
+    "list": "Prospecting",
+    "created": "2026-08-17",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a827b897733aee7db40359f",
+    "name": "PROSPEKTI: Kuljetusliike Turun seutu #107777  HINTA: tarjous  LV: ?  (12 ajoneuvoa, eläkemyynti)",
+    "list": "Prospecting",
+    "created": "2026-08-17",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9186d72c13f4f14ccbfb5d",
+    "name": "PROSPEKTI: Kasvava ja tunnettu kuljetusyritys #115868  HINTA: tarjous  LV: €2,000,000 - €5,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9186e384a69014e5b19328",
+    "name": "PROSPEKTI: Kasvava rakennus- ja kiinteistöpalveluyritys myytävänä – v #116624  HINTA: tarjous  LV: €1,000,001 - €2,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9186e5c335f5cdf504e8a4",
+    "name": "PROSPEKTI: Kasvava siivousalan B2B-yritys pääkaupunkiseudulta #116620  HINTA: tarjous  LV: €600,001 - €800,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9186e7094c1678af82675e",
+    "name": "PROSPEKTI: Vakiintunut kuljetusliike Pk-seudulla #116599  HINTA: tarjous  LV: €1,000,001 - €2,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9186e9bf588f69c09e8a48",
+    "name": "PROSPEKTI: Vakiintunut ilmanvaihto- ja ilmastointipalveluyritys #115843  HINTA: tarjous  LV: €1,000,001 - €2,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9186eaeecd9566e44e9825",
+    "name": "PROSPEKTI: Kannattava talotekniikan eristyksiin erikoistunut yritys h #116582  HINTA: tarjous  LV: €600,001 - €800,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9186ec4f8fd6028dce3bcc",
+    "name": "PROSPEKTI: Vakiintunut kuljetusliike jakelusopimuksella #116550  HINTA: tarjous  LV: €1,000,001 - €2,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9186ee372f34aae495babb",
+    "name": "PROSPEKTI: Vakavarainen kuljetusyritys Pohjois-Suomessa #116542  HINTA: tarjous  LV: €600,001 - €800,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9186f0ebffa8e1d92786ff",
+    "name": "PROSPEKTI: Vakiintunut kuljetus- ja jakelupalveluyritys Uudellamaalla #116534  HINTA: tarjous  LV: €400,001 - €500,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9186f221abe000540dacef",
+    "name": "PROSPEKTI: Pitkän linjan sähköurakoitsija Etelä-Suomesta – vakiintunu #115106  HINTA: tarjous  LV: €1,000,001 - €2,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9186f45435cf2bc8a56c5e",
+    "name": "PROSPEKTI: Vakiintunut sähköalan urakointiyritys myytävänä – pitkä hi #116480  HINTA: tarjous  LV: €800,001- €1,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9186f67e1bb6f8e5049bdf",
+    "name": "PROSPEKTI: Tunnettu rengasliike Pohjois-Karjalassa – erinomainen kehi #116463  HINTA: tarjous  LV: €800,001- €1,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9186f9332492609cf92950",
+    "name": "PROSPEKTI: Täyden palvelun sähköurakointiyritys Etelä-Pohjanmaalla, k #116433  HINTA: tarjous  LV: €2,000,000 - €5,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9186fbd7510f6cf8c531f0",
+    "name": "PROSPEKTI: Vakiintunut IV-alan yritys, lv 4–5 M€, merkittävä kasvupot #116406  HINTA: tarjous  LV: €2,000,000 - €5,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9186fd0b75b178be61101f",
+    "name": "PROSPEKTI: Vakiintunut viemärihuolto- ja paineautoalan yritys Uudella #116358  HINTA: tarjous  LV: €800,001- €1,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9186ff80a2919c6b02ff7a",
+    "name": "PROSPEKTI: Kannattava LVI-alan yritys, vahvat asiakkuudet, Uusimaa #116357  HINTA: tarjous  LV: €800,001- €1,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a91870153d967f59bbc34a2",
+    "name": "PROSPEKTI: Sähköautomaatioalan edelläkävijä Uudeltamaalta #115739  HINTA: tarjous  LV: €1,000,001 - €2,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9187032cccfdc4c10b177e",
+    "name": "PROSPEKTI: Myydään taksi- ja linja-autoliiketoiminta Satakunnassa #113799  HINTA: tarjous  LV: €1,000,001 - €2,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9187055581a6a07d0c4fbf",
+    "name": "PROSPEKTI: EV-Sähkö Oy Kiteellä #116259  HINTA: tarjous  LV: €1,000,001 - €2,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9187077f1293e4800afe86",
+    "name": "PROSPEKTI: Vakiintunut LVI‑yritys Uudeltamaalta #115602  HINTA: tarjous  LV: €1,000,001 - €2,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a91870942ed0c88dae23752",
+    "name": "PROSPEKTI: Myydään kannattava sähköurakointiyritys Sysmässä #114816  HINTA: tarjous  LV: €600,001 - €800,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a91870b9cefcf94d54c0904",
+    "name": "PROSPEKTI: Menestyvä ja pitkään toiminut sähköurakointiliike #116104  HINTA: tarjous  LV: €1,000,001 - €2,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a91870d3fd93c0f7cad46e2",
+    "name": "PROSPEKTI: Tuottava ja maineikas kukkakauppa ja hautaustoimisto Etelä #114798  HINTA: tarjous  LV: €500,001 - €600,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a91870f126e496e862ec7f3",
+    "name": "PROSPEKTI: Kannattava ja kasvupotentiaalinen isännöintiyritys Suomess #116073  HINTA: tarjous  LV: €1,000,001 - €2,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9187113d6294a000e98526",
+    "name": "PROSPEKTI: Menestyvä sähköurakointialan yritys #114709  HINTA: tarjous  LV: €2,000,000 - €5,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a91871366ac0f275b13206e",
+    "name": "PROSPEKTI: Sähköala; teollisuuden automaation huollot, kunnossapidot  #113246  HINTA: tarjous  LV: €800,001- €1,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9187156300236ebe0b9d87",
+    "name": "PROSPEKTI: KULJETUSLIIKE PIRKANMAALLA HYVÄSSÄ VAUHDISSA OLEVA #111502  HINTA: tarjous  LV: €2,000,000 - €5,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a918717f7c993f8214c804c",
+    "name": "PROSPEKTI: KULJETUS-, KUNNOSSAPITO- SEKÄ MAANRAKENNUSTÖITÄ HARJOITTAV #110122  HINTA: tarjous  LV: €2,000,000 - €5,000,000",
+    "list": "Prospecting",
+    "created": "2026-08-28",
+    "source_guess": "H4"
+   },
+   {
+    "id": "6a9958b673a9729a01222602",
+    "name": "📋  Kiinteistösiivous Metsänen Oy B2B, tulos: 177K€ hinta: 1m€",
+    "list": "Screening",
+    "created": "2026-09-03",
+    "source_guess": "H3"
+   }
+  ]
+ },
+ "daily": [
+  {
+   "date": "2026-09-04",
+   "ts": "2026-09-04T06:03:53.257595+00:00",
+   "ingestion": {
+    "cron-weekly-sourcing": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    },
+    "cron-swedish-sweep": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    },
+    "cron-yritysporssi-alerts": {
+     "runs": 3,
+     "available": 43,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    },
+    "cron-yrityskaupat-newsletter": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    },
+    "cron-weak-signal-sweep": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    }
+   },
+   "bugs": [],
+   "bug_check_exit": 0,
+   "alerted_channel": null,
+   "outbound": {
+    "emails_sent": 0,
+    "replies": 0,
+    "reply_kinds": {}
+   },
+   "cards": {
+    "new": [],
+    "moved": [],
+    "total_tracked": 119
+   }
+  }
+ ],
+ "moves": [],
+ "bugs_log": [],
+ "new_cards_log": [],
+ "totals": {
+  "days_tracked": 1,
+  "cards_moved": 0,
+  "new_cards": 0,
+  "bugs_logged": 0,
+  "emails_sent": 0,
+  "replies": 0
+ }
+}

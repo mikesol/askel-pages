@@ -16,6 +16,10 @@
     --good: #6fd08c;
     --warn: #f0c674;
     --bad: #f28b82;
+    /* dataviz categorical slots 1 & 2 (dark mode), validated:
+       CVD ΔE 26.8 protan / 32.4 tritan, normal-vision ΔE 31.8, all ≥3:1 on this surface */
+    --series-broker: #3987e5;
+    --series-outbound: #d95926;
     --mono: 'SF Mono', 'Consolas', 'Menlo', monospace;
   }
   * { box-sizing: border-box; }
@@ -47,11 +51,24 @@
   }
   .tag {
     display: inline-block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.03em;
-    padding: 4px 11px; border-radius: 20px; margin-bottom: 18px;
+    padding: 4px 11px; border-radius: 20px; margin-bottom: 18px; margin-right: 8px;
   }
   .tag-major { background: rgba(242,139,130,0.15); color: var(--bad); border: 1px solid rgba(242,139,130,0.3); }
   .tag-minor { background: rgba(124,196,255,0.12); color: var(--accent); border: 1px solid rgba(124,196,255,0.28); }
   .tag-new   { background: rgba(111,208,140,0.13); color: var(--good); border: 1px solid rgba(111,208,140,0.28); }
+
+  /* broker vs outbound — used everywhere a source type needs to read at a glance */
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11.5px;
+    padding: 4px 11px; border-radius: 20px; margin-bottom: 18px; margin-right: 8px; font-weight: 600;
+  }
+  .badge-broker { background: rgba(57,135,229,0.16); color: #8fbdf2; border: 1px solid rgba(57,135,229,0.4); }
+  .badge-outbound { background: rgba(217,89,38,0.16); color: #f2a066; border: 1px solid rgba(217,89,38,0.4); }
+  .legend { display: flex; gap: 20px; font-size: 12.5px; color: var(--text-dim); margin: 4px 0 18px; }
+  .legend .sw { display: inline-flex; align-items: center; gap: 7px; }
+  .legend .sw i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+  .legend .sw.broker i { background: var(--series-broker); }
+  .legend .sw.outbound i { background: var(--series-outbound); }
 
   h1 { font-size: clamp(36px, 6vw, 64px); margin: 0 0 14px; letter-spacing: -0.02em; line-height: 1.05; }
   h2 { font-size: clamp(28px, 4.4vw, 46px); margin: 0 0 8px; letter-spacing: -0.01em; line-height: 1.08; }
@@ -86,6 +103,18 @@
   }
   .callout b { color: var(--warn); }
 
+  /* funnel stages */
+  .funnel { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 6px 0 20px; }
+  .fstage {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px 20px; text-align: center; min-width: 100px;
+  }
+  .fstage .val { font-family: var(--mono); font-size: clamp(22px, 3vw, 32px); font-weight: 700; }
+  .fstage.broker .val { color: var(--series-broker); }
+  .fstage.outbound .val { color: var(--series-outbound); }
+  .fstage .lbl { font-size: 11.5px; color: var(--text-dim); margin-top: 4px; }
+  .farrow { color: var(--text-dimmer); font-size: 18px; }
+
   .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; width: 100%; }
   .punch h3 {
     font-family: var(--mono); font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em;
@@ -96,6 +125,38 @@
   .punch ul { margin: 0; padding-left: 16px; font-size: 14.5px; line-height: 1.5; color: var(--text-dim); }
   .punch li { margin-bottom: 12px; }
   .punch li b { color: var(--text); font-weight: 600; }
+
+  /* live chart */
+  .chartbox {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px 24px 12px; max-width: 900px; width: 100%;
+  }
+  .chart-bars {
+    display: flex; align-items: flex-end; gap: 14px; height: 170px; padding-top: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .chart-col { display: flex; flex-direction: column; align-items: center; gap: 2px; flex: 1; height: 100%; justify-content: flex-end; min-width: 0; }
+  .chart-bargroup { display: flex; align-items: flex-end; gap: 2px; width: 100%; justify-content: center; height: 100%; }
+  .chart-bar { width: 12px; border-radius: 4px 4px 0 0; min-height: 2px; }
+  .chart-bar.broker { background: var(--series-broker); }
+  .chart-bar.outbound { background: var(--series-outbound); }
+  .chart-date { font-family: var(--mono); font-size: 9.5px; color: var(--text-dimmer); margin-top: 8px; white-space: nowrap; }
+  .chart-bugdot { width: 7px; height: 7px; border-radius: 50%; margin-top: 6px; background: var(--border); }
+  .chart-bugdot.on { background: var(--bad); }
+  .chart-empty { color: var(--text-dimmer); font-size: 14px; padding: 30px 4px; }
+
+  .liststat-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0 22px; }
+  .liststat { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; text-align: center; min-width: 90px; }
+  .liststat .val { font-family: var(--mono); font-size: 20px; font-weight: 700; color: var(--accent); }
+  .liststat .lbl { font-size: 10.5px; color: var(--text-dim); margin-top: 3px; }
+
+  .logbox { max-width: 900px; width: 100%; max-height: 34vh; overflow-y: auto; border: 1px solid var(--border); border-radius: 10px; }
+  .logbox table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .logbox th { position: sticky; top: 0; background: var(--bg-card); text-align: left; padding: 9px 14px; font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; color: var(--text-dimmer); letter-spacing: 0.04em; border-bottom: 1px solid var(--border); }
+  .logbox td { padding: 9px 14px; border-bottom: 1px solid var(--border); color: var(--text-dim); }
+  .logbox tr:last-child td { border-bottom: none; }
+  .logbox .name { color: var(--text); }
+  .logbox .arrow { color: var(--text-dimmer); }
 
   .num-badge {
     position: absolute; top: 6vh; right: 9vw; font-family: var(--mono); font-size: 13px; color: var(--text-dimmer);
@@ -128,12 +189,14 @@
     .stats { grid-template-columns: 1fr 1fr; }
     .navbtn { width: 36px; height: 36px; font-size: 15px; }
     .slide { padding: 8vh 7vw; }
+    .funnel { gap: 6px; }
+    .fstage { padding: 12px 14px; min-width: 76px; }
   }
 </style>
 </head>
 <body>
 
-<div class="hint" id="hint">1 / 9</div>
+<div class="hint" id="hint">1 / 12</div>
 <button class="navbtn" id="prev" aria-label="previous">‹</button>
 <button class="navbtn" id="next" aria-label="next">›</button>
 <div class="progress" id="progress"></div>
@@ -144,29 +207,50 @@
   <section class="slide">
     <div class="kicker">Askel Ventures · Internal · Confidential</div>
     <h1>Prospecting Pipeline<br>— What Changed</h1>
-    <div class="lede">One month of sourcing, in nine slides.</div>
-    <footer class="slidefoot">Aug 4 – Sep 4, 2026 · compiled by Steve</footer>
+    <div class="lede">One month of sourcing — and a live tracker running through the Oct 25 retro.</div>
+    <footer class="slidefoot">Review period Aug 4 – Sep 4, 2026 · tracking daily since · compiled by Steve</footer>
   </section>
 
-  <!-- 2 — FUNNEL -->
+  <!-- 2 — BROKER FUNNEL -->
   <section class="slide">
-    <div class="kicker">The funnel</div>
-    <h2>1,430 in → 29 cards out</h2>
-    <div class="subhead">19 cron runs across 5 sourcing channels, last 30 days</div>
-    <div class="stats">
-      <div class="stat"><div class="val">1,430</div><div class="lbl">seen</div></div>
-      <div class="stat"><div class="val">548</div><div class="lbl">delivered</div></div>
-      <div class="stat"><div class="val">45</div><div class="lbl">passed thesis</div></div>
-      <div class="stat"><div class="val">29</div><div class="lbl">cards</div></div>
-      <div class="stat"><div class="val">38%</div><div class="lbl">coverage</div></div>
-      <div class="stat"><div class="val">8%</div><div class="lbl">hit rate</div></div>
+    <span class="badge badge-broker">📋 broker sources — H1 · H2 · H4 · H5</span>
+    <h2>Broker funnel: 1,355 in → 29 cards out</h2>
+    <div class="subhead">Listed companies. Trello card only — never emailed.</div>
+    <div class="funnel">
+      <div class="fstage broker"><div class="val">1,355</div><div class="lbl">seen</div></div>
+      <div class="farrow">→</div>
+      <div class="fstage broker"><div class="val">529</div><div class="lbl">delivered</div></div>
+      <div class="farrow">→</div>
+      <div class="fstage broker"><div class="val">44</div><div class="lbl">passed thesis</div></div>
+      <div class="farrow">→</div>
+      <div class="fstage broker"><div class="val">29</div><div class="lbl">cards</div></div>
     </div>
-    <div class="callout"><b>28 of 29 cards</b> came from one channel, one fix, one week. The rest of the month idled.</div>
+    <div class="callout"><b>28 of those 29 cards</b> came from one channel (H4), one fix, one week. The rest of the month idled.</div>
   </section>
 
-  <!-- 3 — H1 -->
+  <!-- 3 — OUTBOUND FUNNEL -->
+  <section class="slide">
+    <span class="badge badge-outbound">📤 cold outbound — H3 only</span>
+    <h2>Outbound funnel: 96 found → 0 replies (so far)</h2>
+    <div class="subhead">Companies that never listed themselves for sale. The only channel allowed to email.</div>
+    <div class="funnel">
+      <div class="fstage outbound"><div class="val">96</div><div class="lbl">found</div></div>
+      <div class="farrow">→</div>
+      <div class="fstage outbound"><div class="val">19</div><div class="lbl">enriched</div></div>
+      <div class="farrow">→</div>
+      <div class="fstage outbound"><div class="val">1</div><div class="lbl">passed thesis</div></div>
+      <div class="farrow">→</div>
+      <div class="fstage outbound"><div class="val">1</div><div class="lbl">emailed</div></div>
+      <div class="farrow">→</div>
+      <div class="fstage outbound"><div class="val">0</div><div class="lbl">replied</div></div>
+    </div>
+    <div class="callout">This replaces the old "4/10 to 7/10" hit-rate line — that was the enrichment step's contact-discovery rate, not a funnel. One sector, one run, one candidate — too early to call, which is exactly why this now tracks daily.</div>
+  </section>
+
+  <!-- 4 — H1 -->
   <section class="slide">
     <div class="kicker">H1 · firmakauppa.fi · weekly</div>
+    <span class="badge badge-broker">📋 broker</span>
     <span class="tag tag-minor">doctrine fix</span>
     <h2>Finnish broker listings</h2>
     <ul class="points">
@@ -177,9 +261,10 @@
     </ul>
   </section>
 
-  <!-- 4 — H2 -->
+  <!-- 5 — H2 -->
   <section class="slide">
     <div class="kicker">H2 · bolagsplatsen.se · weekly</div>
+    <span class="badge badge-broker">📋 broker</span>
     <span class="tag tag-minor">steady, quiet</span>
     <h2>Nordic broker listings</h2>
     <ul class="points">
@@ -190,22 +275,24 @@
     </ul>
   </section>
 
-  <!-- 5 — H3 -->
+  <!-- 6 — H3 -->
   <section class="slide">
     <div class="kicker">H3 · PRH + finder.fi · weekly</div>
+    <span class="badge badge-outbound">📤 outbound</span>
     <span class="tag tag-new">new pipeline</span>
     <h2>Non-listed weak signals</h2>
     <ul class="points">
-      <li>Shipped discovery + contact-enrichment scripts — email hit rate <b>4/10 → 7/10</b></li>
+      <li>Shipped discovery + contact-enrichment scripts this month, end to end</li>
       <li>Autonomous cold email now restricted, in code, to H3-only leads</li>
       <li class="good">First run sent the pipeline's <b>first-ever autonomous cold email</b></li>
-      <li>Sample of one — too early to call volume</li>
+      <li>See the outbound funnel — sample of one, too early to call volume</li>
     </ul>
   </section>
 
-  <!-- 6 — H4 -->
+  <!-- 7 — H4 -->
   <section class="slide">
     <div class="kicker">H4 · yritysporssi.fi email alerts · 3×/day</div>
+    <span class="badge badge-broker">📋 broker</span>
     <span class="tag tag-major">the month's incident</span>
     <h2>Yrityspörssi alerts</h2>
     <ul class="points">
@@ -217,9 +304,10 @@
     </ul>
   </section>
 
-  <!-- 7 — H5 -->
+  <!-- 8 — H5 -->
   <section class="slide">
     <div class="kicker">H5 · yrityskaupat newsletter · monthly</div>
+    <span class="badge badge-broker">📋 broker</span>
     <span class="tag tag-minor">dormant → live</span>
     <h2>Newsletter scrape</h2>
     <ul class="points">
@@ -229,7 +317,7 @@
     </ul>
   </section>
 
-  <!-- 8 — MONITORING -->
+  <!-- 9 — MONITORING -->
   <section class="slide">
     <div class="kicker">Cross-cutting · shipped 08-28</div>
     <span class="tag tag-new">new infra</span>
@@ -241,7 +329,33 @@
     </ul>
   </section>
 
-  <!-- 9 — PUNCH LIST -->
+  <!-- 10 — LIVE: DAILY INGESTION -->
+  <section class="slide">
+    <div class="kicker">Live · updates daily · retro 2026-10-25</div>
+    <h2>Tracking since Sep 4</h2>
+    <div class="subhead" id="trackerSub">loading…</div>
+    <div class="legend">
+      <span class="sw broker"><i></i>📋 broker ingestion</span>
+      <span class="sw outbound"><i></i>📤 outbound ingestion</span>
+      <span class="sw"><i style="background:var(--bad)"></i>bugs that day</span>
+    </div>
+    <div class="chartbox"><div class="chart-bars" id="dailyChart"><div class="chart-empty">loading…</div></div></div>
+  </section>
+
+  <!-- 11 — LIVE: CARD MOVEMENT -->
+  <section class="slide">
+    <div class="kicker">Live · from the review-period baseline</div>
+    <h2>Where the cards are</h2>
+    <div class="liststat-row" id="listStats"></div>
+    <div class="logbox">
+      <table>
+        <thead><tr><th>Date</th><th>Kind</th><th>Card</th><th></th></tr></thead>
+        <tbody id="movesLog"><tr><td colspan="4" style="padding:20px 14px;color:var(--text-dimmer)">loading…</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 12 — PUNCH LIST -->
   <section class="slide">
     <div class="kicker">Where this leaves us</div>
     <h2>Open questions · defects · next moves</h2>
@@ -260,7 +374,7 @@
           <li>Estonia: no dedicated source, thesis or not</li>
           <li>H1 never gets EBITDA — always manual follow-up</li>
           <li>H4 still can't see profit / age / price</li>
-          <li>"Reports vanish on long turns" — worked around, not fixed</li>
+          <li>Card source (H1-H5) isn't a real Trello field — tracker guesses it from freetext</li>
         </ul>
       </div>
       <div class="punch">
@@ -268,8 +382,8 @@
         <ul>
           <li>Non-datacenter path into H4 detail pages</li>
           <li>Any Estonian source beats zero</li>
+          <li>Add a real Source field to the card template</li>
           <li>Revisit H3 sector order once more data lands</li>
-          <li>Faster smoke-check to catch a dead account in hours, not weeks</li>
         </ul>
       </div>
     </div>
@@ -313,6 +427,102 @@
   });
   window.addEventListener('resize', () => go(currentIndex()));
   update();
+
+  // ---- live tracker data ----
+  const BROKER = ['cron-weekly-sourcing', 'cron-swedish-sweep', 'cron-yritysporssi-alerts', 'cron-yrityskaupat-newsletter'];
+  const OUTBOUND = ['cron-weak-signal-sweep'];
+  const badge = (src) => src === 'H3'
+    ? '<span class="badge badge-outbound" style="margin:0;padding:2px 8px;font-size:10px">📤 ' + src + '</span>'
+    : src
+      ? '<span class="badge badge-broker" style="margin:0;padding:2px 8px;font-size:10px">📋 ' + src + '</span>'
+      : '<span style="color:var(--text-dimmer);font-size:11px">unattributed</span>';
+
+  fetch('./tracker-data.json').then(r => r.ok ? r.json() : null).then(data => {
+    if (!data) throw new Error('no data');
+    renderChart(data);
+    renderMoves(data);
+  }).catch(() => {
+    document.getElementById('trackerSub').textContent = 'tracker data not available yet';
+    document.getElementById('dailyChart').innerHTML = '<div class="chart-empty">No tracker data yet — first cron run pending.</div>';
+    document.getElementById('movesLog').innerHTML = '<tr><td colspan="4" style="padding:20px 14px;color:var(--text-dimmer)">No tracker data yet.</td></tr>';
+  });
+
+  function renderChart(data) {
+    const days = data.daily || [];
+    const sub = document.getElementById('trackerSub');
+    sub.textContent = days.length
+      ? `${days.length} day(s) logged · ${data.totals.new_cards} new cards · ${data.totals.cards_moved} moved · ${data.totals.bugs_logged} bugs seen · ${data.totals.emails_sent} outbound emails · ${data.totals.replies} replies`
+      : 'no days logged yet';
+
+    const box = document.getElementById('dailyChart');
+    if (!days.length) { box.innerHTML = '<div class="chart-empty">First entry lands with tomorrow\'s 08:20 sweep.</div>'; return; }
+
+    const maxVal = Math.max(1, ...days.map(d => {
+      const ing = d.ingestion || {};
+      const b = BROKER.reduce((s, c) => s + ((ing[c] || {}).available || 0), 0);
+      const o = OUTBOUND.reduce((s, c) => s + ((ing[c] || {}).available || 0), 0);
+      return Math.max(b, o);
+    }));
+    box.innerHTML = '';
+    days.forEach(d => {
+      const ing = d.ingestion || {};
+      const b = BROKER.reduce((s, c) => s + ((ing[c] || {}).available || 0), 0);
+      const o = OUTBOUND.reduce((s, c) => s + ((ing[c] || {}).available || 0), 0);
+      const col = document.createElement('div');
+      col.className = 'chart-col';
+      const grp = document.createElement('div');
+      grp.className = 'chart-bargroup';
+      grp.title = `${d.date}: broker ${b}, outbound ${o}`;
+      const bb = document.createElement('div');
+      bb.className = 'chart-bar broker';
+      bb.style.height = Math.max(2, (b / maxVal) * 130) + 'px';
+      const ob = document.createElement('div');
+      ob.className = 'chart-bar outbound';
+      ob.style.height = Math.max(2, (o / maxVal) * 130) + 'px';
+      grp.appendChild(bb); grp.appendChild(ob);
+      const dt = document.createElement('div');
+      dt.className = 'chart-date';
+      dt.textContent = d.date.slice(5);
+      const bug = document.createElement('div');
+      bug.className = 'chart-bugdot' + ((d.bugs || []).length ? ' on' : '');
+      bug.title = (d.bugs || []).length + ' bug(s)';
+      col.appendChild(grp); col.appendChild(dt); col.appendChild(bug);
+      box.appendChild(col);
+    });
+  }
+
+  function renderMoves(data) {
+    const b = data.baseline || {};
+    const cards = b.cards || [];
+    const byList = {};
+    cards.forEach(c => byList[c.list] = (byList[c.list] || 0) + 1);
+    // apply moves on top of baseline for a live-ish distribution
+    (data.moves || []).slice().reverse().forEach(m => {
+      byList[m.from] = Math.max(0, (byList[m.from] || 0) - 1);
+      byList[m.to] = (byList[m.to] || 0) + 1;
+    });
+    const order = ['Prospecting', 'Screening', 'IC', 'DD', 'Acquired - onboarding', 'Dropped / Lost'];
+    const statBox = document.getElementById('listStats');
+    statBox.innerHTML = order.map(l => `<div class="liststat"><div class="val">${byList[l] || 0}</div><div class="lbl">${l.replace(' - onboarding','')}</div></div>`).join('')
+      + `<div class="liststat"><div class="val">${cards.length}</div><div class="lbl">baseline total</div></div>`;
+
+    const rows = [];
+    (data.moves || []).forEach(m => rows.push({ date: m.date, kind: 'Moved', name: m.name, detail: `${m.from} <span class="arrow">→</span> ${m.to}`, src: m.source_guess }));
+    (data.new_cards_log || []).forEach(n => rows.push({ date: n.date, kind: 'New', name: n.name, detail: n.list, src: n.source_guess }));
+    rows.sort((a, c) => c.date.localeCompare(a.date));
+
+    const tbody = document.getElementById('movesLog');
+    if (!rows.length) {
+      tbody.innerHTML = '<tr><td colspan="4" style="padding:20px 14px;color:var(--text-dimmer)">No moves or new cards logged yet — this fills in as the daily cron runs.</td></tr>';
+      return;
+    }
+    tbody.innerHTML = rows.map(r => `<tr>
+      <td>${r.date}</td>
+      <td>${r.kind}</td>
+      <td class="name">${(r.name || '').replace(/</g,'&lt;').slice(0,60)}</td>
+      <td>${badge(r.src)}<br><span style="font-size:11.5px">${r.detail}</span></td>
+    </tr>`).join('');
+  }
 </script>
 
 </body>
