@@ -8,445 +8,312 @@
   :root {
     --bg: #0e1116;
     --bg-card: #161b22;
-    --bg-card-hover: #1c2229;
     --border: #2a313c;
     --text: #e6e9ef;
     --text-dim: #9aa4b2;
     --text-dimmer: #6b7484;
     --accent: #7cc4ff;
-    --accent-2: #ffb86b;
     --good: #6fd08c;
     --warn: #f0c674;
     --bad: #f28b82;
     --mono: 'SF Mono', 'Consolas', 'Menlo', monospace;
   }
   * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
+  html, body {
+    margin: 0; height: 100%; background: var(--bg); color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-    line-height: 1.55;
-  }
-  .wrap { max-width: 880px; margin: 0 auto; padding: 56px 24px 100px; }
-  header.page {
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 28px;
-    margin-bottom: 36px;
-  }
-  .kicker {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 10px;
-  }
-  h1 {
-    font-size: 32px;
-    margin: 0 0 10px;
-    letter-spacing: -0.01em;
-  }
-  .sub {
-    color: var(--text-dim);
-    font-size: 15.5px;
-    max-width: 640px;
-  }
-  .meta {
-    margin-top: 18px;
-    font-family: var(--mono);
-    font-size: 12.5px;
-    color: var(--text-dimmer);
-  }
-
-  h2 {
-    font-size: 22px;
-    margin: 56px 0 6px;
-    letter-spacing: -0.01em;
-  }
-  h2 .num {
-    color: var(--accent);
-    font-family: var(--mono);
-    font-weight: 600;
-    margin-right: 8px;
-  }
-  .section-note {
-    color: var(--text-dim);
-    font-size: 14.5px;
-    margin-bottom: 22px;
-    max-width: 680px;
-  }
-
-  /* headline stat strip */
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 10px;
     overflow: hidden;
-    margin: 20px 0 8px;
   }
-  .stat {
-    background: var(--bg-card);
-    padding: 18px 16px;
-  }
-  .stat .val {
-    font-family: var(--mono);
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--text);
-  }
-  .stat .lbl {
-    font-size: 12px;
-    color: var(--text-dim);
-    margin-top: 4px;
-  }
-  .callout {
-    background: rgba(240,198,116,0.08);
-    border: 1px solid rgba(240,198,116,0.35);
-    border-radius: 8px;
-    padding: 14px 16px;
-    font-size: 14.5px;
-    color: var(--text);
-    margin-top: 16px;
-  }
-  .callout b { color: var(--warn); }
 
-  /* hypothesis cards */
-  .hyp {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 22px 24px;
-    margin-bottom: 18px;
+  .deck {
+    height: 100dvh; width: 100vw;
+    display: flex; overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
   }
-  .hyp-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 4px;
+  .deck::-webkit-scrollbar { display: none; }
+
+  .slide {
+    flex: 0 0 100vw; height: 100dvh;
+    scroll-snap-align: start;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6vh 9vw;
+    position: relative;
   }
-  .hyp-title {
-    font-size: 17px;
-    font-weight: 600;
+
+  .kicker {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 14px;
   }
-  .hyp-tag {
-    font-family: var(--mono);
-    font-size: 11px;
-    padding: 3px 8px;
-    border-radius: 20px;
-    white-space: nowrap;
+  .tag {
+    display: inline-block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.03em;
+    padding: 4px 11px; border-radius: 20px; margin-bottom: 18px;
   }
   .tag-major { background: rgba(242,139,130,0.15); color: var(--bad); border: 1px solid rgba(242,139,130,0.3); }
   .tag-minor { background: rgba(124,196,255,0.12); color: var(--accent); border: 1px solid rgba(124,196,255,0.28); }
   .tag-new   { background: rgba(111,208,140,0.13); color: var(--good); border: 1px solid rgba(111,208,140,0.28); }
-  .hyp-sub { font-family: var(--mono); font-size: 12.5px; color: var(--text-dimmer); margin-bottom: 14px; }
 
-  .field { margin-top: 12px; }
-  .field-lbl {
-    font-family: var(--mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-dimmer);
-    margin-bottom: 4px;
-  }
-  .field-body { color: var(--text); font-size: 14.5px; }
-  .field-body p { margin: 0 0 8px; }
-  .field-body p:last-child { margin-bottom: 0; }
-  .field-body code {
-    font-family: var(--mono);
-    background: rgba(124,196,255,0.1);
-    color: var(--accent);
-    padding: 1px 5px;
-    border-radius: 4px;
-    font-size: 13px;
-  }
+  h1 { font-size: clamp(36px, 6vw, 64px); margin: 0 0 14px; letter-spacing: -0.02em; line-height: 1.05; }
+  h2 { font-size: clamp(28px, 4.4vw, 46px); margin: 0 0 8px; letter-spacing: -0.01em; line-height: 1.08; }
+  .subhead { font-family: var(--mono); font-size: clamp(13px, 1.3vw, 15px); color: var(--text-dimmer); margin-bottom: 34px; }
+  .lede { font-size: clamp(16px, 1.9vw, 20px); color: var(--text-dim); max-width: 640px; margin-bottom: 8px; }
 
-  .playbook-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    color: var(--accent);
-    background: rgba(124,196,255,0.08);
-    border: 1px solid rgba(124,196,255,0.22);
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-family: var(--mono);
+  ul.points { list-style: none; margin: 0; padding: 0; max-width: 760px; }
+  ul.points li {
+    font-size: clamp(17px, 2.1vw, 23px); line-height: 1.4; color: var(--text);
+    padding-left: 30px; position: relative; margin-bottom: 20px;
   }
+  ul.points li::before {
+    content: "→"; position: absolute; left: 0; color: var(--accent); font-weight: 600;
+  }
+  ul.points li b { color: var(--warn); font-weight: 600; }
+  ul.points li.bad::before { color: var(--bad); }
+  ul.points li.good::before { color: var(--good); }
+  ul.points li small { display: block; font-size: 0.62em; color: var(--text-dimmer); margin-top: 4px; font-weight: 400; }
 
-  /* three-column punch list */
-  .grid3 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
-    margin-top: 18px;
+  .stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--border); border: 1px solid var(--border); border-radius: 14px;
+    overflow: hidden; max-width: 760px; margin: 8px 0 26px;
   }
-  .punch {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 18px 20px;
+  .stat { background: var(--bg-card); padding: 22px 20px; }
+  .stat .val { font-family: var(--mono); font-size: clamp(26px, 3.6vw, 40px); font-weight: 700; color: var(--text); }
+  .stat .lbl { font-size: 12.5px; color: var(--text-dim); margin-top: 6px; }
+
+  .callout {
+    background: rgba(240,198,116,0.08); border: 1px solid rgba(240,198,116,0.35); border-radius: 10px;
+    padding: 16px 20px; font-size: clamp(15px, 1.7vw, 18px); max-width: 700px;
   }
+  .callout b { color: var(--warn); }
+
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; width: 100%; }
   .punch h3 {
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin: 0 0 12px;
-    display: flex;
-    align-items: center;
-    gap: 7px;
+    font-family: var(--mono); font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em;
+    margin: 0 0 14px; display: flex; align-items: center; gap: 8px; color: var(--text-dim);
   }
-  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-  .dot-q { background: var(--accent); }
-  .dot-d { background: var(--bad); }
-  .dot-i { background: var(--good); }
-  .punch ul { margin: 0; padding-left: 18px; font-size: 14px; color: var(--text-dim); }
-  .punch li { margin-bottom: 10px; }
-  .punch li:last-child { margin-bottom: 0; }
+  .dot-i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .dot-q { background: var(--accent); } .dot-d { background: var(--bad); } .dot-g { background: var(--good); }
+  .punch ul { margin: 0; padding-left: 16px; font-size: 14.5px; line-height: 1.5; color: var(--text-dim); }
+  .punch li { margin-bottom: 12px; }
   .punch li b { color: var(--text); font-weight: 600; }
-  .infer { font-size: 12px; color: var(--text-dimmer); font-style: italic; }
 
-  footer {
-    margin-top: 64px;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
-    font-size: 12.5px;
-    color: var(--text-dimmer);
-    font-family: var(--mono);
+  .num-badge {
+    position: absolute; top: 6vh; right: 9vw; font-family: var(--mono); font-size: 13px; color: var(--text-dimmer);
+  }
+  footer.slidefoot {
+    position: absolute; bottom: 6vh; left: 9vw; font-family: var(--mono); font-size: 11.5px; color: var(--text-dimmer);
   }
 
-  @media (max-width: 560px) {
-    .wrap { padding: 32px 16px 80px; }
-    h1 { font-size: 26px; }
+  /* nav */
+  .progress { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+  .progress .d {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--border); cursor: pointer;
+    transition: background .2s, transform .2s;
+  }
+  .progress .d.active { background: var(--accent); transform: scale(1.3); }
+  .navbtn {
+    position: fixed; top: 50%; transform: translateY(-50%); z-index: 10;
+    width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border);
+    background: rgba(22,27,34,0.8); color: var(--text-dim); font-size: 18px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px);
+  }
+  .navbtn:hover { color: var(--text); border-color: var(--accent); }
+  #prev { left: 20px; } #next { right: 20px; }
+  .hint {
+    position: fixed; top: 22px; right: 24px; font-family: var(--mono); font-size: 11px; color: var(--text-dimmer); z-index: 10;
+  }
+
+  @media (max-width: 720px) {
+    .grid3 { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .navbtn { width: 36px; height: 36px; font-size: 15px; }
+    .slide { padding: 8vh 7vw; }
   }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header class="page">
+<div class="hint" id="hint">1 / 9</div>
+<button class="navbtn" id="prev" aria-label="previous">‹</button>
+<button class="navbtn" id="next" aria-label="next">›</button>
+<div class="progress" id="progress"></div>
+
+<div class="deck" id="deck">
+
+  <!-- 1 — TITLE -->
+  <section class="slide">
     <div class="kicker">Askel Ventures · Internal · Confidential</div>
-    <h1>Prospecting Pipeline — What Changed</h1>
-    <div class="sub">
-      A month-in-review of the deal sourcing pipeline (Aug 4 – Sep 4, 2026): what shipped across the five
-      sourcing hypotheses, how it maps to the acquisition playbook, and what's still open, broken, or worth
-      building next.
-    </div>
-    <div class="meta">Compiled by Steve · 2026-09-04 · source: cc-disco git history + sourcing-health funnel data</div>
-  </header>
+    <h1>Prospecting Pipeline<br>— What Changed</h1>
+    <div class="lede">One month of sourcing, in nine slides.</div>
+    <footer class="slidefoot">Aug 4 – Sep 4, 2026 · compiled by Steve</footer>
+  </section>
 
-  <section>
-    <h2><span class="num">00</span>The month in one funnel</h2>
-    <p class="section-note">
-      30-day rolling funnel across all five crons (19 runs, via <code>sourcing-health.py funnel --days 30</code>).
-    </p>
+  <!-- 2 — FUNNEL -->
+  <section class="slide">
+    <div class="kicker">The funnel</div>
+    <h2>1,430 in → 29 cards out</h2>
+    <div class="subhead">19 cron runs across 5 sourcing channels, last 30 days</div>
     <div class="stats">
-      <div class="stat"><div class="val">1,430</div><div class="lbl">listings seen at source</div></div>
-      <div class="stat"><div class="val">548</div><div class="lbl">delivered to Steve</div></div>
-      <div class="stat"><div class="val">45</div><div class="lbl">passed thesis screen</div></div>
-      <div class="stat"><div class="val">29</div><div class="lbl">Trello cards created</div></div>
-      <div class="stat"><div class="val">38.3%</div><div class="lbl">coverage</div></div>
-      <div class="stat"><div class="val">8.2%</div><div class="lbl">hit rate</div></div>
+      <div class="stat"><div class="val">1,430</div><div class="lbl">seen</div></div>
+      <div class="stat"><div class="val">548</div><div class="lbl">delivered</div></div>
+      <div class="stat"><div class="val">45</div><div class="lbl">passed thesis</div></div>
+      <div class="stat"><div class="val">29</div><div class="lbl">cards</div></div>
+      <div class="stat"><div class="val">38%</div><div class="lbl">coverage</div></div>
+      <div class="stat"><div class="val">8%</div><div class="lbl">hit rate</div></div>
     </div>
-    <div class="callout">
-      <b>28 of the month's 29 cards came from one channel (H4, yrityspörssi) in one week</b> — right after a
-      structural fix on 2026-08-28. Outside that week, H1/H2/H3 ran on their normal weekly cadence and produced
-      close to nothing. The pipeline's "steady weekly output" framing doesn't match what actually happened this
-      month: one incident fix produced a month's worth of cards in days, while everything else idled. Worth
-      watching whether that normalizes or whether H4 was just draining four months of backlog.
-    </div>
+    <div class="callout"><b>28 of 29 cards</b> came from one channel, one fix, one week. The rest of the month idled.</div>
   </section>
 
-  <section>
-    <h2><span class="num">01</span>By hypothesis</h2>
-    <p class="section-note">
-      Sourcing runs on five standing hypotheses defined in <code>playbook-sourcing</code>, each scored against
-      criteria in <code>playbook-thesis</code> rather than hardcoding rules per cron.
-    </p>
-
-    <!-- H1 -->
-    <div class="hyp">
-      <div class="hyp-head">
-        <div class="hyp-title">H1 — Finnish broker listings</div>
-        <div class="hyp-tag tag-minor">doctrine fix</div>
-      </div>
-      <div class="hyp-sub">firmakauppa.fi · weekly, Monday · cron-weekly-sourcing</div>
-      <div class="field">
-        <div class="field-lbl">What changed</div>
-        <div class="field-body">
-          <p><code>playbook-sourcing</code>'s Tier 1 source table still listed <code>yritysporssi.fi, yrityskaupat.net</code> — a month after yrityskaupat.net merged into firmakauppa.fi. The narrative text had been updated in July; the priority table hadn't. Caught in an audit, not a failure in the field.</p>
-          <p>Also excluded <code>novie.fi</code> from the source list — confirmed brokerage-consulting site with no scrapable inventory, flagged via a MEMO card so it never lands on a cron by accident.</p>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-lbl">Output this month</div>
-        <div class="field-body"><p>Thin. The 2026-08-24 sweep produced <b>0 cards — every lead failed the thesis filter</b>. The 2026-08-31 sweep produced 1 card, and even that was actually sourced via the H3/H4 path, not firmakauppa itself.</p></div>
-      </div>
-      <div class="field">
-        <div class="field-lbl">Standing defect (not new)</div>
-        <div class="field-body"><p>firmakauppa.fi never discloses EBITDA. No lead from this source alone is ever card-worthy on its own — every hit needs a human/broker follow-up before it can be scored, so leads sit in DEFER rather than moving straight to CARD.</p></div>
-      </div>
-      <span class="playbook-link">↳ playbook-sourcing · Tier 1 sources</span>
-    </div>
-
-    <!-- H2 -->
-    <div class="hyp">
-      <div class="hyp-head">
-        <div class="hyp-title">H2 — Nordic broker listings</div>
-        <div class="hyp-tag tag-minor">no infra change</div>
-      </div>
-      <div class="hyp-sub">bolagsplatsen.se (FI + SE) · weekly, Tuesday · cron-swedish-sweep</div>
-      <div class="field">
-        <div class="field-lbl">What changed</div>
-        <div class="field-body"><p>Nothing structural this month. The 2026-08-25 sweep flagged 6 new candidates and 0 cards; a Malmö hemstädfirma flagged as a standout sat unclaimed for two-plus weeks running with no follow-up.</p></div>
-      </div>
-      <div class="field">
-        <div class="field-lbl">Standing gap</div>
-        <div class="field-body"><p>Estonia is in the thesis's geographic scope but still has no dedicated source — Estonian opportunities are flagged ad hoc through this cron only, no systematic coverage.</p></div>
-      </div>
-      <span class="playbook-link">↳ playbook-thesis · geography (FI+SE+EE)</span>
-    </div>
-
-    <!-- H3 -->
-    <div class="hyp">
-      <div class="hyp-head">
-        <div class="hyp-title">H3 — Non-listed weak signals</div>
-        <div class="hyp-tag tag-new">new pipeline shipped</div>
-      </div>
-      <div class="hyp-sub">PRH open data → finder.fi enrichment · weekly, Wednesday · cron-weak-signal-sweep</div>
-      <div class="field">
-        <div class="field-lbl">What changed</div>
-        <div class="field-body">
-          <p>This is where nearly all of the month's build effort went. H3 moved from "the sole audience for autonomous outreach, run manually" to a real automated pipeline:</p>
-          <p><b>prospect-discovery</b> (2026-08-28) — PRH industry-code + town + age filtering. Found that the TOIMI3 classification is retired (every company under it is dissolved) and avoided that trap; all 12 thesis sector codes verified live under TOIMI4.</p>
-          <p><b>enrich-contacts</b> (2026-08-28) — scrapes company websites for contact info (Brave → own domain → contact page), handling @-obfuscation and JS-cloaked addresses. Email hit rate went from 4/10 to 7/10. Also stopped misreading e-invoicing operator domains (Netvisor, Maventa, Apix) as "already acquired by a group" signals, while keeping genuine acquisition signals (e.g. a target now sending mail from an acquirer's domain).</p>
-          <p><b>Outreach channel rule codified</b> (2026-08-28, <code>knowledge/outreach/autonomy-policy.md</code>) — only H3 leads (companies that were never listed for sale) may receive the automatic Simo cold email. The approved opener only makes sense to someone who hasn't decided to sell yet; leads from H1/H2/H4/H5 are Trello-card-only, never emailed autonomously. Enforced in code, not just policy — the send script refuses anything whose source isn't a non-listed channel. Caps: 8 sends/run, 15/24h, 20s gap, dedup, an approval gate file, and reply-based opt-out wired into cron-email-check.</p>
-          <p><b>First run, 2026-09-02</b> — laundry sector: 96 active companies discovered, 19 enriched, 1 candidate (already had an old Trello card, so no new card) — but it triggered the <b>first fully autonomous cold email the pipeline has ever sent</b>.</p>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-lbl">Read with caution</div>
-        <div class="field-body"><p>One run, one thin result. The 10-sector rotation means each sector only comes up roughly once every ten weeks — worth another rotation or two before judging whether this actually surfaces volume.</p></div>
-      </div>
-      <span class="playbook-link">↳ playbook-sourcing · weak-signal detection</span>
-    </div>
-
-    <!-- H4 -->
-    <div class="hyp">
-      <div class="hyp-head">
-        <div class="hyp-title">H4 — Yrityspörssi email alerts</div>
-        <div class="hyp-tag tag-major">the month's incident</div>
-      </div>
-      <div class="hyp-sub">yritysporssi.fi saved-search alerts · weekdays, 3x/day · cron-yritysporssi-alerts</div>
-      <div class="field">
-        <div class="field-lbl">Root cause, finally found</div>
-        <div class="field-body"><p>yritysporssi.fi sits behind AWS WAF with a <code>captcha</code> action keyed on the server's Hetzner IP specifically — 405 from the datacenter IP, 200 from anywhere else. It's an IP-reputation block, not the browser-fingerprint theory the docs carried for months, and steel-browser can't route around it since it shares the box's own egress IP. Sourcing here runs entirely off saved-search email alerts instead.</p></div>
-      </div>
-      <div class="field">
-        <div class="field-lbl">Three compounding failures, all found and fixed the same day (2026-08-28)</div>
-        <div class="field-body">
-          <p><b>1. The account was never actually live.</b> The 2026-08-03 signup was an unverified stub — nobody could log in for over three weeks.</p>
-          <p><b>2. The saved searches were self-sabotaging.</b> All four original alerts carried a €400K–2M asking-price filter, which cut the site's own search from 805 results to 36 — a 95.5% loss — because Finnish listings quote <i>"tarjous"</i> rather than a number, so almost everything got filtered out by accident.</p>
-          <p><b>3. Sector scoring drifted from the thesis.</b> The cron was scoring against inferred sector labels instead of <code>playbook-thesis</code>'s actual sector list — flagging non-thesis sectors like <i>maanrakennus</i> while missing 31 live auto-repair listings.</p>
-          <p>A backfill measured the damage before fixing it: of 98 live thesis-sector listings, only 10 had ever reached the email channel — <b>88 never did.</b> Scoring the backfill found 19 Tier A and 14 Tier B candidates, 28 of 37 owner- (not broker-) listed.</p>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-lbl">Fix</div>
-        <div class="field-body"><p>The four filtered alerts were deleted and replaced with <b>six price-filter-free alerts (IDs 30540–30545)</b> segmented by revenue band, €400K–5M. Result was immediate: the first post-fix sweep recorded 805 available / 61 delivered / 29 candidates / <b>28 cards in one run</b> — which accounts for almost the entire month's card output.</p></div>
-      </div>
-      <div class="field">
-        <div class="field-lbl">Residual, undocumented-as-fixed</div>
-        <div class="field-body"><p>The email channel still only carries title, location, and revenue band. Profit, age, and asking price never appear in the email, and listing detail pages remain WAF-blocked — so H4 leads still can't be scored pass/fail outright, only flagged for manual verification.</p></div>
-      </div>
-      <span class="playbook-link">↳ playbook-thesis · scoring criteria</span>
-    </div>
-
-    <!-- H5 -->
-    <div class="hyp">
-      <div class="hyp-head">
-        <div class="hyp-title">H5 — Yrityskaupat newsletter</div>
-        <div class="hyp-tag tag-minor">dormant, now live</div>
-      </div>
-      <div class="hyp-sub">monthly newsletter scrape · 1st of month, 11:00 Helsinki · cron-yrityskaupat-newsletter</div>
-      <div class="field">
-        <div class="field-lbl">What changed</div>
-        <div class="field-body"><p>The cron existed with no newsletter subscription behind it since it was created — first flagged 2026-07-01 and left unresolved for two months until the 2026-08-28 monitoring audit caught it as a hard <code>NEVER RAN</code>. Simo's subscription finally went live 2026-08-31. The first real run (2026-09-01) delivered 0 listings, which is expected — the newsletter ships "about monthly" and this was day one.</p></div>
-      </div>
-      <div class="field">
-        <div class="field-lbl">Status</div>
-        <div class="field-body"><p>Given a grace period through 2026-09-30 in the health monitor. If it's still silent after that, treat it as broken rather than just early.</p></div>
-      </div>
-      <span class="playbook-link">↳ playbook-sourcing · Tier 1 sources</span>
-    </div>
+  <!-- 3 — H1 -->
+  <section class="slide">
+    <div class="kicker">H1 · firmakauppa.fi · weekly</div>
+    <span class="tag tag-minor">doctrine fix</span>
+    <h2>Finnish broker listings</h2>
+    <ul class="points">
+      <li>Playbook still pointed at the dead <b>yrityskaupat.net</b> name a month after its merger — fixed</li>
+      <li>Excluded <b>novie.fi</b> — consulting site, no scrapable listings</li>
+      <li class="bad">0 cards, then 1 card, all month</li>
+      <li>No EBITDA ever disclosed here — every lead needs a human follow-up</li>
+    </ul>
   </section>
 
-  <section>
-    <h2><span class="num">02</span>Cross-cutting: making silent failure loud</h2>
-    <p class="section-note">
-      Everything above — the dead H4 account, the price filter, the sector drift, the missing H5 subscription —
-      was invisible for weeks or months because nothing was watching the pipeline itself. That changed on
-      2026-08-28, the same day all five issues surfaced.
-    </p>
-    <div class="hyp">
-      <div class="hyp-head">
-        <div class="hyp-title">cron-sourcing-health</div>
-        <div class="hyp-tag tag-new">new infra</div>
-      </div>
-      <div class="hyp-sub">daily, 08:00 → #admin · posts only on failure</div>
-      <div class="field">
-        <div class="field-body">
-          <p><code>scripts/sourcing-health.py</code> runs five assertions across every sourcing cron: <b>YIELD</b> (are leads converting), <b>EMPTY SOURCE</b> (did a run come back suspiciously empty), <b>COLLAPSE</b> (did volume fall off a cliff), <b>ZERO STREAK</b> (how many runs in a row produced nothing), and <b>SILENT / NEVER RAN</b> (is a cron overdue or has it never fired). Deliberately posts only when something's wrong — an "all clear" every day would just train people to stop reading it. A 30-day funnel view (the numbers in section 00) was also added to the weekly digest.</p>
-          <p>Three rounds of false positives have hit since launch, each fixed with a recorded reason rather than silently tuned away: a Monday <code>SILENT</code> alarm on the weekday-only H4 cron that didn't account for the weekend gap (fixed by raising the expected interval to 72h); an <code>EMPTY SOURCE</code>/<code>COLLAPSE</code> pair firing on H4's ordinary zero-email windows, since its metric is a delta against inventory it can't directly observe (fixed with an exemption + wider zero-streak window); and a daily <code>EMPTY SOURCE</code> alarm on H5's correctly-empty first run (fixed with the dated grace period above).</p>
-        </div>
-      </div>
-      <span class="playbook-link">↳ playbook-sourcing · Trello card standards</span>
-    </div>
+  <!-- 4 — H2 -->
+  <section class="slide">
+    <div class="kicker">H2 · bolagsplatsen.se · weekly</div>
+    <span class="tag tag-minor">steady, quiet</span>
+    <h2>Nordic broker listings</h2>
+    <ul class="points">
+      <li>No infra changes this month</li>
+      <li>6 candidates flagged, 0 cards made</li>
+      <li class="bad">Malmö standout lead unclaimed <b>2+ weeks</b> running</li>
+      <li>Estonia still has zero dedicated coverage</li>
+    </ul>
   </section>
 
-  <section>
-    <h2><span class="num">03</span>Open questions, defects, and next moves</h2>
-    <p class="section-note">Items marked <span class="infer">italic</span> are Steve's inference from the data, not something explicitly logged.</p>
+  <!-- 5 — H3 -->
+  <section class="slide">
+    <div class="kicker">H3 · PRH + finder.fi · weekly</div>
+    <span class="tag tag-new">new pipeline</span>
+    <h2>Non-listed weak signals</h2>
+    <ul class="points">
+      <li>Shipped discovery + contact-enrichment scripts — email hit rate <b>4/10 → 7/10</b></li>
+      <li>Autonomous cold email now restricted, in code, to H3-only leads</li>
+      <li class="good">First run sent the pipeline's <b>first-ever autonomous cold email</b></li>
+      <li>Sample of one — too early to call volume</li>
+    </ul>
+  </section>
+
+  <!-- 6 — H4 -->
+  <section class="slide">
+    <div class="kicker">H4 · yritysporssi.fi email alerts · 3×/day</div>
+    <span class="tag tag-major">the month's incident</span>
+    <h2>Yrityspörssi alerts</h2>
+    <ul class="points">
+      <li class="bad">Account sat dead, unverified, for <b>3+ weeks</b></li>
+      <li class="bad">Price filter was quietly killing <b>95.5%</b> of results</li>
+      <li class="bad">Sector scoring had drifted off the actual thesis list</li>
+      <li>Fixed 08-28 → <b>28 cards in one sweep</b>, next run</li>
+      <li>Still blind to profit / age / price — WAF blocks the detail pages</li>
+    </ul>
+  </section>
+
+  <!-- 7 — H5 -->
+  <section class="slide">
+    <div class="kicker">H5 · yrityskaupat newsletter · monthly</div>
+    <span class="tag tag-minor">dormant → live</span>
+    <h2>Newsletter scrape</h2>
+    <ul class="points">
+      <li class="bad">Cron ran for 2 months with <b>no subscription</b> behind it — never caught</li>
+      <li>Subscribed 08-31; first real run 09-01</li>
+      <li>Grace period through Sep 30 before calling it broken</li>
+    </ul>
+  </section>
+
+  <!-- 8 — MONITORING -->
+  <section class="slide">
+    <div class="kicker">Cross-cutting · shipped 08-28</div>
+    <span class="tag tag-new">new infra</span>
+    <h2>Making silence loud</h2>
+    <div class="lede">All five issues above were invisible until this landed — same day it caught them.</div>
+    <ul class="points">
+      <li><b>cron-sourcing-health</b>: yield, empty-source, collapse, zero-streak, silent checks — daily, posts only on failure</li>
+      <li>3 false-positive rounds since launch, each fixed with a logged reason</li>
+    </ul>
+  </section>
+
+  <!-- 9 — PUNCH LIST -->
+  <section class="slide">
+    <div class="kicker">Where this leaves us</div>
+    <h2>Open questions · defects · next moves</h2>
     <div class="grid3">
       <div class="punch">
-        <h3><span class="dot dot-q"></span>Open questions</h3>
+        <h3><span class="dot-i dot-q"></span>Open questions</h3>
         <ul>
-          <li>Does H4's card burst normalize into steady weekly output, or was it a one-time backlog drain? <span class="infer">— worth another two or three weeks before concluding either way.</span></li>
-          <li>Is the H3 weak-signal cadence (each sector once per ~10 weeks) actually enough volume, or does the rotation need to be faster? <span class="infer">— one thin run isn't enough evidence yet.</span></li>
-          <li>Should Simo's outreach identity send from @askelventures.com or @gmail.com? Raised by Varia with Micke back on 2026-04-07 — still open as of the 2026-08-28 autonomy-policy update, and it blocks full outreach maturity for H3.</li>
+          <li>Does H4's burst repeat, or was it a one-time backlog drain?</li>
+          <li>Is H3's ~10-week sector rotation fast enough?</li>
+          <li>Simo's send identity — @askelventures.com or @gmail? Open since April.</li>
         </ul>
       </div>
       <div class="punch">
-        <h3><span class="dot dot-d"></span>Known defects</h3>
+        <h3><span class="dot-i dot-d"></span>Known defects</h3>
         <ul>
-          <li>Estonia has no dedicated sourcing cron despite being in-thesis geography — coverage is ad hoc via H2 only.</li>
-          <li>firmakauppa.fi (H1) structurally can't surface EBITDA — every lead needs a human follow-up before it's card-worthy. Not new, not fixed this month.</li>
-          <li>H4 email alerts still can't deliver profit, age, or asking price — WAF still blocks listing detail pages, so leads are flagged for manual verification, never auto-scored pass/fail.</li>
-          <li>"Cron reports vanishing after long turns" — one of the five original silent failures — is logged in cron-sourcing-health's own notes as <b>worked around, not fixed</b>.</li>
+          <li>Estonia: no dedicated source, thesis or not</li>
+          <li>H1 never gets EBITDA — always manual follow-up</li>
+          <li>H4 still can't see profit / age / price</li>
+          <li>"Reports vanish on long turns" — worked around, not fixed</li>
         </ul>
       </div>
       <div class="punch">
-        <h3><span class="dot dot-i"></span>Potential improvements</h3>
+        <h3><span class="dot-i dot-g"></span>Potential improvements</h3>
         <ul>
-          <li>Give H4 a way to reach listing detail pages (a non-datacenter egress path) so profit/age/asking-price can be scored automatically instead of flagged for manual review.</li>
-          <li>Stand up any Estonian source at all — even a manual monthly check beats the current zero coverage.</li>
-          <li>Once H3 has a few more rotations of data, revisit whether the sector order or cadence should change based on which sectors actually yield candidates.</li>
-          <li><span class="infer">Consider a lighter-weight "did this fire and was it non-empty" smoke check that runs sooner than daily, so a dead account (like H4's three-week gap) gets caught in hours, not weeks.</span></li>
+          <li>Non-datacenter path into H4 detail pages</li>
+          <li>Any Estonian source beats zero</li>
+          <li>Revisit H3 sector order once more data lands</li>
+          <li>Faster smoke-check to catch a dead account in hours, not weeks</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <footer>
-    Sources: cc-disco git history (2026-08-04 → 2026-09-04), sourcing-health.py 30-day funnel, playbook-sourcing &amp; playbook-thesis skills, knowledge/outreach/autonomy-policy.md. Askel Ventures internal — not for external distribution.
-  </footer>
-
 </div>
+
+<script>
+  const deck = document.getElementById('deck');
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const progress = document.getElementById('progress');
+  const hint = document.getElementById('hint');
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'd' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => go(i));
+    progress.appendChild(d);
+  });
+  const dots = Array.from(progress.children);
+
+  function currentIndex() {
+    return Math.round(deck.scrollLeft / window.innerWidth);
+  }
+  function go(i) {
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    deck.scrollTo({ left: i * deck.clientWidth, behavior: 'smooth' });
+  }
+  function update() {
+    const i = currentIndex();
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+    hint.textContent = (i + 1) + ' / ' + slides.length;
+  }
+  deck.addEventListener('scroll', () => { window.requestAnimationFrame(update); });
+  document.getElementById('prev').addEventListener('click', () => go(currentIndex() - 1));
+  document.getElementById('next').addEventListener('click', () => go(currentIndex() + 1));
+  window.addEventListener('keydown', (e) => {
+    if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); go(currentIndex() + 1); }
+    if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); go(currentIndex() - 1); }
+    if (e.key === 'Home') go(0);
+    if (e.key === 'End') go(slides.length - 1);
+  });
+  window.addEventListener('resize', () => go(currentIndex()));
+  update();
+</script>
+
 </body>
 </html>
