@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-06T23:03:38.136668+00:00",
+ "generated": "2026-09-07T05:20:18.548884+00:00",
  "window_start": "2026-09-04",
  "retro_date": "2026-10-25",
  "baseline": {
@@ -415,6 +415,67 @@
     ],
     "total_tracked": 119
    }
+  },
+  {
+   "date": "2026-09-07",
+   "ts": "2026-09-07T05:20:18.548204+00:00",
+   "ingestion": {
+    "cron-weekly-sourcing": {
+     "runs": 1,
+     "available": 137,
+     "delivered": 137,
+     "candidates": 1,
+     "cards": 1
+    },
+    "cron-swedish-sweep": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    },
+    "cron-yritysporssi-alerts": {
+     "runs": 1,
+     "available": 13,
+     "delivered": 13,
+     "candidates": 1,
+     "cards": 0
+    },
+    "cron-yrityskaupat-newsletter": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    },
+    "cron-weak-signal-sweep": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    }
+   },
+   "bugs": [],
+   "bug_check_exit": 0,
+   "alerted_channel": null,
+   "outbound": {
+    "emails_sent": 0,
+    "replies": 0,
+    "reply_kinds": {}
+   },
+   "cards": {
+    "new": [
+     {
+      "id": "6a9e2a3cc7286f045132c7d0",
+      "name": "PROSPEKTI: LVI-alan yritys, Keski-Suomi (firmakauppa FK73942)  HINTA: neuvotellaan  LV: 942 000€",
+      "list": "Prospecting",
+      "source_guess": "H1"
+     }
+    ],
+    "moved": [],
+    "total_tracked": 120
+   }
   }
  ],
  "moves": [
@@ -428,11 +489,19 @@
   }
  ],
  "bugs_log": [],
- "new_cards_log": [],
+ "new_cards_log": [
+  {
+   "id": "6a9e2a3cc7286f045132c7d0",
+   "name": "PROSPEKTI: LVI-alan yritys, Keski-Suomi (firmakauppa FK73942)  HINTA: neuvotellaan  LV: 942 000€",
+   "list": "Prospecting",
+   "source_guess": "H1",
+   "date": "2026-09-07"
+  }
+ ],
  "totals": {
-  "days_tracked": 2,
+  "days_tracked": 3,
   "cards_moved": 1,
-  "new_cards": 0,
+  "new_cards": 1,
   "bugs_logged": 0,
   "emails_sent": 0,
   "replies": 0
