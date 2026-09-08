@@ -7,7 +7,6 @@ Published pages for Askel Ventures. Each folder is a site deployed to `<folder-n
 | playbook | https://playbook.askelventures.com |
 | steve-test | https://steve-test.askelventures.com |
 | pitch | https://pitch.askelventures.com |
-| fimiliam | https://fimiliam.askelventures.com |
 | askel-preview | https://askel-preview.askelventures.com |
 | anika | https://anika.askelventures.com |
 | vesa | https://vesa.askelventures.com |
