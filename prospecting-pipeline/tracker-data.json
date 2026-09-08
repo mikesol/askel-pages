@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-07T05:20:18.548884+00:00",
+ "generated": "2026-09-08T05:20:14.188287+00:00",
  "window_start": "2026-09-04",
  "retro_date": "2026-10-25",
  "baseline": {
@@ -476,6 +476,67 @@
     "moved": [],
     "total_tracked": 120
    }
+  },
+  {
+   "date": "2026-09-08",
+   "ts": "2026-09-08T05:20:14.186090+00:00",
+   "ingestion": {
+    "cron-weekly-sourcing": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    },
+    "cron-swedish-sweep": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    },
+    "cron-yritysporssi-alerts": {
+     "runs": 3,
+     "available": 15,
+     "delivered": 15,
+     "candidates": 1,
+     "cards": 0
+    },
+    "cron-yrityskaupat-newsletter": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    },
+    "cron-weak-signal-sweep": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    }
+   },
+   "bugs": [],
+   "bug_check_exit": 0,
+   "alerted_channel": null,
+   "outbound": {
+    "emails_sent": 0,
+    "replies": 0,
+    "reply_kinds": {}
+   },
+   "cards": {
+    "new": [
+     {
+      "id": "6a9e94c6a7ca78525856f85e",
+      "name": "Melers Oy,  price: 400K€, Profit: 100K€",
+      "list": "Acquired - onboarding",
+      "source_guess": null
+     }
+    ],
+    "moved": [],
+    "total_tracked": 121
+   }
   }
  ],
  "moves": [
@@ -491,6 +552,13 @@
  "bugs_log": [],
  "new_cards_log": [
   {
+   "id": "6a9e94c6a7ca78525856f85e",
+   "name": "Melers Oy,  price: 400K€, Profit: 100K€",
+   "list": "Acquired - onboarding",
+   "source_guess": null,
+   "date": "2026-09-08"
+  },
+  {
    "id": "6a9e2a3cc7286f045132c7d0",
    "name": "PROSPEKTI: LVI-alan yritys, Keski-Suomi (firmakauppa FK73942)  HINTA: neuvotellaan  LV: 942 000€",
    "list": "Prospecting",
@@ -499,9 +567,9 @@
   }
  ],
  "totals": {
-  "days_tracked": 3,
+  "days_tracked": 4,
   "cards_moved": 1,
-  "new_cards": 1,
+  "new_cards": 2,
   "bugs_logged": 0,
   "emails_sent": 0,
   "replies": 0
