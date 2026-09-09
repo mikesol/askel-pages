@@ -106,6 +106,28 @@
   .del-btn { background: none; border: none; cursor: pointer; color: var(--navy20); font-size: 15px; }
   .add-row { font-family: 'Sora', sans-serif; font-size: 10px; font-weight: 700; background: transparent; color: var(--navy40); border: 1.5px dashed var(--navy20); border-radius: 9px; padding: 7px 16px; cursor: pointer; }
   .total-row td { padding: 14px 10px; border-top: 2px solid var(--navy); font-family: 'Sora', sans-serif; font-weight: 700; }
+
+  /* ── PROSESSIMME / MEISTÄ / MIKSI ME / SEURAAVAT ASKELEET ─ */
+  #s-process .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+  #s-process .field label { font-family: 'Sora', sans-serif; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--navy40); display: block; margin-bottom: 4px; }
+  #s-process .field input, #s-process .field select { width: 100%; background: var(--gray); border: none; border-radius: 8px; padding: 8px 12px; outline: none; }
+  #s-process .qr-note { background: var(--gray); border-radius: 12px; padding: 16px 20px; font-family: 'Inter', sans-serif; font-size: 12.5px; color: var(--navy65); line-height: 1.6; margin-top: auto; }
+
+  #s-about .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
+  #s-about .stat { text-align: center; background: var(--gray); border-radius: 12px; padding: 18px 10px; }
+  #s-about .stat-n { font-family: 'Merriweather', serif; font-size: 24px; color: var(--coral); display: block; margin-bottom: 4px; }
+  #s-about .stat-l { font-family: 'Inter', sans-serif; font-size: 11px; color: var(--navy40); }
+
+  #s-why ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  #s-why li { font-family: 'Inter', sans-serif; font-size: 14px; color: var(--navy65); line-height: 1.6; padding-left: 20px; position: relative; }
+  #s-why li::before { content: '→'; position: absolute; left: 0; color: var(--coral); }
+
+  #s-next { background: var(--navy); }
+  #s-next .sb { align-items: center; text-align: center; justify-content: center; }
+  #s-next .cta-h { font-family: 'Merriweather', serif; font-size: 32px; color: white; margin-bottom: 12px; }
+  #s-next .cta-sub { font-family: 'Inter', sans-serif; color: rgba(255,255,255,0.5); margin-bottom: 32px; max-width: 420px; }
+  #s-next .contact-box { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 24px 36px; }
+  #s-next .contact-box div { font-family: 'Inter', sans-serif; color: rgba(255,255,255,0.75); font-size: 13.5px; margin-bottom: 6px; }
 </style>
 </head>
 <body>
@@ -197,6 +219,62 @@
       <tfoot><tr class="total-row"><td colspan="4">Yhteensä (ei sis. ALV)</td><td class="r" id="grand-total">0,00 €</td><td class="no-print"></td></tr></tfoot>
     </table>
     <button class="add-row no-print" onclick="addBlankRow()">+ Lisää rivi</button>
+  </div>
+</div>
+
+<div class="slide" id="s-process">
+  <div class="sh"><img src="/tsp-logo.svg" alt="TSP"><span class="sh-tag">Prosessimme</span></div>
+  <div class="sb">
+    <p class="eyebrow">Prosessimme</p>
+    <h2 class="slide-h">Miten yhteistyö etenee</h2>
+    <div class="field-grid">
+      <div class="field"><label>Aloituspäivä</label><input type="text" placeholder="pp.kk.vvvv" oninput="onFieldChange('process_start_date', this.value)"></div>
+      <div class="field"><label>Kuljetussykli</label><input type="text" placeholder="esim. kerran viikossa" oninput="onFieldChange('process_delivery_cycle', this.value)"></div>
+      <div class="field"><label>Vuokratekstiilit</label>
+        <select onchange="onFieldChange('process_vuokratekstiilit', this.value)">
+          <option value="">—</option><option value="Kyllä">Kyllä</option><option value="Ei">Ei</option>
+        </select>
+      </div>
+      <div class="field"><label>Tarve lajittelulle</label><input type="text" placeholder="esim. osastoittain" oninput="onFieldChange('process_sorting_need', this.value)"></div>
+    </div>
+    <div class="qr-note">Tilaaminen on helppoa: skannaa QR-koodi tai lähetä sähköpostia — vahvistamme noudon saman päivän aikana.</div>
+  </div>
+</div>
+
+<div class="slide" id="s-about">
+  <div class="sh"><img src="/tsp-logo.svg" alt="TSP"><span class="sh-tag">Meistä</span></div>
+  <div class="sb">
+    <p class="eyebrow">Meistä</p>
+    <h2 class="slide-h">Turkulainen perheyritys</h2>
+    <p style="font-family:'Inter',sans-serif; font-size:14px; color:var(--navy65); line-height:1.75;">Turun Suurpesula on osa Melers Pesulapalvelut -konsernia — vakaa omistus ja pitkä sitoumus asiakassuhteisiin.</p>
+    <div class="stat-grid">
+      <div class="stat"><span class="stat-n">16</span><span class="stat-l">vuotta alalla</span></div>
+      <div class="stat"><span class="stat-n">1,2M+ kg</span><span class="stat-l">pesty</span></div>
+      <div class="stat"><span class="stat-n">170 000 kg</span><span class="stat-l">kapasiteetti / v</span></div>
+    </div>
+    <p style="font-family:'Inter',sans-serif; font-size:13px; color:var(--navy40);">Telekatu 6, Turku</p>
+  </div>
+</div>
+
+<div class="slide" id="s-why">
+  <div class="sh"><img src="/tsp-logo.svg" alt="TSP"><span class="sh-tag">Miksi me</span></div>
+  <div class="sb">
+    <p class="eyebrow">Miksi me</p>
+    <h2 class="slide-h">Miksi Turun Suurpesula</h2>
+    <ul id="why-list"></ul>
+  </div>
+</div>
+
+<div class="slide" id="s-next">
+  <div class="sb">
+    <p class="eyebrow">Seuraavat askeleet</p>
+    <h2 class="cta-h">Aloitetaan yhdessä</h2>
+    <p class="cta-sub">Ei sitoumuksia. Tehdään ratkaisu, joka toimii juuri teidän toimintaanne.</p>
+    <div class="contact-box">
+      <div id="next-rep" style="font-family:'Sora',sans-serif; font-weight:700; font-size:15px;">—</div>
+      <div id="next-rep-contact">—</div>
+      <div>02 2321 300 · myynti@melers.fi</div>
+    </div>
   </div>
 </div>
 
@@ -341,6 +419,20 @@ function renderPricingSlide() {
   renderCatalogPills();
   renderPricingRows();
 }
+
+function renderMiksiMe() {
+  const entry = window.__content.find(c => c.industry === state.industry);
+  const points = entry ? (state.language === 'en' ? entry.selling_points_en : entry.selling_points_fi) : '';
+  document.getElementById('why-list').innerHTML = points.split('\n').filter(Boolean).map(p => `<li>${p}</li>`).join('');
+}
+
+function renderStaticCopy() {
+  document.getElementById('next-rep').textContent = state.sales_rep || '—';
+  document.getElementById('next-rep-contact').textContent = state.sales_rep_contact || '—';
+}
+
+const _origOnFieldChange = onFieldChange;
+onFieldChange = function(key, value) { _origOnFieldChange(key, value); renderStaticCopy(); };
 
 async function init() {
   const [catalogRes, contentRes] = await Promise.all([api('/catalog'), api('/content')]);
