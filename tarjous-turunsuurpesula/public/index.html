@@ -128,6 +128,14 @@
   #s-next .cta-sub { font-family: 'Inter', sans-serif; color: rgba(255,255,255,0.5); margin-bottom: 32px; max-width: 420px; }
   #s-next .contact-box { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 24px 36px; }
   #s-next .contact-box div { font-family: 'Inter', sans-serif; color: rgba(255,255,255,0.75); font-size: 13.5px; margin-bottom: 6px; }
+
+  /* ── HISTORIA TAB ─────────────────────────────── */
+  #tab-history .filters { display: flex; gap: 10px; margin-bottom: 16px; }
+  #tab-history .filters input { background: var(--gray); border: none; border-radius: 8px; padding: 8px 12px; outline: none; }
+  #tab-history table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
+  #tab-history th { text-align: left; font-family: 'Sora', sans-serif; font-size: 10px; text-transform: uppercase; color: var(--navy40); padding: 10px 14px; background: var(--gray); }
+  #tab-history td { padding: 10px 14px; border-bottom: 1px solid var(--gray); font-size: 13px; }
+  #tab-history .open-btn { background: var(--navy); color: white; border: none; border-radius: 7px; padding: 5px 14px; cursor: pointer; font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700; }
 </style>
 </head>
 <body>
@@ -281,7 +289,16 @@
   </div>
 </section>
 
-<section id="tab-history"></section>
+<section id="tab-history">
+  <div class="filters">
+    <input id="hist-rep" placeholder="Suodata myyjän mukaan..." oninput="loadHistory()">
+    <input id="hist-customer" placeholder="Suodata asiakkaan mukaan..." oninput="loadHistory()">
+  </div>
+  <table>
+    <thead><tr><th>Päivämäärä</th><th>Myyjä</th><th>Asiakas</th><th>Toimiala</th><th></th></tr></thead>
+    <tbody id="history-rows"></tbody>
+  </table>
+</section>
 <section id="tab-admin"></section>
 
 <script>
@@ -450,6 +467,42 @@ async function saveAndPrint() {
   } catch (e) {
     alert('Tallennus epäonnistui: ' + e.message);
   }
+}
+
+async function loadHistory() {
+  const rep = document.getElementById('hist-rep').value;
+  const customer = document.getElementById('hist-customer').value;
+  const params = new URLSearchParams();
+  if (rep) params.set('rep', rep);
+  if (customer) params.set('customer', customer);
+  const { rows } = await api('/proposals?' + params.toString());
+  document.getElementById('history-rows').innerHTML = rows.map(r => `
+    <tr>
+      <td>${r.created_at}</td><td>${r.sales_rep}</td><td>${r.customer_company}</td><td>${r.industry}</td>
+      <td><button class="open-btn" onclick="openProposal(${r.id})">Avaa</button></td>
+    </tr>
+  `).join('');
+}
+
+async function openProposal(id) {
+  const { proposal, line_items } = await api('/proposals/' + id);
+  Object.assign(state, proposal);
+  state.line_items = line_items;
+  state.readonly = true;
+
+  document.getElementById('f-client').value = state.customer_company;
+  document.getElementById('f-contact-name').value = state.contact_name || '';
+  document.getElementById('f-contact-info').value = state.contact_info || '';
+  document.getElementById('f-rep').value = state.sales_rep;
+  document.getElementById('f-rep-contact').value = state.sales_rep_contact || '';
+  document.getElementById('f-date').value = state.proposal_date || '';
+  document.getElementById('needs-text').textContent = state.needs_summary || '';
+
+  renderCover();
+  renderPricingSlide();
+  renderMiksiMe();
+  renderStaticCopy();
+  switchTab('builder');
 }
 
 async function init() {
