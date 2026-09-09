@@ -35,3 +35,4 @@ Published pages for Askel Ventures. Each folder is a site deployed to `<folder-n
 | ns-deck | https://ns-deck.askelventures.com |
 | familiam | https://familiam.askelventures.com |
 | tarjous-prd | https://tarjous-prd.askelventures.com |
+| investor-concepts | https://investor-concepts.askelventures.com |
