@@ -88,6 +88,24 @@
   #s-needs .hint-box li { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--navy65); padding-left: 14px; position: relative; }
   #s-needs .hint-box li::before { content: '→'; position: absolute; left: 0; color: var(--coral); }
   #needs-text { font-family: 'Inter', sans-serif; font-size: 14px; color: var(--navy); line-height: 1.8; min-height: 320px; flex: 1; }
+
+  /* ── PRICING SLIDE ───────────────────────────── */
+  #s-pricing .industry-picker { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  #s-pricing select { background: var(--gray); border: none; border-radius: 9px; padding: 7px 14px; font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 700; color: var(--navy); cursor: pointer; outline: none; }
+  #s-pricing .catalog-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  #s-pricing .cat-pill { background: var(--gray); color: var(--navy); font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700; padding: 5px 13px; border-radius: 20px; cursor: pointer; border: none; }
+  #s-pricing .cat-pill:hover { background: var(--coral); color: white; }
+  .pt { width: 100%; border-collapse: collapse; background: white; border-radius: 14px; overflow: hidden; margin-bottom: 12px; }
+  .pt thead th { font-family: 'Sora', sans-serif; font-size: 8.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--navy40); padding: 12px 10px; text-align: left; border-bottom: 1px solid var(--gray); background: var(--gray); }
+  .pt thead th.r { text-align: right; }
+  .pt tbody td { padding: 8px 10px; border-bottom: 1px solid var(--gray); vertical-align: middle; }
+  .pt-input { background: var(--gray); border: none; border-radius: 7px; padding: 4px 8px; width: 80px; text-align: right; outline: none; }
+  .pt-desc { background: var(--gray); border: none; border-radius: 7px; padding: 4px 8px; width: 100%; outline: none; }
+  .pt-vat { background: var(--gray); border: none; border-radius: 7px; padding: 4px 6px; outline: none; font-size: 12px; }
+  .pt-orig { text-decoration: line-through; color: var(--navy40); font-size: 11px; }
+  .del-btn { background: none; border: none; cursor: pointer; color: var(--navy20); font-size: 15px; }
+  .add-row { font-family: 'Sora', sans-serif; font-size: 10px; font-weight: 700; background: transparent; color: var(--navy40); border: 1.5px dashed var(--navy20); border-radius: 9px; padding: 7px 16px; cursor: pointer; }
+  .total-row td { padding: 14px 10px; border-top: 2px solid var(--navy); font-family: 'Sora', sans-serif; font-weight: 700; }
 </style>
 </head>
 <body>
@@ -150,6 +168,35 @@
       </ul>
     </div>
     <div id="needs-text" contenteditable="true" data-ph="Kirjoita vapaasti mitä asiakas kertoi tarvitsevansa..."></div>
+  </div>
+</div>
+
+<div class="slide" id="s-pricing">
+  <div class="sh"><img src="/tsp-logo.svg" alt="TSP"><span class="sh-tag">Hinnasto</span></div>
+  <div class="sb">
+    <p class="eyebrow">Hinnasto</p>
+    <h2 class="slide-h">Alustava hinta-arvio</h2>
+    <div class="industry-picker no-print">
+      <label style="font-family:'Sora',sans-serif; font-size:9px; font-weight:700; text-transform:uppercase; color:var(--navy40);">Toimiala</label>
+      <select id="industry-select" onchange="onIndustryChange(this.value)">
+        <option value="hotellit">Hotellit</option>
+        <option value="palvelutalot">Palvelutalot</option>
+        <option value="hatapesut">Hätäpesut</option>
+        <option value="tyoasut">Työasut</option>
+        <option value="vuokratekstiilit">Vuokratekstiilit</option>
+        <option value="muu">Muu</option>
+      </select>
+    </div>
+    <div class="catalog-pills no-print" id="catalog-pills"></div>
+    <table class="pt">
+      <thead><tr>
+        <th>Kuvaus</th><th class="r" style="width:70px;">Määrä</th><th class="r" style="width:80px;">ALV %</th>
+        <th class="r" style="width:90px;">Yks. hinta</th><th class="r" style="width:100px;">Summa</th><th class="no-print" style="width:70px;"></th>
+      </tr></thead>
+      <tbody id="pricing-rows"></tbody>
+      <tfoot><tr class="total-row"><td colspan="4">Yhteensä (ei sis. ALV)</td><td class="r" id="grand-total">0,00 €</td><td class="no-print"></td></tr></tfoot>
+    </table>
+    <button class="add-row no-print" onclick="addBlankRow()">+ Lisää rivi</button>
   </div>
 </div>
 
@@ -219,6 +266,80 @@ function renderCover() {
   document.getElementById('cf-date').textContent = state.proposal_date || '—';
   document.getElementById('cf-contact').textContent = state.contact_name || '—';
   document.getElementById('cf-contact-info').textContent = state.contact_info || '—';
+}
+
+function industryDefaultVat(industry) { return industry === 'palvelutalot' ? 0 : 25.5; }
+
+function onIndustryChange(value) {
+  state.industry = value;
+  document.getElementById('industry-select').value = value;
+  renderCatalogPills();
+  if (window.renderMiksiMe) renderMiksiMe();
+}
+
+function renderCatalogPills() {
+  const items = window.__catalog.filter(c => c.industry === state.industry);
+  document.getElementById('catalog-pills').innerHTML = items.map(c =>
+    `<button class="cat-pill" onclick="addCatalogRow(${c.id})">+ ${c.description} (${c.min_price.toFixed(2)}–${c.max_price.toFixed(2)} €/${c.unit})</button>`
+  ).join('');
+}
+
+function addCatalogRow(catalogId) {
+  const item = window.__catalog.find(c => c.id === catalogId);
+  state.line_items.push({ description: item.description, unit: item.unit, qty: 1, unit_price: item.min_price, vat_rate: item.default_vat_rate, is_discounted: false, original_price: null });
+  renderPricingRows();
+}
+
+function addBlankRow() {
+  state.line_items.push({ description: '', unit: '', qty: 1, unit_price: 0, vat_rate: industryDefaultVat(state.industry), is_discounted: false, original_price: null });
+  renderPricingRows();
+}
+
+function removeRow(index) { state.line_items.splice(index, 1); renderPricingRows(); }
+
+function updateRow(index, field, value) {
+  const row = state.line_items[index];
+  if (field === 'qty' || field === 'unit_price' || field === 'vat_rate') row[field] = parseFloat(value) || 0;
+  else row[field] = value;
+  renderPricingRows();
+}
+
+function toggleDiscount(index) {
+  const row = state.line_items[index];
+  if (!row.is_discounted) { row.original_price = row.unit_price; row.is_discounted = true; }
+  else { row.unit_price = row.original_price; row.original_price = null; row.is_discounted = false; }
+  renderPricingRows();
+}
+
+function renderPricingRows() {
+  const tbody = document.getElementById('pricing-rows');
+  tbody.innerHTML = state.line_items.map((row, i) => `
+    <tr>
+      <td><input class="pt-desc" value="${row.description}" oninput="updateRow(${i},'description',this.value)"></td>
+      <td class="r"><input class="pt-input" type="number" step="0.1" value="${row.qty}" oninput="updateRow(${i},'qty',this.value)"></td>
+      <td class="r"><select class="pt-vat" onchange="updateRow(${i},'vat_rate',this.value)">
+        <option value="0" ${row.vat_rate === 0 ? 'selected' : ''}>0%</option>
+        <option value="25.5" ${row.vat_rate === 25.5 ? 'selected' : ''}>25.5%</option>
+      </select></td>
+      <td class="r">
+        ${row.is_discounted ? `<div class="pt-orig">${row.original_price.toFixed(2)} €</div>` : ''}
+        <input class="pt-input" type="number" step="0.01" value="${row.unit_price}" oninput="updateRow(${i},'unit_price',this.value)">
+      </td>
+      <td class="r">${(row.qty * row.unit_price).toFixed(2)} €</td>
+      <td class="no-print" style="display:flex; gap:4px;">
+        <button class="del-btn" onclick="toggleDiscount(${i})" title="Alennus">%</button>
+        <button class="del-btn" onclick="removeRow(${i})" title="Poista">✕</button>
+      </td>
+    </tr>
+  `).join('');
+  const total = state.line_items.reduce((sum, r) => sum + r.qty * r.unit_price, 0);
+  document.getElementById('grand-total').textContent = total.toFixed(2).replace('.', ',') + ' €';
+}
+
+function renderPricingSlide() {
+  document.getElementById('industry-select').value = state.industry;
+  renderCatalogPills();
+  renderPricingRows();
 }
 
 async function init() {
