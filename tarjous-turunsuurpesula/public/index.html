@@ -434,6 +434,24 @@ function renderStaticCopy() {
 const _origOnFieldChange = onFieldChange;
 onFieldChange = function(key, value) { _origOnFieldChange(key, value); renderStaticCopy(); };
 
+async function saveAndPrint() {
+  const payload = {
+    sales_rep: state.sales_rep, sales_rep_contact: state.sales_rep_contact,
+    customer_company: state.customer_company, contact_name: state.contact_name, contact_info: state.contact_info,
+    industry: state.industry, needs_summary: state.needs_summary, proposal_date: state.proposal_date,
+    process_start_date: state.process_start_date, process_delivery_cycle: state.process_delivery_cycle,
+    process_vuokratekstiilit: state.process_vuokratekstiilit, process_sorting_need: state.process_sorting_need,
+    language: state.language, line_items: state.line_items
+  };
+  try {
+    const result = await api('/proposals', 'POST', payload);
+    state.id = result.id;
+    window.print();
+  } catch (e) {
+    alert('Tallennus epäonnistui: ' + e.message);
+  }
+}
+
 async function init() {
   const [catalogRes, contentRes] = await Promise.all([api('/catalog'), api('/content')]);
   window.__catalog = catalogRes.rows;
