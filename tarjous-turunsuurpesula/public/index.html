@@ -136,6 +136,16 @@
   #tab-history th { text-align: left; font-family: 'Sora', sans-serif; font-size: 10px; text-transform: uppercase; color: var(--navy40); padding: 10px 14px; background: var(--gray); }
   #tab-history td { padding: 10px 14px; border-bottom: 1px solid var(--gray); font-size: 13px; }
   #tab-history .open-btn { background: var(--navy); color: white; border: none; border-radius: 7px; padding: 5px 14px; cursor: pointer; font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700; }
+
+  /* ── YLLÄPITO TAB ─────────────────────────────── */
+  #tab-admin .admin-section { background: white; border-radius: 12px; padding: 20px 24px; margin-bottom: 20px; }
+  #tab-admin .admin-section h3 { font-family: 'Sora', sans-serif; font-size: 14px; margin-bottom: 14px; color: var(--navy); }
+  #tab-admin table { width: 100%; border-collapse: collapse; }
+  #tab-admin th { text-align: left; font-size: 10px; text-transform: uppercase; color: var(--navy40); padding: 8px; }
+  #tab-admin td { padding: 6px 8px; }
+  #tab-admin td input, #tab-admin td select { width: 100%; background: var(--gray); border: none; border-radius: 6px; padding: 5px 8px; outline: none; }
+  #tab-admin textarea { width: 100%; min-height: 90px; background: var(--gray); border: none; border-radius: 8px; padding: 10px; font-family: 'Inter', sans-serif; font-size: 12.5px; outline: none; }
+  #tab-admin .save-btn { background: var(--coral); color: white; border: none; border-radius: 7px; padding: 6px 14px; cursor: pointer; font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700; }
 </style>
 </head>
 <body>
@@ -299,7 +309,20 @@
     <tbody id="history-rows"></tbody>
   </table>
 </section>
-<section id="tab-admin"></section>
+<section id="tab-admin">
+  <div class="admin-section">
+    <h3>Hinnasto</h3>
+    <table>
+      <thead><tr><th>Toimiala</th><th>Kuvaus</th><th>Yksikkö</th><th>Min €</th><th>Max €</th><th>ALV %</th><th></th></tr></thead>
+      <tbody id="admin-catalog-rows"></tbody>
+    </table>
+    <button class="add-row no-print" style="margin-top:10px;" onclick="addNewCatalogRow()">+ Uusi rivi</button>
+  </div>
+  <div class="admin-section">
+    <h3>Miksi me -sisältö</h3>
+    <div id="admin-content-blocks"></div>
+  </div>
+</section>
 
 <script>
 const I18N = {
@@ -503,6 +526,76 @@ async function openProposal(id) {
   renderMiksiMe();
   renderStaticCopy();
   switchTab('builder');
+}
+
+async function loadAdmin() {
+  const { rows: catalogRows } = await api('/catalog');
+  window.__catalog = catalogRows;
+  document.getElementById('admin-catalog-rows').innerHTML = catalogRows.map(c => `
+    <tr id="cat-row-${c.id}">
+      <td><select onchange="markDirty(${c.id})" id="cat-industry-${c.id}">
+        ${['hotellit','palvelutalot','hatapesut','tyoasut','vuokratekstiilit','muu'].map(i => `<option value="${i}" ${i===c.industry?'selected':''}>${i}</option>`).join('')}
+      </select></td>
+      <td><input id="cat-desc-${c.id}" value="${c.description}" onchange="markDirty(${c.id})"></td>
+      <td><input id="cat-unit-${c.id}" value="${c.unit}" onchange="markDirty(${c.id})"></td>
+      <td><input id="cat-min-${c.id}" type="number" step="0.01" value="${c.min_price}" onchange="markDirty(${c.id})"></td>
+      <td><input id="cat-max-${c.id}" type="number" step="0.01" value="${c.max_price}" onchange="markDirty(${c.id})"></td>
+      <td><input id="cat-vat-${c.id}" type="number" step="0.1" value="${c.default_vat_rate}" onchange="markDirty(${c.id})"></td>
+      <td>
+        <button class="save-btn" id="cat-save-${c.id}" style="display:none;" onclick="saveCatalogRow(${c.id})">Tallenna</button>
+        <button class="del-btn" onclick="deleteCatalogRow(${c.id})">✕</button>
+      </td>
+    </tr>
+  `).join('');
+
+  const { rows: contentRows } = await api('/content');
+  window.__content = contentRows;
+  const industries = ['hotellit','palvelutalot','hatapesut','tyoasut','vuokratekstiilit','muu'];
+  document.getElementById('admin-content-blocks').innerHTML = industries.map(ind => {
+    const c = contentRows.find(r => r.industry === ind) || { selling_points_fi: '', selling_points_en: '' };
+    return `
+      <div style="margin-bottom:18px;">
+        <label style="font-family:'Sora',sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; color:var(--navy);">${ind}</label>
+        <textarea id="content-fi-${ind}" placeholder="Suomeksi, yksi väite per rivi">${c.selling_points_fi}</textarea>
+        <textarea id="content-en-${ind}" placeholder="In English, one point per line" style="margin-top:6px;">${c.selling_points_en}</textarea>
+        <button class="save-btn" style="margin-top:6px;" onclick="saveContent('${ind}')">Tallenna</button>
+      </div>
+    `;
+  }).join('');
+}
+
+function markDirty(id) { document.getElementById('cat-save-' + id).style.display = 'inline-block'; }
+
+async function saveCatalogRow(id) {
+  const body = {
+    industry: document.getElementById('cat-industry-' + id).value,
+    description: document.getElementById('cat-desc-' + id).value,
+    unit: document.getElementById('cat-unit-' + id).value,
+    min_price: parseFloat(document.getElementById('cat-min-' + id).value) || 0,
+    max_price: parseFloat(document.getElementById('cat-max-' + id).value) || 0,
+    default_vat_rate: parseFloat(document.getElementById('cat-vat-' + id).value) || 0
+  };
+  await api('/catalog/' + id, 'PUT', body);
+  document.getElementById('cat-save-' + id).style.display = 'none';
+}
+
+async function deleteCatalogRow(id) {
+  if (!confirm('Poistetaanko rivi?')) return;
+  await api('/catalog/' + id, 'DELETE');
+  loadAdmin();
+}
+
+async function addNewCatalogRow() {
+  const { id } = await api('/catalog', 'POST', { industry: 'muu', description: 'Uusi palvelu', unit: 'kpl', min_price: 0, max_price: 0, default_vat_rate: 25.5 });
+  loadAdmin();
+}
+
+async function saveContent(industry) {
+  const body = {
+    selling_points_fi: document.getElementById('content-fi-' + industry).value,
+    selling_points_en: document.getElementById('content-en-' + industry).value
+  };
+  await api('/content/' + industry, 'PUT', body);
 }
 
 async function init() {
