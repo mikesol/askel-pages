@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarjous — Turun Suurpesula</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500;600&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #14375A; --coral: #FF8F7A; --taupe: #E9E4DF; --gray: #F1F2F4; --white: #FFFFFF;
+    --navy65: rgba(20,55,90,0.65); --navy40: rgba(20,55,90,0.40); --navy20: rgba(20,55,90,0.20); --navy10: rgba(20,55,90,0.10);
+  }
+  body { font-family: 'Inter', sans-serif; background: #C8C8C8; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* ── TOP BAR: tabs + language toggle ─────────── */
+  #topbar {
+    position: sticky; top: 0; z-index: 100; background: var(--navy);
+    padding: 12px 24px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  #topbar .brand { font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 700; color: var(--coral); white-space: nowrap; }
+  .tabs { display: flex; gap: 2px; background: rgba(255,255,255,0.08); border-radius: 9px; padding: 3px; }
+  .tab-btn {
+    font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700; padding: 7px 16px;
+    border: none; border-radius: 7px; cursor: pointer; background: transparent; color: rgba(255,255,255,0.55);
+  }
+  .tab-btn.active { background: var(--coral); color: white; }
+  .lang-toggle { display: flex; gap: 2px; background: rgba(255,255,255,0.08); border-radius: 9px; padding: 3px; margin-left: auto; }
+  .lang-btn { font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700; padding: 6px 12px; border: none; border-radius: 7px; cursor: pointer; background: transparent; color: rgba(255,255,255,0.55); }
+  .lang-btn.active { background: white; color: var(--navy); }
+
+  /* ── SLIDE SHELL (shared by all proposal slides) ─ */
+  .slides-wrapper { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 28px 20px 40px; }
+  .slide { width: 794px; min-height: 1123px; position: relative; overflow: hidden; background: var(--white); box-shadow: 0 4px 28px rgba(0,0,0,0.14); display: flex; flex-direction: column; }
+  .sh { background: var(--navy); padding: 18px 52px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+  .sh img { height: 40px; filter: brightness(0) invert(1); opacity: 0.9; }
+  .sh-tag { font-family: 'Sora', sans-serif; font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.3); letter-spacing: 0.04em; }
+  .sb { padding: 44px 52px 40px; flex: 1; display: flex; flex-direction: column; }
+  .eyebrow { font-family: 'Sora', sans-serif; font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--coral); margin-bottom: 10px; }
+  .slide-h { font-family: 'Merriweather', serif; font-weight: 400; color: var(--navy); line-height: 1.3; font-size: 30px; margin-bottom: 20px; }
+
+  /* ── EDITABLE FIELDS ─────────────────────────── */
+  .prompt-hint { font-family: 'Sora', sans-serif; font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,143,122,0.55); margin-bottom: 5px; }
+  [contenteditable] { outline: none; transition: background 0.12s; border-radius: 4px; }
+  [contenteditable]:focus { background: rgba(255,143,122,0.06); outline: 1.5px dashed rgba(255,143,122,0.4); }
+  [contenteditable]:empty::before { content: attr(data-ph); color: var(--navy20); font-style: italic; pointer-events: none; }
+
+  input, select, textarea { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--navy); }
+
+  /* ── PRINT ───────────────────────────────────── */
+  @media print {
+    @page { size: A4 portrait; margin: 0; }
+    body { background: white; }
+    #topbar, .no-print { display: none !important; }
+    .slides-wrapper { padding: 0; gap: 0; }
+    .slide { width: 210mm; height: 297mm; min-height: unset; page-break-after: always; box-shadow: none; }
+    [contenteditable] { outline: none !important; background: transparent !important; border: none !important; }
+    .prompt-hint { display: none !important; }
+  }
+
+  #tab-history, #tab-admin { display: none; padding: 24px; max-width: 960px; margin: 0 auto; }
+  #tab-history.active, #tab-admin.active { display: block; }
+  #tab-builder.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <span class="brand">TSP Tarjouspohja</span>
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="builder" onclick="switchTab('builder')" data-i18n="tab_builder">Uusi tarjous</button>
+    <button class="tab-btn" data-tab="history" onclick="switchTab('history')" data-i18n="tab_history">Historia</button>
+    <button class="tab-btn" data-tab="admin" onclick="switchTab('admin')" data-i18n="tab_admin">Ylläpito</button>
+  </div>
+  <button class="no-print" style="font-family:'Sora',sans-serif; font-size:11px; font-weight:700; background:var(--coral); color:white; border:none; border-radius:18px; padding:8px 20px; cursor:pointer;" onclick="saveAndPrint()" data-i18n="btn_save_print">💾 Tallenna &amp; lataa PDF</button>
+  <div class="lang-toggle">
+    <button class="lang-btn active" data-lang="fi" onclick="setLanguage('fi')">FI</button>
+    <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+  </div>
+</div>
+
+<section id="tab-builder">
+  <div class="slides-wrapper" id="slides-wrapper"></div>
+</section>
+
+<section id="tab-history"></section>
+<section id="tab-admin"></section>
+
+<script>
+const I18N = {
+  fi: { tab_builder: 'Uusi tarjous', tab_history: 'Historia', tab_admin: 'Ylläpito', btn_save_print: '💾 Tallenna & lataa PDF' },
+  en: { tab_builder: 'New proposal', tab_history: 'History', tab_admin: 'Admin', btn_save_print: '💾 Save & download PDF' }
+};
+
+window.state = {
+  id: null,
+  language: 'fi',
+  sales_rep: '', sales_rep_contact: '', customer_company: '', contact_name: '', contact_info: '',
+  industry: 'hotellit', needs_summary: '', proposal_date: '',
+  process_start_date: '', process_delivery_cycle: '', process_vuokratekstiilit: '', process_sorting_need: '',
+  line_items: [],
+  readonly: false
+};
+window.__catalog = [];
+window.__content = [];
+
+async function api(path, method = 'GET', body = null) {
+  const opts = { method, headers: { 'Content-Type': 'application/json' } };
+  if (body) opts.body = JSON.stringify(body);
+  const res = await fetch('/api' + path, opts);
+  if (!res.ok) throw new Error('API error: ' + res.status);
+  return res.json();
+}
+
+function t(key) { return I18N[state.language][key] || key; }
+
+function applyI18n() {
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.getAttribute('data-i18n')); });
+}
+
+function setLanguage(lang) {
+  state.language = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  applyI18n();
+  if (window.renderMiksiMe) renderMiksiMe();
+  if (window.renderStaticCopy) renderStaticCopy();
+}
+
+function switchTab(name) {
+  document.getElementById('tab-builder').classList.toggle('hidden', name !== 'builder');
+  document.getElementById('tab-history').classList.toggle('active', name === 'history');
+  document.getElementById('tab-admin').classList.toggle('active', name === 'admin');
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+  if (name === 'history' && window.loadHistory) loadHistory();
+  if (name === 'admin' && window.loadAdmin) loadAdmin();
+}
+
+async function init() {
+  const [catalogRes, contentRes] = await Promise.all([api('/catalog'), api('/content')]);
+  window.__catalog = catalogRes.rows;
+  window.__content = contentRes.rows;
+  if (window.renderCover) renderCover();
+  if (window.renderPricingSlide) renderPricingSlide();
+  if (window.renderMiksiMe) renderMiksiMe();
+}
+init();
+</script>
+
+</body>
+</html>
