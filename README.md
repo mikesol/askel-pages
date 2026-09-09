@@ -34,3 +34,4 @@ Published pages for Askel Ventures. Each folder is a site deployed to `<folder-n
 | prospecting-pipeline | https://prospecting-pipeline.askelventures.com |
 | ns-deck | https://ns-deck.askelventures.com |
 | familiam | https://familiam.askelventures.com |
+| tarjous-prd | https://tarjous-prd.askelventures.com |
