@@ -1236,6 +1236,182 @@
     right: 14px;
   }
 
+  /* ── Gantt chart (12-month roadmap) ── */
+  .gantt { margin-top: 1.3em; max-width: 900px; }
+
+  .gantt-axis,
+  .gantt-row {
+    display: grid;
+    grid-template-columns: 170px repeat(13, 1fr);
+    align-items: center;
+    gap: 5px;
+  }
+
+  .gantt-axis {
+    margin-bottom: 0.4em;
+    padding-bottom: 0.35em;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .gantt-axis-label {
+    font-size: clamp(0.56rem, 0.85vw, 0.64rem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .gantt-axis-month {
+    text-align: center;
+    font-size: clamp(0.5rem, 0.72vw, 0.58rem);
+    color: var(--muted);
+  }
+
+  .gantt-row { padding: 0.42em 0; border-bottom: 1px solid var(--border); }
+
+  .gantt-row-label {
+    font-size: clamp(0.64rem, 1vw, 0.78rem);
+    font-weight: 600;
+    color: var(--dark);
+  }
+
+  .gantt-track {
+    position: relative;
+    height: 24px;
+  }
+
+  .gantt-bar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 0 0.6em;
+    cursor: default;
+    outline: none;
+    box-sizing: border-box;
+  }
+
+  .gantt-bar-label {
+    font-size: clamp(0.56rem, 0.8vw, 0.66rem);
+    font-weight: 700;
+    color: #000000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .gantt-bar.g-kt  { background: var(--cat-fund); }
+  .gantt-bar.g-rec { background: var(--cat-find); }
+  .gantt-bar.g-rec .gantt-bar-label { color: #ffffff; }
+  .gantt-bar.g-sm  { background: var(--cat-grow); }
+  .gantt-bar.g-dt  { background: var(--dark); }
+
+  /* ── Gantt hover tooltip ── */
+  .gantt-tooltip {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 30;
+    width: max-content;
+    max-width: 280px;
+    background: #0d0d0d;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.7em 0.9em;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.55);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    pointer-events: none;
+  }
+
+  .gantt-bar:hover .gantt-tooltip,
+  .gantt-bar:focus-visible .gantt-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .gantt-tooltip-title {
+    font-size: clamp(0.54rem, 0.8vw, 0.6rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.45em;
+    white-space: normal;
+  }
+
+  .gantt-tooltip ul {
+    margin: 0;
+    padding-left: 1.1em;
+    list-style: disc;
+  }
+
+  .gantt-tooltip li {
+    font-size: clamp(0.62rem, 0.9vw, 0.72rem);
+    font-weight: 400;
+    color: var(--mid);
+    line-height: 1.5;
+    white-space: normal;
+    margin-bottom: 0.3em;
+  }
+
+  .gantt-tooltip li:last-child { margin-bottom: 0; }
+
+  @media (max-width: 600px) {
+    .gantt-axis-month { display: none; }
+
+    .gantt-row {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.45em;
+      padding: 0.6em 0;
+    }
+
+    .gantt-row-label { font-size: 0.74rem; }
+
+    .gantt-track {
+      grid-column: unset;
+      position: relative;
+      width: 100%;
+      height: 26px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 5px;
+    }
+
+    .gantt-bar {
+      position: static;
+      width: calc(var(--d) / 13 * 100%);
+      margin-left: calc(var(--s) / 13 * 100%);
+      min-width: 44px;
+    }
+
+    .gantt-tooltip {
+      left: 50%;
+      right: auto;
+      width: 88%;
+      max-width: 280px;
+      transform: translateX(-50%) translateY(-4px);
+    }
+
+    .gantt-bar:hover .gantt-tooltip,
+    .gantt-bar:focus-visible .gantt-tooltip {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  .gantt-note {
+    margin-top: 0.7em;
+    font-size: clamp(0.58rem, 0.8vw, 0.66rem);
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
   /* ── Mobile ─────────────────────────── */
   @media (max-width: 600px) {
     .reveal .slides section {
@@ -1269,6 +1445,9 @@
     .split-photo.slant img { clip-path: none; }
 
     .team-grid { grid-template-columns: 1fr; }
+
+    .gantt-bar { padding: 0 0.4em; }
+    .gantt-bar-label { font-size: 0.64rem; }
 
     .bleed-photo {
       position: relative !important;
@@ -1499,8 +1678,8 @@
       </div>
     </section>
 
-    <!-- ── 9. CASE STUDY: MELERS OY (new) ── -->
-    <section class="slide-photo-bleed" data-background-color="#000000">
+    <!-- ── 9. CASE STUDY: MELERS OY (new) — HIDDEN, superseded by 9b's Gantt version ── -->
+    <section class="slide-photo-bleed" data-background-color="#000000" data-visibility="hidden">
       <div class="bleed-photo"><img src="melers-team-collage.jpg?v=4" alt="Melers laundry facility with roll cages of linens, and the Askel team on-site"></div>
       <div class="content-clear">
         <div class="act-label"><span class="act-num">II</span><span class="act-text">The Engine</span></div>
@@ -1526,6 +1705,113 @@
           <span class="ask-tag">Sales system</span>
         </div>
         <img class="case-logo-corner" src="melers-logo.png" alt="Melers">
+      </div>
+    </section>
+
+    <!-- ── 9b. CASE STUDY: MELERS OY — TIMELINE (copy) ── -->
+    <section class="slide-photo-bleed" data-background-color="#000000">
+      <div class="bleed-photo"><img src="melers-team-collage.jpg?v=4" alt="Melers laundry facility with roll cages of linens, and the Askel team on-site"></div>
+      <div class="content-clear">
+        <div class="act-label"><span class="act-num">II</span><span class="act-text">The Engine</span></div>
+        <div class="label">Case Study</div>
+        <div class="rule"></div>
+        <h2>Proof-of-concept: <span class="accent">Melers Oy.</span></h2>
+        <div class="terms-grid" style="margin-bottom:1.2em;">
+          <div class="term"><div class="term-label">Deal overview</div><div class="term-value">Industrial laundry for elderly care and hotels &amp; consumer dry cleaning, Turku region — operating since <strong>1967</strong> (founded 2001). 100% acquisition, closed <strong>Jan 2026</strong> in <strong>&lt;100 days</strong>.</div></div>
+          <div class="term"><div class="term-label">Business snapshot</div><div class="term-value">Revenue <strong>~€490K</strong>, EBITDA <strong>€115K</strong> (23% margin). 60/40 B2B/B2C mix. Team of <strong>7</strong>. Acquired at <strong>~3.5x</strong> EBITDA.<div class="case-links"><a href="https://melers.fi" target="_blank" rel="noopener">melers.fi ↗</a><a href="https://turunsuurpesula.fi" target="_blank" rel="noopener">turunsuurpesula.fi ↗</a></div></div></div>
+          <div class="term"><div class="term-label">Financing</div><div class="term-value"><strong>€400K</strong> purchase price — <strong>55%</strong> bank loan (OP, Finnvera-backed), <strong>25%</strong> seller financing, <strong>20%</strong> founder equity (cash). No outside capital needed.</div></div>
+          <div class="term"><div class="term-label">Value-creation plan</div><div class="term-value">New modern branding, AI-enabled ERP, standardized sales &amp; marketing operating practices, new outbound sales system, growth-minded operator. Target: <strong>min. +10% YoY</strong> EBITDA growth.</div></div>
+        </div>
+
+        <div class="gantt">
+          <div class="gantt-axis">
+            <div class="gantt-axis-label">12-Month Plan</div>
+            <div class="gantt-axis-month">M1</div>
+            <div class="gantt-axis-month">M2</div>
+            <div class="gantt-axis-month">M3</div>
+            <div class="gantt-axis-month">M4</div>
+            <div class="gantt-axis-month">M5</div>
+            <div class="gantt-axis-month">M6</div>
+            <div class="gantt-axis-month">M7</div>
+            <div class="gantt-axis-month">M8</div>
+            <div class="gantt-axis-month">M9</div>
+            <div class="gantt-axis-month">M10</div>
+            <div class="gantt-axis-month">M11</div>
+            <div class="gantt-axis-month">M12</div>
+            <div class="gantt-axis-month">M13</div>
+          </div>
+          <div class="gantt-row">
+            <div class="gantt-row-label">Knowledge Transfer</div>
+            <div class="gantt-track" style="grid-column: 2 / 5;">
+              <div class="gantt-bar g-kt" style="--s:1; --d:3;" tabindex="0">
+                <span class="gantt-bar-label">Mo 1–3</span>
+                <div class="gantt-tooltip">
+                  <div class="gantt-tooltip-title">Knowledge Transfer</div>
+                  <ul>
+                    <li>Video training library (TikToks)</li>
+                    <li>Invoicing criteria documentation &amp; invoicing to Askel</li>
+                    <li>Company process documentation</li>
+                    <li>ConnectTeam Ops &amp; HR system installation</li>
+                    <li>Basic IT systems set up: accounting &amp; comms</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gantt-row">
+            <div class="gantt-row-label">Recruitment</div>
+            <div class="gantt-track" style="grid-column: 3 / 7;">
+              <div class="gantt-bar g-rec" style="--s:2; --d:4;" tabindex="0">
+                <span class="gantt-bar-label">Mo 2–5</span>
+                <div class="gantt-tooltip">
+                  <div class="gantt-tooltip-title">Recruitment</div>
+                  <ul>
+                    <li>Key role definition</li>
+                    <li>Key role recruitment</li>
+                    <li>Key role training via training library and old owners</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gantt-row">
+            <div class="gantt-row-label">Sales &amp; Marketing SOPs</div>
+            <div class="gantt-track" style="grid-column: 4 / 10;">
+              <div class="gantt-bar g-sm" style="--s:3; --d:6;" tabindex="0">
+                <span class="gantt-bar-label">Mo 3–8</span>
+                <div class="gantt-tooltip">
+                  <div class="gantt-tooltip-title">Sales &amp; Marketing SOPs</div>
+                  <ul>
+                    <li>New branding &amp; website</li>
+                    <li>Pricing increase</li>
+                    <li>Customer service systems</li>
+                    <li>Sales rep &amp; sales booking system (Wannado)</li>
+                    <li>Sales CRM &amp; proposal tools</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gantt-row">
+            <div class="gantt-row-label">Digital Transformation</div>
+            <div class="gantt-track" style="grid-column: 9 / 15;">
+              <div class="gantt-bar g-dt" style="--s:8; --d:6;" tabindex="0">
+                <span class="gantt-bar-label">Mo 8–13</span>
+                <div class="gantt-tooltip">
+                  <div class="gantt-tooltip-title">Digital Transformation</div>
+                  <ul>
+                    <li>Business Finland grants</li>
+                    <li>Process documentation</li>
+                    <li>PoC / MVP software &amp; IoT development</li>
+                    <li>New system development (ERP, AI agentic computer vision systems)</li>
+                    <li>New system testing &amp; trial with team</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="gantt-note">Knowledge Transfer (Mo 1–3) and Recruitment (Mo 2–5) run first, followed by Sales &amp; Marketing SOPs (Mo 3–8) and Digital Transformation (Mo 8–13). The key goal for the first 6 months: don't break the company or lose customers.</div>
       </div>
     </section>
 
