@@ -1236,6 +1236,70 @@
     right: 14px;
   }
 
+  /* ── Gantt chart (12-month roadmap) ── */
+  .gantt { margin-top: 1.3em; max-width: 900px; }
+
+  .gantt-axis,
+  .gantt-row {
+    display: grid;
+    grid-template-columns: 170px repeat(13, 1fr);
+    align-items: center;
+    gap: 5px;
+  }
+
+  .gantt-axis {
+    margin-bottom: 0.4em;
+    padding-bottom: 0.35em;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .gantt-axis-label {
+    font-size: clamp(0.56rem, 0.85vw, 0.64rem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .gantt-axis-month {
+    text-align: center;
+    font-size: clamp(0.5rem, 0.72vw, 0.58rem);
+    color: var(--muted);
+  }
+
+  .gantt-row { padding: 0.42em 0; border-bottom: 1px solid var(--border); }
+
+  .gantt-row-label {
+    font-size: clamp(0.64rem, 1vw, 0.78rem);
+    font-weight: 600;
+    color: var(--dark);
+  }
+
+  .gantt-bar {
+    height: 24px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 0 0.6em;
+    font-size: clamp(0.56rem, 0.8vw, 0.66rem);
+    font-weight: 700;
+    color: #000000;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .gantt-bar.g-kt  { background: var(--cat-fund); }
+  .gantt-bar.g-rec { background: var(--cat-find); color: #ffffff; }
+  .gantt-bar.g-sm  { background: var(--cat-grow); }
+  .gantt-bar.g-dt  { background: var(--dark); }
+
+  .gantt-note {
+    margin-top: 0.7em;
+    font-size: clamp(0.58rem, 0.8vw, 0.66rem);
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
   /* ── Mobile ─────────────────────────── */
   @media (max-width: 600px) {
     .reveal .slides section {
@@ -1269,6 +1333,11 @@
     .split-photo.slant img { clip-path: none; }
 
     .team-grid { grid-template-columns: 1fr; }
+
+    .gantt-axis,
+    .gantt-row { grid-template-columns: 92px repeat(13, 1fr); gap: 2px; }
+    .gantt-axis-month { font-size: 0.42rem; }
+    .gantt-bar { font-size: 0.48rem; padding: 0 0.3em; }
 
     .bleed-photo {
       position: relative !important;
@@ -1504,6 +1573,59 @@
           <span class="ask-tag">Sales system</span>
         </div>
         <img class="case-logo-corner" src="melers-logo.png" alt="Melers">
+      </div>
+    </section>
+
+    <!-- ── 9b. CASE STUDY: MELERS OY — TIMELINE (copy) ── -->
+    <section class="slide-photo-bleed" data-background-color="#000000">
+      <div class="bleed-photo"><img src="melers-team-collage.jpg?v=4" alt="Melers laundry facility with roll cages of linens, and the Askel team on-site"></div>
+      <div class="content-clear">
+        <div class="act-label"><span class="act-num">II</span><span class="act-text">The Engine</span></div>
+        <div class="label">Case Study</div>
+        <div class="rule"></div>
+        <h2>Proof-of-concept: <span class="accent">Melers Oy.</span></h2>
+        <div class="terms-grid" style="margin-bottom:1.2em;">
+          <div class="term"><div class="term-label">Deal overview</div><div class="term-value">Industrial laundry for elderly care and hotels &amp; consumer dry cleaning, Turku region — operating since <strong>1967</strong> (founded 2001). 100% acquisition, closed <strong>Jan 2026</strong> in <strong>&lt;100 days</strong>.</div></div>
+          <div class="term"><div class="term-label">Business snapshot</div><div class="term-value">Revenue <strong>~€490K</strong>, EBITDA <strong>€115K</strong> (23% margin). 60/40 B2B/B2C mix. Acquired at <strong>~3.5x</strong> EBITDA.<div class="case-links"><a href="https://melers.fi" target="_blank" rel="noopener">melers.fi ↗</a><a href="https://turunsuurpesula.fi" target="_blank" rel="noopener">turunsuurpesula.fi ↗</a></div></div></div>
+          <div class="term"><div class="term-label">Financing</div><div class="term-value"><strong>€400K</strong> purchase price — <strong>55%</strong> bank loan (OP, Finnvera-backed), <strong>25%</strong> seller financing, <strong>20%</strong> founder equity (cash). No outside capital needed.</div></div>
+          <div class="term"><div class="term-label">Value-creation plan</div><div class="term-value">New modern branding, AI-enabled ERP, standardized sales &amp; marketing operating practices, new outbound sales system, growth-minded operator. Target: <strong>min. +10% YoY</strong> EBITDA growth.</div></div>
+        </div>
+
+        <div class="gantt">
+          <div class="gantt-axis">
+            <div class="gantt-axis-label">12-Month Plan</div>
+            <div class="gantt-axis-month">M1</div>
+            <div class="gantt-axis-month">M2</div>
+            <div class="gantt-axis-month">M3</div>
+            <div class="gantt-axis-month">M4</div>
+            <div class="gantt-axis-month">M5</div>
+            <div class="gantt-axis-month">M6</div>
+            <div class="gantt-axis-month">M7</div>
+            <div class="gantt-axis-month">M8</div>
+            <div class="gantt-axis-month">M9</div>
+            <div class="gantt-axis-month">M10</div>
+            <div class="gantt-axis-month">M11</div>
+            <div class="gantt-axis-month">M12</div>
+            <div class="gantt-axis-month">M13</div>
+          </div>
+          <div class="gantt-row">
+            <div class="gantt-row-label">Knowledge Transfer</div>
+            <div class="gantt-bar g-kt" style="grid-column: 2 / 5;">Mo 1–3</div>
+          </div>
+          <div class="gantt-row">
+            <div class="gantt-row-label">Recruitment</div>
+            <div class="gantt-bar g-rec" style="grid-column: 2 / 4;">Mo 1–2</div>
+          </div>
+          <div class="gantt-row">
+            <div class="gantt-row-label">Sales &amp; Marketing SOPs</div>
+            <div class="gantt-bar g-sm" style="grid-column: 8 / 10;">Mo 7–8</div>
+          </div>
+          <div class="gantt-row">
+            <div class="gantt-row-label">Digital Transformation</div>
+            <div class="gantt-bar g-dt" style="grid-column: 9 / 15;">Mo 8–13</div>
+          </div>
+        </div>
+        <div class="gantt-note">Knowledge Transfer &amp; Recruitment run in parallel from Month 1. Sales &amp; Marketing SOPs starts after Month 6; Digital Transformation starts after Month 7 and runs 6 months — landing at Month 13, one month past the 12-month frame as specified.</div>
       </div>
     </section>
 
