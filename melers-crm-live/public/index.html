@@ -35,6 +35,13 @@
     }
     .nav-tab.active { color: var(--white); border-bottom-color: var(--coral); }
     .nav-tab:hover { color: var(--white); }
+    .nav-tarjous-btn {
+      margin-left: auto; background: var(--coral); color: var(--navy);
+      font-family: 'Sora', sans-serif; font-weight: 700; font-size: 14px;
+      padding: 10px 20px; border-radius: 8px; text-decoration: none;
+      transition: background 0.15s; white-space: nowrap;
+    }
+    .nav-tarjous-btn:hover { background: var(--coral-hover); }
 
     /* ── Views ── */
     .view { display: none; }
@@ -283,6 +290,7 @@
   <div class="nav-divider"></div>
   <span class="nav-tab active" data-view="kanban">Myynti &amp; Asiakaspalvelu</span>
   <span class="nav-tab" data-view="customers">Asiakkaat</span>
+  <a class="nav-tarjous-btn" href="https://tarjous-turunsuurpesula.askelventures.com" target="_blank" rel="noopener">+ Luo Tarjous</a>
 </nav>
 
 <div id="view-kanban" class="view active"></div>
