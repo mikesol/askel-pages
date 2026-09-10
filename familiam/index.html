@@ -1276,22 +1276,84 @@
   }
 
   .gantt-bar {
+    position: relative;
     height: 24px;
     border-radius: 5px;
     display: flex;
     align-items: center;
     padding: 0 0.6em;
+    cursor: default;
+    outline: none;
+  }
+
+  .gantt-bar-label {
     font-size: clamp(0.56rem, 0.8vw, 0.66rem);
     font-weight: 700;
     color: #000000;
     white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .gantt-bar.g-kt  { background: var(--cat-fund); }
-  .gantt-bar.g-rec { background: var(--cat-find); color: #ffffff; }
+  .gantt-bar.g-rec { background: var(--cat-find); }
+  .gantt-bar.g-rec .gantt-bar-label { color: #ffffff; }
   .gantt-bar.g-sm  { background: var(--cat-grow); }
   .gantt-bar.g-dt  { background: var(--dark); }
+
+  /* ── Gantt hover tooltip ── */
+  .gantt-tooltip {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 30;
+    width: max-content;
+    max-width: 250px;
+    background: #0d0d0d;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.7em 0.9em;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.55);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    pointer-events: none;
+  }
+
+  .gantt-bar:hover .gantt-tooltip,
+  .gantt-bar:focus-visible .gantt-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .gantt-tooltip-title {
+    font-size: clamp(0.54rem, 0.8vw, 0.6rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.45em;
+    white-space: normal;
+  }
+
+  .gantt-tooltip ul {
+    margin: 0;
+    padding-left: 1.1em;
+    list-style: disc;
+  }
+
+  .gantt-tooltip li {
+    font-size: clamp(0.62rem, 0.9vw, 0.72rem);
+    font-weight: 400;
+    color: var(--mid);
+    line-height: 1.5;
+    white-space: normal;
+    margin-bottom: 0.3em;
+  }
+
+  .gantt-tooltip li:last-child { margin-bottom: 0; }
 
   .gantt-note {
     margin-top: 0.7em;
@@ -1337,7 +1399,9 @@
     .gantt-axis,
     .gantt-row { grid-template-columns: 92px repeat(13, 1fr); gap: 2px; }
     .gantt-axis-month { font-size: 0.42rem; }
-    .gantt-bar { font-size: 0.48rem; padding: 0 0.3em; }
+    .gantt-bar { padding: 0 0.3em; }
+    .gantt-bar-label { font-size: 0.48rem; }
+    .gantt-tooltip { max-width: 200px; left: auto; right: 0; }
 
     .bleed-photo {
       position: relative !important;
@@ -1610,19 +1674,59 @@
           </div>
           <div class="gantt-row">
             <div class="gantt-row-label">Knowledge Transfer</div>
-            <div class="gantt-bar g-kt" style="grid-column: 2 / 5;">Mo 1–3</div>
+            <div class="gantt-bar g-kt" style="grid-column: 2 / 5;" tabindex="0">
+              <span class="gantt-bar-label">Mo 1–3</span>
+              <div class="gantt-tooltip">
+                <div class="gantt-tooltip-title">Knowledge Transfer</div>
+                <ul>
+                  <li>PLACEHOLDER — shadow current owner on day-to-day operations</li>
+                  <li>PLACEHOLDER — document supplier &amp; vendor relationships</li>
+                  <li>PLACEHOLDER — transfer key customer relationships &amp; pricing knowledge</li>
+                </ul>
+              </div>
+            </div>
           </div>
           <div class="gantt-row">
             <div class="gantt-row-label">Recruitment</div>
-            <div class="gantt-bar g-rec" style="grid-column: 3 / 7;">Mo 2–5</div>
+            <div class="gantt-bar g-rec" style="grid-column: 3 / 7;" tabindex="0">
+              <span class="gantt-bar-label">Mo 2–5</span>
+              <div class="gantt-tooltip">
+                <div class="gantt-tooltip-title">Recruitment</div>
+                <ul>
+                  <li>PLACEHOLDER — hire GM / ops lead to run day-to-day</li>
+                  <li>PLACEHOLDER — backfill any departing staff roles</li>
+                  <li>PLACEHOLDER — build hiring pipeline for growth roles</li>
+                </ul>
+              </div>
+            </div>
           </div>
           <div class="gantt-row">
             <div class="gantt-row-label">Sales &amp; Marketing SOPs</div>
-            <div class="gantt-bar g-sm" style="grid-column: 4 / 10;">Mo 3–8</div>
+            <div class="gantt-bar g-sm" style="grid-column: 4 / 10;" tabindex="0">
+              <span class="gantt-bar-label">Mo 3–8</span>
+              <div class="gantt-tooltip">
+                <div class="gantt-tooltip-title">Sales &amp; Marketing SOPs</div>
+                <ul>
+                  <li>PLACEHOLDER — roll out new branding &amp; sales collateral</li>
+                  <li>PLACEHOLDER — stand up outbound sales system &amp; scripts</li>
+                  <li>PLACEHOLDER — document repeatable sales playbook</li>
+                </ul>
+              </div>
+            </div>
           </div>
           <div class="gantt-row">
             <div class="gantt-row-label">Digital Transformation</div>
-            <div class="gantt-bar g-dt" style="grid-column: 9 / 15;">Mo 8–13</div>
+            <div class="gantt-bar g-dt" style="grid-column: 9 / 15;" tabindex="0">
+              <span class="gantt-bar-label">Mo 8–13</span>
+              <div class="gantt-tooltip">
+                <div class="gantt-tooltip-title">Digital Transformation</div>
+                <ul>
+                  <li>PLACEHOLDER — implement AI-enabled ERP</li>
+                  <li>PLACEHOLDER — migrate to modern booking / invoicing stack</li>
+                  <li>PLACEHOLDER — automate reporting &amp; KPI dashboards</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
         <div class="gantt-note">Knowledge Transfer starts Month 1; Recruitment starts Month 2 and overlaps it. Sales &amp; Marketing SOPs runs Month 3–8. Digital Transformation starts after Month 7 and runs 6 months — landing at Month 13, one month past the 12-month frame as specified.</div>
