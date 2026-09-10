@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-09T05:20:10.627677+00:00",
+ "generated": "2026-09-10T05:20:15.299426+00:00",
  "window_start": "2026-09-04",
  "retro_date": "2026-10-25",
  "baseline": {
@@ -591,6 +591,62 @@
     "moved": [],
     "total_tracked": 121
    }
+  },
+  {
+   "date": "2026-09-10",
+   "ts": "2026-09-10T05:20:15.298978+00:00",
+   "ingestion": {
+    "cron-weekly-sourcing": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    },
+    "cron-swedish-sweep": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    },
+    "cron-yritysporssi-alerts": {
+     "runs": 3,
+     "available": 12,
+     "delivered": 12,
+     "candidates": 2,
+     "cards": 0
+    },
+    "cron-yrityskaupat-newsletter": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    },
+    "cron-weak-signal-sweep": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    }
+   },
+   "bugs": [],
+   "bug_check_exit": 0,
+   "alerted_channel": null,
+   "outbound": {
+    "emails_sent": 0,
+    "replies": 1,
+    "reply_kinds": {
+     "reply": 1
+    }
+   },
+   "cards": {
+    "new": [],
+    "moved": [],
+    "total_tracked": 121
+   }
   }
  ],
  "moves": [
@@ -621,11 +677,11 @@
   }
  ],
  "totals": {
-  "days_tracked": 5,
+  "days_tracked": 6,
   "cards_moved": 1,
   "new_cards": 2,
   "bugs_logged": 0,
   "emails_sent": 0,
-  "replies": 0
+  "replies": 1
  }
 }
