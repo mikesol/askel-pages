@@ -1275,15 +1275,22 @@
     color: var(--dark);
   }
 
-  .gantt-bar {
+  .gantt-track {
     position: relative;
     height: 24px;
+  }
+
+  .gantt-bar {
+    position: relative;
+    width: 100%;
+    height: 100%;
     border-radius: 5px;
     display: flex;
     align-items: center;
     padding: 0 0.6em;
     cursor: default;
     outline: none;
+    box-sizing: border-box;
   }
 
   .gantt-bar-label {
@@ -1355,6 +1362,49 @@
 
   .gantt-tooltip li:last-child { margin-bottom: 0; }
 
+  @media (max-width: 600px) {
+    .gantt-axis-month { display: none; }
+
+    .gantt-row {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.45em;
+      padding: 0.6em 0;
+    }
+
+    .gantt-row-label { font-size: 0.74rem; }
+
+    .gantt-track {
+      grid-column: unset;
+      position: relative;
+      width: 100%;
+      height: 26px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 5px;
+    }
+
+    .gantt-bar {
+      position: static;
+      width: calc(var(--d) / 13 * 100%);
+      margin-left: calc(var(--s) / 13 * 100%);
+      min-width: 44px;
+    }
+
+    .gantt-tooltip {
+      left: 50%;
+      right: auto;
+      width: 88%;
+      max-width: 280px;
+      transform: translateX(-50%) translateY(-4px);
+    }
+
+    .gantt-bar:hover .gantt-tooltip,
+    .gantt-bar:focus-visible .gantt-tooltip {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
   .gantt-note {
     margin-top: 0.7em;
     font-size: clamp(0.58rem, 0.8vw, 0.66rem);
@@ -1396,12 +1446,8 @@
 
     .team-grid { grid-template-columns: 1fr; }
 
-    .gantt-axis,
-    .gantt-row { grid-template-columns: 92px repeat(13, 1fr); gap: 2px; }
-    .gantt-axis-month { font-size: 0.42rem; }
-    .gantt-bar { padding: 0 0.3em; }
-    .gantt-bar-label { font-size: 0.48rem; }
-    .gantt-tooltip { max-width: 200px; left: auto; right: 0; }
+    .gantt-bar { padding: 0 0.4em; }
+    .gantt-bar-label { font-size: 0.64rem; }
 
     .bleed-photo {
       position: relative !important;
@@ -1674,63 +1720,71 @@
           </div>
           <div class="gantt-row">
             <div class="gantt-row-label">Knowledge Transfer</div>
-            <div class="gantt-bar g-kt" style="grid-column: 2 / 5;" tabindex="0">
-              <span class="gantt-bar-label">Mo 1–3</span>
-              <div class="gantt-tooltip">
-                <div class="gantt-tooltip-title">Knowledge Transfer</div>
-                <ul>
-                  <li>Video training library (TikToks)</li>
-                  <li>Invoicing criteria documentation &amp; invoicing to Askel</li>
-                  <li>Company process documentation</li>
-                  <li>ConnectTeam Ops &amp; HR system installation</li>
-                  <li>Basic IT systems set up: accounting &amp; comms</li>
-                </ul>
+            <div class="gantt-track" style="grid-column: 2 / 5;">
+              <div class="gantt-bar g-kt" style="--s:1; --d:3;" tabindex="0">
+                <span class="gantt-bar-label">Mo 1–3</span>
+                <div class="gantt-tooltip">
+                  <div class="gantt-tooltip-title">Knowledge Transfer</div>
+                  <ul>
+                    <li>Video training library (TikToks)</li>
+                    <li>Invoicing criteria documentation &amp; invoicing to Askel</li>
+                    <li>Company process documentation</li>
+                    <li>ConnectTeam Ops &amp; HR system installation</li>
+                    <li>Basic IT systems set up: accounting &amp; comms</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
           <div class="gantt-row">
             <div class="gantt-row-label">Recruitment</div>
-            <div class="gantt-bar g-rec" style="grid-column: 3 / 7;" tabindex="0">
-              <span class="gantt-bar-label">Mo 2–5</span>
-              <div class="gantt-tooltip">
-                <div class="gantt-tooltip-title">Recruitment</div>
-                <ul>
-                  <li>Key role definition</li>
-                  <li>Key role recruitment</li>
-                  <li>Key role training via training library and old owners</li>
-                </ul>
+            <div class="gantt-track" style="grid-column: 3 / 7;">
+              <div class="gantt-bar g-rec" style="--s:2; --d:4;" tabindex="0">
+                <span class="gantt-bar-label">Mo 2–5</span>
+                <div class="gantt-tooltip">
+                  <div class="gantt-tooltip-title">Recruitment</div>
+                  <ul>
+                    <li>Key role definition</li>
+                    <li>Key role recruitment</li>
+                    <li>Key role training via training library and old owners</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
           <div class="gantt-row">
             <div class="gantt-row-label">Sales &amp; Marketing SOPs</div>
-            <div class="gantt-bar g-sm" style="grid-column: 4 / 10;" tabindex="0">
-              <span class="gantt-bar-label">Mo 3–8</span>
-              <div class="gantt-tooltip">
-                <div class="gantt-tooltip-title">Sales &amp; Marketing SOPs</div>
-                <ul>
-                  <li>New branding &amp; website</li>
-                  <li>Pricing increase</li>
-                  <li>Customer service systems</li>
-                  <li>Sales rep &amp; sales booking system (Wannado)</li>
-                  <li>Sales CRM &amp; proposal tools</li>
-                </ul>
+            <div class="gantt-track" style="grid-column: 4 / 10;">
+              <div class="gantt-bar g-sm" style="--s:3; --d:6;" tabindex="0">
+                <span class="gantt-bar-label">Mo 3–8</span>
+                <div class="gantt-tooltip">
+                  <div class="gantt-tooltip-title">Sales &amp; Marketing SOPs</div>
+                  <ul>
+                    <li>New branding &amp; website</li>
+                    <li>Pricing increase</li>
+                    <li>Customer service systems</li>
+                    <li>Sales rep &amp; sales booking system (Wannado)</li>
+                    <li>Sales CRM &amp; proposal tools</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
           <div class="gantt-row">
             <div class="gantt-row-label">Digital Transformation</div>
-            <div class="gantt-bar g-dt" style="grid-column: 9 / 15;" tabindex="0">
-              <span class="gantt-bar-label">Mo 8–13</span>
-              <div class="gantt-tooltip">
-                <div class="gantt-tooltip-title">Digital Transformation</div>
-                <ul>
-                  <li>Business Finland grants</li>
-                  <li>Process documentation</li>
-                  <li>PoC / MVP software &amp; IoT development</li>
-                  <li>New system development (ERP, AI agentic computer vision systems)</li>
-                  <li>New system testing &amp; trial with team</li>
-                </ul>
+            <div class="gantt-track" style="grid-column: 9 / 15;">
+              <div class="gantt-bar g-dt" style="--s:8; --d:6;" tabindex="0">
+                <span class="gantt-bar-label">Mo 8–13</span>
+                <div class="gantt-tooltip">
+                  <div class="gantt-tooltip-title">Digital Transformation</div>
+                  <ul>
+                    <li>Business Finland grants</li>
+                    <li>Process documentation</li>
+                    <li>PoC / MVP software &amp; IoT development</li>
+                    <li>New system development (ERP, AI agentic computer vision systems)</li>
+                    <li>New system testing &amp; trial with team</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
