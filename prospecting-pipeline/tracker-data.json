@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-13T05:20:14.374585+00:00",
+ "generated": "2026-09-17T05:20:16.986939+00:00",
  "window_start": "2026-09-04",
  "retro_date": "2026-10-25",
  "baseline": {
@@ -809,6 +809,71 @@
     "moved": [],
     "total_tracked": 121
    }
+  },
+  {
+   "date": "2026-09-17",
+   "ts": "2026-09-17T05:20:16.986078+00:00",
+   "ingestion": {
+    "cron-weekly-sourcing": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    },
+    "cron-swedish-sweep": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    },
+    "cron-yritysporssi-alerts": {
+     "runs": 3,
+     "available": 45,
+     "delivered": 28,
+     "candidates": 1,
+     "cards": 0
+    },
+    "cron-yrityskaupat-newsletter": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    },
+    "cron-weak-signal-sweep": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    }
+   },
+   "bugs": [
+    {
+     "type": "SILENT",
+     "cron": "cron-swedish-sweep",
+     "message": "SILENT: cron-swedish-sweep last reported 213h ago (expected every 192h)"
+    },
+    {
+     "type": "SILENT",
+     "cron": "cron-weak-signal-sweep",
+     "message": "SILENT: cron-weak-signal-sweep last reported 193h ago (expected every 192h)"
+    }
+   ],
+   "bug_check_exit": 1,
+   "alerted_channel": "#admin",
+   "outbound": {
+    "emails_sent": 0,
+    "replies": 0,
+    "reply_kinds": {}
+   },
+   "cards": {
+    "new": [],
+    "moved": [],
+    "total_tracked": 121
+   }
   }
  ],
  "moves": [
@@ -821,7 +886,20 @@
    "date": "2026-09-06"
   }
  ],
- "bugs_log": [],
+ "bugs_log": [
+  {
+   "type": "SILENT",
+   "cron": "cron-weak-signal-sweep",
+   "message": "SILENT: cron-weak-signal-sweep last reported 193h ago (expected every 192h)",
+   "date": "2026-09-17"
+  },
+  {
+   "type": "SILENT",
+   "cron": "cron-swedish-sweep",
+   "message": "SILENT: cron-swedish-sweep last reported 213h ago (expected every 192h)",
+   "date": "2026-09-17"
+  }
+ ],
  "new_cards_log": [
   {
    "id": "6a9e94c6a7ca78525856f85e",
@@ -839,10 +917,10 @@
   }
  ],
  "totals": {
-  "days_tracked": 9,
+  "days_tracked": 10,
   "cards_moved": 1,
   "new_cards": 2,
-  "bugs_logged": 0,
+  "bugs_logged": 2,
   "emails_sent": 0,
   "replies": 1
  }
