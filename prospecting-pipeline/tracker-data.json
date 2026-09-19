@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-18T05:20:16.005651+00:00",
+ "generated": "2026-09-19T05:20:09.767178+00:00",
  "window_start": "2026-09-04",
  "retro_date": "2026-10-25",
  "baseline": {
@@ -939,6 +939,71 @@
     "moved": [],
     "total_tracked": 121
    }
+  },
+  {
+   "date": "2026-09-19",
+   "ts": "2026-09-19T05:20:09.766420+00:00",
+   "ingestion": {
+    "cron-weekly-sourcing": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    },
+    "cron-swedish-sweep": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    },
+    "cron-yritysporssi-alerts": {
+     "runs": 2,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    },
+    "cron-yrityskaupat-newsletter": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    },
+    "cron-weak-signal-sweep": {
+     "runs": 0,
+     "available": 0,
+     "delivered": 0,
+     "candidates": 0,
+     "cards": 0
+    }
+   },
+   "bugs": [
+    {
+     "type": "SILENT",
+     "cron": "cron-swedish-sweep",
+     "message": "SILENT: cron-swedish-sweep last reported 261h ago (expected every 192h)"
+    },
+    {
+     "type": "SILENT",
+     "cron": "cron-weak-signal-sweep",
+     "message": "SILENT: cron-weak-signal-sweep last reported 241h ago (expected every 192h)"
+    }
+   ],
+   "bug_check_exit": 1,
+   "alerted_channel": "#admin",
+   "outbound": {
+    "emails_sent": 0,
+    "replies": 0,
+    "reply_kinds": {}
+   },
+   "cards": {
+    "new": [],
+    "moved": [],
+    "total_tracked": 121
+   }
   }
  ],
  "moves": [
@@ -952,6 +1017,18 @@
   }
  ],
  "bugs_log": [
+  {
+   "type": "SILENT",
+   "cron": "cron-weak-signal-sweep",
+   "message": "SILENT: cron-weak-signal-sweep last reported 241h ago (expected every 192h)",
+   "date": "2026-09-19"
+  },
+  {
+   "type": "SILENT",
+   "cron": "cron-swedish-sweep",
+   "message": "SILENT: cron-swedish-sweep last reported 261h ago (expected every 192h)",
+   "date": "2026-09-19"
+  },
   {
    "type": "SILENT",
    "cron": "cron-weak-signal-sweep",
@@ -994,10 +1071,10 @@
   }
  ],
  "totals": {
-  "days_tracked": 11,
+  "days_tracked": 12,
   "cards_moved": 1,
   "new_cards": 2,
-  "bugs_logged": 4,
+  "bugs_logged": 6,
   "emails_sent": 0,
   "replies": 1
  }
